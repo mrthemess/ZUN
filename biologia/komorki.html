@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!--og--><meta property="og:type" content="website"><meta property="og:site_name" content="Zakład utylizacji niewiedzy"><meta property="og:title" content="Komórki i wirusy"><meta property="og:url" content="https://narzedzia.netlify.app/biologia/komorki.html"><meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><!--og-->
+<!--seo--><meta name="description" content="Interaktywne modele komórek: zwierzęcej, roślinnej, grzybowej, bakteryjnej, eugleny i pantofelka. Kliknij organellum, żeby poznać jego budowę i funkcję. Do tego wirusy, baza wiedzy o komórkach i quiz."><meta property="og:description" content="Interaktywne modele komórek: zwierzęcej, roślinnej, grzybowej, bakteryjnej, eugleny i pantofelka. Kliknij organellum, żeby poznać jego budowę i funkcję. Do tego wirusy, baza wiedzy o komórkach i quiz."><link rel="canonical" href="https://narzedzia.netlify.app/biologia/komorki.html"><!--seo-->
+
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('komorkiLang',l)}catch(e){}})();</script><!--site-lang-->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Komórki i wirusy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+<style>
+:root{--bg:#edf3ef;--paper:#fcfdfc;--ink:#14201a;--muted:#53645b;--line:#cfdcd4;--soft:#e2ede6;--acc:#1d7a58;--acc-t:#16684a;--acc-ink:#fff;--ok:#2e7d4f;--no:#b4432a;--focus:#c2571a;--stage:#f7fbf8;--hl:#e8a400;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1714;--paper:#16201c;--ink:#e2ece6;--muted:#97a9a0;--line:#2a3a33;--soft:#1d2a25;--acc:#3fae84;--acc-t:#8fdcb8;--acc-ink:#08140f;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--stage:#1b2722;--hl:#ffc233;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1714;--paper:#16201c;--ink:#e2ece6;--muted:#97a9a0;--line:#2a3a33;--soft:#1d2a25;--acc:#3fae84;--acc-t:#8fdcb8;--acc-ink:#08140f;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--stage:#1b2722;--hl:#ffc233;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 'Atkinson Hyperlegible',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;letter-spacing:-.015em;line-height:1.15}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 80px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+header h1{margin:0;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800}header p{margin:2px 0 0;color:var(--muted)}
+.hr{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:5px 12px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--paper);font-weight:700}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 15px}
+.tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.btn{font:inherit;font-size:.95rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:8px 14px}
+.btn:hover:not(:disabled){border-color:var(--acc)}.btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:700}
+.btn:disabled{opacity:.5;cursor:default}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;min-width:0}
+.card h2{margin:0 0 6px;font-size:1.45rem}.card h3{margin:14px 0 6px;font-size:1.12rem}
+.card p{margin:0 0 10px}.card ul{margin:0 0 10px;padding-left:20px}.card li{margin:3px 0}
+.note{font-size:.88rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:5px 12px;display:flex;gap:6px;align-items:center}
+.chips button i{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}
+.chips button[aria-pressed=true]{border-color:var(--acc);background:var(--soft);color:var(--acc-t)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:14px}
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.seg button+button{border-left:1.5px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:700}
+.bar .lbl{font-size:.88rem;color:var(--muted);font-weight:700}
+label.ck{display:inline-flex;gap:7px;align-items:center;cursor:pointer;font-size:.95rem}
+label.ck input{accent-color:var(--acc);width:18px;height:18px;margin:0}
+/* model */
+.mgrid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stage{background:var(--stage);border:1.5px solid var(--line);border-radius:16px;padding:8px;margin-top:16px;min-width:0}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.stage svg{display:block;width:100%;height:auto}
+.stage svg.model{max-height:min(580px,78vh)}
+@media (max-width:640px){.scroll svg.wl{min-width:600px}}
+.stage .cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:4px 6px 2px;font-size:.88rem;color:var(--muted)}
+.org{cursor:pointer;transition:opacity .2s}.org:focus{outline:none}
+.org:focus-visible{filter:url(#glowF)}
+.org:hover{filter:brightness(1.07)}
+.org.sel{filter:url(#glow)}
+svg.has-sel .org:not(.sel){opacity:.42}
+.org.good{filter:url(#glowOk)}.org.bad{filter:url(#glowNo)}
+.lab{cursor:pointer}.lab text{fill:var(--ink);font-size:15px}.lab line{stroke:var(--muted)}.lab circle.dot{fill:var(--muted)}
+.lab.sel text{font-weight:700;fill:var(--acc-t)}.lab.sel line{stroke:var(--acc-t);stroke-width:2}
+.lab .nb{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}.lab .nt{font-weight:700;font-size:14px}
+.ocard .kicker{display:block;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.75rem}
+.ocard h2{font-size:1.6rem;margin:2px 0 10px}
+dl.facts{display:grid;grid-template-columns:1fr;gap:0;margin:0;border-top:1px solid var(--line)}
+dl.facts dt{color:var(--muted);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding-top:9px}
+dl.facts dd{margin:0;padding:2px 0 9px;border-bottom:1px solid var(--line)}
+dl.facts dd.fn{font-weight:700}
+.fun{background:var(--soft);border-radius:12px;padding:10px 12px;margin-top:12px}
+.fun::before{content:"✨ "}
+.tagl{display:flex;flex-wrap:wrap;gap:5px;margin:0;padding:0;list-style:none}.tagl li{background:var(--soft);border-radius:999px;padding:2px 10px;font-size:.88rem;margin:0}
+.intro{margin:12px 0 0;color:var(--muted)}
+/* tables */
+.tablewrap{overflow-x:auto;margin-top:10px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:center;vertical-align:top}
+th:first-child,td:first-child{text-align:left}
+thead th{background:var(--soft);font-size:.88rem}
+td.y{color:var(--ok);font-weight:700}td.n{color:var(--no);font-weight:700}
+table.cmp{min-width:720px}table.diff{min-width:760px}table.diff td{text-align:left;font-size:.9rem}
+sup{font-size:.7em}
+.ugrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
+.ucard h3{margin-top:0;display:flex;gap:8px;align-items:center;font-size:1.2rem}
+/* cycle */
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.steps button{font:inherit;font-size:.85rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 10px}
+.steps button[aria-current=step]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:700}
+.cyc svg{display:block;width:100%;height:auto;max-height:340px}
+.fadein{animation:fi .5s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fadein{animation:none}.org{transition:none}}
+.cstep h3{margin:6px 0 4px}
+/* size scale */
+input[type=range]{width:100%;accent-color:var(--acc)}
+.zoomv{font-weight:700;font-size:1.05rem}
+.badge{display:inline-block;border-radius:999px;padding:1px 9px;font-size:.8rem;font-weight:700;background:var(--soft)}
+/* quiz */
+.q{font-size:1.2rem;font-weight:700;margin:4px 0 14px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opts button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:12px 14px;text-align:left}
+.opts button:hover:not(:disabled){border-color:var(--acc)}
+.opts button:disabled{cursor:default;color:var(--ink)}
+.opts button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--paper))}
+.opts button.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 12%,var(--paper))}
+.fb{margin-top:14px;font-weight:700}.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.expl{margin:6px 0 12px}
+.score{color:var(--muted);font-size:.95rem;margin:0 0 6px}
+ul.feat{margin:0 0 14px;padding-left:22px}
+/* worksheet */
+.sheet{background:#fff;color:#111;border-radius:6px;padding:22px 24px;margin-top:16px;box-shadow:0 1px 6px rgba(0,0,0,.15);font-family:'Atkinson Hyperlegible',system-ui,sans-serif}
+.sheet h3{text-align:center;margin:0 0 10px;font-size:1.3rem;color:#111}
+.sheet .tk{font-weight:700;margin:14px 0 2px}.sheet .ins{font-style:italic;margin:0 0 6px}
+.sheet svg{display:block;width:auto;height:auto;max-width:100%;max-height:430px;margin:4px auto}
+.sheet ol{columns:2;column-gap:28px;padding-left:24px;margin:4px 0}.sheet ol li{margin:6px 0;border-bottom:1px dotted #777;min-height:1.4em}
+.sheet .bank{border:1px solid #444;padding:6px 10px;margin:4px 0 8px;font-size:.92rem}
+.sheet .key{border-top:2px dashed #999;margin-top:18px;padding-top:8px}
+.sheet .lab text{fill:#111}.sheet .lab line{stroke:#444}.sheet .lab .nb{fill:#fff;stroke:#111}.sheet .lab circle.dot{fill:#444}
+.wsopt{display:grid;gap:12px}
+.status{font-size:.9rem;color:var(--muted);margin-left:4px}
+@media (max-width:820px){.mgrid,.ugrid{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}.sheet ol{columns:1}}
+@media (max-width:480px){.seg button{padding:6px 9px;font-size:.86rem}.card{padding:14px 14px}.sheet{padding:14px 12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div><h1 id="t1"></h1><p id="t2"></p></div>
+<div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
+<div class="tabs" role="tablist" id="tabs"></div></div></header>
+<main id="app"></main>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" id="measure"><path id="mpath" d="M0 0"/></svg>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let L='pl';try{const s=localStorage.getItem('komorkiLang');if(s==='pl'||s==='en')L=s;}catch(e){}
+const tr=(pl,en)=>L==='pl'?pl:en, T=a=>a[L==='pl'?0:1];
+// liczby w zapisie danego języka, z prawdziwym minusem
+const NF=(n,d=0)=>n.toLocaleString(L==='pl'?'pl-PL':'en-GB',{maximumFractionDigits:d}).replace('-','−');
+const shuffle=(a,r=Math.random)=>{const c=[...a];for(let i=c.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c;};
+const pick=(a,n,r)=>shuffle(a,r).slice(0,n);
+const rngOf=seed=>{let s=seed%2147483647;if(s<=0)s+=2147483646;return()=>(s=s*16807%2147483647)/2147483647;};
+
+const UI={
+ t1:['Komórki i wirusy','Cells and viruses'],
+ t2:['Modele komórek, organella, wirusy, baza wiedzy i quiz.','Cell models, organelles, viruses, a knowledge base and a quiz.'],
+ tabs:{models:['Modele komórek','Cell models'],compare:['Porównaj','Compare'],viruses:['Wirusy','Viruses'],kb:['Baza wiedzy','Knowledge base'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
+};
+// typy komórek
+const CT={
+ animal:{n:['Komórka zwierzęca','Animal cell'],s:['komórka zwierzęca','animal cell'],col:'#e58fa8',
+  d:['Typowa komórka eukariotyczna, np. komórka nabłonka człowieka. Nie ma ściany komórkowej, chloroplastów ani dużej wakuoli.','A typical eukaryotic cell, e.g. a human epithelial cell. It has no cell wall, no chloroplasts and no large vacuole.']},
+ plant:{n:['Komórka roślinna','Plant cell'],s:['komórka roślinna','plant cell'],col:'#5fb84a',
+  d:['Komórka miękiszu liścia. Ma ścianę z celulozy, chloroplasty i dużą wakuolę, która spycha jądro i cytoplazmę na brzegi komórki.','A cell from the soft tissue of a leaf. It has a cellulose wall, chloroplasts and a large vacuole that pushes the nucleus and cytoplasm to the edges.']},
+ fungus:{n:['Komórka grzyba (drożdże)','Fungal cell (yeast)'],s:['komórka grzyba','fungal cell'],col:'#d8a65c',
+  d:['Komórka drożdży – jednokomórkowego grzyba. Ma ścianę z chityny, ale nie ma chloroplastów: grzyby są cudzożywne.','A yeast cell – a single-celled fungus. It has a chitin wall but no chloroplasts: fungi are heterotrophs.']},
+ bacteria:{n:['Komórka bakterii','Bacterial cell'],s:['komórka bakterii','bacterial cell'],col:'#5d9cd6',
+  d:['Pałeczka, np. pałeczka okrężnicy (Escherichia coli). To komórka prokariotyczna – nie ma jądra ani organelli otoczonych błonami.','A rod-shaped bacterium, such as Escherichia coli. It is a prokaryotic cell – it has no nucleus and no membrane-bound organelles.']},
+ euglena:{n:['Euglena zielona','Euglena'],s:['euglena','euglena'],col:'#3e9e6e',
+  d:['Euglena zielona (Euglena viridis) – jednokomórkowy protist słodkowodny. Na świetle prowadzi fotosyntezę, w ciemności pobiera związki organiczne z wody – jest miksotrofem.','Euglena viridis – a single-celled freshwater protist. In light it photosynthesises; in the dark it takes in organic substances from the water – it is a mixotroph.']},
+ paramecium:{n:['Pantofelek','Paramecium'],s:['pantofelek','paramecium'],col:'#9b7dcc',
+  d:['Pantofelek (Paramecium caudatum) – jednokomórkowy protist słodkowodny pokryty rzęskami. Jest cudzożywny: zjada bakterie.','Paramecium caudatum – a single-celled freshwater protist covered in cilia. It is a heterotroph that eats bacteria.']},
+};
+const VT={
+ t4:{n:['Bakteriofag T4','Bacteriophage T4'],s:['bakteriofag T4','phage T4'],col:'#7a8a99',d:['Wirus atakujący bakterie (pałeczki E. coli). Ma kapsyd o złożonej budowie: główkę i ogonek. Materiał genetyczny: DNA.','A virus that attacks bacteria (E. coli). It has a complex capsid made of a head and a tail. Genetic material: DNA.']},
+ flu:{n:['Wirus grypy','Influenza virus'],s:['wirus grypy','flu virus'],col:'#d4708a',d:['Wirus otoczkowy atakujący komórki dróg oddechowych. Materiał genetyczny: RNA. Średnica ok. 100 nm.','An enveloped virus that infects cells lining the airways. Genetic material: RNA. About 100 nm across.']},
+ tmv:{n:['Wirus mozaiki tytoniu','Tobacco mosaic virus'],s:['wirus mozaiki tytoniu','tobacco mosaic virus'],col:'#6aa84f',d:['Wirus roślin bez otoczki, w kształcie sztywnej pałeczki (ok. 300 nm × 18 nm). Materiał genetyczny: RNA. Wywołuje mozaikowate plamy na liściach.','A plant virus with no envelope, shaped like a stiff rod (about 300 nm × 18 nm). Genetic material: RNA. It causes mosaic-like patches on leaves.']},
+ sars:{n:['Koronawirus SARS-CoV-2','Coronavirus SARS-CoV-2'],s:['SARS-CoV-2','SARS-CoV-2'],col:'#c0504d',d:['Wirus otoczkowy wywołujący COVID-19. Materiał genetyczny: RNA. Średnica ok. 100 nm.','An enveloped virus that causes COVID-19. Genetic material: RNA. About 100 nm across.']},
+};
+// B na poziomie podstawowym te elementy łączą się w jeden
+const MERGE_B={rer:'er',ser:'er',envelope:'nucleus',nucleolus:'nucleus',chromatin:'nucleus',macro:'nuclei',micro:'nuclei',ha:'spikes',na:'spikes'};
+
+// ---------- organella i części wirusów ----------
+// n nazwa, nA nazwa na poziomie rozszerzonym, s budowa, f funkcja, a analogia, x ciekawostka (R), q krótko funkcja (quiz), no – nie mogą być dystraktorami
+const ORG={
+ membrane:{n:['Błona komórkowa','Cell membrane'],s:['Cienka, elastyczna warstwa zbudowana z dwóch warstw lipidów (fosfolipidów) z wbudowanymi białkami.','A thin, flexible layer made of a double layer of lipids (phospholipids) with proteins built into it.'],f:['Oddziela wnętrze komórki od otoczenia i decyduje, co wchodzi do komórki, a co z niej wychodzi (jest półprzepuszczalna). Odbiera też sygnały z otoczenia.','Separates the inside of the cell from its surroundings and controls what goes in and out (it is partially permeable). It also picks up signals from outside.'],a:['Jak bramka z ochroną – wpuszcza tylko to, co trzeba.','Like a gate with security guards – it only lets in what is needed.'],x:['Błona nie jest sztywna – lipidy i białka stale się w niej przemieszczają. Taki opis nazywa się modelem płynnej mozaiki.','The membrane isn’t rigid – its lipids and proteins keep moving around. This is called the fluid mosaic model.'],q:['regulowanie, jakie substancje wnikają do komórki i z niej wychodzą','controlling which substances enter and leave the cell'],no:['wall_cel','wall_chit','wall_mur','pellicle','envelope','capsule']},
+ cytoplasm:{n:['Cytoplazma','Cytoplasm'],s:['Galaretowata substancja wypełniająca komórkę – głównie woda z rozpuszczonymi solami, cukrami i białkami (cytozol). Zawieszone są w niej organella.','A jelly-like substance filling the cell – mostly water with dissolved salts, sugars and proteins (the cytosol). The organelles are suspended in it.'],f:['Tu zachodzi wiele reakcji chemicznych, np. pierwszy etap rozkładu glukozy (glikoliza). Cytoplazma łączy wszystkie części komórki i umożliwia transport substancji.','Many chemical reactions happen here, e.g. the first stage of breaking down glucose (glycolysis). It links all parts of the cell and lets substances move around.'],a:['Jak hala fabryczna, w której stoją wszystkie maszyny.','Like a factory floor where all the machines stand.'],x:['W wielu komórkach cytoplazma stale krąży – u roślin ten ruch nazywa się cyklozą i widać go pod mikroskopem po przesuwających się chloroplastach.','In many cells the cytoplasm keeps flowing – in plants this is called cytoplasmic streaming, and under a microscope you can see the chloroplasts drifting along.']},
+ nucleus:{n:['Jądro komórkowe','Nucleus'],s:['Duże, zwykle kuliste organellum otoczone podwójną błoną (otoczką jądrową) z porami. W środku znajdują się DNA (chromatyna) i jąderko.','A large, usually round organelle surrounded by a double membrane (the nuclear envelope) with pores. Inside are the DNA (chromatin) and the nucleolus.'],f:['Przechowuje informację genetyczną (DNA) i kieruje wszystkimi procesami życiowymi komórki. Bierze udział w podziale komórki.','Stores the genetic information (DNA) and controls all of the cell’s life processes. It takes part in cell division.'],a:['Jak centrum dowodzenia z biblioteką instrukcji.','Like a control centre with a library of instructions.'],x:['Gdyby rozwinąć DNA z jednego jądra komórki człowieka, miałoby ok. 2 metrów długości.','If you unwound the DNA from a single human cell nucleus, it would be about 2 metres long.'],q:['przechowywanie informacji genetycznej i kierowanie pracą komórki','storing genetic information and controlling the cell’s activities'],no:['nucleoid','chromatin','nuclei','macro','micro','plasmid','nucleolus']},
+ envelope:{n:['Otoczka jądrowa','Nuclear envelope'],s:['Dwie błony otaczające jądro, przedziurawione porami jądrowymi. Zewnętrzna błona łączy się z siateczką śródplazmatyczną.','Two membranes around the nucleus, with nuclear pores running through them. The outer membrane is continuous with the endoplasmic reticulum.'],f:['Oddziela DNA od cytoplazmy. Przez pory jądrowe przechodzą m.in. cząsteczki RNA (z jądra) i białka (do jądra).','Separates the DNA from the cytoplasm. Molecules such as RNA (out of the nucleus) and proteins (into it) pass through the nuclear pores.'],a:['Jak mur z bramami wokół skarbca.','Like a wall with gates around a vault.'],x:['Jedno jądro może mieć kilka tysięcy porów, a każdy z nich to złożona „bramka” zbudowana z ok. 30 rodzajów białek.','A single nucleus can have several thousand pores, and each one is a complex gateway built from about 30 kinds of protein.']},
+ nucleolus:{n:['Jąderko','Nucleolus'],s:['Gęsty, ciemniejszy obszar wewnątrz jądra, nieotoczony błoną.','A dense, darker area inside the nucleus, with no membrane around it.'],f:['Tu powstają podjednostki rybosomów (z rRNA i białek), które potem wędrują do cytoplazmy.','This is where ribosome subunits are made (from rRNA and proteins); they then move out into the cytoplasm.'],a:['Jak warsztat produkujący części do maszyn wytwarzających białka.','Like a workshop making parts for the protein-building machines.'],x:['Komórki, które wytwarzają dużo białek, mają duże jąderka – czasem nawet kilka.','Cells that make lots of protein have big nucleoli – sometimes even several.'],q:['wytwarzanie podjednostek rybosomów','making ribosome subunits'],no:['ribo','nucleus','rer','er','chromatin']},
+ chromatin:{n:['Chromatyna','Chromatin'],s:['Nici DNA nawinięte na białka (histony). Podczas podziału komórki zwijają się w chromosomy.','Strands of DNA wound around proteins (histones). During cell division they coil up into chromosomes.'],f:['Zawiera geny – zapis informacji o budowie białek i cechach organizmu.','Contains the genes – the coded information for building proteins and for the organism’s traits.'],a:['Jak długa nić z zapisanym przepisem.','Like a long thread with a recipe written along it.'],x:['DNA jest nawinięte na histony jak nić na szpulki – dzięki temu mieści się w malutkim jądrze.','DNA is wrapped around histones like thread on reels – that’s how it fits into the tiny nucleus.']},
+ mito:{n:['Mitochondria','Mitochondria'],s:['Owalne organella otoczone dwiema błonami; wewnętrzna tworzy pofałdowania (grzebienie). Mają własne, koliste DNA i rybosomy.','Oval organelles with two membranes; the inner one is folded into ridges (cristae). They have their own circular DNA and ribosomes.'],f:['Przeprowadzają oddychanie komórkowe (tlenowe): rozkładają związki organiczne, np. glukozę, z udziałem tlenu i uwalniają energię, magazynowaną w ATP.','Carry out (aerobic) cellular respiration: they break down organic compounds such as glucose using oxygen and release energy, which is stored in ATP.'],a:['Jak elektrownia komórki.','Like the cell’s power station.'],x:['Mitochondria dziedziczymy prawie wyłącznie po matce – pochodzą z komórki jajowej.','We inherit our mitochondria almost entirely from our mother – they come from the egg cell.'],q:['uwalnianie energii w procesie oddychania komórkowego','releasing energy through cellular respiration'],no:['chloro','cytoplasm']},
+ ribo:{n:['Rybosomy','Ribosomes'],s:['Bardzo małe, ziarniste struktury bez błon, zbudowane z RNA i białek, z dwóch podjednostek. Występują swobodnie w cytoplazmie lub na siateczce śródplazmatycznej.','Tiny granules with no membrane, made of RNA and protein and built from two subunits. They float freely in the cytoplasm or sit on the endoplasmic reticulum.'],f:['Wytwarzają białka – łączą aminokwasy w łańcuch według instrukcji zapisanej w RNA.','Make proteins – they join amino acids into a chain following instructions carried by RNA.'],a:['Jak maszyny składające białka według przepisu.','Like assembly machines that build proteins from a recipe.'],x:['W cytoplazmie eukariontów są rybosomy 80S, a u bakterii mniejsze – 70S. Niektóre antybiotyki blokują tylko rybosomy bakterii.','Eukaryotic cytoplasm has 80S ribosomes, while bacteria have smaller 70S ones. Some antibiotics block only the bacterial ones.'],q:['synteza (wytwarzanie) białek','protein synthesis (making proteins)'],no:['rer','er','nucleolus','golgi','nucleus']},
+ er:{n:['Siateczka śródplazmatyczna','Endoplasmic reticulum'],s:['Sieć kanalików i spłaszczonych woreczków z błon, połączona z otoczką jądrową. Część siateczki pokrywają rybosomy (szorstka), część jest ich pozbawiona (gładka).','A network of membrane tubes and flattened sacs, connected to the nuclear envelope. Part of it is covered with ribosomes (rough) and part has none (smooth).'],f:['Transportuje substancje wewnątrz komórki. Na siateczce szorstkiej powstają białka, a na gładkiej – tłuszcze (lipidy).','Transports substances around the cell. Proteins are made on the rough part and lipids (fats) on the smooth part.'],a:['Jak sieć korytarzy i taśmociągów w fabryce.','Like a network of corridors and conveyor belts in a factory.'],x:['Siateczka śródplazmatyczna może zajmować ponad połowę wszystkich błon w komórce.','The endoplasmic reticulum can make up more than half of all the membranes in a cell.'],q:['transport substancji wewnątrz komórki oraz udział w wytwarzaniu białek i tłuszczów','transporting substances within the cell and helping to make proteins and lipids'],no:['golgi','cytosk','vesicle','ribo','cytoplasm']},
+ rer:{n:['Siateczka śródplazmatyczna szorstka','Rough endoplasmic reticulum'],s:['Spłaszczone woreczki z błon, z rybosomami przyczepionymi od zewnątrz – dlatego wyglądają na „szorstkie”.','Flattened membrane sacs with ribosomes stuck to the outside – which is why they look “rough”.'],f:['Przyczepione rybosomy wytwarzają białka, które siateczka modyfikuje i przesyła dalej, głównie do aparatu Golgiego.','The attached ribosomes make proteins, which the reticulum modifies and sends on, mainly to the Golgi apparatus.'],a:['Jak linia montażowa z robotami (rybosomami).','Like an assembly line lined with robots (the ribosomes).'],x:['Komórki trzustki, które produkują enzymy trawienne, są wręcz wypełnione siateczką szorstką.','Pancreas cells that make digestive enzymes are packed with rough ER.'],q:['modyfikowanie i transport białek wytworzonych przez przyczepione do niej rybosomy','modifying and transporting proteins made by the ribosomes attached to it'],no:['ribo','golgi','ser','vesicle']},
+ ser:{n:['Siateczka śródplazmatyczna gładka','Smooth endoplasmic reticulum'],s:['Sieć rurkowatych kanalików z błon, bez rybosomów.','A network of tube-like membrane channels with no ribosomes.'],f:['Wytwarza lipidy (np. składniki błon i niektóre hormony), magazynuje jony wapnia i unieszkodliwia niektóre trucizny i leki.','Makes lipids (e.g. membrane components and some hormones), stores calcium ions and breaks down some poisons and drugs.'],a:['Jak wytwórnia tłuszczów połączona z oczyszczalnią.','Like a fat factory combined with a detox plant.'],x:['Komórki wątroby osób, które przyjmują dużo leków, mogą mieć wyraźnie więcej siateczki gładkiej.','Liver cells of people who take a lot of medicines can have noticeably more smooth ER.'],q:['wytwarzanie lipidów i unieszkodliwianie niektórych trucizn','making lipids and breaking down some poisons'],no:['perox','rer','lyso']},
+ golgi:{n:['Aparat Golgiego','Golgi apparatus'],s:['Stos kilku spłaszczonych, wygiętych woreczków z błon (cystern), od których odrywają się pęcherzyki.','A stack of several flattened, curved membrane sacs (cisternae) that pinch off small vesicles.'],f:['Modyfikuje, sortuje i pakuje białka i inne substancje w pęcherzyki, a potem wysyła je w odpowiednie miejsce – także poza komórkę (wydzielanie). Wytwarza lizosomy.','Modifies, sorts and packages proteins and other substances into vesicles, then sends them where they are needed – including out of the cell (secretion). It also makes lysosomes.'],a:['Jak sortownia paczek na poczcie.','Like a post office sorting and packing parcels.'],x:['Nazwa pochodzi od włoskiego lekarza Camilla Golgiego, który opisał to organellum w 1898 roku.','It is named after the Italian doctor Camillo Golgi, who described it in 1898.'],q:['sortowanie, pakowanie i wydzielanie substancji w pęcherzykach','sorting, packaging and secreting substances in vesicles'],no:['er','rer','ser','vesicle']},
+ lyso:{n:['Lizosomy','Lysosomes'],s:['Małe pęcherzyki otoczone jedną błoną, wypełnione enzymami trawiennymi.','Small vesicles with a single membrane, filled with digestive enzymes.'],f:['Trawią (rozkładają) zużyte części komórki, pobrane cząstki pokarmu oraz bakterie wchłonięte przez komórkę.','Digest (break down) worn-out parts of the cell, food particles taken in, and bacteria the cell has swallowed.'],a:['Jak ekipa sprzątająca z recyklingiem.','Like a cleaning and recycling crew.'],x:['Enzymy lizosomów działają w kwaśnym środowisku (pH ok. 5). Gdyby wyciekły do cytoplazmy, prawie by nie działały – to chroni komórkę.','Lysosome enzymes work in acidic conditions (about pH 5). If they leaked into the cytoplasm they would hardly work – which protects the cell.'],q:['trawienie zużytych organelli i cząstek pobranych przez komórkę','digesting worn-out organelles and particles taken into the cell'],no:['vacuole','foodvac','perox','ser']},
+ centro:{n:['Centrosom (centriole)','Centrosome (centrioles)'],s:['Obszar w pobliżu jądra z dwiema centriolami – walcami z 9 trójek mikrotubul, ustawionymi prostopadle do siebie.','An area near the nucleus with two centrioles – cylinders made of 9 triplets of microtubules, set at right angles to each other.'],f:['Organizuje mikrotubule cytoszkieletu; podczas podziału komórki tworzy wrzeciono podziałowe, które rozdziela chromosomy.','Organises the microtubules of the cytoskeleton; during cell division it builds the spindle that pulls the chromosomes apart.'],a:['Jak brygadzista, który rozpina liny podczas przeprowadzki chromosomów.','Like a foreman setting up the ropes to move the chromosomes.'],x:['Komórki roślin nasiennych nie mają centrioli, a mimo to bez problemu tworzą wrzeciono podziałowe.','Seed-plant cells have no centrioles, yet they still build a spindle without any trouble.'],q:['tworzenie wrzeciona podziałowego podczas podziału komórki','forming the spindle during cell division'],no:['cytosk','nucleus','chromatin']},
+ perox:{n:['Peroksysomy','Peroxisomes'],s:['Małe pęcherzyki otoczone jedną błoną, zawierające enzymy, m.in. katalazę.','Small vesicles with a single membrane, containing enzymes such as catalase.'],f:['Rozkładają szkodliwy nadtlenek wodoru (H₂O₂) na wodę i tlen, unieszkodliwiają niektóre trucizny i rozkładają kwasy tłuszczowe.','Break down harmful hydrogen peroxide (H₂O₂) into water and oxygen, neutralise some poisons and break down fatty acids.'],a:['Jak oczyszczalnia toksycznych odpadów.','Like a toxic-waste treatment plant.'],x:['To katalaza sprawia, że woda utleniona pieni się na ranie.','Catalase is what makes hydrogen peroxide fizz on a cut.'],q:['rozkład szkodliwego nadtlenku wodoru (H₂O₂)','breaking down harmful hydrogen peroxide (H₂O₂)'],no:['ser','lyso','mito']},
+ cytosk:{n:['Cytoszkielet','Cytoskeleton'],s:['Sieć włókien białkowych: mikrotubul, mikrofilamentów (aktynowych) i filamentów pośrednich.','A network of protein fibres: microtubules, microfilaments (actin) and intermediate filaments.'],f:['Nadaje komórce kształt, podtrzymuje organella, umożliwia ruch komórki i transport pęcherzyków wewnątrz niej.','Gives the cell its shape, holds the organelles in place, and lets the cell move and transport vesicles around inside it.'],a:['Jak rusztowanie i tory kolejowe jednocześnie.','Like scaffolding and a railway network at the same time.'],x:['Białka motoryczne dosłownie „kroczą” po mikrotubulach, niosąc pęcherzyki – jak tragarze po linie.','Motor proteins literally “walk” along microtubules carrying vesicles – like porters on a rope.'],q:['podtrzymywanie kształtu komórki i przemieszczanie organelli w jej wnętrzu','supporting the cell’s shape and moving organelles around inside it'],no:['wall_cel','wall_chit','wall_mur','centro','pellicle','vacuole','cilia','flagE','flagB','er','membrane']},
+ vesicle:{n:['Małe wodniczki (pęcherzyki)','Small vacuoles (vesicles)'],s:['Drobne pęcherzyki otoczone jedną błoną, wypełnione płynem lub przenoszonymi substancjami. W komórce zwierzęcej są małe i często tymczasowe.','Tiny sacs with a single membrane, filled with fluid or substances being carried. In animal cells they are small and often temporary.'],f:['Przenoszą i przechowują substancje – np. pobrane z zewnątrz (endocytoza) albo przeznaczone do wydzielenia (egzocytoza).','Carry and store substances – e.g. ones taken in from outside (endocytosis) or ones to be released (exocytosis).'],a:['Jak przesyłki kurierskie krążące po komórce.','Like courier parcels moving around the cell.'],x:['Neurony przekazują sygnały, wypuszczając z pęcherzyków neuroprzekaźniki.','Neurons pass on signals by releasing neurotransmitters from vesicles.']},
+ wall_cel:{n:['Ściana komórkowa (z celulozy)','Cell wall (cellulose)'],s:['Sztywna warstwa na zewnątrz błony, zbudowana głównie z włókien celulozy (wielocukru).','A stiff layer outside the membrane, made mainly of cellulose fibres (a polysaccharide).'],f:['Chroni komórkę, nadaje jej stały kształt i zapobiega pęknięciu, gdy komórka nasiąka wodą. Przepuszcza wodę i rozpuszczone w niej substancje.','Protects the cell, gives it a fixed shape and stops it bursting when it takes in water. It lets water and dissolved substances through.'],a:['Jak mur obronny wokół zamku.','Like the defensive wall around a castle.'],x:['Celuloza to najpowszechniejszy związek organiczny na Ziemi – robi się z niej papier, a bawełna to niemal czysta celuloza.','Cellulose is the most common organic compound on Earth – paper is made from it, and cotton is almost pure cellulose.'],q:['ochrona komórki roślinnej i nadawanie jej stałego kształtu (warstwa z celulozy)','protecting a plant cell and giving it a fixed shape (a layer made of cellulose)'],no:['membrane','wall_chit','wall_mur','pellicle','vacuole','cytosk','capsule']},
+ wall_chit:{n:['Ściana komórkowa (z chityny)','Cell wall (chitin)'],s:['Sztywna warstwa na zewnątrz błony, zbudowana głównie z chityny.','A stiff layer outside the membrane, made mainly of chitin.'],f:['Chroni komórkę grzyba, nadaje jej kształt i zapobiega pęknięciu.','Protects the fungal cell, gives it its shape and stops it bursting.'],a:['Jak zbroja.','Like a suit of armour.'],x:['Z chityny zbudowane są też pancerzyki owadów i skorupiaków.','Insect and crustacean shells are also made of chitin.'],q:['ochrona komórki grzyba i nadawanie jej kształtu (warstwa z chityny)','protecting a fungal cell and giving it its shape (a layer made of chitin)'],no:['membrane','wall_cel','wall_mur','pellicle','vacuole','cytosk','capsule']},
+ wall_mur:{n:['Ściana komórkowa (z mureiny)','Cell wall (murein)'],s:['Warstwa na zewnątrz błony zbudowana z mureiny (peptydoglikanu) – sieci łańcuchów cukrowych połączonych krótkimi łańcuchami aminokwasów.','A layer outside the membrane made of murein (peptidoglycan) – a mesh of sugar chains cross-linked by short chains of amino acids.'],f:['Nadaje bakterii kształt (np. pałeczki lub ziarniaka) i chroni ją przed pęknięciem.','Gives the bacterium its shape (e.g. a rod or a sphere) and stops it bursting.'],a:['Jak siatkowy gorset.','Like a mesh corset.'],x:['Penicylina blokuje budowę mureiny, więc rosnąca bakteria pęka. Komórki człowieka nie mają mureiny, dlatego penicylina im nie szkodzi.','Penicillin blocks the building of murein, so the growing bacterium bursts. Human cells have no murein, so penicillin doesn’t harm them.'],q:['nadawanie kształtu komórce bakterii (warstwa z mureiny)','giving a bacterial cell its shape (a layer made of murein)'],no:['membrane','wall_cel','wall_chit','pellicle','capsule','cytosk']},
+ chloro:{n:['Chloroplasty','Chloroplasts'],s:['Zielone organella otoczone dwiema błonami. Wewnątrz mają stosy błon (tylakoidy tworzące grana) z chlorofilem oraz własne, koliste DNA.','Green organelles with two membranes. Inside are stacks of membranes (thylakoids forming grana) containing chlorophyll, plus their own circular DNA.'],f:['Przeprowadzają fotosyntezę: dzięki energii światła wytwarzają glukozę z dwutlenku węgla i wody, uwalniając tlen.','Carry out photosynthesis: using light energy, they make glucose from carbon dioxide and water, releasing oxygen.'],a:['Jak panele słoneczne połączone z kuchnią.','Like solar panels connected to a kitchen.'],x:['W jednej komórce liścia może być od kilkudziesięciu do ponad 100 chloroplastów.','A single leaf cell can contain from a few dozen to over 100 chloroplasts.'],q:['fotosynteza – wytwarzanie glukozy z użyciem energii światła','photosynthesis – making glucose using light energy'],no:['amylo','stigma','mito']},
+ vacuole:{n:['Wakuola (wodniczka)','Vacuole'],s:['Pęcherz otoczony pojedynczą błoną (tonoplastem), wypełniony sokiem komórkowym – wodą z rozpuszczonymi solami, cukrami i barwnikami.','A sac with a single membrane (the tonoplast), filled with cell sap – water with dissolved salts, sugars and pigments.'],f:['Magazynuje wodę i różne substancje, utrzymuje jędrność komórki (turgor) i gromadzi zbędne produkty przemiany materii. U roślin i grzybów przejmuje też funkcję lizosomów – trawi zbędne składniki komórki.','Stores water and various substances, keeps the cell firm (turgor) and collects waste products. In plants and fungi it also does the job of lysosomes – digesting unwanted cell material.'],a:['Jak zbiornik na wodę i magazyn w jednym.','Like a water tank and storeroom in one.'],x:['Barwniki rozpuszczone w soku komórkowym (antocyjany) nadają kolor płatkom bratków i korzeniowi buraka.','Pigments dissolved in the cell sap (anthocyanins) give pansy petals and beetroot their colour.'],q:['magazynowanie wody i utrzymywanie jędrności (turgoru) komórki roślinnej','storing water and keeping a plant cell firm (turgor)'],no:['cvac','vesicle','wall_cel','foodvac','lyso','amylo']},
+ plasmod:{n:['Plazmodesmy','Plasmodesmata'],s:['Cienkie kanały przechodzące przez ściany sąsiednich komórek, wyściełane błoną.','Thin channels through the walls of neighbouring cells, lined with membrane.'],f:['Łączą cytoplazmę sąsiednich komórek roślinnych – przepływają przez nie woda, substancje odżywcze i sygnały.','Connect the cytoplasm of neighbouring plant cells – water, nutrients and signals flow through them.'],a:['Jak drzwi między sąsiednimi mieszkaniami.','Like doors between neighbouring flats.'],x:['Niektóre wirusy roślin, np. wirus mozaiki tytoniu, rozprzestrzeniają się po roślinie właśnie przez plazmodesmy.','Some plant viruses, such as tobacco mosaic virus, spread through the plant via plasmodesmata.'],q:['łączenie cytoplazmy sąsiednich komórek roślinnych','connecting the cytoplasm of neighbouring plant cells'],no:['membrane','wall_cel']},
+ amylo:{n:['Amyloplasty (ziarna skrobi)','Amyloplasts (starch grains)'],s:['Bezbarwne plastydy otoczone dwiema błonami, wypełnione ziarnami skrobi.','Colourless plastids with two membranes, filled with starch grains.'],f:['Magazynują skrobię – główny materiał zapasowy roślin. Dużo ich jest w bulwach ziemniaka i w nasionach.','Store starch – plants’ main storage material. Potato tubers and seeds are full of them.'],a:['Jak spiżarnia.','Like a pantry.'],x:['Amyloplasty w czapeczce korzenia działają jak pion murarski – opadają w dół i pomagają korzeniowi rosnąć w stronę ziemi.','Amyloplasts in the root cap act like a plumb line – they sink downwards and help the root grow towards the ground.'],q:['magazynowanie skrobi','storing starch'],no:['vacuole','chloro','storage','paramylon']},
+ storage:{n:['Materiał zapasowy (glikogen, krople tłuszczu)','Storage material (glycogen, fat droplets)'],s:['Ziarna glikogenu i kropelki tłuszczu zawieszone w cytoplazmie – nieotoczone błoną białkowo-lipidową jak organella.','Glycogen granules and fat droplets suspended in the cytoplasm – not wrapped in a membrane like the organelles.'],f:['Zapas energii i budulca na gorsze czasy. Grzyby, podobnie jak zwierzęta, magazynują glikogen, a nie skrobię.','A reserve of energy and building material for hard times. Like animals, fungi store glycogen, not starch.'],a:['Jak zapasy w spiżarni.','Like supplies in a pantry.'],x:['To, że grzyby magazynują glikogen i mają chitynę, a nie celulozę, to jedna ze wskazówek, że są bliżej spokrewnione ze zwierzętami niż z roślinami.','Storing glycogen and having chitin rather than cellulose are among the clues that fungi are more closely related to animals than to plants.'],q:['magazynowanie glikogenu i tłuszczu w komórce grzyba','storing glycogen and fat in a fungal cell'],no:['vacuole','amylo','paramylon','lyso']},
+ nucleoid:{n:['Nukleoid (DNA)','Nucleoid (DNA)'],s:['Obszar cytoplazmy, w którym leży kolista cząsteczka DNA (chromosom bakteryjny). Nie jest otoczony błoną – bakteria nie ma jądra.','An area of the cytoplasm containing a circular DNA molecule (the bacterial chromosome). It has no membrane around it – bacteria have no nucleus.'],f:['Zawiera informację genetyczną bakterii i kieruje jej procesami życiowymi.','Holds the bacterium’s genetic information and controls its life processes.'],a:['Jak instrukcja obsługi rozłożona na stole, a nie zamknięta w szafie.','Like an instruction manual left open on the table rather than locked in a cupboard.'],x:['Kolisty chromosom E. coli ma ok. 1,5 mm długości – kilkaset razy więcej niż sama bakteria.','The circular chromosome of E. coli is about 1.5 mm long – several hundred times longer than the bacterium itself.'],q:['przechowywanie głównego DNA w komórce, która nie ma jądra','holding the main DNA in a cell that has no nucleus'],no:['plasmid','nucleus','chromatin','nuclei','macro','micro']},
+ capsule:{n:['Otoczka śluzowa','Slime capsule'],s:['Galaretowata warstwa (głównie z wielocukrów) na zewnątrz ściany komórkowej. Mają ją tylko niektóre bakterie.','A jelly-like layer (mainly polysaccharides) outside the cell wall. Only some bacteria have one.'],f:['Chroni bakterię przed wysychaniem i przed komórkami odpornościowymi gospodarza, pomaga też przyczepiać się do powierzchni.','Protects the bacterium from drying out and from the host’s immune cells, and helps it stick to surfaces.'],a:['Jak płaszcz przeciwdeszczowy z warstwą kleju.','Like a raincoat with a sticky coating.'],x:['Bakterie z otoczką są często groźniejsze – np. dwoinki zapalenia płuc bez otoczki prawie nie wywołują choroby.','Bacteria with a capsule are often more dangerous – e.g. pneumococci without a capsule hardly cause disease at all.'],q:['ochrona bakterii przed wysychaniem i komórkami odpornościowymi','protecting a bacterium from drying out and from immune cells'],no:['wall_mur','pili','membrane']},
+ flagB:{n:['Rzęska (wić bakteryjna)','Flagellum (bacterial)'],s:['Długa, cienka nić z białka (flageliny), osadzona w błonie i ścianie w obrotowym „silniczku”.','A long, thin thread of protein (flagellin), anchored in the membrane and wall by a rotating motor.'],f:['Umożliwia ruch – obraca się jak śruba napędowa statku.','Lets the bacterium move – it spins like a ship’s propeller.'],a:['Jak śruba napędowa motorówki.','Like the propeller of a motorboat.'],x:['Silnik rzęski bakteryjnej może wykonywać ponad 10 000 obrotów na minutę.','The motor of a bacterial flagellum can spin at more than 10,000 revolutions per minute.'],q:['ruch bakterii – obraca się jak śruba napędowa','moving the bacterium – it spins like a propeller'],no:['pili','flagE','cilia','cytosk']},
+ pili:{n:['Fimbrie (pile)','Fimbriae (pili)'],s:['Krótkie, cienkie i liczne białkowe wypustki na powierzchni bakterii.','Short, thin and numerous protein projections on the surface of the bacterium.'],f:['Pozwalają przyczepiać się do powierzchni i komórek gospodarza. Specjalne pile płciowe służą do przekazywania DNA (np. plazmidów) innej bakterii – to koniugacja.','Help the bacterium stick to surfaces and host cells. Special sex pili are used to pass DNA (e.g. plasmids) to another bacterium – this is conjugation.'],a:['Jak haczyki rzepu na kurtce.','Like the hooks of Velcro on a jacket.'],x:['Dzięki fimbriom pałeczki E. coli mogą trzymać się ścian dróg moczowych mimo przepływu moczu.','Fimbriae let E. coli cling to the walls of the urinary tract even with urine flowing past.'],q:['przyczepianie się bakterii do powierzchni i komórek gospodarza','attaching the bacterium to surfaces and host cells'],no:['capsule','flagB','plasmid']},
+ plasmid:{n:['Plazmidy','Plasmids'],s:['Małe, koliste cząsteczki DNA poza nukleoidem.','Small circular DNA molecules separate from the nucleoid.'],f:['Zawierają dodatkowe geny, np. oporności na antybiotyki. Bakterie mogą przekazywać je sobie nawzajem.','Carry extra genes, e.g. for antibiotic resistance. Bacteria can pass them to one another.'],a:['Jak pendrive z dodatkowymi programami.','Like a USB stick with extra apps.'],x:['Plazmidy wykorzystuje się w inżynierii genetycznej – tak powstały np. bakterie wytwarzające ludzką insulinę.','Plasmids are used in genetic engineering – for example to make bacteria that produce human insulin.'],q:['przechowywanie dodatkowych genów, np. oporności na antybiotyki','carrying extra genes, e.g. for antibiotic resistance'],no:['nucleoid','nucleus','chromatin','pili','micro','macro','nuclei']},
+ stigma:{n:['Plamka oczna (stigma)','Eyespot (stigma)'],s:['Czerwona plamka z barwników (karotenoidów) przy nasadzie wici.','A red patch of pigments (carotenoids) near the base of the flagellum.'],f:['Razem z fotoreceptorem u nasady wici pozwala wyczuć kierunek światła, dzięki czemu euglena płynie w stronę światła (fototaksja).','Together with a light sensor at the base of the flagellum, it lets euglena sense where light is coming from, so it can swim towards it (phototaxis).'],a:['Jak prosty czujnik światła.','Like a simple light sensor.'],x:['Plamka oczna nie jest okiem – nie widzi obrazów, tylko rzuca cień na fotoreceptor i w ten sposób „mówi”, skąd pada światło.','The eyespot isn’t an eye – it can’t see images; it just casts a shadow on the light sensor to show where the light is coming from.'],q:['wykrywanie kierunku, z którego pada światło','sensing which direction light is coming from'],no:['chloro']},
+ flagE:{n:['Wić (witka)','Flagellum'],s:['Długa, ruchliwa nić z wiązki mikrotubul okrytej błoną, wyrastająca z przedniego końca komórki.','A long, whip-like thread made of a bundle of microtubules covered by membrane, growing from the front end of the cell.'],f:['Służy do ruchu – wykonuje ruchy falujące i „ciągnie” euglenę przez wodę.','Used for swimming – it beats in waves and pulls euglena through the water.'],a:['Jak wiosło albo ogon napędowy.','Like an oar or a whipping tail.'],x:['Wić eukariontów ma inną budowę niż rzęska bakterii: w środku jest układ mikrotubul 9 par + 2 – taki sam jak w witce plemnika.','A eukaryotic flagellum is built differently from a bacterial one: inside is a 9 + 2 pattern of microtubules – the same as in a sperm cell’s tail.'],q:['pływanie eugleny – jedna długa, falująca nić','euglena swimming – a single long, waving thread'],no:['cilia','flagB','cytosk','pili']},
+ cvac:{n:['Wodniczka tętniąca','Contractile vacuole'],s:['Pęcherzyk, który rytmicznie napełnia się wodą i opróżnia (kurczy się – „tętni”). U pantofelka ma promieniście ułożone kanaliki doprowadzające.','A vacuole that fills with water and empties again in a steady rhythm (it contracts, or “pulses”). In paramecium it has radiating channels feeding into it.'],f:['Usuwa nadmiar wody, która stale napływa do komórki z wody słodkiej (osmoza). Bez niej komórka by pękła.','Pumps out the excess water that keeps flowing into the cell from fresh water (osmosis). Without it the cell would burst.'],a:['Jak pompa wypompowująca wodę z przeciekającej łodzi.','Like a bilge pump bailing water out of a leaking boat.'],x:['W słodkiej wodzie wodniczka tętniąca pantofelka może opróżniać się nawet co kilka sekund.','In fresh water, a paramecium’s contractile vacuole can empty as often as every few seconds.'],q:['usuwanie nadmiaru wody z komórki protista słodkowodnego','removing excess water from a freshwater protist cell'],no:['vacuole','vesicle','foodvac','cytopyge','membrane']},
+ pellicle:{n:['Pellikula','Pellicle'],s:['Elastyczna warstwa białkowych pasków pod błoną komórkową. Zastępuje ścianę komórkową.','A flexible layer of protein strips under the cell membrane. It takes the place of a cell wall.'],f:['Nadaje komórce kształt, ale pozwala jej się wyginać i zmieniać kształt podczas ruchu.','Gives the cell its shape but still lets it bend and change shape as it moves.'],a:['Jak elastyczny kombinezon nurka.','Like a flexible wetsuit.'],x:['Dzięki pellikuli euglena potrafi pełzać, rytmicznie zmieniając kształt – to tzw. ruch euglenoidalny.','Thanks to its pellicle, euglena can crawl by rhythmically changing shape – this is called euglenoid movement.'],q:['nadawanie kształtu komórce protista w miejsce ściany komórkowej','giving a protist cell its shape in place of a cell wall'],no:['cytosk','membrane','wall_cel','wall_chit','wall_mur','capsule']},
+ paramylon:{n:['Ziarna paramylonu','Paramylon grains'],s:['Białawe ziarna wielocukru (paramylonu) w cytoplazmie.','Whitish grains of a polysaccharide (paramylon) in the cytoplasm.'],f:['Materiał zapasowy eugleny – zapas energii na czas, gdy brakuje światła.','Euglena’s storage material – an energy reserve for when there isn’t enough light.'],a:['Jak zapasowa bateria.','Like a spare battery.'],x:['Paramylon przypomina skrobię, ale cząsteczki glukozy są w nim połączone inaczej (wiązaniami β-1,3), więc nie barwi się płynem Lugola na granatowo.','Paramylon is similar to starch but its glucose units are linked differently (β-1,3 bonds), so it doesn’t turn blue-black with iodine solution.'],q:['magazynowanie materiału zapasowego u eugleny','storing reserve material in euglena'],no:['amylo','storage','vacuole','chloro']},
+ cilia:{n:['Rzęski','Cilia'],s:['Tysiące krótkich, włoskowatych wypustek pokrywających całą komórkę. Mają taką budowę jak wić (9 par + 2 mikrotubule).','Thousands of short, hair-like projections covering the whole cell. They are built like a flagellum (9 pairs + 2 microtubules).'],f:['Poruszają się falami i napędzają komórkę; rzęski przy lejku gębowym nagarniają pokarm.','Beat in waves to push the cell along; the cilia around the mouth area sweep in food.'],a:['Jak wiosła całej osady wioślarskiej.','Like the oars of a rowing crew.'],x:['Pantofelek ma kilka tysięcy rzęsek i przepływa ok. 1 mm na sekundę – kilka długości własnego ciała.','A paramecium has several thousand cilia and swims about 1 mm a second – several times its own length.'],q:['ruch pantofelka i nagarnianie pokarmu – tysiące krótkich wypustek','moving a paramecium and sweeping in food – thousands of short projections'],no:['flagE','flagB','oral','groove','cytosk','pili','trich']},
+ nuclei:{n:['Jądro duże i jądro małe','Large and small nucleus'],s:['Pantofelek ma dwa rodzaje jąder: duże jądro (makronukleus) i małe jądro (mikronukleus).','Paramecium has two kinds of nucleus: a large one (the macronucleus) and a small one (the micronucleus).'],f:['Jądro duże kieruje codziennymi czynnościami życiowymi komórki, a jądro małe przechowuje informację genetyczną przekazywaną podczas rozmnażania płciowego.','The large nucleus controls the cell’s everyday activities, while the small nucleus holds the genetic information passed on during sexual reproduction.'],a:['Jak kierownik zmiany i archiwum.','Like a shift manager and an archive.'],x:['Podczas koniugacji jądro duże się rozpada, a nowe powstaje z jądra małego.','During conjugation the large nucleus breaks down and a new one forms from the small nucleus.']},
+ macro:{n:['Makronukleus (jądro duże)','Macronucleus (large nucleus)'],s:['Duże, fasolkowate jądro zawierające wiele kopii części genów.','A large, bean-shaped nucleus containing many copies of some of the genes.'],f:['Kieruje bieżącymi procesami życiowymi: przemianą materii, wzrostem i ruchem.','Controls everyday life processes: metabolism, growth and movement.'],a:['Jak kierownik codziennej pracy fabryki.','Like the manager running the factory day to day.'],x:['Podczas koniugacji makronukleus się rozpada, a nowy powstaje z mikronukleusu.','During conjugation the macronucleus breaks down and a new one forms from the micronucleus.'],q:['kierowanie bieżącymi czynnościami życiowymi pantofelka','controlling the paramecium’s everyday activities'],no:['micro','nucleus','nuclei','nucleoid','chromatin']},
+ micro:{n:['Mikronukleus (jądro małe)','Micronucleus (small nucleus)'],s:['Małe, kuliste jądro leżące przy makronukleusie.','A small, round nucleus lying next to the macronucleus.'],f:['Przechowuje informację genetyczną, która jest wymieniana i przekazywana podczas rozmnażania płciowego (koniugacji).','Holds the genetic information that is exchanged and passed on during sexual reproduction (conjugation).'],a:['Jak archiwum z oryginałami dokumentów.','Like an archive of original documents.'],x:['Niektóre gatunki pantofelków mają kilka mikronukleusów – Paramecium caudatum zwykle ma jeden.','Some paramecium species have several micronuclei – Paramecium caudatum usually has just one.'],q:['udział w rozmnażaniu płciowym (koniugacji) pantofelka','taking part in sexual reproduction (conjugation) in paramecium'],no:['macro','nucleus','nuclei','nucleoid','plasmid','pili','chromatin']},
+ foodvac:{n:['Wodniczki pokarmowe','Food vacuoles'],s:['Pęcherzyki z pokarmem (np. bakteriami), powstające przy cytostomie.','Vacuoles containing food (e.g. bacteria) that form at the cytostome.'],f:['Trawią pokarm – łączą się z lizosomami, a strawione składniki przechodzą do cytoplazmy. W tym czasie wędrują po komórce.','Digest food – they fuse with lysosomes, and the digested nutrients pass into the cytoplasm. They travel around the cell as this happens.'],a:['Jak żołądki w miniaturze.','Like miniature stomachs.'],x:['Gdy pantofelek zje drożdże zabarwione czerwienią Kongo, widać, jak wodniczki zmieniają kolor, gdy ich wnętrze staje się kwaśne.','If a paramecium eats yeast stained with Congo red, you can watch its food vacuoles change colour as they turn acidic inside.'],q:['trawienie pokarmu wewnątrz komórki pantofelka','digesting food inside a paramecium'],no:['lyso','vacuole','cvac','oral','vesicle']},
+ oral:{n:['Lejek gębowy (cytostom)','Oral funnel (cytostome)'],nA:['Cytostom (otwór gębowy)','Cytostome (cell mouth)'],s:['Zagłębienie w komórce zakończone otworem gębowym, przez który pokarm dostaje się do wnętrza komórki.','A dip in the cell surface ending in a cell mouth, through which food gets into the cell.'],f:['Pobieranie pokarmu: rzęski nagarniają bakterie i drobne cząstki do otworu gębowego, gdzie powstają wodniczki pokarmowe.','Taking in food: cilia sweep bacteria and small particles into the cell mouth, where food vacuoles form.'],a:['Jak usta z lejkiem.','Like a mouth with a funnel.'],x:['Pantofelek potrafi odrzucać część niejadalnych cząstek, zanim trafią do wodniczki pokarmowej.','A paramecium can reject some inedible particles before they reach a food vacuole.'],q:['pobieranie pokarmu przez pantofelka','taking in food in paramecium'],no:['groove','foodvac','cilia','cytopyge']},
+ groove:{n:['Bruzda gębowa','Oral groove'],s:['Wgłębienie biegnące skośnie wzdłuż jednego boku komórki, wyściełane rzęskami.','A hollow running diagonally along one side of the cell, lined with cilia.'],f:['Kieruje wodę z pokarmem w stronę cytostomu.','Channels water carrying food towards the cytostome.'],a:['Jak rynna prowadząca do wejścia.','Like a gutter leading to the entrance.'],x:['To bruzda gębowa nadaje pantofelkowi charakterystyczny kształt podeszwy buta.','The oral groove is what gives a paramecium its typical slipper-sole shape.']},
+ cytopyge:{n:['Cytopyge (otwór wydalniczy)','Cytoproct (anal pore)'],s:['Stałe miejsce w pellikuli, przez które komórka usuwa niestrawione resztki.','A fixed spot in the pellicle through which the cell gets rid of undigested waste.'],f:['Usuwa niestrawione resztki pokarmu z wodniczek pokarmowych.','Gets rid of undigested food remains from the food vacuoles.'],a:['Jak zsyp na śmieci.','Like a rubbish chute.'],x:['Cytopyge widać tylko w chwili usuwania resztek – przez resztę czasu jest zamknięte.','The cytoproct is only visible while waste is being expelled – the rest of the time it is closed.'],q:['usuwanie niestrawionych resztek pokarmu','getting rid of undigested food remains'],no:['cvac','foodvac','lyso','oral','vacuole']},
+ trich:{n:['Trichocysty','Trichocysts'],s:['Wrzecionowate pęcherzyki ułożone tuż pod pellikulą, zawierające zwiniętą nić białkową.','Spindle-shaped sacs just under the pellicle, each containing a coiled protein thread.'],f:['Są wystrzeliwane w razie zagrożenia – służą prawdopodobnie do obrony przed drapieżnikami.','Fired out when the cell is threatened – they probably help defend it against predators.'],a:['Jak harpuny w pogotowiu.','Like harpoons held at the ready.'],x:['Wystrzelona nić trichocysty jest kilka razy dłuższa niż przed wystrzeleniem.','A fired trichocyst thread is several times longer than it was before firing.'],q:['obrona przed drapieżnikami – wystrzeliwane nici','defence against predators – threads that shoot out'],no:['cilia','capsule','pellicle','pili']},
+ // ---- wirusy ----
+ head:{n:['Główka (kapsyd)','Head (capsid)'],s:['Białkowy płaszcz w kształcie wydłużonego dwudziestościanu, zbudowany z wielu jednakowych podjednostek – kapsomerów.','A protein coat shaped like an elongated icosahedron, built from many identical subunits called capsomeres.'],f:['Chroni materiał genetyczny wirusa (DNA), który jest w nim ciasno upakowany.','Protects the virus’s genetic material (DNA), which is packed tightly inside.'],a:['Jak sejf z cennym ładunkiem.','Like a safe holding precious cargo.'],x:['DNA jest wtłaczane do główki przez białkowy „silnik” pod tak dużym ciśnieniem, że ułatwia ono potem wstrzyknięcie DNA do bakterii.','The DNA is packed into the head by a protein motor at such high pressure that this later helps push it into the bacterium.']},
+ vdna:{n:['DNA wirusa','Viral DNA'],s:['Długa cząsteczka dwuniciowego DNA ciasno zwinięta w główce.','A long, double-stranded DNA molecule coiled tightly in the head.'],f:['Zawiera geny wirusa – instrukcję, którą komórka bakterii wykona, budując nowe wirusy.','Carries the virus’s genes – instructions the bacterial cell will follow to build new viruses.'],a:['Jak pendrive z wirusem komputerowym.','Like a USB stick carrying a computer virus.'],x:['Bakteriofag T4 ma ok. 170 tysięcy par nukleotydów DNA – to jeden z większych genomów wirusów.','Phage T4 has about 170,000 base pairs of DNA – one of the larger viral genomes.']},
+ collar:{n:['Kołnierz','Collar'],s:['Krótki pierścień białek łączący główkę z ogonkiem.','A short ring of proteins linking the head to the tail.'],f:['Łączy główkę z ogonkiem; tędy DNA przechodzi z główki do ogonka.','Joins the head to the tail; the DNA passes this way from the head into the tail.'],a:['Jak szyjka butelki.','Like the neck of a bottle.'],x:['Do kołnierza przyczepione są krótkie „wąsy”, które pomagają zamocować włókienka ogonowe podczas składania wirusa.','Short “whiskers” attached to the collar help fit the tail fibres when the virus is assembled.']},
+ tail:{n:['Ogonek (pochewka)','Tail (sheath)'],s:['Pusta w środku rurka otoczona kurczliwą pochewką białkową.','A hollow tube surrounded by a contractile protein sheath.'],f:['Po przyczepieniu się do bakterii pochewka kurczy się, a rurka przebija ścianę komórkową – jak strzykawka. Przez nią DNA wnika do bakterii.','Once the phage is attached, the sheath contracts and the tube pierces the cell wall – like a syringe. The DNA passes through it into the bacterium.'],a:['Jak igła strzykawki.','Like a syringe needle.'],x:['Po skurczu pochewka jest mniej więcej o połowę krótsza.','After contracting, the sheath is roughly half as long.']},
+ fibres:{n:['Włókienka ogonowe','Tail fibres'],s:['Sześć długich włókien białkowych, zgiętych w połowie jak kolano.','Six long protein fibres, each bent halfway like a knee.'],f:['Rozpoznają i wiążą swoiste receptory na powierzchni bakterii – dlatego fag atakuje tylko określony gatunek.','Recognise and bind specific receptors on the bacterium’s surface – which is why a phage attacks only a particular species.'],a:['Jak nogi lądownika księżycowego.','Like the legs of a lunar lander.'],x:['Bakteriofagi są najliczniejszymi „istotami” na Ziemi – szacuje się, że jest ich ok. 10³¹.','Bacteriophages are the most numerous biological entities on Earth – an estimated 10³¹ of them.']},
+ baseplate:{n:['Płytka podstawowa','Baseplate'],s:['Sześciokątna płytka z białek na końcu ogonka, z krótkimi kolcami.','A hexagonal protein plate at the end of the tail, with short spikes.'],f:['Mocuje wirusa do powierzchni bakterii i uruchamia skurcz pochewki.','Anchors the virus to the bacterium’s surface and triggers the sheath to contract.'],a:['Jak stopa z kotwicą.','Like a foot with an anchor.'],x:['Płytka podstawowa zawiera enzym, który robi „dziurkę” w ścianie bakterii.','The baseplate carries an enzyme that makes a small hole in the bacterial wall.']},
+ venv:{n:['Otoczka lipidowa','Lipid envelope'],s:['Błona z lipidów pochodząca z błony komórki gospodarza, z wbudowanymi białkami wirusa. Mają ją tylko niektóre wirusy.','A lipid membrane taken from the host cell’s membrane, with viral proteins built into it. Only some viruses have one.'],f:['Chroni wnętrze wirusa i pomaga mu wniknąć do komórki – otoczka zlewa się z błoną komórki gospodarza.','Protects the inside of the virus and helps it get into a cell – the envelope fuses with the host cell’s membrane.'],a:['Jak przebranie uszyte z ubrania gospodarza.','Like a disguise made from the host’s own clothes.'],x:['Mydło rozpuszcza lipidy otoczki – dlatego mycie rąk tak skutecznie niszczy wirusy grypy i SARS-CoV-2.','Soap dissolves the lipid envelope – which is why handwashing destroys flu viruses and SARS-CoV-2 so well.']},
+ spikes:{n:['Kolce białkowe','Protein spikes'],s:['Białka wystające z otoczki. U wirusa grypy są dwa rodzaje: hemaglutynina (H) i neuraminidaza (N).','Proteins sticking out of the envelope. The flu virus has two kinds: haemagglutinin (H) and neuraminidase (N).'],f:['Rozpoznają receptory na komórkach gospodarza i pozwalają wirusowi się do nich przyczepić, a nowym wirusom – uwolnić się z komórki.','Recognise receptors on host cells and let the virus attach to them, and let new viruses break free from the cell.'],a:['Jak klucze pasujące do konkretnych zamków.','Like keys that fit particular locks.'],x:['Od nich pochodzą nazwy szczepów grypy, np. H1N1 czy H3N2.','Flu strains are named after them, e.g. H1N1 or H3N2.']},
+ ha:{n:['Hemaglutynina (H)','Haemagglutinin (H)'],s:['Pałeczkowate białko otoczki, występujące w trójkach (trimerach).','A rod-shaped envelope protein that comes in groups of three (trimers).'],f:['Przyczepia wirusa do receptorów (kwasu sialowego) na komórkach nabłonka dróg oddechowych i umożliwia wniknięcie do komórki.','Attaches the virus to receptors (sialic acid) on cells lining the airways and lets it get into the cell.'],a:['Jak klucz do drzwi komórki.','Like the key to the cell’s front door.'],x:['Hemaglutynina ciągle się zmienia, dlatego skład szczepionki przeciw grypie aktualizuje się co roku.','Haemagglutinin keeps changing, which is why the flu vaccine is updated every year.']},
+ na:{n:['Neuraminidaza (N)','Neuraminidase (N)'],s:['Grzybkowate białko otoczki (enzym), występujące w czwórkach.','A mushroom-shaped envelope protein (an enzyme) that comes in groups of four.'],f:['Odcina kwas sialowy z powierzchni komórki, dzięki czemu nowe wirusy mogą się uwolnić i zarażać kolejne komórki.','Cuts sialic acid off the cell surface so that new viruses can break free and infect more cells.'],a:['Jak nożyczki przecinające cumy.','Like scissors cutting the mooring ropes.'],x:['Niektóre leki przeciw grypie (np. oseltamiwir) działają, blokując neuraminidazę.','Some flu drugs (e.g. oseltamivir) work by blocking neuraminidase.']},
+ m1:{n:['Białko macierzy (M1)','Matrix protein (M1)'],s:['Warstwa białek tuż pod otoczką lipidową.','A layer of protein just beneath the lipid envelope.'],f:['Nadaje wirusowi kształt i łączy otoczkę z materiałem genetycznym; pomaga składać nowe wirusy.','Gives the virus its shape and links the envelope to the genetic material; helps assemble new viruses.'],a:['Jak stelaż pod tkaniną namiotu.','Like the frame under a tent’s fabric.'],x:['Białko M1 jest najliczniejszym białkiem w cząstce wirusa grypy.','M1 is the most plentiful protein in a flu virus particle.']},
+ rnp:{n:['Materiał genetyczny (RNA)','Genetic material (RNA)'],nA:['RNA w 8 odcinkach (nukleokapsydy)','RNA in 8 segments (nucleocapsids)'],s:['Jednoniciowe RNA podzielone na 8 osobnych odcinków, każdy owinięty białkiem (nukleoproteiną) – razem tworzą nukleokapsydy.','Single-stranded RNA split into 8 separate pieces, each wrapped in protein (nucleoprotein) – together these form the nucleocapsids.'],f:['Zawiera geny wirusa grypy. Dzięki podziałowi na odcinki różne wirusy grypy mogą wymieniać się nimi – tak powstają nowe szczepy.','Carries the flu virus’s genes. Because it is split into segments, different flu viruses can swap pieces – which is how new strains arise.'],a:['Jak instrukcja wydrukowana na 8 osobnych kartkach.','Like an instruction manual printed on 8 separate pages.'],x:['Wymiana odcinków RNA między wirusami ptasimi, świńskimi i ludzkimi doprowadziła do pandemii grypy, m.in. w 2009 roku.','Swapping RNA segments between bird, pig and human flu viruses led to flu pandemics, including the one in 2009.']},
+ tmvcap:{n:['Kapsyd spiralny','Helical capsid'],s:['Ok. 2130 jednakowych podjednostek białkowych (kapsomerów) ułożonych spiralnie wokół RNA – razem tworzą sztywną pałeczkę.','About 2,130 identical protein subunits (capsomeres) arranged in a spiral around the RNA, forming a stiff rod.'],f:['Chroni RNA wirusa. Ten wirus nie ma otoczki lipidowej.','Protects the virus’s RNA. This virus has no lipid envelope.'],a:['Jak spiralne schody owinięte wokół poręczy.','Like a spiral staircase wound around a handrail.'],x:['Wirus mozaiki tytoniu był pierwszym odkrytym wirusem (Dmitrij Iwanowski 1892, Martinus Beijerinck 1898).','Tobacco mosaic virus was the first virus ever discovered (Dmitri Ivanovsky 1892, Martinus Beijerinck 1898).']},
+ capsomere:{n:['Kapsomer','Capsomere'],s:['Pojedyncza podjednostka białkowa kapsydu.','A single protein subunit of the capsid.'],f:['Z tysięcy identycznych kapsomerów wirus „składa” cały kapsyd – dzięki temu wystarcza mu jeden gen na białko kapsydu.','The virus builds the whole capsid from thousands of identical capsomeres – so a single gene for the capsid protein is enough.'],a:['Jak pojedynczy klocek w budowli z klocków.','Like a single brick in a building made of identical bricks.'],x:['Kapsyd wirusa mozaiki tytoniu potrafi sam złożyć się w probówce z oczyszczonego białka i RNA.','The TMV capsid can assemble itself in a test tube from purified protein and RNA.']},
+ tmvrna:{n:['RNA wirusa','Viral RNA'],s:['Jedna nić RNA ułożona spiralnie wewnątrz kapsydu.','A single strand of RNA coiled in a spiral inside the capsid.'],f:['Zawiera geny wirusa; w komórce rośliny od razu służy jako instrukcja do wytwarzania białek wirusa.','Carries the virus’s genes; inside a plant cell it acts straight away as instructions for making viral proteins.'],a:['Jak taśma z nagranym programem.','Like a tape with a program recorded on it.'],x:['Wirus mozaiki tytoniu jest bardzo trwały – w suszonych liściach tytoniu może przetrwać wiele lat.','Tobacco mosaic virus is very hardy – it can survive for many years in dried tobacco leaves.']},
+ spikeS:{n:['Białko S (kolec)','Spike protein (S)'],s:['Duże białka wystające z otoczki, które tworzą „koronę” wokół wirusa – stąd nazwa koronawirus.','Large proteins sticking out from the envelope, forming a “crown” around the virus – hence the name coronavirus.'],f:['Wiąże się z receptorem ACE2 na komórkach człowieka i umożliwia wniknięcie wirusa.','Binds to the ACE2 receptor on human cells and lets the virus get in.'],a:['Jak klucz dopasowany do zamka komórki.','Like a key cut to fit the cell’s lock.'],x:['Szczepionki mRNA przeciw COVID-19 uczą organizm rozpoznawać właśnie białko S.','mRNA COVID-19 vaccines teach the body to recognise exactly this spike protein.']},
+ covrna:{n:['RNA z białkiem N','RNA with N protein'],s:['Jedna długa nić RNA (ok. 30 tysięcy nukleotydów) owinięta białkiem nukleokapsydu (N).','One long strand of RNA (about 30,000 nucleotides) wrapped in nucleocapsid protein (N).'],f:['Zawiera geny wirusa; w komórce człowieka służy jako instrukcja do wytwarzania białek wirusa.','Carries the virus’s genes; inside a human cell it acts as instructions for making viral proteins.'],a:['Jak zwój z instrukcją.','Like a scroll of instructions.'],x:['To jeden z najdłuższych genomów RNA wśród wirusów.','It is one of the longest RNA genomes of any virus.']},
+ mprot:{n:['Białko M (błonowe)','Membrane protein (M)'],s:['Białko wbudowane w otoczkę – najliczniejsze w cząstce wirusa.','A protein built into the envelope – the most plentiful one in the virus particle.'],f:['Nadaje otoczce kształt i pomaga składać nowe wirusy.','Shapes the envelope and helps assemble new viruses.'],a:['Jak szkielet namiotu.','Like the poles of a tent.'],x:['Oprócz białek S i M w otoczce jest też niewielkie białko E.','Besides the S and M proteins, the envelope also contains a small E protein.']},
+};
+// uwagi dotyczące konkretnego typu komórki
+const NOTE={
+ 'plant.vacuole':['W komórce roślinnej wakuola jest duża i zajmuje zwykle większość wnętrza komórki.','In a plant cell the vacuole is large and usually fills most of the cell.'],
+ 'fungus.vacuole':['U grzybów wakuola magazynuje m.in. jony i aminokwasy i pełni funkcję trawienną, podobnie jak lizosomy.','In fungi the vacuole stores ions and amino acids, among other things, and digests material, much like lysosomes.'],
+ 'bacteria.ribo':['Rybosomy bakterii są mniejsze (70S) niż rybosomy w cytoplazmie eukariontów (80S).','Bacterial ribosomes are smaller (70S) than those in eukaryotic cytoplasm (80S).'],
+ 'bacteria.membrane':['U bakterii na błonie komórkowej zachodzi też oddychanie komórkowe – bakterie nie mają mitochondriów.','In bacteria, cellular respiration also takes place on the cell membrane – bacteria have no mitochondria.'],
+ 'plant.golgi':['U roślin aparat Golgiego wytwarza też część składników ściany komórkowej.','In plants the Golgi apparatus also makes some of the components of the cell wall.'],
+ 'euglena.chloro':['Euglena w ciemności może stracić chlorofil i odżywiać się cudzożywnie.','In the dark, euglena can lose its chlorophyll and feed heterotrophically.'],
+ 'euglena.cvac':['Wodniczka tętniąca opróżnia się do zbiorniczka u nasady wici.','The contractile vacuole empties into the reservoir at the base of the flagellum.'],
+ 'paramecium.cvac':['Pantofelek ma dwie wodniczki tętniące – na przednim i tylnym końcu komórki.','Paramecium has two contractile vacuoles – one at each end of the cell.'],
+ 'paramecium.pellicle':['Pellikula pantofelka ma regularny wzór zagłębień, z których wyrastają rzęski.','Paramecium’s pellicle has a regular pattern of dips from which the cilia grow.'],
+ 'flu.venv':['Otoczkę wirus grypy „zabiera” z błony komórki gospodarza, wychodząc z niej przez pączkowanie.','The flu virus picks up its envelope from the host cell’s membrane as it buds out of the cell.'],
+ 'animal.vesicle':['W komórce zwierzęcej nie ma dużej wakuoli – są tylko małe, często tymczasowe pęcherzyki.','Animal cells have no large vacuole – only small, often temporary vesicles.'],
+};
+const orgName=id=>{const o=ORG[id];return T(S.lvl==='A'&&o.nA?o.nA:o.n);};
+
+// ---------- rysunki (SVG) ----------
+const W=800,H=540,CX=400;
+const P=(id,lv,ax,ay,g)=>({id,lv,a:[ax,ay],g});
+const hit=(d,w=14)=>`<path d="${d}" fill="none" stroke="transparent" stroke-width="${w}"/>`;
+const f1=n=>Math.round(n*10)/10;
+const DEFS=`<defs>
+<radialGradient id="gCytA" cx="45%" cy="40%" r="70%"><stop offset="0" stop-color="#fffaf1"/><stop offset="1" stop-color="#fbe2c6"/></radialGradient>
+<radialGradient id="gCytP" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#f5fcef"/><stop offset="1" stop-color="#d6eec6"/></radialGradient>
+<radialGradient id="gCytF" cx="45%" cy="40%" r="70%"><stop offset="0" stop-color="#fffaf0"/><stop offset="1" stop-color="#f4dfba"/></radialGradient>
+<radialGradient id="gCytB" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#f3f8fe"/><stop offset="1" stop-color="#d3e5f6"/></radialGradient>
+<radialGradient id="gCytE" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#f4fbec"/><stop offset="1" stop-color="#d8eecb"/></radialGradient>
+<radialGradient id="gCytPa" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#f9f6ff"/><stop offset="1" stop-color="#e2d9f5"/></radialGradient>
+<radialGradient id="gNuc" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#efe6fb"/><stop offset="1" stop-color="#bda6e6"/></radialGradient>
+<linearGradient id="gMito" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fcc893"/><stop offset="1" stop-color="#ee8846"/></linearGradient>
+<radialGradient id="gChl" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#98da78"/><stop offset="1" stop-color="#3d9531"/></radialGradient>
+<radialGradient id="gVac" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#eef9fe"/><stop offset="1" stop-color="#b9def2"/></radialGradient>
+<radialGradient id="gLys" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#fbb7b0"/><stop offset="1" stop-color="#dc5e57"/></radialGradient>
+<radialGradient id="gEnv" cx="50%" cy="50%" r="50%"><stop offset=".8" stop-color="#fff6f4"/><stop offset="1" stop-color="#fde3df"/></radialGradient>
+<linearGradient id="gHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfe6ee"/><stop offset="1" stop-color="#9fb0c2"/></linearGradient>
+<filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="d"/><feFlood style="flood-color:var(--hl,#f5b400)"/><feComposite in2="d" operator="in"/><feGaussianBlur stdDeviation="1.6"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="glowF" x="-40%" y="-40%" width="180%" height="180%"><feMorphology in="SourceAlpha" operator="dilate" radius="3" result="d"/><feFlood style="flood-color:var(--focus,#c2571a)"/><feComposite in2="d" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="glowOk" x="-40%" y="-40%" width="180%" height="180%"><feMorphology in="SourceAlpha" operator="dilate" radius="3.5" result="d"/><feFlood flood-color="#2e9d5f"/><feComposite in2="d" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="glowNo" x="-40%" y="-40%" width="180%" height="180%"><feMorphology in="SourceAlpha" operator="dilate" radius="3.5" result="d"/><feFlood flood-color="#d0442a"/><feComposite in2="d" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>`;
+const mito=(x,y,r=0,s=1)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><ellipse rx="28" ry="14" fill="url(#gMito)" stroke="#b5561f" stroke-width="2"/><path d="M-20 0 l4 -8 l4 14 l4 -14 l4 14 l4 -14 l4 14 l4 -14 l4 14 l4 -14 l4 8" fill="none" stroke="#fff0de" stroke-width="2.2" stroke-linejoin="round"/></g>`;
+const chloro=(x,y,r=0,s=1)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><ellipse rx="30" ry="15" fill="url(#gChl)" stroke="#2c6b23" stroke-width="2"/><path d="M-24 0 H24" stroke="#2f7d2a" stroke-width="1.4"/>${[-18,-9,0,9,18].map(gx=>`<rect x="${gx-3}" y="-6" width="6" height="12" rx="1.5" fill="#2a7424"/><path d="M${gx-3} -2 h6 M${gx-3} 2 h6" stroke="#6fc35a" stroke-width=".8"/>`).join('')}</g>`;
+const dots=(pts,c='#4b2f7a',r=2.8)=>pts.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7" fill="transparent"/><circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`).join('');
+const golgi=(x,y,r=0,s=1)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})">${[0,1,2,3].map(i=>{const w=34-i*3;return `<path d="M${-w} ${-12+i*9} Q 0 ${-26+i*9} ${w} ${-12+i*9}" fill="none" stroke="#c99512" stroke-width="7.5" stroke-linecap="round"/><path d="M${-w} ${-12+i*9} Q 0 ${-26+i*9} ${w} ${-12+i*9}" fill="none" stroke="#f6d36b" stroke-width="4.5" stroke-linecap="round"/>`;}).join('')}<circle cx="${-42}" cy="${4}" r="4.5" fill="#f6d36b" stroke="#c99512" stroke-width="1.5"/><circle cx="42" cy="2" r="4" fill="#f6d36b" stroke="#c99512" stroke-width="1.5"/><circle cx="10" cy="${-24}" r="4" fill="#f6d36b" stroke="#c99512" stroke-width="1.5"/></g>`;
+const lyso=(x,y,r=12)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#gLys)" stroke="#a83a35" stroke-width="2"/><circle cx="${x-r*.35}" cy="${y-r*.2}" r="${r*.16}" fill="#8f2c28"/><circle cx="${x+r*.3}" cy="${y+r*.25}" r="${r*.16}" fill="#8f2c28"/><circle cx="${x+r*.25}" cy="${y-r*.4}" r="${r*.12}" fill="#8f2c28"/>`;
+const perox=(x,y,r=10)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#b8e0a8" stroke="#4f9a3c" stroke-width="2"/><rect x="${x-r*.38}" y="${y-r*.38}" width="${r*.76}" height="${r*.76}" fill="#5c9e48" transform="rotate(20 ${x} ${y})"/>`;
+const vac=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#gVac)" stroke="#5ea3c8" stroke-width="2"/>`;
+function arcs(cx,cy,rx,ry,a0,a1,offs,ribo){
+  const rad=d=>d*Math.PI/180;let s='',h='';
+  for(const o of offs){const Rx=rx+o,Ry=ry+o;const sx=cx+Rx*Math.cos(rad(a0)),sy=cy+Ry*Math.sin(rad(a0)),ex=cx+Rx*Math.cos(rad(a1)),ey=cy+Ry*Math.sin(rad(a1));
+    const d=`M${f1(sx)} ${f1(sy)} A${Rx} ${Ry} 0 0 1 ${f1(ex)} ${f1(ey)}`;
+    s+=`<path d="${d}" fill="none" stroke="#3f7fbf" stroke-width="8" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#9cc8ee" stroke-width="4.5" stroke-linecap="round"/>`;h+=hit(d,12);
+    if(ribo)for(let a=a0+6;a<a1;a+=11){s+=`<circle cx="${f1(cx+(Rx+6)*Math.cos(rad(a)))}" cy="${f1(cy+(Ry+6)*Math.sin(rad(a)))}" r="2.3" fill="#4b2f7a"/>`;}}
+  return h+s;
+}
+const tube=d=>`${hit(d,12)}<path d="${d}" fill="none" stroke="#3f8fb8" stroke-width="8" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#bfe4f6" stroke-width="4.5" stroke-linecap="round"/>`;
+const nucBody=(x,y,rx,ry)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="url(#gNuc)"/>`;
+const nucEnv=(x,y,rx,ry)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="none" stroke="transparent" stroke-width="12"/><ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="none" stroke="#6a46a6" stroke-width="4" stroke-dasharray="15 4"/><ellipse cx="${x}" cy="${y}" rx="${rx-4}" ry="${ry-4}" fill="none" stroke="#6a46a6" stroke-width="1.3" stroke-dasharray="14 5" opacity=".7"/>`;
+const nucleolus=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#5e3d99"/><circle cx="${x-r*.3}" cy="${y-r*.3}" r="${r*.35}" fill="#7b58b8"/>`;
+const chromat=ds=>ds.map(d=>hit(d,10)+`<path d="${d}" fill="none" stroke="#8665c2" stroke-width="2.4" stroke-linecap="round"/>`).join('');
+const nucFull=(x,y,rx,ry,nr)=>nucBody(x,y,rx,ry)+chromat([`M${x-rx*.6} ${y+ry*.3} q${rx*.12} -${ry*.2} ${rx*.24} 0 t${rx*.24} 0`,`M${x-rx*.1} ${y+ry*.55} q${rx*.1} ${ry*.15} ${rx*.2} 0 t${rx*.2} 0`])+nucEnv(x,y,rx,ry)+nucleolus(x+rx*.15,y-ry*.15,nr);
+const membraneD=(d,c='#cf6f93',w=5)=>`${hit(d,16)}<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}"/><path d="${d}" fill="none" stroke="#fbe0ea" stroke-width="${w*.3}"/>`;
+// punkty wzdłuż ścieżki (do rzęsek, fimbrii)
+function pathPts(d,n){const p=document.getElementById('mpath');p.setAttribute('d',d);const len=p.getTotalLength(),o=[];
+  for(let i=0;i<n;i++){const l=len*i/n,a=p.getPointAtLength(l),b=p.getPointAtLength((l+1)%len);const dx=b.x-a.x,dy=b.y-a.y,m=Math.hypot(dx,dy)||1;o.push({x:a.x,y:a.y,nx:dy/m,ny:-dx/m});}return o;}
+const rrect=(x,y,w,h,r)=>`M${x+r} ${y} H${x+w-r} A${r} ${r} 0 0 1 ${x+w} ${y+r} V${y+h-r} A${r} ${r} 0 0 1 ${x+w-r} ${y+h} H${x+r} A${r} ${r} 0 0 1 ${x} ${y+h-r} V${y+r} A${r} ${r} 0 0 1 ${x+r} ${y} Z`;
+
+const MODELS={
+ animal(){const D='M400 70 C 500 62 580 130 575 230 C 572 320 560 420 450 462 C 360 492 250 450 228 360 C 205 270 230 160 290 110 C 320 85 360 72 400 70 Z';
+  const nx=385,ny=268,rx=72,ry=62;return[
+  P('cytoplasm','B',255,250,`<path d="${D}" fill="url(#gCytA)"/>`),
+  P('cytosk','A',545,295,['M262 205 Q 330 120 450 98','M245 335 Q 300 445 420 452','M540 180 Q 560 300 520 400'].map(d=>hit(d,10)+`<path d="${d}" fill="none" stroke="#b8975e" stroke-width="1.8" stroke-dasharray="1 0" opacity=".9"/><path d="${d}" fill="none" stroke="#e8d3a8" stroke-width=".8" transform="translate(4 3)"/>`).join('')),
+  P('nucleus','B',440,296,nucBody(nx,ny,rx,ry)),
+  P('chromatin','B',351,286,chromat(['M335 250 q8 -10 16 0 t16 0 t16 0','M340 286 q8 10 16 0 t16 0 t16 0 t16 0','M415 298 q6 -8 12 0 t12 0 t12 0','M372 228 q6 -6 12 0 t12 0'])),
+  P('envelope','B',nx,ny-ry,nucEnv(nx,ny,rx,ry)),
+  P('nucleolus','B',408,255,nucleolus(408,255,17)),
+  P('rer','B',nx-rx-26,ny,arcs(nx,ny,rx,ry,118,228,[14,26,38],true)),
+  P('ser','B',480,372,tube('M440 362 q20 -18 40 0 t40 0')+tube('M448 388 q20 -18 40 0 t36 -6')+tube('M462 412 q16 -14 32 0')),
+  P('golgi','B',482,165,golgi(482,165,22)),
+  P('mito','B',300,150,mito(300,150,-35)+mito(522,282,75)+mito(330,415,15)),
+  P('lyso','B',430,128,lyso(430,128,12)+lyso(400,432,11)),
+  P('centro','A',486,232,`<circle cx="486" cy="232" r="16" fill="#e6ecf2" opacity=".85"/><rect x="474" y="228" width="20" height="8" rx="2" fill="#7c8da0" stroke="#4c5d70"/><rect x="489" y="219" width="8" height="20" rx="2" fill="#93a3b5" stroke="#4c5d70"/>`),
+  P('perox','A',362,160,perox(362,160,9)),
+  P('vesicle','A',268,392,vac(268,392,11)+vac(546,170,8)+vac(540,412,7)),
+  P('ribo','B',536,222,dots([[352,116],[368,103],[516,206],[536,222],[258,330],[272,348],[503,436],[468,448],[250,262],[300,250]])),
+  P('membrane','B',575,230,membraneD(D)),
+ ];},
+ plant(){const ow=rrect(205,60,390,420,22),iw=rrect(219,74,362,392,12),mb=rrect(221,76,358,388,11);
+  const V='M330 140 C 420 120 520 130 522 220 C 526 300 520 400 420 404 C 330 410 298 380 302 280 C 304 200 292 150 330 140Z';
+  const pd=[[400,60,6,16],[300,464,6,16],[205,330,16,6],[579,250,16,6]];
+  return[
+  P('wall_cel','B',212,150,`<path d="${ow} ${iw}" fill="#8cc86a" fill-rule="evenodd" stroke="#4d8a32" stroke-width="2"/><path d="M209 120 h8 M209 210 h8 M209 400 h8 M583 140 h8 M583 330 h8 M583 420 h8 M260 64 v8 M480 64 v8 M360 468 v8 M520 468 v8" stroke="#5f9f40" stroke-width="2"/>`),
+  P('plasmod','A',400,67,pd.map(([x,y,w,h])=>`<rect x="${x-w/2}" y="${y}" width="${w}" height="${h}" rx="2" fill="#f2fae9" stroke="#3f7a2a" stroke-width="1.4"/>`).join('')+`<circle cx="400" cy="67" r="10" fill="transparent"/>`),
+  P('cytoplasm','B',286,305,`<path d="${mb}" fill="url(#gCytP)"/>`),
+  P('cytosk','A',240,300,['M236 268 Q 246 300 238 336','M272 270 Q 262 305 276 340'].map(d=>hit(d,10)+`<path d="${d}" fill="none" stroke="#9c8a55" stroke-width="1.8"/>`).join('')),
+  P('vacuole','B',455,300,`<path d="${V}" fill="url(#gVac)" stroke="#4f95bc" stroke-width="3.5"/><path d="${V}" fill="none" stroke="#d8eef9" stroke-width="1" transform="translate(0 0)"/>`),
+  P('nucleus','B',262,215,nucFull(262,215,30,38,9)),
+  P('rer','B',262,128,arcs(262,215,30,38,235,305,[18,28,38],true)),
+  P('ser','B',545,440,tube('M524 448 q10 -12 20 0 t20 0')+tube('M530 430 q10 -10 20 -2')),
+  P('chloro','B',445,100,chloro(338,103,0)+chloro(445,100,5)+chloro(549,178,90)+chloro(549,290,90)+chloro(262,440,0,.9)+chloro(478,435,0,.95)),
+  P('mito','B',549,362,mito(549,362,90,.85)+mito(337,435,0,.85)),
+  P('golgi','B',405,438,golgi(405,438,0,.75)),
+  P('amylo','A',262,375,`<ellipse cx="262" cy="375" rx="21" ry="17" fill="#f6f1e1" stroke="#a89a6a" stroke-width="2"/><ellipse cx="258" cy="372" rx="12" ry="9" fill="none" stroke="#cfc29a" stroke-width="2"/><ellipse cx="256" cy="371" rx="6" ry="4" fill="#e3d9b9"/>`),
+  P('perox','A',549,234,perox(549,234,9)),
+  P('ribo','B',505,111,dots([[388,92],[394,112],[492,92],[505,111],[300,128],[296,170],[566,400],[570,320],[440,458],[236,465-20]])),
+  P('membrane','B',579,330,membraneD(mb,'#cf6f93',3.5)),
+ ];},
+ fungus(){const E='M400 75 A160 195 0 1 1 399.9 75 Z',M='M400 85 A150 185 0 1 1 399.9 85 Z';return[
+  P('wall_chit','B',242,270,`<ellipse cx="400" cy="270" rx="160" ry="195" fill="#e7c48e" stroke="#a67a3a" stroke-width="2"/><ellipse cx="400" cy="270" rx="152" ry="187" fill="none" stroke="#c99d5d" stroke-width="2" stroke-dasharray="3 6"/>`),
+  P('cytoplasm','B',530,262,`<ellipse cx="400" cy="270" rx="148" ry="183" fill="url(#gCytF)"/>`),
+  P('vacuole','B',455,330,`<ellipse cx="430" cy="300" rx="68" ry="62" fill="url(#gVac)" stroke="#4f95bc" stroke-width="3"/><circle cx="410" cy="285" r="4" fill="#8fc0dd"/><circle cx="445" cy="318" r="3" fill="#8fc0dd"/>`),
+  P('nucleus','B',318,175,nucFull(330,185,40,40,10)),
+  P('rer','B',372,236,arcs(330,185,40,40,20,100,[12,22,32],true)),
+  P('ser','B',330,398,tube('M318 398 q12 -14 24 0 t24 0')+tube('M326 418 q10 -10 22 0')),
+  P('golgi','A',445,140,golgi(445,140,15,.75)),
+  P('mito','B',312,330,mito(312,330,70,.9)+mito(492,192,-30,.9)+mito(430,410,10,.85)),
+  P('storage','A',292,268,`<circle cx="292" cy="268" r="13" fill="#ffe39a" stroke="#d1a52e" stroke-width="2"/><circle cx="288" cy="264" r="4" fill="#fff6d6"/><circle cx="495" cy="385" r="10" fill="#ffe39a" stroke="#d1a52e" stroke-width="2"/>`+dots([[370,432],[378,440],[386,430],[394,442],[376,423]],'#6e4a2a',3.2)),
+  P('ribo','B',520,240,dots([[520,240],[532,256],[275,215],[280,232],[360,120],[380,110],[452,430],[352,370],[515,335]])),
+  P('membrane','B',548,300,membraneD(M,'#cf6f93',3.5)),
+ ];},
+ bacteria(){const C=rrect(230,165,300,160,80),Mb=rrect(239,174,282,142,71),Cap=rrect(210,145,340,200,100);
+  const pts=pathPts(C,34).filter((p,i)=>i%2===0);
+  const F='M520 290 c 25 15 0 45 22 65 s 0 45 22 65 s 0 45 18 60';
+  return[
+  P('capsule','A',300,152,`<path d="${Cap}" fill="#cfeedd" fill-opacity=".75" stroke="#7cbf98" stroke-width="2" stroke-dasharray="7 5"/>`),
+  P('pili','A',f1(pts[3].x+pts[3].nx*18),f1(pts[3].y+pts[3].ny*18),pts.map(p=>{const d=`M${f1(p.x)} ${f1(p.y)} L${f1(p.x+p.nx*26)} ${f1(p.y+p.ny*26)}`;return hit(d,9)+`<path d="${d}" stroke="#8a6a44" stroke-width="2" stroke-linecap="round"/>`;}).join('')),
+  P('flagB','B',548,385,hit(F,14)+`<path d="${F}" fill="none" stroke="#6b4e2e" stroke-width="3.2" stroke-linecap="round"/><circle cx="520" cy="290" r="5" fill="#6b4e2e"/>`),
+  P('wall_mur','B',372,165,`<path d="${C}" fill="#e9b56e" stroke="#b07a2e" stroke-width="2"/><path d="${C}" fill="none" stroke="#f7d9a8" stroke-width="2" stroke-dasharray="2 5" transform="translate(0 0)"/>`),
+  P('cytoplasm','B',488,205,`<path d="${Mb}" fill="url(#gCytB)"/>`),
+  P('nucleoid','B',330,220,hit('M330 220 C 360 190 420 260 450 215 C 480 185 500 260 460 275 C 420 290 380 240 350 285 C 320 320 290 250 330 220 Z',12)+`<path d="M330 220 C 360 190 420 260 450 215 C 480 185 500 260 460 275 C 420 290 380 240 350 285 C 320 320 290 250 330 220 Z" fill="none" stroke="#7e5bb5" stroke-width="3.2"/><path d="M345 235 C 370 215 400 270 430 240 C 450 222 470 250 452 262" fill="none" stroke="#9b7dd0" stroke-width="2"/>`),
+  P('plasmid','A',470,298,`<circle cx="470" cy="298" r="9" fill="none" stroke="#c45ab0" stroke-width="2.8"/><circle cx="292" cy="292" r="7.5" fill="none" stroke="#c45ab0" stroke-width="2.8"/><circle cx="470" cy="298" r="12" fill="transparent"/><circle cx="292" cy="292" r="10" fill="transparent"/>`),
+  P('ribo','B',268,246,dots([[268,246],[282,262],[275,205],[400,190],[420,300],[505,250],[495,228],[385,300],[300,195],[515,280]],'#4b2f7a',2.6)),
+  P('membrane','B',420,174,membraneD(Mb,'#cf6f93',3.2)),
+ ];},
+ euglena(){const D='M395 70 C 450 90 485 200 480 300 C 476 380 440 450 405 485 C 395 492 390 492 386 485 C 350 440 312 370 310 290 C 308 190 340 92 395 70 Z';
+  const F='M398 80 C 420 44 380 26 420 12 S 470 30 505 10';
+  const str=[0,1,2,3,4,5,6].map(i=>`<path d="M${280+i*35} 60 C ${320+i*35} 200 ${260+i*35} 330 ${300+i*35} 500" fill="none" stroke="#5e9f7e" stroke-width="1.2" opacity=".35"/>`).join('');
+  return[
+  P('cytoplasm','B',395,240,`<clipPath id="clE"><path d="${D}"/></clipPath><path d="${D}" fill="url(#gCytE)"/><g clip-path="url(#clE)">${str}</g><path d="M390 82 C 380 95 382 108 395 112 C 408 108 410 95 400 82 Z" fill="#e3f3fa" stroke="#7fb7d0" stroke-width="1.5"/>`),
+  P('flagE','B',462,22,hit(F,14)+`<path d="${F}" fill="none" stroke="#3f7a5c" stroke-width="3.5" stroke-linecap="round"/>`),
+  P('chloro','B',338,240,[[350,172,60],[440,182,-60],[338,240,80],[452,250,-80],[345,358,-65],[445,372,62],[385,428,20],[420,150,-20]].map(([x,y,r])=>chloro(x,y,r,.55)).join('')),
+  P('nucleus','B',395,300,nucFull(395,300,32,34,8)),
+  P('stigma','B',420,118,`<ellipse cx="420" cy="118" rx="10" ry="6.5" fill="#e0372d" stroke="#9e1f18" stroke-width="1.5" transform="rotate(-20 420 118)"/>`),
+  P('cvac','B',372,122,`<circle cx="372" cy="122" r="11" fill="#d9f1fb" stroke="#4f95bc" stroke-width="2"/>`),
+  P('mito','B',360,404,mito(360,404,40,.45)+mito(434,425,-50,.45)+mito(372,190,-80,.45)),
+  P('paramylon','A',397,213,[[397,213,0],[425,330,70],[370,342,-60],[410,400,10]].map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="10" ry="5" fill="#fbfbf2" stroke="#b8b18a" stroke-width="1.6" transform="rotate(${r} ${x} ${y})"/>`).join('')),
+  P('pellicle','B',481,300,membraneD(D,'#3f8a68',4.5)),
+ ];},
+ paramecium(){const D='M400 60 C 470 60 505 140 500 230 C 497 270 470 290 470 300 C 470 315 500 340 495 390 C 488 450 450 485 400 485 C 340 485 305 430 300 340 C 295 250 300 170 330 110 C 345 80 370 60 400 60 Z';
+  const pts=pathPts(D,96);
+  const cilia=pts.map(p=>`M${f1(p.x)} ${f1(p.y)} l${f1(p.nx*13+p.ny*3)} ${f1(p.ny*13-p.nx*3)}`).join(' ');
+  const trich=pts.filter((p,i)=>i%4===1).map(p=>`M${f1(p.x-p.nx*6)} ${f1(p.y-p.ny*6)} L${f1(p.x-p.nx*15)} ${f1(p.y-p.ny*15)}`).join(' ');
+  const cv=(x,y)=>`<g>${[0,60,120,180,240,300].map(a=>{const r=a*Math.PI/180;return `<path d="M${f1(x+12*Math.cos(r))} ${f1(y+12*Math.sin(r))} L${f1(x+30*Math.cos(r))} ${f1(y+30*Math.sin(r))}" stroke="#7cc3e6" stroke-width="4" stroke-linecap="round"/>`;}).join('')}<circle cx="${x}" cy="${y}" r="12" fill="#d9f1fb" stroke="#4f95bc" stroke-width="2"/></g>`;
+  const fv=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#f1dcc0" stroke="#b07f4a" stroke-width="1.8"/><circle cx="${x-r*.3}" cy="${y}" r="${r*.22}" fill="#9a6a3a"/><circle cx="${x+r*.3}" cy="${y-r*.3}" r="${r*.18}" fill="#9a6a3a"/>`;
+  return[
+  P('cilia','B',300,300,hit(cilia,6)+`<path d="${cilia}" stroke="#7e64ad" stroke-width="1.6" stroke-linecap="round"/>`),
+  P('cytoplasm','B',350,170,`<path d="${D}" fill="url(#gCytPa)"/>`),
+  P('groove','A',486,215,`<path d="M478 150 C 490 200 480 260 462 296 C 455 280 462 220 470 160 Z" fill="#cdbfe9" stroke="#8a72bb" stroke-width="1.5"/>`),
+  P('oral','B',455,300,`<path d="M470 296 C 455 300 440 306 426 318 C 438 322 452 318 470 306 Z" fill="#b7a3df" stroke="#6f56a3" stroke-width="1.8"/><circle cx="430" cy="316" r="5" fill="#6f56a3"/>`),
+  P('foodvac','B',345,205,fv(345,205,13)+fv(340,300,11)+fv(368,360,12)+fv(415,345,9)+fv(440,395,10)),
+  P('macro','B',388,250,`<ellipse cx="388" cy="250" rx="30" ry="52" fill="url(#gNuc)" stroke="#6a46a6" stroke-width="2.5" transform="rotate(12 388 250)"/>${'<path d="M375 230 q6 -6 12 0 t12 0 M372 262 q6 6 12 0 t12 0" fill="none" stroke="#8665c2" stroke-width="2"/>'}`),
+  P('micro','B',430,215,`<circle cx="430" cy="215" r="9" fill="#9a7bd0" stroke="#5a3a92" stroke-width="2"/>`),
+  P('cvac','B',400,122,cv(400,122)+cv(398,428)),
+  P('mito','A',448,165,mito(448,165,-60,.42)+mito(338,145,50,.42)+mito(352,430,-30,.42)+mito(455,440,30,.42)),
+  P('cytopyge','A',488,405,`<path d="M483 398 q8 6 4 16" fill="none" stroke="#5a3a92" stroke-width="3" stroke-linecap="round"/><circle cx="487" cy="405" r="9" fill="transparent"/>`),
+  P('trich','A',f1(pts[30].x-pts[30].nx*10),f1(pts[30].y-pts[30].ny*10),hit(trich,8)+`<path d="${trich}" stroke="#5f7894" stroke-width="2.6" stroke-linecap="round"/>`),
+  P('pellicle','B',300,340,membraneD(D,'#6f56a3',4)),
+ ];},
+ // ---------- wirusy ----------
+ t4(){const hx=400,hy=50;
+  const head=`M400 50 L452 82 L452 188 L400 220 L348 188 L348 82 Z`;
+  const fib=[[372,384,300,430,338,505],[380,384,336,440,372,512],[428,384,500,430,462,505],[420,384,464,440,428,512]];
+  return[
+  P('head','B',452,120,`<path d="${head}" fill="url(#gHead)" stroke="#55677a" stroke-width="3" stroke-linejoin="round"/><path d="M400 50 V220 M348 82 L400 112 L452 82 M348 188 L400 160 L452 188" fill="none" stroke="#7d8fa2" stroke-width="1.5"/>`),
+  P('vdna','B',385,140,hit('M370 100 q30 10 15 30 t20 30 t-20 25 t25 15',12)+`<path d="M370 100 q30 10 15 30 t20 30 t-20 25 t25 15 M420 100 q-25 15 -10 35 t-15 30" fill="none" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>`),
+  P('collar','B',428,230,`<rect x="372" y="222" width="56" height="14" rx="4" fill="#9fb0c2" stroke="#55677a" stroke-width="2.5"/>`),
+  P('tail','B',412,300,`<rect x="386" y="236" width="28" height="136" rx="3" fill="#c7d3df" stroke="#55677a" stroke-width="2.5"/>${Array.from({length:16},(_,i)=>`<path d="M386 ${244+i*8} H414" stroke="#7d8fa2" stroke-width="1.6"/>`).join('')}`),
+  P('baseplate','B',435,380,`<path d="M368 372 H432 L440 380 L432 388 H368 L360 380 Z" fill="#8a9cb0" stroke="#55677a" stroke-width="2.5" stroke-linejoin="round"/>`+[372,388,404,420].map(x=>`<path d="M${x+4} 388 v8" stroke="#55677a" stroke-width="2.5"/>`).join('')),
+  P('fibres','B',300,430,fib.map(([a,b,c,d,e,f])=>{const p=`M${a} ${b} L${c} ${d} L${e} ${f}`;return hit(p,12)+`<path d="${p}" fill="none" stroke="#55677a" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>`;}).join('')),
+ ];},
+ flu(){const cx=400,cy=270,R=150;
+  const sp=[];for(let i=0;i<28;i++){const a=i/28*2*Math.PI,ha=i%3!==2;const x0=cx+(R+2)*Math.cos(a),y0=cy+(R+2)*Math.sin(a),x1=cx+(R+30)*Math.cos(a),y1=cy+(R+30)*Math.sin(a);
+   const deg=a*180/Math.PI;sp.push({ha,g:ha?`<g transform="translate(${f1(x0)} ${f1(y0)}) rotate(${f1(deg)})"><rect x="0" y="-3" width="22" height="6" rx="2" fill="#d98a3a"/><path d="M20 -7 L32 0 L20 7 Z" fill="#e8a24f" stroke="#a5651f" stroke-width="1.3"/></g>`:`<g transform="translate(${f1(x0)} ${f1(y0)}) rotate(${f1(deg)})"><rect x="0" y="-1.8" width="22" height="3.6" fill="#5a8f3c"/><rect x="21" y="-8" width="10" height="16" rx="3" fill="#7cbf55" stroke="#3f6f28" stroke-width="1.3"/></g>`,x1,y1});}
+  const haG=sp.filter(s=>s.ha),naG=sp.filter(s=>!s.ha);
+  const seg=[[0,0,0]].concat(Array.from({length:7},(_,i)=>{const a=i/7*2*Math.PI-Math.PI/2;return[f1(80*Math.cos(a)),f1(80*Math.sin(a)),f1(a*180/Math.PI+90)];}));
+  const rn=seg.map(([dx,dy,r])=>`<g transform="translate(${cx+dx} ${cy+dy}) rotate(${r})"><rect x="-26" y="-9" width="52" height="18" rx="9" fill="#f6d2e4" stroke="#b0457a" stroke-width="1.6"/><path d="M-22 0 q4 -7 8 0 t8 0 t8 0 t8 0 t8 0" fill="none" stroke="#b0457a" stroke-width="2"/></g>`).join('');
+  return[
+  P('venv','B',cx+R*Math.cos(2.35),cy+R*Math.sin(2.35),`<circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#gEnv)" stroke="#d4708a" stroke-width="9"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#f7c9d5" stroke-width="3"/>`),
+  P('m1','A',cx+138*Math.cos(1.2),cy+138*Math.sin(1.2),`<circle cx="${cx}" cy="${cy}" r="139" fill="none" stroke="transparent" stroke-width="10"/><circle cx="${cx}" cy="${cy}" r="139" fill="none" stroke="#e7b85b" stroke-width="6" stroke-dasharray="9 3"/>`),
+  P('ha','B',f1(haG[2].x1),f1(haG[2].y1),haG.map(s=>s.g).join('')),
+  P('na','B',f1(naG[5].x1),f1(naG[5].y1),naG.map(s=>s.g).join('')),
+  P('rnp','B',cx,cy,rn),
+ ];},
+ tmv(){const rot=(x,y)=>[f1(400+.643*x+.766*y),f1(270-.766*x+.643*y)];
+  let caps='',half='';for(let x=-210;x<=110;x+=11)caps+=`<path d="M${x} -36 l7 0 l-4 72 l-7 0 Z" fill="${(x/11)%2?'#8fc57a':'#a7d68f'}" stroke="#4f8a3a" stroke-width="1"/>`;
+  for(let x=121;x<=210;x+=11)half+=`<path d="M${x} 0 l5.5 0 l-2 36 l-7 0 Z" fill="#a7d68f" stroke="#4f8a3a" stroke-width="1"/>`;
+  const rna=`M100 0 ${Array.from({length:14},(_,i)=>`q5 ${i%2?14:-14} 10 0`).join(' ')}`;
+  const [ca,cb]=rot(-160,36),[ra,rb]=rot(232,0),[ka,kb]=rot(-54,0);
+  return[
+  P('tmvcap','B',ca,cb,`<g transform="translate(400 270) rotate(-50)">${caps}${half}<path d="M121 -4 H214" stroke="#4f8a3a" stroke-width="1" stroke-dasharray="3 3"/></g>`),
+  P('capsomere','A',ka,kb,`<g transform="translate(400 270) rotate(-50)"><path d="M-56 -36 l7 0 l-4 72 l-7 0 Z" fill="#f4d35e" stroke="#9c7a12" stroke-width="1.6"/></g>`),
+  P('tmvrna','B',ra,rb,`<g transform="translate(400 270) rotate(-50)">${hit(rna,12)}<path d="${rna}" fill="none" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/></g>`),
+ ];},
+ sars(){const cx=400,cy=270,R=135;let sp='',mp='';
+  for(let i=0;i<18;i++){const a=i/18*2*Math.PI+.1,deg=a*180/Math.PI,x=cx+(R+3)*Math.cos(a),y=cy+(R+3)*Math.sin(a);
+   sp+=`<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(deg)})"><path d="M0 -3 L26 -4 L26 4 L0 3 Z" fill="#d0574f"/><path d="M24 -13 C 40 -13 46 -6 46 0 C 46 6 40 13 24 13 Z" fill="#e2736b" stroke="#9d2f28" stroke-width="1.5"/></g>`;
+   const b=a+Math.PI/18;mp+=`<circle cx="${f1(cx+R*Math.cos(b))}" cy="${f1(cy+R*Math.sin(b))}" r="4.5" fill="#5b7fb5" stroke="#2f4e80" stroke-width="1"/>`;}
+  let d='M300 270';for(let i=0;i<9;i++)d+=` q${12} ${i%2?-60:60} 22 0`;
+  const beads=[];const n=26;for(let i=0;i<n;i++){const t=i/(n-1);beads.push([f1(300+t*198),f1(270+Math.sin(t*Math.PI*9)*28)]);}
+  return[
+  P('venv','B',cx+R*Math.cos(2.5),cy+R*Math.sin(2.5),`<circle cx="${cx}" cy="${cy}" r="${R}" fill="url(#gEnv)" stroke="#c97b74" stroke-width="9"/><circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#f3cdc8" stroke-width="3"/>`),
+  P('mprot','A',f1(cx+R*Math.cos(.1+Math.PI/18+2*Math.PI*5/18)),f1(cy+R*Math.sin(.1+Math.PI/18+2*Math.PI*5/18)),mp),
+  P('spikeS','B',f1(cx+(R+46)*Math.cos(.1+2*Math.PI*14/18)),f1(cy+(R+46)*Math.sin(.1+2*Math.PI*14/18)),sp),
+  P('covrna','B',398,262,hit(d,12)+`<path d="${d}" fill="none" stroke="#c0392b" stroke-width="2.5"/>`+beads.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5.5" fill="#f2c14e" stroke="#a87b12" stroke-width="1.2"/>`).join('')),
+ ];},
+};
+const KIND=t=>VT[t]?'virus':'cell';
+// poziomy zasięg rysunku – podpisy stoją po bokach
+const BOX={animal:[222,578],plant:[203,597],fungus:[238,562],bacteria:[208,566],euglena:[306,506],paramecium:[285,515],t4:[298,502],flu:[216,584],tmv:[236,566],sars:[218,584]};
+// części widoczne na danym poziomie
+function partsOf(type,lvl){
+  return MODELS[type]().filter(p=>p.lv!=='A'||lvl==='A').map(p=>({...p,e:(lvl==='B'&&MERGE_B[p.id])||p.id}));
+}
+const effIds=(type,lvl)=>[...new Set(partsOf(type,lvl).map(p=>p.e))];
+const nameIn=(id,lvl)=>{const o=ORG[id];return T(lvl==='A'&&o.nA?o.nA:o.n);};
+// układanie podpisów po bokach
+function layoutLabels(items){
+  const out=[];
+  for(const side of ['L','R']){
+    const g=items.filter(i=>i.side===side).sort((a,b)=>a.a[1]-b.a[1]);
+    const hgt=i=>i.lines.length>1?38:26;
+    let y=22;g.forEach(i=>{i.y=Math.max(i.a[1],y+(i.prev||0));y=i.y;i.prev=0;});
+    // przesuwanie z kolizjami
+    for(let k=1;k<g.length;k++){const need=(hgt(g[k-1])+hgt(g[k]))/2;if(g[k].y-g[k-1].y<need)g[k].y=g[k-1].y+need;}
+    const maxY=H-18;
+    if(g.length&&g[g.length-1].y>maxY){g[g.length-1].y=maxY;for(let k=g.length-2;k>=0;k--){const need=(hgt(g[k])+hgt(g[k+1]))/2;if(g[k+1].y-g[k].y<need)g[k].y=g[k+1].y-need;}}
+    if(g.length&&g[0].y<16){g[0].y=16;for(let k=1;k<g.length;k++){const need=(hgt(g[k-1])+hgt(g[k]))/2;if(g[k].y-g[k-1].y<need)g[k].y=g[k-1].y+need;}}
+    out.push(...g);
+  }
+  return out;
+}
+function wrap(s,max=22){if(s.length<=max)return[s];const k=s.indexOf(' (');if(k>0&&k<=max+3&&s.length-k-1<=max+4)return[s.slice(0,k),s.slice(k+1)];const w=s.split(' ');let a='',b='';for(const x of w){if(!b&&(a+' '+x).trim().length<=max)a=(a+' '+x).trim();else b=(b+' '+x).trim();}return b?[a,b]:[a];}
+/* opt: {lvl, labels:'names'|'none'|'num', sel, nums:{id:n}, exp:true (kolory na sztywno), cls, title, quiz:{good,bad}} */
+function drawModel(type,opt){
+  const lvl=opt.lvl||S.lvl,parts=partsOf(type,lvl),seen=new Set();
+  const qz=opt.quiz||{};
+  let g='';
+  for(const p of parts){const first=!seen.has(p.e);seen.add(p.e);
+    const cls='org'+(opt.sel===p.e?' sel':'')+(qz.good===p.e?' good':'')+(qz.bad===p.e?' bad':'');
+    const nm=esc(nameIn(p.e,lvl));
+    g+=opt.exp?`<g>${p.g}</g>`:`<g class="${cls}" data-o="${p.e}"${first&&!opt.noTab?` tabindex="0" role="button" aria-label="${nm}"${opt.sel===p.e?' aria-pressed="true"':''}`:''}>${p.g}</g>`;}
+  let lab='';
+  if(opt.labels!=='none'){
+    const items=[];const done=new Set();
+    for(const p of parts){if(done.has(p.e))continue;done.add(p.e);
+      if(opt.labels==='num'&&!(opt.nums&&opt.nums[p.e]))continue;
+      const text=opt.labels==='num'?String(opt.nums[p.e]):nameIn(p.e,lvl);
+      items.push({id:p.e,a:p.a,side:p.a[0]<CX?'L':'R',lines:opt.labels==='num'?[text]:wrap(text)});}
+    const LX=BOX[type][0]-14,RX=BOX[type][1]+14;
+    const ink=opt.exp?'#1c2621':null,mut=opt.exp?'#56645c':null;
+    for(const i of layoutLabels(items)){
+      const L1=i.side==='L',tx=L1?LX:RX,lx=L1?LX+6:RX-6;
+      const num=opt.labels==='num';
+      const sel=opt.sel===i.id?' sel':'';
+      const lineEnd=num?(L1?tx+14:tx-14):lx;
+      lab+=`<g class="lab${sel}" data-o="${i.id}"${opt.exp?'':' aria-hidden="true"'}><line x1="${num?(L1?tx+12:tx-12):lx}" y1="${f1(i.y)}" x2="${f1(i.a[0])}" y2="${f1(i.a[1])}" stroke-width="1.4"${mut?` stroke="${mut}"`:''}/><circle class="dot" cx="${f1(i.a[0])}" cy="${f1(i.a[1])}" r="2.6"${mut?` fill="${mut}"`:''}/>`;
+      if(num)lab+=`<circle class="nb" cx="${L1?tx:tx}" cy="${f1(i.y)}" r="12"${opt.exp?' fill="#fff" stroke="#111" stroke-width="1.5"':''}/><text class="nt" x="${tx}" y="${f1(i.y+5)}" text-anchor="middle"${opt.exp?' fill="#111" font-weight="700" font-size="14"':''}>${esc(i.lines[0])}</text>`;
+      else{const y0=i.y-(i.lines.length-1)*8.5+5;lab+=`<text x="${L1?tx-2:tx+2}" y="${f1(y0)}" text-anchor="${L1?'end':'start'}"${ink?` fill="${ink}" font-size="15"`:''}>${i.lines.map((t,k)=>`<tspan x="${L1?tx-2:tx+2}" dy="${k?17:0}">${esc(t)}</tspan>`).join('')}</text>`;}
+      lab+='</g>';
+    }
+  }
+  const name=T((CT[type]||VT[type]).n);
+  let side=opt.labels==='num'?40:opt.labels==='none'?24:190;if(opt.title)side=Math.max(side,150);const vx=BOX[type][0]-14-side,vw=BOX[type][1]-BOX[type][0]+28+2*side;
+  const title=opt.title?`<text x="${BOX[type][0]-14-side+12}" y="28" font-size="20" font-weight="700" fill="#1c2621">${esc(opt.title)}</text>`:'';
+  const ff=opt.exp?` font-family="Atkinson Hyperlegible, Arial, Helvetica, sans-serif"`:'';
+  const wl=opt.labels!=='none'?' wl':'';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vx} 0 ${vw} ${H}" width="${vw}" height="${H}" class="model${wl}${opt.sel&&!opt.exp?' has-sel':''} ${opt.cls||''}" role="group" aria-label="${esc(tr('Schemat: ','Diagram: ')+name)}"${ff}>${DEFS}${opt.bg?`<rect x="${vx}" width="${vw}" height="${H}" fill="${opt.bg}"/>`:''}${title}${g}${lab}</svg>`;
+}
+// SVG → PNG (canvas)
+function svgToCanvas(svg,w,h,bg='#fff'){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));img.onload=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle=bg;x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);URL.revokeObjectURL(u);res(c);};img.onerror=e=>{URL.revokeObjectURL(u);rej(e);};img.src=u;});}
+const toPng=(svg,w,h)=>svgToCanvas(svg,w,h).then(c=>new Promise((res,rej)=>c.toBlob(b=>b?b.arrayBuffer().then(res):rej(),'image/png')));
+let DL={save:async({filename,data})=>{const u=URL.createObjectURL(data);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);return{status:'saved'};}};
+if(window.claude&&window.claude.use)window.claude.use('downloads').then(d=>{if(d)DL=d;}).catch(()=>{});
+function exportSVG(type,labels){
+  const nm=T((CT[type]||VT[type]).n)+(KIND(type)==='cell'?` – ${S.lvl==='A'?tr('poziom rozszerzony','advanced level'):tr('poziom podstawowy','basic level')}`:'');
+  return drawModel(type,{lvl:S.lvl,labels,exp:true,bg:'#ffffff',title:nm});
+}
+const dims=svg=>{const m=svg.match(/viewBox="[-\d.]+ 0 ([\d.]+) ([\d.]+)"/);return[+m[1],+m[2]];};
+async function pngDataURL(type){const sv=exportSVG(type,S.labels?'names':'none'),[w,h]=dims(sv);const c=await svgToCanvas(sv,w*2,h*2);return c.toDataURL('image/png');}
+async function downloadPng(type){
+  const sv=exportSVG(type,S.labels?'names':'none'),[w,h]=dims(sv);const c=await svgToCanvas(sv,w*2,h*2);
+  const blob=await new Promise(r=>c.toBlob(r,'image/png'));
+  const fname=`${T((CT[type]||VT[type]).n)} – ${S.labels?tr('schemat z podpisami','labelled diagram'):tr('schemat bez podpisów','blank diagram')}.png`;
+  await DL.save({filename:fname,data:blob});return fname;
+}
+
+// ---------- stan ----------
+const S={tab:'models',lvl:'B',cell:'animal',org:null,labels:true,virus:'t4',vorg:null,cyc:'lytic',step:0,playing:false,zoom:-5,osmC:'animal',osmS:'hypo',q:null,ok:0,all:0,
+ ws:{cells:['animal'],n:0,bank:false,func:true,groups:false,key:true,seed:1+Math.floor(Math.random()*99999)},wsSt:'',pngSt:''};
+
+// gdzie występuje dany element
+function occurs(id,kind){
+  const types=kind==='virus'?Object.keys(VT):Object.keys(CT);
+  return types.filter(t=>MODELS[t]().some(p=>p.id===id||MERGE_B[p.id]===id));
+}
+const lvlSeg=()=>`<span class="lbl" id="lvlLbl">${tr('Poziom','Level')}</span><div class="seg" role="group" aria-labelledby="lvlLbl"><button data-lvl="B" aria-pressed="${S.lvl==='B'}">${tr('Podstawowy','Basic')}</button><button data-lvl="A" aria-pressed="${S.lvl==='A'}">${tr('Rozszerzony','Advanced')}</button></div>`;
+function orgCard(id,type){
+  const kind=KIND(type),o=ORG[id],TT=kind==='virus'?VT:CT;
+  const note=NOTE[type+'.'+id];
+  return `<section class="card ocard" aria-live="polite"><span class="kicker">${esc(T(TT[type].n))}</span><h2 tabindex="-1">${esc(orgName(id))}</h2>
+   <dl class="facts"><dt>${tr('Budowa','Structure')}</dt><dd>${esc(T(o.s))}</dd>
+   <dt>${tr('Funkcja','Function')}</dt><dd class="fn">${esc(T(o.f))}</dd>
+   <dt>${tr('Porównanie','Think of it as')}</dt><dd>${esc(T(o.a))}</dd>
+   ${note?`<dt>${tr('W tym przypadku','In this case')}</dt><dd>${esc(T(note))}</dd>`:''}
+   <dt>${kind==='virus'?tr('Występuje u (z tych modeli)','Found in (of these models)'):tr('Występuje w','Found in')}</dt><dd><ul class="tagl">${occurs(id,kind).map(t=>`<li>${esc(T(TT[t].s))}</li>`).join('')}</ul></dd></dl>
+   ${S.lvl==='A'&&o.x?`<p class="fun">${esc(T(o.x))}</p>`:''}
+   <p style="margin:12px 0 0"><button class="btn" data-act="clearSel">${tr('Pokaż wszystkie elementy','Show all parts')}</button></p></section>`;
+}
+function partList(type){
+  const ids=effIds(type,S.lvl);
+  return `<section class="card"><h2>${esc(T((CT[type]||VT[type]).n))}</h2><p class="note">${tr('Kliknij element na schemacie albo wybierz go z listy. Na schemacie można też poruszać się klawiszem Tab i wybierać Enterem.','Click a part on the diagram or pick it from the list. You can also move around the diagram with Tab and choose with Enter.')}</p>
+   <div class="chips" role="group" aria-label="${esc(tr('Elementy','Parts'))}">${ids.map(id=>`<button data-o="${id}" aria-pressed="false">${esc(orgName(id))}</button>`).join('')}</div>
+   <p class="note" style="margin-top:12px">${tr(`Liczba elementów na tym poziomie: ${ids.length}.`,`Parts shown at this level: ${ids.length}.`)}</p></section>`;
+}
+function stage(type,ctx,sel){
+  return `<div class="stage" data-ctx="${ctx}"><div class="scroll">${drawModel(type,{labels:S.labels?'names':'none',sel})}</div>
+   <div class="cap"><span>${S.labels?tr('Kliknij element, żeby poznać jego budowę i funkcję.','Click a part to see its structure and function.'):tr('Podpisy ukryte – sprawdź się: kliknij element i zobacz, czy dobrze go rozpoznajesz.','Labels hidden – test yourself: click a part and see if you recognised it.')}</span></div></div>`;
+}
+function toolbar(kind){
+  return `<div class="bar">${lvlSeg()}<label class="ck"><input type="checkbox" id="labChk" ${S.labels?'checked':''}> ${tr('Pokaż podpisy','Show labels')}</label>
+   <button class="btn" data-act="png" data-kind="${kind}">${tr('Pobierz schemat (PNG)','Download diagram (PNG)')}</button><span class="status" role="status">${S.pngSt?esc(T(STATUS[S.pngSt])):''}</span></div>`;
+}
+function viewModels(){
+  if(S.org&&!effIds(S.cell,S.lvl).includes(S.org))S.org=null;
+  const chips=`<div class="chips" style="margin-top:14px" role="group" aria-label="${esc(tr('Wybierz komórkę','Choose a cell'))}">${Object.entries(CT).map(([k,c])=>`<button data-cell="${k}" aria-pressed="${S.cell===k}"><i style="background:${c.col}"></i>${esc(T(c.n))}</button>`).join('')}</div>`;
+  return `${chips}${toolbar('cell')}<p class="intro">${esc(T(CT[S.cell].d))}</p>
+   <div class="mgrid">${stage(S.cell,'cell',S.org)}<div>${S.org?orgCard(S.org,S.cell):partList(S.cell)}</div></div>`;
+}
+
+// ---------- porównanie ----------
+const FN=[
+ ['Komórki zwierzęce mają tylko małe, często tymczasowe wodniczki (pęcherzyki), a nie dużą wakuolę.','Animal cells only have small, often temporary vacuoles (vesicles), not a large central vacuole.'],
+ ['U roślin i grzybów funkcję lizosomów pełni głównie wakuola.','In plants and fungi, the job of lysosomes is done mainly by the vacuole.'],
+ ['Rybosomy bakterii są mniejsze (70S) niż rybosomy w cytoplazmie eukariontów (80S).','Bacterial ribosomes are smaller (70S) than those in eukaryotic cytoplasm (80S).'],
+ ['Pantofelek ma dwa jądra: duże (makronukleus) i małe (mikronukleus).','Paramecium has two nuclei: a large one (macronucleus) and a small one (micronucleus).'],
+ ['Drożdże i rośliny nasienne nie mają centrioli. U eugleny i pantofelka struktury o budowie centrioli występują jako ciałka podstawowe wici i rzęsek.','Yeast and seed plants have no centrioles. In euglena and paramecium, centriole-like structures are found as the basal bodies of the flagellum and cilia.'],
+ ['Niektóre komórki zwierzęce mają witkę (plemniki) albo rzęski (np. nabłonek dróg oddechowych). Nie wszystkie bakterie mają rzęski.','Some animal cells have a flagellum (sperm) or cilia (e.g. the lining of the airways). Not all bacteria have flagella.'],
+ ['Euglena i pantofelek mają wodniczki tętniące, a pantofelek także wodniczki pokarmowe.','Euglena and paramecium have contractile vacuoles, and paramecium also has food vacuoles.'],
+ ['Zamiast ściany komórkowej – elastyczna pellikula.','Instead of a cell wall – a flexible pellicle.'],
+];
+const ORDER=['animal','plant','fungus','bacteria','euglena','paramecium'];
+const CMP=[
+ [['Jądro komórkowe','Nucleus'],[1,1,1,0,1,{v:1,fn:4}]],
+ [['Nukleoid (DNA w cytoplazmie)','Nucleoid (DNA in the cytoplasm)'],[0,0,0,1,0,0]],
+ [['Błona komórkowa','Cell membrane'],[1,1,1,1,1,1]],
+ [['Cytoplazma','Cytoplasm'],[1,1,1,1,1,1]],
+ [['Rybosomy','Ribosomes'],[1,1,1,{v:1,fn:3},1,1]],
+ [['Mitochondria','Mitochondria'],[1,1,1,0,1,1]],
+ [['Chloroplasty','Chloroplasts'],[0,1,0,0,1,0]],
+ [['Ściana komórkowa','Cell wall'],[0,{v:1,t:['celuloza','cellulose']},{v:1,t:['chityna','chitin']},{v:1,t:['mureina','murein']},{v:0,fn:8},{v:0,fn:8}]],
+ [['Wakuola (wodniczka)','Vacuole'],[{v:1,t:['małe','small'],fn:1},{v:1,t:['duża','large']},1,0,{v:1,fn:7},{v:1,fn:7}]],
+ [['Lizosomy','Lysosomes'],[1,{v:0,fn:2},{v:0,fn:2},0,1,1]],
+ [['Siateczka śródplazmatyczna','Endoplasmic reticulum'],[1,1,1,0,1,1]],
+ [['Aparat Golgiego','Golgi apparatus'],[1,1,1,0,1,1]],
+ [['Centriole','Centrioles'],[1,0,{v:0,fn:5},0,{v:0,fn:5},{v:0,fn:5}]],
+ [['Wić lub rzęski','Flagellum or cilia'],[{v:0,fn:6},0,0,{v:1,fn:6},{v:1,t:['wić','flagellum']},{v:1,t:['rzęski','cilia']}]],
+ [['Plamka oczna','Eyespot'],[0,0,0,0,1,0]],
+ [['Wodniczka tętniąca','Contractile vacuole'],[0,0,0,0,1,1]],
+];
+const DIFF=[
+ [['Typ komórki','Cell type'],[['eukariotyczna','eukaryotic'],['eukariotyczna','eukaryotic'],['eukariotyczna','eukaryotic'],['prokariotyczna','prokaryotic'],['eukariotyczna','eukaryotic'],['eukariotyczna','eukaryotic']]],
+ [['Materiał genetyczny','Genetic material'],[['DNA w jądrze','DNA in a nucleus'],['DNA w jądrze','DNA in a nucleus'],['DNA w jądrze','DNA in a nucleus'],['koliste DNA w nukleoidzie (bez jądra) + plazmidy','circular DNA in a nucleoid (no nucleus) + plasmids'],['DNA w jądrze','DNA in a nucleus'],['DNA w dwóch jądrach: dużym i małym','DNA in two nuclei: large and small']]],
+ [['Ściana komórkowa','Cell wall'],[['brak','none'],['z celulozy','cellulose'],['z chityny','chitin'],['z mureiny (peptydoglikanu)','murein (peptidoglycan)'],['brak – pellikula','none – a pellicle'],['brak – pellikula','none – a pellicle']]],
+ [['Materiał zapasowy','Storage material'],[['glikogen, tłuszcze','glycogen, fats'],['skrobia','starch'],['glikogen, tłuszcze','glycogen, fats'],['m.in. ziarna glikogenu','e.g. glycogen granules'],['paramylon','paramylon'],['glikogen','glycogen']]],
+ [['Odżywianie','Nutrition'],[['cudzożywne','heterotrophic'],['samożywne (fotosynteza)','autotrophic (photosynthesis)'],['cudzożywne','heterotrophic'],['różne – większość cudzożywna, niektóre samożywne (np. sinice)','varies – most heterotrophic, some autotrophic (e.g. cyanobacteria)'],['miksotroficzne: samożywne na świetle, cudzożywne w ciemności','mixotrophic: autotrophic in light, heterotrophic in the dark'],['cudzożywne (zjada bakterie)','heterotrophic (eats bacteria)']]],
+ [['Typowa wielkość','Typical size'],[['10–30 µm','10–30 µm'],['10–100 µm','10–100 µm'],['5–10 µm','5–10 µm'],['1–5 µm (E. coli ok. 2 µm)','1–5 µm (E. coli about 2 µm)'],['40–60 µm','40–60 µm'],['200–300 µm','200–300 µm']]],
+ [['Organizm','Organism'],[['wielokomórkowy','multicellular'],['wielokomórkowy','multicellular'],['drożdże – jednokomórkowe; większość grzybów – wielokomórkowa','yeast – single-celled; most fungi – multicellular'],['jednokomórkowy','single-celled'],['jednokomórkowy','single-celled'],['jednokomórkowy','single-celled']]],
+];
+function viewCompare(){
+  const cell=v=>{const o=typeof v==='object'?v:{v};const sym=o.v?'✓':'✗';
+    return `<td class="${o.v?'y':'n'}"><span aria-label="${o.v?esc(tr('tak','yes')):esc(tr('nie','no'))}">${sym}</span>${o.fn?`<sup>${o.fn}</sup>`:''}${o.t?`<br><small style="font-weight:400;color:var(--muted)">${esc(T(o.t))}</small>`:''}</td>`;};
+  const head=`<thead><tr><th>${tr('Element','Part')}</th>${ORDER.map(k=>`<th>${esc(T(CT[k].n))}</th>`).join('')}</tr></thead>`;
+  return `<section class="card"><h2>${tr('Co ma która komórka?','Which cell has what?')}</h2><p class="note">${tr('✓ – występuje, ✗ – nie występuje. Liczby odsyłają do przypisów pod tabelą. Tabela na telefonie przewija się w bok.','✓ – present, ✗ – absent. Numbers refer to the notes below the table. On a phone, the table scrolls sideways.')}</p>
+   <div class="tablewrap"><table class="cmp">${head}<tbody>${CMP.map(([n,v])=>`<tr><th scope="row" style="text-align:left">${esc(T(n))}</th>${v.map(cell).join('')}</tr>`).join('')}</tbody></table></div>
+   <ol class="note" style="margin-top:10px">${FN.map(f=>`<li>${esc(T(f))}</li>`).join('')}</ol></section>
+   <section class="card"><h2>${tr('Najważniejsze różnice','Key differences')}</h2>
+   <div class="tablewrap"><table class="diff">${head}<tbody>${DIFF.map(([n,v])=>`<tr><th scope="row" style="text-align:left">${esc(T(n))}</th>${v.map(x=>`<td>${esc(T(x))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section>
+   <div class="ugrid"><section class="card"><h3 style="margin-top:0">${tr('Komórka roślinna a zwierzęca','Plant cell vs animal cell')}</h3><ul>
+    <li>${tr('Tylko roślinna: ściana z celulozy, chloroplasty, duża wakuola, plazmodesmy.','Plant only: a cellulose wall, chloroplasts, a large vacuole, plasmodesmata.')}</li>
+    <li>${tr('Tylko zwierzęca: centriole, lizosomy (u roślin ich rolę pełni głównie wakuola).','Animal only: centrioles, lysosomes (in plants the vacuole mostly does their job).')}</li>
+    <li>${tr('Obie: jądro, błona, cytoplazma, mitochondria, rybosomy, siateczka, aparat Golgiego.','Both: nucleus, membrane, cytoplasm, mitochondria, ribosomes, ER, Golgi apparatus.')}</li></ul></section>
+   <section class="card"><h3 style="margin-top:0">${tr('Prokarioty a eukarioty','Prokaryotes vs eukaryotes')}</h3><ul>
+    <li>${tr('Prokarioty (bakterie): brak jądra i organelli otoczonych błonami, rybosomy 70S, zwykle 1–5 µm.','Prokaryotes (bacteria): no nucleus or membrane-bound organelles, 70S ribosomes, usually 1–5 µm.')}</li>
+    <li>${tr('Eukarioty (rośliny, zwierzęta, grzyby, protisty): jądro, organella z błonami, rybosomy 80S, zwykle 10–100 µm.','Eukaryotes (plants, animals, fungi, protists): a nucleus, membrane-bound organelles, 80S ribosomes, usually 10–100 µm.')}</li></ul></section></div>`;
+}
+
+// ---------- wirusy ----------
+const ph=(x,y,s=1,r=0,empty=false,op=1)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})" opacity="${op}"><path d="M0 -94 L12 -87 L12 -65 L0 -58 L-12 -65 L-12 -87 Z" fill="${empty?'#f1f4f7':'url(#gHead)'}" stroke="#55677a" stroke-width="2"/>${empty?'':'<path d="M-5 -84 q8 4 2 10 t4 10" stroke="#c0392b" fill="none" stroke-width="1.8"/>'}<rect x="-4" y="-58" width="8" height="34" fill="#c7d3df" stroke="#55677a" stroke-width="1.5"/><rect x="-9" y="-24" width="18" height="5" fill="#8a9cb0" stroke="#55677a"/><path d="M-7 -20 L-19 -10 L-13 0 M7 -20 L19 -10 L13 0" fill="none" stroke="#55677a" stroke-width="1.8"/></g>`;
+const CHR='M250 190 C 260 150 330 150 360 170 C 400 195 420 150 440 175 C 460 205 420 235 380 225 C 340 215 300 245 270 230 C 250 220 245 205 250 190 Z';
+const bact=(extra='',broken=false)=>`<rect x="150" y="110" width="340" height="160" rx="70" fill="${broken?'#eef4fa':'#d9e8f6'}" stroke="#c08a3e" stroke-width="7" ${broken?'stroke-dasharray="40 26" opacity=".7"':''}/>${extra}`;
+const chr=(cls='')=>`<path d="${CHR}" fill="none" stroke="#7e5bb5" stroke-width="3" ${cls}/>`;
+const PROF='M360 170 C 400 195 420 150 440 175';
+const CYC={
+ lytic:[
+  {t:['Adsorpcja','Attachment'],d:['Fag przyczepia się włókienkami ogonowymi do swoistych receptorów na powierzchni bakterii.','The phage attaches with its tail fibres to specific receptors on the surface of the bacterium.'],g:()=>bact(chr())+ph(280,107)+ph(370,107)+ph(560,70,.9,30)},
+  {t:['Wniknięcie materiału genetycznego','Injection of genetic material'],d:['Pochewka ogonka kurczy się, rurka przebija ścianę, a DNA faga wnika do komórki. Pusty kapsyd zostaje na zewnątrz.','The tail sheath contracts, the tube pierces the wall and the phage DNA enters the cell. The empty capsid stays outside.'],g:()=>bact(chr()+'<path d="M320 112 q14 30 -8 52 t16 42 t-20 30" fill="none" stroke="#c0392b" stroke-width="3.2" stroke-linecap="round"/>')+ph(320,107,1,0,true)},
+  {t:['Replikacja i synteza białek','Replication and protein synthesis'],d:['Komórka bakterii, „przeprogramowana” przez wirusa, kopiuje DNA faga i wytwarza białka jego kapsydu. DNA bakterii jest rozkładane.','The bacterium, “reprogrammed” by the virus, copies the phage DNA and makes its capsid proteins. The bacterial DNA is broken down.'],g:()=>bact(chr('stroke-dasharray="6 10" opacity=".45"')+[[200,150],[260,240],[430,140],[470,230],[350,200],[300,150]].map(([x,y],i)=>`<path d="M${x} ${y} q8 -10 16 0 t16 0" fill="none" stroke="#c0392b" stroke-width="3"/>`).join('')+[[230,200],[400,240],[440,190],[330,250]].map(([x,y])=>`<path d="M${x} ${y-10} l9 5 v10 l-9 5 l-9 -5 v-10 Z" fill="url(#gHead)" stroke="#55677a" stroke-width="1.5"/>`).join('')+[[380,150],[280,205],[460,160]].map(([x,y])=>`<rect x="${x}" y="${y}" width="5" height="22" fill="#c7d3df" stroke="#55677a" stroke-width="1.2"/>`).join(''))+ph(320,107,1,0,true,.5)},
+  {t:['Składanie wirusów','Assembly'],d:['Z nowych kopii DNA i białek powstają kompletne cząstki wirusa – nawet ok. 100–200 w jednej komórce.','New copies of DNA and proteins are put together into complete virus particles – as many as about 100–200 in one cell.'],g:()=>bact([[215,190,-20],[270,250,10],[330,200,0],[390,250,-10],[440,190,15],[470,250,0],[300,150,0],[400,160,0]].map(([x,y,r])=>ph(x,y,.48,r)).join(''))},
+  {t:['Uwolnienie (liza)','Release (lysis)'],d:['Enzymy wirusa rozkładają ścianę komórkową. Bakteria pęka (liza), a nowe wirusy wydostają się na zewnątrz i atakują kolejne komórki.','Viral enzymes break down the cell wall. The bacterium bursts (lysis), and the new viruses escape to attack more cells.'],g:()=>bact('',true)+[[120,100,-30],[230,92,-10],[340,90,0],[450,92,12],[560,100,30],[105,205,-75],[585,205,75],[200,280,200],[330,288,180],[470,280,160]].map(([x,y,r])=>ph(x,y,.5,r)).join('')},
+ ],
+ lyso:[
+  {t:['Adsorpcja','Attachment'],d:['Jak w cyklu litycznym: fag przyczepia się do receptorów na powierzchni bakterii.','As in the lytic cycle: the phage attaches to receptors on the surface of the bacterium.'],g:()=>bact(chr())+ph(320,107)},
+  {t:['Wniknięcie materiału genetycznego','Injection of genetic material'],d:['DNA faga wnika do komórki bakterii.','The phage DNA enters the bacterial cell.'],g:()=>bact(chr()+'<path d="M320 112 q14 30 -8 52" fill="none" stroke="#c0392b" stroke-width="3.2" stroke-linecap="round"/>')+ph(320,107,1,0,true)},
+  {t:['Włączenie do DNA gospodarza (profag)','Joining the host DNA (prophage)'],d:['DNA faga wbudowuje się w chromosom bakterii i staje się profagiem. Wirus „uśpiony” – nie powstają nowe cząstki, a bakteria żyje normalnie.','The phage DNA inserts itself into the bacterial chromosome and becomes a prophage. The virus lies “dormant” – no new particles are made and the bacterium lives normally.'],g:()=>bact(chr()+`<path d="${PROF}" fill="none" stroke="#c0392b" stroke-width="5" stroke-linecap="round"/><text x="455" y="150" font-size="15" font-weight="700" fill="#c0392b">${esc(tr('profag','prophage'))}</text>`)},
+  {t:['Podziały komórki','Cell division'],d:['Przy każdym podziale bakterii profag jest kopiowany razem z jej DNA – trafia do wszystkich komórek potomnych.','Each time the bacterium divides, the prophage is copied along with its DNA – so it ends up in all the daughter cells.'],g:()=>`<g transform="translate(-40 40) scale(.62)">${bact(chr()+`<path d="${PROF}" fill="none" stroke="#c0392b" stroke-width="6"/>`)}</g><g transform="translate(270 40) scale(.62)">${bact(chr()+`<path d="${PROF}" fill="none" stroke="#c0392b" stroke-width="6"/>`)}</g><g transform="translate(115 165) scale(.62)">${bact(chr()+`<path d="${PROF}" fill="none" stroke="#c0392b" stroke-width="6"/>`)}</g>`},
+  {t:['Indukcja → cykl lityczny','Induction → lytic cycle'],d:['Pod wpływem czynnika stresowego (np. promieniowania UV) profag wycina się z chromosomu i wirus przechodzi do cyklu litycznego.','When something stresses the cell (e.g. UV radiation), the prophage cuts itself out of the chromosome and the virus switches to the lytic cycle.'],g:()=>bact(chr()+`<circle cx="400" cy="230" r="14" fill="none" stroke="#c0392b" stroke-width="4"/><path d="M380 172 q10 -6 20 0" stroke="#c0392b" stroke-width="2" fill="none" stroke-dasharray="3 3"/>`)+`<path d="M500 190 H575" stroke="#1d7a58" stroke-width="4" marker-end="url(#arr)"/><text x="590" y="182" font-size="15" font-weight="700" fill="#1d7a58">${esc(tr('cykl','lytic'))}</text><text x="590" y="200" font-size="15" font-weight="700" fill="#1d7a58">${esc(tr('lityczny','cycle'))}</text>`},
+ ],
+};
+function cycleSVG(){const st=CYC[S.cyc][S.step];
+  return `<svg viewBox="0 0 680 330" role="img" aria-label="${esc(T(st.t))}"><defs><linearGradient id="gHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dfe6ee"/><stop offset="1" stop-color="#9fb0c2"/></linearGradient><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1d7a58"/></marker></defs><g class="fadein">${st.g()}</g></svg>`;}
+const DIS=[
+ [['Grypa','Flu (influenza)'],['wirus grypy (RNA)','influenza virus (RNA)'],['drogą kropelkową','droplets (coughs and sneezes)'],['coroczna szczepionka, mycie rąk','yearly vaccine, handwashing']],
+ [['Przeziębienie','Common cold'],['głównie rinowirusy','mainly rhinoviruses'],['drogą kropelkową, przez dotyk','droplets, touch'],['mycie rąk, unikanie kontaktu z chorymi (brak szczepionki)','handwashing, avoiding sick people (no vaccine)']],
+ [['Ospa wietrzna','Chickenpox'],['wirus ospy wietrznej i półpaśca','varicella-zoster virus'],['drogą kropelkową, przez kontakt z pęcherzykami','droplets, contact with the blisters'],['szczepionka','vaccine']],
+ [['Odra','Measles'],['wirus odry','measles virus'],['drogą kropelkową – bardzo zaraźliwa','droplets – extremely contagious'],['szczepionka MMR (odra, świnka, różyczka)','MMR vaccine (measles, mumps, rubella)']],
+ [['Świnka','Mumps'],['wirus świnki','mumps virus'],['drogą kropelkową','droplets'],['szczepionka MMR','MMR vaccine']],
+ [['Różyczka','Rubella'],['wirus różyczki','rubella virus'],['drogą kropelkową; groźna dla płodu','droplets; dangerous for unborn babies'],['szczepionka MMR','MMR vaccine']],
+ [['Zakażenie HPV','HPV infection'],['wirus brodawczaka ludzkiego','human papillomavirus'],['kontakt płciowy, kontakt skóry ze skórą','sexual contact, skin-to-skin contact'],['szczepionka (chroni m.in. przed rakiem szyjki macicy)','vaccine (protects against cervical cancer, among others)']],
+ [['WZW typu B','Hepatitis B'],['wirus zapalenia wątroby typu B','hepatitis B virus'],['krew, kontakt płciowy, z matki na dziecko','blood, sexual contact, mother to baby'],['szczepionka, jednorazowy sprzęt medyczny','vaccine, single-use medical equipment']],
+ [['COVID-19','COVID-19'],['SARS-CoV-2','SARS-CoV-2'],['drogą kropelkową i przez aerozol','droplets and aerosols'],['szczepionka, wietrzenie pomieszczeń, maseczki','vaccine, ventilation, face masks']],
+ [['Wścieklizna','Rabies'],['wirus wścieklizny','rabies virus'],['ugryzienie przez chore zwierzę','a bite from an infected animal'],['szczepienie zwierząt; po pogryzieniu – szybkie szczepienie','vaccinating animals; after a bite – vaccination straight away']],
+ [['AIDS','AIDS'],['HIV (ludzki wirus niedoboru odporności)','HIV (human immunodeficiency virus)'],['krew, kontakt płciowy, z matki na dziecko','blood, sexual contact, mother to baby'],['prezerwatywy, jednorazowe igły, leki zapobiegawcze (brak szczepionki)','condoms, single-use needles, preventive medicines (no vaccine)']],
+];
+function viewViruses(){
+  if(S.vorg&&!effIds(S.virus,S.lvl).includes(S.vorg))S.vorg=null;
+  const chips=`<div class="chips" style="margin-top:14px" role="group" aria-label="${esc(tr('Wybierz wirusa','Choose a virus'))}">${Object.entries(VT).map(([k,c])=>`<button data-virus="${k}" aria-pressed="${S.virus===k}"><i style="background:${c.col}"></i>${esc(T(c.n))}</button>`).join('')}</div>`;
+  const steps=CYC[S.cyc],st=steps[S.step];
+  return `<section class="card"><h2>${tr('Budowa wirusa','How a virus is built')}</h2><ul>
+   <li>${tr('<b>Kapsyd</b> – białkowy płaszcz zbudowany z podjednostek zwanych kapsomerami. Chroni materiał genetyczny.','<b>Capsid</b> – a protein coat built from subunits called capsomeres. It protects the genetic material.')}</li>
+   <li>${tr('<b>Materiał genetyczny</b> – DNA <i>albo</i> RNA. Cząstka wirusa (wirion) nigdy nie zawiera obu naraz.','<b>Genetic material</b> – DNA <i>or</i> RNA. A virus particle (virion) never contains both at once.')}</li>
+   <li>${tr('<b>Otoczka lipidowa</b> – tylko u niektórych wirusów (np. grypy, SARS-CoV-2, HIV); pochodzi z błony komórki gospodarza.','<b>Lipid envelope</b> – only in some viruses (e.g. flu, SARS-CoV-2, HIV); it comes from the host cell’s membrane.')}</li>
+   <li>${tr('<b>Białka powierzchniowe (kolce)</b> – rozpoznają i wiążą receptory komórki, którą wirus może zarazić.','<b>Surface proteins (spikes)</b> – recognise and bind the receptors of the cells the virus can infect.')}</li></ul>
+   <p class="note">${tr('Wirusy są o wiele mniejsze od komórek: zwykle 20–300 nm. Nie mają cytoplazmy, rybosomów ani własnej przemiany materii.','Viruses are far smaller than cells: usually 20–300 nm. They have no cytoplasm, no ribosomes and no metabolism of their own.')}</p></section>
+   ${chips}${toolbar('virus')}<p class="intro">${esc(T(VT[S.virus].d))}</p>
+   <div class="mgrid">${stage(S.virus,'virus',S.vorg)}<div>${S.vorg?orgCard(S.vorg,S.virus):partList(S.virus)}</div></div>
+   <section class="card cyc"><h2>${tr('Jak bakteriofag namnaża się w bakterii?','How does a phage multiply inside a bacterium?')}</h2>
+    <div class="bar" style="margin-top:6px"><div class="seg" role="group" aria-label="${esc(tr('Rodzaj cyklu','Type of cycle'))}"><button data-cyc="lytic" aria-pressed="${S.cyc==='lytic'}">${tr('Cykl lityczny','Lytic cycle')}</button><button data-cyc="lyso" aria-pressed="${S.cyc==='lyso'}">${tr('Cykl lizogeniczny','Lysogenic cycle')}</button></div></div>
+    <div class="steps" role="group" aria-label="${esc(tr('Etapy','Stages'))}">${steps.map((s,i)=>`<button data-step="${i}" ${i===S.step?'aria-current="step"':''}>${i+1}. ${esc(T(s.t))}</button>`).join('')}</div>
+    <div class="stage" style="margin-top:6px">${cycleSVG()}</div>
+    <div class="cstep" aria-live="polite"><h3>${tr('Etap','Stage')} ${S.step+1}/${steps.length}: ${esc(T(st.t))}</h3><p>${esc(T(st.d))}</p></div>
+    <div class="bar" style="margin-top:4px"><button class="btn" data-act="prev" ${S.step===0?'disabled':''}>← ${tr('Wstecz','Back')}</button><button class="btn primary" data-act="play" id="playBtn">${S.playing?tr('⏸ Zatrzymaj','⏸ Pause'):tr('▶ Odtwórz','▶ Play')}</button><button class="btn" data-act="next" ${S.step===steps.length-1?'disabled':''}>${tr('Dalej','Next')} →</button></div>
+    <p class="note" style="margin-top:10px">${S.cyc==='lytic'?tr('Cykl lityczny kończy się śmiercią komórki. Trwa często tylko 20–30 minut.','The lytic cycle ends with the cell’s death. It often takes only 20–30 minutes.'):tr('W cyklu lizogenicznym wirus może przez wiele pokoleń „ukrywać się” w DNA bakterii, zanim przejdzie do cyklu litycznego.','In the lysogenic cycle the virus can “hide” in the bacterial DNA for many generations before switching to the lytic cycle.')}</p></section>
+   <div class="ugrid">
+   <section class="card ucard"><h3><span aria-hidden="true">🤔</span>${tr('Czy wirusy żyją?','Are viruses alive?')}</h3>
+    <p><b>${tr('Za tym, że żyją:','Arguments for:')}</b></p><ul><li>${tr('mają materiał genetyczny (DNA lub RNA) i geny','they have genetic material (DNA or RNA) and genes')}</li><li>${tr('namnażają się (choć tylko w komórkach)','they reproduce (though only inside cells)')}</li><li>${tr('ulegają mutacjom i ewoluują','they mutate and evolve')}</li></ul>
+    <p><b>${tr('Przeciw:','Arguments against:')}</b></p><ul><li>${tr('nie mają budowy komórkowej','they are not made of cells')}</li><li>${tr('nie mają własnej przemiany materii ani rybosomów','they have no metabolism of their own and no ribosomes')}</li><li>${tr('poza komórką są nieaktywne – jak cząstki chemiczne (można je nawet krystalizować)','outside a cell they are inactive – like chemical particles (some can even be crystallised)')}</li></ul>
+    <p class="note">${tr('Dlatego wirusy nazywa się często bezkomórkowymi formami na granicy świata ożywionego i nieożywionego.','That is why viruses are often described as non-cellular forms on the border between the living and non-living world.')}</p></section>
+   <section class="card ucard"><h3><span aria-hidden="true">💊</span>${tr('Dlaczego antybiotyki nie działają na wirusy?','Why don’t antibiotics work on viruses?')}</h3>
+    <p>${tr('Antybiotyki atakują struktury i procesy typowe dla bakterii: np. budowę ściany z mureiny albo pracę rybosomów 70S. Wirusy nie mają ściany, rybosomów ani własnej przemiany materii – nie ma więc czego zablokować.','Antibiotics attack structures and processes typical of bacteria, such as building the murein wall or the work of 70S ribosomes. Viruses have no wall, no ribosomes and no metabolism of their own – so there is nothing to block.')}</p>
+    <p>${tr('Niepotrzebne branie antybiotyków przy przeziębieniu czy grypie nie pomaga, a sprzyja powstawaniu bakterii opornych na antybiotyki. Na niektóre wirusy są natomiast leki przeciwwirusowe.','Taking antibiotics for a cold or flu doesn’t help, and it helps antibiotic-resistant bacteria to emerge. For some viruses, though, there are antiviral drugs.')}</p></section>
+   <section class="card ucard"><h3><span aria-hidden="true">💉</span>${tr('Jak działają szczepionki?','How do vaccines work?')}</h3>
+    <p>${tr('Szczepionka zawiera osłabione lub zabite drobnoustroje, ich fragmenty (np. białka) albo instrukcję do wytworzenia takiego białka (szczepionki mRNA). Układ odpornościowy uczy się je rozpoznawać i wytwarza przeciwciała oraz komórki pamięci.','A vaccine contains weakened or killed microbes, parts of them (e.g. proteins) or instructions for making such a protein (mRNA vaccines). The immune system learns to recognise them and makes antibodies and memory cells.')}</p>
+    <p>${tr('Gdy prawdziwy wirus zaatakuje, organizm rozpoznaje go od razu i reaguje szybko – choroba nie rozwija się albo przebiega łagodnie. To odporność swoista nabyta sztucznie (czynnie).','When the real virus attacks, the body recognises it straight away and responds quickly – so the illness doesn’t develop or is mild. This is artificially acquired (active) specific immunity.')}</p></section>
+   <section class="card ucard"><h3><span aria-hidden="true">🌿</span>${tr('Nie tylko ludzie chorują','Not just humans get ill')}</h3>
+    <p>${tr('Wirusy atakują wszystkie grupy organizmów: zwierzęta, rośliny, grzyby, protisty i bakterie. Każdy wirus ma swój krąg gospodarzy – zaraża tylko komórki z pasującymi receptorami.','Viruses attack every group of organisms: animals, plants, fungi, protists and bacteria. Each virus has its own host range – it only infects cells with matching receptors.')}</p>
+    <ul><li>${tr('Rośliny: wirus mozaiki tytoniu (plamy na liściach), wirusy ziemniaka, tulipanów (pstre płatki).','Plants: tobacco mosaic virus (patchy leaves), potato viruses, tulip viruses (streaked petals).')}</li>
+    <li>${tr('Bakterie: bakteriofagi. Bada się je jako możliwy lek na bakterie oporne na antybiotyki (terapia fagowa).','Bacteria: bacteriophages. They are being studied as a possible treatment for antibiotic-resistant bacteria (phage therapy).')}</li></ul></section></div>
+   <section class="card"><h2>${tr('Choroby wirusowe człowieka','Human viral diseases')}</h2>
+    <div class="tablewrap"><table class="diff" style="min-width:680px"><thead><tr><th>${tr('Choroba','Disease')}</th><th>${tr('Wirus','Virus')}</th><th>${tr('Jak się szerzy','How it spreads')}</th><th>${tr('Zapobieganie','Prevention')}</th></tr></thead>
+    <tbody>${DIS.map(r=>`<tr>${r.map((c,i)=>i?`<td>${esc(T(c))}</td>`:`<th scope="row" style="text-align:left">${esc(T(c))}</th>`).join('')}</tr>`).join('')}</tbody></table></div></section>`;
+}
+
+// ---------- baza wiedzy ----------
+const SIZES=[
+ {n:['Atom','Atom'],s:1e-10,c:'#8a6fb0',sh:'c',t:['ok. 0,1 nm','about 0.1 nm']},
+ {n:['Cząsteczka białka','Protein molecule'],s:7e-9,c:'#c97bb0',sh:'b',t:['ok. 5–10 nm','about 5–10 nm']},
+ {n:['Wirus grypy','Flu virus'],s:1e-7,c:'#d4708a',sh:'v',t:['ok. 100 nm','about 100 nm']},
+ {n:['Mitochondrium','Mitochondrion'],s:1.5e-6,c:'#ee8846',sh:'o',t:['ok. 1–2 µm','about 1–2 µm']},
+ {n:['Bakteria E. coli','E. coli bacterium'],s:2e-6,c:'#5d9cd6',sh:'r',t:['ok. 2 µm','about 2 µm']},
+ {n:['Erytrocyt (krwinka czerwona)','Red blood cell'],s:7.5e-6,c:'#d9534f',sh:'d',t:['ok. 7–8 µm','about 7–8 µm']},
+ {n:['Komórka zwierzęca','Animal cell'],s:2e-5,c:'#e58fa8',sh:'c',t:['ok. 10–30 µm','about 10–30 µm']},
+ {n:['Komórka roślinna','Plant cell'],s:5e-5,c:'#5fb84a',sh:'s',t:['ok. 10–100 µm','about 10–100 µm']},
+ {n:['Pantofelek','Paramecium'],s:2.5e-4,c:'#9b7dcc',sh:'o',t:['ok. 200–300 µm','about 200–300 µm']},
+ {n:['Jajo kury','Hen’s egg'],s:5.5e-2,c:'#e8c48a',sh:'e',t:['ok. 5–6 cm','about 5–6 cm']},
+ {n:['Jajo strusia','Ostrich egg'],s:1.5e-1,c:'#efe3c8',sh:'e',t:['ok. 15 cm','about 15 cm']},
+];
+const LIM=[{s:1e-4,n:['oko','the naked eye'],c:'#4caf7d'},{s:2e-7,n:['mikroskop świetlny','a light microscope'],c:'#4f8fd6'},{s:1e-10,n:['mikroskop elektronowy','an electron microscope'],c:'#9b6bc9'}];
+function fmtLen(m){let v,u;if(m>=1e-2){v=m*100;u='cm';}else if(m>=1e-3){v=m*1000;u='mm';}else if(m>=1e-6){v=m*1e6;u='µm';}else{v=m*1e9;u='nm';}return `${NF(v,v<1?2:v<10?1:0)} ${u}`;}
+const needTool=s=>s>=1e-4?LIM[0]:s>=2e-7?LIM[1]:LIM[2];
+function shape(o,x,y,px){const r=px/2,c=o.c,st='stroke="#33413a" stroke-width="1.2"';
+  switch(o.sh){case 'r':return `<rect x="${x-r}" y="${y-r*.4}" width="${px}" height="${px*.4}" rx="${r*.4}" fill="${c}" ${st}/>`;
+   case 'o':return `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.45}" fill="${c}" ${st}/>`;
+   case 'd':return `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r}" fill="${c}" ${st}/><ellipse cx="${x}" cy="${y}" rx="${r*.45}" ry="${r*.45}" fill="#f08a86"/>`;
+   case 's':return `<rect x="${x-r}" y="${y-r*.7}" width="${px}" height="${px*.7*2}" rx="${r*.12}" fill="${c}" ${st}/>`;
+   case 'e':return `<ellipse cx="${x}" cy="${y}" rx="${r*.78}" ry="${r}" fill="${c}" ${st}/>`;
+   case 'v':return `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" ${st}/>`+(px>14?Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<line x1="${x+r*Math.cos(a)}" y1="${y+r*Math.sin(a)}" x2="${x+r*1.25*Math.cos(a)}" y2="${y+r*1.25*Math.sin(a)}" stroke="#8a3b4f" stroke-width="${Math.max(1,px/40)}"/>`;}).join(''):'');
+   case 'b':return `<path d="M${x-r} ${y} C ${x-r} ${y-r*1.1} ${x+r*.2} ${y-r} ${x+r} ${y-r*.2} C ${x+r*1.1} ${y+r*.8} ${x-r*.1} ${y+r} ${x-r} ${y} Z" fill="${c}" ${st}/>`;
+   default:return `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" ${st}/>`;}}
+function scaleViz(){
+  const fov=Math.pow(10,S.zoom),Wv=760;
+  const vis=SIZES.filter(o=>{const px=Wv*o.s/fov;return px>=3&&px<=330;}),small=SIZES.filter(o=>Wv*o.s/fov<3),big=SIZES.filter(o=>Wv*o.s/fov>330);
+  let x=20,g='';
+  for(const o of vis){const px=Wv*o.s/fov;const w=Math.max(px,70);g+=shape(o,x+w/2,110,px)+`<text x="${x+w/2}" y="${Math.min(110+px/2,180)+22}" text-anchor="middle" font-size="13" class="svt">${esc(T(o.n))}</text>`;x+=w+18;}
+  const tool=needTool(fov/10);
+  // oś logarytmiczna
+  const ax=v=>20+(v+11)/11*720;
+  let axis=`<rect x="${ax(-10)}" y="18" width="${ax(Math.log10(2e-7))-ax(-10)}" height="14" fill="${LIM[2].c}" opacity=".35"/><rect x="${ax(Math.log10(2e-7))}" y="18" width="${ax(-4)-ax(Math.log10(2e-7))}" height="14" fill="${LIM[1].c}" opacity=".35"/><rect x="${ax(-4)}" y="18" width="${ax(0)-ax(-4)}" height="14" fill="${LIM[0].c}" opacity=".35"/>`;
+  axis+=`<line x1="${ax(-11)}" y1="32" x2="${ax(0)}" y2="32" stroke="currentColor"/>`;
+  const tk=[[-10,'0,1 nm','0.1 nm'],[-9,'1 nm','1 nm'],[-8,'10 nm','10 nm'],[-7,'100 nm','100 nm'],[-6,'1 µm','1 µm'],[-5,'10 µm','10 µm'],[-4,'0,1 mm','0.1 mm'],[-3,'1 mm','1 mm'],[-2,'1 cm','1 cm'],[-1,'10 cm','10 cm'],[0,'1 m','1 m']];
+  axis+=tk.map(([v,a,b])=>`<line x1="${ax(v)}" y1="28" x2="${ax(v)}" y2="36" stroke="currentColor"/><text x="${ax(v)}" y="50" font-size="11" text-anchor="middle" class="svt">${T([a,b])}</text>`).join('');
+  axis+=SIZES.map(o=>`<circle cx="${ax(Math.log10(o.s))}" cy="25" r="4" fill="${o.c}" stroke="#33413a"/>`).join('');
+  axis+=`<rect x="${ax(S.zoom-2)}" y="12" width="${ax(S.zoom)-ax(S.zoom-2)}" height="26" fill="none" stroke="var(--focus)" stroke-width="2.5" rx="3"/>`;
+  return `<p class="zoomv">${tr('Szerokość pola widzenia','Width of the field of view')}: ${fmtLen(fov)} · ${tr('Potrzebne narzędzie','Tool needed')}: <span class="badge" style="background:${tool.c};color:#fff">${esc(T(tool.n))}</span></p>
+   <div class="stage" style="margin-top:6px"><svg viewBox="0 0 800 250" role="img" aria-label="${esc(tr('Obiekty widoczne w tej skali: ','Objects visible at this scale: ')+(vis.map(o=>T(o.n)).join(', ')||'–'))}"><style>.svt{fill:var(--ink)}</style><line x1="20" y1="226" x2="780" y2="226" stroke="var(--muted)"/><text x="400" y="243" text-anchor="middle" font-size="11" class="svt">← ${fmtLen(fov)} →</text>${g||`<text x="400" y="120" text-anchor="middle" class="svt" font-size="15">${esc(tr('Przy tej skali nie widać żadnego z obiektów – przesuń suwak.','None of the objects fits this scale – move the slider.'))}</text>`}</svg></div>
+   <p class="note">${small.length?`${tr('Za małe, by je tu zobaczyć','Too small to see here')}: ${small.map(o=>esc(T(o.n))).join(', ')}. `:''}${big.length?`${tr('Za duże, by zmieścić się w polu widzenia','Too big to fit in the view')}: ${big.map(o=>esc(T(o.n))).join(', ')}.`:''}</p>
+   <div class="scroll"><svg viewBox="0 0 760 60" style="min-width:560px;color:var(--ink)" role="img" aria-label="${esc(tr('Oś wielkości od 0,1 nm do 1 m','Size axis from 0.1 nm to 1 m'))}"><style>.svt{fill:var(--ink)}</style>${axis}</svg></div>
+   <p class="note"><span class="badge" style="background:${LIM[2].c};color:#fff">${tr('mikroskop elektronowy','electron microscope')}</span> ${tr('od ok. 0,1 nm','from about 0.1 nm')} · <span class="badge" style="background:${LIM[1].c};color:#fff">${tr('mikroskop świetlny','light microscope')}</span> ${tr('od ok. 0,2 µm','from about 0.2 µm')} · <span class="badge" style="background:${LIM[0].c};color:#fff">${tr('oko','naked eye')}</span> ${tr('od ok. 0,1 mm','from about 0.1 mm')}</p>`;
+}
+function osmSVG(){
+  const c=S.osmC,s=S.osmS;
+  const out=s==='hyper'?46:s==='iso'?22:6;let seed=3;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  let dots='';for(let i=0;i<out;i++){const x=40+rnd()*520,y=40+rnd()*200;if(Math.hypot(x-300,y-140)<120)continue;dots+=`<circle cx="${f1(x)}" cy="${f1(y)}" r="3.5" fill="#d08a2a"/>`;}
+  let cell='';
+  if(c==='animal'){
+    if(s==='hypo')cell=`<circle cx="300" cy="140" r="100" fill="#f7c4c4" stroke="#c0504d" stroke-width="3"/><path d="M380 80 l12 -10 M392 92 l14 -6 M215 200 l-12 10" stroke="#c0504d" stroke-width="2.5"/>`;
+    else if(s==='iso')cell=`<ellipse cx="300" cy="140" rx="85" ry="85" fill="#f2a3a3" stroke="#c0504d" stroke-width="3"/><ellipse cx="300" cy="140" rx="38" ry="38" fill="#ec8f8f"/>`;
+    else{let d='';for(let i=0;i<=24;i++){const a=i/24*2*Math.PI,r=i%2?52:62;d+=(i?'L':'M')+f1(300+r*Math.cos(a))+' '+f1(140+r*Math.sin(a));}cell=`<path d="${d}Z" fill="#e57d7d" stroke="#a83a35" stroke-width="3" stroke-linejoin="round"/>`;}
+    cell+=Array.from({length:8},(_,i)=>`<circle cx="${270+(i%4)*20}" cy="${125+Math.floor(i/4)*30}" r="3.5" fill="#d08a2a"/>`).join('');
+  }else{
+    const pr=s==='hypo'?[208,58,184,164,14]:s==='iso'?[214,64,172,152,14]:[250,92,100,96,30];
+    cell=`<rect x="200" y="50" width="200" height="180" rx="10" fill="#e9f6df" stroke="#4d8a32" stroke-width="10"/>
+     <rect x="${pr[0]}" y="${pr[1]}" width="${pr[2]}" height="${pr[3]}" rx="${pr[4]}" fill="#cfeec0" stroke="#cf6f93" stroke-width="3"/>
+     <rect x="${pr[0]+14}" y="${pr[1]+14}" width="${pr[2]-28}" height="${pr[3]-28}" rx="${pr[4]}" fill="${s==='hyper'?'#a9d3ea':'#d3ecf8'}" stroke="#4f95bc" stroke-width="2"/>`+
+     Array.from({length:6},(_,i)=>`<circle cx="${pr[0]+pr[2]/2-25+(i%3)*25}" cy="${pr[1]+pr[3]/2-8+Math.floor(i/3)*16}" r="3.5" fill="#d08a2a"/>`).join('')+
+     `<g transform="translate(${pr[0]+10} ${pr[1]+12})">${chloro(0,0,30,.32)}</g>`;
+  }
+  const arrIn=`<g stroke="#2d7fc1" stroke-width="4" marker-end="url(#ar2)">`,ar=(x1,y1,x2,y2)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+  let arrows='';
+  if(s==='hypo')arrows=arrIn+ar(90,140,175,140)+ar(510,140,425,140)+ar(300,10,300,32)+'</g>';
+  else if(s==='hyper')arrows=arrIn+ar(225,140,130,140)+ar(375,140,470,140)+ar(300,240,300,262)+'</g>';
+  else arrows=`<g stroke="#2d7fc1" stroke-width="3" marker-end="url(#ar2)">${ar(100,120,170,120)}${ar(180,160,110,160)}${ar(500,120,430,120)}${ar(420,160,490,160)}</g>`;
+  return `<svg viewBox="0 0 600 280" role="img" aria-label="${esc(osmText()[0])}"><defs><marker id="ar2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#2d7fc1"/></marker><linearGradient id="gW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6f3fb"/><stop offset="1" stop-color="#cfe6f5"/></linearGradient></defs>
+   <rect x="20" y="20" width="560" height="240" rx="18" fill="url(#gW)" stroke="#7fb3d5" stroke-width="2"/>${dots}<g class="fadein">${cell}</g>${arrows}</svg>`;
+}
+function osmText(){
+  const k=S.osmC+'.'+S.osmS;
+  const M={
+   'animal.hypo':['Roztwór hipotoniczny (np. woda destylowana): na zewnątrz jest mniej substancji rozpuszczonych niż w komórce. Woda napływa do komórki, komórka pęcznieje i – bez ściany komórkowej – może pęknąć (u krwinek czerwonych to hemoliza).','Hypotonic solution (e.g. distilled water): there are fewer dissolved substances outside than inside the cell. Water flows in, the cell swells and – with no cell wall – it can burst (in red blood cells this is called haemolysis).'],
+   'animal.iso':['Roztwór izotoniczny (np. sól fizjologiczna 0,9% NaCl): stężenia w komórce i na zewnątrz są takie same. Woda przepływa w obie strony w równym tempie – komórka nie zmienia kształtu.','Isotonic solution (e.g. 0.9% saline): the concentrations inside and outside the cell are equal. Water moves both ways at the same rate – the cell keeps its shape.'],
+   'animal.hyper':['Roztwór hipertoniczny (np. stężona solanka): na zewnątrz jest więcej substancji rozpuszczonych. Woda wypływa z komórki, która się kurczy i marszczy.','Hypertonic solution (e.g. strong salt water): there are more dissolved substances outside. Water flows out of the cell, which shrinks and shrivels.'],
+   'plant.hypo':['Roztwór hipotoniczny: woda napływa do wakuoli, protoplast mocno napiera na ścianę komórkową – komórka jest jędrna (turgor). Sztywna ściana nie pozwala jej pęknąć. Dzięki turgorowi rośliny zielne stoją prosto.','Hypotonic solution: water flows into the vacuole and the protoplast presses firmly against the cell wall – the cell is turgid (firm). The stiff wall stops it bursting. Turgor is what keeps soft-stemmed plants upright.'],
+   'plant.iso':['Roztwór izotoniczny: woda przepływa w obie strony w równym tempie. Komórka nie jest w pełni jędrna – rośliny w takich warunkach lekko więdną.','Isotonic solution: water moves both ways at the same rate. The cell isn’t fully firm – plants in these conditions wilt slightly.'],
+   'plant.hyper':['Roztwór hipertoniczny: woda wypływa z wakuoli, protoplast kurczy się i odstaje od ściany komórkowej – to plazmoliza. Po przeniesieniu do wody komórka może wrócić do normy (deplazmoliza).','Hypertonic solution: water flows out of the vacuole, and the protoplast shrinks and pulls away from the cell wall – this is plasmolysis. Put back in water, the cell can recover (deplasmolysis).'],
+  };
+  return [T(M[k])];
+}
+function viewKB(){
+  return `<div class="ugrid">
+  <section class="card ucard"><h3><span aria-hidden="true">📜</span>${tr('Teoria komórkowa','Cell theory')}</h3><ol>
+   <li>${tr('Wszystkie organizmy zbudowane są z komórek (jednej lub wielu).','All living things are made of cells (one or many).')}</li>
+   <li>${tr('Komórka jest podstawową jednostką budowy i funkcjonowania organizmów.','The cell is the basic unit of structure and function in living things.')}</li>
+   <li>${tr('Każda komórka powstaje z innej komórki (przez podział).','Every cell comes from another cell (by division).')}</li></ol>
+   <p>${tr('Twórcy: Matthias Schleiden (1838, rośliny) i Theodor Schwann (1839, zwierzęta). Rudolf Virchow (1855) dodał zasadę <i>omnis cellula e cellula</i> – „każda komórka pochodzi z komórki”.','Its founders were Matthias Schleiden (1838, plants) and Theodor Schwann (1839, animals). Rudolf Virchow (1855) added the principle <i>omnis cellula e cellula</i> – “every cell comes from a cell”.')}</p>
+   <p class="note">${tr('Nazwę „komórka” wprowadził Robert Hooke w 1665 roku, oglądając pod mikroskopem korek.','The name “cell” was coined by Robert Hooke in 1665 when he looked at cork under a microscope.')}</p></section>
+  <section class="card ucard"><h3><span aria-hidden="true">🧫</span>${tr('Prokarioty i eukarioty','Prokaryotes and eukaryotes')}</h3>
+   <p>${tr('<b>Prokarioty</b> (bakterie i archeony) nie mają jądra – DNA leży w cytoplazmie (nukleoid). Nie mają też organelli otoczonych błonami (mitochondriów, chloroplastów, siateczki, aparatu Golgiego). Rybosomy 70S.','<b>Prokaryotes</b> (bacteria and archaea) have no nucleus – their DNA lies in the cytoplasm (the nucleoid). They also have no membrane-bound organelles (mitochondria, chloroplasts, ER, Golgi apparatus). 70S ribosomes.')}</p>
+   <p>${tr('<b>Eukarioty</b> (zwierzęta, rośliny, grzyby, protisty) mają jądro komórkowe i liczne organella otoczone błonami. Rybosomy 80S. Komórki zwykle 10 razy większe niż bakterie.','<b>Eukaryotes</b> (animals, plants, fungi, protists) have a nucleus and many membrane-bound organelles. 80S ribosomes. Their cells are usually about 10 times bigger than bacteria.')}</p>
+   <p class="note">${tr('Wspólne dla wszystkich komórek: błona komórkowa, cytoplazma, rybosomy i DNA.','Shared by all cells: a cell membrane, cytoplasm, ribosomes and DNA.')}</p></section>
+  <section class="card ucard"><h3><span aria-hidden="true">🔗</span>${tr('Teoria endosymbiozy','Endosymbiotic theory')}</h3>
+   <p>${tr('Według teorii rozwiniętej przez Lynn Margulis (1967) mitochondria i chloroplasty pochodzą od bakterii, które dawno temu zostały wchłonięte przez większą komórkę, ale nie zostały strawione. Mitochondria – od bakterii tlenowych, chloroplasty – od sinic.','According to the theory developed by Lynn Margulis (1967), mitochondria and chloroplasts come from bacteria that were swallowed by a larger cell long ago but not digested. Mitochondria came from aerobic bacteria, and chloroplasts from cyanobacteria.')}</p>
+   <p><b>${tr('Dowody:','Evidence:')}</b></p><ul>
+    <li>${tr('mają własne, koliste DNA – jak bakterie','they have their own circular DNA – like bacteria')}</li>
+    <li>${tr('mają własne rybosomy typu 70S','they have their own 70S-type ribosomes')}</li>
+    <li>${tr('otaczają je dwie błony (wewnętrzna – dawnej bakterii, zewnętrzna – z wchłonięcia)','they have two membranes (the inner from the former bacterium, the outer from being engulfed)')}</li>
+    <li>${tr('powstają tylko z istniejących mitochondriów i chloroplastów, przez podział podobny do podziału bakterii','they only form from existing mitochondria and chloroplasts, by dividing in a way similar to bacteria')}</li></ul></section>
+  <section class="card ucard"><h3><span aria-hidden="true">⚗️</span>${tr('Skład chemiczny komórki','What cells are made of')}</h3>
+   <p>${tr('<b>Woda</b> stanowi ok. 70–80% masy komórki. Jest rozpuszczalnikiem i środowiskiem reakcji chemicznych.','<b>Water</b> makes up about 70–80% of a cell’s mass. It is a solvent and the medium for chemical reactions.')}</p>
+   <ul><li>${tr('<b>Białka</b> – budulec, enzymy, transport; największa część suchej masy','<b>Proteins</b> – building material, enzymes, transport; the largest part of the dry mass')}</li>
+   <li>${tr('<b>Lipidy (tłuszcze)</b> – budowa błon, zapas energii','<b>Lipids (fats)</b> – building membranes, storing energy')}</li>
+   <li>${tr('<b>Cukry (węglowodany)</b> – źródło energii (glukoza), materiał zapasowy (skrobia, glikogen), budulec (celuloza)','<b>Sugars (carbohydrates)</b> – energy source (glucose), storage (starch, glycogen), building material (cellulose)')}</li>
+   <li>${tr('<b>Kwasy nukleinowe</b> (DNA, RNA) – przechowywanie i odczytywanie informacji genetycznej','<b>Nucleic acids</b> (DNA, RNA) – storing and reading genetic information')}</li>
+   <li>${tr('<b>Sole mineralne</b> (jony)','<b>Mineral salts</b> (ions)')}</li></ul>
+   <p>${tr('Najważniejsze pierwiastki: <b>C, H, O, N</b> (razem ok. 96% masy) oraz <b>P</b> i <b>S</b>. Ważne są też m.in. Ca, K, Na, Mg, Cl, a w śladowych ilościach np. Fe, I, Zn, Cu (mikroelementy).','The key elements are <b>C, H, O, N</b> (together about 96% of the mass) plus <b>P</b> and <b>S</b>. Others such as Ca, K, Na, Mg and Cl also matter, and some are needed only in traces, e.g. Fe, I, Zn, Cu (trace elements).')}</p></section></div>
+  <section class="card"><h2>${tr('Skala wielkości','Size scale')}</h2><p class="note">${tr('Przesuń suwak, żeby przybliżać i oddalać. Każdy krok o 1 na osi to 10 razy mniej lub więcej.','Move the slider to zoom in and out. Each step of 1 along the axis means 10 times smaller or bigger.')}</p>
+   <label for="zoom" class="lbl" style="font-weight:700">${tr('Powiększenie (pole widzenia)','Zoom (field of view)')}</label>
+   <input type="range" id="zoom" min="-9.6" max="-0.4" step="0.1" value="${S.zoom}" aria-valuetext="${esc(fmtLen(Math.pow(10,S.zoom)))}">
+   <div class="chips" role="group" aria-label="${esc(tr('Przybliż do','Zoom to'))}">${SIZES.map((o,i)=>`<button data-zoom="${i}"><i style="background:${o.c}"></i>${esc(T(o.n))} <small style="font-weight:400">(${esc(T(o.t))})</small></button>`).join('')}</div>
+   <div id="scaleViz" style="margin-top:10px">${scaleViz()}</div></section>
+  <section class="card"><h2>${tr('Mikroskop świetlny a elektronowy','Light vs electron microscope')}</h2>
+   <div class="tablewrap"><table class="diff" style="min-width:560px"><thead><tr><th></th><th>${tr('Świetlny (optyczny)','Light (optical)')}</th><th>${tr('Elektronowy','Electron')}</th></tr></thead><tbody>
+   ${[[['Co tworzy obraz','What makes the image'],['światło widzialne i soczewki szklane','visible light and glass lenses'],['wiązka elektronów i soczewki elektromagnetyczne','a beam of electrons and electromagnetic lenses']],
+     [['Powiększenie','Magnification'],['do ok. 1500–2000×','up to about 1,500–2,000×'],['ponad 1 000 000×','over 1,000,000×']],
+     [['Najmniejsze rozróżniane szczegóły','Smallest details it can show'],['ok. 0,2 µm','about 0.2 µm'],['ok. 0,1–1 nm','about 0.1–1 nm']],
+     [['Preparat','Specimen'],['żywy lub utrwalony, często barwiony','living or preserved, often stained'],['tylko martwy, specjalnie przygotowany, oglądany w próżni','dead only, specially prepared, viewed in a vacuum']],
+     [['Obraz','Image'],['kolorowy','in colour'],['czarno-biały (kolory dodaje się komputerowo)','black and white (colour is added by computer)']],
+     [['Co widać','What you can see'],['komórki, jądro, chloroplasty, ścianę komórkową, wakuolę, ruch cytoplazmy, duże bakterie','cells, nuclei, chloroplasts, cell walls, vacuoles, moving cytoplasm, large bacteria'],['budowę mitochondriów i chloroplastów, rybosomy, siateczkę śródplazmatyczną, błony, wirusy','the inside of mitochondria and chloroplasts, ribosomes, the ER, membranes, viruses']],
+   ].map(r=>`<tr><th scope="row" style="text-align:left">${esc(T(r[0]))}</th><td>${esc(T(r[1]))}</td><td>${esc(T(r[2]))}</td></tr>`).join('')}</tbody></table></div>
+   <p class="note" style="margin-top:8px">${tr('Powiększenie mikroskopu świetlnego = powiększenie okularu × powiększenie obiektywu, np. 10× · 40× = 400×.','Light microscope magnification = eyepiece magnification × objective magnification, e.g. 10× · 40× = 400×.')}</p></section>
+  <section class="card"><h2>${tr('Osmoza w komórce','Osmosis in cells')}</h2><p class="note">${tr('Osmoza to przenikanie wody przez błonę półprzepuszczalną z roztworu o mniejszym stężeniu do roztworu o większym stężeniu. Brązowe kropki oznaczają substancje rozpuszczone, strzałki – kierunek przepływu wody.','Osmosis is the movement of water through a partially permeable membrane from a weaker solution into a stronger one. Brown dots stand for dissolved substances; arrows show which way the water moves.')}</p>
+   <div class="bar"><div class="seg" role="group" aria-label="${esc(tr('Komórka','Cell'))}"><button data-osmc="animal" aria-pressed="${S.osmC==='animal'}">${tr('Zwierzęca (krwinka)','Animal (red blood cell)')}</button><button data-osmc="plant" aria-pressed="${S.osmC==='plant'}">${tr('Roślinna','Plant')}</button></div>
+   <div class="seg" role="group" aria-label="${esc(tr('Roztwór','Solution'))}"><button data-osms="hypo" aria-pressed="${S.osmS==='hypo'}">${tr('Hipotoniczny','Hypotonic')}</button><button data-osms="iso" aria-pressed="${S.osmS==='iso'}">${tr('Izotoniczny','Isotonic')}</button><button data-osms="hyper" aria-pressed="${S.osmS==='hyper'}">${tr('Hipertoniczny','Hypertonic')}</button></div></div>
+   <div class="mgrid"><div class="stage">${osmSVG()}</div><div><p style="margin-top:16px" aria-live="polite">${esc(osmText()[0])}</p></div></div></section>`;
+}
+
+// ---------- quiz ----------
+const CELLQ=[
+ {a:'animal',lv:'B',f:[['ma jądro komórkowe','has a nucleus'],['nie ma ściany komórkowej ani chloroplastów','has no cell wall and no chloroplasts'],['nie ma rzęsek, wici ani wodniczek tętniących','has no cilia, flagellum or contractile vacuoles'],['buduje tkanki, np. mięśnie człowieka','forms tissues, e.g. human muscle']]},
+ {a:'animal',lv:'A',f:[['ma centriole i lizosomy','has centrioles and lysosomes'],['nie ma ściany komórkowej ani pellikuli','has no cell wall and no pellicle'],['jest częścią organizmu wielokomórkowego','is part of a multicellular organism']]},
+ {a:'plant',lv:'B',f:[['ma ścianę komórkową z celulozy','has a cellulose cell wall'],['ma chloroplasty','has chloroplasts'],['ma dużą wakuolę z sokiem komórkowym','has a large vacuole full of cell sap']]},
+ {a:'plant',lv:'A',f:[['ma plazmodesmy','has plasmodesmata'],['materiał zapasowy: skrobia w amyloplastach','storage material: starch in amyloplasts'],['nie ma centrioli','has no centrioles']]},
+ {a:'fungus',lv:'B',f:[['ma jądro komórkowe','has a nucleus'],['ma ścianę komórkową z chityny','has a chitin cell wall'],['nie ma chloroplastów','has no chloroplasts']]},
+ {a:'fungus',lv:'A',f:[['ściana komórkowa z chityny','a cell wall made of chitin'],['materiał zapasowy: glikogen','storage material: glycogen'],['rozmnaża się przez pączkowanie','reproduces by budding']]},
+ {a:'bacteria',lv:'B',f:[['nie ma jądra – DNA leży w cytoplazmie','has no nucleus – its DNA lies in the cytoplasm'],['ma ścianę komórkową z mureiny','has a murein cell wall'],['nie ma mitochondriów','has no mitochondria']]},
+ {a:'bacteria',lv:'A',f:[['ma rybosomy 70S i nie ma organelli otoczonych błonami','has 70S ribosomes and no membrane-bound organelles'],['ma plazmidy','has plasmids'],['może mieć otoczkę śluzową i fimbrie','may have a slime capsule and fimbriae']]},
+ {a:'euglena',lv:'B',f:[['ma chloroplasty, ale nie ma ściany komórkowej','has chloroplasts but no cell wall'],['ma czerwoną plamkę oczną','has a red eyespot'],['porusza się za pomocą jednej wici','moves using a single flagellum']]},
+ {a:'euglena',lv:'A',f:[['materiał zapasowy: paramylon','storage material: paramylon'],['ciało okryte pellikulą, ma chloroplasty','covered by a pellicle, has chloroplasts'],['jest miksotrofem','is a mixotroph']]},
+ {a:'paramecium',lv:'B',f:[['całą komórkę pokrywają rzęski','cilia cover the whole cell'],['ma jądro duże i jądro małe','has a large and a small nucleus'],['ma wodniczki pokarmowe i dwie wodniczki tętniące','has food vacuoles and two contractile vacuoles']]},
+ {a:'paramecium',lv:'A',f:[['ma makronukleus i mikronukleus','has a macronucleus and a micronucleus'],['ma trichocysty','has trichocysts'],['niestrawione resztki usuwa przez cytopyge','gets rid of undigested waste through a cytoproct']]},
+];
+const TF=[
+ {lv:'B',s:['Komórka bakterii nie ma jądra komórkowego.','A bacterial cell has no nucleus.'],a:1,e:['DNA bakterii leży w cytoplazmie, w obszarze zwanym nukleoidem.','Bacterial DNA lies in the cytoplasm, in an area called the nucleoid.']},
+ {lv:'B',s:['Komórka zwierzęca ma ścianę komórkową.','An animal cell has a cell wall.'],a:0,e:['Ścianę komórkową mają rośliny, grzyby i bakterie. Komórkę zwierzęcą otacza tylko błona.','Plants, fungi and bacteria have cell walls. An animal cell is surrounded only by a membrane.']},
+ {lv:'B',s:['Komórki roślin mają mitochondria.','Plant cells have mitochondria.'],a:1,e:['Rośliny też oddychają – ich komórki mają i chloroplasty, i mitochondria.','Plants respire too – their cells have both chloroplasts and mitochondria.']},
+ {lv:'B',s:['Ściana komórkowa grzybów zbudowana jest z celulozy.','Fungal cell walls are made of cellulose.'],a:0,e:['Ściana komórkowa grzybów jest z chityny. Z celulozy jest ściana komórek roślin.','Fungal cell walls are made of chitin. Cellulose makes up plant cell walls.']},
+ {lv:'B',s:['Rybosomy występują we wszystkich komórkach – także u bakterii.','Ribosomes are found in all cells – bacteria included.'],a:1,e:['Każda komórka musi wytwarzać białka, więc każda ma rybosomy.','Every cell needs to make proteins, so every cell has ribosomes.']},
+ {lv:'B',s:['Choroby wirusowe leczy się antybiotykami.','Viral diseases are treated with antibiotics.'],a:0,e:['Antybiotyki działają na struktury bakterii (np. ścianę z mureiny, rybosomy 70S), których wirusy nie mają.','Antibiotics act on bacterial structures (e.g. the murein wall, 70S ribosomes), which viruses don’t have.']},
+ {lv:'B',s:['Wirusy mogą się namnażać tylko wewnątrz żywych komórek.','Viruses can only multiply inside living cells.'],a:1,e:['Wirusy nie mają własnej przemiany materii ani rybosomów – wykorzystują do tego komórkę gospodarza.','Viruses have no metabolism or ribosomes of their own – they use the host cell’s.']},
+ {lv:'B',s:['Cząstka wirusa zawiera jednocześnie DNA i RNA.','A virus particle contains both DNA and RNA.'],a:0,e:['Wirion zawiera albo DNA, albo RNA – nigdy oba naraz.','A virion contains either DNA or RNA – never both.']},
+ {lv:'B',s:['Euglena może odżywiać się zarówno samożywnie, jak i cudzożywnie.','Euglena can feed both autotrophically and heterotrophically.'],a:1,e:['Na świetle prowadzi fotosyntezę, w ciemności pobiera związki organiczne z otoczenia – to miksotrofia.','In light it photosynthesises; in the dark it takes in organic substances from its surroundings – this is mixotrophy.']},
+ {lv:'B',s:['Pantofelek porusza się za pomocą jednej długiej wici.','Paramecium moves using one long flagellum.'],a:0,e:['Pantofelek porusza się dzięki tysiącom rzęsek. Jedną wić ma euglena.','Paramecium moves using thousands of cilia. It’s euglena that has a single flagellum.']},
+ {lv:'B',s:['Komórki grzybów mają chloroplasty.','Fungal cells have chloroplasts.'],a:0,e:['Grzyby są cudzożywne i nie mają chloroplastów.','Fungi are heterotrophs and have no chloroplasts.']},
+ {lv:'B',s:['Wodniczka tętniąca usuwa z komórki nadmiar wody.','A contractile vacuole removes excess water from the cell.'],a:1,e:['Do komórek protistów słodkowodnych stale napływa woda (osmoza) – wodniczka tętniąca ją wypompowuje.','Water keeps flowing into freshwater protists (osmosis) – the contractile vacuole pumps it out.']},
+ {lv:'B',s:['Bakteriofagi to wirusy atakujące bakterie.','Bacteriophages are viruses that attack bacteria.'],a:1,e:['Nazwa oznacza dosłownie „zjadacz bakterii”.','The name literally means “bacteria eater”.']},
+ {lv:'B',s:['Komórki roślin magazynują skrobię, a komórki grzybów – glikogen.','Plant cells store starch, while fungal cells store glycogen.'],a:1,e:['Glikogen jest też materiałem zapasowym zwierząt.','Glycogen is also the storage material of animals.']},
+ {lv:'B',s:['Wszystkie wirusy mają otoczkę lipidową.','All viruses have a lipid envelope.'],a:0,e:['Np. bakteriofag T4 i wirus mozaiki tytoniu nie mają otoczki – tylko kapsyd.','For example, phage T4 and tobacco mosaic virus have no envelope – just a capsid.']},
+ {lv:'B',s:['Szczepionka uczy układ odpornościowy rozpoznawać drobnoustrój, zanim dojdzie do zakażenia.','A vaccine teaches the immune system to recognise a microbe before an infection happens.'],a:1,e:['Dzięki komórkom pamięci organizm reaguje szybko, gdy zetknie się z prawdziwym drobnoustrojem.','Thanks to memory cells, the body reacts quickly when it meets the real microbe.']},
+ {lv:'B',s:['Ściana komórkowa bakterii zbudowana jest z mureiny (peptydoglikanu).','Bacterial cell walls are made of murein (peptidoglycan).'],a:1,e:['Mureina występuje tylko u bakterii – dlatego niektóre antybiotyki niszczą bakterie, nie szkodząc człowiekowi.','Murein is found only in bacteria – which is why some antibiotics destroy bacteria without harming people.']},
+ {lv:'B',s:['Komórka roślinna w roztworze hipertonicznym ulega plazmolizie.','A plant cell in a hypertonic solution undergoes plasmolysis.'],a:1,e:['Woda wypływa z wakuoli, a protoplast odstaje od ściany komórkowej.','Water leaves the vacuole and the protoplast pulls away from the cell wall.']},
+ {lv:'B',s:['Krwinka czerwona w wodzie destylowanej kurczy się.','A red blood cell in distilled water shrinks.'],a:0,e:['Woda destylowana jest roztworem hipotonicznym – woda napływa do krwinki, która pęcznieje i może pęknąć.','Distilled water is hypotonic – water flows into the cell, which swells and may burst.']},
+ {lv:'B',s:['Zasada „omnis cellula e cellula” oznacza, że każda komórka pochodzi z innej komórki.','The principle “omnis cellula e cellula” means every cell comes from another cell.'],a:1,e:['Sformułował ją Rudolf Virchow w 1855 roku.','Rudolf Virchow put it forward in 1855.']},
+ {lv:'B',s:['Wirusy atakują wyłącznie ludzi i zwierzęta.','Viruses attack only humans and animals.'],a:0,e:['Wirusy atakują też rośliny (np. wirus mozaiki tytoniu), grzyby i bakterie (bakteriofagi).','Viruses also attack plants (e.g. tobacco mosaic virus), fungi and bacteria (bacteriophages).']},
+ {lv:'A',s:['Rybosomy bakterii (70S) są mniejsze niż rybosomy w cytoplazmie komórek eukariotycznych (80S).','Bacterial ribosomes (70S) are smaller than those in eukaryotic cytoplasm (80S).'],a:1,e:['Dlatego niektóre antybiotyki blokują tylko rybosomy bakterii.','That’s why some antibiotics block only bacterial ribosomes.']},
+ {lv:'A',s:['Mitochondria i chloroplasty mają własne, koliste DNA.','Mitochondria and chloroplasts have their own circular DNA.'],a:1,e:['To jeden z dowodów teorii endosymbiozy.','This is one of the pieces of evidence for endosymbiotic theory.']},
+ {lv:'A',s:['Siateczka śródplazmatyczna gładka jest pokryta rybosomami.','Smooth ER is covered in ribosomes.'],a:0,e:['Rybosomy pokrywają siateczkę szorstką. Siateczka gładka wytwarza lipidy.','Ribosomes cover the rough ER. Smooth ER makes lipids.']},
+ {lv:'A',s:['Peroksysomy rozkładają nadtlenek wodoru.','Peroxisomes break down hydrogen peroxide.'],a:1,e:['Robi to enzym katalaza: 2 H₂O₂ → 2 H₂O + O₂.','The enzyme catalase does this: 2 H₂O₂ → 2 H₂O + O₂.']},
+ {lv:'A',s:['W cyklu lizogenicznym DNA faga włącza się do chromosomu bakterii jako profag.','In the lysogenic cycle, phage DNA joins the bacterial chromosome as a prophage.'],a:1,e:['Profag jest kopiowany przy każdym podziale bakterii.','The prophage is copied every time the bacterium divides.']},
+ {lv:'A',s:['Materiałem genetycznym wirusa grypy jest jedna długa cząsteczka DNA.','The flu virus’s genetic material is one long DNA molecule.'],a:0,e:['Wirus grypy ma RNA podzielone na 8 odcinków.','The flu virus has RNA split into 8 segments.']},
+ {lv:'A',s:['Makronukleus pantofelka kieruje bieżącymi procesami życiowymi komórki.','Paramecium’s macronucleus controls the cell’s everyday life processes.'],a:1,e:['Mikronukleus odgrywa rolę w rozmnażaniu płciowym (koniugacji).','The micronucleus is involved in sexual reproduction (conjugation).']},
+ {lv:'A',s:['W mikroskopie świetlnym można zobaczyć pojedyncze rybosomy.','Individual ribosomes can be seen with a light microscope.'],a:0,e:['Rybosomy mają ok. 20–30 nm, a mikroskop świetlny rozróżnia szczegóły od ok. 0,2 µm. Potrzebny jest mikroskop elektronowy.','Ribosomes are about 20–30 nm, while a light microscope only shows details from about 0.2 µm. You need an electron microscope.']},
+ {lv:'A',s:['Komórki roślin nasiennych mają centriole.','Seed-plant cells have centrioles.'],a:0,e:['Rośliny nasienne nie mają centrioli, a wrzeciono podziałowe tworzą bez nich.','Seed plants have no centrioles and build the spindle without them.']},
+ {lv:'A',s:['Teorię endosymbiozy rozwinęła Lynn Margulis.','Lynn Margulis developed endosymbiotic theory.'],a:1,e:['Opublikowała ją w 1967 roku; dziś jest powszechnie przyjęta.','She published it in 1967; today it is widely accepted.']},
+ {lv:'A',s:['Neuraminidaza pomaga nowym wirusom grypy uwolnić się z komórki.','Neuraminidase helps new flu viruses break free from the cell.'],a:1,e:['Odcina kwas sialowy, który „przytrzymuje” wirusy na powierzchni komórki.','It cuts off the sialic acid that holds the viruses on the cell surface.']},
+];
+const qShort=id=>{const o=ORG[id];return o.q?T(o.q):T(o.f).split(/(?<=\.) /)[0];};
+function funcPool(){const ids=new Set();for(const t of Object.keys(CT))effIds(t,S.lvl).forEach(i=>ids.add(i));return [...ids].filter(i=>ORG[i].q);}
+function newQ(){
+  const r=Math.random(),k=r<.3?'point':r<.55?'func':r<.75?'which':'tf';
+  if(k==='point'){const type=pick(Object.keys(CT),1)[0];const ans=pick(effIds(type,S.lvl),1)[0];S.q={k,type,ans,picked:null};return;}
+  if(k==='func'){const pool=funcPool();const ans=pick(pool,1)[0];const bad=new Set([ans,...(ORG[ans].no||[])]);
+    const ds=pool.filter(i=>!bad.has(i)&&!(ORG[i].no||[]).includes(ans));S.q={k,ans,opts:shuffle([ans,...pick(ds,3)]),picked:null};return;}
+  if(k==='which'){const c=pick(CELLQ.filter(x=>x.lv==='B'||S.lvl==='A'),1)[0];S.q={k,ci:CELLQ.indexOf(c),ans:c.a,opts:shuffle([c.a,...pick(ORDER.filter(x=>x!==c.a),3)]),picked:null};return;}
+  const t=pick(TF.filter(x=>x.lv==='B'||S.lvl==='A'),1)[0];S.q={k:'tf',ti:TF.indexOf(t),ans:t.a?'1':'0',opts:['1','0'],picked:null};
+}
+function qOptLabel(q,o){return q.k==='func'?orgName(o):q.k==='which'?T(CT[o].n):o==='1'?tr('Prawda','True'):tr('Fałsz','False');}
+function viewQuiz(){
+  if(!S.q)newQ();
+  const q=S.q,done=q.picked!==null,ok=done&&q.picked===q.ans;
+  let body='',question='',expl='';
+  if(q.k==='point'){
+    question=`${tr('Wskaż na schemacie','Point to it on the diagram')}: <span style="color:var(--acc-t)">${esc(orgName(q.ans))}</span> <small style="font-weight:400;color:var(--muted)">(${esc(T(CT[q.type].s))})</small>`;
+    body=`<div class="stage" data-ctx="quiz" style="max-width:760px">${drawModel(q.type,{labels:'none',quiz:done?{good:q.ans,bad:ok?null:q.picked}:{},noTab:false})}<div class="cap"><span>${done?tr('Zielona obwódka – poprawny element; czerwona – wskazany błędnie.','Green outline – the correct part; red – the wrong pick.'):tr('Kliknij element albo wybierz go klawiszami Tab i Enter.','Click a part, or pick it with Tab and Enter.')}</span></div></div>`;
+    expl=`${esc(orgName(q.ans))}: ${esc(T(ORG[q.ans].f))}`+(done&&!ok&&q.picked?` ${tr('Wskazany element to','The part you picked was')}: ${esc(orgName(q.picked))}.`:'');
+  }else{
+    if(q.k==='func'){question=`${tr('Który element komórki odpowiada za','Which part of the cell is responsible for')}: <span style="color:var(--acc-t)">${esc(qShort(q.ans))}</span>?`;expl=`${esc(orgName(q.ans))}: ${esc(T(ORG[q.ans].f))}`;}
+    else if(q.k==='which'){question=`${tr('Która to komórka?','Which cell is this?')}<ul class="feat" style="font-weight:400;font-size:1rem;margin-top:8px">${CELLQ[q.ci].f.map(f=>`<li>${esc(T(f))}</li>`).join('')}</ul>`;expl=esc(T(CT[q.ans].d));}
+    else{const t=TF[q.ti];question=`${tr('Prawda czy fałsz?','True or false?')}<br><span style="font-weight:400">„${esc(T(t.s))}”</span>`;expl=esc(T(t.e));}
+    body=`<div class="opts">${q.opts.map(o=>{const cls=done?(o===q.ans?'ok':o===q.picked?'no':''):'';return `<button data-ans="${o}" class="${cls}" ${done?'disabled':''}>${esc(qOptLabel(q,o))}</button>`;}).join('')}</div>`;
+  }
+  const fb=done?`<p class="fb ${ok?'ok':'no'}" role="status">${ok?tr('✅ Dobrze!','✅ Correct!'):tr(`❌ Niestety. Poprawna odpowiedź: ${q.k==='point'?orgName(q.ans):qOptLabel(q,q.ans)}.`,`❌ Not quite. The right answer is: ${q.k==='point'?orgName(q.ans):qOptLabel(q,q.ans)}.`)}</p><p class="expl">${expl}</p><button class="btn primary" id="nextQ">${tr('Następne pytanie →','Next question →')}</button>`:'';
+  return `<div class="bar">${lvlSeg()}</div><section class="card"><p class="score">${tr('Twój wynik','Your score')}: ${S.ok} / ${S.all}</p><p class="q">${question}</p>${body}${fb}</section>`;
+}
+function answer(v){if(!S.q||S.q.picked!==null)return;S.q.picked=v;S.all++;if(v===S.q.ans)S.ok++;}
+
+// ---------- karta pracy ----------
+function wsBuild(){
+  const ws=S.ws,gs=ws.groups?['A','B']:[''];const prev={};
+  return gs.map((g,gi)=>{const r=rngOf(ws.seed*7+gi*1013+1);const tasks=[];let no=0;
+    for(const type of ORDER.filter(t=>ws.cells.includes(t))){
+      const ids=effIds(type,S.lvl),n=ws.n&&ws.n<ids.length?ws.n:ids.length;
+      let chosen;if(gi&&prev[type]&&n<ids.length){const rest=ids.filter(i=>!prev[type].includes(i));chosen=[...shuffle(rest,r),...shuffle(prev[type],r)].slice(0,n);chosen=shuffle(chosen,r);}else chosen=pick(ids,n,r);
+      prev[type]=chosen;const nums={};chosen.forEach((id,i)=>nums[id]=i+1);
+      tasks.push({no:++no,kind:'label',type,ids:chosen,nums});
+      if(ws.func){const f=pick(chosen.filter(i=>i!=='cytoplasm'),3,r).sort((a,b)=>nums[a]-nums[b]);tasks.push({no:++no,kind:'func',type,ids:f,nums});}
+    }
+    return{g,tasks};});
+}
+const wsTitle=g=>tr('Karta pracy – budowa komórki','Worksheet – cell structure')+(g?tr(` – grupa ${g}`,` – group ${g}`):'');
+function taskText(t){const cn=T(CT[t.type].s);
+  if(t.kind==='label')return tr(`Podpisz elementy oznaczone numerami na schemacie (${cn}).`,`Label the numbered parts on the diagram (${cn}).`)+(S.ws.bank?tr(' Skorzystaj z nazw w ramce.',' Use the names in the box.'):'');
+  const nn=t.ids.map(i=>t.nums[i]).join(', ');return tr(`Podaj funkcje elementów oznaczonych na schemacie (${cn}) numerami: ${nn}. Zapisz odpowiedź w zeszycie.`,`Give the functions of the parts numbered ${nn} on the diagram (${cn}). Write your answers in your exercise book.`);}
+const keyText=t=>t.kind==='label'?t.ids.map(i=>`${t.nums[i]} – ${nameIn(i,S.lvl)}`).join('; '):t.ids.map(i=>`${t.nums[i]} – ${nameIn(i,S.lvl)}: ${qShort(i)}`).join('; ');
+const bankNames=t=>t.ids.map(i=>nameIn(i,S.lvl)).sort((a,b)=>a.localeCompare(b,L));
+const wsSVG=t=>drawModel(t.type,{labels:'num',nums:t.nums,exp:true,lvl:S.lvl});
+function viewSheet(){
+  const ws=S.ws,data=wsBuild();
+  const opt=`<section class="card"><h2>${tr('Generator karty pracy','Worksheet generator')}</h2><p class="note">${tr('Wybierz komórki i opcje. Podgląd poniżej odpowiada plikowi Word.','Choose the cells and options. The preview below matches the Word file.')}</p>
+   <div class="wsopt"><div><span class="lbl" style="font-weight:700">${tr('Komórki','Cells')}</span><div class="chips" style="margin-top:6px" role="group" aria-label="${esc(tr('Komórki','Cells'))}">${ORDER.map(k=>`<button data-wscell="${k}" aria-pressed="${ws.cells.includes(k)}"><i style="background:${CT[k].col}"></i>${esc(T(CT[k].n))}</button>`).join('')}</div></div>
+   <div class="bar" style="margin-top:0">${lvlSeg()}<span class="lbl" id="wsnL">${tr('Liczba elementów na schemacie','Parts per diagram')}</span><div class="seg" role="group" aria-labelledby="wsnL">${[[0,tr('wszystkie','all')],[6,'6'],[8,'8'],[10,'10']].map(([v,l])=>`<button data-wsn="${v}" aria-pressed="${ws.n===v}">${l}</button>`).join('')}</div></div>
+   <div class="bar" style="margin-top:0"><label class="ck"><input type="checkbox" data-wsopt="bank" ${ws.bank?'checked':''}> ${tr('Dodaj ramkę z nazwami','Add a box of names')}</label>
+   <label class="ck"><input type="checkbox" data-wsopt="func" ${ws.func?'checked':''}> ${tr('Dodaj zadanie o funkcjach','Add a task on functions')}</label>
+   <label class="ck"><input type="checkbox" data-wsopt="groups" ${ws.groups?'checked':''}> ${tr('Dwie grupy (A i B)','Two groups (A and B)')}</label>
+   <label class="ck"><input type="checkbox" data-wsopt="key" ${ws.key?'checked':''}> ${tr('Dołącz klucz odpowiedzi','Include an answer key')}</label></div>
+   <div class="bar" style="margin-top:0"><button class="btn" data-act="wsNew">${tr('🎲 Losuj numerację','🎲 Shuffle the numbering')}</button><button class="btn primary" data-act="docx" ${ws.cells.length?'':'disabled'}>${tr('Pobierz kartę (Word)','Download worksheet (Word)')}</button><span class="status" role="status">${S.wsSt?esc(T(STATUS[S.wsSt])):''}</span></div></div></section>`;
+  if(!ws.cells.length)return opt+`<p class="note" style="margin-top:14px">${tr('Wybierz co najmniej jedną komórkę.','Choose at least one cell.')}</p>`;
+  const sheets=data.map(({g,tasks})=>`<article class="sheet" aria-label="${esc(wsTitle(g))}"><h3>${esc(wsTitle(g))}</h3><p>${tr('Imię i nazwisko','Name')}: ..................................................................</p><p class="ins">${tr('Przyjrzyj się schematom i wykonaj zadania.','Look carefully at the diagrams and complete the tasks.')}</p>
+    ${tasks.map(t=>`<p class="tk">${tr('Zadanie','Task')} ${t.no}.</p><p class="ins">${esc(taskText(t))}</p>${t.kind==='label'?`${wsSVG(t)}${ws.bank?`<div class="bank">${bankNames(t).map(esc).join(' • ')}</div>`:''}<ol>${t.ids.map(()=>'<li></li>').join('')}</ol>`:''}`).join('')}
+    ${ws.key?`<div class="key"><p class="tk">${tr('Klucz odpowiedzi (dla nauczyciela)','Answer key (for the teacher)')}${g?` – ${tr('grupa','group')} ${g}`:''}</p>${tasks.map(t=>`<p><b>${tr('Zadanie','Task')} ${t.no}:</b> ${esc(keyText(t))}</p>`).join('')}</div>`:''}</article>`).join('');
+  return opt+sheets;
+}
+async function buildDocx(){
+  const D=window.docx,F='Kohinoor Bangla',ws=S.ws,data=wsBuild();
+  const R=(t,o={})=>new D.TextRun(Object.assign({text:t,font:F,color:'000000',size:22},o));const Pp=(r,o={})=>new D.Paragraph(Object.assign({children:r},o));
+  const ch=[];const dots='............................................';
+  for(const [gi,{g,tasks}] of data.entries()){
+    ch.push(Pp([R(wsTitle(g),{bold:true,size:32})],{alignment:D.AlignmentType.CENTER,spacing:{after:160},pageBreakBefore:gi>0}));
+    ch.push(Pp([R(tr('Imię i nazwisko: ','Name: ')+'..................................................................')],{spacing:{after:120}}));
+    ch.push(Pp([R(tr('Przyjrzyj się schematom i wykonaj zadania.','Look carefully at the diagrams and complete the tasks.'),{italics:true})],{spacing:{after:120}}));
+    for(const t of tasks){
+      ch.push(Pp([R(`${tr('Zadanie','Task')} ${t.no}.`,{bold:true,size:24})],{spacing:{before:160,after:40},keepNext:true}));
+      ch.push(Pp([R(taskText(t),{italics:true})],{spacing:{after:80},keepNext:t.kind==='label'}));
+      if(t.kind!=='label')continue;
+      const sv=wsSVG(t),[w,h]=dims(sv),iw=Math.min(620,Math.round(418*w/h));ch.push(Pp([new D.ImageRun({data:await toPng(sv,w*2,h*2),transformation:{width:iw,height:Math.round(iw*h/w)}})],{alignment:D.AlignmentType.CENTER,spacing:{after:80}}));
+      if(ws.bank)ch.push(Pp([R(bankNames(t).join('  •  '))],{border:{top:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4},bottom:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4},left:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4},right:{style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4}},spacing:{after:120}}));
+      for(let i=0;i<t.ids.length;i+=2){const a=`${i+1}. ${dots}`,b=i+1<t.ids.length?`${i+2}. ${dots}`:'';
+        ch.push(Pp([R(a),...(b?[new D.TextRun({text:'\t',font:F}),R(b)]:[])],{tabStops:[{type:D.TabStopType.LEFT,position:5300}],spacing:{before:120,after:60}}));}
+    }
+  }
+  if(ws.key){ch.push(Pp([R(tr('Klucz odpowiedzi (dla nauczyciela)','Answer key (for the teacher)'),{bold:true,size:26})],{pageBreakBefore:true,spacing:{after:120}}));
+    for(const {g,tasks} of data){if(g)ch.push(Pp([R(`${tr('Grupa','Group')} ${g}`,{bold:true,size:24})],{spacing:{before:160,after:60}}));
+      for(const t of tasks)ch.push(Pp([R(`${tr('Zadanie','Task')} ${t.no}: `,{bold:true}),R(keyText(t))],{spacing:{after:80}}));}}
+  const doc=new D.Document({creator:'Zakład utylizacji niewiedzy',title:wsTitle(''),styles:{default:{document:{run:{font:F,size:22}}}},sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:720,bottom:720,left:720,right:720}}},children:ch}]});
+  return D.Packer.toBlob(doc);
+}
+const STATUS={lib:['Nie udało się wczytać biblioteki do plików Word.','Could not load the Word file library.'],prep:['Przygotowuję plik…','Preparing the file…'],saved:['Plik zapisany.','File saved.'],err:['Nie udało się przygotować pliku.','Could not prepare the file.']};
+async function docxClick(){
+  if(!window.docx){S.wsSt='lib';render();return;}
+  S.wsSt='prep';render();
+  try{const blob=await buildDocx();await DL.save({filename:tr('Karta pracy – budowa komórki.docx','Worksheet – cell structure.docx'),data:blob});S.wsSt='saved';}
+  catch(e){console.error(e);S.wsSt='err';}
+  render();
+}
+async function pngClick(kind){
+  S.pngSt='prep';render();
+  try{await downloadPng(kind==='virus'?S.virus:S.cell);S.pngSt='saved';}catch(e){console.error(e);S.pngSt='err';}
+  render();
+}
+
+// ---------- całość ----------
+let playT=null;
+function stopPlay(){S.playing=false;if(playT){clearInterval(playT);playT=null;}}
+function focusKey(el){if(!el||el===document.body)return null;if(el.id)return '#'+CSS.escape(el.id);
+  const a=[...el.attributes].filter(x=>x.name.startsWith('data-')).map(x=>`[${x.name}="${CSS.escape(x.value)}"]`).join('');if(!a)return null;
+  const ctx=el.closest('[data-ctx]');return (ctx?`[data-ctx="${ctx.dataset.ctx}"] `:'')+el.tagName.toLowerCase()+a;}
+function render(keep=true){
+  const fk=keep?focusKey(document.activeElement):null;
+  const sl=$$('#app .scroll, #app .tablewrap').map(e=>e.scrollLeft);
+  document.documentElement.lang=L;document.title=T(UI.t1);
+  $('#t1').textContent=T(UI.t1);$('#t2').textContent=T(UI.t2);
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
+  $('#tabs').innerHTML=Object.entries(UI.tabs).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
+  $('#app').innerHTML={models:viewModels,compare:viewCompare,viruses:viewViruses,kb:viewKB,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
+  $$('#app .scroll, #app .tablewrap').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
+  if(fk){const el=$(fk);if(el&&el!==document.activeElement)try{el.focus({preventScroll:true});}catch(_){}}
+}
+function act(b){
+  const d=b.dataset;let after=null;
+  if(d.lang){L=d.lang;try{localStorage.setItem('komorkiLang',L);}catch(_){}}
+  else if(d.tab){if(d.tab!==S.tab)stopPlay();S.tab=d.tab;}
+  else if(d.cell){S.cell=d.cell;S.org=null;S.pngSt='';}
+  else if(d.virus){S.virus=d.virus;S.vorg=null;S.pngSt='';}
+  else if(d.lvl){if(S.lvl!==d.lvl){S.lvl=d.lvl;S.q=null;}}
+  else if(d.o){const ctx=b.closest('[data-ctx]')?.dataset.ctx||(S.tab==='viruses'?'virus':'cell');
+    if(ctx==='quiz'){answer(d.o);after='#nextQ';}
+    else if(S.tab==='viruses')S.vorg=d.o;
+    else S.org=d.o;
+    if(!b.closest('svg'))after='.ocard h2';}
+  else if(d.ans){answer(d.ans);after='#nextQ';}
+  else if(b.id==='nextQ'){newQ();after=S.q.k==='point'?'[data-ctx="quiz"] [data-o][tabindex]':'.opts button';}
+  else if(d.act==='clearSel'){if(S.tab==='viruses')S.vorg=null;else S.org=null;after='.stage [data-o][tabindex]';}
+  else if(d.act==='png'){pngClick(d.kind);return;}
+  else if(d.act==='docx'){docxClick();return;}
+  else if(d.act==='wsNew'){S.ws.seed=1+Math.floor(Math.random()*99999);S.wsSt='';}
+  else if(d.act==='prev'){stopPlay();S.step=Math.max(0,S.step-1);}
+  else if(d.act==='next'){stopPlay();S.step=Math.min(CYC[S.cyc].length-1,S.step+1);}
+  else if(d.act==='play'){if(S.playing)stopPlay();else{S.playing=true;if(S.step>=CYC[S.cyc].length-1)S.step=0;
+    playT=setInterval(()=>{if(S.tab!=='viruses'){stopPlay();return;}if(S.step<CYC[S.cyc].length-1)S.step++;if(S.step>=CYC[S.cyc].length-1)stopPlay();render();},matchMedia('(prefers-reduced-motion: reduce)').matches?4000:2600);}}
+  else if(d.cyc){stopPlay();S.cyc=d.cyc;S.step=0;}
+  else if(d.step){stopPlay();S.step=+d.step;}
+  else if(d.zoom){const o=SIZES[+d.zoom];S.zoom=Math.max(-9.6,Math.min(-0.4,Math.round((Math.log10(o.s)+.55)*10)/10));}
+  else if(d.osmc)S.osmC=d.osmc;
+  else if(d.osms)S.osmS=d.osms;
+  else if(d.wscell){const c=S.ws.cells;S.ws.cells=c.includes(d.wscell)?c.filter(x=>x!==d.wscell):[...c,d.wscell];S.wsSt='';}
+  else if(d.wsn!==undefined){S.ws.n=+d.wsn;S.wsSt='';}
+  else return;
+  render();
+  if(after){const el=$(after);if(el)el.focus({preventScroll:after==='.ocard h2'?false:true});}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-lang],[data-tab],[data-cell],[data-virus],[data-lvl],[data-o],[data-ans],#nextQ,[data-act],[data-cyc],[data-step],[data-zoom],[data-osmc],[data-osms],[data-wscell],[data-wsn]');
+  if(!b||b.disabled)return;
+  if(b.matches('.sheet *'))return;
+  if(b.dataset.o&&b.closest('[data-ctx="quiz"]')&&S.q&&S.q.picked!==null)return;
+  act(b);
+});
+document.addEventListener('keydown',e=>{const g=e.target.closest&&e.target.closest('svg [data-o][tabindex]');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();if(g.closest('[data-ctx="quiz"]')&&S.q&&S.q.picked!==null)return;act(g);}});
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.id==='labChk'){S.labels=t.checked;S.pngSt='';render();}
+  else if(t.dataset.wsopt){S.ws[t.dataset.wsopt]=t.checked;S.wsSt='';render();}});
+document.addEventListener('input',e=>{if(e.target.id==='zoom'){S.zoom=+e.target.value;e.target.setAttribute('aria-valuetext',fmtLen(Math.pow(10,S.zoom)));$('#scaleViz').innerHTML=scaleViz();}});
+render();
+</script>
+<a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><a id="report-link" href="../index.html?zglos=biologia/komorki" style="position:fixed;right:12px;bottom:12px;z-index:9999;font:700 13px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#231f17;background:#fdfcf8;border:1.5px solid #dcd4c3;border-radius:999px;padding:9px 12px;box-shadow:0 2px 8px rgba(0,0,0,.18)">🐞 Zgłoś błąd</a><script>(function(){var a=document.getElementById('home-link'),r=document.getElementById('report-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x;r.textContent=x==='en'?'🐞 Report a bug':'🐞 Zgłoś błąd';r.href='../index.html?lang='+x+'&zglos=biologia/komorki'}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+<!--stats--><script>window.goatcounter={path:function(){return location.pathname.replace(/index\.html$/,"")}}</script><script data-goatcounter="https://zun.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script><!--stats-->
+</body>
+</html>
