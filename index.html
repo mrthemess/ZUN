@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Wykorzystaj internet do czegoś innego niż YouTube">
+<meta property="og:image:alt" content="Zakład utylizacji niewiedzy">
 <meta property="og:locale" content="pl_PL">
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
@@ -52,8 +52,9 @@ a{color:var(--acc-t)}
 .langsw button{font:700 .9rem 'Atkinson Hyperlegible',sans-serif;cursor:pointer;border:0;border-radius:999px;padding:6px 12px;background:transparent;color:#ece6da;display:flex;gap:6px;align-items:center}
 .langsw button{white-space:nowrap}.langsw .ls{display:none}
 .langsw button[aria-pressed=true]{background:#e2b27a;color:#1a140c}
-.hero{background:#0f120e}
-.hero img{display:block;width:100%;max-width:1600px;height:auto;margin:0 auto}
+.hero{background:#121713}
+/* na szerokich ekranach przycinamy górę i dół, napis zostaje w kadrze */
+.hero img{display:block;width:100%;max-width:1600px;height:auto;max-height:min(68vh,720px);object-fit:cover;object-position:50% 40%;margin:0 auto}
 .wrap{max-width:1160px;margin:0 auto;padding:28px 16px 70px}
 .intro{max-width:80ch;margin:0 auto;font-size:1.05rem}
 .intro p{margin:0}
@@ -129,7 +130,7 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
     <button type="button" data-set="en" aria-pressed="false">🇬🇧 <span class="lf">English</span><span class="ls">EN</span></button>
   </div>
 </div></div>
-<header class="hero"><img src="img/baner.jpg" alt="Wykorzystaj internet do czegoś innego niż YouTube / Use the internet for something other than YouTube" width="2048" height="737"></header>
+<header class="hero"><img src="img/baner.jpg" alt="Zakład utylizacji niewiedzy – geografia, biologia i inne sposoby na mądrzejszy internet" width="1654" height="951"></header>
 <main class="wrap">
   <div class="intro">
     <p data-l="pl">Nie wiesz, od czego zacząć naukę? A może szukasz czegoś, co wreszcie pomoże Ci ogarnąć poziomice, klimatogramy albo mejozę? Jesteś we właściwym miejscu! Znajdziesz tu interaktywne narzędzia do nauki biologii i geografii oraz przydatne, sprawdzone linki, które pomogą Ci zrozumieć trudniejsze tematy, poćwiczyć przed sprawdzianem i odkryć, że nauka nie musi boleć. No dobra, przynajmniej nie zawsze.</p>
