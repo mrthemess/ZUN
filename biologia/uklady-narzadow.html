@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('ukLang',l)}catch(e){}})();</script><!--site-lang-->
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Układy narządów człowieka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1efee;--paper:#fdfcfb;--ink:#221d1b;--muted:#665d58;--line:#ddd5d0;--soft:#ebe5e1;--body:#f3dfd2;--bodyline:#c9a996;--ghost:#bfb3ab;--acc:#7b4fc4;--focus:#c2571a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161312;--paper:#1f1b19;--ink:#ece6e2;--muted:#a99f99;--line:#352e2b;--soft:#28221f;--body:#3a2f2a;--bodyline:#6d5a50;--ghost:#5b504a;--focus:#f0a36a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#161312;--paper:#1f1b19;--ink:#ece6e2;--muted:#a99f99;--line:#352e2b;--soft:#28221f;--body:#3a2f2a;--bodyline:#6d5a50;--ghost:#5b504a;--focus:#f0a36a;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 'Atkinson Hyperlegible',system-ui,sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;letter-spacing:-.015em;line-height:1.15}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 20px 60px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+header h1{margin:0;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800}header p{margin:2px 0 0;color:var(--muted)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:6px 13px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper);font-weight:700}
+.systems{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0}
+.systems button{font:inherit;font-size:.92rem;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 13px;display:inline-flex;gap:7px;align-items:center}
+.systems button i{width:11px;height:11px;border-radius:50%;background:var(--c);display:inline-block}
+.systems button[aria-pressed=true]{background:var(--c);border-color:var(--c);color:#fff}
+.systems button[aria-pressed=true] i{background:#fff}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.grid{display:grid;grid-template-columns:minmax(260px,400px) minmax(0,1fr);gap:24px;margin-top:18px;align-items:start}
+.bodybox{position:sticky;top:12px;background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:10px;display:flex;flex-direction:column;align-items:center}
+.bodybox svg{width:100%;max-height:calc(100vh - 60px);height:auto;display:block}
+.sexrow{margin:4px 0 2px}
+.sh{cursor:pointer;transition:opacity .2s}
+.sh.f.ghost{fill:var(--ghost);opacity:.22}.sh.s.ghost{stroke:var(--ghost);opacity:.25}
+.sh.f.on{fill:var(--acc);opacity:.9}.sh.s.on{stroke:var(--acc);opacity:1}
+.sh.f.sel{fill:var(--acc);opacity:1;filter:drop-shadow(0 0 3px var(--acc));stroke:var(--ink);stroke-width:1.2}
+.sh.s.sel{stroke:var(--acc);opacity:1;stroke-width:5!important}
+.sh.s{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sh.off{display:none}
+#silh{fill:var(--body);stroke:var(--bodyline);stroke-width:1.5}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--paper);font-size:.85rem;padding:3px 8px;border-radius:6px;white-space:nowrap;z-index:5}
+.sysinfo h2{margin:0 0 6px;font-size:1.8rem;color:var(--acc)}
+.sysinfo p{margin:0 0 10px;max-width:70ch}
+.adv{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:.96rem}
+.olist{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
+.olist button{font:inherit;font-size:.92rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:6px 11px}
+.olist button:hover{border-color:var(--acc)}
+.olist button[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:700}
+.card{background:var(--paper);border:2px solid var(--acc);border-radius:16px;padding:18px 20px}
+.card h3{margin:0 0 2px;font-size:1.5rem}
+.card .en{color:var(--muted);margin:0 0 10px;font-size:.92rem}
+.card ul{margin:10px 0 0;padding-left:20px}.card li{margin:6px 0}
+.hint{color:var(--muted)}
+.also{font-size:.88rem;color:var(--muted);margin-top:12px}
+.also button{font:inherit;font-size:.88rem;border:0;background:none;color:var(--acc);text-decoration:underline;cursor:pointer;padding:0}
+@media (max-width:820px){.grid{grid-template-columns:1fr}.bodybox{position:static}.bodybox svg{max-height:70vh}}
+@media (prefers-reduced-motion:reduce){.sh{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div><h1 id="t1"></h1><p id="t2"></p></div>
+<div class="ctl"><div class="seg" role="group" aria-label="Poziom / Level" id="lvl"></div><div class="seg" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div></div></header>
+<div class="systems" id="systems" role="group"></div>
+<div class="grid"><div class="bodybox"><div class="seg sexrow" id="sex" role="group"></div><div id="bodysvg"></div></div><section id="info" aria-live="polite"></section></div>
+</div>
+<div class="tip" id="tip" hidden></div>
+<script>
+// System: id, nazwy, kolor, opis; narządy: [kształt, nazwa PL, nazwa EN, podstawowy? , opis podstawowy PL, EN, fakty zaawansowane PL[], EN[]]
+const SYS=[
+{id:'nerw',pl:'Układ nerwowy',en:'Nervous system',c:'#7b4fc4',
+ d:['Odbiera informacje z ciała i otoczenia, przetwarza je i steruje pracą wszystkich narządów.','Receives information from the body and surroundings, processes it and controls all organs.'],
+ dA:['Dzieli się na ośrodkowy (mózgowie i rdzeń kręgowy) i obwodowy (nerwy i zwoje). Część autonomiczna – współczulna („walcz lub uciekaj”) i przywspółczulna („odpocznij i traw”) – steruje narządami wewnętrznymi bez udziału naszej woli. Podstawową komórką jest neuron, który przewodzi impulsy elektryczne i przekazuje je dalej przez synapsy za pomocą neuroprzekaźników.','It is divided into the central (brain and spinal cord) and peripheral (nerves and ganglia) parts. The autonomic division – sympathetic (“fight or flight”) and parasympathetic (“rest and digest”) – controls internal organs without our will. Its basic cell is the neuron, which conducts electrical impulses and passes them on through synapses using neurotransmitters.'],
+ o:[
+ ['brain','Mózg (kresomózgowie)','Cerebrum',1,'Najważniejsza część układu nerwowego. Myśli, pamięta, rozumie mowę i steruje ruchami ciała.','The most important part of the nervous system. It thinks, remembers, understands speech and controls body movements.',
+  ['Dwie półkule połączone ciałem modzelowatym; lewa półkula steruje prawą stroną ciała i odwrotnie.','Kora mózgowa (istota szara) ma płaty: czołowy (planowanie, ruchy dowolne, osobowość), ciemieniowy (czucie dotyku i bólu), skroniowy (słuch, pamięć, rozumienie mowy) i potyliczny (wzrok).','Pod korą leży istota biała – włókna nerwowe łączące różne ośrodki.','Układ limbiczny (m.in. hipokamp i ciało migdałowate) odpowiada za emocje i zapamiętywanie.','Zużywa ok. 20% energii organizmu, choć waży tylko ok. 1,4 kg.'],
+  ['Two hemispheres joined by the corpus callosum; the left hemisphere controls the right side of the body and vice versa.','The cerebral cortex (grey matter) has lobes: frontal (planning, voluntary movement, personality), parietal (touch and pain), temporal (hearing, memory, understanding speech) and occipital (vision).','Beneath the cortex lies white matter – nerve fibres connecting different centres.','The limbic system (incl. the hippocampus and amygdala) is responsible for emotions and memory.','It uses about 20% of the body’s energy although it weighs only about 1.4 kg.']],
+ ['cereb','Móżdżek','Cerebellum',1,'Dba o równowagę i płynność ruchów – dzięki niemu nie przewracamy się i możemy jeździć na rowerze.','Keeps balance and makes movements smooth – thanks to it we don’t fall over and can ride a bike.',
+  ['Koordynuje ruchy i napięcie mięśni, porównując zamierzony ruch z rzeczywistym.','Odpowiada za uczenie się wyuczonych ruchów, np. pisania czy gry na instrumencie.','Uszkodzenie powoduje chwiejny chód i drżenie przy wykonywaniu ruchów.'],
+  ['Coordinates movement and muscle tone by comparing the intended movement with the actual one.','Responsible for learning motor skills such as writing or playing an instrument.','Damage causes an unsteady gait and tremor during movement.']],
+ ['stem','Pień mózgu','Brainstem',0,'','',
+  ['Składa się ze śródmózgowia, mostu i rdzenia przedłużonego.','Rdzeń przedłużony zawiera ośrodki życiowe: oddechowy, sercowy i naczynioruchowy.','Steruje odruchami: kaszlem, kichaniem, połykaniem i wymiotami.','Przewodzi impulsy między mózgiem a rdzeniem kręgowym; wychodzi z niego większość nerwów czaszkowych.'],
+  ['Made up of the midbrain, pons and medulla oblongata.','The medulla contains vital centres controlling breathing, heart rate and blood vessel diameter.','Controls reflexes: coughing, sneezing, swallowing and vomiting.','Relays impulses between the brain and spinal cord; most cranial nerves emerge from it.']],
+ ['cord','Rdzeń kręgowy','Spinal cord',1,'Biegnie wewnątrz kręgosłupa i przekazuje informacje między mózgiem a resztą ciała. Steruje też odruchami.','Runs inside the spine and carries messages between the brain and the rest of the body. It also controls reflexes.',
+  ['Ma ok. 45 cm długości i jest chroniony przez kręgi, opony rdzeniowe i płyn mózgowo-rdzeniowy.','W przekroju istota szara tworzy kształt litery H, a istota biała ją otacza – odwrotnie niż w mózgu.','Jest ośrodkiem odruchów bezwarunkowych, np. odruchu kolanowego i cofania ręki od gorącego przedmiotu.','Wychodzi z niego 31 par nerwów rdzeniowych.'],
+  ['About 45 cm long, protected by the vertebrae, meninges and cerebrospinal fluid.','In cross-section the grey matter forms an H shape surrounded by white matter – the opposite of the brain.','It is the centre of unconditioned reflexes, e.g. the knee-jerk reflex and pulling your hand away from something hot.','31 pairs of spinal nerves emerge from it.']],
+ ['nerves','Nerwy','Nerves',1,'Jak kable przewodzą sygnały od mózgu i rdzenia do mięśni oraz od narządów zmysłów do mózgu.','Like cables, they carry signals from the brain and spinal cord to muscles and from the sense organs to the brain.',
+  ['Nerwy czuciowe (dośrodkowe) przenoszą informacje do ośrodkowego układu nerwowego, ruchowe (odśrodkowe) – z niego do mięśni i gruczołów.','Człowiek ma 12 par nerwów czaszkowych i 31 par nerwów rdzeniowych.','Włókna otoczone osłonką mielinową przewodzą impulsy nawet z prędkością ponad 100 m/s.','Nerw błędny (X) unerwia serce, płuca i przewód pokarmowy – to główny nerw przywspółczulny.'],
+  ['Sensory (afferent) nerves carry information to the central nervous system, motor (efferent) nerves carry it to muscles and glands.','Humans have 12 pairs of cranial nerves and 31 pairs of spinal nerves.','Fibres wrapped in a myelin sheath conduct impulses at over 100 m/s.','The vagus nerve (X) supplies the heart, lungs and gut – it is the main parasympathetic nerve.']]
+ ]},
+{id:'dokr',pl:'Układ dokrewny (hormonalny)',en:'Endocrine system',c:'#c2185b',
+ d:['Gruczoły wydzielają do krwi hormony – chemiczne sygnały, które regulują wzrost, przemianę materii i rozwój.','Glands release hormones into the blood – chemical messengers that control growth, metabolism and development.'],
+ dA:['Hormony działają wolniej niż impulsy nerwowe, ale dłużej. Każdy hormon działa tylko na komórki, które mają dla niego odpowiednie receptory. Wydzielanie wielu hormonów regulują ujemne sprzężenia zwrotne: gdy hormonu jest dużo, gruczoł nadrzędny ogranicza jego produkcję. Nadrzędną rolę pełni oś podwzgórze–przysadka.','Hormones act more slowly than nerve impulses but for longer. Each hormone affects only cells that have receptors for it. Most hormone secretion is controlled by negative feedback: when there is a lot of a hormone, the controlling gland reduces its production. The hypothalamus–pituitary axis is at the top of the hierarchy.'],
+ o:[
+ ['hypo','Podwzgórze','Hypothalamus',0,'','',
+  ['Łączy układ nerwowy z hormonalnym i steruje przysadką za pomocą hormonów uwalniających i hamujących.','Wytwarza wazopresynę (ADH), która zmniejsza ilość wydalanego moczu, i oksytocynę, która wywołuje skurcze macicy przy porodzie i wypływ mleka.','Zawiera ośrodki głodu, sytości, pragnienia i termoregulacji.'],
+  ['Links the nervous and endocrine systems and controls the pituitary with releasing and inhibiting hormones.','Produces vasopressin (ADH), which reduces urine output, and oxytocin, which triggers contractions during birth and milk let-down.','Contains centres for hunger, satiety, thirst and body temperature.']],
+ ['pit','Przysadka mózgowa','Pituitary gland',1,'Mały gruczoł pod mózgiem, który „dowodzi” innymi gruczołami i wytwarza hormon wzrostu.','A small gland under the brain that “commands” other glands and makes growth hormone.',
+  ['Płat przedni wydziela: hormon wzrostu (GH), tyreotropinę (TSH – pobudza tarczycę), kortykotropinę (ACTH – pobudza korę nadnerczy), gonadotropiny FSH i LH (sterują jajnikami i jądrami) oraz prolaktynę (produkcja mleka).','Płat tylny magazynuje i uwalnia wazopresynę i oksytocynę wytworzone w podwzgórzu.','Nadmiar hormonu wzrostu w dzieciństwie powoduje gigantyzm, a niedobór – karłowatość przysadkową.'],
+  ['The anterior lobe secretes growth hormone (GH), thyroid-stimulating hormone (TSH), adrenocorticotropic hormone (ACTH – stimulates the adrenal cortex), the gonadotropins FSH and LH (control the ovaries and testes) and prolactin (milk production).','The posterior lobe stores and releases vasopressin and oxytocin made in the hypothalamus.','Too much growth hormone in childhood causes gigantism; too little causes pituitary dwarfism.']],
+ ['pineal','Szyszynka','Pineal gland',0,'','',
+  ['Wydziela melatoninę, głównie w ciemności.','Melatonina reguluje rytm dobowy, czyli zasypianie i budzenie się.','Światło ekranów wieczorem hamuje jej wydzielanie i utrudnia zasypianie.'],
+  ['Secretes melatonin, mainly in darkness.','Melatonin regulates the circadian rhythm – falling asleep and waking up.','Screen light in the evening suppresses it and makes it harder to fall asleep.']],
+ ['thyroid','Tarczyca','Thyroid gland',1,'Gruczoł na szyi. Jej hormony przyspieszają przemianę materii i są potrzebne do prawidłowego rozwoju.','A gland in the neck. Its hormones speed up metabolism and are needed for normal development.',
+  ['Wytwarza tyroksynę (T4) i trójjodotyroninę (T3), które przyspieszają metabolizm, zwiększają wytwarzanie ciepła i są niezbędne do rozwoju mózgu u dzieci.','Do ich produkcji potrzebny jest jod – dlatego sól kuchenna jest jodowana.','Wydziela też kalcytoninę, która obniża poziom wapnia we krwi.','Nadczynność objawia się m.in. chudnięciem i kołataniem serca, niedoczynność – zmęczeniem, tyciem i uczuciem zimna.'],
+  ['Produces thyroxine (T4) and triiodothyronine (T3), which speed up metabolism, increase heat production and are essential for brain development in children.','Iodine is needed to make them – which is why table salt is iodised.','It also secretes calcitonin, which lowers blood calcium.','An overactive thyroid causes weight loss and a racing heart; an underactive one causes tiredness, weight gain and feeling cold.']],
+ ['parathy','Przytarczyce','Parathyroid glands',0,'','',
+  ['Cztery małe gruczoły na tylnej powierzchni tarczycy.','Wydzielają parathormon, który podnosi poziom wapnia we krwi – uwalnia go z kości, zwiększa wchłanianie w jelitach i zatrzymywanie w nerkach.','Działa przeciwnie do kalcytoniny; wapń jest niezbędny do pracy mięśni i nerwów.'],
+  ['Four small glands on the back of the thyroid.','They secrete parathyroid hormone, which raises blood calcium by releasing it from bone, increasing absorption in the gut and retention in the kidneys.','It works opposite to calcitonin; calcium is essential for muscle and nerve function.']],
+ ['thymus','Grasica','Thymus',0,'','',
+  ['Wydziela hormony (m.in. tymozynę), które pomagają dojrzewać limfocytom T.','Jest największa w dzieciństwie; po okresie dojrzewania stopniowo zanika i zastępuje ją tkanka tłuszczowa.'],
+  ['Secretes hormones (incl. thymosin) that help T lymphocytes mature.','It is largest in childhood; after puberty it gradually shrinks and is replaced by fat.']],
+ ['adrenal','Nadnercza','Adrenal glands',1,'Leżą na nerkach. Wytwarzają adrenalinę – hormon, który w sytuacji zagrożenia przyspiesza bicie serca i dodaje energii.','They sit on top of the kidneys. They make adrenaline – a hormone that speeds up the heart and gives energy in danger.',
+  ['Rdzeń nadnerczy wydziela adrenalinę i noradrenalinę: przyspieszają pracę serca, rozszerzają oskrzela i źrenice, podnoszą poziom glukozy we krwi i przygotowują ciało do walki lub ucieczki.','Kora nadnerczy wydziela kortyzol (hormon stresu: podnosi poziom glukozy, hamuje stany zapalne), aldosteron (zatrzymuje sód i wodę w nerkach, podnosi ciśnienie krwi) oraz niewielkie ilości androgenów.','Wydzielanie kortyzolu reguluje ACTH z przysadki.'],
+  ['The adrenal medulla secretes adrenaline and noradrenaline: they speed up the heart, widen the airways and pupils, raise blood glucose and prepare the body for fight or flight.','The adrenal cortex secretes cortisol (the stress hormone: raises glucose, suppresses inflammation), aldosterone (keeps sodium and water in the kidneys, raises blood pressure) and small amounts of androgens.','Cortisol secretion is controlled by ACTH from the pituitary.']],
+ ['pancreas','Trzustka (wyspy trzustkowe)','Pancreas (pancreatic islets)',1,'Wytwarza insulinę, która obniża poziom cukru we krwi. Gdy jej brakuje, rozwija się cukrzyca.','Makes insulin, which lowers blood sugar. When it is missing, diabetes develops.',
+  ['Wyspy Langerhansa stanowią ok. 1–2% trzustki.','Komórki beta wydzielają insulinę: ułatwia komórkom pobieranie glukozy, a wątrobie i mięśniom magazynowanie jej jako glikogenu.','Komórki alfa wydzielają glukagon: rozkłada glikogen w wątrobie i podnosi poziom glukozy.','W cukrzycy typu 1 organizm niszczy komórki beta; w typie 2 komórki słabo reagują na insulinę.'],
+  ['The islets of Langerhans make up about 1–2% of the pancreas.','Beta cells secrete insulin: it helps cells take up glucose and lets the liver and muscles store it as glycogen.','Alpha cells secrete glucagon: it breaks down glycogen in the liver and raises blood glucose.','In type 1 diabetes the body destroys beta cells; in type 2 cells respond poorly to insulin.']],
+ ['ovary','Jajniki','Ovaries',1,'U kobiet wytwarzają estrogeny i progesteron – hormony odpowiedzialne za dojrzewanie i cykl miesiączkowy.','In women they make oestrogen and progesterone – hormones responsible for puberty and the menstrual cycle.',
+  ['Estrogeny odpowiadają za rozwój cech płciowych żeńskich i wzrost błony śluzowej macicy.','Progesteron (z ciałka żółtego) przygotowuje macicę na przyjęcie zarodka i podtrzymuje ciążę.','Pracą jajników sterują FSH i LH z przysadki.'],
+  ['Oestrogens drive the development of female sex characteristics and the growth of the uterine lining.','Progesterone (from the corpus luteum) prepares the uterus for an embryo and maintains pregnancy.','The ovaries are controlled by FSH and LH from the pituitary.']],
+ ['testis','Jądra','Testes',1,'U mężczyzn wytwarzają testosteron – hormon odpowiedzialny za dojrzewanie, np. niższy głos i zarost.','In men they make testosterone – the hormone responsible for puberty changes such as a deeper voice and facial hair.',
+  ['Komórki śródmiąższowe (Leydiga) wydzielają testosteron pod wpływem LH.','Testosteron odpowiada za cechy płciowe męskie, wzrost masy mięśniowej i powstawanie plemników.'],
+  ['Interstitial (Leydig) cells secrete testosterone in response to LH.','Testosterone drives male sex characteristics, muscle growth and sperm production.']]
+ ]},
+{id:'krw',pl:'Układ krwionośny',en:'Circulatory system',c:'#c62828',
+ d:['Serce pompuje krew, która płynie naczyniami i rozprowadza po całym ciele tlen, składniki odżywcze i hormony.','The heart pumps blood through vessels, carrying oxygen, nutrients and hormones around the whole body.'],
+ dA:['Człowiek ma układ zamknięty z dwoma obiegami krwi. W obiegu płucnym (małym) prawa komora tłoczy krew do płuc, gdzie oddaje ona dwutlenek węgla i pobiera tlen. W obiegu ogólnym (dużym) lewa komora tłoczy krew natlenowaną do wszystkich narządów. Układ krwionośny transportuje też ciepło, uczestniczy w obronie organizmu i utrzymuje stałe środowisko wewnętrzne.','Humans have a closed system with a double circulation. In the pulmonary circuit the right ventricle pumps blood to the lungs, where it releases carbon dioxide and picks up oxygen. In the systemic circuit the left ventricle pumps oxygenated blood to all organs. The system also distributes heat, helps defend the body and keeps the internal environment stable.'],
+ o:[
+ ['heart','Serce','Heart',1,'Mięsień, który przez całe życie pompuje krew. Bije ok. 70 razy na minutę.','A muscle that pumps blood all your life. It beats about 70 times a minute.',
+  ['Ma cztery jamy: dwa przedsionki i dwie komory; ściana lewej komory jest najgrubsza, bo tłoczy krew do całego ciała.','Zastawki (trójdzielna, dwudzielna, półksiężycowate) zapobiegają cofaniu się krwi.','Skurcze wywołuje sam układ bodźcoprzewodzący – węzeł zatokowo-przedsionkowy jest naturalnym rozrusznikiem.','Mięsień sercowy odżywiają tętnice wieńcowe; ich zablokowanie wywołuje zawał.','W spoczynku serce przepompowuje ok. 5 litrów krwi na minutę.'],
+  ['It has four chambers: two atria and two ventricles; the left ventricle wall is the thickest because it pumps blood to the whole body.','Valves (tricuspid, mitral, semilunar) prevent blood from flowing backwards.','Contractions are triggered by its own conducting system – the sinoatrial node is the natural pacemaker.','The heart muscle is supplied by the coronary arteries; their blockage causes a heart attack.','At rest the heart pumps about 5 litres of blood per minute.']],
+ ['arteries','Tętnice','Arteries',1,'Naczynia, które prowadzą krew od serca do narządów.','Vessels that carry blood away from the heart to the organs.',
+  ['Mają grube, elastyczne i umięśnione ściany, bo krew płynie w nich pod dużym ciśnieniem.','Największa tętnica to aorta, wychodząca z lewej komory.','Tętnice płucne jako jedyne prowadzą krew odtlenowaną.','Fala rozciągania ścian tętnic to tętno, które można wyczuć na nadgarstku lub szyi.'],
+  ['They have thick, elastic, muscular walls because blood flows through them under high pressure.','The largest artery is the aorta, leaving the left ventricle.','The pulmonary arteries are the only arteries carrying deoxygenated blood.','The wave stretching the artery walls is the pulse, felt at the wrist or neck.']],
+ ['veins','Żyły','Veins',1,'Naczynia, które prowadzą krew z powrotem do serca.','Vessels that carry blood back to the heart.',
+  ['Mają cieńsze ściany niż tętnice i niskie ciśnienie krwi.','Zastawki żylne, zwłaszcza w kończynach dolnych, zapobiegają cofaniu się krwi; pomaga im praca mięśni.','Żyły główne górna i dolna uchodzą do prawego przedsionka.','Żyły płucne jako jedyne prowadzą krew natlenowaną.'],
+  ['They have thinner walls than arteries and low blood pressure.','Venous valves, especially in the legs, stop blood flowing backwards, helped by muscle contractions.','The superior and inferior venae cavae empty into the right atrium.','The pulmonary veins are the only veins carrying oxygenated blood.']],
+ ['caps','Naczynia włosowate','Capillaries',0,'','',
+  ['Najcieńsze naczynia: ich ściana ma grubość jednej warstwy komórek.','Tu zachodzi wymiana gazów, składników odżywczych i zbędnych produktów między krwią a tkankami.','Łączą tętniczki z żyłkami; razem mają ogromną powierzchnię.'],
+  ['The thinnest vessels: their wall is only one cell thick.','Gases, nutrients and waste are exchanged here between blood and tissues.','They connect arterioles to venules; together they have a huge surface area.']],
+ ['blood','Krew','Blood',1,'Płyn, który przenosi tlen, pokarm i ciepło. Czerwone krwinki niosą tlen, białe bronią przed chorobami.','A liquid that carries oxygen, food and heat. Red cells carry oxygen, white cells fight disease.',
+  ['Dorosły ma ok. 5 litrów krwi; ponad połowę stanowi osocze – woda z białkami, solami, glukozą i hormonami.','Erytrocyty (czerwone krwinki) zawierają hemoglobinę wiążącą tlen; nie mają jądra i żyją ok. 120 dni.','Leukocyty (białe krwinki) bronią organizm przed drobnoustrojami.','Płytki krwi i białka osocza (np. fibrynogen) odpowiadają za krzepnięcie.','Grupy krwi układu AB0 i czynnik Rh decydują o tym, komu można przetoczyć krew.'],
+  ['An adult has about 5 litres of blood; more than half is plasma – water with proteins, salts, glucose and hormones.','Erythrocytes (red blood cells) contain haemoglobin, which binds oxygen; they have no nucleus and live about 120 days.','Leukocytes (white blood cells) defend the body against microbes.','Platelets and plasma proteins (e.g. fibrinogen) are responsible for clotting.','The AB0 blood groups and the Rh factor determine who can receive whose blood.']]
+ ]},
+{id:'limf',pl:'Układ limfatyczny i odpornościowy',en:'Lymphatic and immune system',c:'#2e7d32',
+ d:['Chroni organizm przed bakteriami i wirusami oraz odprowadza nadmiar płynu z tkanek.','Protects the body against bacteria and viruses and drains extra fluid from the tissues.'],
+ dA:['Odporność nieswoista działa natychmiast i wobec wszystkich zagrożeń (skóra, błony śluzowe, gorączka, stan zapalny, komórki żerne). Odporność swoista jest skierowana przeciw konkretnemu drobnoustrojowi: limfocyty B wytwarzają przeciwciała, a limfocyty T niszczą zakażone komórki i koordynują obronę. Komórki pamięci sprawiają, że przy kolejnym kontakcie reakcja jest szybsza – na tym polegają szczepienia. Naczynia limfatyczne zbierają płyn z tkanek (limfę) i oddają go do krwi.','Innate immunity works immediately against all threats (skin, mucous membranes, fever, inflammation, phagocytes). Adaptive immunity targets a specific microbe: B lymphocytes make antibodies and T lymphocytes kill infected cells and coordinate the defence. Memory cells make the response faster the next time – this is how vaccines work. Lymphatic vessels collect fluid from the tissues (lymph) and return it to the blood.'],
+ o:[
+ ['nodes','Węzły chłonne','Lymph nodes',1,'Małe „filtry” rozsiane po ciele. Zatrzymują bakterie i wirusy; podczas choroby mogą się powiększać.','Small “filters” spread around the body. They trap bacteria and viruses and may swell when you are ill.',
+  ['Skupiają się m.in. na szyi, pod pachami i w pachwinach.','Filtrują limfę; znajdujące się w nich limfocyty i makrofagi rozpoznają i niszczą drobnoustroje.','Powiększone, bolesne węzły zwykle oznaczają, że organizm walczy z infekcją.'],
+  ['They cluster in the neck, armpits and groin, among other places.','They filter lymph; their lymphocytes and macrophages recognise and destroy microbes.','Swollen, tender nodes usually mean the body is fighting an infection.']],
+ ['lvessels','Naczynia limfatyczne','Lymphatic vessels',0,'','',
+  ['Zbierają nadmiar płynu tkankowego i prowadzą go jako limfę do węzłów, a potem do żył w okolicy obojczyków.','W jelicie cienkim naczynia limfatyczne kosmków (naczynia chłonne) wchłaniają tłuszcze.','Nie mają pompy – limfa płynie dzięki skurczom mięśni i zastawkom.'],
+  ['They collect excess tissue fluid and carry it as lymph to the nodes, then to veins near the collarbones.','In the small intestine the lacteals in the villi absorb fats.','There is no pump – lymph moves thanks to muscle contractions and valves.']],
+ ['spleen','Śledziona','Spleen',1,'Narząd po lewej stronie brzucha, który oczyszcza krew i pomaga zwalczać infekcje.','An organ on the left side of the abdomen that cleans the blood and helps fight infections.',
+  ['Usuwa z krwi stare i uszkodzone czerwone krwinki.','Miazga biała zawiera limfocyty, które reagują na drobnoustroje we krwi.','Magazynuje płytki krwi; można żyć bez śledziony, ale łatwiej wtedy o niektóre infekcje.'],
+  ['Removes old and damaged red blood cells from the blood.','Its white pulp contains lymphocytes that respond to microbes in the blood.','It stores platelets; you can live without a spleen but are then more prone to some infections.']],
+ ['thymus','Grasica','Thymus',1,'Gruczoł za mostkiem, w którym „szkolą się” białe krwinki – limfocyty T. Najważniejszy jest u dzieci.','A gland behind the breastbone where white blood cells called T cells are “trained”. It matters most in children.',
+  ['Dojrzewają w niej limfocyty T, które uczą się odróżniać własne komórki od obcych.','Limfocyty atakujące własne komórki są w niej eliminowane – chroni to przed chorobami autoimmunologicznymi.','Po okresie dojrzewania zanika.'],
+  ['T lymphocytes mature here and learn to tell the body’s own cells from foreign ones.','Lymphocytes that would attack the body’s own cells are eliminated here – protecting against autoimmune diseases.','It shrinks after puberty.']],
+ ['tonsils','Migdałki','Tonsils',0,'','',
+  ['Skupiska tkanki limfatycznej w gardle (podniebienne, gardłowy, językowy).','Jako pierwsze rozpoznają drobnoustroje wnikające z powietrzem i pokarmem.'],
+  ['Clusters of lymphatic tissue in the throat (palatine, pharyngeal, lingual).','They are the first to detect microbes entering with air and food.']],
+ ['marrow','Szpik kostny czerwony','Red bone marrow',0,'','',
+  ['Wytwarza wszystkie komórki krwi: erytrocyty, leukocyty i płytki krwi.','U dorosłych występuje głównie w kościach płaskich (mostek, miednica, żebra) i w kręgach.','Dojrzewają w nim limfocyty B.'],
+  ['Produces all blood cells: red cells, white cells and platelets.','In adults it is found mainly in flat bones (breastbone, pelvis, ribs) and the vertebrae.','B lymphocytes mature here.']]
+ ]},
+{id:'odd',pl:'Układ oddechowy',en:'Respiratory system',c:'#0277bd',
+ d:['Doprowadza do organizmu tlen z powietrza i usuwa dwutlenek węgla.','Brings oxygen from the air into the body and removes carbon dioxide.'],
+ dA:['Drogi oddechowe (jama nosowa, gardło, krtań, tchawica, oskrzela) ogrzewają, nawilżają i oczyszczają powietrze. W pęcherzykach płucnych zachodzi wymiana gazowa zewnętrzna: tlen dyfunduje do krwi, a dwutlenek węgla z krwi do powietrza. W komórkach tlen służy do oddychania komórkowego, w którym z glukozy uwalniana jest energia. Rytm oddechów reguluje ośrodek oddechowy w rdzeniu przedłużonym, reagując głównie na stężenie CO₂ we krwi.','The airways (nasal cavity, pharynx, larynx, trachea, bronchi) warm, moisten and clean the air. In the alveoli external gas exchange takes place: oxygen diffuses into the blood and carbon dioxide from the blood into the air. In cells, oxygen is used in cellular respiration, which releases energy from glucose. The breathing rhythm is controlled by the respiratory centre in the medulla, mainly in response to blood CO₂ levels.'],
+ o:[
+ ['nose','Jama nosowa','Nasal cavity',1,'Ogrzewa, nawilża i oczyszcza wdychane powietrze. Tu też czujemy zapachy.','Warms, moistens and cleans the air you breathe in. It is also where we smell.',
+  ['Wyściela ją błona śluzowa z nabłonkiem migawkowym, który przesuwa śluz z zatrzymanymi pyłami do gardła.','Bogate unaczynienie ogrzewa powietrze.','W górnej części znajdują się receptory węchu.'],
+  ['It is lined with a mucous membrane with ciliated epithelium that moves mucus and trapped dust to the throat.','A rich blood supply warms the air.','Smell receptors are found in its upper part.']],
+ ['throat','Gardło','Pharynx',0,'','',
+  ['Wspólny odcinek dróg oddechowych i pokarmowych.','Podczas połykania nagłośnia zamyka wejście do krtani, żeby pokarm nie wpadł do tchawicy.'],
+  ['A shared section of the airway and the digestive tract.','During swallowing the epiglottis closes the entrance to the larynx so food doesn’t enter the trachea.']],
+ ['larynx','Krtań','Larynx',1,'Narząd głosu – drgające struny głosowe pozwalają nam mówić i śpiewać.','The voice box – vibrating vocal cords let us speak and sing.',
+  ['Zbudowana z chrząstek, m.in. tarczowatej (u mężczyzn tworzy „jabłko Adama”) i nagłośni.','Fałdy głosowe drgają w strumieniu wydychanego powietrza; ich napięcie decyduje o wysokości głosu.'],
+  ['Made of cartilages, incl. the thyroid cartilage (the “Adam’s apple” in men) and the epiglottis.','The vocal folds vibrate in the exhaled airflow; their tension determines pitch.']],
+ ['trachea','Tchawica','Trachea (windpipe)',1,'Rura prowadząca powietrze do płuc.','A tube that carries air to the lungs.',
+  ['Ma ok. 10–12 cm; podpierają ją chrzęstne półpierścienie, które nie pozwalają jej się zapaść.','Nabłonek migawkowy i śluz zatrzymują i usuwają zanieczyszczenia – kaszel wyrzuca je na zewnątrz.','Dzieli się na dwa oskrzela główne.'],
+  ['About 10–12 cm long; supported by C-shaped cartilage rings that stop it collapsing.','Ciliated epithelium and mucus trap and remove dirt – coughing expels it.','It divides into two main bronchi.']],
+ ['bronchi','Oskrzela','Bronchi',0,'','',
+  ['Rozgałęziają się wielokrotnie, tworząc drzewo oskrzelowe, a najcieńsze to oskrzeliki.','Mięśnie gładkie w ich ścianach mogą się kurczyć – w astmie skurcz utrudnia oddychanie.'],
+  ['They branch many times to form the bronchial tree; the thinnest are bronchioles.','Smooth muscle in their walls can contract – in asthma this makes breathing difficult.']],
+ ['lungs','Płuca','Lungs',1,'Dwa duże narządy w klatce piersiowej. Tlen przechodzi w nich do krwi, a dwutlenek węgla z krwi do powietrza.','Two large organs in the chest. Here oxygen passes into the blood and carbon dioxide from the blood into the air.',
+  ['Prawe płuco ma trzy płaty, lewe dwa – zostawia miejsce na serce.','Zawierają ok. 300–500 mln pęcherzyków płucnych o łącznej powierzchni kilkudziesięciu m², oplecionych naczyniami włosowatymi.','Ściany pęcherzyków są bardzo cienkie, co umożliwia szybką dyfuzję gazów.','Otacza je opłucna, której płyn zmniejsza tarcie podczas oddychania.'],
+  ['The right lung has three lobes, the left only two – leaving room for the heart.','They contain about 300–500 million alveoli with a total area of several dozen m², wrapped in capillaries.','The alveolar walls are extremely thin, allowing gases to diffuse quickly.','They are surrounded by the pleura, whose fluid reduces friction during breathing.']],
+ ['diaphragm','Przepona','Diaphragm',1,'Płaski mięsień pod płucami. Gdy się kurczy, wciągamy powietrze.','A flat muscle under the lungs. When it contracts, we breathe in.',
+  ['Oddziela klatkę piersiową od jamy brzusznej.','Przy wdechu kurczy się i obniża, a mięśnie międzyżebrowe unoszą żebra – objętość klatki rośnie, ciśnienie spada i powietrze wpływa do płuc.','Spokojny wydech jest bierny: przepona się rozkurcza, a płuca sprężyście się zapadają.','Czkawka to mimowolne skurcze przepony.'],
+  ['It separates the chest from the abdomen.','When breathing in it contracts and flattens while the intercostal muscles lift the ribs – the chest volume grows, pressure drops and air flows in.','Quiet breathing out is passive: the diaphragm relaxes and the lungs recoil.','Hiccups are involuntary contractions of the diaphragm.']]
+ ]},
+{id:'pok',pl:'Układ pokarmowy',en:'Digestive system',c:'#e65100',
+ d:['Rozdrabnia i rozkłada pokarm na drobne cząsteczki, które przechodzą do krwi, a resztki usuwa z organizmu.','Breaks food down into tiny molecules that pass into the blood, and removes what is left.'],
+ dA:['Trawienie mechaniczne (żucie, ruchy przewodu) i chemiczne – enzymy rozkładają białka do aminokwasów, węglowodany do cukrów prostych, a tłuszcze do glicerolu i kwasów tłuszczowych. Wchłanianie zachodzi głównie w jelicie cienkim. Ruchy perystaltyczne przesuwają treść pokarmową. Przewód pokarmowy ma długość ok. 8–9 m; w jelicie grubym żyją pożyteczne bakterie (mikrobiota).','Mechanical digestion (chewing, gut movements) and chemical digestion – enzymes break proteins into amino acids, carbohydrates into simple sugars and fats into glycerol and fatty acids. Absorption takes place mainly in the small intestine. Peristalsis moves the food along. The digestive tract is about 8–9 m long; useful bacteria (the microbiota) live in the large intestine.'],
+ o:[
+ ['mouth','Jama ustna','Mouth',1,'Zęby rozdrabniają pokarm, język go miesza, a ślina zwilża i zaczyna trawić.','Teeth chop up food, the tongue mixes it and saliva moistens it and starts digestion.',
+  ['Zęby: siekacze odgryzają, kły rozrywają, przedtrzonowe i trzonowe miażdżą; dorosły ma 32 zęby stałe.','Trzy pary ślinianek (przyuszne, podżuchwowe, podjęzykowe) wydzielają 1–1,5 l śliny na dobę.','Ślina zawiera amylazę ślinową, która zaczyna trawić skrobię, oraz lizozym niszczący bakterie.','Na języku są kubki smakowe.'],
+  ['Teeth: incisors bite, canines tear, premolars and molars grind; an adult has 32 permanent teeth.','Three pairs of salivary glands (parotid, submandibular, sublingual) produce 1–1.5 l of saliva a day.','Saliva contains salivary amylase, which starts digesting starch, and lysozyme, which kills bacteria.','The tongue has taste buds.']],
+ ['esoph','Przełyk','Oesophagus',1,'Rura, która przesuwa pokarm z gardła do żołądka.','A tube that moves food from the throat to the stomach.',
+  ['Ma ok. 25 cm; pokarm przesuwają skurcze perystaltyczne, więc można przełykać nawet do góry nogami.','Na dole zwieracz zapobiega cofaniu się treści żołądka – jego osłabienie powoduje zgagę.'],
+  ['About 25 cm long; peristaltic waves move food, so you can even swallow upside down.','At the bottom a sphincter stops stomach contents coming back up – when it weakens, you get heartburn.']],
+ ['stomach','Żołądek','Stomach',1,'Worek, w którym pokarm miesza się z sokiem żołądkowym. Kwas zabija bakterie, a enzymy trawią białka.','A bag where food mixes with gastric juice. Acid kills bacteria and enzymes digest proteins.',
+  ['Sok żołądkowy zawiera kwas solny (pH ok. 1,5–2), który zabija drobnoustroje i aktywuje enzymy.','Pepsyna rozkłada białka na krótsze łańcuchy (peptydy).','Śluz chroni ścianę żołądka przed strawieniem; bakteria Helicobacter pylori może wywołać wrzody.','Pokarm przebywa w żołądku 2–4 godziny, po czym przez odźwiernik przechodzi do dwunastnicy.'],
+  ['Gastric juice contains hydrochloric acid (pH about 1.5–2), which kills microbes and activates enzymes.','Pepsin breaks proteins into shorter chains (peptides).','Mucus protects the stomach wall from digesting itself; the bacterium Helicobacter pylori can cause ulcers.','Food stays in the stomach for 2–4 hours before passing through the pylorus into the duodenum.']],
+ ['liver','Wątroba','Liver',1,'Największy gruczoł w ciele. Wytwarza żółć, magazynuje cukier i oczyszcza krew z trucizn.','The largest gland in the body. It makes bile, stores sugar and cleans poisons out of the blood.',
+  ['Wytwarza żółć, która emulguje tłuszcze, czyli rozbija je na drobne kropelki ułatwiające trawienie.','Magazynuje glukozę w postaci glikogenu, a także witaminy (A, D, B12) i żelazo.','Unieszkodliwia toksyny, alkohol i leki; zamienia amoniak w mocznik.','Wytwarza białka osocza, m.in. albuminy i czynniki krzepnięcia.','Jako jedyny narząd potrafi odrosnąć nawet po usunięciu dużej części.'],
+  ['Makes bile, which emulsifies fats – breaks them into small droplets that are easier to digest.','Stores glucose as glycogen, plus vitamins (A, D, B12) and iron.','Neutralises toxins, alcohol and drugs; converts ammonia into urea.','Produces plasma proteins, incl. albumin and clotting factors.','It is the only organ that can regrow even after a large part is removed.']],
+ ['gallb','Pęcherzyk żółciowy','Gallbladder',0,'','',
+  ['Magazynuje i zagęszcza żółć wytworzoną w wątrobie.','Po tłustym posiłku kurczy się i wyrzuca żółć do dwunastnicy.','Z zagęszczonej żółci mogą powstawać kamienie żółciowe.'],
+  ['Stores and concentrates bile made in the liver.','After a fatty meal it contracts and releases bile into the duodenum.','Gallstones can form from concentrated bile.']],
+ ['pancreas','Trzustka','Pancreas',1,'Wytwarza sok trzustkowy z enzymami, które trawią białka, cukry i tłuszcze.','Makes pancreatic juice with enzymes that digest proteins, sugars and fats.',
+  ['Sok trzustkowy (ok. 1,5 l na dobę) trafia do dwunastnicy.','Zawiera: trypsynę i chymotrypsynę (rozkładają białka), amylazę trzustkową (skrobię do maltozy), lipazę (tłuszcze do glicerolu i kwasów tłuszczowych) oraz nukleazy (kwasy nukleinowe).','Wodorowęglany w soku zobojętniają kwaśną treść z żołądka.','Ta sama trzustka wydziela też hormony – insulinę i glukagon (zob. układ dokrewny).'],
+  ['Pancreatic juice (about 1.5 l a day) flows into the duodenum.','It contains trypsin and chymotrypsin (break down proteins), pancreatic amylase (starch to maltose), lipase (fats to glycerol and fatty acids) and nucleases (nucleic acids).','Bicarbonate in the juice neutralises the acidic contents arriving from the stomach.','The same pancreas also secretes hormones – insulin and glucagon (see the endocrine system).']],
+ ['smallint','Jelito cienkie','Small intestine',1,'Najdłuższa część przewodu pokarmowego. Tu kończy się trawienie i składniki pokarmu przechodzą do krwi.','The longest part of the digestive tract. Digestion finishes here and nutrients pass into the blood.',
+  ['Ma ok. 5–6 m i trzy odcinki: dwunastnicę, jelito czcze i jelito kręte.','Kosmki i mikrokosmki ogromnie zwiększają powierzchnię wchłaniania – do ok. 200 m².','Enzymy jelitowe (m.in. maltaza, sacharaza, laktaza, peptydazy) kończą rozkład cukrów i białek.','Cukry i aminokwasy przechodzą do krwi, a tłuszcze głównie do naczyń limfatycznych.'],
+  ['About 5–6 m long with three parts: the duodenum, jejunum and ileum.','Villi and microvilli hugely enlarge the absorbing surface – up to about 200 m².','Intestinal enzymes (incl. maltase, sucrase, lactase, peptidases) finish breaking down sugars and proteins.','Sugars and amino acids pass into the blood, fats mainly into the lymphatic vessels.']],
+ ['largeint','Jelito grube','Large intestine',1,'Wchłania wodę z resztek pokarmu i formuje kał.','Absorbs water from food leftovers and forms faeces.',
+  ['Ma ok. 1,5 m; składa się z jelita ślepego z wyrostkiem robaczkowym, okrężnicy i odbytnicy.','Wchłania wodę i sole mineralne.','Żyjące w nim bakterie rozkładają błonnik i wytwarzają witaminę K oraz niektóre witaminy z grupy B.','Błonnik pobudza ruchy jelit i zapobiega zaparciom.'],
+  ['About 1.5 m long; made up of the caecum with the appendix, the colon and the rectum.','It absorbs water and mineral salts.','Its bacteria break down fibre and produce vitamin K and some B vitamins.','Fibre stimulates gut movement and prevents constipation.']],
+ ['rectum','Odbytnica i odbyt','Rectum and anus',0,'','',
+  ['Odbytnica gromadzi kał, a jej rozciągnięcie wywołuje potrzebę wypróżnienia.','Zwieracze odbytu – wewnętrzny (niezależny od woli) i zewnętrzny (zależny od woli) – kontrolują wydalanie.'],
+  ['The rectum stores faeces; its stretching triggers the urge to defecate.','The anal sphincters – internal (involuntary) and external (voluntary) – control defecation.']]
+ ]},
+{id:'mocz',pl:'Układ moczowy (wydalniczy)',en:'Urinary system',c:'#f9a825',
+ d:['Oczyszcza krew ze szkodliwych substancji i usuwa je z moczem.','Cleans harmful substances out of the blood and removes them in urine.'],
+ dA:['Nerki utrzymują stały skład płynów ustrojowych (homeostazę): regulują ilość wody i soli, pH krwi i ciśnienie tętnicze. Usuwają głównie mocznik – produkt przemiany białek – a także kwas moczowy, kreatyninę i nadmiar soli. Pracę nerek regulują hormony: wazopresyna (ADH) i aldosteron. Do narządów wydalniczych zalicza się też płuca (CO₂) i skórę (pot).','The kidneys keep body fluids stable (homeostasis): they regulate water and salt levels, blood pH and blood pressure. They mainly remove urea – a product of protein breakdown – as well as uric acid, creatinine and excess salts. Kidney function is regulated by the hormones vasopressin (ADH) and aldosterone. The lungs (CO₂) and skin (sweat) also help with excretion.'],
+ o:[
+ ['kidney','Nerki','Kidneys',1,'Dwa narządy w kształcie fasoli. Filtrują krew i wytwarzają mocz.','Two bean-shaped organs. They filter the blood and make urine.',
+  ['Każda nerka zawiera ok. miliona nefronów – podstawowych jednostek filtrujących.','W kłębuszku nerkowym z krwi filtruje się mocz pierwotny – ok. 150–180 l na dobę.','W kanalikach nerkowych większość wody, glukoza i potrzebne sole wracają do krwi; zostaje ok. 1,5 l moczu ostatecznego.','Nerki wytwarzają też erytropoetynę (pobudza powstawanie krwinek czerwonych) i reninę (podnosi ciśnienie) oraz aktywują witaminę D.'],
+  ['Each kidney contains about a million nephrons – the basic filtering units.','In the glomerulus, primary urine is filtered from the blood – about 150–180 l a day.','In the tubules most water, glucose and useful salts return to the blood, leaving about 1.5 l of final urine.','The kidneys also make erythropoietin (stimulates red blood cell production) and renin (raises blood pressure), and activate vitamin D.']],
+ ['ureter','Moczowody','Ureters',1,'Cienkie przewody, którymi mocz spływa z nerek do pęcherza.','Thin tubes that carry urine from the kidneys to the bladder.',
+  ['Mają ok. 25–30 cm; mocz przesuwają skurcze perystaltyczne ich ścian.','Mogą się w nich zaklinować kamienie nerkowe, wywołując silny ból (kolkę).'],
+  ['About 25–30 cm long; peristaltic contractions of their walls move the urine.','Kidney stones can get stuck in them, causing severe pain (colic).']],
+ ['bladder','Pęcherz moczowy','Urinary bladder',1,'Zbiornik na mocz. Gdy się wypełni, czujemy potrzebę pójścia do toalety.','A storage bag for urine. When it is full, we feel we need the toilet.',
+  ['Ma rozciągliwą, umięśnioną ścianę; mieści zwykle 300–500 ml moczu.','Przy wypełnieniu receptory rozciągania wysyłają sygnał do rdzenia i mózgu, a my możemy świadomie kontrolować zwieracz.'],
+  ['It has a stretchy, muscular wall and usually holds 300–500 ml of urine.','When it fills, stretch receptors send signals to the spinal cord and brain, and we can consciously control the sphincter.']],
+ ['urethra','Cewka moczowa','Urethra',0,'','',
+  ['Odprowadza mocz z pęcherza na zewnątrz.','U kobiet ma ok. 4 cm, u mężczyzn ok. 20 cm i jest wspólnym odcinkiem dróg moczowych i nasiennych.'],
+  ['Carries urine out of the body from the bladder.','It is about 4 cm long in women and about 20 cm in men, where it is shared with the reproductive tract.']]
+ ]},
+{id:'rozr',pl:'Układ rozrodczy',en:'Reproductive system',c:'#ad1457',
+ d:['Umożliwia wydanie na świat potomstwa. U kobiet i mężczyzn zbudowany jest inaczej.','Makes it possible to have children. It is built differently in women and men.'],
+ dA:['Gonady – jajniki i jądra – wytwarzają gamety (komórki jajowe i plemniki) w procesie mejozy oraz hormony płciowe. Do zapłodnienia dochodzi zwykle w jajowodzie; zarodek zagnieżdża się w błonie śluzowej macicy, a ciąża trwa ok. 38–40 tygodni. Cykl miesiączkowy trwa średnio 28 dni i jest regulowany przez FSH, LH, estrogeny i progesteron.','The gonads – ovaries and testes – produce gametes (eggs and sperm) by meiosis, as well as sex hormones. Fertilisation usually happens in the fallopian tube; the embryo implants in the uterine lining and pregnancy lasts about 38–40 weeks. The menstrual cycle lasts about 28 days on average and is regulated by FSH, LH, oestrogen and progesterone.'],
+ o:[
+ ['ovary','Jajniki','Ovaries',1,'Wytwarzają komórki jajowe i żeńskie hormony.','Produce egg cells and female hormones.',
+  ['Od okresu dojrzewania w każdym cyklu zwykle dojrzewa jeden pęcherzyk Graafa, z którego podczas owulacji uwalnia się komórka jajowa.','Po owulacji z pęcherzyka powstaje ciałko żółte wydzielające progesteron.','Wydzielają estrogeny i progesteron.'],
+  ['From puberty, usually one Graafian follicle matures in each cycle and releases an egg at ovulation.','After ovulation the follicle becomes the corpus luteum, which secretes progesterone.','They secrete oestrogens and progesterone.']],
+ ['tube','Jajowody','Fallopian tubes',0,'','',
+  ['Łączą jajniki z macicą; strzępki chwytają uwolnioną komórkę jajową.','Zwykle tu dochodzi do zapłodnienia.','Rzęski i skurcze przesuwają komórkę jajową lub zarodek do macicy.'],
+  ['Connect the ovaries to the uterus; fimbriae catch the released egg.','This is usually where fertilisation happens.','Cilia and contractions move the egg or embryo towards the uterus.']],
+ ['uterus','Macica','Uterus',1,'Narząd, w którym rozwija się dziecko podczas ciąży.','The organ where a baby develops during pregnancy.',
+  ['Ma grubą, umięśnioną ścianę i błonę śluzową (endometrium), która co miesiąc narasta i – jeśli nie dojdzie do ciąży – złuszcza się podczas miesiączki.','W ciąży powstaje łożysko, przez które płód dostaje tlen i pokarm.','Skurcze macicy podczas porodu wywołuje oksytocyna.'],
+  ['It has a thick muscular wall and a lining (endometrium) that thickens each month and, if there is no pregnancy, is shed during menstruation.','During pregnancy the placenta forms, supplying the foetus with oxygen and nutrients.','Contractions during labour are triggered by oxytocin.']],
+ ['vagina','Pochwa','Vagina',0,'','',['Łączy macicę ze środowiskiem zewnętrznym; jest drogą rodną podczas porodu.','Kwaśne środowisko chroni przed drobnoustrojami.'],['Connects the uterus to the outside of the body; it is the birth canal.','Its acidic environment protects against microbes.']],
+ ['testis','Jądra','Testes',1,'Wytwarzają plemniki i męski hormon testosteron.','Produce sperm and the male hormone testosterone.',
+  ['Plemniki powstają w kanalikach nasiennych; dojrzewanie jednego trwa ok. 2–2,5 miesiąca.','Leżą w mosznie poza jamą brzuszną, bo do powstawania plemników potrzebna jest temperatura niższa o ok. 2–3°C.','Komórki Leydiga wydzielają testosteron.'],
+  ['Sperm are made in the seminiferous tubules; one sperm takes about 2–2.5 months to mature.','They sit in the scrotum outside the abdomen because sperm production needs a temperature about 2–3°C lower.','Leydig cells secrete testosterone.']],
+ ['epid','Najądrza i nasieniowody','Epididymis and vas deferens',0,'','',
+  ['W najądrzach plemniki dojrzewają i są przechowywane.','Nasieniowody prowadzą plemniki do cewki moczowej.'],
+  ['Sperm mature and are stored in the epididymis.','The vas deferens carries sperm to the urethra.']],
+ ['prostate','Gruczoł krokowy (prostata) i pęcherzyki nasienne','Prostate and seminal vesicles',0,'','',
+  ['Wydzielają płyn, który wraz z plemnikami tworzy nasienie.','Wydzielina pęcherzyków nasiennych zawiera fruktozę – źródło energii dla plemników.'],
+  ['They produce fluid that together with sperm forms semen.','Seminal vesicle fluid contains fructose – an energy source for sperm.']]
+ ]},
+{id:'ruch',pl:'Układ ruchu',en:'Musculoskeletal system',c:'#6d4c41',
+ d:['Kości tworzą szkielet, który podtrzymuje i chroni ciało, a mięśnie poruszają kośćmi.','Bones form a skeleton that supports and protects the body, and muscles move the bones.'],
+ dA:['Bierną część układu tworzy szkielet (ok. 206 kości u dorosłego), czynną – mięśnie szkieletowe (ok. 600). Kości połączone są stawami, a mięśnie przyczepiają się do nich ścięgnami. Mięśnie działają parami antagonistycznymi: gdy jeden się kurczy, drugi się rozkurcza. Kości magazynują wapń i fosfor, a w szpiku czerwonym powstają krwinki.','The passive part is the skeleton (about 206 bones in an adult), the active part is the skeletal muscles (about 600). Bones are joined by joints and muscles attach to them by tendons. Muscles work in antagonistic pairs: when one contracts, the other relaxes. Bones store calcium and phosphorus, and blood cells are made in the red marrow.'],
+ o:[
+ ['skel','Kości (szkielet)','Bones (skeleton)',1,'Twarde rusztowanie ciała. Chronią mózg, serce i płuca i pozwalają nam stać.','The hard framework of the body. They protect the brain, heart and lungs and let us stand.',
+  ['Szkielet dzieli się na osiowy (czaszka, kręgosłup, klatka piersiowa) i kończyn wraz z obręczami.','Kość zawiera związki mineralne (głównie fosforan wapnia – twardość) i białko osseinę (sprężystość).','Kości długie rosną na długość w chrząstkach wzrostowych aż do końca okresu dojrzewania.','Najdłuższą kością jest kość udowa, najmniejszą strzemiączko w uchu środkowym.','Kręgosłup ma cztery naturalne krzywizny, które amortyzują wstrząsy.'],
+  ['The skeleton is divided into the axial skeleton (skull, spine, rib cage) and the limbs with their girdles.','Bone contains minerals (mainly calcium phosphate – hardness) and the protein ossein (flexibility).','Long bones grow in length at the growth plates until the end of puberty.','The longest bone is the femur, the smallest is the stapes in the middle ear.','The spine has four natural curves that absorb shocks.']],
+ ['joints','Stawy','Joints',1,'Ruchome połączenia kości, np. kolano i łokieć.','Movable joints between bones, such as the knee and elbow.',
+  ['Powierzchnie stawowe pokrywa gładka chrząstka, a maź stawowa zmniejsza tarcie.','Typy: zawiasowy (łokieć, kolano), kulisty (bark, biodro), obrotowy (między kręgami szyjnymi C1 i C2).','Stawy wzmacniają więzadła.'],
+  ['Joint surfaces are covered with smooth cartilage, and synovial fluid reduces friction.','Types: hinge (elbow, knee), ball-and-socket (shoulder, hip), pivot (between the C1 and C2 neck vertebrae).','Joints are reinforced by ligaments.']],
+ ['muscles','Mięśnie szkieletowe','Skeletal muscles',1,'Kurczą się i poruszają kośćmi. Działają zgodnie z naszą wolą.','They contract to move the bones. They work when we want them to.',
+  ['Zbudowane z tkanki mięśniowej poprzecznie prążkowanej szkieletowej; kurczą się dzięki białkom aktynie i miozynie.','Przykład pary antagonistycznej: biceps zgina łokieć, a triceps go prostuje.','Pracujące mięśnie wytwarzają ciepło – dlatego dygoczemy z zimna.','Oprócz nich w ciele są mięśnie gładkie (ściany narządów wewnętrznych) i mięsień sercowy – oba działają niezależnie od woli.'],
+  ['Made of skeletal striated muscle tissue; they contract thanks to the proteins actin and myosin.','An antagonistic pair: the biceps bends the elbow and the triceps straightens it.','Working muscles produce heat – which is why we shiver when cold.','The body also has smooth muscle (in the walls of internal organs) and heart muscle – both work involuntarily.']],
+ ['tendons','Ścięgna','Tendons',0,'','',
+  ['Mocne pasma tkanki łącznej przyczepiające mięśnie do kości.','Największe jest ścięgno Achillesa przy pięcie.'],
+  ['Strong bands of connective tissue attaching muscles to bones.','The largest is the Achilles tendon at the heel.']]
+ ]},
+{id:'skora',pl:'Układ powłokowy (skóra)',en:'Integumentary system (skin)',c:'#8d6e63',
+ d:['Skóra okrywa całe ciało, chroni przed urazami i drobnoustrojami, pomaga utrzymać stałą temperaturę i pozwala czuć dotyk.','The skin covers the whole body, protects against injury and microbes, helps keep a steady temperature and lets us feel touch.'],
+ dA:['Skóra to największy narząd człowieka (ok. 1,5–2 m², kilka kg). Składa się z naskórka (warstwa rozrodcza i zrogowaciała, melanocyty z barwnikiem melaniną), skóry właściwej (naczynia, nerwy, receptory, gruczoły, mieszki włosowe) i tkanki podskórnej (tłuszcz – izolacja i zapas energii). Pod wpływem promieni UV powstaje w niej witamina D.','The skin is the largest human organ (about 1.5–2 m², several kg). It consists of the epidermis (a dividing layer and a dead keratinised layer, plus melanocytes with the pigment melanin), the dermis (vessels, nerves, receptors, glands, hair follicles) and the subcutaneous tissue (fat – insulation and an energy store). Vitamin D is made in it under UV light.'],
+ o:[
+ ['skin','Skóra','Skin',1,'Chroni ciało, czuje dotyk, ciepło i ból oraz pomaga regulować temperaturę.','Protects the body, senses touch, heat and pain and helps control temperature.',
+  ['Naskórek stale się odnawia – zewnętrzne martwe komórki złuszczają się mniej więcej co miesiąc.','Melanina chroni przed promieniowaniem UV; od jej ilości zależy kolor skóry.','W skórze właściwej są receptory dotyku, ucisku, temperatury i bólu.','Gdy jest gorąco, naczynia krwionośne się rozszerzają i tracimy ciepło; gdy zimno – zwężają się.'],
+  ['The epidermis renews itself constantly – the outer dead cells are shed roughly every month.','Melanin protects against UV radiation; its amount determines skin colour.','The dermis contains receptors for touch, pressure, temperature and pain.','When it is hot, blood vessels widen and we lose heat; when cold, they narrow.']],
+ ['sweat','Gruczoły potowe','Sweat glands',1,'Wydzielają pot, który chłodzi ciało, gdy paruje.','Produce sweat, which cools the body as it evaporates.',
+  ['Człowiek ma ich 2–4 miliony.','Pot to głównie woda z solami i niewielką ilością mocznika – skóra pełni więc też funkcję wydalniczą.','Parowanie potu odbiera ciału ciepło.'],
+  ['Humans have 2–4 million of them.','Sweat is mainly water with salts and a little urea – so the skin also helps with excretion.','Evaporating sweat removes heat from the body.']],
+ ['sebum','Gruczoły łojowe','Sebaceous glands',0,'','',
+  ['Uchodzą do mieszków włosowych i wydzielają łój natłuszczający skórę i włosy.','Łój chroni skórę przed wysychaniem i hamuje rozwój bakterii; zatkane ujścia gruczołów prowadzą do trądziku.'],
+  ['They open into hair follicles and secrete sebum, which oils the skin and hair.','Sebum stops the skin drying out and slows bacterial growth; blocked glands lead to acne.']],
+ ['hair','Włosy i paznokcie','Hair and nails',0,'','',
+  ['Zbudowane z twardego białka – keratyny.','Włosy chronią przed promieniowaniem i utratą ciepła, a mięsień przywłosowy je stawia („gęsia skórka”).','Paznokcie chronią opuszki palców i ułatwiają chwytanie drobnych przedmiotów.'],
+  ['Made of a tough protein – keratin.','Hair protects against radiation and heat loss; the arrector pili muscle raises it (“goosebumps”).','Nails protect the fingertips and help us pick up small objects.']]
+ ]}
+];
+// Kształty narządów na schemacie ciała (widok z przodu, viewBox 0 0 400 760). k: 'f' wypełnienie, 's' linia
+const SIL='M200 18 C232 18 248 44 248 74 C248 104 236 122 220 128 L220 150 C246 156 276 160 292 172 C308 184 314 210 318 240 L332 330 C338 372 342 410 340 452 C340 468 330 476 324 470 C318 462 320 446 318 430 L304 330 L298 300 C296 340 290 372 276 404 C286 430 288 460 282 500 L272 620 C270 660 268 700 274 730 C276 744 262 748 250 744 C242 740 240 728 240 712 L232 620 C228 560 222 520 212 480 L206 470 L194 470 L188 480 C178 520 172 560 168 620 L160 712 C160 728 158 740 150 744 C138 748 124 744 126 730 C132 700 130 660 128 620 L118 500 C112 460 114 430 124 404 C110 372 104 340 102 300 L96 330 L82 430 C80 446 82 462 76 470 C70 476 60 468 60 452 C58 410 62 372 68 330 L82 240 C86 210 92 184 108 172 C124 160 154 156 180 150 L180 128 C164 122 152 104 152 74 C152 44 168 18 200 18 Z';
+const SH={
+ skin:['f',`<path d="${SIL}"/>`],
+ hair:['f','<path d="M154 66 C150 30 176 14 200 14 C226 14 252 30 246 66 C238 46 222 34 200 34 C178 34 162 46 154 66 Z"/><rect x="58" y="466" width="6" height="5" rx="2"/><rect x="336" y="466" width="6" height="5" rx="2"/><rect x="126" y="740" width="10" height="4" rx="2"/><rect x="264" y="740" width="10" height="4" rx="2"/>'],
+ sweat:['f','<circle cx="186" cy="50" r="2.4"/><circle cx="200" cy="46" r="2.4"/><circle cx="214" cy="50" r="2.4"/><circle cx="116" cy="210" r="2.6"/><circle cx="122" cy="220" r="2.6"/><circle cx="284" cy="210" r="2.6"/><circle cx="278" cy="220" r="2.6"/><circle cx="70" cy="440" r="2.4"/><circle cx="330" cy="440" r="2.4"/>'],
+ sebum:['f','<circle cx="186" cy="100" r="2"/><circle cx="214" cy="100" r="2"/><circle cx="200" cy="84" r="2"/><circle cx="180" cy="176" r="2"/><circle cx="220" cy="176" r="2"/>'],
+ skel:['s','<ellipse cx="200" cy="72" rx="40" ry="50"/><path d="M200 128 L200 410"/><path d="M200 175 C170 175 150 190 148 215 M200 195 C168 195 150 210 150 235 M200 215 C168 215 152 230 154 255 M200 235 C170 235 156 250 160 272 M200 175 C230 175 250 190 252 215 M200 195 C232 195 250 210 250 235 M200 215 C232 215 248 230 246 255 M200 235 C230 235 244 250 240 272"/><path d="M140 168 L260 168"/><path d="M150 400 C160 380 240 380 250 400 L240 440 L160 440 Z"/><path d="M128 178 L106 300 L86 430 M272 178 L294 300 L314 430"/><path d="M170 440 L158 600 L150 730 M230 440 L242 600 L250 730"/>'],
+ joints:['f','<circle cx="128" cy="178" r="7"/><circle cx="272" cy="178" r="7"/><circle cx="106" cy="300" r="6"/><circle cx="294" cy="300" r="6"/><circle cx="170" cy="440" r="7"/><circle cx="230" cy="440" r="7"/><circle cx="158" cy="600" r="7"/><circle cx="242" cy="600" r="7"/><circle cx="150" cy="730" r="5"/><circle cx="250" cy="730" r="5"/>'],
+ muscles:['f','<ellipse cx="114" cy="238" rx="11" ry="30" transform="rotate(10 114 238)"/><ellipse cx="286" cy="238" rx="11" ry="30" transform="rotate(-10 286 238)"/><ellipse cx="174" cy="196" rx="24" ry="14"/><ellipse cx="226" cy="196" rx="24" ry="14"/><ellipse cx="164" cy="510" rx="18" ry="56"/><ellipse cx="236" cy="510" rx="18" ry="56"/><ellipse cx="156" cy="655" rx="11" ry="34"/><ellipse cx="244" cy="655" rx="11" ry="34"/>'],
+ tendons:['s','<path d="M150 690 L150 726 M250 690 L250 726 M164 570 L160 596 M236 570 L240 596 M120 268 L108 296 M280 268 L292 296"/>'],
+ marrow:['f','<rect x="196" y="190" width="8" height="70" rx="3"/><path d="M160 404 C170 392 230 392 240 404 L236 422 L164 422 Z"/><rect x="161" y="470" width="7" height="110" rx="3"/><rect x="232" y="470" width="7" height="110" rx="3"/>'],
+ brain:['f','<ellipse cx="200" cy="62" rx="38" ry="30"/>'],
+ cereb:['f','<ellipse cx="216" cy="96" rx="15" ry="9"/>'],
+ stem:['f','<rect x="194" y="86" width="12" height="30" rx="5"/>'],
+ hypo:['f','<circle cx="196" cy="80" r="4.5"/>'],
+ pit:['f','<circle cx="200" cy="90" r="4"/>'],
+ pineal:['f','<circle cx="210" cy="74" r="3.5"/>'],
+ cord:['s','<path d="M200 116 L200 410"/>'],
+ nerves:['s','<path d="M200 170 C170 172 140 176 128 180 L106 300 L84 440 M200 170 C230 172 260 176 272 180 L294 300 L316 440 M200 410 L172 450 L160 600 L152 730 M200 410 L228 450 L240 600 L248 730 M200 240 L160 260 M200 240 L240 260 M200 320 L170 340 M200 320 L230 340"/>'],
+ nose:['f','<ellipse cx="200" cy="96" rx="7" ry="9"/>'],
+ mouth:['f','<ellipse cx="200" cy="112" rx="13" ry="5"/>'],
+ tonsils:['f','<circle cx="190" cy="119" r="3"/><circle cx="210" cy="119" r="3"/>'],
+ throat:['f','<rect x="195" y="114" width="10" height="20" rx="4"/>'],
+ larynx:['f','<rect x="192" y="134" width="16" height="11" rx="4"/>'],
+ thyroid:['f','<ellipse cx="191" cy="152" rx="8" ry="6"/><ellipse cx="209" cy="152" rx="8" ry="6"/><rect x="190" y="150" width="20" height="4"/>'],
+ parathy:['f','<circle cx="186" cy="148" r="2"/><circle cx="214" cy="148" r="2"/><circle cx="186" cy="157" r="2"/><circle cx="214" cy="157" r="2"/>'],
+ esoph:['s','<path d="M204 134 L206 286"/>'],
+ trachea:['f','<rect x="196" y="145" width="8" height="52" rx="3"/>'],
+ bronchi:['s','<path d="M200 196 L176 214 L164 232 M176 214 L170 246 M200 196 L224 214 L236 232 M224 214 L230 246"/>'],
+ lungs:['f','<path d="M190 182 C170 176 146 196 140 230 C134 262 140 284 160 286 C180 288 192 280 192 260 Z"/><path d="M210 182 C232 176 256 196 260 230 C266 262 260 284 240 286 C226 287 220 282 222 270 L222 250 C214 248 210 240 210 230 Z"/>'],
+ thymus:['f','<ellipse cx="200" cy="186" rx="11" ry="13"/>'],
+ heart:['f','<path d="M212 268 C196 256 186 244 188 232 C190 222 202 220 208 228 C212 218 226 218 228 230 C230 244 222 258 212 268 Z"/>'],
+ arteries:['s','<path d="M210 232 C210 206 190 200 188 216 L196 236 L196 410 L172 450 L164 600 L156 728 M196 410 L222 450 L234 600 L242 728 M200 210 L130 184 L110 300 L90 436 M200 210 L270 184 L290 300 L310 436 M194 214 L192 140 L190 90 M206 214 L208 140 L210 90"/>'],
+ veins:['s','<path d="M216 240 L216 410 L240 452 L248 600 L256 728 M216 410 L184 452 L172 600 L164 728 M214 232 L276 190 L296 300 L318 436 M214 232 L124 190 L104 300 L82 436 M214 222 L216 150 L216 92 M208 222 L186 150 L184 92"/>'],
+ caps:['s','<path d="M84 440 l-6 10 m6 -10 l2 12 m-2 -12 l8 9 M316 440 l6 10 m-6 -10 l-2 12 m2 -12 l-8 9 M152 728 l-6 8 m6 -8 l2 9 m-2 -9 l7 7 M248 728 l6 8 m-6 -8 l-2 9 m2 -9 l-7 7"/>'],
+ blood:['f','<path d="M200 0" />'],
+ nodes:['f','<circle cx="186" cy="138" r="4"/><circle cx="214" cy="138" r="4"/><circle cx="182" cy="160" r="4"/><circle cx="218" cy="160" r="4"/><circle cx="128" cy="198" r="4.5"/><circle cx="272" cy="198" r="4.5"/><circle cx="134" cy="210" r="4"/><circle cx="266" cy="210" r="4"/><circle cx="166" cy="430" r="4.5"/><circle cx="234" cy="430" r="4.5"/><circle cx="172" cy="442" r="4"/><circle cx="228" cy="442" r="4"/><circle cx="188" cy="360" r="3.5"/><circle cx="212" cy="372" r="3.5"/>'],
+ lvessels:['s','<path d="M186 138 L182 160 L196 200 L200 370 M214 138 L218 160 L204 200 M128 198 L170 200 L196 200 M272 198 L230 200 L204 200 M166 430 L188 410 L200 370 M234 430 L212 410 L200 370 M134 210 L110 300 M266 210 L290 300 M172 442 L164 600 M228 442 L236 600"/>'],
+ spleen:['f','<ellipse cx="262" cy="300" rx="11" ry="20" transform="rotate(20 262 300)"/>'],
+ diaphragm:['s','<path d="M138 288 C160 262 240 262 262 288"/>'],
+ liver:['f','<path d="M140 290 C150 276 214 272 232 284 C232 296 214 312 190 322 C166 330 146 322 140 310 Z"/>'],
+ gallb:['f','<ellipse cx="190" cy="322" rx="6" ry="8"/>'],
+ stomach:['f','<path d="M224 284 C246 280 262 292 260 312 C258 334 236 344 216 338 C206 334 206 324 214 320 C228 318 236 310 232 300 C228 294 222 292 222 288 Z"/>'],
+ pancreas:['f','<path d="M190 340 C206 334 236 330 256 332 C262 336 258 344 250 344 C232 344 212 350 196 350 C186 350 184 342 190 340 Z"/>'],
+ adrenal:['f','<path d="M160 330 L170 320 L180 330 Z"/><path d="M220 330 L230 320 L240 330 Z"/>'],
+ kidney:['f','<path d="M170 332 C158 332 154 350 156 362 C158 376 168 380 176 374 C170 366 170 352 178 346 C182 338 178 332 170 332 Z"/><path d="M230 332 C242 332 246 350 244 362 C242 376 232 380 224 374 C230 366 230 352 222 346 C218 338 222 332 230 332 Z"/>'],
+ ureter:['s','<path d="M172 374 L192 436 M228 374 L208 436"/>'],
+ bladder:['f','<ellipse cx="200" cy="444" rx="17" ry="13"/>'],
+ urethra:['s','<path d="M200 457 L200 474"/>'],
+ smallint:['f','<path d="M168 362 C168 350 232 350 232 362 C238 376 236 404 222 410 C206 416 192 416 178 410 C164 404 162 376 168 362 Z"/><path d="M178 368 C192 360 208 376 222 366 M176 384 C192 376 208 392 224 382 M178 398 C192 392 208 406 222 398" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2"/>'],
+ largeint:['s','<path d="M164 420 L160 354 C160 344 240 344 240 354 L240 418 C238 428 222 428 208 424"/>'],
+ rectum:['f','<rect x="196" y="422" width="8" height="16" rx="3"/>'],
+ ovary:['f','<ellipse cx="172" cy="424" rx="7" ry="5"/><ellipse cx="228" cy="424" rx="7" ry="5"/>'],
+ tube:['s','<path d="M180 422 C186 414 192 418 194 424 M220 422 C214 414 208 418 206 424"/>'],
+ uterus:['f','<path d="M192 418 C192 410 208 410 208 418 C208 430 204 438 200 440 C196 438 192 430 192 418 Z"/>'],
+ vagina:['f','<rect x="197" y="440" width="6" height="22" rx="3"/>'],
+ testis:['f','<ellipse cx="192" cy="484" rx="7" ry="9"/><ellipse cx="208" cy="484" rx="7" ry="9"/>'],
+ epid:['s','<path d="M186 478 C182 470 186 460 196 456 M214 478 C218 470 214 460 204 456"/>'],
+ prostate:['f','<circle cx="200" cy="462" r="6"/><ellipse cx="190" cy="454" rx="4" ry="3"/><ellipse cx="210" cy="454" rx="4" ry="3"/>']
+};
+const ALIAS={blood:['arteries','veins','heart']};
+const FEMALE=['ovary','tube','uterus','vagina'], MALE=['testis','epid','prostate'];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let L='pl';try{const s=localStorage.getItem('ukLang');if(s==='pl'||s==='en')L=s;}catch(e){}
+const T={pl:{t1:'Układy narządów człowieka',t2:'Wybierz układ, a potem kliknij narząd na schemacie albo na liście.',basic:'Podstawowy',adv:'Zaawansowany',f:'Kobieta',m:'Mężczyzna',pick:'Kliknij narząd na schemacie lub na liście, żeby poznać jego funkcje.',also:'Ten narząd należy też do:',organs:'Narządy'},
+ en:{t1:'Human organ systems',t2:'Choose a system, then click an organ on the diagram or in the list.',basic:'Basic',adv:'Advanced',f:'Female',m:'Male',pick:'Click an organ on the diagram or in the list to see what it does.',also:'This organ also belongs to:',organs:'Organs'}};
+const t=k=>T[L][k];const li=()=>L==='pl'?0:1;
+const S={sys:'nerw',lvl:'basic',sel:null,sex:'f'};
+try{const v=JSON.parse(localStorage.getItem('ukState')||'null');if(v)Object.assign(S,v,{sel:null});}catch(e){}
+const save=()=>{try{localStorage.setItem('ukState',JSON.stringify({sys:S.sys,lvl:S.lvl,sex:S.sex}));localStorage.setItem('ukLang',L);}catch(e){}};
+const sysById=id=>SYS.find(s=>s.id===id);
+const shapesOf=o=>ALIAS[o[0]]||[o[0]];
+const visibleOrgans=s=>s.o.filter(o=>(S.lvl==='adv'||o[3])&&!(S.sex==='f'&&MALE.includes(o[0]))&&!(S.sex==='m'&&FEMALE.includes(o[0])));
+function drawBody(){
+  const order=['skin','skel','marrow','muscles','tendons','joints','hair','sweat','sebum','nerves','cord','arteries','veins','caps','lvessels','nodes','brain','cereb','stem','hypo','pit','pineal','nose','throat','mouth','tonsils','larynx','esoph','thyroid','parathy','trachea','lungs','bronchi','thymus','heart','diaphragm','spleen','kidney','adrenal','ureter','liver','gallb','stomach','pancreas','largeint','smallint','bladder','urethra','rectum','ovary','tube','uterus','vagina','prostate','epid','testis'];
+  let s=`<svg viewBox="0 0 400 760" role="img" aria-label="${esc(t('t1'))}"><path id="silh" d="${SIL}"/>`;
+  order.forEach(id=>{const [k,svg]=SH[id];s+=`<g class="sh ${k}" data-s="${id}" ${k==='s'?`stroke-width="${id==='cord'?6:id==='esoph'?5:id==='largeint'?9:id==='skel'?3:2.6}"`:''}>${svg}</g>`;});
+  $('#bodysvg').innerHTML=s+'</svg>';
+}
+function paint(){
+  const sys=sysById(S.sys), vis=visibleOrgans(sys);
+  document.documentElement.style.setProperty('--acc',sys.c);
+  const on=new Set(vis.flatMap(shapesOf)), sel=S.sel!=null?new Set(shapesOf(sys.o[S.sel])):new Set();
+  $$('.sh').forEach(g=>{const id=g.dataset.s;g.classList.remove('on','sel','ghost','off');
+    if((S.sex==='f'&&MALE.includes(id))||(S.sex==='m'&&FEMALE.includes(id))){g.classList.add('off');return;}
+    g.style.removeProperty('--acc');g.style.opacity='';
+    if(sel.has(id))g.classList.add('sel');else if(on.has(id)){g.classList.add('on');const k=[...on].indexOf(id);if(g.classList.contains('f'))g.style.opacity=k%2?'.68':'.92';}else g.classList.add('ghost');
+    if(id==='veins'&&(on.has(id)||sel.has(id)))g.style.setProperty('--acc','#1e63b8');
+    if(id==='skin'&&!on.has('skin'))g.classList.add('off');});
+}
+function render(){
+  document.documentElement.lang=L;$('#t1').textContent=t('t1');$('#t2').textContent=t('t2');
+  $('#lvl').innerHTML=`<button data-lvl="basic" aria-pressed="${S.lvl==='basic'}">${t('basic')}</button><button data-lvl="adv" aria-pressed="${S.lvl==='adv'}">${t('adv')}</button>`;
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
+  $('#systems').innerHTML=SYS.map(s=>`<button data-sys="${s.id}" style="--c:${s.c}" aria-pressed="${S.sys===s.id}"><i></i>${esc(s[L])}</button>`).join('');
+  const sys=sysById(S.sys);
+  $('#sex').hidden=!(S.sys==='rozr'||S.sys==='dokr');
+  $('#sex').innerHTML=`<button data-sex="f" aria-pressed="${S.sex==='f'}">♀ ${t('f')}</button><button data-sex="m" aria-pressed="${S.sex==='m'}">♂ ${t('m')}</button>`;
+  const vis=visibleOrgans(sys);
+  if(S.sel!=null&&!vis.includes(sys.o[S.sel]))S.sel=null;
+  let h=`<div class="sysinfo"><h2>${esc(sys[L])}</h2><p>${esc(sys.d[li()])}</p>${S.lvl==='adv'?`<p class="adv">${esc(sys.dA[li()])}</p>`:''}</div>`;
+  h+=`<h3 style="margin:18px 0 0;font-size:1.05rem">${t('organs')}</h3><div class="olist">${vis.map(o=>{const i=sys.o.indexOf(o);return `<button data-o="${i}" aria-pressed="${S.sel===i}">${esc(o[li()+1])}</button>`;}).join('')}</div>`;
+  if(S.sel==null)h+=`<p class="hint">${t('pick')}</p>`;
+  else{const o=sys.o[S.sel];const other=SYS.filter(s=>s.id!==sys.id&&s.o.some(x=>x[0]===o[0]));
+    const basic=o[4+li()], facts=o[6+li()];
+    h+=`<article class="card"><h3>${esc(o[li()+1])}</h3><p class="en">${esc(o[(1-li())+1])}</p>${basic?`<p style="margin:0">${esc(basic)}</p>`:''}${S.lvl==='adv'&&facts.length?`<ul>${facts.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>`:''}
+     ${other.length?`<p class="also">${t('also')} ${other.map(s=>`<button data-jump="${s.id}:${o[0]}">${esc(s[L])}</button>`).join(', ')}</p>`:''}</article>`;}
+  $('#info').innerHTML=h;paint();save();
+}
+const tip=$('#tip');
+$('#bodysvg').addEventListener('mousemove',e=>{const g=e.target.closest('.sh');if(!g||g.classList.contains('off')){tip.hidden=true;return;}const n=organName(g.dataset.s);if(!n){tip.hidden=true;return;}tip.hidden=false;tip.textContent=n;tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';});
+$('#bodysvg').addEventListener('mouseleave',()=>tip.hidden=true);
+function findOrgan(shape){const sys=sysById(S.sys);let i=sys.o.findIndex(o=>shapesOf(o).includes(shape)&&visibleOrgans(sys).includes(o));if(i>=0)return [sys.id,i];
+  for(const s of SYS){const j=s.o.findIndex(o=>shapesOf(o).includes(shape)&&(S.lvl==='adv'||o[3]));if(j>=0)return [s.id,j];}return null;}
+function organName(shape){const f=findOrgan(shape);if(!f)return '';const o=sysById(f[0]).o[f[1]];return o[li()+1];}
+$('#bodysvg').addEventListener('click',e=>{const g=e.target.closest('.sh');if(!g||g.classList.contains('off'))return;const f=findOrgan(g.dataset.s);if(!f)return;
+  if(f[0]===S.sys&&S.sel===f[1]){S.sel=null;}else{S.sys=f[0];S.sel=f[1];}render();});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.lang){L=b.dataset.lang;render();}
+  else if(b.dataset.lvl){S.lvl=b.dataset.lvl;render();}
+  else if(b.dataset.sys){S.sys=b.dataset.sys;S.sel=null;render();}
+  else if(b.dataset.sex){S.sex=b.dataset.sex;render();}
+  else if(b.dataset.o!=null){const i=+b.dataset.o;S.sel=S.sel===i?null:i;render();}
+  else if(b.dataset.jump){const [sid,shape]=b.dataset.jump.split(':');const s=sysById(sid);S.sys=sid;S.sel=s.o.findIndex(o=>o[0]===shape);if(S.lvl==='basic'&&!s.o[S.sel][3])S.lvl='adv';render();}});
+drawBody();render();
+
+</script>
+<a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><script>(function(){var a=document.getElementById('home-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+</body>
+</html>

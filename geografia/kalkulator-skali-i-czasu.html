@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('skalaPrLang',l)}catch(e){}})();</script><!--site-lang-->
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kalkulator skali i stref czasowych</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#edf1f4;--paper:#fbfcfd;--ink:#16222c;--muted:#566571;--line:#cfd8df;--soft:#e2e9ef;--acc:#1f5f8b;--acc-t:#1f5f8b;--acc-ink:#fff;--sun:#f2c14e;--night:#1d3550;--focus:#c2571a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11171c;--paper:#182129;--ink:#e3eaf0;--muted:#98a8b5;--line:#2c3945;--soft:#1f2a34;--acc:#2f78ad;--acc-t:#8cc0e8;--night:#0b1622;--focus:#f0a36a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11171c;--paper:#182129;--ink:#e3eaf0;--muted:#98a8b5;--line:#2c3945;--soft:#1f2a34;--acc:#2f78ad;--acc-t:#8cc0e8;--night:#0b1622;--focus:#f0a36a;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.5 'Atkinson Hyperlegible',system-ui,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 20px 60px}
+h1,h2,h3,.disp{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;letter-spacing:-.015em;line-height:1.1}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:16px}
+header h1{margin:0;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800}
+.main-tabs{display:flex;gap:6px}
+.hr{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:5px 12px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--paper);font-weight:700}
+@media (max-width:820px){.hr{align-items:flex-start}}
+.main-tabs button,.seg button{font:inherit;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 18px;font-weight:700}
+.main-tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 18px}
+.seg button{font-weight:400;font-size:.95rem;border-radius:10px;padding:7px 14px}
+.seg button[aria-selected=true]{border-color:var(--acc);color:var(--acc-t);font-weight:700;background:var(--soft)}
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:24px 26px}
+.panel h2{margin:0 0 4px;font-size:1.55rem}
+.panel .sub{margin:0 0 18px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-end}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.88rem;color:var(--muted)}
+input,select{font:inherit;font-size:1.25rem;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:8px 12px;min-width:0}
+input:focus,select:focus{border-color:var(--acc);outline:none}
+.scale-in{display:flex;align-items:center;gap:6px}
+.scale-in span{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.5rem}
+input.w-num{width:8.5em}input.w-sc{width:7.5em}input.w-sm{width:5em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+.chips button{font:inherit;font-size:.85rem;cursor:pointer;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:3px 10px}
+.chips button:hover{border-color:var(--acc)}
+.answer{margin:22px 0 0;padding:18px 20px;border-radius:14px;background:var(--soft);border-left:6px solid var(--acc)}
+.answer .big{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.05;margin:0}
+.answer .alt{margin:6px 0 0;color:var(--muted)}
+.answer.err{border-left-color:var(--focus)}
+.steps{margin:16px 0 0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding-left:40px;margin:0 0 8px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.bar{margin:18px 0 4px;overflow-x:auto}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+/* zones */
+.clocks{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.clock{position:relative;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--paper)}
+.clock.home{border-color:var(--acc);border-width:2.5px}
+.clock .c{font-size:.95rem;font-weight:700}
+.clock .t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:2.4rem;line-height:1.05}
+.clock .o{font-size:.85rem;color:var(--muted)}
+.clock .x{position:absolute;right:6px;top:6px;border:0;background:transparent;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1}
+.clock .dn{font-size:1.2rem;margin-left:6px}
+.ruler{overflow-x:auto;margin:20px 0 0;padding-bottom:6px}
+.ruler-in{display:grid;grid-template-columns:repeat(27,minmax(64px,1fr));min-width:1728px;border-radius:12px;overflow:hidden;border:1.5px solid var(--line)}
+.zc{position:relative;min-height:150px;padding:6px 2px;text-align:center;font-size:.72rem;border-right:1px solid rgba(127,127,127,.25)}
+.zc.day{background:color-mix(in srgb,var(--sun) 38%,var(--paper))}
+.zc.twi{background:color-mix(in srgb,var(--sun) 14%,var(--soft))}
+.zc.night{background:var(--night);color:#dbe6f1}
+.zc .h{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1rem;display:block}
+.zc .u{opacity:.8}
+.zc .ct{display:block;margin-top:5px;font-size:.66rem;line-height:1.15;font-weight:700;overflow-wrap:normal;hyphens:auto;background:var(--paper);color:var(--ink);border-radius:6px;padding:2px 2px}
+.zc.home-z{outline:3px solid var(--acc);outline-offset:-3px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;font-size:.85rem;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px}
+.note{color:var(--muted);font-size:.9rem;margin:14px 0 0;max-width:72ch}
+.btn{font:inherit;font-size:.95rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:8px 14px}
+.btn:hover{border-color:var(--acc)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@media (max-width:700px){.cmp{grid-template-columns:1fr}.panel{padding:18px}}
+/* ---- Praktyka ---- */
+#praktyka .ptop{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:flex-end;justify-content:space-between;margin:22px 0 16px}
+#praktyka .pctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-end}
+#praktyka .lvl{display:inline-flex;gap:6px;flex-wrap:wrap}
+#praktyka .lvl button,#praktyka .types button{font:inherit;font-size:.92rem;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:6px 12px}
+#praktyka .lvl button[aria-pressed=true],#praktyka .types button[aria-pressed=true]{border-color:var(--acc);background:var(--soft);color:var(--acc-t);font-weight:700}
+#praktyka .types{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+#praktyka .score{display:flex;flex-wrap:wrap;gap:8px}
+#praktyka .score span{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:6px 12px;font-size:.9rem;color:var(--muted)}
+#praktyka .score b{color:var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-size:1.25rem;margin-left:4px}
+#praktyka .task{font-size:1.2rem;line-height:1.5;margin:0 0 6px}
+#praktyka .task strong{font-family:'Bricolage Grotesque',sans-serif;font-size:1.3rem}
+#praktyka .pstep{border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0 0;background:var(--paper)}
+#praktyka .pstep.locked{opacity:.45}
+#praktyka .pstep.done{border-color:#2e8b57;background:color-mix(in srgb,#2e8b57 8%,var(--paper))}
+#praktyka .pstep.shown{border-color:var(--focus)}
+#praktyka .pstep h3{margin:0 0 6px;font-size:1.05rem;display:flex;gap:10px;align-items:center}
+#praktyka .pstep h3 .n{width:30px;height:30px;border-radius:50%;background:var(--acc);color:var(--acc-ink);display:inline-grid;place-items:center;font-size:.9rem;flex:none}
+#praktyka .pstep.done h3 .n{background:#2e8b57}
+#praktyka .pstep p.q{margin:0 0 10px}
+#praktyka .arow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#praktyka .arow input{width:9em;font-size:1.3rem}
+#praktyka .arow select{font-size:1.15rem}
+#praktyka .arow .pre{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.4rem}
+#praktyka .pbtn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--acc);background:var(--acc);color:var(--acc-ink);border-radius:10px;padding:8px 18px}
+#praktyka .pbtn.ghost{background:transparent;color:var(--acc-t)}
+#praktyka .pbtn:disabled{opacity:.5;cursor:default}
+#praktyka .fb{margin:10px 0 0;padding:10px 12px;border-radius:10px;font-size:1rem}
+#praktyka .fb.ok{background:color-mix(in srgb,#2e8b57 16%,var(--paper));color:var(--ink)}
+#praktyka .fb.bad{background:color-mix(in srgb,var(--focus) 15%,var(--paper))}
+#praktyka .fb.sol{background:var(--soft);border-left:5px solid var(--focus)}
+#praktyka .final{margin:16px 0 0;padding:16px 18px;border-radius:14px;background:var(--soft);border-left:6px solid #2e8b57;font-size:1.1rem}
+#praktyka .final .big{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(1.5rem,4vw,2.2rem)}
+#praktyka .newb{margin-top:16px}
+@media (max-width:640px){#praktyka .arow input{width:100%;flex:1 1 140px}#praktyka .task{font-size:1.05rem}#praktyka .pstep{padding:12px}}
+
+#praktyka .mut{color:var(--muted);font-size:.9rem}
+.main-tabs{flex-wrap:wrap}
+@media (max-width:640px){.main-tabs button{padding:7px 13px;font-size:.95rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1 data-i18n="h1">Kalkulator skali i stref czasowych</h1>
+<div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
+<div class="main-tabs" role="tablist"><button role="tab" data-main="skala" aria-selected="true" data-i18n="tabScale">Skala mapy</button><button role="tab" data-main="czas" aria-selected="false" data-i18n="tabTime">Czas na Ziemi</button><button role="tab" data-main="praktyka" aria-selected="false" data-i18n="tabPr">Praktyka</button></div></div></header>
+
+<section id="skala">
+ <div class="seg" role="tablist">
+  <button data-s="teren" aria-selected="true" data-i18n="sTeren">Odległość w terenie</button>
+  <button data-s="mapa" aria-selected="false" data-i18n="sMapa">Odległość na mapie</button>
+  <button data-s="oblicz" aria-selected="false" data-i18n="sOblicz">Oblicz skalę</button>
+  <button data-s="zamiana" aria-selected="false" data-i18n="sZamiana">Rodzaje skali</button>
+  <button data-s="porownaj" aria-selected="false" data-i18n="sPorownaj">Która skala większa?</button>
+ </div>
+
+ <div class="panel" data-sp="teren">
+  <h2 data-i18n="tH">Ile to w terenie?</h2><p class="sub" data-i18n="tSub">Zmierz odległość na mapie linijką i wpisz skalę mapy.</p>
+  <div class="row">
+   <label class="f"><span data-i18n="lMapDist">Odległość na mapie</span><span class="row" style="gap:6px"><input class="w-num" id="t_d" value="4,5" inputmode="decimal"><select id="t_u"><option value="0.1">mm</option><option value="1" selected>cm</option></select></span></label>
+   <label class="f"><span data-i18n="lScale">Skala mapy</span><span class="scale-in"><span>1 :</span><input class="w-sc" id="t_s" value="50 000" inputmode="numeric"></span></label>
+  </div>
+  <div class="chips" data-for="t_s"></div>
+  <div id="t_out"></div>
+ </div>
+
+ <div class="panel" data-sp="mapa" hidden>
+  <h2 data-i18n="mH">Ile to na mapie?</h2><p class="sub" data-i18n="mSub">Wpisz odległość w terenie i skalę mapy.</p>
+  <div class="row">
+   <label class="f"><span data-i18n="lGroundDist">Odległość w terenie</span><span class="row" style="gap:6px"><input class="w-num" id="m_d" value="3" inputmode="decimal"><select id="m_u"><option value="100">m</option><option value="100000" selected>km</option></select></span></label>
+   <label class="f"><span data-i18n="lScale">Skala mapy</span><span class="scale-in"><span>1 :</span><input class="w-sc" id="m_s" value="50 000" inputmode="numeric"></span></label>
+  </div>
+  <div class="chips" data-for="m_s"></div>
+  <div id="m_out"></div>
+ </div>
+
+ <div class="panel" data-sp="oblicz" hidden>
+  <h2 data-i18n="oH">Jaka to skala?</h2><p class="sub" data-i18n="oSub">Znasz odległość na mapie i tę samą odległość w terenie.</p>
+  <div class="row">
+   <label class="f"><span data-i18n="lMapDist">Odległość na mapie</span><span class="row" style="gap:6px"><input class="w-num" id="o_m" value="3" inputmode="decimal"><select id="o_mu"><option value="0.1">mm</option><option value="1" selected>cm</option></select></span></label>
+   <label class="f"><span data-i18n="lGroundDist">Odległość w terenie</span><span class="row" style="gap:6px"><input class="w-num" id="o_t" value="1,5" inputmode="decimal"><select id="o_tu"><option value="100">m</option><option value="100000" selected>km</option></select></span></label>
+  </div>
+  <div id="o_out"></div>
+ </div>
+
+ <div class="panel" data-sp="zamiana" hidden>
+  <h2 data-i18n="zH">Skala liczbowa, mianowana i liniowa</h2><p class="sub" data-i18n="zSub">Wpisz skalę liczbową, a zobaczysz ją w trzech postaciach.</p>
+  <label class="f"><span data-i18n="lNumScale">Skala liczbowa</span><span class="scale-in"><span>1 :</span><input class="w-sc" id="z_s" value="25 000" inputmode="numeric"></span></label>
+  <div class="chips" data-for="z_s"></div>
+  <div id="z_out"></div>
+ </div>
+
+ <div class="panel" data-sp="porownaj" hidden>
+  <h2 data-i18n="pH">Która skala jest większa?</h2><p class="sub" data-i18n="pSub">Większa skala to mniejsza liczba po dwukropku – mapa pokazuje mniejszy obszar, ale dokładniej.</p>
+  <div class="cmp">
+   <label class="f"><span data-i18n="lMapA">Mapa A</span><span class="scale-in"><span>1 :</span><input class="w-sc" id="p_a" value="10 000" inputmode="numeric"></span></label>
+   <label class="f"><span data-i18n="lMapB">Mapa B</span><span class="scale-in"><span>1 :</span><input class="w-sc" id="p_b" value="1 000 000" inputmode="numeric"></span></label>
+  </div>
+  <div id="p_out"></div>
+ </div>
+</section>
+
+<section id="czas" hidden>
+ <div class="seg" role="tablist">
+  <button data-c="zegary" aria-selected="true" data-i18n="cZegary">Zegary świata</button>
+  <button data-c="przelicz" aria-selected="false" data-i18n="cPrzelicz">Przelicz godzinę</button>
+  <button data-c="sloneczny" aria-selected="false" data-i18n="cSlon">Czas słoneczny</button>
+ </div>
+
+ <div class="panel" data-cp="zegary">
+  <h2 data-i18n="zgH">Która godzina na świecie?</h2><p class="sub" data-i18n="zgSub">Czas strefowy w wybranych miastach. Pasek poniżej pokazuje, gdzie jest teraz dzień, a gdzie noc.</p>
+  <div class="clocks" id="clocks"></div>
+  <div class="row" style="margin-top:14px"><label class="f"><span data-i18n="lAddCity">Dodaj miasto</span><select id="addcity"></select></label></div>
+  <div class="ruler"><div class="ruler-in" id="ruler"></div></div>
+  <div class="legend"><span><i style="background:color-mix(in srgb,var(--sun) 38%,var(--paper))"></i><span data-i18n="lgDay">dzień (7–18)</span></span><span><i style="background:color-mix(in srgb,var(--sun) 14%,var(--soft))"></i><span data-i18n="lgTwi">świt i zmierzch</span></span><span><i style="background:var(--night)"></i><span data-i18n="lgNight">noc (21–4)</span></span><span data-i18n="lgHome">W ramce: obecny czas urzędowy w Polsce</span></div>
+  <p class="note" data-i18n="zgNote">Strefy na pasku są wyrównane do pełnych godzin. Niektóre kraje mają przesunięcie o pół godziny lub 45 minut (np. Indie, Nepal). Polska leży w strefie UTC+1, a od końca marca do końca października obowiązuje czas letni, czyli UTC+2.</p>
+ </div>
+
+ <div class="panel" data-cp="przelicz" hidden>
+  <h2 data-i18n="cvH">Przelicz godzinę między miastami</h2><p class="sub" data-i18n="cvSub">Uwzględnia czas letni i zmianę daty.</p>
+  <div class="row">
+   <label class="f"><span data-i18n="lCity">Miasto</span><select id="c_a"></select></label>
+   <label class="f"><span data-i18n="lDate">Data</span><input type="date" id="c_date"></label>
+   <label class="f"><span data-i18n="lTime">Godzina</span><input type="time" id="c_time"></label>
+   <button class="btn" id="c_now" data-i18n="bNow">Teraz</button>
+  </div>
+  <div class="row" style="margin-top:14px"><label class="f"><span data-i18n="lCityB">Ile jest wtedy w mieście</span><select id="c_b"></select></label><button class="btn" id="c_swap" title="Zamień miasta" data-i18n="bSwap" data-i18n-title="bSwapT">⇄ Zamień</button></div>
+  <div id="c_out"></div>
+ </div>
+
+ <div class="panel" data-cp="sloneczny" hidden>
+  <h2 data-i18n="sH">Czas słoneczny z długości geograficznej</h2><p class="sub" data-i18n="sSub">Ziemia obraca się o 15° w ciągu godziny, czyli o 1° w 4 minuty. Na wschód jest później, na zachód wcześniej.</p>
+  <div class="cmp">
+   <div><h3 style="margin:0 0 8px" data-i18n="sPlA">Miejsce A</h3>
+    <div class="row"><label class="f"><span data-i18n="lLon">Długość geograficzna</span><span class="row" style="gap:6px"><input class="w-sm" id="s_ad" value="21" inputmode="numeric">°<input class="w-sm" id="s_am" value="0" inputmode="numeric">′<select id="s_ae"><option value="1">E</option><option value="-1">W</option></select></span></label>
+    <label class="f"><span data-i18n="lSunTime">Czas słoneczny</span><input type="time" id="s_at" value="12:00"></label></div>
+    <div class="chips" data-lon="a"></div></div>
+   <div><h3 style="margin:0 0 8px" data-i18n="sPlB">Miejsce B</h3>
+    <div class="row"><label class="f"><span data-i18n="lLon">Długość geograficzna</span><span class="row" style="gap:6px"><input class="w-sm" id="s_bd" value="14" inputmode="numeric">°<input class="w-sm" id="s_bm" value="33" inputmode="numeric">′<select id="s_be"><option value="1">E</option><option value="-1">W</option></select></span></label></div>
+    <div class="chips" data-lon="b"></div></div>
+  </div>
+  <div id="s_out"></div>
+ </div>
+</section>
+
+<section id="praktyka" hidden>
+ <div class="ptop">
+  <div class="pctl">
+   <div class="lvl" role="group" id="p_lvl"></div>
+  </div>
+  <div class="score" id="p_score" aria-live="polite"></div>
+ </div>
+ <div class="types" role="group" id="p_types"></div>
+ <div class="panel" id="p_panel"></div>
+</section>
+
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+// --- język (wspólny dla całego narzędzia)
+let L='pl';try{const v=localStorage.getItem('skalaPrLang');if(v==='pl'||v==='en')L=v;}catch(e){}
+const tr=(pl,en)=>L==='en'?en:pl;
+const NFS={pl:new Intl.NumberFormat('pl-PL',{maximumFractionDigits:3}),en:new Intl.NumberFormat('en-GB',{maximumFractionDigits:3})};
+const fmt=n=>NFS[L].format(n).replace(/[  ]/g,' ');
+const numL=(v,lg)=>{let s=String(v).replace(/[\s  ]/g,'');if(lg==='en'&&/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(s))s=s.replace(/,/g,'');const x=parseFloat(s.replace(',','.'));return isFinite(x)?x:NaN;};
+const num=v=>numL(v,L);
+const scl=v=>{const s=String(v).replace(/[\s  ]/g,'');const m=s.match(L==='en'?/^(?:1:)?(\d+(?:[.,]\d+)*)$/:/^(?:1:)?(\d+(?:[.,]\d+)?)$/);return m?num(m[1]):NaN;};
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const err=t=>`<div class="answer err"><p style="margin:0">${t}</p></div>`;
+const I18N_EN={h1:'Scale and time zone calculator',tabScale:'Map scale',tabTime:'Time on Earth',tabPr:'Practice',
+ sTeren:'Distance on the ground',sMapa:'Distance on the map',sOblicz:'Find the scale',sZamiana:'Types of scale',sPorownaj:'Which scale is larger?',
+ tH:'How far is it on the ground?',tSub:'Measure the distance on the map with a ruler and enter the map scale.',lMapDist:'Distance on the map',lScale:'Map scale',
+ mH:'How long is it on the map?',mSub:'Enter the distance on the ground and the map scale.',lGroundDist:'Distance on the ground',
+ oH:'What is the scale?',oSub:'You know a distance on the map and the same distance on the ground.',
+ zH:'Numerical, verbal and linear scale',zSub:'Enter a numerical scale to see it in three forms.',lNumScale:'Numerical scale',
+ pH:'Which scale is larger?',pSub:'A larger scale has a smaller number after the colon – the map shows a smaller area, but in more detail.',lMapA:'Map A',lMapB:'Map B',
+ cZegary:'World clocks',cPrzelicz:'Convert the time',cSlon:'Solar time',
+ zgH:'What time is it around the world?',zgSub:'Zone (standard) time in selected cities. The bar below shows where it is day and where it is night right now.',lAddCity:'Add a city',
+ lgDay:'day (7–18)',lgTwi:'dawn and dusk',lgNight:'night (21–4)',lgHome:'Framed: current official time in Poland',
+ zgNote:'The zones on the bar are rounded to whole hours. Some countries are offset by half an hour or 45 minutes (e.g. India, Nepal). Poland lies in the UTC+1 zone, and from the end of March to the end of October it uses summer time, i.e. UTC+2.',
+ cvH:'Convert the time between cities',cvSub:'Takes summer time and date changes into account.',lCity:'City',lDate:'Date',lTime:'Time',bNow:'Now',lCityB:'What time is it then in',bSwap:'⇄ Swap',bSwapT:'Swap cities',
+ sH:'Solar time from longitude',sSub:'The Earth rotates 15° in an hour, which is 1° every 4 minutes. To the east it is later, to the west earlier.',sPlA:'Place A',sPlB:'Place B',lLon:'Longitude',lSunTime:'Solar time'};
+const I18N_PL={};
+$$('[data-i18n]').forEach(el=>{I18N_PL[el.dataset.i18n]=el.innerHTML;});
+$$('[data-i18n-title]').forEach(el=>{I18N_PL[el.dataset.i18nTitle]=el.title;});
+const TITLE_PL=document.title, TITLE_EN='Scale and time zone calculator';
+function applyStatic(){
+  const D=L==='en'?I18N_EN:I18N_PL;
+  $$('[data-i18n]').forEach(el=>{el.innerHTML=D[el.dataset.i18n];});
+  $$('[data-i18n-title]').forEach(el=>{el.title=D[el.dataset.i18nTitle];});
+  document.title=L==='en'?TITLE_EN:TITLE_PL;document.documentElement.lang=L;
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
+}
+function cmTo(cm){ // zwraca [główny tekst, alternatywy]
+  const m=cm/100, km=cm/100000;
+  if(cm<100) return [fmt(cm)+' cm',[fmt(m)+' m']];
+  if(km<1) return [fmt(m)+' m',[fmt(km)+' km',fmt(cm)+' cm']];
+  return [fmt(km)+' km',[fmt(m)+' m',fmt(cm)+' cm']];
+}
+function unitConv(cm){const st=[];if(cm>=100)st.push(`${fmt(cm)} cm = ${fmt(cm/100)} m`);if(cm>=100000)st[0]+=` = ${fmt(cm/100000)} km`;return st;}
+function named(den){const cm=den; return cm>=100000?`1 cm – ${fmt(cm/100000)} km`:`1 cm – ${fmt(cm/100)} m`;}
+// --- skala presets
+const PRES=[10000,25000,50000,100000,200000,500000,1000000,5000000];
+function renderChips(){$$('.chips[data-for]').forEach(c=>{c.innerHTML=PRES.map(p=>`<button data-v="${p}">1 : ${fmt(p)}</button>`).join('');});}
+$$('.chips[data-for]').forEach(c=>{c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;$('#'+c.dataset.for).value=fmt(+b.dataset.v);calc();});});
+renderChips();
+const ol=st=>`<ol class="steps">${st.map(x=>`<li>${x}</li>`).join('')}</ol>`;
+function calcTeren(){
+  const d=num($('#t_d').value), u=+$('#t_u').value, s=scl($('#t_s').value);
+  if(!(d>0)) return $('#t_out').innerHTML=err(tr('Wpisz odległość na mapie, np. 4,5.','Enter the distance on the map, e.g. 4.5.'));
+  if(!(s>0)) return $('#t_out').innerHTML=err(tr('Wpisz skalę jako liczbę po dwukropku, np. 50 000.','Enter the scale as the number after the colon, e.g. 50,000.'));
+  const dcm=d*u, tcm=dcm*s, [main,alt]=cmTo(tcm);
+  const st=[tr(`Skala 1 : ${fmt(s)} oznacza, że 1 cm na mapie to ${fmt(s)} cm w terenie.`,`A scale of 1 : ${fmt(s)} means that 1 cm on the map represents ${fmt(s)} cm on the ground.`)];
+  if(u!==1) st.push(tr(`Zamień na centymetry: ${fmt(d)} mm = ${fmt(dcm)} cm.`,`Convert to centimetres: ${fmt(d)} mm = ${fmt(dcm)} cm.`));
+  st.push(tr(`Pomnóż: ${fmt(dcm)} cm × ${fmt(s)} = ${fmt(tcm)} cm.`,`Multiply: ${fmt(dcm)} cm × ${fmt(s)} = ${fmt(tcm)} cm.`));
+  const c=unitConv(tcm); if(c.length) st.push(tr('Zamień jednostki: ','Convert the units: ')+c[0]+'.');
+  $('#t_out').innerHTML=`<div class="answer"><p class="big">${main}</p><p class="alt">${tr('czyli','that is')} ${alt.join(tr(' lub ',' or '))}</p>${ol(st)}</div>`;
+}
+function calcMapa(){
+  const d=num($('#m_d').value), u=+$('#m_u').value, s=scl($('#m_s').value);
+  if(!(d>0)) return $('#m_out').innerHTML=err(tr('Wpisz odległość w terenie, np. 3.','Enter the distance on the ground, e.g. 3.'));
+  if(!(s>0)) return $('#m_out').innerHTML=err(tr('Wpisz skalę jako liczbę po dwukropku, np. 50 000.','Enter the scale as the number after the colon, e.g. 50,000.'));
+  const tcm=d*u, mcm=tcm/s;
+  const st=[tr(`Zamień odległość w terenie na centymetry: ${fmt(d)} ${u===100?'m':'km'} = ${fmt(tcm)} cm.`,`Convert the ground distance into centimetres: ${fmt(d)} ${u===100?'m':'km'} = ${fmt(tcm)} cm.`),tr(`Podziel przez mianownik skali: ${fmt(tcm)} cm : ${fmt(s)} = ${fmt(mcm)} cm.`,`Divide by the scale denominator: ${fmt(tcm)} cm ÷ ${fmt(s)} = ${fmt(mcm)} cm.`)];
+  const main=mcm<1?`${fmt(mcm*10)} mm`:`${fmt(mcm)} cm`;
+  if(mcm<1) st.push(tr(`To mniej niż 1 cm: ${fmt(mcm)} cm = ${fmt(mcm*10)} mm.`,`That is less than 1 cm: ${fmt(mcm)} cm = ${fmt(mcm*10)} mm.`));
+  const warn=mcm>100?`<p class="alt">${tr('To ponad metr na mapie – sprawdź, czy skala jest dobrze dobrana.','That is over a metre on the map – check that the scale is suitable.')}</p>`:'';
+  $('#m_out').innerHTML=`<div class="answer"><p class="big">${main}</p>${warn}${ol(st)}</div>`;
+}
+function calcOblicz(){
+  const m=num($('#o_m').value), mu=+$('#o_mu').value, t=num($('#o_t').value), tu=+$('#o_tu').value;
+  if(!(m>0)||!(t>0)) return $('#o_out').innerHTML=err(tr('Wpisz obie odległości.','Enter both distances.'));
+  const mcm=m*mu, tcm=t*tu, s=tcm/mcm;
+  const round=Math.abs(s-Math.round(s))<1e-6?Math.round(s):s;
+  const st=[];
+  if(mu!==1) st.push(tr(`Odległość na mapie w centymetrach: ${fmt(m)} mm = ${fmt(mcm)} cm.`,`Map distance in centimetres: ${fmt(m)} mm = ${fmt(mcm)} cm.`));
+  st.push(tr(`Odległość w terenie w centymetrach: ${fmt(t)} ${tu===100?'m':'km'} = ${fmt(tcm)} cm.`,`Ground distance in centimetres: ${fmt(t)} ${tu===100?'m':'km'} = ${fmt(tcm)} cm.`));
+  st.push(tr(`Podziel: ${fmt(tcm)} cm : ${fmt(mcm)} cm = ${fmt(round)}.`,`Divide: ${fmt(tcm)} cm ÷ ${fmt(mcm)} cm = ${fmt(round)}.`));
+  st.push(tr(`Skala to 1 : ${fmt(round)}, czyli ${named(round)}.`,`The scale is 1 : ${fmt(round)}, that is ${named(round)}.`));
+  $('#o_out').innerHTML=`<div class="answer"><p class="big">1 : ${fmt(round)}</p><p class="alt">${named(round)}</p>${ol(st)}</div>`;
+}
+function barSVG(s){
+  const seg=5, w=60, val=s; // każdy odcinek = 1 cm na mapie
+  let g='';for(let i=0;i<seg;i++){g+=`<rect x="${20+i*w}" y="20" width="${w}" height="12" fill="${i%2?'var(--paper)':'var(--ink)'}" stroke="var(--ink)" stroke-width="1.5"/>`;}
+  const useKm=val>=100000;const lab=i=>{const cm=i*val;return cm===0?'0':useKm?fmt(cm/100000):fmt(cm/100);};
+  const unit=useKm?'km':'m';
+  for(let i=0;i<=seg;i++) g+=`<text x="${20+i*w}" y="52" text-anchor="middle" font-size="14" fill="var(--ink)">${lab(i)}</text>`;
+  g+=`<text x="${20+seg*w+14}" y="31" font-size="14" fill="var(--ink)">${unit}</text>`;
+  return `<svg viewBox="0 0 ${seg*w+70} 60" width="${seg*w+70}" height="60" role="img" aria-label="${tr('Podziałka liniowa','Linear scale bar')}">${g}</svg>`;
+}
+function calcZamiana(){
+  const s=scl($('#z_s').value);
+  if(!(s>0)) return $('#z_out').innerHTML=err(tr('Wpisz skalę jako liczbę po dwukropku, np. 25 000.','Enter the scale as the number after the colon, e.g. 25,000.'));
+  $('#z_out').innerHTML=`<div class="answer"><p style="margin:0 0 4px"><b>${tr('Liczbowa','Numerical')}</b></p><p class="big">1 : ${fmt(s)}</p>
+   <p style="margin:16px 0 4px"><b>${tr('Mianowana','Verbal (written)')}</b></p><p class="big" style="font-size:clamp(1.6rem,3.6vw,2.3rem)">${named(s)}</p>
+   <p style="margin:16px 0 0">${tr('<b>Liniowa</b> (podziałka) – każdy odcinek to 1 cm na mapie:','<b>Linear</b> (graphic scale bar) – each segment is 1 cm on the map:')}</p><div class="bar">${barSVG(s)}</div>
+   <ol class="steps"><li>${tr(`1 cm na mapie to ${fmt(s)} cm w terenie.`,`1 cm on the map represents ${fmt(s)} cm on the ground.`)}</li><li>${unitConv(s)[0]?unitConv(s)[0]+'.':fmt(s)+' cm.'}</li><li>${tr(`Stąd skala mianowana: ${named(s)}.`,`So the verbal scale is: ${named(s)}.`)}</li></ol></div>`;
+}
+function calcPorownaj(){
+  const a=scl($('#p_a').value), b=scl($('#p_b').value);
+  if(!(a>0)||!(b>0)) return $('#p_out').innerHTML=err(tr('Wpisz obie skale.','Enter both scales.'));
+  if(a===b) return $('#p_out').innerHTML=`<div class="answer"><p class="big">${tr('Skale są równe','The scales are equal')}</p></div>`;
+  const big=a<b?'A':'B', r=Math.max(a,b)/Math.min(a,b);
+  $('#p_out').innerHTML=L==='en'
+   ?`<div class="answer"><p class="big">Larger scale: map ${big}</p><p class="alt">1 : ${fmt(Math.min(a,b))} is ${fmt(r)} times larger than 1 : ${fmt(Math.max(a,b))}.</p>
+   <ol class="steps"><li>Compare the numbers after the colon: ${fmt(a)} and ${fmt(b)}.</li><li>A smaller number means a larger scale – map ${big} shows the land in more detail, but a smaller area.</li><li>The same 1 cm line represents ${cmTo(a)[0]} on the ground on map A and ${cmTo(b)[0]} on map B.</li></ol></div>`
+   :`<div class="answer"><p class="big">Większa skala: mapa ${big}</p><p class="alt">1 : ${fmt(Math.min(a,b))} jest ${fmt(r)} razy większa niż 1 : ${fmt(Math.max(a,b))}.</p>
+   <ol class="steps"><li>Porównaj liczby po dwukropku: ${fmt(a)} i ${fmt(b)}.</li><li>Mniejsza liczba oznacza większą skalę – mapa ${big} pokazuje teren dokładniej, ale mniejszy obszar.</li><li>Ten sam odcinek 1 cm to na mapie A ${cmTo(a)[0]}, a na mapie B ${cmTo(b)[0]} w terenie.</li></ol></div>`;
+}
+// --- czas
+const CITIES=[['Warszawa','Europe/Warsaw'],['Londyn','Europe/London'],['Lizbona','Europe/Lisbon'],['Reykjavík','Atlantic/Reykjavik'],['Paryż','Europe/Paris'],['Ateny','Europe/Athens'],['Moskwa','Europe/Moscow'],['Kair','Africa/Cairo'],['Nairobi','Africa/Nairobi'],['Kapsztad','Africa/Johannesburg'],['Dubaj','Asia/Dubai'],['Nowe Delhi','Asia/Kolkata'],['Katmandu','Asia/Kathmandu'],['Bangkok','Asia/Bangkok'],['Pekin','Asia/Shanghai'],['Tokio','Asia/Tokyo'],['Sydney','Australia/Sydney'],['Auckland','Pacific/Auckland'],['Honolulu','Pacific/Honolulu'],['Anchorage','America/Anchorage'],['Los Angeles','America/Los_Angeles'],['Chicago','America/Chicago'],['Meksyk','America/Mexico_City'],['Nowy Jork','America/New_York'],['Rio de Janeiro','America/Sao_Paulo'],['Buenos Aires','America/Argentina/Buenos_Aires']];
+const CITY_EN={'Warszawa':'Warsaw','Londyn':'London','Lizbona':'Lisbon','Paryż':'Paris','Ateny':'Athens','Moskwa':'Moscow','Kair':'Cairo','Kapsztad':'Cape Town','Dubaj':'Dubai','Nowe Delhi':'New Delhi','Katmandu':'Kathmandu','Pekin':'Beijing','Tokio':'Tokyo','Meksyk':'Mexico City','Nowy Jork':'New York','Londyn (Greenwich)':'London (Greenwich)'};
+const cn=c=>L==='en'?(CITY_EN[c]||c):c; // nazwa miasta do wyświetlenia (identyfikatorem pozostaje nazwa polska)
+const TZ=Object.fromEntries(CITIES);
+let SHOWN=['Warszawa','Londyn','Nowy Jork','Los Angeles','Moskwa','Pekin','Tokio','Sydney'];
+try{const L=JSON.parse(localStorage.getItem('zegarySwiata')||'null');if(Array.isArray(L)&&L.every(c=>TZ[c]))SHOWN=L;}catch(e){}
+const saveShown=()=>{try{localStorage.setItem('zegarySwiata',JSON.stringify(SHOWN));}catch(e){}};
+function parts(tz,d){const o={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(d).forEach(p=>o[p.type]=p.value);return {y:+o.year,mo:+o.month,d:+o.day,h:+o.hour%24,mi:+o.minute,s:+o.second};}
+function offMin(tz,d){const p=parts(tz,d);return Math.round((Date.UTC(p.y,p.mo-1,p.d,p.h,p.mi,p.s)-Math.floor(d.getTime()/1000)*1000)/60000);}
+function zonedToUtc(y,mo,d,h,mi,tz){const g=Date.UTC(y,mo-1,d,h,mi);let o=offMin(tz,new Date(g));let t=g-o*60000;const o2=offMin(tz,new Date(t));if(o2!==o)t=g-o2*60000;return t;}
+const offTxt=m=>{const s=m<0?'−':'+',a=Math.abs(m);return 'UTC'+s+Math.floor(a/60)+(a%60?':'+String(a%60).padStart(2,'0'):'');};
+const hm=(h,m)=>String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
+const DAYS={pl:['niedziela','poniedziałek','wtorek','środa','czwartek','piątek','sobota'],en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']};
+const MONTHS_EN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const dayName=p=>DAYS[L][new Date(Date.UTC(p.y,p.mo-1,p.d)).getUTCDay()];
+const dateTxt=p=>L==='en'?`${dayName(p)} ${p.d} ${MONTHS_EN[p.mo-1]}`:`${dayName(p)}, ${p.d}.${String(p.mo).padStart(2,'0')}`;
+const isNight=h=>h>=21||h<5, isDay=h=>h>=7&&h<19;
+function renderClocks(){
+  const now=new Date(), home=parts('Europe/Warsaw',now), homeOff=offMin('Europe/Warsaw',now);
+  $('#clocks').innerHTML=SHOWN.map(c=>{const p=parts(TZ[c],now),o=offMin(TZ[c],now),diff=o-homeOff;
+    const dd=Date.UTC(p.y,p.mo-1,p.d)-Date.UTC(home.y,home.mo-1,home.d);
+    const dtx=c==='Warszawa'?(o===120?tr('czas letni','summer time'):tr('czas zimowy (standardowy)','winter (standard) time')):diff===0?tr('tak samo jak w Polsce','same as in Poland'):`${diff>0?'+':'−'}${fmtH(Math.abs(diff))} ${tr('względem Polski','relative to Poland')}`;
+    return `<div class="clock ${c==='Warszawa'?'home':''}"><div class="c">${esc(cn(c))}${c!=='Warszawa'?`<button class="x" data-rm="${esc(c)}" aria-label="${tr('Usuń','Remove')} ${esc(cn(c))}">×</button>`:''}</div><div class="t">${hm(p.h,p.mi)}<span class="dn" aria-hidden="true">${isNight(p.h)?'🌙':isDay(p.h)?'☀️':'🌅'}</span></div><div class="o">${offTxt(o)}, ${dtx}${dd>0?tr(', już jutro',', already tomorrow'):dd<0?tr(', jeszcze wczoraj',', still yesterday'):''}</div></div>`;}).join('');
+  $('#addcity').innerHTML=`<option value="">${tr('wybierz…','choose…')}</option>`+CITIES.filter(([c])=>!SHOWN.includes(c)).map(([c])=>`<option value="${esc(c)}">${esc(cn(c))}</option>`).join('');
+  // pasek stref
+  const um=now.getUTCHours()*60+now.getUTCMinutes();
+  let cells='';
+  for(let z=-12;z<=14;z++){const lm=((um+z*60)%1440+1440)%1440, H=Math.floor(lm/60), M=lm%60;
+    const cls=isNight(H)?'night':isDay(H)?'day':'twi';
+    const here=CITIES.filter(([c,t])=>Math.round(offMin(t,now)/60-0.01)===z||Math.floor(offMin(t,now)/60)===z&&offMin(t,now)%60!==0).filter(([c])=>SHOWN.includes(c));
+    const uniq=[...new Set(here.map(x=>x[0]))];
+    cells+=`<div class="zc ${cls} ${Math.round(homeOff/60)===z?'home-z':''}"><span class="h">${hm(H,M)}</span><span class="u">${z===0?'UTC':(z>0?'+':'−')+Math.abs(z)}</span>${uniq.map(c=>`<span class="ct">${esc(cn(c))}</span>`).join('')}</div>`;}
+  $('#ruler').innerHTML=cells;
+  if(!renderClocks.done){const hz=$('#ruler .home-z'),r=$('.ruler');if(hz&&r.clientWidth){r.scrollLeft=hz.offsetLeft-r.clientWidth/2+hz.offsetWidth/2;renderClocks.done=1;}}
+}
+function fmtH(m){const h=Math.floor(m/60),mi=m%60,u=tr(' godz.',' h');return (h?h+u:'')+(mi?(h?' ':'')+mi+' min':'')||'0'+u;}
+$('#clocks').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(!b)return;SHOWN=SHOWN.filter(c=>c!==b.dataset.rm);saveShown();renderClocks();});
+$('#addcity').addEventListener('change',e=>{if(e.target.value){SHOWN.push(e.target.value);saveShown();renderClocks();}});
+function cityOpts(){['#c_a','#c_b'].forEach(id=>{const sel=$(id),v=sel.value;sel.innerHTML=CITIES.map(([c])=>`<option value="${esc(c)}">${esc(cn(c))}</option>`).join('');if(v)sel.value=v;});}
+function initConv(){
+  cityOpts();$('#c_a').value='Warszawa';$('#c_b').value='Tokio';setNow();
+}
+function setNow(){const p=parts(TZ[$('#c_a').value],new Date());$('#c_date').value=`${p.y}-${String(p.mo).padStart(2,'0')}-${String(p.d).padStart(2,'0')}`;$('#c_time').value=hm(p.h,p.mi);}
+function calcConv(){
+  const A=$('#c_a').value,B=$('#c_b').value,dv=$('#c_date').value,tv=$('#c_time').value,An=cn(A),Bn=cn(B);
+  if(!dv||!tv) return $('#c_out').innerHTML=err(tr('Wybierz datę i godzinę.','Choose a date and a time.'));
+  const [y,mo,d]=dv.split('-').map(Number),[h,mi]=tv.split(':').map(Number);
+  const t=zonedToUtc(y,mo,d,h,mi,TZ[A]), date=new Date(t), pa=parts(TZ[A],date), pb=parts(TZ[B],date), oa=offMin(TZ[A],date), ob=offMin(TZ[B],date), diff=ob-oa;
+  const dd=(Date.UTC(pb.y,pb.mo-1,pb.d)-Date.UTC(pa.y,pa.mo-1,pa.d))/86400000;
+  const dayTxt=dd===0?tr('tego samego dnia','on the same day'):dd===1?tr('następnego dnia','the next day'):dd===-1?tr('poprzedniego dnia','the previous day'):'';
+  const st=[`${An}: ${offTxt(oa)}. ${Bn}: ${offTxt(ob)}.`, diff===0?tr(`Oba miasta mają ten sam czas.`,`Both cities have the same time.`):L==='en'
+   ?`Difference: ${fmtH(Math.abs(diff))}. ${Bn} lies in a time zone ${diff>0?'east':'west'} of ${An}, so the time there is ${diff>0?'later – we add':'earlier – we subtract'}.`
+   :`Różnica: ${fmtH(Math.abs(diff)).replace(/\.$/,'')}. ${B} leży w strefie ${diff>0?'na wschód':'na zachód'} od miasta ${A}, więc czas jest tam ${diff>0?'późniejszy – dodajemy':'wcześniejszy – odejmujemy'}.`];
+  if(diff) st.push(`${hm(pa.h,pa.mi)} ${diff>0?'+':'−'} ${fmtH(Math.abs(diff))} = ${hm(pb.h,pb.mi)}${dd?' ('+dayTxt+')':''}.`);
+  $('#c_out').innerHTML=`<div class="answer"><p class="big">${hm(pb.h,pb.mi)} ${tr('w mieście','in')} ${esc(Bn)}</p><p class="alt">${dateTxt(pb)}${dd?' – '+dayTxt:''}</p>${ol(st)}</div>`;
+}
+$('#c_now').addEventListener('click',()=>{setNow();calcConv();});
+$('#c_swap').addEventListener('click',()=>{const a=$('#c_a').value;$('#c_a').value=$('#c_b').value;$('#c_b').value=a;calcConv();});
+// czas słoneczny
+const LONS=[['Warszawa',21,1,1],['Kraków',19,56,1],['Gdańsk',18,39,1],['Szczecin',14,33,1],['Wrocław',17,2,1],['Białystok',23,10,1],['Londyn (Greenwich)',0,0,1],['Nowy Jork',74,0,-1],['Tokio',139,42,1]];
+function renderLonChips(){$$('.chips[data-lon]').forEach(c=>{c.innerHTML=LONS.map(([n],i)=>`<button data-i="${i}">${cn(n)}</button>`).join('');});}
+$$('.chips[data-lon]').forEach(c=>{const k=c.dataset.lon;c.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const [,dg,mn,ew]=LONS[+b.dataset.i];$(`#s_${k}d`).value=dg;$(`#s_${k}m`).value=mn;$(`#s_${k}e`).value=ew;calcSun();});});
+renderLonChips();
+const lonTxt=(dg,mn,ew)=>`${dg}°${mn?String(mn).padStart(2,'0')+'′':''}${dg||mn?(ew>0?'E':'W'):''}`;
+function calcSun(){
+  const ad=num($('#s_ad').value),am=num($('#s_am').value)||0,ae=+$('#s_ae').value,bd=num($('#s_bd').value),bm=num($('#s_bm').value)||0,be=+$('#s_be').value,at=$('#s_at').value;
+  if(!(ad>=0&&ad<=180)||!(bd>=0&&bd<=180)||am<0||am>=60||bm<0||bm>=60) return $('#s_out').innerHTML=err(tr('Długość geograficzna to od 0° do 180°, a minuty od 0 do 59.','Longitude ranges from 0° to 180°, and minutes from 0 to 59.'));
+  if(!at) return $('#s_out').innerHTML=err(tr('Wpisz czas słoneczny w miejscu A.','Enter the solar time at place A.'));
+  const A=(ad*60+am)*ae, B=(bd*60+bm)*be; // w minutach kątowych
+  const dArc=B-A, absArc=Math.abs(dArc), tmin=absArc*4/60; // minuty czasu
+  const [h,m]=at.split(':').map(Number); let total=h*60+m+(dArc>0?1:-1)*tmin*(dArc?1:0);
+  const secs=Math.round(total*60), day=Math.floor(secs/86400); const r=((secs%86400)+86400)%86400;
+  const H=Math.floor(r/3600),M=Math.floor(r%3600/60),Sx=r%60;
+  const arcTxt=a=>{const d=Math.floor(a/60),mm=Math.round(a%60);return `${d}°${mm?String(mm).padStart(2,'0')+'′':''}`;};
+  const tTxt=t=>{const mm=Math.floor(t),ss=Math.round((t-mm)*60);const hh=Math.floor(mm/60);return (hh?hh+tr(' godz. ',' h '):'')+(mm%60)+' min'+(ss?' '+ss+' s':'');};
+  const st=[];
+  if(ae===be||A===0||B===0) st.push(`${tr('Różnica długości','Difference in longitude')}: |${arcTxt(Math.abs(A))} − ${arcTxt(Math.abs(B))}| = ${arcTxt(absArc)}.`);
+  else st.push(tr(`Miejsca leżą po różnych stronach południka 0°, więc dodajemy: `,`The places lie on opposite sides of the 0° meridian, so we add: `)+`${arcTxt(Math.abs(A))} + ${arcTxt(Math.abs(B))} = ${arcTxt(absArc)}.`);
+  st.push(tr(`Każdy 1° to 4 min (a 1′ to 4 s): `,`Each 1° is 4 min (and 1′ is 4 s): `)+`${arcTxt(absArc)} × 4 min = ${tTxt(tmin)}.`);
+  if(dArc) st.push(L==='en'?`Place B lies ${dArc>0?'east':'west'} of A, so the time is ${dArc>0?'later':'earlier'}: ${at} ${dArc>0?'+':'−'} ${tTxt(tmin)} = ${hm(H,M)}${Sx?':'+String(Sx).padStart(2,'0'):''}.`
+   :`Miejsce B leży na ${dArc>0?'wschód':'zachód'} od A, więc czas jest ${dArc>0?'późniejszy':'wcześniejszy'}: ${at} ${dArc>0?'+':'−'} ${tTxt(tmin)} = ${hm(H,M)}${Sx?':'+String(Sx).padStart(2,'0'):''}.`);
+  $('#s_out').innerHTML=`<div class="answer"><p class="big">${hm(H,M)}${Sx?`<span style="font-size:.5em">:${String(Sx).padStart(2,'0')}</span>`:''}</p><p class="alt">${tr('czas słoneczny w miejscu B','solar time at place B')} (${lonTxt(bd,bm,be)})${day>0?tr(', następnego dnia',', the next day'):day<0?tr(', poprzedniego dnia',', the previous day'):''}</p>${ol(st)}</div>`;
+}
+// --- nawigacja
+function calc(){calcTeren();calcMapa();calcOblicz();calcZamiana();calcPorownaj();}
+$$('[data-main]').forEach(b=>b.addEventListener('click',()=>{$$('[data-main]').forEach(x=>x.setAttribute('aria-selected',x===b));$('#skala').hidden=b.dataset.main!=='skala';$('#czas').hidden=b.dataset.main!=='czas';renderClocks();}));
+$$('[data-s]').forEach(b=>b.addEventListener('click',()=>{$$('[data-s]').forEach(x=>x.setAttribute('aria-selected',x===b));$$('[data-sp]').forEach(p=>p.hidden=p.dataset.sp!==b.dataset.s);}));
+$$('[data-c]').forEach(b=>b.addEventListener('click',()=>{$$('[data-c]').forEach(x=>x.setAttribute('aria-selected',x===b));$$('[data-cp]').forEach(p=>p.hidden=p.dataset.cp!==b.dataset.c);}));
+document.addEventListener('input',e=>{if(e.target.closest('#skala'))calc();if(e.target.closest('[data-cp="przelicz"]'))calcConv();if(e.target.closest('[data-cp="sloneczny"]'))calcSun();});
+document.addEventListener('change',e=>{if(e.target.closest('[data-cp="przelicz"]'))calcConv();if(e.target.closest('[data-cp="sloneczny"]'))calcSun();});
+// --- przełączanie języka: przepisuje liczby w polach na format nowego języka i odświeża wszystko
+const NUM_INPUTS=['t_d','t_s','m_d','m_s','o_m','o_t','z_s','p_a','p_b'];
+function reformatInputs(from){NUM_INPUTS.forEach(id=>{const el=$('#'+id);const raw=String(el.value).replace(/^\s*1\s*:\s*/,'');const x=numL(raw,from);if(raw.trim()&&isFinite(x))el.value=fmt(x);});}
+function setLang(nl){const old=L;if(nl!==old&&window.__skalaPr)window.__skalaPr.stash();L=nl;try{localStorage.setItem('skalaPrLang',L);}catch(e){}
+  if(nl!==old)reformatInputs(old);
+  applyStatic();renderChips();renderLonChips();cityOpts();calc();calcConv();calcSun();renderClocks();
+  if(window.__skalaPr)window.__skalaPr.relang(old);}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(b)setLang(b.dataset.lang);});
+if(L==='en')reformatInputs('pl');
+applyStatic();calc();initConv();calcConv();calcSun();renderClocks();setInterval(renderClocks,20000);
+// ================= PRAKTYKA (samodzielna nauka skali) =================
+(function(){
+const Q=s=>document.querySelector(s),QA=s=>[...document.querySelectorAll(s)];
+// język: wspólna zmienna L (zob. wyżej), klucz 'skalaPrLang'
+const P={lvl:'easy',type:'all',ok:0,all:0,streak:0,task:null};
+try{const v=JSON.parse(localStorage.getItem('skalaPr')||'null');if(v){P.lvl=v.lvl||'easy';P.type=v.type||'all';P.ok=v.ok||0;P.all=v.all||0;P.streak=v.streak||0;}}catch(e){}
+const save=()=>{try{localStorage.setItem('skalaPr',JSON.stringify({lvl:P.lvl,type:P.type,ok:P.ok,all:P.all,streak:P.streak}));localStorage.setItem('skalaPrLang',L);}catch(e){}};
+const T={pl:{tab:'Praktyka',easy:'Łatwy',medium:'Średni',hard:'Trudny',all:'Wszystkie typy',A:'Rodzaje skali',B:'Mapa → teren',C:'Teren → mapa',D:'Oblicz skalę',E:'Powierzchnia',
+ solved:'Rozwiązane samodzielnie',total:'Wszystkie zadania',streak:'Seria',inrow:'z rzędu',step:'Krok',check:'Sprawdź',showSol:'Pokaż rozwiązanie kroku',newT:'Nowe zadanie',
+ answer:'Twoja odpowiedź',unit:'jednostka',empty:'Wpisz liczbę.',nan:'To nie wygląda na liczbę. Możesz pisać z przecinkiem, kropką i spacjami, np. 2,5 albo 50 000.',
+ praise:['Brawo!','Świetnie!','Dokładnie tak!','Bezbłędnie!','Super, tak trzymać!'],next:'Przechodzimy do następnego kroku.',
+ tries:n=>`Pozostałe próby, zanim będzie można zobaczyć rozwiązanie: ${n}.`,after3:'Trzy próby za tobą. Możesz spróbować jeszcze raz albo zobaczyć rozwiązanie tego kroku.',
+ doneSelf:'Zadanie rozwiązane samodzielnie! Licznik +1.',doneHelp:'Zadanie skończone, ale z podglądem rozwiązania – spróbuj następne samodzielnie.',finalLbl:'Odpowiedź:'},
+ en:{tab:'Practice',easy:'Easy',medium:'Medium',hard:'Hard',all:'All types',A:'Types of scale',B:'Map → ground',C:'Ground → map',D:'Find the scale',E:'Area',
+ solved:'Solved on your own',total:'All tasks',streak:'Streak',inrow:'in a row',step:'Step',check:'Check',showSol:'Show this step’s solution',newT:'New task',
+ answer:'Your answer',unit:'unit',empty:'Type a number.',nan:'That doesn’t look like a number. You can use a comma or a dot and spaces, e.g. 2.5 or 50 000.',
+ praise:['Well done!','Great!','Exactly right!','Perfect!','Super, keep going!'],next:'On to the next step.',
+ tries:n=>`Tries left before the solution can be shown: ${n}.`,after3:'Three tries done. Try again or reveal the solution of this step.',
+ doneSelf:'Task solved on your own! Counter +1.',doneHelp:'Task finished, but with a revealed solution – try the next one on your own.',finalLbl:'Answer:'}};
+const t=k=>T[L][k];const li=()=>L==='pl'?0:1;
+const both=f=>{const s=L,r={};try{for(const l of ['pl','en']){L=l;r[l]=f();}}finally{L=s;}return r;}; // komunikat w obu językach
+// ---- liczby
+const nf=(x,max=6)=>{const v=Math.round(x*1e8)/1e8;return new Intl.NumberFormat(L==='pl'?'pl-PL':'en-GB',{maximumFractionDigits:max,useGrouping:true}).format(v).replace(/[\u00a0\u202f]/g,' ');};
+const fs=x=>nf(x);
+function parseNum(s){if(s==null)return NaN;s=String(s).trim().replace(/[\s\u00a0\u202f\u2009']/g,'').replace(/−/g,'-');s=s.replace(/^1:/,'');
+ if(/^-?\d{1,3}(,\d{3})+$/.test(s)&&L==='en')s=s.replace(/,/g,'');
+ else if(/^-?\d{1,3}(\.\d{3}){2,}$/.test(s))s=s.replace(/\./g,'');
+ s=s.replace(',','.');if(!/^-?\d*\.?\d+$/.test(s))return NaN;return parseFloat(s);}
+const near=(a,b)=>Math.abs(a-b)<=Math.max(1e-9,Math.abs(b)*1e-6);
+const pick=a=>a[Math.floor(Math.random()*a.length)];const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const SC={easy:[10000,20000,25000,50000,100000],medium:[40000,75000,200000,250000,500000],hard:[30000,150000,300000,400000,600000,1000000,2500000]};
+const DU={km:100000,m:100,cm:1,mm:0.1},AU={'km²':1e6,ha:1e4,a:100,'m²':1};
+const S1=s=>`1 : ${fs(s)}`;
+// ---- generatory zadań: każde ma 3 kroki {q:[pl,en], ans, kind:'num'|'scale'|'dist'|'map'|'area', hints:[[pl,en],[pl,en]], sol:[pl,en], pre}
+function genA(lvl){const S=pick(SC[lvl]);const km=S/100000,m=S/100;
+ if(lvl!=='hard')return {type:'A',text:[`Zamień skalę liczbową <strong>${S1(S)}</strong> na skalę mianowaną.`,`Convert the numerical scale <strong>${S1(S)}</strong> into a verbal scale.`],steps:[
+  {q:['Ile centymetrów w terenie odpowiada 1 cm na mapie?','How many centimetres on the ground does 1 cm on the map represent?'],ans:S,kind:'num',suf:'cm',hints:[['Skala liczbowa mówi wprost: 1 cm na mapie to tyle centymetrów w terenie, ile stoi po dwukropku.','A numerical scale tells you directly: 1 cm on the map equals the number after the colon, in centimetres.'],[`Spójrz na liczbę po dwukropku: ${fs(S)}.`,`Look at the number after the colon: ${fs(S)}.`]],sol:[`1 cm na mapie = ${fs(S)} cm w terenie.`,`1 cm on the map = ${fs(S)} cm on the ground.`]},
+  {q:[`Zamień ${fs(S)} cm na metry.`,`Convert ${fs(S)} cm into metres.`],ans:m,kind:'num',suf:'m',hints:[['Pamiętaj: 1 m = 100 cm, więc dzielisz przez 100.','Remember: 1 m = 100 cm, so divide by 100.'],['Dzielenie przez 100 to skreślenie dwóch zer na końcu.','Dividing by 100 means removing two zeros from the end.']],sol:[`${fs(S)} cm : 100 = ${fs(m)} m`,`${fs(S)} cm ÷ 100 = ${fs(m)} m`]},
+  {q:['Zapisz skalę mianowaną: 1 cm na mapie – ile w terenie? Wybierz jednostkę.','Write the verbal scale: 1 cm on the map – how much on the ground? Choose the unit.'],ans:S,kind:'dist',units:['km','m'],pre:'1 cm –',hints:[['Możesz podać wynik w metrach albo w kilometrach. 1 km = 1000 m.','You can answer in metres or kilometres. 1 km = 1,000 m.'],[`${fs(m)} m to ${fs(km)} km.`,`${fs(m)} m is ${fs(km)} km.`]],sol:[`1 cm – ${fs(km)} km (czyli ${fs(m)} m)`,`1 cm – ${fs(km)} km (that is ${fs(m)} m)`]}],
+  final:[`1 cm – ${fs(km)} km`,`1 cm – ${fs(km)} km`]};
+ return {type:'A',text:[`Zamień skalę mianowaną <strong>1 cm – ${fs(km)} km</strong> na skalę liczbową.`,`Convert the verbal scale <strong>1 cm – ${fs(km)} km</strong> into a numerical scale.`],steps:[
+  {q:[`Ile metrów to ${fs(km)} km?`,`How many metres is ${fs(km)} km?`],ans:m,kind:'num',suf:'m',hints:[['Pamiętaj: 1 km = 1000 m, więc mnożysz przez 1000.','Remember: 1 km = 1,000 m, so multiply by 1,000.'],[`${fs(km)} × 1000 = ?`,`${fs(km)} × 1,000 = ?`]],sol:[`${fs(km)} km × 1000 = ${fs(m)} m`,`${fs(km)} km × 1,000 = ${fs(m)} m`]},
+  {q:[`Ile centymetrów to ${fs(m)} m?`,`How many centimetres is ${fs(m)} m?`],ans:S,kind:'num',suf:'cm',hints:[['Pamiętaj: 1 m = 100 cm, więc mnożysz przez 100.','Remember: 1 m = 100 cm, so multiply by 100.'],['Mnożenie przez 100 to dopisanie dwóch zer.','Multiplying by 100 means adding two zeros.']],sol:[`${fs(m)} m × 100 = ${fs(S)} cm`,`${fs(m)} m × 100 = ${fs(S)} cm`]},
+  {q:['Zapisz skalę liczbową.','Write the numerical scale.'],ans:S,kind:'scale',pre:'1 :',hints:[['W skali liczbowej obie strony są w tych samych jednostkach (cm), więc nie piszemy jednostek.','In a numerical scale both sides are in the same units (cm), so no units are written.'],['Po dwukropku wpisz, ile centymetrów w terenie odpowiada 1 cm na mapie.','After the colon write how many centimetres on the ground equal 1 cm on the map.']],sol:[`Skala: ${S1(S)}`,`Scale: ${S1(S)}`]}],
+  final:[S1(S),S1(S)]};}
+function genB(lvl){const S=pick(SC[lvl]);const k=S/100000;let d,dTxt,dcm;
+ if(lvl==='easy'){d=rnd(2,9);dcm=d;dTxt=`${fs(d)} cm`;}else if(lvl==='medium'){d=rnd(15,125)/10;dcm=d;dTxt=`${fs(d)} cm`;}else{d=rnd(15,95);dcm=d/10;dTxt=`${fs(d)} mm`;}
+ const km=dcm*k;
+ const s1=lvl==='hard'?{q:[`Zamień ${dTxt} na centymetry.`,`Convert ${dTxt} into centimetres.`],ans:dcm,kind:'num',suf:'cm',hints:[['Pamiętaj: 1 cm = 10 mm, więc dzielisz przez 10.','Remember: 1 cm = 10 mm, so divide by 10.'],[`${fs(d)} : 10 = ?`,`${fs(d)} ÷ 10 = ?`]],sol:[`${dTxt} = ${fs(dcm)} cm`,`${dTxt} = ${fs(dcm)} cm`]}
+  :{q:['Ile kilometrów w terenie odpowiada 1 cm na mapie?','How many kilometres on the ground does 1 cm on the map represent?'],ans:k,kind:'num',suf:'km',hints:[['Pamiętaj: 1 km = 100 000 cm. Podziel liczbę po dwukropku przez 100 000.','Remember: 1 km = 100,000 cm. Divide the number after the colon by 100,000.'],['Dzielenie przez 100 000 to przesunięcie przecinka o pięć miejsc w lewo.','Dividing by 100,000 moves the decimal point five places to the left.']],sol:[`1 cm – ${fs(S)} cm = ${fs(k)} km`,`1 cm – ${fs(S)} cm = ${fs(k)} km`]};
+ return {type:'B',text:[`Na mapie w skali <strong>${S1(S)}</strong> odległość między dwoma punktami wynosi <strong>${dTxt}</strong>. Oblicz odległość w terenie.`,`On a map at a scale of <strong>${S1(S)}</strong> the distance between two points is <strong>${dTxt}</strong>. Calculate the distance on the ground.`],steps:[s1,
+  {q:lvl==='hard'?[`Oblicz odległość w terenie w kilometrach (1 cm na mapie = ile km?).`,`Calculate the ground distance in kilometres (1 cm on the map = how many km?).`]:[`Oblicz: ${fs(dcm)} cm × ${fs(k)} km = ? km`,`Calculate: ${fs(dcm)} cm × ${fs(k)} km = ? km`],ans:km,kind:'num',suf:'km',hints:lvl==='hard'?[['Najpierw policz, ile km to 1 cm na mapie: podziel liczbę po dwukropku przez 100 000 (1 km = 100 000 cm).','First work out how many km 1 cm on the map is: divide the number after the colon by 100,000 (1 km = 100,000 cm).'],[`1 cm na mapie = ${fs(k)} km. Teraz pomnóż ${fs(dcm)} × ${fs(k)}.`,`1 cm on the map = ${fs(k)} km. Now multiply ${fs(dcm)} × ${fs(k)}.`]]:[['Pomnóż odległość na mapie przez to, ile km przypada na 1 cm.','Multiply the map distance by the number of km per 1 cm.'],[`${fs(dcm)} × ${fs(k)} = ?`,`${fs(dcm)} × ${fs(k)} = ?`]],sol:[`${fs(dcm)} × ${fs(k)} km = ${fs(km)} km`,`${fs(dcm)} × ${fs(k)} km = ${fs(km)} km`]},
+  {q:['Zapisz wynik końcowy z jednostką.','Write the final answer with its unit.'],ans:dcm*S,kind:'dist',units:['km','m'],hints:[['Wpisz odległość w terenie i wybierz jednostkę. Możesz podać ją w km albo w m (1 km = 1000 m).','Type the ground distance and choose a unit. You may use km or m (1 km = 1,000 m).'],[`W poprzednim kroku wyszło ${fs(km)} km.`,`In the previous step you got ${fs(km)} km.`]],sol:[`${fs(km)} km = ${fs(km*1000)} m`,`${fs(km)} km = ${fs(km*1000)} m`]}],
+  final:[`${fs(km)} km`,`${fs(km)} km`]};}
+function genC(lvl){const S=pick(SC[lvl]);const k=S/100000;let dm=lvl==='easy'?rnd(2,9):lvl==='medium'?rnd(3,25)/2:rnd(12,96)/4;const km=dm*k,m=km*1000;
+ const terTxt=lvl==='hard'?`${fs(m)} m`:`${fs(km)} km`;
+ return {type:'C',text:[`Odległość w terenie wynosi <strong>${terTxt}</strong>. Ile to będzie na mapie w skali <strong>${S1(S)}</strong>?`,`The distance on the ground is <strong>${terTxt}</strong>. How long will it be on a map at a scale of <strong>${S1(S)}</strong>?`],steps:[
+  lvl==='hard'?{q:['Ile metrów w terenie odpowiada 1 cm na mapie?','How many metres on the ground does 1 cm on the map represent?'],ans:S/100,kind:'num',suf:'m',hints:[['Pamiętaj: 1 m = 100 cm. Podziel liczbę po dwukropku przez 100.','Remember: 1 m = 100 cm. Divide the number after the colon by 100.'],['Dzielenie przez 100 to skreślenie dwóch zer.','Dividing by 100 means removing two zeros.']],sol:[`1 cm – ${fs(S/100)} m`,`1 cm – ${fs(S/100)} m`]}
+   :{q:['Ile kilometrów w terenie odpowiada 1 cm na mapie?','How many kilometres on the ground does 1 cm on the map represent?'],ans:k,kind:'num',suf:'km',hints:[['Pamiętaj: 1 km = 100 000 cm. Podziel liczbę po dwukropku przez 100 000.','Remember: 1 km = 100,000 cm. Divide the number after the colon by 100,000.'],['Przesuń przecinek o pięć miejsc w lewo.','Move the decimal point five places to the left.']],sol:[`1 cm – ${fs(k)} km`,`1 cm – ${fs(k)} km`]},
+  {q:lvl==='hard'?[`Podziel: ${fs(m)} m : ${fs(S/100)} m = ? cm`,`Divide: ${fs(m)} m ÷ ${fs(S/100)} m = ? cm`]:[`Podziel: ${fs(km)} km : ${fs(k)} km = ? cm`,`Divide: ${fs(km)} km ÷ ${fs(k)} km = ? cm`],ans:dm,kind:'num',suf:'cm',hints:[['Sprawdzasz, ile razy odcinek odpowiadający 1 cm mieści się w odległości w terenie – to dzielenie.','You check how many times the 1-cm distance fits into the ground distance – that is division.'],[`${lvl==='hard'?fs(m)+' : '+fs(S/100):fs(km)+' : '+fs(k)} = ?`,`${lvl==='hard'?fs(m)+' ÷ '+fs(S/100):fs(km)+' ÷ '+fs(k)} = ?`]],sol:[`${lvl==='hard'?fs(m)+' : '+fs(S/100):fs(km)+' : '+fs(k)} = ${fs(dm)} cm`,`${lvl==='hard'?fs(m)+' ÷ '+fs(S/100):fs(km)+' ÷ '+fs(k)} = ${fs(dm)} cm`]},
+  {q:['Zapisz wynik końcowy z jednostką.','Write the final answer with its unit.'],ans:dm,kind:'map',units:['cm','mm'],hints:[['Wpisz odległość na mapie i wybierz jednostkę: cm albo mm (1 cm = 10 mm).','Type the map distance and choose a unit: cm or mm (1 cm = 10 mm).'],[`W poprzednim kroku wyszło ${fs(dm)} cm.`,`In the previous step you got ${fs(dm)} cm.`]],sol:[`${fs(dm)} cm = ${fs(dm*10)} mm`,`${fs(dm)} cm = ${fs(dm*10)} mm`]}],
+  final:[`${fs(dm)} cm`,`${fs(dm)} cm`]};}
+function genD(lvl){const S=pick(SC[lvl]);let d=lvl==='easy'?rnd(2,8):lvl==='medium'?rnd(3,19)/2:rnd(15,90);const dcm=lvl==='hard'?d/10:d;const Dcm=dcm*S,km=Dcm/100000,m=Dcm/100;
+ const mapTxt=lvl==='hard'?`${fs(d)} mm`:`${fs(d)} cm`,terTxt=lvl==='hard'&&m<10000?`${fs(m)} m`:`${fs(km)} km`;
+ return {type:'D',text:[`Odcinek o długości <strong>${mapTxt}</strong> na mapie odpowiada <strong>${terTxt}</strong> w terenie. Oblicz skalę mapy.`,`A <strong>${mapTxt}</strong> line on the map represents <strong>${terTxt}</strong> on the ground. Calculate the scale of the map.`],steps:[
+  {q:[`Zamień ${terTxt} na centymetry.`,`Convert ${terTxt} into centimetres.`],ans:Dcm,kind:'num',suf:'cm',hints:[[terTxt.endsWith('km')?'Pamiętaj: 1 km = 100 000 cm.':'Pamiętaj: 1 m = 100 cm.',terTxt.endsWith('km')?'Remember: 1 km = 100,000 cm.':'Remember: 1 m = 100 cm.'],[terTxt.endsWith('km')?`${fs(km)} × 100 000 = ?`:`${fs(m)} × 100 = ?`,terTxt.endsWith('km')?`${fs(km)} × 100,000 = ?`:`${fs(m)} × 100 = ?`]],sol:[`${terTxt} = ${fs(Dcm)} cm`,`${terTxt} = ${fs(Dcm)} cm`]},
+  {q:lvl==='hard'?['Ile centymetrów w terenie przypada na 1 cm na mapie? (Uwaga: odcinek na mapie podano w mm.)','How many centimetres on the ground correspond to 1 cm on the map? (Careful: the map length is given in mm.)']:[`Ile centymetrów w terenie przypada na 1 cm na mapie? Podziel ${fs(Dcm)} : ${fs(dcm)}.`,`How many centimetres on the ground correspond to 1 cm on the map? Divide ${fs(Dcm)} ÷ ${fs(dcm)}.`],ans:S,kind:'num',suf:'cm',hints:lvl==='hard'?[['Najpierw zamień długość na mapie na cm: 1 cm = 10 mm.','First convert the map length to cm: 1 cm = 10 mm.'],[`${mapTxt} = ${fs(dcm)} cm. Teraz podziel ${fs(Dcm)} : ${fs(dcm)}.`,`${mapTxt} = ${fs(dcm)} cm. Now divide ${fs(Dcm)} ÷ ${fs(dcm)}.`]]:[['Dzielisz odległość w terenie (w cm) przez odległość na mapie (w cm).','Divide the ground distance (in cm) by the map distance (in cm).'],[`${fs(Dcm)} : ${fs(dcm)} = ?`,`${fs(Dcm)} ÷ ${fs(dcm)} = ?`]],sol:[`${fs(Dcm)} : ${fs(dcm)} = ${fs(S)}`,`${fs(Dcm)} ÷ ${fs(dcm)} = ${fs(S)}`]},
+  {q:['Zapisz skalę liczbową mapy.','Write the numerical scale of the map.'],ans:S,kind:'scale',pre:'1 :',hints:[['Skalę liczbową zapisujemy jako 1 : liczba centymetrów w terenie na 1 cm mapy.','A numerical scale is written as 1 : the number of ground centimetres per 1 cm of map.'],[`Wynik z poprzedniego kroku to ${fs(S)}.`,`The result of the previous step was ${fs(S)}.`]],sol:[S1(S),S1(S)]}],
+  final:[S1(S),S1(S)]};}
+function genE(lvl){const S=pick(lvl==='easy'?[10000,20000,25000,50000,100000]:SC[lvl]);const k=S/100000,k2=k*k;let A,aTxt;
+ if(lvl==='easy'){A=rnd(2,20);aTxt=[`<strong>${fs(A)} cm²</strong>`,`<strong>${fs(A)} cm²</strong>`];}else{const a=rnd(2,8),b=rnd(2,9);A=a*b;aTxt=[`kształt prostokąta o bokach <strong>${a} cm × ${b} cm</strong>`,`the shape of a rectangle measuring <strong>${a} cm × ${b} cm</strong>`];}
+ const km2=A*k2;
+ return {type:'E',text:[`Na mapie w skali <strong>${S1(S)}</strong> las ma ${lvl==='easy'?'powierzchnię ':''}${aTxt[0]}. Oblicz jego rzeczywistą powierzchnię${lvl==='hard'?' w hektarach':''}.`,`On a map at a scale of <strong>${S1(S)}</strong> a forest has ${lvl==='easy'?'an area of ':''}${aTxt[1]}. Calculate its real area${lvl==='hard'?' in hectares':''}.`],steps:[
+  {q:['Ile kilometrów w terenie odpowiada 1 cm na mapie?','How many kilometres on the ground does 1 cm on the map represent?'],ans:k,kind:'num',suf:'km',hints:[['Pamiętaj: 1 km = 100 000 cm. Podziel liczbę po dwukropku przez 100 000.','Remember: 1 km = 100,000 cm. Divide the number after the colon by 100,000.'],['Przesuń przecinek o pięć miejsc w lewo.','Move the decimal point five places to the left.']],sol:[`1 cm – ${fs(k)} km`,`1 cm – ${fs(k)} km`]},
+  {q:['Ile km² w terenie odpowiada 1 cm² na mapie?','How many km² on the ground does 1 cm² on the map represent?'],ans:k2,kind:'num',suf:'km²',hints:[['1 cm² to kwadrat 1 cm × 1 cm. W terenie ma boki po '+fs(k)+' km – policz jego pole.','1 cm² is a 1 cm × 1 cm square. On the ground its sides are '+fs(k)+' km – work out its area.'],[`${fs(k)} × ${fs(k)} = ?`,`${fs(k)} × ${fs(k)} = ?`]],sol:[`1 cm² – ${fs(k)} km × ${fs(k)} km = ${fs(k2)} km²`,`1 cm² – ${fs(k)} km × ${fs(k)} km = ${fs(k2)} km²`]},
+  {q:[lvl==='hard'?'Oblicz powierzchnię lasu i podaj ją w hektarach (możesz też w innej jednostce).':'Oblicz powierzchnię lasu i wybierz jednostkę.',lvl==='hard'?'Calculate the area of the forest in hectares (other units are accepted too).':'Calculate the area of the forest and choose the unit.'],ans:km2,kind:'area',units:lvl==='hard'?['ha','km²','a','m²']:['km²','ha','a','m²'],hints:[[lvl==='easy'?`Pomnóż pole na mapie (${fs(A)} cm²) przez to, ile km² przypada na 1 cm².`:`Najpierw policz pole prostokąta na mapie (bok × bok), potem pomnóż przez ${fs(k2)} km².`,lvl==='easy'?`Multiply the map area (${fs(A)} cm²) by the number of km² per 1 cm².`:`First work out the rectangle’s area on the map (side × side), then multiply by ${fs(k2)} km².`],['Pamiętaj: 1 km² = 100 ha, 1 ha = 10 000 m².','Remember: 1 km² = 100 ha, 1 ha = 10,000 m².']],sol:[`${fs(A)} cm² × ${fs(k2)} km² = ${fs(km2)} km² = ${fs(km2*100)} ha`,`${fs(A)} cm² × ${fs(k2)} km² = ${fs(km2)} km² = ${fs(km2*100)} ha`]}],
+  final:[`${fs(km2)} km² = ${fs(km2*100)} ha`,`${fs(km2)} km² = ${fs(km2*100)} ha`]};}
+const GEN={A:genA,B:genB,C:genC,D:genD,E:genE};
+// generuje zadanie dwa razy (te same losowania): teksty PL z liczbami w formacie PL, teksty EN w formacie EN
+function genBoth(ty,lvl){const orig=Math.random,saved=L,seq=[];let a,b;
+ try{Math.random=()=>{const r=orig();seq.push(r);return r;};L='pl';a=GEN[ty](lvl);
+  let i=0;Math.random=()=>i<seq.length?seq[i++]:orig();L='en';b=GEN[ty](lvl);}finally{Math.random=orig;L=saved;}
+ a.text[1]=b.text[1];a.final[1]=b.final[1];
+ a.steps.forEach((st,j)=>{const sb=b.steps[j];st.q[1]=sb.q[1];st.sol[1]=sb.sol[1];st.hints.forEach((h,k)=>{h[1]=sb.hints[k][1];});});
+ return a;}
+function newTask(){const ty=P.type==='all'?pick(Object.keys(GEN)):P.type;const tk=genBoth(ty,P.lvl);tk.cur=0;tk.tries=[0,0,0];tk.shown=[false,false,false];tk.vals=['','',''];tk.units=[null,null,null];tk.fb=['','',''];tk.done=false;P.task=tk;}
+// ---- wartość wpisana w kroku (w jednostkach odpowiedzi)
+function value(st,i){const raw=Q('#pin'+i).value;const v=parseNum(raw);if(isNaN(v))return {err:raw.trim()?'nan':'empty'};
+ if(st.kind==='dist'){const u=Q('#punit'+i).value;return {v:v*DU[u]};}if(st.kind==='map'){const u=Q('#punit'+i).value;return {v:v*DU[u]};}
+ if(st.kind==='area'){const u=Q('#punit'+i).value;return {v:v*AU[u]/1e6};}return {v};}
+function factorHint(v,ans){if(!(v>0&&ans>0))return '';const r=Math.log10(v/ans);const k=Math.round(r);if(k!==0&&Math.abs(r-k)<1e-6){const f='1'+'0'.repeat(Math.abs(k));
+  return L==='pl'?`Twój wynik jest ${f} razy ${k>0?'za duży':'za mały'}. To znak, że coś nie tak z zamianą jednostek.`:`Your answer is ${f} times too ${k>0?'big':'small'}. That usually means a unit conversion slip.`;}return '';}
+function check(i){const tk=P.task,st=tk.steps[i];const r=value(st,i);tk.vals[i]=Q('#pin'+i).value;if(st.units)tk.units[i]=Q('#punit'+i).value;
+ if(r.err){tk.fb[i]=['bad',both(()=>t(r.err))];return render();}
+ if(near(r.v,st.ans)){const k=Math.floor(Math.random()*T.pl.praise.length);tk.fb[i]=['ok',both(()=>t('praise')[k]+(i<2?' '+t('next'):''))];tk.cur=i+1;if(i===2)finish();return render(i+1);}
+ tk.tries[i]++;const n=tk.tries[i];
+ tk.fb[i]=['bad',both(()=>{const fh=factorHint(r.v,st.ans);
+ let msg=n===1?(fh||st.hints[0][li()]):n===2?(fh?fh+' '+st.hints[1][li()]:st.hints[1][li()]):(fh?fh+' ':st.hints[1][li()]+' ')+t('after3');
+ if(n<3)msg+=' '+`<span class="mut">${t('tries')(3-n)}</span>`;return msg;})];render(i);}
+function reveal(i){const tk=P.task,st=tk.steps[i];tk.shown[i]=true;tk.fb[i]=['sol',{pl:st.sol[0],en:st.sol[1]}];
+ tk.vals[i]=st.kind==='area'?fs(st.ans*1e6/AU[st.units[0]]):st.kind==='dist'?fs(st.ans/DU[st.units[0]]):fs(st.ans);if(st.units)tk.units[i]=st.units[0];tk.cur=i+1;if(i===2)finish();render(i+1);}
+function finish(){const tk=P.task;if(tk.done)return;tk.done=true;P.all++;if(!tk.shown.some(Boolean)){P.ok++;P.streak++;tk.self=true;}else{P.streak=0;tk.self=false;}save();}
+// ---- widok
+function render(focus){const tk=P.task;Q('#p_lvl').innerHTML=['easy','medium','hard'].map(l=>`<button data-plvl="${l}" aria-pressed="${P.lvl===l}">${t(l)}</button>`).join('');
+ Q('#p_types').innerHTML=['all','A','B','C','D','E'].map(x=>`<button data-ptype="${x}" aria-pressed="${P.type===x}">${t(x)}</button>`).join('');
+ Q('#p_score').innerHTML=`<span>${t('solved')}<b>${P.ok}</b></span><span>${t('total')}<b>${P.all}</b></span><span>${t('streak')}<b>${P.streak}</b> ${t('inrow')}</span>`;
+ let h=`<p class="sub" style="margin:0 0 6px">${t(tk.type)} · ${t(P.lvl)}</p><p class="task">${tk.text[li()]}</p>`;
+ tk.steps.forEach((st,i)=>{const locked=i>tk.cur,done=i<tk.cur;const dis=locked||done?'disabled':'';
+  h+=`<div class="pstep ${locked?'locked':''} ${done?(tk.shown[i]?'done shown':'done'):''}"><h3><span class="n">${done?'✓':i+1}</span>${t('step')} ${i+1}</h3><p class="q">${locked?(L==='pl'?`Odblokuje się po rozwiązaniu kroku ${i}.`:`Unlocks after you solve step ${i}.`):st.q[li()]}</p>
+  <div class="arow">${st.pre?`<span class="pre">${st.pre}</span>`:''}<input id="pin${i}" inputmode="decimal" autocomplete="off" aria-label="${t('answer')}" value="${tk.vals[i].replace(/"/g,'&quot;')}" ${dis}>${st.units?`<select id="punit${i}" aria-label="${t('unit')}" ${dis}>${st.units.map(u=>`<option ${tk.units[i]===u?'selected':''}>${u}</option>`).join('')}</select>`:st.suf?`<span>${st.suf}</span>`:''}
+  ${!locked&&!done?`<button class="pbtn" data-pchk="${i}">${t('check')}</button>${tk.tries[i]>=3?`<button class="pbtn ghost" data-psol="${i}">${t('showSol')}</button>`:''}`:''}</div>
+  ${tk.fb[i]?`<div class="fb ${tk.fb[i][0]}" role="status">${tk.fb[i][1][L]}</div>`:''}</div>`;});
+ if(tk.done)h+=`<div class="final"><div>${t('finalLbl')}</div><div class="big">${tk.final[li()]}</div><p style="margin:8px 0 0">${tk.self?t('doneSelf'):t('doneHelp')}</p></div>`;
+ h+=`<p class="newb"><button class="pbtn ${tk.done?'':'ghost'}" id="p_new">${t('newT')}</button></p>`;
+ Q('#p_panel').innerHTML=h;
+ if(focus!=null){const el=Q('#pin'+focus);if(el&&!el.disabled)el.focus({preventScroll:false});else if(tk.done)Q('#p_new').focus();}}
+document.addEventListener('click',e=>{const b=e.target.closest('#praktyka button');if(!b)return;
+ if(b.dataset.plvl){P.lvl=b.dataset.plvl;save();newTask();render(0);}
+ else if(b.dataset.ptype){P.type=b.dataset.ptype;save();newTask();render(0);}
+ else if(b.dataset.pchk!=null)check(+b.dataset.pchk);
+ else if(b.dataset.psol!=null)reveal(+b.dataset.psol);
+ else if(b.id==='p_new'){if(P.task&&!P.task.done&&P.task.cur>0){P.streak=0;save();}newTask();render(0);}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id&&/^pin\d$/.test(e.target.id)){e.preventDefault();check(+e.target.id.slice(3));}});
+// ---- zakładka główna
+// zmiana języka: zapamiętaj wpisane wartości, przepisz liczby na format nowego języka, odśwież widok
+function stash(){const tk=P.task;if(!tk)return;for(let i=0;i<3;i++){const el=Q('#pin'+i);if(el&&!el.disabled){tk.vals[i]=el.value;const u=Q('#punit'+i);if(u)tk.units[i]=u.value;}}}
+function relang(old){const tk=P.task;if(!tk)return;
+ if(old!==L){const cur=L;tk.vals=tk.vals.map(v=>{if(!String(v).trim())return v;L=old;const x=parseNum(v);L=cur;return isNaN(x)?v:nf(x);});}
+ render();}
+window.__skalaPr={P,newTask,render,stash,relang};
+QA('[data-main]').forEach(b=>b.addEventListener('click',()=>{const on=b.dataset.main==='praktyka';Q('#praktyka').hidden=!on;if(on){if(!P.task)newTask();render();}}));
+})();
+
+</script>
+<a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><script>(function(){var a=document.getElementById('home-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+</body>
+</html>

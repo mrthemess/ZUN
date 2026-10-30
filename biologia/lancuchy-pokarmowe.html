@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="pl"><head>
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('siecpok_lang',JSON.stringify(l))}catch(e){}})();</script><!--site-lang-->
+
+
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Łańcuchy i sieci pokarmowe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>:root{--bg:#e9f0eb;--panel:#fff;--ink:#16302a;--muted:#5a6e66;--line:#cbd9d0;--acc:#1f5e4b;--accs:#d9eae1;
+--l1:#3e8e41;--l2:#c4930f;--l3:#df7433;--l4:#c2412d;--l5:#7b3f8c;--l6:#3f4c9e;--ld:#8b6b4a;
+--ok:#2f8a4a;--bad:#c2412d;--warn:#b7791f;--r:14px;font-size:16px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,.btn,.tabs button,.ecos button,.card .nm{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+#app{max-width:1280px;margin:0 auto;padding:18px 18px 30px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.ttl{display:flex;gap:14px;align-items:center}
+.logo{flex:none}
+h1{margin:0;font-size:clamp(1.5rem,3.2vw,2.3rem);line-height:1.1;font-weight:800;letter-spacing:-.01em}
+#sub{margin:4px 0 0;color:var(--muted)}
+.lang{display:inline-flex;border:2px solid var(--ink);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;color:var(--ink);font:700 .95rem system-ui;padding:6px 14px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:#fff}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 10px;border-bottom:2px solid var(--line);padding-bottom:10px}
+.tabs button{border:2px solid transparent;background:transparent;color:var(--ink);font-size:1.05rem;font-weight:700;padding:8px 16px;border-radius:999px;cursor:pointer}
+.tabs button:hover{background:var(--accs)}
+.tabs button[aria-selected=true]{background:var(--acc);color:#fff}
+#ecobar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0 14px}
+#ecolbl{font-weight:700;color:var(--muted);font-size:.9rem}
+.ecos{display:flex;gap:6px;flex-wrap:wrap}
+.ecos button{display:inline-flex;gap:6px;align-items:center;border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:5px 13px;font-size:.95rem;font-weight:600;cursor:pointer}
+.ecos button[aria-pressed=true]{border-color:var(--acc);background:var(--accs)}
+main>section{background:var(--panel);border:1.5px solid var(--line);border-radius:var(--r);padding:20px}
+button:focus-visible,select:focus-visible,input:focus-visible,[data-node]:focus-visible{outline:3px solid #2a7fd4;outline-offset:2px}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:0 0 12px}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{border:0;background:var(--panel);color:var(--ink);padding:8px 13px;font:600 .95rem system-ui;cursor:pointer}
+.seg button+button{border-left:2px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--accs);color:var(--acc);font-weight:800}
+.btn{border:2px solid var(--acc);background:var(--panel);color:var(--acc);border-radius:12px;padding:8px 15px;font-size:.98rem;font-weight:700;cursor:pointer}
+.btn.main{background:var(--acc);color:#fff}
+.btn:hover{filter:brightness(1.06)}
+select,input[type=number]{font:inherit;padding:6px 8px;border:2px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+input[type=number]{width:9em}
+.inl{display:inline-flex;gap:8px;align-items:center;font-weight:600}
+.tog{display:inline-flex;gap:7px;align-items:center;font-weight:600;cursor:pointer}
+.tog input{width:20px;height:20px;accent-color:var(--acc)}
+.hint{color:var(--muted);margin:0 0 12px}
+.note{background:#fff7e3;border-left:5px solid var(--warn);padding:8px 12px;border-radius:8px}
+.small{font-size:.86rem;color:var(--muted)}
+.mut{color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}
+/* karty łańcucha */
+.chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:8px 0 6px}
+.arr{align-self:center;font-size:2rem;font-weight:800;color:var(--acc);line-height:1}
+.card{--c:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;width:150px;min-height:150px;padding:12px 8px 10px;border-radius:16px;border:3px solid var(--c);background:color-mix(in srgb,var(--c) 9%,#fff);text-align:center;font:inherit;color:var(--ink)}
+button.card{cursor:pointer}
+.card .em{font-size:2.6rem;line-height:1.1}
+.card .nm{font-weight:700;font-size:1rem;line-height:1.2}
+.card .lvp{margin-top:auto;font-size:.82rem;font-weight:800;color:#fff;background:var(--c);border-radius:999px;padding:3px 9px}
+.card .tl{font-size:.75rem;color:var(--muted)}
+.c1{--c:var(--l1)}.c2{--c:var(--l2)}.c3{--c:var(--l3)}.c4{--c:var(--l4)}.c5{--c:var(--l5)}.c6{--c:var(--l6)}.cd{--c:var(--ld)}.c0{--c:#7d8f87}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:80px;padding:10px;border:2px dashed var(--line);border-radius:16px;margin-bottom:10px}
+.pool .card{min-height:120px;width:140px}
+.card.ghost{border-style:dashed;border-color:var(--line);background:transparent;min-height:120px}
+.card.slot{justify-content:center;border-style:dashed;border-color:var(--line);background:#f6f9f7;font-size:1.6rem;font-weight:800;color:var(--line);min-height:120px}
+.card.placed{--c:var(--acc)}
+.card.placed.ok{--c:var(--ok)}.card.placed.bad{--c:var(--bad)}
+.card.placed.c1,.card.placed.c2,.card.placed.c3,.card.placed.c4,.card.placed.c5,.card.placed.cd{}
+.fb{padding:11px 14px;border-radius:10px;margin:12px 0 0}
+.fb.ok{background:color-mix(in srgb,var(--ok) 14%,#fff);border-left:5px solid var(--ok)}
+.fb.bad{background:color-mix(in srgb,var(--bad) 12%,#fff);border-left:5px solid var(--bad)}
+.expl ul{margin:14px 0 0;padding-left:20px}
+.expl li{margin:4px 0}
+.also{margin-top:12px;background:var(--accs);border-radius:12px;padding:10px 14px}
+.also h3{margin:0 0 4px;font-size:1rem}
+.also p{margin:0}
+.cch{--c:#7d8f87;display:inline-flex;gap:4px;align-items:center;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 10%,#fff);border-radius:999px;padding:2px 10px;font-weight:600;white-space:nowrap}
+.car{font-weight:800;color:var(--acc);margin:0 4px}
+.mini{line-height:2.2;margin:6px 0 12px}
+/* sieć */
+.webwrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:start}
+.webscroll{overflow:auto;border:1.5px solid var(--line);border-radius:12px;background:#fbfdfb;max-height:78vh}
+#websvg{display:block;width:100%;height:auto;min-width:760px}
+.band{stroke:#e2ebe5;stroke-width:1.5;stroke-dasharray:3 6}
+.bandt{font:800 22px "Bricolage Grotesque",system-ui;fill:#c5d5cb}
+.bandt.dec{font-size:15px}
+.e{stroke:#9aaba3;stroke-width:1.7;opacity:.75}
+.e.edec{stroke-dasharray:5 5}
+.e.ein{stroke:#2f8a4a;stroke-width:3.2;opacity:1}
+.e.eout{stroke:#d0661f;stroke-width:3.2;opacity:1}
+.e.echain{stroke:var(--acc);stroke-width:4.5;opacity:1}
+.e.efade{opacity:.12}
+.e.egone{opacity:.08;stroke-dasharray:3 5}
+.nd{cursor:pointer}
+.nd circle{fill:#fff;stroke:var(--c);stroke-width:3.5}
+.nd .em{font-size:26px;text-anchor:middle;pointer-events:none}
+.nd .lb{font:600 12.5px system-ui,sans-serif;text-anchor:middle;fill:var(--ink);paint-order:stroke;stroke:#fbfdfb;stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.nd .tlb{font:700 11px system-ui;fill:var(--muted);paint-order:stroke;stroke:#fbfdfb;stroke-width:3px}
+.nd:hover circle{stroke-width:5}
+.nd.sel circle{stroke-width:6;fill:color-mix(in srgb,var(--c) 18%,#fff)}
+.nd.rel circle{stroke-width:5}
+.nd.fade{opacity:.25}
+.nd.inchain circle{stroke-width:6;fill:color-mix(in srgb,var(--c) 16%,#fff)}
+.nd.rem,.nd.ext{opacity:.45}
+.nd.rem circle{stroke-dasharray:4 4}
+.bdg circle{stroke:#fff;stroke-width:2}
+.bdg text{font:800 14px system-ui;fill:#fff;text-anchor:middle}
+.bdg.rm circle{fill:#555}.bdg.ex circle{fill:#7a1d12}.bdg.up circle{fill:var(--ok)}.bdg.dn circle{fill:var(--bad)}.bdg.mx circle{fill:var(--warn)}
+.bdg.ind circle{opacity:.6}
+.info{border:1.5px solid var(--line);border-radius:12px;padding:14px;background:#fff;position:sticky;top:10px}
+.info h3{margin:0 0 6px}
+.info p{margin:6px 0}
+.ihead{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.ihead h3{margin:0}.ihead p{margin:0}
+.iem{font-size:2.3rem}
+.tag{--c:var(--muted);display:inline-block;background:var(--c);color:#fff;font-weight:800;font-size:.8rem;border-radius:999px;padding:2px 9px}
+ul.pos{margin:4px 0;padding-left:0;list-style:none}
+ul.pos li{margin:6px 0}
+ul.pos .ex{display:block;font-size:.86rem;color:var(--muted);margin-top:2px}
+.kv{margin:8px 0}
+.fxg{border-left:5px solid var(--c,#555);padding:2px 0 2px 10px;margin:10px 0}
+.fxg h3{font-size:1rem;margin:0 0 4px}
+.fxg ul{margin:0;padding-left:16px}
+.fxg li span{display:block;font-size:.84rem;color:var(--muted)}
+.fxg.rm{--c:#555}.fxg.ex{--c:#7a1d12}.fxg.dn{--c:var(--bad)}.fxg.up{--c:var(--ok)}.fxg.mx{--c:var(--warn)}
+/* piramida */
+.pyr{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.pbar{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px;align-items:center}
+.pfill{--c:var(--l1);justify-self:center;height:52px;border-radius:8px;background:var(--c);display:flex;align-items:center;justify-content:center;min-width:44px;transition:width .4s}
+.pfill span{font-size:1.6rem}
+.pfill.tox{background:#6b4fa3}
+.plab{font-size:.92rem;line-height:1.35}
+.pbox{background:var(--accs);border-radius:12px;padding:10px 16px;margin-top:10px}
+.pbox h3{margin:10px 0 2px;font-size:1.02rem}
+/* zadania */
+.score{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.score span{border:1.5px solid var(--line);border-radius:10px;padding:4px 10px;color:var(--muted);font-size:.9rem}
+.score b{color:var(--ink);font-size:1.15rem;margin-left:3px}
+.qcard{border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;background:#fbfdfb}
+.qt{margin:0 0 6px;font-weight:800;color:var(--acc);font-size:.92rem}
+.ecot{display:inline-block;background:var(--accs);border-radius:999px;padding:2px 10px;font-size:.88rem;font-weight:600}
+.qcard p{font-size:1.1rem;margin:8px 0}
+.stmt{font-size:1.25rem!important;font-weight:600}
+.qlist{margin:6px 0 10px;padding-left:20px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin:12px 0 0}
+.opt{text-align:left;font:inherit;font-size:1.02rem;padding:11px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);cursor:pointer;line-height:1.5}
+.opt:hover:not(:disabled){border-color:var(--acc)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,#fff)}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,#fff)}
+.opt:disabled{cursor:default;color:var(--ink)}
+/* teoria */
+.theory{max-width:900px}
+.th{margin:0 0 26px}
+.th h2{font-size:1.45rem;margin:0 0 8px;font-weight:800}
+.th h3{font-size:1.08rem;margin:14px 0 4px}
+.th p{margin:6px 0;max-width:75ch}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0}
+.tcard{--c:var(--l1);border-top:6px solid var(--c);background:color-mix(in srgb,var(--c) 8%,#fff);border-radius:12px;padding:10px 14px}
+.tcard.l2{--c:var(--l3)}.tcard.ld{--c:var(--ld)}
+.tcard h3{margin:2px 0 4px}
+.tcard .ex{font-style:italic;color:var(--muted);font-size:.92rem}
+.tchip{--c:#7d8f87;display:inline-block;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 10%,#fff);border-radius:999px;padding:3px 11px;font-weight:600;margin:3px 0}
+.tchip.l1{--c:var(--l1)}.tchip.l2{--c:var(--l2)}.tchip.l3{--c:var(--l3)}.tchip.l4{--c:var(--l4)}.tchip.ld{--c:var(--ld)}.tchip.sun{--c:#d9a400}
+.tar{font-weight:800;color:var(--acc);margin:0 6px}
+.tchain,.tloop{margin:10px 0;line-height:2.3}
+.tnote{background:#fff7e3;border-left:5px solid var(--warn);padding:9px 13px;border-radius:8px;margin:10px 0;max-width:75ch}
+.tadv{background:#eef0fa;border-left:5px solid var(--l6);padding:9px 13px;border-radius:8px;margin:12px 0;max-width:75ch}
+.tadv h3{margin:0 0 4px}
+.tl{padding-left:20px;max-width:75ch}
+.tl li{margin:5px 0}
+.tl.err li::marker{content:"✗  ";color:var(--bad);font-weight:800}
+.tlev{display:flex;flex-direction:column-reverse;gap:6px;max-width:560px;margin:10px 0}
+.lv{--c:var(--l1);display:grid;grid-template-columns:90px 1fr auto;gap:10px;align-items:center;border-left:8px solid var(--c);background:color-mix(in srgb,var(--c) 10%,#fff);border-radius:8px;padding:7px 12px}
+.lv.l2{--c:var(--l2)}.lv.l3{--c:var(--l3)}.lv.l4{--c:var(--l4)}
+.lv em{color:var(--muted)}
+footer{margin:14px 4px 0;font-size:.85rem;color:var(--muted)}
+@media (max-width:980px){.webwrap{grid-template-columns:1fr}.info{position:static}}
+@media (max-width:620px){#app{padding:12px}main>section{padding:14px}.card{width:128px;min-height:132px}.card .em{font-size:2.1rem}.pbar{grid-template-columns:1fr}.plab{text-align:center}.arr{font-size:1.5rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.vchain{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin:6px 0 10px}.vchain .car{margin-left:18px}
+.tag.c1{--c:var(--l1)}.tag.c2{--c:var(--l2)}.tag.c3{--c:var(--l3)}.tag.c4{--c:var(--l4)}.tag.c5{--c:var(--l5)}.tag.c6{--c:var(--l6)}.tag.cd{--c:var(--ld)}
+.nd .lb{font-size:13.5px}
+.pfill.c1{--c:var(--l1)}.pfill.c2{--c:var(--l2)}.pfill.c3{--c:var(--l3)}.pfill.c4{--c:var(--l4)}.pfill.c5{--c:var(--l5)}.pfill.c6{--c:var(--l6)}
+.cch.c1{--c:var(--l1)}.cch.c2{--c:var(--l2)}.cch.c3{--c:var(--l3)}.cch.c4{--c:var(--l4)}.cch.c5{--c:var(--l5)}.cch.c6{--c:var(--l6)}.cch.cd{--c:var(--ld)}.cch.c0{--c:#7d8f87}
+[hidden]{display:none!important}
+</style></head><body>
+<div id="app">
+<header class="top"><div class="ttl"><svg class="logo" width="58" height="58" viewBox="0 0 58 58" aria-hidden="true"><g stroke="#1f5e4b" stroke-width="2.4" fill="none"><line x1="14" y1="46" x2="29" y2="32"/><line x1="44" y1="46" x2="29" y2="32"/><line x1="44" y1="46" x2="44" y2="30"/><line x1="29" y1="32" x2="29" y2="14"/><line x1="44" y1="30" x2="29" y2="14"/></g><circle cx="14" cy="46" r="7" fill="#3e8e41"/><circle cx="44" cy="46" r="7" fill="#3e8e41"/><circle cx="29" cy="32" r="6.5" fill="#c4930f"/><circle cx="44" cy="30" r="6.5" fill="#df7433"/><circle cx="29" cy="13" r="7" fill="#c2412d"/></svg>
+<div><h1 id="title"></h1><p id="sub"></p></div></div>
+<div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div></header>
+<nav class="tabs" id="tabs" role="tablist"><button role="tab" data-tab="teoria"></button><button role="tab" data-tab="lancuch"></button><button role="tab" data-tab="siec"></button><button role="tab" data-tab="piramida"></button><button role="tab" data-tab="zadania"></button></nav>
+<div id="ecobar"><span id="ecolbl"></span><div class="ecos" id="ecos"></div></div>
+<main><section id="p-teoria"></section><section id="p-lancuch" hidden></section><section id="p-siec" hidden></section><section id="p-piramida" hidden></section><section id="p-zadania" hidden></section></main>
+<footer id="foot"></footer>
+</div>
+<script>// t: P = producent, C = konsument, X = martwa materia (detrytus), R = destruent (reducent)
+const ECOS = {
+las:{pl:'Las mieszany',en:'Mixed forest',e:'🌲',n:[
+['dab','Dąb szypułkowy','English oak','🌳','P'],
+['sosna','Sosna zwyczajna','Scots pine','🌲','P'],
+['borowka','Borówka czarna','Bilberry','🫐','P'],
+['runo','Rośliny runa (trawy, zioła)','Forest-floor plants (grasses, herbs)','🌿','P'],
+['brudnica','Brudnica mniszka (gąsienice)','Nun moth (caterpillars)','🐛','C',['sosna']],
+['kornik','Korniki','Bark beetles','🪲','C',['sosna']],
+['sarna','Sarna','Roe deer','🦌','C',['runo','borowka','dab']],
+['jelen','Jeleń szlachetny','Red deer','🦌','C',['runo','dab','sosna','borowka']],
+['wiewiorka','Wiewiórka pospolita','Red squirrel','🐿️','C',['sosna','dab']],
+['mysz','Mysz leśna','Yellow-necked mouse','🐭','C',['dab','sosna']],
+['nornica','Nornica ruda','Bank vole','🐁','C',['borowka','runo','dab']],
+['sojka','Sójka','Eurasian jay','🐦','C',['dab','brudnica']],
+['sikora','Sikora bogatka','Great tit','🐦','C',['brudnica','sosna']],
+['dziecol','Dzięcioł duży','Great spotted woodpecker','🐦','C',['kornik','sosna']],
+['dzik','Dzik','Wild boar','🐗','C',['dab','runo','dzdzownica']],
+['dzdzownica','Dżdżownice','Earthworms','🪱','C',['detrytus']],
+['ryjowka','Ryjówka aksamitna','Common shrew','🐭','C',['dzdzownica']],
+['lis','Lis rudy','Red fox','🦊','C',['mysz','nornica','borowka','dzdzownica']],
+['puszczyk','Puszczyk','Tawny owl','🦉','C',['mysz','nornica','ryjowka']],
+['kuna','Kuna leśna','Pine marten','🐾','C',['wiewiorka','nornica','mysz','sikora','borowka']],
+['krogulec','Krogulec','Eurasian sparrowhawk','🦅','C',['sikora']],
+['jastrzab','Jastrząb','Northern goshawk','🦅','C',['sojka','wiewiorka','dziecol']],
+['wilk','Wilk szary','Grey wolf','🐺','C',['jelen','sarna','dzik']],
+['rys','Ryś','Eurasian lynx','🐈','C',['sarna']],
+['detrytus','Martwa materia organiczna (liście, igły, szczątki)','Dead organic matter (leaves, needles, remains)','🍂','X'],
+['grzyby','Grzyby','Fungi','🍄','R',['detrytus']],
+['bakterie','Bakterie','Bacteria','🦠','R',['detrytus']]]},
+laka:{pl:'Łąka',en:'Meadow',e:'🌼',n:[
+['trawy','Trawy','Grasses','🌾','P'],
+['koniczyna','Koniczyna łąkowa','Red clover','☘️','P'],
+['mniszek','Mniszek lekarski','Dandelion','🌼','P'],
+['konik','Konik polny','Grasshopper','🦗','C',['trawy','koniczyna']],
+['mszyce','Mszyce','Aphids','🟩','C',['koniczyna','mniszek']],
+['trzmiel','Trzmiel','Bumblebee','🐝','C',['koniczyna','mniszek']],
+['zajac','Zając szarak','Brown hare','🐇','C',['trawy','koniczyna','mniszek']],
+['nornik','Nornik zwyczajny','Common vole','🐁','C',['trawy','koniczyna']],
+['biedronka','Biedronka siedmiokropka','Seven-spot ladybird','🐞','C',['mszyce']],
+['pajak','Pająk krzyżak','Garden spider','🕷️','C',['konik','mszyce']],
+['skowronek','Skowronek','Skylark','🐦','C',['trawy','konik']],
+['jaszczurka','Jaszczurka zwinka','Sand lizard','🦎','C',['konik','pajak']],
+['dzdzownica','Dżdżownice','Earthworms','🪱','C',['detrytus']],
+['kret','Kret','European mole','🐾','C',['dzdzownica']],
+['bocian','Bocian biały','White stork','🐦','C',['konik','nornik','jaszczurka','dzdzownica']],
+['pustulka','Pustułka','Common kestrel','🦅','C',['nornik','konik','jaszczurka']],
+['myszolow','Myszołów','Common buzzard','🦅','C',['nornik','kret']],
+['lis','Lis rudy','Red fox','🦊','C',['nornik','zajac','skowronek','dzdzownica']],
+['detrytus','Martwa materia organiczna (obumarłe rośliny, szczątki)','Dead organic matter (dead plants, remains)','🍂','X'],
+['grzyby','Grzyby','Fungi','🍄','R',['detrytus']],
+['bakterie','Bakterie','Bacteria','🦠','R',['detrytus']]]},
+jezioro:{pl:'Jezioro',en:'Lake',e:'💧',n:[
+['fito','Fitoplankton (glony, sinice)','Phytoplankton (algae, cyanobacteria)','🟢','P'],
+['rosliny','Rośliny wodne (moczarka, rdestnice)','Aquatic plants (waterweed, pondweeds)','🌿','P'],
+['zoo','Zooplankton (rozwielitki)','Zooplankton (water fleas)','🦐','C',['fito']],
+['komary','Larwy komarów','Mosquito larvae','🦟','C',['fito']],
+['slimak','Błotniarka stawowa','Great pond snail','🐌','C',['rosliny']],
+['ochotki','Larwy ochotek','Midge larvae (bloodworms)','🪱','C',['detrytus']],
+['wazka','Larwy ważek','Dragonfly nymphs','🪲','C',['zoo','komary','ochotki']],
+['plotka','Płoć','Roach','🐟','C',['rosliny','zoo','slimak','komary','ochotki']],
+['okon','Okoń','European perch','🐟','C',['zoo','wazka','plotka','ochotki']],
+['szczupak','Szczupak','Northern pike','🐟','C',['plotka','okon']],
+['labedz','Łabędź niemy','Mute swan','🦢','C',['rosliny']],
+['kaczka','Kaczka krzyżówka','Mallard','🦆','C',['rosliny','slimak','komary']],
+['perkoz','Perkoz dwuczuby','Great crested grebe','🐦','C',['plotka','okon']],
+['czapla','Czapla siwa','Grey heron','🐦','C',['plotka','okon','szczupak']],
+['wydra','Wydra','Eurasian otter','🦦','C',['plotka','szczupak','okon']],
+['bielik','Bielik','White-tailed eagle','🦅','C',['szczupak','plotka','kaczka']],
+['detrytus','Martwa materia organiczna (osad denny, szczątki)','Dead organic matter (bottom sediment, remains)','🍂','X'],
+['grzyby','Grzyby wodne','Water moulds and fungi','🍄','R',['detrytus']],
+['bakterie','Bakterie','Bacteria','🦠','R',['detrytus']]]},
+baltyk:{pl:'Morze Bałtyckie',en:'Baltic Sea',e:'🌊',n:[
+['fito','Fitoplankton','Phytoplankton','🟢','P'],
+['morszczyn','Morszczyn pęcherzykowaty','Bladderwrack','🌿','P'],
+['zoo','Zooplankton (widłonogi)','Zooplankton (copepods)','🦐','C',['fito']],
+['omulek','Omułek jadalny','Blue mussel','🦪','C',['fito']],
+['kielze','Kiełże','Amphipods (scuds)','🦐','C',['morszczyn','detrytus']],
+['podwoj','Podwój wielki','Saduria (Baltic isopod)','🦞','C',['detrytus','kielze']],
+['sledz','Śledź','Atlantic herring','🐟','C',['zoo']],
+['szprot','Szprot','Sprat','🐟','C',['zoo']],
+['stornia','Stornia','European flounder','🐟','C',['omulek','kielze']],
+['babka','Babka bycza','Round goby','🐟','C',['omulek','kielze']],
+['dorsz','Dorsz bałtycki','Baltic cod','🐟','C',['sledz','szprot','podwoj','babka']],
+['edredon','Edredon','Common eider','🦆','C',['omulek']],
+['kormoran','Kormoran','Great cormorant','🐦','C',['sledz','babka','stornia']],
+['foka','Foka szara','Grey seal','🦭','C',['dorsz','sledz','stornia']],
+['morswin','Morświn','Harbour porpoise','🐬','C',['sledz','szprot']],
+['bielik','Bielik','White-tailed eagle','🦅','C',['edredon','stornia']],
+['detrytus','Martwa materia organiczna (szczątki na dnie)','Dead organic matter (remains on the seabed)','🍂','X'],
+['bakterie','Bakterie','Bacteria','🦠','R',['detrytus']]]},
+antarktyka:{pl:'Ocean Południowy (Antarktyka)',en:'Southern Ocean (Antarctica)',e:'🧊',n:[
+['fito','Fitoplankton (okrzemki)','Phytoplankton (diatoms)','🟢','P'],
+['kryl','Kryl antarktyczny','Antarctic krill','🦐','C',['fito']],
+['widlonogi','Widłonogi','Copepods','🦐','C',['fito']],
+['ryby','Srebrzanka antarktyczna','Antarctic silverfish','🐟','C',['kryl','widlonogi']],
+['kalamarnica','Kałamarnice','Squid','🦑','C',['kryl','ryby']],
+['pletwal','Płetwal błękitny','Blue whale','🐋','C',['kryl']],
+['krabojad','Foka krabojad','Crabeater seal','🦭','C',['kryl']],
+['adeli','Pingwin Adeli','Adélie penguin','🐧','C',['kryl','ryby']],
+['cesarski','Pingwin cesarski','Emperor penguin','🐧','C',['ryby','kalamarnica','kryl']],
+['weddell','Foka Weddella','Weddell seal','🦭','C',['ryby','kalamarnica']],
+['albatros','Albatros wędrowny','Wandering albatross','🐦','C',['kalamarnica','ryby']],
+['kaszalot','Kaszalot','Sperm whale','🐋','C',['kalamarnica']],
+['lampart','Lampart morski','Leopard seal','🦭','C',['kryl','adeli','krabojad','ryby']],
+['orka','Orka','Orca','🐬','C',['weddell','krabojad','cesarski']],
+['detrytus','Martwa materia organiczna („śnieg morski”)','Dead organic matter (“marine snow”)','🍂','X'],
+['bakterie','Bakterie','Bacteria','🦠','R',['detrytus']]]},
+sawanna:{pl:'Sawanna afrykańska',en:'African savanna',e:'🦒',n:[
+['trawy','Trawy','Grasses','🌾','P'],
+['akacja','Akacja','Acacia','🌳','P'],
+['zebra','Zebra','Zebra','🦓','C',['trawy']],
+['gnu','Gnu pręgowane','Blue wildebeest','🐃','C',['trawy']],
+['gazela','Gazela Thomsona','Thomson’s gazelle','🦌','C',['trawy','akacja']],
+['zyrafa','Żyrafa','Giraffe','🦒','C',['akacja']],
+['slon','Słoń afrykański','African elephant','🐘','C',['trawy','akacja']],
+['termity','Termity','Termites','🐜','C',['trawy','detrytus']],
+['gnojarz','Żuki gnojarze','Dung beetles','🪲','C',['detrytus']],
+['mrownik','Mrównik afrykański','Aardvark','🐾','C',['termity']],
+['lew','Lew','Lion','🦁','C',['zebra','gnu','zyrafa']],
+['gepard','Gepard','Cheetah','🐆','C',['gazela']],
+['hiena','Hiena cętkowana','Spotted hyena','🐾','C',['gnu','zebra','gazela']],
+['krokodyl','Krokodyl nilowy','Nile crocodile','🐊','C',['gnu','zebra']],
+['detrytus','Martwa materia organiczna (suche trawy, odchody, szczątki)','Dead organic matter (dry grass, dung, remains)','🍂','X'],
+['grzyby','Grzyby','Fungi','🍄','R',['detrytus']],
+['bakterie','Bakterie','Bacteria','🦠','R',['detrytus']]]}
+};
+
+const T={
+pl:{title:'Łańcuchy i sieci pokarmowe',sub:'Producenci, konsumenci, destruenci i to, kto tu właściwie kogo zje',
+tabs:{teoria:'Teoria',lancuch:'Łańcuch',siec:'Sieć',piramida:'Piramidy',zadania:'Zadania'},
+eco:'Ekosystem',
+grazing:'Łańcuch spasania',detrital:'Łańcuch detrytusowy',len:'Liczba ogniw',any:'dowolna',
+newChain:'Losuj łańcuch',practice:'Ułóż samodzielnie',showMode:'Pokaż gotowy',toWeb:'Rozwiń w sieć pokarmową',
+noDetr:'W tym ekosystemie narzędzie nie ma łańcucha detrytusowego, więc losuje łańcuch spasania.',
+noLen:n=>`Nie ma tu łańcucha o tej długości, więc losuję łańcuch z ${n} ogniwami.`,
+eats:'zjada',level:'poziom troficzny',
+pracIntro:'Klikaj organizmy w kolejności od początku łańcucha. Kliknięcie ułożonej karty odsyła ją z powrotem.',
+check:'Sprawdź',clear:'Od nowa',pracOk:'Brawo, łańcuch ułożony poprawnie! Poniżej nazwy poziomów.',pracBad:'Coś się nie zgadza. Czerwona karta oznacza, że ten organizm nie zjada organizmu przed nim (a na pierwszym miejscu nie stoi producent albo martwa materia). Spróbuj jeszcze raz.',pracFill:'Najpierw ułóż wszystkie organizmy.',
+alsoTitle:'W całej sieci te organizmy bywają też kimś innym',
+alsoLine:(n,l)=>`<b>${n}</b> – w innych łańcuchach także: ${l}.`,
+inWeb:(n)=>`To tylko jeden z <b>${n}</b> pełnych łańcuchów w tej sieci (od producenta albo martwej materii aż do organizmu, którego nikt już nie zjada).`,
+showDet:'Pokaż martwą materię i destruentów',showTL:'Pokaż średni poziom troficzny',whatIf:'Tryb „Co jeśli?”',restore:'Przywróć wszystkie',
+webHint:'Kliknij organizm, żeby zobaczyć, co zjada i kto zjada jego. Strzałki biegną od pokarmu do zjadającego.',
+whatHint:'Kliknij organizm, żeby usunąć go z ekosystemu. Kliknij ponownie, żeby go przywrócić.',
+producer:'Producent',consumer:'Konsument',detritus:'Martwa materia organiczna',reducent:'Destruent',
+prodDesc:'Wytwarza materię organiczną w fotosyntezie, korzystając z energii światła.',
+xDesc:'Szczątki roślin i zwierząt, odchody i opadłe części roślin. Od niej zaczyna się łańcuch detrytusowy.',
+rDesc:'Rozkłada martwą materię na związki nieorganiczne, z których znów korzystają producenci. Rozkłada szczątki organizmów ze wszystkich poziomów troficznych.',
+eatsL:'Zjada',eatenBy:'Zjadany przez',nobody:'nikogo w tej sieci – to drapieżnik szczytowy',
+positions:'W łańcuchach tej sieci bywa',avgTL:'Średni poziom troficzny',chainsThrough:'Pełnych łańcuchów przez ten organizm',
+detrNote:'(łańcuch detrytusowy)',
+chainBox:'Łańcuch z zakładki „Łańcuch”',hideChain:'Ukryj łańcuch',
+removed:'Usunięte przez ciebie',extinct:'Znikają, bo straciły cały pokarm',down:'Prawdopodobnie mniej liczne',up:'Prawdopodobnie liczniejsze',mixed:'Trudno przewidzieć',indirect:'pośrednio',
+lostFood:'znika pokarm',lostPred:'znika zjadający',moreEaters:'więcej zjadających',fewerEaters:'mniej zjadających',moreFood:'więcej pokarmu',lessFood:'mniej pokarmu',
+mixedWhy:'działają tu czynniki w przeciwne strony, a wynik zależy od tego, który przeważy',
+noEffect:'Usuń organizm, żeby zobaczyć skutki.',
+whatNote:'To uproszczony model: pokazuje kierunek zmian, a nie ich wielkość. W prawdziwym ekosystemie zwierzęta mogą też zmienić dietę.',
+pyrChain:'Łańcuch',pyrE:'Energia związana przez producentów',pyrEff:'Na kolejny poziom przechodzi',pyrNew:'Losuj inny łańcuch',pyrTake:'Weź łańcuch z zakładki „Łańcuch”',
+pyrEnergy:'Piramida energii',pyrTox:'Kumulacja toksyn',
+pyrSum:(a,b,p)=>`Z <b>${a}</b> energii związanej przez producentów do ostatniego ogniwa dociera tylko <b>${b}</b>, czyli <b>${p}</b>.`,
+pyrWhere:'Gdzie znika reszta energii?',pyrWhereT:(a,b,c)=>`Konsumenci I rzędu zjadają producentów zawierających ${a}, ale w ich ciałach zostaje tylko ${b}. Pozostałe ${c} zostało zużyte na oddychanie komórkowe (uszło jako ciepło), zostało w niezjedzonych częściach producentów albo trafiło do odchodów, a stamtąd do destruentów.`,
+pyrScale:'Paski oznaczone gwiazdką są szersze, niż wynika z liczb, bo inaczej byłyby niewidoczne.',
+pyrOfProd:'energii producentów',
+toxIntro:'Przykład: do środowiska trafia trwały insektycyd (np. DDT). Każdy kolejny organizm zjada wiele organizmów z niższego poziomu, a toksyna zostaje w jego tkankach. Model zakłada wzrost stężenia mniej więcej 10 razy na każdym poziomie, choć w rzeczywistości ten wzrost bywa różny.',
+toxUnit:'jednostek stężenia',
+pyrDetr:'Piramida energii liczona od producentów, więc narzędzie wylosowało łańcuch spasania.',
+qType:'Rodzaj pytań',qAll:'Wszystkie rodzaje',qMix:'Losuj z różnych ekosystemów',qNext:'Następne pytanie',
+qScore:'Poprawne',qAnswered:'Odpowiedzi',qStreak:'Seria z rzędu',qGood:['Dokładnie tak!','Brawo!','Świetnie!','Bezbłędnie!','Tak jest!'],qBad:'Niestety nie.',
+qTypes:{lvl:'Poziom w łańcuchu',who:'Kto jest konsumentem…?',order:'Poprawny zapis łańcucha',multi:'Kilka poziomów naraz',what:'Co jeśli zniknie…?',energy:'Zasada 10%',detr:'Łańcuch detrytusowy',tox:'Kumulacja toksyn',count:'Liczenie łańcuchów',apex:'Drapieżnik szczytowy',tf:'Prawda czy fałsz?'},
+up3:'wzrośnie',down3:'zmaleje',same3:'nie zmieni się',tru:'Prawda',fal:'Fałsz',
+footer:'Zależności pokarmowe są uproszczone do celów szkolnych: każdy organizm ma w sieci tylko najważniejsze składniki diety.'},
+en:{title:'Food chains and food webs',sub:'Producers, consumers, decomposers and who actually eats whom',
+tabs:{teoria:'Theory',lancuch:'Chain',siec:'Web',piramida:'Pyramids',zadania:'Practice'},
+eco:'Ecosystem',
+grazing:'Grazing chain',detrital:'Detrital chain',len:'Number of links',any:'any',
+newChain:'New chain',practice:'Build it yourself',showMode:'Show answer',toWeb:'Expand into a food web',
+noDetr:'This ecosystem has no detrital chain in the tool, so a grazing chain was drawn.',
+noLen:n=>`There is no chain of that length here, so I drew one with ${n} links.`,
+eats:'eats',level:'trophic level',
+pracIntro:'Tap the organisms in order, starting from the beginning of the chain. Tap a placed card to send it back.',
+check:'Check',clear:'Start again',pracOk:'Well done, the chain is correct! The level names are below.',pracBad:'Not quite. A red card means this organism does not eat the one before it (or the first place is not a producer or dead matter). Try again.',pracFill:'Place all the organisms first.',
+alsoTitle:'In the whole web these organisms can also be something else',
+alsoLine:(n,l)=>`<b>${n}</b> – in other chains also: ${l}.`,
+inWeb:(n)=>`This is just one of <b>${n}</b> complete chains in this web (from a producer or dead matter up to an organism that nothing else eats).`,
+showDet:'Show dead matter and decomposers',showTL:'Show average trophic level',whatIf:'“What if?” mode',restore:'Restore all',
+webHint:'Tap an organism to see what it eats and what eats it. Arrows run from the food to the eater.',
+whatHint:'Tap an organism to remove it from the ecosystem. Tap again to bring it back.',
+producer:'Producer',consumer:'Consumer',detritus:'Dead organic matter',reducent:'Decomposer',
+prodDesc:'Makes organic matter in photosynthesis, using light energy.',
+xDesc:'Remains of plants and animals, faeces and fallen plant parts. The detrital chain starts here.',
+rDesc:'Breaks dead matter down into inorganic substances that producers use again. It breaks down remains from every trophic level.',
+eatsL:'Eats',eatenBy:'Eaten by',nobody:'nothing in this web – it is an apex predator',
+positions:'In the chains of this web it can be a',avgTL:'Average trophic level',chainsThrough:'Complete chains through this organism',
+detrNote:'(detrital chain)',
+chainBox:'Chain from the “Chain” tab',hideChain:'Hide chain',
+removed:'Removed by you',extinct:'Disappear: lost all their food',down:'Probably fewer',up:'Probably more',mixed:'Hard to predict',indirect:'indirectly',
+lostFood:'food disappears',lostPred:'eater disappears',moreEaters:'more eaters',fewerEaters:'fewer eaters',moreFood:'more food',lessFood:'less food',
+mixedWhy:'factors pull in opposite directions, and the result depends on which one wins',
+noEffect:'Remove an organism to see the effects.',
+whatNote:'This is a simplified model: it shows the direction of change, not its size. In a real ecosystem animals may also switch to other food.',
+pyrChain:'Chain',pyrE:'Energy captured by producers',pyrEff:'Passed on to the next level',pyrNew:'Draw another chain',pyrTake:'Use the chain from the “Chain” tab',
+pyrEnergy:'Energy pyramid',pyrTox:'Toxin build-up',
+pyrSum:(a,b,p)=>`Of the <b>${a}</b> captured by producers, only <b>${b}</b> reaches the last link, i.e. <b>${p}</b>.`,
+pyrWhere:'Where does the rest of the energy go?',pyrWhereT:(a,b,c)=>`Primary consumers eat producers containing ${a}, but only ${b} stays in their bodies. The other ${c} was used in cellular respiration (lost as heat), stayed in uneaten parts of the producers or ended up in faeces, and from there went to decomposers.`,
+pyrScale:'Bars marked with an asterisk are drawn wider than the numbers say, otherwise they would be invisible.',
+pyrOfProd:'of the producers’ energy',
+toxIntro:'Example: a persistent insecticide (e.g. DDT) gets into the environment. Each organism eats many organisms from the level below, and the toxin stays in its tissues. The model assumes the concentration rises about 10 times at each level, although in reality the increase varies.',
+toxUnit:'concentration units',
+pyrDetr:'The energy pyramid starts from producers, so a grazing chain was drawn.',
+qType:'Question type',qAll:'All types',qMix:'Mix ecosystems',qNext:'Next question',
+qScore:'Correct',qAnswered:'Answered',qStreak:'Streak',qGood:['Exactly!','Well done!','Great!','Perfect!','Spot on!'],qBad:'Not quite.',
+qTypes:{lvl:'Level in a chain',who:'Which one is the … consumer?',order:'Correctly written chain',multi:'Several levels at once',what:'What if … disappears?',energy:'The 10% rule',detr:'Detrital chain',tox:'Toxin build-up',count:'Counting chains',apex:'Apex predator',tf:'True or false?'},
+up3:'it will increase',down3:'it will decrease',same3:'it will not change',tru:'True',fal:'False',
+footer:'Feeding relationships are simplified for school use: each organism has only the main parts of its diet in the web.'}};
+
+const ROMAN=['','I','II','III','IV','V','VI'];
+const ORD_EN=['','primary','secondary','tertiary','quaternary','fifth-order','sixth-order'];
+function lvlName(pos,detr,L){
+  if(pos===1) return detr?(L==='pl'?'martwa materia organiczna':'dead organic matter'):(L==='pl'?'producent':'producer');
+  return L==='pl'?`konsument ${ROMAN[pos-1]} rzędu`:`${ORD_EN[pos-1]} consumer`;
+}
+const TF=[
+{pl:'Strzałka w łańcuchu pokarmowym wskazuje od zjadanego do zjadającego.',en:'An arrow in a food chain points from the eaten to the eater.',ok:true,xpl:'Tak: strzałka pokazuje kierunek przepływu energii, czyli od pokarmu do tego, kto go zjada.',xen:'Yes: the arrow shows the direction of energy flow, from the food to the eater.'},
+{pl:'Konsumenci I rzędu to zawsze najmniejsze zwierzęta w ekosystemie.',en:'Primary consumers are always the smallest animals in an ecosystem.',ok:false,xpl:'Rząd zależy od pokarmu, a nie od wielkości. Słoń i zebra są konsumentami I rzędu, a malutka biedronka jedząca mszyce – II rzędu.',xen:'The level depends on food, not size. Elephants and zebras are primary consumers, while a tiny ladybird eating aphids is a secondary consumer.'},
+{pl:'Glony i sinice są producentami.',en:'Algae and cyanobacteria are producers.',ok:true,xpl:'Tak: prowadzą fotosyntezę. Fitoplankton jest najważniejszym producentem w morzach i jeziorach.',xen:'Yes: they photosynthesise. Phytoplankton is the most important producer in seas and lakes.'},
+{pl:'Na kolejny poziom troficzny przechodzi średnio około 90% energii.',en:'On average about 90% of the energy passes to the next trophic level.',ok:false,xpl:'Odwrotnie: przechodzi średnio około 10%. Około 90% zostaje zużyte na oddychanie (uchodzi jako ciepło), w niezjedzonych częściach i w odchodach.',xen:'The other way round: about 10% passes on. About 90% is used in respiration (lost as heat), left in uneaten parts or in faeces.'},
+{pl:'Ten sam gatunek może być w jednym łańcuchu konsumentem I rzędu, a w innym II rzędu.',en:'The same species can be a primary consumer in one chain and a secondary consumer in another.',ok:true,xpl:'Tak, to typowe dla wszystkożerców, np. lisa jedzącego borówki i nornice.',xen:'Yes, it is typical of omnivores, e.g. a fox eating bilberries and voles.'},
+{pl:'Destruenci rozkładają tylko szczątki drapieżników szczytowych.',en:'Decomposers only break down the remains of apex predators.',ok:false,xpl:'Destruenci rozkładają szczątki i odchody organizmów ze wszystkich poziomów troficznych.',xen:'Decomposers break down the remains and faeces of organisms from all trophic levels.'},
+{pl:'Energia w ekosystemie krąży, tak jak pierwiastki.',en:'Energy cycles in an ecosystem, just like elements do.',ok:false,xpl:'Materia krąży, ale energia przepływa w jedną stronę: wchodzi jako światło, a uchodzi jako ciepło.',xen:'Matter cycles, but energy flows one way: it enters as light and leaves as heat.'},
+{pl:'Piramida liczebności może być odwrócona.',en:'A pyramid of numbers can be upside down.',ok:true,xpl:'Tak: jeden dąb może wyżywić tysiące gąsienic. Piramida energii nigdy nie jest odwrócona.',xen:'Yes: one oak can feed thousands of caterpillars. A pyramid of energy is never upside down.'},
+{pl:'Łańcuchy pokarmowe rzadko mają więcej niż 5 ogniw, bo na wyższych poziomach brakuje energii.',en:'Food chains rarely have more than 5 links, because there is not enough energy at higher levels.',ok:true,xpl:'Tak: przy stratach około 90% na każdym poziomie na piątym zostaje około 0,01% energii producentów.',xen:'Yes: with about 90% lost at each level, the fifth level gets about 0.01% of the producers’ energy.'},
+{pl:'Łańcuch detrytusowy zaczyna się od martwej materii organicznej.',en:'A detrital food chain starts with dead organic matter.',ok:true,xpl:'Tak, np. opadłe liście → dżdżownice → ryjówka → puszczyk.',xen:'Yes, e.g. fallen leaves → earthworms → shrew → tawny owl.'},
+{pl:'Stężenie trwałych toksyn, np. DDT, jest najwyższe u producentów.',en:'The concentration of persistent toxins such as DDT is highest in producers.',ok:false,xpl:'Najwyższe jest u drapieżników na końcu łańcucha, bo toksyna kumuluje się z każdym poziomem (biomagnifikacja).',xen:'It is highest in the predators at the end of the chain, because the toxin builds up at each level (biomagnification).'},
+{pl:'Im więcej powiązań w sieci pokarmowej, tym zwykle stabilniejszy ekosystem.',en:'The more links in a food web, the more stable the ecosystem usually is.',ok:true,xpl:'Tak: gdy zniknie jeden gatunek, zjadający go konsumenci mogą przerzucić się na inny pokarm.',xen:'Yes: if one species disappears, its consumers can switch to other food.'},
+{pl:'Płetwal błękitny, największe zwierzę świata, jest drapieżnikiem szczytowym na najwyższym poziomie troficznym.',en:'The blue whale, the largest animal in the world, is an apex predator at the highest trophic level.',ok:false,xpl:'Płetwal je kryl, który je fitoplankton, więc jest konsumentem II rzędu, czyli na 3. poziomie troficznym.',xen:'The blue whale eats krill, which eats phytoplankton, so it is a secondary consumer, at trophic level 3.'}
+];
+
+const CH=(a,cls)=>`<span class="tchip ${cls||''}">${a}</span>`;
+const AR='<span class="tar">→</span>';
+const THEORY={
+pl:`
+<section class="th"><h2>Kto kogo zjada</h2>
+<p>Każdy organizm w ekosystemie potrzebuje energii i materii. Ze względu na to, skąd je bierze, dzielimy organizmy na trzy grupy.</p>
+<div class="trio">
+<div class="tcard l1"><h3>Producenci</h3><p>Samożywne organizmy, które w <b>fotosyntezie</b> wytwarzają materię organiczną z dwutlenku węgla i wody, korzystając z energii światła. To rośliny, glony i sinice.</p><p class="ex">sosna, trawy, fitoplankton</p></div>
+<div class="tcard l2"><h3>Konsumenci</h3><p>Cudzożywne organizmy, które zjadają inne organizmy (albo ich części) i w ten sposób zdobywają materię i energię. To roślinożercy, drapieżniki i wszystkożercy.</p><p class="ex">sarna, sikora, wilk</p></div>
+<div class="tcard ld"><h3>Destruenci</h3><p>Rozkładają martwą materię organiczną na proste związki nieorganiczne (np. sole mineralne), które znów mogą pobrać producenci. To głównie bakterie i grzyby. Nazywa się je też <b>reducentami</b>.</p><p class="ex">bakterie glebowe, grzyby</p></div>
+</div></section>
+
+<section class="th"><h2>Łańcuch pokarmowy</h2>
+<p><b>Łańcuch pokarmowy</b> to szereg organizmów, w którym każdy kolejny zjada poprzedni. Pokazuje, którędy płyną materia i energia.</p>
+<div class="tchain">${CH('🌲 sosna','l1')}${AR}${CH('🐛 brudnica mniszka','l2')}${AR}${CH('🐦 sikora bogatka','l3')}${AR}${CH('🦅 krogulec','l4')}</div>
+<div class="tnote"><b>Strzałka pokazuje kierunek przepływu energii,</b> czyli wskazuje od zjadanego do zjadającego. „Sosna → brudnica” czytamy: brudnica zjada sosnę. Strzałka w drugą stronę to najczęstszy błąd na sprawdzianie.</div>
+<p>Wyróżniamy dwa główne typy łańcuchów:</p>
+<ul class="tl">
+<li><b>Łańcuch spasania</b> zaczyna się od żywego producenta, którego zjadają roślinożercy. Przykład: trawy → konik polny → jaszczurka zwinka → pustułka.</li>
+<li><b>Łańcuch detrytusowy</b> zaczyna się od martwej materii organicznej (opadłych liści, szczątków, odchodów), którą zjadają detrytusożercy, np. dżdżownice. Przykład: opadłe liście → dżdżownice → ryjówka → puszczyk. W lesie właśnie tędy przepływa większość energii, bo zwierzęta zjadają tylko niewielką część żywych roślin.</li>
+</ul></section>
+
+<section class="th"><h2>Poziomy troficzne</h2>
+<p><b>Poziom troficzny</b> to miejsce organizmu w łańcuchu pokarmowym, czyli liczba „kroków” od producenta.</p>
+<div class="tlev">
+<div class="lv l1"><b>1. poziom</b><span>producenci</span><em>sosna</em></div>
+<div class="lv l2"><b>2. poziom</b><span>konsumenci I rzędu</span><em>brudnica mniszka</em></div>
+<div class="lv l3"><b>3. poziom</b><span>konsumenci II rzędu</span><em>sikora bogatka</em></div>
+<div class="lv l4"><b>4. poziom</b><span>konsumenci III rzędu</span><em>krogulec</em></div>
+</div>
+<h3>Czym różnią się konsumenci I i II rzędu?</h3>
+<p><b>Konsument I rzędu</b> zjada producenta. W łańcuchu spasania jest więc roślinożercą: sarna skubiąca trawę, gąsienica na igłach sosny, kryl filtrujący fitoplankton. <b>Konsument II rzędu</b> zjada konsumenta I rzędu, czyli zwykle jest drapieżnikiem albo owadożercą. <b>Konsument III rzędu</b> zjada konsumenta II rzędu i tak dalej. Konsumenta, którego w danym ekosystemie nikt już nie zjada, nazywamy <b>drapieżnikiem szczytowym</b> (np. wilk, orka).</p>
+<div class="tnote"><b>Uwaga:</b> „rząd” konsumenta zależy od łańcucha, a nie od gatunku. Sikora jedząca gąsienice jest konsumentem II rzędu, ale ta sama sikora jedząca zimą nasiona sosny jest konsumentem I rzędu.</div>
+</section>
+
+<section class="th"><h2>Sieć pokarmowa</h2>
+<p>W przyrodzie prawie żaden organizm nie je tylko jednego gatunku i nie jest zjadany tylko przez jeden. Łańcuchy przeplatają się więc ze sobą i tworzą <b>sieć pokarmową</b>, czyli zbiór wszystkich zależności pokarmowych w ekosystemie.</p>
+<ul class="tl">
+<li><b>Wszystkożercy</b> zajmują kilka poziomów troficznych naraz. Lis zjadający borówki jest konsumentem I rzędu, a zjadający nornice – II rzędu.</li>
+<li><b>Im bardziej rozbudowana sieć, tym stabilniejszy ekosystem.</b> Jeśli zniknie jeden gatunek, zjadający go konsumenci mogą przerzucić się na inny pokarm.</li>
+<li><b>Gatunek z jednym źródłem pokarmu jest wrażliwy.</b> Ryś zjada głównie sarny, więc ich spadek uderza w niego bardziej niż w wilka.</li>
+</ul>
+<div class="tadv"><h3>Dla dociekliwych: średni poziom troficzny</h3><p>Ekolodzy często podają poziom troficzny jako ułamek. Liczy się go tak: <b>1 + średnia poziomów troficznych zjadanego pokarmu</b>. Sikora jedząca po równo gąsienice (poziom 2) i nasiona sosny (poziom 1) ma poziom 1 + (2 + 1) : 2 = <b>2,5</b>. W zakładce „Sieć” narzędzie liczy go dla każdego organizmu (przy założeniu, że każdy pokarm jest zjadany w równej ilości) i według niego ustawia organizmy w pionie.</p></div>
+</section>
+
+<section class="th"><h2>Przepływ energii i zasada 10%</h2>
+<p>Na każdy kolejny poziom troficzny trafia tylko część energii z poprzedniego, średnio około <b>10%</b> (w rzeczywistości zwykle od kilku do kilkunastu procent). Reszta:</p>
+<ul class="tl">
+<li>jest zużywana w <b>oddychaniu komórkowym</b> na procesy życiowe (ruch, utrzymanie temperatury ciała) i ostatecznie uchodzi jako <b>ciepło</b>,</li>
+<li>pozostaje w <b>niezjedzonych częściach</b> (korzenie, kości, sierść),</li>
+<li>trafia do <b>odchodów</b>, a stamtąd do destruentów.</li>
+</ul>
+<p>Dlatego łańcuchy pokarmowe są krótkie, zwykle mają 3–5 ogniw: na wyższe poziomy po prostu nie starczy energii. Dlatego też drapieżników szczytowych jest zawsze mniej niż roślinożerców.</p>
+<h3>Piramidy ekologiczne</h3>
+<ul class="tl">
+<li><b>Piramida energii</b> pokazuje, ile energii jest na każdym poziomie. Zawsze zwęża się ku górze.</li>
+<li><b>Piramida biomasy</b> pokazuje masę organizmów na każdym poziomie. Zwykle też zwęża się ku górze.</li>
+<li><b>Piramida liczebności</b> pokazuje liczbę osobników. Może być odwrócona: jeden dąb wykarmi tysiące gąsienic.</li>
+</ul></section>
+
+<section class="th"><h2>Materia krąży, energia przepływa</h2>
+<p>Materia (np. pierwiastki węgiel i azot) krąży w ekosystemie: producenci budują z niej związki organiczne, konsumenci je zjadają, a destruenci rozkładają szczątki na związki nieorganiczne, które znów pobierają producenci. <b>Energia krąży tylko w jedną stronę:</b> wchodzi do ekosystemu jako światło, a opuszcza go jako ciepło. Ekosystem potrzebuje więc stałego dopływu energii ze Słońca.</p>
+<div class="tloop">${CH('☀️ światło','sun')}${AR}${CH('🌿 producenci','l1')}${AR}${CH('🦌 konsumenci','l2')}${AR}${CH('🍂 szczątki','ld')}${AR}${CH('🍄 destruenci','ld')}${AR}${CH('🧂 sole mineralne','ld')}<span class="tar">↩</span>${CH('🌿 producenci','l1')}</div>
+</section>
+
+<section class="th"><h2>Kumulacja toksyn w łańcuchu</h2>
+<p>Niektóre trwałe substancje, np. rtęć czy insektycyd DDT, nie są rozkładane ani wydalane, tylko gromadzą się w tkankach. Każdy drapieżnik zjada w ciągu życia ogromną liczbę ofiar, więc ich stężenie rośnie z każdym poziomem troficznym. To zjawisko nazywa się <b>biomagnifikacją</b>. W XX wieku DDT tak bardzo osłabiło skorupki jaj bielików i sokołów wędrownych, że ich liczebność gwałtownie spadła. Po zakazie DDT populacje się odbudowały.</p></section>
+
+<section class="th"><h2>Kaskada troficzna</h2>
+<p>Zmiana na jednym poziomie przenosi się na kolejne. Klasyczny przykład to Park Yellowstone w USA: po powrocie wilków w 1995 roku zmniejszyła się liczebność jeleni wapiti i zmieniło się ich zachowanie, a w niektórych miejscach odrosły wierzby i osiki. Badacze wciąż dyskutują, jak silny był ten efekt, ale mechanizm jest ten sam co w zakładce „Co jeśli?”: <b>mniej drapieżników → więcej roślinożerców → mniej roślin</b>.</p></section>
+
+<section class="th"><h2>Typowe błędy</h2>
+<ul class="tl err">
+<li><b>Strzałka od zjadającego do zjadanego.</b> Poprawnie: od pokarmu do tego, kto go zjada.</li>
+<li><b>„Producent to roślina”.</b> Producentami są też glony i sinice. W morzach i jeziorach to właśnie fitoplankton jest najważniejszym producentem.</li>
+<li><b>„Konsument I rzędu to małe zwierzę, a III rzędu duże”.</b> Rząd zależy od tego, co organizm je, a nie od jego wielkości. Płetwal błękitny jedzący kryl jest konsumentem II rzędu.</li>
+<li><b>„Destruenci to ostatnie ogniwo łańcucha”.</b> Destruenci rozkładają szczątki organizmów ze wszystkich poziomów, a nie tylko drapieżnika na końcu.</li>
+<li><b>„Każdy gatunek ma jeden poziom troficzny”.</b> Wszystkożercy mogą zajmować kilka poziomów, zależnie od tego, co akurat jedzą.</li>
+</ul></section>`,
+en:`
+<section class="th"><h2>Who eats whom</h2>
+<p>Every organism in an ecosystem needs energy and matter. Depending on where they get them from, we divide organisms into three groups.</p>
+<div class="trio">
+<div class="tcard l1"><h3>Producers</h3><p>Autotrophs that make organic matter from carbon dioxide and water in <b>photosynthesis</b>, using light energy. These are plants, algae and cyanobacteria.</p><p class="ex">pine, grasses, phytoplankton</p></div>
+<div class="tcard l2"><h3>Consumers</h3><p>Heterotrophs that eat other organisms (or parts of them) to get matter and energy. They include herbivores, carnivores and omnivores.</p><p class="ex">roe deer, great tit, wolf</p></div>
+<div class="tcard ld"><h3>Decomposers</h3><p>They break dead organic matter down into simple inorganic substances (e.g. mineral salts), which producers can take up again. Mostly bacteria and fungi.</p><p class="ex">soil bacteria, fungi</p></div>
+</div></section>
+
+<section class="th"><h2>Food chain</h2>
+<p>A <b>food chain</b> is a sequence of organisms in which each one eats the one before it. It shows the path that matter and energy take.</p>
+<div class="tchain">${CH('🌲 Scots pine','l1')}${AR}${CH('🐛 nun moth','l2')}${AR}${CH('🐦 great tit','l3')}${AR}${CH('🦅 sparrowhawk','l4')}</div>
+<div class="tnote"><b>The arrow shows the direction of energy flow,</b> so it points from the eaten to the eater. “Pine → nun moth” means: the nun moth eats the pine. Drawing the arrow the other way is the most common test mistake.</div>
+<p>There are two main types of food chain:</p>
+<ul class="tl">
+<li><b>A grazing food chain</b> starts with a living producer eaten by herbivores. Example: grasses → grasshopper → sand lizard → kestrel.</li>
+<li><b>A detrital food chain</b> starts with dead organic matter (fallen leaves, remains, dung) eaten by detritivores such as earthworms. Example: fallen leaves → earthworms → shrew → tawny owl. In a forest most energy actually flows this way, because animals eat only a small part of the living plants.</li>
+</ul></section>
+
+<section class="th"><h2>Trophic levels</h2>
+<p>A <b>trophic level</b> is an organism’s position in a food chain, i.e. the number of “steps” from the producer.</p>
+<div class="tlev">
+<div class="lv l1"><b>Level 1</b><span>producers</span><em>Scots pine</em></div>
+<div class="lv l2"><b>Level 2</b><span>primary consumers</span><em>nun moth</em></div>
+<div class="lv l3"><b>Level 3</b><span>secondary consumers</span><em>great tit</em></div>
+<div class="lv l4"><b>Level 4</b><span>tertiary consumers</span><em>sparrowhawk</em></div>
+</div>
+<h3>Primary vs secondary consumers</h3>
+<p>A <b>primary consumer</b> eats a producer, so in a grazing chain it is a herbivore: a deer grazing on grass, a caterpillar on pine needles, krill filtering phytoplankton. A <b>secondary consumer</b> eats a primary consumer, so it is usually a carnivore or an insectivore. A <b>tertiary consumer</b> eats a secondary consumer, and so on. A consumer that nothing else eats in the ecosystem is called an <b>apex predator</b> (e.g. wolf, orca).</p>
+<div class="tnote"><b>Careful:</b> the consumer’s level depends on the chain, not on the species. A great tit eating caterpillars is a secondary consumer, but the same tit eating pine seeds in winter is a primary consumer.</div>
+</section>
+
+<section class="th"><h2>Food web</h2>
+<p>In nature almost no organism eats just one species or is eaten by just one. Food chains therefore interconnect to form a <b>food web</b>: all the feeding relationships in an ecosystem.</p>
+<ul class="tl">
+<li><b>Omnivores</b> occupy several trophic levels at once. A fox eating bilberries is a primary consumer; a fox eating voles is a secondary consumer.</li>
+<li><b>The more complex the web, the more stable the ecosystem.</b> If one species disappears, its consumers can switch to other food.</li>
+<li><b>A species with a single food source is vulnerable.</b> The lynx eats mainly roe deer, so a drop in deer numbers hits it harder than the wolf.</li>
+</ul>
+<div class="tadv"><h3>Going further: average trophic level</h3><p>Ecologists often give trophic levels as fractions: <b>1 + the average trophic level of the food eaten</b>. A great tit eating equal amounts of caterpillars (level 2) and pine seeds (level 1) has a level of 1 + (2 + 1) ÷ 2 = <b>2.5</b>. In the “Web” tab the tool works this out for every organism (assuming each food item is eaten in equal amounts) and uses it to place organisms vertically.</p></div>
+</section>
+
+<section class="th"><h2>Energy flow and the 10% rule</h2>
+<p>Only part of the energy passes from one trophic level to the next, on average about <b>10%</b> (in reality usually from a few to over a dozen per cent). The rest:</p>
+<ul class="tl">
+<li>is used in <b>cellular respiration</b> for life processes (movement, keeping warm) and finally escapes as <b>heat</b>,</li>
+<li>stays in <b>uneaten parts</b> (roots, bones, fur),</li>
+<li>ends up in <b>faeces</b>, and from there goes to decomposers.</li>
+</ul>
+<p>That is why food chains are short, usually 3–5 links: there is not enough energy left for higher levels. It is also why there are always fewer apex predators than herbivores.</p>
+<h3>Ecological pyramids</h3>
+<ul class="tl">
+<li><b>A pyramid of energy</b> shows the energy at each level. It always narrows towards the top.</li>
+<li><b>A pyramid of biomass</b> shows the mass of organisms at each level. It usually narrows towards the top too.</li>
+<li><b>A pyramid of numbers</b> shows the number of individuals. It can be upside down: one oak can feed thousands of caterpillars.</li>
+</ul></section>
+
+<section class="th"><h2>Matter cycles, energy flows</h2>
+<p>Matter (e.g. the elements carbon and nitrogen) cycles in an ecosystem: producers build organic compounds from it, consumers eat them, and decomposers break remains down into inorganic substances that producers take up again. <b>Energy flows only one way:</b> it enters the ecosystem as light and leaves as heat, so an ecosystem needs a constant supply of energy from the Sun.</p>
+<div class="tloop">${CH('☀️ light','sun')}${AR}${CH('🌿 producers','l1')}${AR}${CH('🦌 consumers','l2')}${AR}${CH('🍂 remains','ld')}${AR}${CH('🍄 decomposers','ld')}${AR}${CH('🧂 mineral salts','ld')}<span class="tar">↩</span>${CH('🌿 producers','l1')}</div>
+</section>
+
+<section class="th"><h2>Toxins building up in a chain</h2>
+<p>Some persistent substances, such as mercury or the insecticide DDT, are neither broken down nor excreted; they build up in body tissues. Every predator eats a huge number of prey in its lifetime, so the concentration rises at each trophic level. This is called <b>biomagnification</b>. In the 20th century DDT thinned the eggshells of white-tailed eagles and peregrine falcons so much that their numbers crashed. After DDT was banned, the populations recovered.</p></section>
+
+<section class="th"><h2>Trophic cascade</h2>
+<p>A change at one level spreads to the others. The classic example is Yellowstone National Park in the USA: after wolves returned in 1995, elk numbers fell and their behaviour changed, and in some places willows and aspens grew back. Scientists still debate how strong this effect was, but the mechanism is the same as in the “What if?” mode: <b>fewer predators → more herbivores → fewer plants</b>.</p></section>
+
+<section class="th"><h2>Common mistakes</h2>
+<ul class="tl err">
+<li><b>Arrow from the eater to the eaten.</b> Correct: from the food to whoever eats it.</li>
+<li><b>“A producer is a plant.”</b> Algae and cyanobacteria are producers too. In seas and lakes phytoplankton is the most important producer.</li>
+<li><b>“Primary consumers are small, tertiary ones are big.”</b> The level depends on what an organism eats, not on its size. A blue whale eating krill is a secondary consumer.</li>
+<li><b>“Decomposers are the last link of the chain.”</b> Decomposers break down remains from every level, not just the predator at the end.</li>
+<li><b>“Each species has one trophic level.”</b> Omnivores can occupy several levels, depending on what they are eating.</li>
+</ul></section>`};
+
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem('siecpok_'+k);return v==null?d:JSON.parse(v);}catch(e){return d;}},set(k,v){try{localStorage.setItem('siecpok_'+k,JSON.stringify(v));}catch(e){}}};
+let L=store.get('lang','pl'); if(L!=='pl'&&L!=='en')L='pl';
+let ECO=store.get('eco','las'); if(!ECOS[ECO])ECO='las';
+let TAB='teoria';
+const t=k=>T[L][k];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const fmt=(x,d=2)=>new Intl.NumberFormat(L==='pl'?'pl-PL':'en-GB',{maximumFractionDigits:d}).format(x).replace(/\u00a0|\u202f/g,' ');
+const fmtE=x=>fmt(x,x<1?3:1)+' kJ';
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+// ---------- graf ----------
+const G={};
+function build(id){
+  if(G[id])return G[id];
+  const E=ECOS[id]; const by={}; const nodes=E.n.map(a=>({id:a[0],pl:a[1],en:a[2],e:a[3],t:a[4],food:a[5]||[]}));
+  nodes.forEach(n=>{by[n.id]=n;n.eaters=[];});
+  nodes.forEach(n=>n.food.forEach(f=>by[f].eaters.push(n.id)));
+  // średni poziom troficzny
+  const TL={};nodes.forEach(n=>{if(n.t==='P'||n.t==='X')TL[n.id]=1;});
+  for(let k=0;k<60;k++)nodes.forEach(n=>{if(n.t==='C'){const v=n.food.map(f=>TL[f]).filter(x=>x!=null);if(v.length)TL[n.id]=1+v.reduce((a,b)=>a+b,0)/v.length;}});
+  // ścieżki (łańcuchy)
+  function paths(type){const out=[];const st=nodes.filter(n=>n.t===type).map(n=>[n.id]);
+    while(st.length){const p=st.pop();if(p.length>=2)out.push(p);if(p.length>=7)continue;
+      by[p[p.length-1]].eaters.forEach(e=>{if(by[e].t==='C'&&!p.includes(e))st.push(p.concat(e));});}
+    return out;}
+  const g={id,E,nodes,by,TL,PG:paths('P'),PD:paths('X')};
+  g.all=g.PG.concat(g.PD);
+  const isApex=x=>by[x].eaters.filter(e=>by[e].t==='C').length===0;
+  g.complete=g.all.filter(p=>isApex(p[p.length-1]));
+  g.pos={};nodes.forEach(n=>g.pos[n.id]={g:{},d:{}});
+  g.PG.forEach(p=>p.forEach((x,i)=>{const o=g.pos[x].g;if(!o[i+1]||o[i+1].length>p.slice(0,i+1).length)o[i+1]=p.slice(0,i+1);}));
+  g.PD.forEach(p=>p.forEach((x,i)=>{const o=g.pos[x].d;if(!o[i+1])o[i+1]=p.slice(0,i+1);}));
+  g.fromP=new Set();g.PG.forEach(p=>p.forEach(x=>g.fromP.add(x)));nodes.filter(n=>n.t==='P').forEach(n=>g.fromP.add(n.id));
+  g.isApex=isApex;
+  G[id]=g;return g;
+}
+const nm=(g,id)=>g.by[id][L];
+const chip=(g,id,pos,detr)=>`<span class="cch c${Math.min(pos,6)}${detr&&pos===1?' cd':''}">${g.by[id].e} ${esc(nm(g,id))}</span>`;
+const chainTxt=(g,p,detr)=>p.map((x,i)=>chip(g,x,i+1,detr)).join('<span class="car">→</span>');
+const isDetr=(g,p)=>g.by[p[0]].t==='X';
+
+// ---------- nagłówek / zakładki ----------
+function renderStatic(){
+  document.documentElement.lang=L;
+  $('#title').textContent=t('title');$('#sub').textContent=t('sub');
+  $$('[data-tab]').forEach(b=>{b.textContent=t('tabs')[b.dataset.tab];b.setAttribute('aria-selected',b.dataset.tab===TAB);});
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
+  $('#ecolbl').textContent=t('eco');
+  $('#ecos').innerHTML=Object.keys(ECOS).map(k=>`<button data-eco="${k}" aria-pressed="${k===ECO}"><span>${ECOS[k].e}</span>${ECOS[k][L]}</button>`).join('');
+  $('#ecobar').hidden=TAB==='teoria';
+  $('#foot').textContent=t('footer');
+  $$('main>section').forEach(s=>s.hidden=s.id!=='p-'+TAB);
+}
+function render(){renderStatic();({teoria:rTheory,lancuch:rChain,siec:rWeb,piramida:rPyr,zadania:rQuiz})[TAB]();}
+function rTheory(){$('#p-teoria').innerHTML=`<div class="theory">${THEORY[L]}</div>`;}
+
+// ---------- ŁAŃCUCH ----------
+const CS={type:'g',len:'any',chain:null,eco:null,prac:false,placed:[],pool:[],res:null};
+function genChain(){
+  const g=build(ECO);let note='';let type=CS.type;
+  let pool=(type==='d'?g.PD:g.PG).filter(p=>p.length>=3);
+  if(type==='d'&&!pool.length){type='g';note=t('noDetr');pool=g.PG.filter(p=>p.length>=3);}
+  let want=CS.len==='any'?null:+CS.len;
+  let cand=want?pool.filter(p=>p.length===want):pool.filter(p=>g.isApex(p[p.length-1]));
+  if(!cand.length&&want){const lens=[...new Set(pool.map(p=>p.length))].sort((a,b)=>Math.abs(a-want)-Math.abs(b-want));cand=pool.filter(p=>p.length===lens[0]);note=(note?note+' ':'')+t('noLen')(lens[0]);}
+  if(!cand.length)cand=pool;
+  let c=rnd(cand); if(CS.chain&&cand.length>1){let k=0;while(c.join()===CS.chain.join()&&k++<10)c=rnd(cand);}
+  CS.chain=c;CS.eco=ECO;CS.note=note;CS.placed=[];CS.pool=shuffle(c);CS.res=null;
+  if(CS.pool.join()===c.join()&&c.length>1)CS.pool=CS.pool.reverse();
+}
+function rChain(){
+  if(!CS.chain||CS.eco!==ECO)genChain();
+  const g=build(ECO),c=CS.chain,detr=isDetr(g,c);
+  let h=`<div class="ctrl">
+   <div class="seg" role="group"><button data-ctype="g" aria-pressed="${CS.type==='g'}">${t('grazing')}</button><button data-ctype="d" aria-pressed="${CS.type==='d'}">${t('detrital')}</button></div>
+   <label class="inl">${t('len')} <select id="clen">${['any','3','4','5','6'].map(v=>`<option value="${v}" ${CS.len===v?'selected':''}>${v==='any'?t('any'):v}</option>`).join('')}</select></label>
+   <button class="btn main" id="cnew">🎲 ${t('newChain')}</button>
+   <div class="seg" role="group"><button data-cmode="show" aria-pressed="${!CS.prac}">${t('showMode')}</button><button data-cmode="prac" aria-pressed="${CS.prac}">${t('practice')}</button></div>
+  </div>`;
+  if(CS.note)h+=`<p class="note">${CS.note}</p>`;
+  const solved=!CS.prac||CS.res==='ok';
+  if(CS.prac){
+    h+=`<p class="hint">${t('pracIntro')}</p><div class="pool">${CS.pool.map(x=>CS.placed.includes(x)?`<span class="card ghost"></span>`:`<button class="card" data-pick="${x}"><span class="em">${g.by[x].e}</span><span class="nm">${esc(nm(g,x))}</span></button>`).join('')}</div>`;
+    h+=`<div class="chain prac">${c.map((_,i)=>{const x=CS.placed[i];const st=CS.res&&CS.res!=='fill'&&CS.okIdx?(CS.okIdx[i]?'ok':'bad'):'';
+      return (i?'<span class="arr" aria-hidden="true">→</span>':'')+(x?`<button class="card placed ${st} ${solved?'c'+Math.min(i+1,6)+(detr&&i===0?' cd':''):''}" data-unpick="${i}"><span class="em">${g.by[x].e}</span><span class="nm">${esc(nm(g,x))}</span>${solved?`<span class="lvp">${lvlName(i+1,detr,L)}</span>`:''}</button>`:`<span class="card slot">${i+1}</span>`);}).join('')}</div>`;
+    h+=`<div class="row"><button class="btn main" id="pchk">${t('check')}</button><button class="btn" id="pclr">${t('clear')}</button></div>`;
+    if(CS.res)h+=`<p class="fb ${CS.res==='ok'?'ok':'bad'}" role="status">${CS.res==='ok'?t('pracOk'):CS.res==='fill'?t('pracFill'):t('pracBad')}</p>`;
+  }else{
+    h+=`<div class="chain">${c.map((x,i)=>(i?'<span class="arr" aria-hidden="true">→</span>':'')+`<div class="card c${Math.min(i+1,6)}${detr&&i===0?' cd':''}"><span class="em">${g.by[x].e}</span><span class="nm">${esc(nm(g,x))}</span><span class="lvp">${lvlName(i+1,detr,L)}</span><span class="tl">${i+1}. ${t('level')}</span></div>`).join('')}</div>`;
+  }
+  if(solved){
+    h+=`<div class="expl"><ul>${c.map((x,i)=>{let s=`<li><b>${g.by[x].e} ${esc(nm(g,x))}</b> – ${lvlName(i+1,detr,L)}`;
+      if(i===0)s+=detr?(L==='pl'?': od niej zaczyna się łańcuch detrytusowy.':': the detrital chain starts here.'):(L==='pl'?': wytwarza materię organiczną w fotosyntezie.':': makes organic matter in photosynthesis.');
+      else s+=L==='pl'?`. Pokarm w tym łańcuchu: ${esc(nm(g,c[i-1]))} (${lvlName(i,detr,L)}).`:`. Its food in this chain: ${esc(nm(g,c[i-1]))} (${lvlName(i,detr,L)}).`;
+      return s+'</li>';}).join('')}</ul></div>`;
+    // inne poziomy w sieci
+    const also=[];c.forEach((x,i)=>{const P=g.pos[x];const other=[];
+      Object.keys(P.g).forEach(k=>{if(!(+k===i+1&&!detr))other.push(lvlName(+k,false,L));});
+      Object.keys(P.d).forEach(k=>{if(!(+k===i+1&&detr)&&+k>1)other.push(lvlName(+k,true,L)+' '+t('detrNote'));});
+      const u=[...new Set(other)];if(u.length)also.push(t('alsoLine')(g.by[x].e+' '+esc(nm(g,x)),u.join(L==='pl'?' albo ':' or ')));});
+    if(also.length)h+=`<div class="also"><h3>${t('alsoTitle')}</h3><p>${also.join('<br>')}</p></div>`;
+    h+=`<div class="row"><button class="btn main" id="toweb">🕸️ ${t('toWeb')}</button></div>`;
+  }
+  $('#p-lancuch').innerHTML=h;
+}
+
+// ---------- SIEĆ ----------
+const W={sel:null,whatIf:false,removed:new Set(),det:store.get('det',false),tl:store.get('tl',true),chain:null,chainEco:null};
+const COL=['','var(--l1)','var(--l2)','var(--l3)','var(--l4)','var(--l5)','var(--l6)'];
+function visible(g){return g.nodes.filter(n=>W.det||g.fromP.has(n.id));}
+function layout(g,vis){
+  const ids=new Set(vis.map(n=>n.id));
+  const rowsM={};vis.forEach(n=>{const k=n.t==='R'?0:Math.round(g.TL[n.id]*2)/2;(rowsM[k]=rowsM[k]||[]).push(n.id);});
+  const keys=Object.keys(rowsM).map(Number).sort((a,b)=>a-b);
+  // X na końcu pierwszego rzędu
+  if(rowsM[1])rowsM[1].sort((a,b)=>(g.by[a].t==='X')-(g.by[b].t==='X'));
+  const maxN=Math.max(...keys.map(k=>rowsM[k].length));
+  const Wd=Math.max(920,maxN*128+60),sp=k=>Math.min(150,(Wd-60)/rowsM[k].length);
+  const X={};const place=()=>keys.forEach(k=>{const r=rowsM[k],s=sp(k);r.forEach((id,i)=>X[id]=Wd/2+(i-(r.length-1)/2)*s);});
+  place();
+  const bary=(id,list)=>{const v=list.filter(x=>ids.has(x)&&X[x]!=null);return v.length?v.reduce((a,x)=>a+X[x],0)/v.length:X[id];};
+  for(let it=0;it<6;it++){
+    keys.filter(k=>k>1).forEach(k=>{rowsM[k].sort((a,b)=>bary(a,g.by[a].food)-bary(b,g.by[b].food));place();});
+    keys.slice().reverse().filter(k=>k>=1).forEach(k=>{if(k===1)rowsM[1].sort((a,b)=>(g.by[a].t==='X')-(g.by[b].t==='X')||bary(a,g.by[a].eaters)-bary(b,g.by[b].eaters));else rowsM[k].sort((a,b)=>bary(a,g.by[a].eaters)-bary(b,g.by[b].eaters));place();});
+  }
+  const top=Math.max(...keys),unit=Math.max(150,Math.min(230,600/Math.max(1,top-1))),pad=70;
+  const ymain=k=>pad+(top-k)*unit;
+  const hasR=keys.includes(0);
+  const H=ymain(1)+ (hasR?160:0)+70;
+  const Y={};keys.forEach(k=>rowsM[k].forEach(id=>Y[id]=k===0?ymain(1)+160:ymain(k)));
+  return {X,Y,Wd,H,keys,ymain,top};
+}
+function effects(g,vis){
+  const ids=new Set(vis.map(n=>n.id));const gone=new Set(W.removed);const ext=new Set();
+  let ch=true;while(ch){ch=false;vis.forEach(n=>{if(n.t!=='C'&&n.t!=='R')return;if(gone.has(n.id))return;const f=n.food.filter(x=>ids.has(x));if(f.length&&f.every(x=>gone.has(x))){gone.add(n.id);ext.add(n.id);ch=true;}});}
+  const eff={};
+  vis.forEach(n=>{if(gone.has(n.id))return;const up=[],dn=[];
+    n.food.filter(x=>ids.has(x)&&gone.has(x)).forEach(x=>dn.push(['lostFood',nm(g,x)]));
+    n.eaters.filter(x=>ids.has(x)&&gone.has(x)).forEach(x=>up.push(['lostPred',nm(g,x)]));
+    if(up.length||dn.length)eff[n.id]={up,dn,ind:false};});
+  const dir=Object.keys(eff).map(id=>[id,eff[id].up.length&&!eff[id].dn.length?1:eff[id].dn.length&&!eff[id].up.length?-1:0]);
+  const ind={};const add=(id,s,why)=>{if(gone.has(id)||eff[id])return;(ind[id]=ind[id]||{up:[],dn:[],ind:true})[s>0?'up':'dn'].push(why);};
+  dir.forEach(([id,s])=>{if(!s)return;const n=g.by[id];
+    if(n.t==='C')n.food.filter(x=>ids.has(x)).forEach(x=>add(x,-s,[s>0?'moreEaters':'fewerEaters',nm(g,id)]));
+    n.eaters.filter(x=>ids.has(x)).forEach(x=>add(x,s,[s>0?'moreFood':'lessFood',nm(g,id)]));});
+  Object.assign(eff,ind);
+  return {gone,ext,eff};
+}
+function rWeb(){
+  const g=build(ECO);
+  if(W.chainEco!==ECO)W.chain=null;
+  if(W.chain&&W.chain.some(x=>g.by[x].t==='X'||!g.fromP.has(x)))W.det=true;
+  const vis=visible(g);const ids=new Set(vis.map(n=>n.id));
+  if(W.sel&&!ids.has(W.sel))W.sel=null;
+  [...W.removed].forEach(x=>{if(!ids.has(x))W.removed.delete(x);});
+  const Ly=layout(g,vis);const{X,Y,Wd,H}=Ly;
+  const fx=W.whatIf?effects(g,vis):null;
+  const chainE=new Set();if(W.chain)for(let i=1;i<W.chain.length;i++)chainE.add(W.chain[i-1]+'>'+W.chain[i]);
+  const chainN=new Set(W.chain||[]);
+  const R=26;
+  let edges='',nodesS='';
+  // pasma poziomów
+  let bands='';
+  for(let k=1;k<=Math.floor(Ly.top);k++){const y=Ly.ymain(k);bands+=`<line x1="10" x2="${Wd-10}" y1="${y}" y2="${y}" class="band"/><text x="16" y="${y-36}" class="bandt">${k}</text>`;}
+  if(Ly.keys.includes(0))bands+=`<text x="16" y="${Ly.ymain(1)+160-40}" class="bandt dec">${L==='pl'?'destruenci':'decomposers'}</text>`;
+  vis.forEach(n=>n.food.forEach(f=>{if(!ids.has(f))return;
+    const x1=X[f],y1=Y[f],x2=X[n.id],y2=Y[n.id];const dx=x2-x1,dy=y2-y1,d=Math.hypot(dx,dy)||1;
+    const sx=x1+dx/d*(R+2),sy=y1+dy/d*(R+2),ex=x2-dx/d*(R+7),ey=y2-dy/d*(R+7);
+    let cls='e';const key=f+'>'+n.id;
+    if(W.sel){if(n.id===W.sel)cls+=' ein';else if(f===W.sel)cls+=' eout';else cls+=' efade';}
+    else if(W.chain){cls+=chainE.has(key)?' echain':' efade';}
+    if(fx&&(fx.gone.has(f)||fx.gone.has(n.id)))cls+=' egone';
+    if(g.by[n.id].t==='R')cls+=' edec';
+    const mk=cls.includes('ein')?'ain':cls.includes('eout')?'aout':cls.includes('echain')?'ach':'a';
+    edges+=`<line class="${cls}" x1="${sx.toFixed(1)}" y1="${sy.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" marker-end="url(#${mk})"/>`;}));
+  vis.forEach(n=>{const x=X[n.id],y=Y[n.id];const tl=g.TL[n.id];
+    const col=n.t==='X'||n.t==='R'?'var(--ld)':COL[Math.min(6,Math.round(tl))];
+    let cls='nd';
+    if(W.sel){if(n.id===W.sel)cls+=' sel';else if(n.food.includes(W.sel)||g.by[W.sel].food.includes(n.id))cls+=' rel';else cls+=' fade';}
+    else if(W.chain){cls+=chainN.has(n.id)?' inchain':' fade';}
+    let badge='';
+    if(fx){if(W.removed.has(n.id)){cls+=' rem';badge=`<g class="bdg rm"><circle cx="${R-2}" cy="${-R+2}" r="11"/><text x="${R-2}" y="${-R+7}">✕</text></g>`;}
+      else if(fx.ext.has(n.id)){cls+=' ext';badge=`<g class="bdg ex"><circle cx="${R-2}" cy="${-R+2}" r="11"/><text x="${R-2}" y="${-R+7}">✕</text></g>`;}
+      else if(fx.eff[n.id]){const e=fx.eff[n.id];const s=e.up.length&&!e.dn.length?'up':e.dn.length&&!e.up.length?'dn':'mx';
+        badge=`<g class="bdg ${s}${e.ind?' ind':''}"><circle cx="${R-2}" cy="${-R+2}" r="11"/><text x="${R-2}" y="${-R+7}">${s==='up'?'↑':s==='dn'?'↓':'?'}</text></g>`;}}
+    const name=nm(g,n.id).replace(/\s*\(.*\)$/,'');
+    const words=name.split(' ');const lines=[];let cur='';words.forEach(w=>{if((cur+' '+w).trim().length>15&&cur){lines.push(cur);cur=w;}else cur=(cur+' '+w).trim();});lines.push(cur);
+    const lab=lines.slice(0,2).map((l,i)=>`<tspan x="0" dy="${i?14:0}">${esc(l)}</tspan>`).join('');
+    const tlb=W.tl&&n.t==='C'?`<text class="tlb" x="${-R-4}" y="${-R+6}" text-anchor="end">${fmt(tl,2)}</text>`:'';
+    nodesS+=`<g class="${cls}" data-node="${n.id}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})" tabindex="0" role="button" aria-label="${esc(nm(g,n.id))}"><circle r="${R}" style="--c:${col}"/><text class="em" y="9">${n.e}</text><text class="lb" y="${R+15}">${lab}</text>${tlb}${badge}</g>`;});
+  const svg=`<svg viewBox="0 0 ${Wd} ${H}" width="${Wd}" height="${H}" id="websvg" role="img" aria-label="${t('tabs').siec}">
+   <defs>${[['a','#9aaba3'],['ain','#2f8a4a'],['aout','#d0661f'],['ach','#1f5e4b']].map(([i,c])=>`<marker id="${i}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`).join('')}</defs>
+   <rect width="${Wd}" height="${H}" fill="transparent" data-bg="1"/>${bands}${edges}${nodesS}</svg>`;
+  let h=`<div class="ctrl">
+    <label class="tog"><input type="checkbox" id="wdet" ${W.det?'checked':''}> ${t('showDet')}</label>
+    <label class="tog"><input type="checkbox" id="wtl" ${W.tl?'checked':''}> ${t('showTL')}</label>
+    <button class="btn ${W.whatIf?'main':''}" id="wwhat" aria-pressed="${W.whatIf}">🧪 ${t('whatIf')}</button>
+    ${W.whatIf&&W.removed.size?`<button class="btn" id="wrest">${t('restore')}</button>`:''}
+  </div>
+  <p class="hint">${W.whatIf?t('whatHint'):t('webHint')}</p>
+  <div class="webwrap"><div class="webscroll">${svg}</div><aside class="info" id="winfo">${webInfo(g,vis,fx)}</aside></div>`;
+  $('#p-siec').innerHTML=h;
+}
+function webInfo(g,vis,fx){
+  let h='';
+  if(W.whatIf){
+    if(!fx||!W.removed.size)return `<p class="mut">${t('noEffect')}</p><p class="small">${t('whatNote')}</p>`;
+    const list=(arr)=>arr.map(([id,why])=>`<li><b>${g.by[id].e} ${esc(nm(g,id))}</b>${why?`<span>${why}</span>`:''}</li>`).join('');
+    const rem=[...W.removed].map(id=>[id,'']),ext=[...fx.ext].map(id=>[id,'']);
+    const ups=[],dns=[],mx=[];
+    const grp=a=>{const m={};a.forEach(([k,n])=>(m[k]=m[k]||[]).push(n));return Object.entries(m).map(([k,v])=>t(k)+': '+v.join(', ')).join('; ');};
+    Object.entries(fx.eff).forEach(([id,e])=>{const why=(e.ind?t('indirect')+' – ':'')+grp([...e.up,...e.dn]);
+      if(e.up.length&&!e.dn.length)ups.push([id,why]);else if(e.dn.length&&!e.up.length)dns.push([id,why]);else mx.push([id,why+' – '+t('mixedWhy')]);});
+    const sortI=a=>a.sort((x,y)=>fx.eff[x[0]].ind-fx.eff[y[0]].ind);
+    h+=`<div class="fxg rm"><h3>✕ ${t('removed')}</h3><ul>${list(rem)}</ul></div>`;
+    if(ext.length)h+=`<div class="fxg ex"><h3>✕ ${t('extinct')}</h3><ul>${list(ext)}</ul></div>`;
+    if(dns.length)h+=`<div class="fxg dn"><h3>↓ ${t('down')}</h3><ul>${list(sortI(dns))}</ul></div>`;
+    if(ups.length)h+=`<div class="fxg up"><h3>↑ ${t('up')}</h3><ul>${list(sortI(ups))}</ul></div>`;
+    if(mx.length)h+=`<div class="fxg mx"><h3>? ${t('mixed')}</h3><ul>${list(mx)}</ul></div>`;
+    return h+`<p class="small">${t('whatNote')}</p>`;
+  }
+  if(W.sel){
+    const n=g.by[W.sel];const ids=new Set(vis.map(v=>v.id));
+    h+=`<div class="ihead"><span class="iem">${n.e}</span><div><h3>${esc(n[L])}</h3><p class="mut">${esc(n[L==='pl'?'en':'pl'])}</p></div></div>`;
+    if(n.t==='P')h+=`<p><span class="tag c1">${t('producer')}</span></p><p>${t('prodDesc')}</p>`;
+    if(n.t==='X')h+=`<p><span class="tag cd">${t('detritus')}</span></p><p>${t('xDesc')}</p>`;
+    if(n.t==='R')h+=`<p><span class="tag cd">${t('reducent')}</span></p><p>${t('rDesc')}</p>`;
+    if(n.t==='C'){const f=n.food.filter(x=>ids.has(x));h+=`<p class="kv"><b>${t('eatsL')}:</b> ${f.map(x=>g.by[x].e+' '+esc(nm(g,x))).join(', ')}</p>`;}
+    if(n.t!=='R'){const e=n.eaters.filter(x=>ids.has(x)&&g.by[x].t==='C');h+=`<p class="kv"><b>${t('eatenBy')}:</b> ${e.length?e.map(x=>g.by[x].e+' '+esc(nm(g,x))).join(', '):t('nobody')}</p>`;}
+    if(n.t==='C'){
+      const P=g.pos[n.id];let rows='';
+      Object.keys(P.g).forEach(k=>rows+=`<li><span class="tag c${Math.min(+k,6)}">${lvlName(+k,false,L)}</span> <span class="ex">${P.g[k].map(x=>esc(nm(g,x))).join(' → ')}</span></li>`);
+      if(W.det)Object.keys(P.d).forEach(k=>rows+=`<li><span class="tag c${Math.min(+k,6)}">${lvlName(+k,true,L)}</span> <span class="small">${t('detrNote')}</span> <span class="ex">${P.d[k].map(x=>esc(nm(g,x))).join(' → ')}</span></li>`);
+      h+=`<p class="kv"><b>${t('positions')}:</b></p><ul class="pos">${rows}</ul>`;
+      const cnt=g.complete.filter(p=>p.includes(n.id)&&(W.det||!isDetr(g,p))).length;
+      h+=`<p class="kv"><b>${t('avgTL')}:</b> ${fmt(g.TL[n.id],2)}<br><b>${t('chainsThrough')}:</b> ${cnt}</p>`;
+    }
+    return h;
+  }
+  if(W.chain){const detr=isDetr(g,W.chain);const n=g.complete.filter(p=>W.det||!isDetr(g,p)).length;
+    h+=`<h3>${t('chainBox')}</h3><div class="vchain">${W.chain.map((x,i)=>chip(g,x,i+1,detr)).join('<span class="car">↓</span>')}</div><p>${t('inWeb')(n)}</p>`;
+    const multi=W.chain.filter(x=>Object.keys(g.pos[x].g).length+Object.keys(g.pos[x].d).filter(k=>k>1).length>1);
+    if(multi.length)h+=`<p>${L==='pl'?'Kilka poziomów troficznych zajmują tu':'Several trophic levels are occupied here by'}: ${multi.map(x=>'<b>'+esc(nm(g,x))+'</b>').join(', ')}. ${L==='pl'?'Kliknij je, żeby zobaczyć szczegóły.':'Tap them to see details.'}</p>`;
+    return h+`<button class="btn" id="whide">${t('hideChain')}</button>`;
+  }
+  const nC=vis.filter(n=>n.t==='C').length,nP=vis.filter(n=>n.t==='P').length,ap=vis.filter(n=>n.t==='C'&&g.isApex(n.id));
+  const nCh=g.complete.filter(p=>W.det||!isDetr(g,p)).length;
+  h+=`<h3>${ECOS[ECO].e} ${ECOS[ECO][L]}</h3><p>${L==='pl'?`Producenci: <b>${nP}</b>, konsumenci: <b>${nC}</b>, pełne łańcuchy: <b>${nCh}</b>.`:`Producers: <b>${nP}</b>, consumers: <b>${nC}</b>, complete chains: <b>${nCh}</b>.`}</p>
+  <p>${L==='pl'?'Drapieżniki szczytowe':'Apex predators'}: ${ap.map(x=>x.e+' '+esc(x[L])).join(', ')}</p>
+  <p class="small">${L==='pl'?'Liczby przy organizmach to średni poziom troficzny. Organizmy ustawione są w pionie według niego, a numery po lewej to całe poziomy troficzne.':'Numbers next to organisms are average trophic levels. Organisms are placed vertically by it, and the numbers on the left are whole trophic levels.'}</p>`;
+  return h;
+}
+
+// ---------- PIRAMIDA ----------
+const PY={chain:null,eco:null,E:100000,eff:10,mode:'e',note:''};
+function pyrChain(fromTab){
+  const g=build(ECO);PY.note='';
+  if(fromTab&&CS.chain&&CS.eco===ECO){if(isDetr(g,CS.chain)){PY.note=t('pyrDetr');}else{PY.chain=CS.chain;PY.eco=ECO;return;}}
+  const pool=g.PG.filter(p=>p.length>=4&&p.length<=5&&g.isApex(p[p.length-1]));
+  PY.chain=rnd(pool.length?pool:g.PG.filter(p=>p.length>=3));PY.eco=ECO;
+}
+function rPyr(){
+  if(!PY.chain||PY.eco!==ECO)pyrChain(true);
+  const g=build(ECO),c=PY.chain;const n=c.length;
+  const E=c.map((_,i)=>PY.E*Math.pow(PY.eff/100,i));
+  let h=`<div class="ctrl">
+   <div class="seg" role="group"><button data-pmode="e" aria-pressed="${PY.mode==='e'}">⚡ ${t('pyrEnergy')}</button><button data-pmode="t" aria-pressed="${PY.mode==='t'}">☠️ ${t('pyrTox')}</button></div>
+   <button class="btn main" id="pnew">🎲 ${t('pyrNew')}</button><button class="btn" id="ptake">${t('pyrTake')}</button></div>`;
+  if(PY.note)h+=`<p class="note">${PY.note}</p>`;
+  if(PY.mode==='e')h+=`<div class="ctrl"><label class="inl">${t('pyrE')} <input id="pE" type="number" min="100" step="1000" value="${PY.E}" inputmode="numeric"> kJ</label>
+   <label class="inl">${t('pyrEff')} <select id="pEff">${[5,10,15,20].map(v=>`<option ${v===PY.eff?'selected':''}>${v}</option>`).join('')}</select> %</label></div>`;
+  h+=`<p class="mini">${chainTxt(g,c,false)}</p>`;
+  let bars='',star=false;
+  if(PY.mode==='e'){
+    for(let i=n-1;i>=0;i--){let w=E[i]/E[0]*100;let s='';if(w<5){w=5;s='*';star=true;}
+      bars+=`<div class="pbar"><div class="pfill c${Math.min(i+1,6)}" style="width:${w}%"><span>${g.by[c[i]].e}</span></div><div class="plab"><b>${esc(nm(g,c[i]))}</b> · ${lvlName(i+1,false,L)}<br><b>${fmtE(E[i])}${s}</b> <span class="mut">(${fmt(E[i]/E[0]*100,3)}% ${t('pyrOfProd')})</span></div></div>`;}
+    h+=`<div class="pyr">${bars}</div>`;
+    if(star)h+=`<p class="small">* ${t('pyrScale')}</p>`;
+    h+=`<div class="pbox"><p>${t('pyrSum')(fmtE(E[0]),fmtE(E[n-1]),fmt(E[n-1]/E[0]*100,4)+'%')}</p><h3>${t('pyrWhere')}</h3><p>${t('pyrWhereT')(fmtE(E[0]),fmtE(E[1]),fmtE(E[0]-E[1]))}</p></div>`;
+  }else{
+    const base=0.02;const C=c.map((_,i)=>base*Math.pow(10,i));
+    for(let i=n-1;i>=0;i--){const w=Math.max(6,C[i]/C[n-1]*100);
+      bars+=`<div class="pbar"><div class="pfill tox" style="width:${w}%;opacity:${0.35+0.65*(i/(n-1||1))}"><span>${g.by[c[i]].e}</span></div><div class="plab"><b>${esc(nm(g,c[i]))}</b> · ${lvlName(i+1,false,L)}<br><b>${fmt(C[i],2)}</b> <span class="mut">${t('toxUnit')}</span></div></div>`;}
+    h+=`<p>${t('toxIntro')}</p><div class="pyr tox">${bars}</div>
+    <div class="pbox"><p>${L==='pl'?`W ostatnim ogniwie (${esc(nm(g,c[n-1]))}) stężenie jest <b>${fmt(C[n-1]/C[0],0)} razy</b> wyższe niż u producenta (${esc(nm(g,c[0]))}). Dlatego najbardziej cierpią drapieżniki na końcu łańcucha, np. bieliki i sokoły wędrowne w czasach stosowania DDT.`:`In the last link (${esc(nm(g,c[n-1]))}) the concentration is <b>${fmt(C[n-1]/C[0],0)} times</b> higher than in the producer (${esc(nm(g,c[0]))}). That is why predators at the end of the chain suffer most, e.g. white-tailed eagles and peregrine falcons when DDT was in use.`}</p></div>`;
+  }
+  $('#p-piramida').innerHTML=h;
+}
+
+// ---------- ZADANIA ----------
+const QZ={type:store.get('qtype','all'),mix:store.get('qmix',false),q:null,ok:0,all:0,streak:0,ans:null};
+const ecoForQ=()=>QZ.mix?rnd(Object.keys(ECOS)):ECO;
+const ecoTag=g=>`<span class="ecot">${g.E.e} ${g.E[L]}</span>`;
+function opt(a,ok){return {h:a,ok:!!ok};}
+const QG={
+ lvl(){const g=build(ecoForQ());const c=rnd(g.PG.filter(p=>p.length>=3&&p.length<=5));const i=Math.floor(Math.random()*c.length);
+   const o=c.map((_,k)=>opt(lvlName(k+1,false,L),k===i));
+   const x=nm(g,c[i]);
+   return {q:`${ecoTag(g)}<p>${L==='pl'?`Kim w tym łańcuchu jest <b>${esc(x)}</b>?`:`What is the <b>${esc(x)}</b> in this chain?`}</p><p class="mini">${chainTxt(g,c,false).replace(/c[1-6]/g,'c0')}</p>`,o,
+   x:i===0?(L==='pl'?`Stoi na początku łańcucha spasania, więc jest producentem.`:`It stands at the start of the grazing chain, so it is a producer.`):(L==='pl'?`Jego pokarm w tym łańcuchu: ${esc(nm(g,c[i-1]))}, czyli ${lvlName(i,false,L)}. Każdy krok w górę łańcucha to o jeden rząd więcej, więc odpowiedź to: ${lvlName(i+1,false,L)} (${i+1}. poziom troficzny).`:`Its food in this chain is the ${esc(nm(g,c[i-1]))}, a ${lvlName(i,false,L)}. Each step up the chain adds one level, so it is a ${lvlName(i+1,false,L)} (trophic level ${i+1}).`)};},
+ who(){const g=build(ecoForQ());const c=rnd(g.PG.filter(p=>p.length>=3&&p.length<=5));const i=1+Math.floor(Math.random()*(c.length-1));
+   return {q:`${ecoTag(g)}<p>${L==='pl'?`Który organizm w tym łańcuchu jest <b>${lvlName(i+1,false,L)}</b>?`:`Which organism in this chain is the <b>${lvlName(i+1,false,L)}</b>?`}</p><p class="mini">${chainTxt(g,c,false).replace(/c[1-6]/g,'c0')}</p>`,
+   o:shuffle(c.map((x,k)=>opt(g.by[x].e+' '+esc(nm(g,x)),k===i))),
+   x:L==='pl'?`Licz od producenta: ${c.slice(0,i+1).map((x,k)=>esc(nm(g,x))+' ('+(k===0?'producent':ROMAN[k]+' rząd')+')').join(' → ')}.`:`Count from the producer: ${c.slice(0,i+1).map((x,k)=>esc(nm(g,x))+' ('+(k===0?'producer':ORD_EN[k])+')').join(' → ')}.`};},
+ order(){const g=build(ecoForQ());const c=rnd(g.PG.filter(p=>p.length>=3&&p.length<=5));
+   const txt=p=>p.map(x=>g.by[x].e+' '+esc(nm(g,x))).join(' → ');
+   const rev=c.slice().reverse();const sw=c.slice();const k=Math.floor(Math.random()*(c.length-1));[sw[k],sw[k+1]]=[sw[k+1],sw[k]];
+   let bad=null;const last=c[c.length-1],prev=c[c.length-2];
+   const cand=g.nodes.filter(n=>n.t==='C'&&!n.food.includes(prev)&&!c.includes(n.id)&&g.fromP.has(n.id));
+   if(cand.length){bad=c.slice(0,-1).concat(rnd(cand).id);}
+   const o=[opt(txt(c),1),opt(txt(rev)),opt(txt(sw))];if(bad)o.push(opt(txt(bad)));
+   return {q:`${ecoTag(g)}<p>${L==='pl'?'Który łańcuch pokarmowy jest zapisany poprawnie?':'Which food chain is written correctly?'}</p>`,o:shuffle(o),
+   x:(L==='pl'?`Łańcuch zaczyna się od producenta, a strzałki prowadzą od pokarmu do zjadającego: `:`A chain starts with a producer, and the arrows lead from the food to the eater: `)+txt(c)+'.'+(bad?(L==='pl'?` W jednej z błędnych odpowiedzi jest para, której nie ma w tej sieci: ${esc(nm(g,prev))} → ${esc(nm(g,bad[bad.length-1]))}.`:` One of the wrong answers contains a pair that does not exist in this web: ${esc(nm(g,prev))} → ${esc(nm(g,bad[bad.length-1]))}.`):'')};},
+ multi(){for(let tries=0;tries<30;tries++){const g=build(ecoForQ());
+   const ms=g.nodes.filter(n=>n.t==='C'&&Object.keys(g.pos[n.id].g).length>=2);if(!ms.length)continue;
+   const m=rnd(ms);const ks=Object.keys(g.pos[m.id].g).map(Number).sort((a,b)=>a-b);const a=ks[0],b=ks[1];
+   const single=g.nodes.filter(n=>n.t==='C'&&Object.keys(g.pos[n.id].g).length===1&&g.fromP.has(n.id));if(single.length<3)continue;
+   const o=[opt(m.e+' '+esc(m[L]),1)].concat(shuffle(single).slice(0,3).map(n=>opt(n.e+' '+esc(n[L]))));
+   const pa=g.pos[m.id].g[a],pb=g.pos[m.id].g[b];
+   return {q:`${ecoTag(g)}<p>${L==='pl'?`Który organizm w tej sieci może być zarówno <b>${lvlName(a,false,L)}</b>, jak i <b>${lvlName(b,false,L)}</b>?`:`Which organism in this web can be both a <b>${lvlName(a,false,L)}</b> and a <b>${lvlName(b,false,L)}</b>?`}</p>`,o:shuffle(o),
+   x:(L==='pl'?'Na przykład: ':'For example: ')+pa.map(x=>esc(nm(g,x))).join(' → ')+(L==='pl'?' oraz ':' and ')+pb.map(x=>esc(nm(g,x))).join(' → ')+(L==='pl'?'. Pozostałe organizmy mają w tej sieci tylko jeden poziom troficzny.':'. The other organisms have only one trophic level in this web.')};}
+   return QG.lvl();},
+ what(){for(let tries=0;tries<40;tries++){const g=build(ecoForQ());
+   const C=g.nodes.filter(n=>n.t==='C'&&g.fromP.has(n.id));
+   const onlyFood=C.filter(n=>n.food.filter(f=>g.fromP.has(f)).length===1&&n.food.length===1);
+   const onlyPred=g.nodes.filter(n=>g.fromP.has(n.id)&&n.eaters.filter(e=>g.by[e].t==='C').length===1);
+   const useFood=Math.random()<.5&&onlyFood.length;
+   if(useFood){const x=rnd(onlyFood),y=x.food[0];
+     return {q:`${ecoTag(g)}<p>${L==='pl'?`<b>${x.e} ${esc(x[L])}</b>: co najprawdopodobniej stanie się z liczebnością populacji tego organizmu, jeśli z ekosystemu zniknie ten organizm: <b>${g.by[y].e} ${esc(nm(g,y))}</b>?`:`<b>${x.e} ${esc(x[L])}</b>: what will most likely happen to this population if this organism disappears from the ecosystem: <b>${g.by[y].e} ${esc(nm(g,y))}</b>?`}</p>`,
+     o:[opt(t('up3')),opt(t('down3'),1),opt(t('same3'))],x:L==='pl'?`Ten organizm (${esc(x[L])}) ma w tej sieci tylko jedno źródło pokarmu: ${esc(nm(g,y))}. Bez niego jego populacja zmaleje, a nawet może zniknąć.`:`In this web this organism (${esc(x[L])}) has only one food source: ${esc(nm(g,y))}. Without it the population will fall and may even disappear.`};}
+   if(onlyPred.length){const x=rnd(onlyPred),y=x.eaters.find(e=>g.by[e].t==='C');
+     return {q:`${ecoTag(g)}<p>${L==='pl'?`<b>${x.e} ${esc(x[L])}</b>: co najprawdopodobniej stanie się z liczebnością populacji tego organizmu, jeśli z ekosystemu zniknie ten organizm: <b>${g.by[y].e} ${esc(nm(g,y))}</b>?`:`<b>${x.e} ${esc(x[L])}</b>: what will most likely happen to this population if this organism disappears from the ecosystem: <b>${g.by[y].e} ${esc(nm(g,y))}</b>?`}</p>`,
+     o:[opt(t('up3'),1),opt(t('down3')),opt(t('same3'))],x:L==='pl'?`Ten organizm (${esc(x[L])}) ma w tej sieci tylko jednego zjadającego: ${esc(nm(g,y))}. Bez niego jego populacja wzrośnie, przynajmniej dopóki starczy pokarmu.`:`In this web this organism (${esc(x[L])}) is eaten by only one thing: ${esc(nm(g,y))}. Without it the population will grow, at least while there is enough food.`};}}
+   return QG.lvl();},
+ energy(){const g=build(ecoForQ());const c=rnd(g.PG.filter(p=>p.length>=3&&p.length<=5));const E0=rnd([10000,20000,50000,100000,200000,500000]);
+   const i=c.length-1-(c.length>3&&Math.random()<.4?1:0);const v=E0*Math.pow(.1,i);
+   const vals=[v,v*10,v/10,v*100].filter((x,k,a)=>a.indexOf(x)===k);
+   return {q:`${ecoTag(g)}<p>${L==='pl'?`Producenci w tym łańcuchu związali <b>${fmtE(E0)}</b> energii. Ile energii dotrze do organizmu: <b>${g.by[c[i]].e} ${esc(nm(g,c[i]))}</b>, jeśli na kolejny poziom przechodzi 10%?`:`The producers in this chain captured <b>${fmtE(E0)}</b> of energy. How much energy reaches the <b>${g.by[c[i]].e} ${esc(nm(g,c[i]))}</b> if 10% passes to each next level?`}</p><p class="mini">${chainTxt(g,c,false)}</p>`,
+   o:shuffle(vals.map(x=>opt(fmtE(x),x===v))),x:(L==='pl'?`Między producentem a tym organizmem są ${i} przejścia (${i}×10%): `:`There are ${i} transfers between the producer and this organism (${i}×10%): `)+c.slice(0,i+1).map((_,k)=>fmtE(E0*Math.pow(.1,k))).join(' → ')+'.'};},
+ detr(){const ks=Object.keys(ECOS).filter(k=>build(k).PD.some(p=>p.length>=3));const g=build(QZ.mix?rnd(ks):(ks.includes(ECO)?ECO:rnd(ks)));
+   const d=rnd(g.PD.filter(p=>p.length>=3));const gs=shuffle(g.PG.filter(p=>p.length>=3)).filter((p,i,a)=>a.findIndex(q=>q.join()===p.join())===i).slice(0,3);
+   const txt=p=>p.map(x=>g.by[x].e+' '+esc(nm(g,x))).join(' → ');
+   return {q:`${ecoTag(g)}<p>${L==='pl'?'Który z tych łańcuchów jest łańcuchem detrytusowym?':'Which of these chains is a detrital chain?'}</p>`,o:shuffle([opt(txt(d),1)].concat(gs.map(p=>opt(txt(p))))),
+   x:L==='pl'?'Łańcuch detrytusowy zaczyna się od martwej materii organicznej, a nie od żywego producenta. Pozostałe to łańcuchy spasania.':'A detrital chain starts with dead organic matter, not with a living producer. The others are grazing chains.'};},
+ tox(){const g=build(ecoForQ());let pl=g.PG.filter(p=>p.length>=4&&p.length<=5);if(!pl.length)pl=g.PG.filter(p=>p.length>=3);const c=rnd(pl);
+   return {q:`${ecoTag(g)}<p>${L==='pl'?'Do ekosystemu trafił trwały insektycyd DDT. W którym organizmie tego łańcucha jego stężenie będzie najwyższe?':'A persistent insecticide, DDT, got into the ecosystem. In which organism of this chain will its concentration be highest?'}</p><p class="mini">${chainTxt(g,c,false)}</p>`,
+   o:shuffle(c.map((x,k)=>opt(g.by[x].e+' '+esc(nm(g,x)),k===c.length-1))),x:L==='pl'?'W ostatnim ogniwie. DDT nie jest rozkładane ani wydalane, więc kumuluje się w tkankach, a jego stężenie rośnie z każdym poziomem troficznym (biomagnifikacja).':'In the last link. DDT is neither broken down nor excreted, so it builds up in tissues and its concentration rises at each trophic level (biomagnification).'};},
+ count(){for(let tries=0;tries<40;tries++){const g=build(ecoForQ());
+   const cnt={};g.PG.forEach(p=>{const x=p[p.length-1];cnt[x]=(cnt[x]||0)+1;});
+   const cand=Object.keys(cnt).filter(x=>cnt[x]>=2&&cnt[x]<=6);if(!cand.length)continue;const x=rnd(cand);const n=cnt[x];
+   const anc=new Set();const walk=id=>{g.by[id].food.forEach(f=>{if(g.fromP.has(f)&&!anc.has(f)){anc.add(f);walk(f);}});};walk(x);
+   const rows=[x,...anc].filter(id=>g.by[id].t==='C').map(id=>`<li><b>${g.by[id].e} ${esc(nm(g,id))}</b> ${L==='pl'?'zjada':'eats'}: ${g.by[id].food.filter(f=>anc.has(f)).map(f=>esc(nm(g,f))).join(', ')}</li>`).join('');
+   const vals=[n,n-1,n+1,n+2].filter(v=>v>=1).filter((v,k,a)=>a.indexOf(v)===k).slice(0,4);
+   const paths=g.PG.filter(p=>p[p.length-1]===x);
+   return {q:`${ecoTag(g)}<p>${L==='pl'?`Ile różnych łańcuchów pokarmowych prowadzi od producentów do organizmu: <b>${g.by[x].e} ${esc(nm(g,x))}</b>? Skorzystaj z listy poniżej.`:`How many different food chains lead from producers to the <b>${g.by[x].e} ${esc(nm(g,x))}</b>? Use the list below.`}</p><ul class="qlist">${rows}</ul>`,
+   o:shuffle(vals.map(v=>opt(String(v),v===n))),x:paths.map(p=>p.map(y=>esc(nm(g,y))).join(' → ')).join('<br>')};}
+   return QG.lvl();},
+ apex(){for(let tries=0;tries<30;tries++){const g=build(ecoForQ());
+   const ap=g.nodes.filter(n=>n.t==='C'&&g.fromP.has(n.id)&&g.isApex(n.id)&&g.TL[n.id]>=3);const non=g.nodes.filter(n=>n.t==='C'&&g.fromP.has(n.id)&&!g.isApex(n.id));
+   if(!ap.length||non.length<3)continue;const a=rnd(ap);
+   return {q:`${ecoTag(g)}<p>${L==='pl'?'Który z tych organizmów jest w tej sieci drapieżnikiem szczytowym, czyli nikt go już nie zjada?':'Which of these organisms is an apex predator in this web, i.e. nothing else eats it?'}</p>`,
+   o:shuffle([opt(a.e+' '+esc(a[L]),1)].concat(shuffle(non).slice(0,3).map(n=>opt(n.e+' '+esc(n[L]))))),x:L==='pl'?`W tej sieci nic nie zjada tego organizmu (${esc(a[L])}). Pozostałe organizmy są zjadane przez inne.`:`In this web nothing eats this organism (${esc(a[L])}). The other organisms are eaten by others.`};}
+   return QG.lvl();},
+ tf(){const s=rnd(TF);return {q:`<p>${L==='pl'?'Prawda czy fałsz?':'True or false?'}</p><p class="stmt">${s[L]}</p>`,o:[opt(t('tru'),s.ok),opt(t('fal'),!s.ok)],x:L==='pl'?s.xpl:s.xen};}
+};
+function newQ(){const ty=QZ.type==='all'?rnd(Object.keys(QG)):QZ.type;QZ.q=QG[ty]();QZ.q.ty=ty;QZ.q.lang=L;QZ.ans=null;}
+function rQuiz(){
+  if(!QZ.q||QZ.q.lang!==L)newQ();
+  const q=QZ.q;
+  let h=`<div class="ctrl"><label class="inl">${t('qType')} <select id="qtype"><option value="all">${t('qAll')}</option>${Object.keys(QG).map(k=>`<option value="${k}" ${QZ.type===k?'selected':''}>${t('qTypes')[k]}</option>`).join('')}</select></label>
+  <label class="tog"><input type="checkbox" id="qmix" ${QZ.mix?'checked':''}> ${t('qMix')}</label>
+  <div class="score"><span>${t('qScore')} <b>${QZ.ok}</b></span><span>${t('qAnswered')} <b>${QZ.all}</b></span><span>${t('qStreak')} <b>${QZ.streak}</b></span></div></div>
+  <div class="qcard"><p class="qt">${t('qTypes')[q.ty]}</p>${q.q}<div class="opts">${q.o.map((o,i)=>{let c='opt';if(QZ.ans!=null){if(o.ok)c+=' right';else if(i===QZ.ans)c+=' wrong';}return `<button class="${c}" data-opt="${i}" ${QZ.ans!=null?'disabled':''}>${o.h}</button>`;}).join('')}</div>`;
+  if(QZ.ans!=null){const good=q.o[QZ.ans].ok;h+=`<div class="fb ${good?'ok':'bad'}" role="status"><b>${good?rnd(t('qGood')):t('qBad')}</b> ${q.x}</div>`;}
+  h+=`<div class="row"><button class="btn ${QZ.ans!=null?'main':''}" id="qnext">${t('qNext')} →</button></div></div>`;
+  $('#p-zadania').innerHTML=h;
+}
+
+// ---------- zdarzenia ----------
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button,[data-node],[data-bg]');if(!b)return;
+  if(b.dataset.lang){L=b.dataset.lang;store.set('lang',L);render();return;}
+  if(b.dataset.tab){TAB=b.dataset.tab;render();return;}
+  if(b.dataset.eco){ECO=b.dataset.eco;store.set('eco',ECO);W.sel=null;W.removed.clear();render();return;}
+  // łańcuch
+  if(b.dataset.ctype){CS.type=b.dataset.ctype;genChain();rChain();return;}
+  if(b.id==='cnew'){genChain();rChain();return;}
+  if(b.dataset.cmode){CS.prac=b.dataset.cmode==='prac';CS.placed=[];CS.res=null;rChain();return;}
+  if(b.dataset.pick){if(CS.placed.length<CS.chain.length)CS.placed.push(b.dataset.pick);CS.res=null;rChain();return;}
+  if(b.dataset.unpick!=null&&CS.res!=='ok'){CS.placed.splice(+b.dataset.unpick,1);CS.res=null;rChain();return;}
+  if(b.id==='pchk'){if(CS.placed.length<CS.chain.length)CS.res='fill';else{const g=build(ECO);CS.okIdx=CS.placed.map((x,i)=>i===0?(g.by[x].t==='P'||g.by[x].t==='X'):g.by[x].food.includes(CS.placed[i-1]));CS.res=CS.okIdx.every(Boolean)?'ok':'bad';if(CS.res==='ok')CS.chain=CS.placed.slice();}rChain();return;}
+  if(b.id==='pclr'){CS.placed=[];CS.res=null;rChain();return;}
+  if(b.id==='toweb'){W.chain=CS.chain;W.chainEco=ECO;W.sel=null;W.whatIf=false;W.removed.clear();TAB='siec';render();window.scrollTo&&$('#tabs').scrollIntoView({block:'start'});return;}
+  // sieć
+  if(b.dataset.node){const id=b.dataset.node;
+    if(W.whatIf){W.removed.has(id)?W.removed.delete(id):W.removed.add(id);}else W.sel=W.sel===id?null:id;rWeb();return;}
+  if(b.dataset.bg){if(W.sel){W.sel=null;rWeb();}return;}
+  if(b.id==='wwhat'){W.whatIf=!W.whatIf;W.sel=null;if(!W.whatIf)W.removed.clear();rWeb();return;}
+  if(b.id==='wrest'){W.removed.clear();rWeb();return;}
+  if(b.id==='whide'){W.chain=null;rWeb();return;}
+  // piramida
+  if(b.dataset.pmode){PY.mode=b.dataset.pmode;rPyr();return;}
+  if(b.id==='pnew'){pyrChain(false);rPyr();return;}
+  if(b.id==='ptake'){pyrChain(true);rPyr();return;}
+  // zadania
+  if(b.dataset.opt!=null&&QZ.ans==null){QZ.ans=+b.dataset.opt;QZ.all++;if(QZ.q.o[QZ.ans].ok){QZ.ok++;QZ.streak++;}else QZ.streak=0;rQuiz();return;}
+  if(b.id==='qnext'){newQ();rQuiz();return;}
+});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset&&e.target.dataset.node){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
+document.addEventListener('change',e=>{const el=e.target;
+  if(el.id==='clen'){CS.len=el.value;genChain();rChain();}
+  if(el.id==='wdet'){W.det=el.checked;store.set('det',W.det);if(!W.det&&W.chain&&W.chain.some(x=>!build(ECO).fromP.has(x)))W.chain=null;rWeb();}
+  if(el.id==='wtl'){W.tl=el.checked;store.set('tl',W.tl);rWeb();}
+  if(el.id==='pE'){const v=Math.max(1,Math.round(+el.value||0));PY.E=v;rPyr();}
+  if(el.id==='pEff'){PY.eff=+el.value;rPyr();}
+  if(el.id==='qtype'){QZ.type=el.value;store.set('qtype',QZ.type);newQ();rQuiz();}
+  if(el.id==='qmix'){QZ.mix=el.checked;store.set('qmix',QZ.mix);newQ();rQuiz();}
+});
+window.__fw={build,QG,newQ,QZ,CS,W,ECOS,setEco:k=>{ECO=k;render();},setTab:k=>{TAB=k;render();}};
+render();
+})();
+</script><a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><script>(function(){var a=document.getElementById('home-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+</body></html>

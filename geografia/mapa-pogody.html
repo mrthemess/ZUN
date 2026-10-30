@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="pl"><head>
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{window.DEFAULT_LANG=l}catch(e){}})();</script><!--site-lang-->
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa pogody: przewodnik, prognoza i kreator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Baloo+2:wght@600;700;800&display=swap">
+<style>:root{
+  --bg:#E6F1F9; --panel:#FFFFFF; --ink:#16324F; --muted:#557089; --line:#C6D8E6;
+  --sun:#F5B400; --warm:#D9363E; --cold:#1F64C8; --occl:#8E3FB0; --accent:#1F64C8;
+  --soft:#F2F8FC; --chip:#E3EEF7; --ok:#2F9E44; --bad:#D9363E;
+  --r-lg:22px; --r-md:12px; --r-sm:8px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1C2B; --panel:#162A3E; --ink:#E4EEF7; --muted:#9DB3C7; --line:#2B4560;
+    --soft:#1B3249; --chip:#21405C; --accent:#6EA8FF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1C2B; --panel:#162A3E; --ink:#E4EEF7; --muted:#9DB3C7; --line:#2B4560;
+  --soft:#1B3249; --chip:#21405C; --accent:#6EA8FF; color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible","Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3,.disp{font-family:"Baloo 2","Arial Rounded MT Bold","Segoe UI",Arial,sans-serif;line-height:1.15;margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:16px 22px 0;max-width:1500px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:54px;height:54px;flex:none}
+.brand h1{font-size:34px;font-weight:800;letter-spacing:-.01em}
+.brand small{display:block;font-family:"Atkinson Hyperlegible",Arial,sans-serif;font-size:14px;color:var(--muted);font-weight:400}
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.langseg{margin-left:auto}
+.langseg button{padding:5px 12px}
+nav.tabs button{border:0;background:transparent;padding:10px 16px 12px;border-radius:14px 14px 0 0;font-family:"Baloo 2",Arial,sans-serif;font-weight:700;font-size:18px;color:var(--muted)}
+nav.tabs button[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:inset 0 4px 0 var(--sun)}
+nav.tabs button:hover{color:var(--ink)}
+main{max-width:1500px;margin:0 auto;padding:0 22px 30px}
+.tab{background:var(--panel);border-radius:0 0 var(--r-lg) var(--r-lg);padding:26px;min-height:60vh}
+.tab[hidden]{display:none}
+@media (max-width:760px){nav.tabs{margin-left:0} .tab{border-radius:var(--r-lg);padding:16px} .brand h1{font-size:28px}}
+
+/* guide */
+.guide{display:grid;grid-template-columns:230px minmax(0,1fr);gap:34px}
+.toc{position:sticky;top:12px;align-self:start;font-size:15px}
+.toc a{display:block;padding:6px 10px;border-radius:var(--r-sm);color:var(--ink);text-decoration:none}
+.toc a:hover{background:var(--soft)}
+.toc p{margin:0 0 6px;color:var(--muted);font-size:14px}
+.art{max-width:780px}
+.art section{padding:4px 0 26px;border-bottom:2px dashed var(--line);margin-bottom:24px}
+.art section:last-child{border-bottom:0}
+.art h2{font-size:30px;margin:6px 0 10px}
+.art h3{font-size:21px;margin:18px 0 6px}
+.art p{margin:8px 0}
+.lead{font-size:20px;color:var(--ink)}
+.note{background:var(--soft);border-left:6px solid var(--sun);padding:12px 16px;border-radius:0 var(--r-md) var(--r-md) 0;margin:14px 0}
+.note.blue{border-color:var(--cold)}
+.note.red{border-color:var(--warm)}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:10px 0}
+ol.steps li{counter-increment:s;position:relative;padding:8px 0 8px 52px;min-height:44px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:38px;height:38px;border-radius:50%;background:var(--sun);color:#16324F;font-family:"Baloo 2",Arial,sans-serif;font-weight:800;font-size:21px;display:grid;place-items:center}
+.minigrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0}
+.mini{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:var(--r-md);padding:8px 10px;font-size:15px;line-height:1.25}
+.mini svg{width:46px;height:46px;flex:none}
+.fig{background:var(--soft);border-radius:var(--r-lg);padding:16px;margin:14px 0}
+.fig svg{display:block;width:100%;height:auto}
+.fig .cap{font-size:15px;color:var(--muted);margin-top:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:900px){.guide{grid-template-columns:1fr}.toc{position:static;display:flex;flex-wrap:wrap;gap:4px}.toc p{width:100%}.two{grid-template-columns:1fr}}
+.compass{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:center}
+.compass .dirs{display:grid;grid-template-columns:repeat(3,58px);gap:6px;justify-content:start}
+.compass .dirs button{height:46px;border-radius:var(--r-sm);border:2px solid var(--line);background:var(--panel);font-weight:700}
+.compass .dirs button[aria-pressed="true"]{background:var(--cold);color:#fff;border-color:var(--cold)}
+@media (max-width:600px){.compass{grid-template-columns:1fr}}
+.tscale{display:flex;border-radius:var(--r-sm);overflow:hidden;margin:10px 0 4px}
+.tscale span{flex:1;text-align:center;font-size:13px;font-weight:700;padding:6px 0}
+.quiz .q{background:var(--soft);border-radius:var(--r-md);padding:14px 16px;margin:12px 0}
+.quiz .q p{margin:0 0 8px;font-weight:700}
+.quiz .q .qi{float:right;width:64px;height:64px;margin-left:10px}
+.quiz .opts{display:flex;flex-wrap:wrap;gap:8px}
+.quiz .opts button{border:2px solid var(--line);background:var(--panel);border-radius:999px;padding:7px 14px;font-size:16px}
+.quiz .opts button.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.quiz .opts button.no{background:var(--bad);border-color:var(--bad);color:#fff}
+.quiz .fb{margin-top:8px;font-size:15px;min-height:1em}
+.score{font-family:"Baloo 2",Arial,sans-serif;font-size:22px;font-weight:700}
+.joke{display:flex;gap:14px;align-items:flex-start;background:#FFF5D1;color:#16324F;border-radius:var(--r-lg);padding:16px 18px;margin-top:10px}
+.joke svg{width:56px;height:56px;flex:none}
+.joke p{margin:0 0 8px}
+
+/* symbols tab */
+.symhead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}
+.symhead h2{font-size:30px}
+.seg{display:inline-flex;background:var(--chip);border-radius:999px;padding:4px;gap:2px}
+.seg button{border:0;background:transparent;padding:7px 16px;border-radius:999px;font-weight:700;font-size:15px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(22,50,79,.25)}
+.symgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.sym{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center;border:2px solid var(--line);border-radius:var(--r-md);padding:12px}
+.sym svg{width:84px;height:84px;background:#F4F9FD;border-radius:var(--r-sm)}
+.sym h3{font-size:19px;margin-bottom:2px}
+.sym p{margin:0;font-size:14.5px;line-height:1.35;color:var(--muted)}
+.sym .tag{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 8px;margin-top:6px;background:var(--chip);color:var(--ink)}
+.symgroup{font-size:22px;margin:22px 0 10px}
+
+/* forecast + creator */
+.work{display:grid;grid-template-columns:310px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:1050px){.work{grid-template-columns:1fr}}
+.side{display:flex;flex-direction:column;gap:14px}
+.box{background:var(--soft);border-radius:var(--r-md);padding:12px 14px}
+.box h3{font-size:18px;margin-bottom:8px}
+.box label{display:flex;align-items:center;gap:8px;font-size:15.5px;padding:3px 0}
+.box input[type=checkbox]{width:20px;height:20px;accent-color:var(--cold)}
+.box input[type=text],.box input[type=number],.box select{width:100%;border:2px solid var(--line);background:var(--panel);border-radius:var(--r-sm);padding:7px 9px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:2px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:15px;line-height:1.2}
+.chips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.chips button small{display:block;font-size:12px;opacity:.75}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:0;border-radius:var(--r-sm);padding:10px 14px;font-weight:700;background:var(--chip);font-size:15.5px}
+.btn.main{background:var(--cold);color:#fff}
+.btn.sun{background:var(--sun);color:#16324F}
+.btn:disabled{opacity:.5;cursor:default}
+.status{font-size:14px;color:var(--muted)}
+.status.err{color:var(--bad)}
+.sheetwrap{background:#B9CCDA;border-radius:var(--r-md);padding:12px;overflow:auto}
+.sheetwrap svg{display:block;width:100%;height:auto;background:#fff;box-shadow:0 2px 10px rgba(22,50,79,.25);border-radius:4px;touch-action:none}
+.hint{font-size:14.5px;color:var(--muted);margin:8px 2px 0}
+
+/* creator palette */
+.palette{max-height:400px;overflow-y:auto;padding-right:2px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.palette button{border:2px solid var(--line);background:var(--panel);border-radius:var(--r-sm);padding:4px 2px 3px;font-size:11.5px;line-height:1.1;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:70px;min-width:0;overflow-wrap:anywhere}
+.palette button svg{width:40px;height:40px}
+.palette button[aria-pressed="true"]{border-color:var(--cold);background:#D9E8FA;color:#16324F}
+.edit[hidden]{display:none}
+.edit .row{display:flex;gap:8px;align-items:center;margin:6px 0}
+.edit .row>*{flex:1}
+.dir8{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;max-width:200px}
+.dir8 button{border:2px solid var(--line);background:var(--panel);border-radius:6px;padding:4px 0;font-weight:700;font-size:14px}
+.dir8 button[aria-pressed="true"]{background:var(--cold);color:#fff;border-color:var(--cold)}
+input[type=range]{width:100%;accent-color:var(--cold)}
+
+#printArea{display:none}
+@media print{
+  body>*:not(#printArea){display:none!important}
+  #printArea{display:block!important}
+  #printArea svg{width:100%;height:auto}
+  @page{size:A4 landscape;margin:8mm}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.frow{display:grid;grid-template-columns:170px 1fr;gap:14px;align-items:center;padding:8px 0}
+.frow+.frow{border-top:1px solid var(--line)}
+.frow svg{width:170px;height:auto}
+@media (max-width:560px){.frow{grid-template-columns:1fr}}
+</style></head><body>
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 100 100" data-ic="partly" aria-hidden="true"></svg>
+    <div><h1 data-en="Weather map">Mapa pogody</h1><small data-en="Forecasts for Poland: guide, symbols, live map and map maker">Prognozy dla Polski: przewodnik, symbole, aktualna mapa i kreator</small></div>
+  </div>
+  <div class="seg langseg" id="langSeg" aria-label="Język / Language"><button data-lang="pl" aria-pressed="true">PL</button><button data-lang="en" aria-pressed="false">EN</button></div>
+  <nav class="tabs" role="tablist" aria-label="Zakładki">
+    <button role="tab" id="b-guide" aria-controls="t-guide" aria-selected="true" data-en="Guide">Przewodnik</button>
+    <button role="tab" id="b-symbols" aria-controls="t-symbols" aria-selected="false" data-en="Symbols">Symbole</button>
+    <button role="tab" id="b-forecast" aria-controls="t-forecast" aria-selected="false" data-en="Live forecast">Aktualna prognoza</button>
+    <button role="tab" id="b-creator" aria-controls="t-creator" aria-selected="false" data-en="Map maker">Kreator mapy</button>
+  </nav>
+</header>
+<main>
+<!-- ================= PRZEWODNIK ================= -->
+<div class="tab" id="t-guide" role="tabpanel" aria-labelledby="b-guide">
+ <div class="guide">
+  <aside class="toc">
+    <p data-en="In this guide">W tym przewodniku</p>
+    <a href="#g-co" data-en="What is a forecast?">Co to jest prognoza?</a>
+    <a href="#g-jak" data-en="How to read the map">Jak czytać mapę</a>
+    <a href="#g-sym" data-en="Key symbols">Najważniejsze symbole</a>
+    <a href="#g-temp" data-en="Temperature">Temperatura</a>
+    <a href="#g-wiatr" data-en="Wind">Wiatr</a>
+    <a href="#g-wn" data-en="Highs and lows">Wyż i niż</a>
+    <a href="#g-izo" data-en="Isobars">Izobary</a>
+    <a href="#g-front" data-en="Weather fronts">Fronty atmosferyczne</a>
+    <a href="#g-proc" data-en="Chance of rain">Procent szans na opad</a>
+    <a href="#g-quiz" data-en="Test yourself">Sprawdź się</a>
+  </aside>
+  <div class="art">
+   <section id="g-co">
+    <h2 data-en="What is a weather forecast?">Co to jest prognoza pogody?</h2>
+    <p class="lead" data-en="A weather forecast tells us what the weather will be like in the next few hours and days: will the sun shine, will it rain, how warm will it be and how strong will the wind blow.">Prognoza pogody to przewidywanie, jaka będzie pogoda w najbliższych godzinach i dniach: czy będzie świecić słońce, czy spadnie deszcz, jak będzie ciepło i jak mocno powieje wiatr.</p>
+    <p data-en="Forecasts are made by &lt;b&gt;forecasters&lt;/b&gt;, meteorologists who study weather maps. In Poland, official forecasts and warnings come from &lt;b&gt;IMGW-PIB&lt;/b&gt; (the Institute of Meteorology and Water Management).">Prognozy przygotowują <b>synoptycy</b>, czyli meteorolodzy, którzy analizują mapy pogody. W Polsce oficjalne prognozy i ostrzeżenia wydaje <b>IMGW-PIB</b> (Instytut Meteorologii i Gospodarki Wodnej).</p>
+    <p data-en="How do forecasters know what will happen? They collect measurements from weather stations, from balloons sent high into the sky, from radars that “see” rain and from satellites that photograph clouds from space. Then supercomputers calculate how the air will move. The result is a &lt;b&gt;weather model&lt;/b&gt;, and from it we get the map you see on TV or on your phone.">Skąd synoptycy wiedzą, co się stanie? Zbierają pomiary ze stacji meteorologicznych, balonów wypuszczanych wysoko w niebo, radarów, które „widzą” deszcz, i satelitów, które fotografują chmury z kosmosu. Potem superkomputery liczą, jak powietrze będzie się poruszać. Wynik obliczeń to <b>model pogody</b>, a z niego powstaje mapa, którą widzisz w telewizji albo w telefonie.</p>
+    <div class="note" data-en="The further into the future, the less certain the forecast. Tomorrow’s forecast is usually very accurate, but a forecast for next week is more of a hint than a promise.">Im dalej w przyszłość, tym prognoza jest mniej pewna. Prognoza na jutro sprawdza się zwykle bardzo dobrze, a na za tydzień to już raczej wskazówka niż obietnica.</div>
+   </section>
+
+   <section id="g-jak">
+    <h2 data-en="How to read a forecast map, step by step">Jak czytać mapę prognozy, krok po kroku</h2>
+    <ol class="steps">
+      <li data-en="&lt;b&gt;Check when the forecast is for.&lt;/b&gt; Look at the date and time of day: morning, midday, evening or night. The same map at 7:00 and at 13:00 can look completely different."><b>Sprawdź, na kiedy jest prognoza.</b> Zobacz datę i porę dnia: rano, w południe, wieczorem czy w nocy. Ta sama mapa o 7:00 i o 13:00 może wyglądać zupełnie inaczej.</li>
+      <li data-en="&lt;b&gt;Read the key.&lt;/b&gt; The key (legend) tells you what each symbol and colour means. Different maps can use slightly different symbols."><b>Przeczytaj legendę.</b> Legenda mówi, co oznacza każdy symbol i kolor. Różne mapy mogą używać trochę innych znaczków.</li>
+      <li data-en="&lt;b&gt;Find your place.&lt;/b&gt; Look for the city closest to you. For Warsaw look at the centre-east of the map, for Kraków look south."><b>Znajdź swoje miejsce.</b> Odszukaj miasto najbliżej ciebie. Dla Warszawy patrz na środek-wschód mapy, dla Krakowa na południe.</li>
+      <li data-en="&lt;b&gt;Read the weather symbol.&lt;/b&gt; First the clouds: sun, sun with a cloud, cloud. Then what falls from them: drops mean rain, stars mean snow, lightning means a thunderstorm."><b>Odczytaj symbol pogody.</b> Najpierw zachmurzenie: słońce, słońce z chmurą, chmura. Potem opad: krople to deszcz, gwiazdki to śnieg, błyskawica to burza.</li>
+      <li data-en="&lt;b&gt;Read the temperature.&lt;/b&gt; The number next to a city is the temperature in degrees Celsius (°C). The colour helps: red and orange mean warm, blue means cold."><b>Odczytaj temperaturę.</b> Liczba przy mieście to temperatura w stopniach Celsjusza (°C). Kolor podpowiada: czerwony i pomarańczowy to ciepło, niebieski to zimno.</li>
+      <li data-en="&lt;b&gt;Check the wind.&lt;/b&gt; The arrow shows where the wind is blowing to, and the number tells you how fast (in km/h)."><b>Sprawdź wiatr.</b> Strzałka pokazuje, dokąd wieje wiatr, a liczba mówi, jak szybko (w km/h).</li>
+      <li data-en="&lt;b&gt;Compare regions.&lt;/b&gt; Where is it warmest? Where is it raining? The seaside is often different from the mountains."><b>Porównaj regiony.</b> Gdzie jest najcieplej? Gdzie pada? Często nad morzem jest inaczej niż w górach.</li>
+    </ol>
+   </section>
+
+   <section id="g-sym">
+    <h2 data-en="Key symbols">Najważniejsze symbole</h2>
+    <p data-en="A weather symbol usually has two parts: &lt;b&gt;cloud cover&lt;/b&gt; (how much of the sky is covered) and &lt;b&gt;precipitation&lt;/b&gt; (what falls from the clouds). All symbols with descriptions are in the &lt;a href=&quot;#&quot; data-goto=&quot;symbols&quot;&gt;Symbols&lt;/a&gt; tab.">Symbol pogody składa się zwykle z dwóch części: <b>zachmurzenia</b> (ile chmur jest na niebie) i <b>opadu</b> (co spada z chmur). Wszystkie symbole z opisami znajdziesz w zakładce <a href="#" data-goto="symbols">Symbole</a>.</p>
+    <div class="minigrid" id="miniSyms"></div>
+    <div class="note blue" data-en="&lt;b&gt;Showers&lt;/b&gt; (sun + cloud + drops) come and go: it pours for a moment, and fifteen minutes later the sun is out again. &lt;b&gt;Continuous rain&lt;/b&gt; (just a cloud with drops) lasts a long time, sometimes all day."><b>Opady przelotne</b> (słońce + chmura + krople) to deszcz, który przychodzi i odchodzi: przez chwilę leje, a za kwadrans znowu świeci słońce. Opady <b>ciągłe</b> (sama chmura z kroplami) trwają długo, czasem cały dzień.</div>
+   </section>
+
+   <section id="g-temp">
+    <h2 data-en="Temperature">Temperatura</h2>
+    <p data-en="We measure temperature in &lt;b&gt;degrees Celsius&lt;/b&gt;. 0°C is the temperature at which water freezes. When it stays below zero we call it a &lt;b&gt;frost&lt;/b&gt;; when it drops below zero only at night or early in the morning, it is a &lt;b&gt;ground frost&lt;/b&gt;.">Temperaturę podajemy w <b>stopniach Celsjusza</b>. 0°C to temperatura, w której woda zamarza. Gdy temperatura spada poniżej zera, mówimy o <b>mrozie</b>, a gdy tylko w nocy lub nad ranem, o <b>przymrozku</b>.</p>
+    <div class="tscale" id="tscale"></div>
+    <p data-en="Maps often show two numbers: the &lt;b&gt;maximum temperature&lt;/b&gt; (the highest of the day, usually in the afternoon) and the &lt;b&gt;minimum&lt;/b&gt; (the lowest, usually just before sunrise).">Na mapach często widać dwie liczby: <b>temperaturę maksymalną</b> (najwyższą w ciągu dnia, zwykle po południu) i <b>minimalną</b> (najniższą, zwykle tuż przed wschodem słońca).</p>
+    <div class="note" data-en="Why is it colder in the mountains? The higher you go, the colder it gets, on average by about 0.6°C for every 100 m. On Kasprowy Wierch it is usually more than ten degrees colder than in Kraków.">Dlaczego w górach jest zimniej? Im wyżej, tym chłodniej, średnio o około 0,6°C na każde 100 m. Na Kasprowym Wierchu jest zwykle o kilkanaście stopni zimniej niż w Krakowie.</div>
+   </section>
+
+   <section id="g-wiatr">
+    <h2 data-en="Wind: where from, and where to?">Wiatr: skąd wieje, a dokąd leci?</h2>
+    <p data-en="A wind is named after the direction it blows &lt;b&gt;from&lt;/b&gt;. A westerly wind comes from the west and blows towards the east. This is a very common trap in tests!">Wiatr nazywamy od kierunku, <b>z którego wieje</b>. Wiatr zachodni przychodzi z zachodu i wieje na wschód. To bardzo częsta pułapka na sprawdzianie!</p>
+    <div class="fig compass">
+      <div>
+        <div class="dirs" id="dirBtns"></div>
+      </div>
+      <div>
+        <svg viewBox="0 0 300 300" id="compassSvg" style="max-width:300px"></svg>
+        <p id="compassTxt" style="margin:6px 0 0"></p>
+      </div>
+    </div>
+    <p data-en="On a map &lt;b&gt;the arrow shows where the air is going&lt;/b&gt;, and the number next to it is the wind speed. Up to 20 km/h is a light wind, around 40 km/h is already strong (branches sway), and above 75 km/h the wind can break trees.">Na mapie <b>strzałka pokazuje, dokąd płynie powietrze</b>, a liczba przy niej to prędkość wiatru. Do 20 km/h to słaby wiatr, około 40 km/h jest już silny (gałęzie się kołyszą), a powyżej 75 km/h wiatr może łamać drzewa.</p>
+    <div class="note" data-en="In Poland the most common winds are &lt;b&gt;westerlies&lt;/b&gt;. They bring air from the Atlantic: cooler and damp in summer, mild and rainy in winter.">W Polsce najczęściej wieją wiatry <b>zachodnie</b>. Przynoszą powietrze znad Atlantyku: latem chłodniejsze i wilgotne, zimą łagodne i deszczowe.</div>
+   </section>
+
+   <section id="g-wn">
+    <h2 data-en="Highs and lows">Wyż i niż</h2>
+    <p data-en="Air presses down on the Earth. This push is called &lt;b&gt;air pressure&lt;/b&gt; and is measured in hectopascals (hPa). On average it is about 1013 hPa.">Powietrze naciska na Ziemię. Ten nacisk to <b>ciśnienie atmosferyczne</b>, mierzone w hektopaskalach (hPa). Średnio wynosi około 1013 hPa.</p>
+    <div class="two">
+      <div class="fig"><svg viewBox="0 0 300 220" id="figW"></svg>
+        <div class="cap" data-en="&lt;b style=&quot;color:var(--cold)&quot;&gt;H, high&lt;/b&gt;: high pressure. Air sinks and clouds disappear. It is usually fine and dry: warm in summer, frosty in winter. The wind circles clockwise."><b style="color:var(--cold)">W, wyż</b>: wysokie ciśnienie. Powietrze opada, chmury znikają. Zwykle jest pogodnie i sucho, latem ciepło, zimą mroźno. Wiatr krąży zgodnie ze wskazówkami zegara.</div></div>
+      <div class="fig"><svg viewBox="0 0 300 220" id="figN"></svg>
+        <div class="cap" data-en="&lt;b style=&quot;color:var(--warm)&quot;&gt;L, low&lt;/b&gt;: low pressure. Air rises and clouds form. It is usually cloudy, wet and windy. The wind circles anticlockwise."><b style="color:var(--warm)">N, niż</b>: niskie ciśnienie. Powietrze się wznosi, tworzą się chmury. Zwykle jest pochmurno, pada i wieje. Wiatr krąży przeciwnie do wskazówek zegara.</div></div>
+    </div>
+    <p data-en="On Polish maps you will see the letters &lt;b&gt;W&lt;/b&gt; (wyż) and &lt;b&gt;N&lt;/b&gt; (niż) instead of H and L.">Na mapach angielskich zamiast W i N zobaczysz litery <b>H</b> (high) i <b>L</b> (low).</p>
+   </section>
+
+   <section id="g-izo">
+    <h2 data-en="Isobars">Izobary</h2>
+    <p data-en="&lt;b&gt;Isobars&lt;/b&gt; are lines that join places with the same air pressure. They work like contour lines on a map of mountains, but instead of height they show pressure."><b>Izobary</b> to linie, które łączą miejsca o takim samym ciśnieniu. Działają podobnie jak poziomice na mapie gór, tylko zamiast wysokości pokazują ciśnienie.</p>
+    <div class="fig"><svg viewBox="0 0 640 230" id="figIzo"></svg>
+      <div class="cap" data-en="The rule is simple: &lt;b&gt;isobars close together = strong wind&lt;/b&gt;, isobars far apart = light wind.">Zasada jest prosta: <b>izobary gęsto = silny wiatr</b>, izobary rzadko = słaby wiatr.</div></div>
+   </section>
+
+   <section id="g-front">
+    <h2 data-en="Weather fronts">Fronty atmosferyczne</h2>
+    <p data-en="A &lt;b&gt;front&lt;/b&gt; is the boundary between two air masses, for example a warm one and a cold one. When a front passes over us, the weather changes. The triangles and semicircles are always on the side the front is moving towards.">
+<b>Front</b> to granica między dwiema masami powietrza, na przykład ciepłą i zimną. Gdy front przechodzi nad nami, pogoda się zmienia. Ząbki i półkola zawsze są po tej stronie linii, w którą front się przesuwa.</p>
+    <div class="fig" id="figFront"></div>
+   </section>
+
+   <section id="g-proc">
+    <h2 data-en="What does “70% chance of rain” mean?">Co znaczy „70% szans na deszcz”?</h2>
+    <p data-en="It means that in weather like this, &lt;b&gt;it rained on about 7 out of 10 similar days&lt;/b&gt;. It does not mean it will rain for 70% of the day, or that rain will cover 70% of the town.">To znaczy, że w takich warunkach pogodowych <b>na 10 podobnych dni w około 7 padało</b>. Nie znaczy, że będzie padać przez 70% dnia ani że deszcz obejmie 70% miasta.</p>
+    <p data-en="At 20% you can probably leave your umbrella at home. At 70% take it with you. At 90% take an umbrella and wellies.">Przy 20% parasol raczej zostaw w domu. Przy 70% lepiej go weź. Przy 90% weź parasol i kalosze.</p>
+    <div class="note red" data-en="When IMGW issues a &lt;b&gt;warning&lt;/b&gt; (yellow, orange or red), take it seriously. A red warning means weather that is dangerous to health and life, such as very strong winds or violent thunderstorms.">Gdy IMGW wyda <b>ostrzeżenie</b> (żółte, pomarańczowe lub czerwone), traktuj je poważnie. Czerwone ostrzeżenie oznacza zjawiska groźne dla zdrowia i życia, np. bardzo silny wiatr albo gwałtowne burze.</div>
+   </section>
+
+   <section id="g-quiz" class="quiz">
+    <h2 data-en="Test yourself">Sprawdź się</h2>
+    <p data-en="Click an answer. You will see straight away whether it is right.">Kliknij odpowiedź. Od razu zobaczysz, czy jest dobra.</p>
+    <div id="quizBox"></div>
+    <p class="score" id="quizScore"></p>
+    <button class="btn" id="quizReset" data-en="Try again">Rozwiąż jeszcze raz</button>
+    <div class="joke">
+      <svg viewBox="0 0 100 100" data-ic="mostly_sun" aria-hidden="true"></svg>
+      <div><p class="disp" style="font-size:19px;font-weight:700" data-en="Forecaster’s dad joke">Suchar synoptyka</p><p id="jokeTxt"></p><button class="btn sun" id="jokeNext" data-en="Another joke">Kolejny suchar</button></div>
+    </div>
+   </section>
+  </div>
+ </div>
+</div>
+
+<!-- ================= SYMBOLE ================= -->
+<div class="tab" id="t-symbols" role="tabpanel" aria-labelledby="b-symbols" hidden>
+  <div class="symhead">
+    <div><h2 data-en="Symbols on weather maps">Symbole na mapach pogody</h2><p style="margin:4px 0 0;color:var(--muted)" data-en="Basic symbols are the ones you see on TV and in apps. Advanced ones appear on forecasters’ charts.">Symbole proste znajdziesz w telewizji i aplikacjach. Zaawansowane są na mapach synoptycznych.</p></div>
+    <div class="seg" id="symFilter">
+      <button aria-pressed="true" data-f="all" data-en="All">Wszystkie</button>
+      <button aria-pressed="false" data-f="simple" data-en="Basic">Proste</button>
+      <button aria-pressed="false" data-f="adv" data-en="Advanced">Zaawansowane</button>
+    </div>
+  </div>
+  <div id="symList"></div>
+</div>
+
+<!-- ================= AKTUALNA PROGNOZA ================= -->
+<div class="tab" id="t-forecast" role="tabpanel" aria-labelledby="b-forecast" hidden>
+ <div class="work">
+  <div class="side">
+    <div class="box">
+      <h3 data-en="Map level">Poziom mapy</h3>
+      <div class="seg" id="fcLevel"><button aria-pressed="true" data-v="simple" data-en="Basic">Prosta</button><button aria-pressed="false" data-v="adv" data-en="Advanced">Zaawansowana</button></div>
+    </div>
+    <div class="box"><h3 data-en="Day">Dzień</h3><div class="chips" id="fcDays"></div></div>
+    <div class="box"><h3 data-en="Time of day">Pora dnia</h3><div class="chips" id="fcSlots"></div></div>
+    <div class="box">
+      <h3 data-en="Show on the map">Co pokazać</h3>
+      <div id="fcLayers"></div>
+    </div>
+    <div class="box">
+      <h3 data-en="Worksheet">Karta pracy</h3>
+      <label><input type="checkbox" id="fcHideT"> <span data-en="Empty temperature boxes">Puste pola temperatur</span></label>
+      <label><input type="checkbox" id="fcHideS"> <span data-en="No weather symbols">Bez symboli pogody</span></label>
+      <p class="hint" style="margin-top:4px" data-en="Students fill in the printed map.">Uczniowie uzupełniają mapę na wydruku.</p>
+    </div>
+    <div class="box">
+      <h3 data-en="Map title">Tytuł mapy</h3>
+      <input type="text" id="fcTitle" value="Prognoza pogody dla Polski" maxlength="60">
+    </div>
+    <div class="actions">
+      <button class="btn main" id="fcPrint" data-en="Print">Drukuj</button>
+      <button class="btn" id="fcPng" data-en="Download PNG">Pobierz PNG</button>
+      <button class="btn" id="fcToCreator" data-en="Edit in map maker">Edytuj w kreatorze</button>
+      <button class="btn" id="fcReload" data-en="Refresh data">Odśwież dane</button>
+    </div>
+    <p class="status" id="fcStatus"></p>
+  </div>
+  <div>
+    <div class="sheetwrap" id="fcSheet"></div>
+    <p class="hint" data-en="Weather data: &lt;a href=&quot;https://open-meteo.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Open-Meteo.com&lt;/a&gt; (CC BY 4.0 licence), calculated by numerical weather models. This is an automatic forecast, so it may differ from the IMGW forecasters’ forecast. The model does not provide weather fronts; you can draw them in the map maker.">Dane pogodowe: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> (licencja CC BY 4.0), wyliczane z modeli numerycznych. To prognoza automatyczna, więc może różnić się od prognozy synoptyka IMGW. Frontów atmosferycznych model nie podaje, można je dorysować w kreatorze.</p>
+  </div>
+ </div>
+</div>
+
+<!-- ================= KREATOR ================= -->
+<div class="tab" id="t-creator" role="tabpanel" aria-labelledby="b-creator" hidden>
+ <div class="work">
+  <div class="side">
+    <div class="box">
+      <h3 data-en="Level">Poziom</h3>
+      <div class="seg" id="crLevel"><button aria-pressed="true" data-v="simple" data-en="Basic">Prosty</button><button aria-pressed="false" data-v="adv" data-en="Advanced">Zaawansowany</button></div>
+    </div>
+    <div class="box">
+      <h3 data-en="Tools">Narzędzia</h3>
+      <div class="palette" id="crPalette"></div>
+      <p class="hint" id="crHint"></p>
+    </div>
+    <div class="box edit" id="crEdit" hidden>
+      <h3 id="crEditTitle"></h3>
+      <div id="crEditBody"></div>
+      <div class="actions" style="margin-top:8px"><button class="btn" id="crDup" data-en="Duplicate">Powiel</button><button class="btn" id="crDel" style="background:var(--warm);color:#fff" data-en="Delete">Usuń</button></div>
+    </div>
+    <div class="box">
+      <h3 data-en="Map">Mapa</h3>
+      <input type="text" id="crTitle" value="Moja prognoza pogody" maxlength="60" aria-label="Tytuł mapy">
+      <input type="text" id="crSub" value="" placeholder="Podtytuł, np. jutro, 13:00" data-en-ph="Subtitle, e.g. tomorrow, 13:00" maxlength="60" aria-label="Podtytuł" style="margin-top:6px">
+      <label style="margin-top:6px"><input type="checkbox" id="crWoj" checked> <span data-en="Province borders">Granice województw</span></label>
+      <label><input type="checkbox" id="crRiv" checked> <span data-en="Rivers">Rzeki</span></label>
+      <label><input type="checkbox" id="crCity" checked> <span data-en="Cities">Miasta</span></label>
+      <label><input type="checkbox" id="crLeg" checked> <span data-en="Key">Legenda</span></label>
+    </div>
+    <div class="actions">
+      <button class="btn main" id="crPrint" data-en="Print">Drukuj</button>
+      <button class="btn" id="crPng" data-en="Download PNG">Pobierz PNG</button>
+      <button class="btn" id="crUndo" data-en="Undo">Cofnij</button>
+      <button class="btn" id="crClear">Wyczyść mapę</button>
+    </div>
+  </div>
+  <div>
+    <div class="sheetwrap" id="crSheet"></div>
+    <p class="hint" data-en="Drag an element to move it. Click it to select and change it. The Delete key removes the selected element, Ctrl+Z undoes.">Przeciągnij element, żeby go przesunąć. Kliknij, żeby go zaznaczyć i zmienić. Klawisz Delete usuwa zaznaczony element, Ctrl+Z cofa.</p>
+  </div>
+ </div>
+</div>
+</main>
+<div id="printArea"></div>
+
+<script>const GEO={"W":[{"n":"śląskie","d":"M558.8,654.0L551.8,656.6L544.2,648.2L533.7,651.1L527.4,635.1L517.4,627.5L509.7,636.4L483.6,619.8L478.5,623.5L461.2,625.9L463.3,631.9L456.1,655.8L447.5,663.4L449.9,673.8L444.1,677.3L447.1,689.5L453.4,691.2L455.1,700.2L439.7,701.4L434.6,711.1L433.7,720.4L433.7,720.4L433.7,720.4L433.7,720.4L438.9,742.1L422.9,748.9L422.7,753.3L407.2,756.1L403.3,772.0L410.7,782.6L418.9,782.1L425.4,787.1L451.5,799.0L456.9,822.7L465.4,828.4L473.2,829.1L476.7,852.8L485.6,852.7L487.4,862.2L493.4,871.1L508.8,868.1L512.1,853.9L523.8,850.2L533.4,838.7L534.3,831.8L524.9,827.1L531.4,819.7L519.7,814.5L517.2,803.8L509.3,800.7L507.7,789.1L501.7,780.4L510.3,770.8L513.6,762.5L521.0,760.5L529.8,748.5L521.8,744.9L534.9,734.0L535.2,723.2L551.9,720.4L556.7,716.7L572.4,715.0L577.2,707.3L567.4,699.9L571.1,686.6L567.9,678.2L556.3,673.6L563.1,666.2L565.3,658.1L558.8,654.0Z"},{"n":"opolskie","d":"M415.0,608.8L403.7,614.9L389.7,619.0L386.6,608.8L381.5,605.6L361.6,615.2L354.8,637.8L344.0,645.4L332.2,675.9L330.7,691.3L320.6,692.0L314.9,702.6L314.9,711.6L304.5,710.9L300.9,715.5L319.4,722.0L340.4,740.3L361.4,741.2L362.6,740.7L362.6,740.7L362.6,740.7L362.6,740.7L363.6,741.4L363.6,741.4L363.6,741.4L363.6,741.4L371.9,737.2L378.2,751.3L366.4,756.3L366.4,756.3L366.4,756.3L366.4,756.3L366.3,756.4L366.3,756.4L366.3,756.4L366.3,756.4L370.7,766.6L375.7,767.4L379.9,778.8L388.2,785.8L403.3,780.1L403.3,772.0L407.2,756.1L422.7,753.3L422.9,748.9L438.9,742.1L433.7,720.4L433.7,720.4L433.7,720.4L433.7,720.4L434.6,711.1L439.7,701.4L455.1,700.2L453.4,691.2L447.1,689.5L444.1,677.3L449.9,673.8L447.5,663.4L456.1,655.8L463.3,631.9L461.2,625.9L451.2,618.5L442.8,618.9L433.3,613.9L415.0,608.8Z"},{"n":"wielkopolskie","d":"M299.5,242.5L287.5,248.2L283.9,261.6L276.8,267.8L258.1,271.3L261.6,282.0L280.8,293.8L274.9,304.8L249.9,322.7L251.6,327.1L231.0,337.2L215.1,333.1L216.1,360.0L208.8,366.9L213.8,377.0L199.9,382.2L198.9,395.5L205.6,406.5L209.0,420.9L208.7,441.0L205.1,448.1L205.8,474.0L217.4,476.8L216.2,487.0L224.0,490.1L238.0,506.0L247.6,503.4L254.9,510.7L256.3,518.5L268.0,519.2L280.4,529.8L284.4,538.7L294.0,549.3L309.9,553.2L319.2,549.3L328.8,549.6L328.9,541.4L339.3,538.7L352.1,541.9L359.8,548.1L361.3,556.1L356.6,566.0L361.1,574.5L370.0,572.9L378.8,587.6L376.8,596.3L381.5,605.6L386.6,608.8L389.7,619.0L403.7,614.9L415.0,608.8L416.4,601.5L410.7,593.6L409.1,580.9L417.3,577.2L420.8,567.6L429.7,572.3L434.9,563.8L432.9,555.9L434.7,538.0L443.0,508.7L454.1,509.2L462.6,512.9L467.5,496.0L465.8,477.2L484.1,475.1L484.6,457.4L499.1,456.3L499.5,446.8L495.2,437.7L483.0,432.7L468.6,433.5L459.1,420.3L447.9,413.2L447.9,413.2L447.9,413.2L447.9,413.2L435.0,416.4L426.8,413.0L426.8,413.0L426.8,413.0L426.8,413.0L423.7,415.8L408.3,410.0L391.8,397.1L380.5,390.7L373.7,396.5L365.1,383.1L351.7,386.4L356.6,365.6L353.9,347.2L336.7,340.0L344.7,318.0L340.7,309.6L349.1,299.7L339.6,287.8L331.8,283.3L344.8,266.8L334.9,260.5L317.5,259.2L312.3,263.2L304.6,258.2L299.5,242.5Z"},{"n":"zachodniopomorskie","d":"M282.0,107.8L266.6,112.0L257.7,119.9L247.0,135.2L237.1,145.3L221.1,153.6L207.2,155.7L171.3,167.3L153.7,170.1L121.3,182.6L103.0,188.4L82.2,197.1L74.0,203.6L57.4,202.4L56.3,211.6L62.6,225.3L61.1,236.2L65.6,248.1L64.3,257.6L70.6,271.9L70.8,278.9L77.7,301.0L71.1,309.5L72.0,318.2L67.6,332.4L49.9,344.9L51.3,357.3L56.6,366.3L68.9,376.0L76.4,386.4L88.1,394.6L94.8,389.5L102.4,393.7L108.8,383.9L110.7,372.7L120.2,355.6L134.2,364.2L157.9,354.1L159.5,347.6L168.0,340.7L178.0,337.5L185.6,342.6L197.4,336.3L204.7,322.3L216.6,323.0L215.1,333.1L231.0,337.2L251.6,327.1L249.9,322.7L274.9,304.8L280.8,293.8L261.6,282.0L258.1,271.3L276.8,267.8L283.9,261.6L287.5,248.2L299.5,242.5L296.4,229.1L303.0,224.6L297.7,211.1L306.1,205.8L291.5,192.7L290.5,176.9L284.7,158.5L297.0,153.3L293.2,141.9L294.9,127.1L282.0,107.8Z"},{"n":"świętokrzyskie","d":"M558.8,654.0L565.3,658.1L563.1,666.2L556.3,673.6L567.9,678.2L571.1,686.6L567.4,699.9L577.2,707.3L600.3,708.6L610.9,725.0L612.0,742.3L619.5,753.5L643.6,751.4L654.9,739.0L678.1,735.0L691.5,729.4L698.1,721.5L712.8,714.4L712.7,710.3L727.4,704.9L738.2,686.6L746.9,680.0L751.0,663.4L746.4,643.9L747.6,627.3L745.5,623.6L740.8,628.7L734.0,622.7L719.1,626.0L714.6,632.3L704.8,621.7L686.4,622.4L686.5,615.7L665.3,605.4L655.6,612.7L634.3,598.2L621.0,584.2L617.2,594.1L607.0,598.2L604.6,603.7L592.6,606.3L584.1,604.7L580.1,623.5L585.9,624.1L583.3,639.8L576.0,630.6L569.4,629.8L568.0,643.7L558.8,654.0Z"},{"n":"kujawsko-pomorskie","d":"M502.7,252.5L485.8,252.5L470.4,249.7L467.2,244.2L471.8,235.7L450.1,242.5L446.8,235.4L432.3,237.9L424.1,235.9L406.6,224.0L403.2,232.1L393.9,228.7L386.7,237.8L378.9,237.7L373.9,245.4L375.6,251.8L358.6,253.6L348.2,252.3L344.8,266.8L331.8,283.3L339.6,287.8L349.1,299.7L340.7,309.6L344.7,318.0L336.7,340.0L353.9,347.2L356.6,365.6L351.7,386.4L365.1,383.1L373.7,396.5L380.5,390.7L391.8,397.1L408.3,410.0L423.7,415.8L426.8,413.0L426.8,413.0L426.8,413.0L426.8,413.0L435.0,416.4L447.9,413.2L447.9,413.2L447.9,413.2L447.9,413.2L459.1,420.3L468.6,433.5L483.0,432.7L495.2,437.7L505.4,436.5L517.2,428.8L522.8,407.8L529.6,396.6L527.5,391.7L535.8,371.9L529.3,363.9L537.1,358.7L538.9,348.6L553.0,336.5L551.5,323.6L560.1,316.9L553.6,289.6L538.1,290.5L525.5,278.6L517.4,281.8L513.3,275.2L509.1,255.2L502.7,252.5Z"},{"n":"podlaskie","d":"M728.2,268.3L727.7,275.0L734.7,285.0L731.1,297.4L739.4,323.1L746.1,322.5L753.7,339.2L763.5,343.3L766.8,361.2L774.6,362.5L782.2,356.5L790.9,376.4L798.7,369.4L804.6,370.5L804.8,400.2L814.9,427.3L840.7,433.8L850.3,432.4L865.8,444.3L870.4,445.0L886.6,417.6L896.5,405.7L912.4,397.1L922.8,396.1L939.4,381.6L937.4,348.3L938.2,335.6L933.4,327.2L936.6,313.9L928.5,303.3L918.4,274.9L904.0,226.0L900.9,198.2L897.9,191.9L902.2,182.0L898.3,169.2L884.8,154.6L862.5,147.7L852.7,134.3L839.3,131.8L835.3,138.2L834.5,146.6L811.7,155.0L807.3,162.3L821.1,178.0L826.4,195.1L834.4,204.2L826.6,226.9L801.8,238.7L772.0,260.7L756.4,264.2L750.5,271.6L734.9,266.6L728.2,268.3Z"},{"n":"dolnośląskie","d":"M256.3,518.5L250.1,529.7L243.0,533.3L233.0,529.3L230.6,522.3L215.4,517.5L203.4,535.1L201.8,545.3L192.4,554.2L187.1,564.6L181.7,565.0L172.0,556.4L161.4,559.3L157.2,572.5L150.6,568.0L135.4,571.5L125.3,580.6L130.7,590.8L126.1,617.5L122.1,632.5L111.3,651.2L124.0,654.6L129.2,639.1L128.8,631.9L128.9,631.9L128.8,631.9L128.9,631.9L129.1,631.4L129.1,631.4L129.1,631.4L129.1,631.4L137.0,632.5L137.0,632.5L137.0,632.5L137.0,632.5L137.3,633.2L137.3,633.2L137.3,633.2L137.3,633.2L136.7,634.6L136.7,634.6L136.7,634.6L136.7,634.6L136.8,635.0L136.8,635.0L136.8,635.0L136.8,635.0L149.2,635.1L154.2,641.1L152.8,650.3L168.6,662.7L191.8,673.0L203.0,674.9L207.6,682.7L217.5,680.7L221.1,692.7L227.9,683.9L249.6,684.2L258.9,696.3L249.7,708.6L237.1,715.6L244.5,727.5L251.3,725.8L269.4,751.5L269.4,757.5L282.4,767.5L292.0,753.8L301.8,748.4L309.2,749.9L309.5,737.2L303.9,734.6L300.9,715.5L304.5,710.9L314.9,711.6L314.9,702.6L320.6,692.0L330.7,691.3L332.2,675.9L344.0,645.4L354.8,637.8L361.6,615.2L381.5,605.6L376.8,596.3L378.8,587.6L370.0,572.9L361.1,574.5L356.6,566.0L361.3,556.1L359.8,548.1L352.1,541.9L339.3,538.7L328.9,541.4L328.8,549.6L319.2,549.3L309.9,553.2L294.0,549.3L284.4,538.7L280.4,529.8L268.0,519.2L256.3,518.5Z"},{"n":"podkarpackie","d":"M821.7,728.9L810.1,730.7L804.3,727.1L804.8,715.1L814.9,710.5L812.0,697.4L786.0,690.2L776.7,682.5L781.6,670.8L778.2,664.1L768.1,660.7L762.8,666.2L751.0,663.4L746.9,680.0L738.2,686.6L727.4,704.9L712.7,710.3L712.8,714.4L698.1,721.5L691.5,729.4L685.5,746.7L688.0,751.2L686.0,763.1L688.8,792.3L698.4,792.9L697.6,810.7L705.5,835.8L709.9,860.2L708.7,865.3L712.0,868.4L729.8,863.3L741.9,872.7L759.8,877.8L766.4,888.1L766.1,896.0L800.5,913.7L816.2,914.9L822.5,921.8L842.0,923.2L842.9,915.0L827.6,903.5L830.0,898.0L831.2,876.2L826.6,856.2L821.5,851.1L840.3,824.5L851.5,805.6L857.0,799.5L882.7,765.2L896.8,749.6L903.9,744.6L886.3,722.5L877.1,727.9L870.9,723.3L855.7,739.4L818.5,735.9L821.7,728.9L821.7,728.9L821.7,728.9L821.7,728.9Z"},{"n":"małopolskie","d":"M691.5,729.4L678.1,735.0L654.9,739.0L643.6,751.4L619.5,753.5L612.0,742.3L610.9,725.0L600.3,708.6L577.2,707.3L572.4,715.0L556.7,716.7L551.9,720.4L535.2,723.2L534.9,734.0L521.8,744.9L529.8,748.5L521.0,760.5L513.6,762.5L510.3,770.8L501.7,780.4L507.7,789.1L509.3,800.7L517.2,803.8L519.7,814.5L531.4,819.7L524.9,827.1L534.3,831.8L533.4,838.7L539.0,844.7L541.2,857.0L541.2,857.0L541.2,857.0L541.2,857.0L549.7,865.4L549.7,865.4L549.7,865.4L549.7,865.4L557.2,871.5L562.7,868.7L562.9,889.7L560.2,898.6L567.3,900.7L574.4,894.5L588.6,902.9L593.8,884.9L599.5,878.8L611.1,877.2L623.9,867.9L632.4,873.5L644.6,867.3L656.7,879.9L667.1,885.1L676.5,875.4L677.7,867.0L683.8,864.9L690.0,870.1L697.7,861.3L708.7,865.3L709.9,860.2L705.5,835.8L697.6,810.7L698.4,792.9L688.8,792.3L686.0,763.1L688.0,751.2L685.5,746.7L691.5,729.4Z"},{"n":"pomorskie","d":"M549.8,124.9L527.9,135.6L506.0,140.1L477.4,139.8L466.9,136.5L451.4,124.6L450.9,110.5L443.2,98.7L443.1,89.3L435.9,84.1L438.4,75.5L430.0,68.5L397.2,69.0L370.0,76.2L331.3,84.1L313.9,93.0L299.3,104.5L282.0,107.8L294.9,127.1L293.2,141.9L297.0,153.3L284.7,158.5L290.5,176.9L291.5,192.7L306.1,205.8L297.7,211.1L303.0,224.6L296.4,229.1L299.5,242.5L304.6,258.2L312.3,263.2L317.5,259.2L334.9,260.5L344.8,266.8L348.2,252.3L358.6,253.6L375.6,251.8L373.9,245.4L378.9,237.7L386.7,237.8L393.9,228.7L403.2,232.1L406.6,224.0L424.1,235.9L432.3,237.9L446.8,235.4L450.1,242.5L471.8,235.7L467.2,244.2L470.4,249.7L485.8,252.5L502.7,252.5L510.5,243.5L510.3,237.3L518.2,228.3L520.3,219.2L532.2,221.6L537.5,215.0L541.1,199.4L524.9,201.3L525.2,194.0L514.4,186.5L511.2,174.0L520.0,163.5L513.9,151.9L548.6,133.9L549.8,124.9Z"},{"n":"warmińsko-mazurskie","d":"M835.3,138.2L777.2,142.1L717.6,144.0L697.5,143.3L673.1,139.6L656.0,138.6L549.8,124.9L548.6,133.9L513.9,151.9L520.0,163.5L511.2,174.0L514.4,186.5L525.2,194.0L524.9,201.3L541.1,199.4L537.5,215.0L532.2,221.6L520.3,219.2L518.2,228.3L510.3,237.3L510.5,243.5L502.7,252.5L509.1,255.2L513.3,275.2L517.4,281.8L525.5,278.6L538.1,290.5L553.6,289.6L560.1,316.9L571.1,308.5L579.7,318.0L591.2,314.5L608.1,318.7L623.4,302.8L632.8,305.8L641.4,302.2L651.2,292.7L658.8,296.1L664.8,287.9L677.3,289.9L698.1,276.3L709.9,276.2L712.0,270.9L728.2,268.3L734.9,266.6L750.5,271.6L756.4,264.2L772.0,260.7L801.8,238.7L826.6,226.9L834.4,204.2L826.4,195.1L821.1,178.0L807.3,162.3L811.7,155.0L834.5,146.6L835.3,138.2Z"},{"n":"łódzkie","d":"M558.8,654.0L568.0,643.7L569.4,629.8L576.0,630.6L583.3,639.8L585.9,624.1L580.1,623.5L584.1,604.7L592.6,606.3L604.6,603.7L607.0,598.2L617.2,594.1L621.0,584.2L629.5,565.2L622.6,559.3L618.1,535.0L624.2,532.1L638.1,537.3L641.5,527.4L634.6,523.9L636.9,513.9L633.4,503.3L621.6,495.1L613.9,498.6L603.6,494.0L599.8,483.0L606.2,475.4L604.7,469.5L590.0,464.2L589.0,452.4L571.3,441.1L557.7,448.6L547.6,447.8L532.9,436.2L523.5,436.4L517.2,428.8L505.4,436.5L495.2,437.7L499.5,446.8L499.1,456.3L484.6,457.4L484.1,475.1L465.8,477.2L467.5,496.0L462.6,512.9L454.1,509.2L443.0,508.7L434.7,538.0L432.9,555.9L434.9,563.8L429.7,572.3L420.8,567.6L417.3,577.2L409.1,580.9L410.7,593.6L416.4,601.5L415.0,608.8L433.3,613.9L442.8,618.9L451.2,618.5L461.2,625.9L478.5,623.5L483.6,619.8L509.7,636.4L517.4,627.5L527.4,635.1L533.7,651.1L544.2,648.2L551.8,656.6L558.8,654.0Z"},{"n":"mazowieckie","d":"M865.8,444.3L850.3,432.4L840.7,433.8L814.9,427.3L804.8,400.2L804.6,370.5L798.7,369.4L790.9,376.4L782.2,356.5L774.6,362.5L766.8,361.2L763.5,343.3L753.7,339.2L746.1,322.5L739.4,323.1L731.1,297.4L734.7,285.0L727.7,275.0L728.2,268.3L712.0,270.9L709.9,276.2L698.1,276.3L677.3,289.9L664.8,287.9L658.8,296.1L651.2,292.7L641.4,302.2L632.8,305.8L623.4,302.8L608.1,318.7L591.2,314.5L579.7,318.0L571.1,308.5L560.1,316.9L551.5,323.6L553.0,336.5L538.9,348.6L537.1,358.7L529.3,363.9L535.8,371.9L527.5,391.7L529.6,396.6L522.8,407.8L517.2,428.8L523.5,436.4L532.9,436.2L547.6,447.8L557.7,448.6L571.3,441.1L589.0,452.4L590.0,464.2L604.7,469.5L606.2,475.4L599.8,483.0L603.6,494.0L613.9,498.6L621.6,495.1L633.4,503.3L636.9,513.9L634.6,523.9L641.5,527.4L638.1,537.3L624.2,532.1L618.1,535.0L622.6,559.3L629.5,565.2L621.0,584.2L634.3,598.2L655.6,612.7L665.3,605.4L686.5,615.7L686.4,622.4L704.8,621.7L714.6,632.3L719.1,626.0L734.0,622.7L740.8,628.7L745.5,623.6L744.2,604.5L749.5,580.4L745.4,578.5L751.9,564.7L747.3,551.3L732.1,548.3L737.4,540.6L748.7,538.1L752.5,531.9L748.4,524.5L759.1,516.9L752.5,491.0L768.0,483.7L777.1,482.6L794.7,487.2L813.1,480.2L822.9,481.5L824.9,470.7L845.3,477.4L848.1,466.6L856.8,461.1L857.2,454.5L865.8,444.3Z"},{"n":"lubelskie","d":"M865.8,444.3L857.2,454.5L856.8,461.1L848.1,466.6L845.3,477.4L824.9,470.7L822.9,481.5L813.1,480.2L794.7,487.2L777.1,482.6L768.0,483.7L752.5,491.0L759.1,516.9L748.4,524.5L752.5,531.9L748.7,538.1L737.4,540.6L732.1,548.3L747.3,551.3L751.9,564.7L745.4,578.5L749.5,580.4L744.2,604.5L745.5,623.6L747.6,627.3L746.4,643.9L751.0,663.4L762.8,666.2L768.1,660.7L778.2,664.1L781.6,670.8L776.7,682.5L786.0,690.2L812.0,697.4L814.9,710.5L804.8,715.1L804.3,727.1L810.1,730.7L821.7,728.9L821.7,728.9L821.7,728.9L821.7,728.9L818.5,735.9L855.7,739.4L870.9,723.3L877.1,727.9L886.3,722.5L903.9,744.6L918.0,726.4L927.1,722.0L944.7,721.0L951.3,707.5L953.9,693.3L951.5,675.5L942.1,667.2L944.0,658.2L950.3,650.2L937.9,632.5L933.2,613.6L913.7,591.9L911.9,585.7L917.8,573.8L915.0,563.1L905.5,555.4L902.3,524.8L911.5,519.0L909.3,505.0L916.7,487.9L913.5,476.3L898.7,461.9L872.3,452.9L870.4,445.0L865.8,444.3Z"},{"n":"lubuskie","d":"M125.3,580.6L135.4,571.5L150.6,568.0L157.2,572.5L161.4,559.3L172.0,556.4L181.7,565.0L187.1,564.6L192.4,554.2L201.8,545.3L203.4,535.1L215.4,517.5L230.6,522.3L233.0,529.3L243.0,533.3L250.1,529.7L256.3,518.5L254.9,510.7L247.6,503.4L238.0,506.0L224.0,490.1L216.2,487.0L217.4,476.8L205.8,474.0L205.1,448.1L208.7,441.0L209.0,420.9L205.6,406.5L198.9,395.5L199.9,382.2L213.8,377.0L208.8,366.9L216.1,360.0L215.1,333.1L216.6,323.0L204.7,322.3L197.4,336.3L185.6,342.6L178.0,337.5L168.0,340.7L159.5,347.6L157.9,354.1L134.2,364.2L120.2,355.6L110.7,372.7L108.8,383.9L102.4,393.7L94.8,389.5L88.1,394.6L95.0,402.6L94.4,414.5L85.5,428.7L90.7,446.2L99.8,449.0L100.0,471.8L105.7,476.8L101.1,489.8L102.1,495.4L90.5,510.5L97.5,527.2L104.7,534.5L106.3,544.6L103.1,555.9L120.6,563.1L125.3,569.1L125.3,580.6Z"}],"PL":"M533.4,838.7L539.0,844.7L541.2,857.0L541.2,857.0L549.7,865.4L549.7,865.4L557.2,871.5L562.7,868.7L562.9,889.7L560.2,898.6L567.3,900.7L574.4,894.5L588.6,902.9L593.8,884.9L599.5,878.8L611.1,877.2L623.9,867.9L632.4,873.5L644.6,867.3L656.7,879.9L667.1,885.1L676.5,875.4L677.7,867.0L683.8,864.9L690.0,870.1L697.7,861.3L708.7,865.3L712.0,868.4L729.8,863.3L741.9,872.7L759.8,877.8L766.4,888.1L766.1,896.0L800.5,913.7L816.2,914.9L822.5,921.8L842.0,923.2L842.9,915.0L827.6,903.5L830.0,898.0L831.2,876.2L826.6,856.2L821.5,851.1L840.3,824.5L851.5,805.6L857.0,799.5L882.7,765.2L896.8,749.6L903.9,744.6L918.0,726.4L927.1,722.0L944.7,721.0L951.3,707.5L953.9,693.3L951.5,675.5L942.1,667.2L944.0,658.2L950.3,650.2L937.9,632.5L933.2,613.6L913.7,591.9L911.9,585.7L917.8,573.8L915.0,563.1L905.5,555.4L902.3,524.8L911.5,519.0L909.3,505.0L916.7,487.9L913.5,476.3L898.7,461.9L872.3,452.9L870.4,445.0L886.6,417.6L896.5,405.7L912.4,397.1L922.8,396.1L939.4,381.6L937.4,348.3L938.2,335.6L933.4,327.2L936.6,313.9L928.5,303.3L918.4,274.9L904.0,226.0L900.9,198.2L897.9,191.9L902.2,182.0L898.3,169.2L884.8,154.6L862.5,147.7L852.7,134.3L839.3,131.8L835.3,138.2L777.2,142.1L717.6,144.0L697.5,143.3L673.1,139.6L656.0,138.6L549.8,124.9L527.9,135.6L506.0,140.1L477.4,139.8L466.9,136.5L451.4,124.6L450.9,110.5L443.2,98.7L443.1,89.3L435.9,84.1L438.4,75.5L430.0,68.5L397.2,69.0L370.0,76.2L331.3,84.1L313.9,93.0L299.3,104.5L282.0,107.8L266.6,112.0L257.7,119.9L247.0,135.2L237.1,145.3L221.1,153.6L207.2,155.7L171.3,167.3L153.7,170.1L121.3,182.6L103.0,188.4L82.2,197.1L74.0,203.6L57.4,202.4L56.3,211.6L62.6,225.3L61.1,236.2L65.6,248.1L64.3,257.6L70.6,271.9L70.8,278.9L77.7,301.0L71.1,309.5L72.0,318.2L67.6,332.4L49.9,344.9L51.3,357.3L56.6,366.3L68.9,376.0L76.4,386.4L88.1,394.6L95.0,402.6L94.4,414.5L85.5,428.7L90.7,446.2L99.8,449.0L100.0,471.8L105.7,476.8L101.1,489.8L102.1,495.4L90.5,510.5L97.5,527.2L104.7,534.5L106.3,544.6L103.1,555.9L120.6,563.1L125.3,569.1L125.3,580.6L130.7,590.8L126.1,617.5L122.1,632.5L111.3,651.2L124.0,654.6L129.2,639.1L128.8,631.9L128.9,631.9L129.1,631.4L129.1,631.4L137.0,632.5L137.0,632.5L137.3,633.2L137.3,633.2L136.7,634.6L136.7,634.6L136.8,635.0L136.8,635.0L149.2,635.1L154.2,641.1L152.8,650.3L168.6,662.7L191.8,673.0L203.0,674.9L207.6,682.7L217.5,680.7L221.1,692.7L227.9,683.9L249.6,684.2L258.9,696.3L249.7,708.6L237.1,715.6L244.5,727.5L251.3,725.8L269.4,751.5L269.4,757.5L282.4,767.5L292.0,753.8L301.8,748.4L309.2,749.9L309.5,737.2L303.9,734.6L300.9,715.5L319.4,722.0L340.4,740.3L361.4,741.2L362.6,740.7L362.6,740.7L363.6,741.4L363.6,741.4L371.9,737.2L378.2,751.3L366.4,756.3L366.4,756.3L366.3,756.4L366.3,756.4L370.7,766.6L375.7,767.4L379.9,778.8L388.2,785.8L403.3,780.1L403.3,772.0L410.7,782.6L418.9,782.1L425.4,787.1L451.5,799.0L456.9,822.7L465.4,828.4L473.2,829.1L476.7,852.8L485.6,852.7L487.4,862.2L493.4,871.1L508.8,868.1L512.1,853.9L523.8,850.2L533.4,838.7Z","NB":[{"n":"Ukraine","d":"M1172.0,1041.6L1172.0,515.0L1119.8,499.5L1060.0,495.9L977.8,506.3L956.5,536.2L940.5,548.0L918.3,539.7L909.1,557.9L914.5,588.5L932.6,615.6L939.3,635.4L954.6,657.1L943.0,665.9L953.6,690.7L942.5,721.3L918.8,726.1L857.5,796.6L822.3,849.7L829.9,885.7L827.4,904.0L836.9,926.2L812.3,918.5L790.2,975.6L776.3,992.9L775.3,1017.0L786.4,1016.7L795.2,1039.0L816.2,1057.0L833.2,1060.6L840.3,1076.7L857.1,1076.7L866.8,1063.9L889.3,1076.7L1142.1,1076.7L1154.3,1046.7L1172.0,1041.6Z"},{"n":"Sweden","d":"M215.3,-132.8L-94.7,-132.8L-55.9,-58.1L-64.3,-16.4L-24.8,-6.8L19.3,-19.0L52.6,-14.3L67.9,-33.6L55.3,-63.3L56.4,-78.6L87.6,-110.4L105.4,-108.1L107.9,-127.1L157.3,-125.5L184.6,-130.6L202.7,-121.7L215.3,-132.8Z"},{"n":"Slovakia","d":"M812.3,918.5L765.2,898.3L753.4,878.6L730.6,868.5L679.7,867.6L667.8,882.5L637.7,871.5L614.7,872.4L596.6,882.6L587.0,902.5L563.8,900.9L561.2,874.4L551.2,870.8L531.0,841.1L513.6,853.8L504.5,870.2L488.0,870.8L475.7,853.9L454.3,856.8L433.2,879.7L414.7,891.3L407.9,919.6L378.2,945.8L353.1,954.7L326.4,949.8L315.0,961.6L305.0,988.4L297.1,1019.7L306.8,1047.5L322.7,1075.9L335.3,1076.7L472.0,1076.7L483.1,1069.3L533.3,1060.4L547.7,1043.8L572.5,1057.4L612.0,1033.2L626.2,999.0L660.4,996.3L678.6,1002.1L713.5,995.3L742.2,1026.9L775.3,1017.0L776.3,992.9L790.2,975.6L812.3,918.5Z"},{"n":"Russia","d":"M668.7,3.1L663.4,2.0L629.0,45.0L617.8,51.4L579.4,55.9L576.7,81.1L559.8,111.4L545.8,124.0L600.6,129.7L778.6,138.7L832.9,139.1L825.1,119.0L838.8,68.1L814.9,35.5L769.9,34.9L693.9,5.3L689.7,53.8L662.3,57.6L635.7,46.8L668.7,3.1Z"},{"n":"Romania","d":"M1142.1,1076.7L1172.0,1076.7L1172.0,1041.6L1154.3,1046.7L1142.1,1076.7ZM857.1,1076.7L889.3,1076.7L866.8,1063.9L857.1,1076.7Z"},{"n":"Poland","d":"M909.1,557.9L903.6,529.5L911.0,514.9L913.4,480.8L895.8,461.7L872.0,448.9L872.7,436.9L897.7,405.4L930.9,388.8L937.3,373.1L934.7,335.2L925.8,299.3L908.5,250.9L898.2,200.6L895.4,170.6L855.6,140.4L832.9,139.1L778.6,138.7L600.6,129.7L545.8,124.0L527.9,134.8L488.8,140.3L460.9,128.2L439.7,81.9L429.5,68.1L385.8,71.3L333.1,84.1L298.9,103.8L269.3,110.1L235.4,148.9L209.4,154.3L101.9,189.0L71.8,202.9L56.1,199.1L56.3,210.8L87.6,217.8L81.1,240.1L60.4,231.6L74.5,297.4L70.3,323.7L48.5,357.2L83.6,391.5L93.1,408.8L87.2,433.7L105.2,474.7L91.5,511.5L103.9,541.7L102.7,557.0L119.1,565.9L129.2,597.0L124.4,620.2L110.4,655.0L126.1,651.0L127.1,632.1L151.2,640.4L159.9,662.0L194.0,672.6L219.1,691.5L244.1,685.0L256.6,697.1L237.6,719.2L280.2,767.4L308.7,743.4L297.4,720.6L323.1,725.9L347.0,744.2L374.7,737.7L362.8,758.5L388.7,785.8L402.7,776.6L427.8,794.4L451.2,799.5L454.1,817.5L473.4,838.7L475.7,853.9L488.0,870.8L504.5,870.2L513.6,853.8L531.0,841.1L551.2,870.8L561.2,874.4L563.8,900.9L587.0,902.5L596.6,882.6L614.7,872.4L637.7,871.5L667.8,882.5L679.7,867.6L730.6,868.5L753.4,878.6L765.2,898.3L812.3,918.5L836.9,926.2L827.4,904.0L829.9,885.7L822.3,849.7L857.5,796.6L918.8,726.1L942.5,721.3L953.6,690.7L943.0,665.9L954.6,657.1L939.3,635.4L932.6,615.6L914.5,588.5L909.1,557.9Z"},{"n":"Lithuania","d":"M832.9,139.1L855.6,140.4L895.4,170.6L898.2,200.6L920.8,204.7L962.3,199.1L973.8,207.5L1001.3,194.7L1014.7,195.5L1019.9,174.2L1040.0,172.1L1077.7,148.6L1087.8,171.1L1103.8,168.6L1099.6,148.5L1085.5,142.8L1101.6,108.5L1101.4,85.9L1113.8,56.2L1142.5,43.8L1149.4,25.9L1172.0,24.6L1172.0,-2.6L1172.0,-17.5L1172.0,-56.3L1152.1,-66.4L1134.4,-88.0L1089.0,-122.5L1042.4,-132.8L704.0,-132.8L676.7,-113.6L678.2,-75.7L694.1,-22.9L693.9,5.3L769.9,34.9L814.9,35.5L838.8,68.1L825.1,119.0L832.9,139.1Z"},{"n":"Latvia","d":"M704.0,-132.8L674.8,-132.8L676.7,-113.6L704.0,-132.8ZM1172.0,-56.3L1172.0,-132.8L1042.4,-132.8L1089.0,-122.5L1134.4,-88.0L1152.1,-66.4L1172.0,-56.3Z"},{"n":"Hungary","d":"M775.3,1017.0L742.2,1026.9L713.5,995.3L678.6,1002.1L660.4,996.3L626.2,999.0L612.0,1033.2L572.5,1057.4L547.7,1043.8L533.3,1060.4L483.1,1069.3L472.0,1076.7L840.3,1076.7L833.2,1060.6L816.2,1057.0L795.2,1039.0L786.4,1016.7L775.3,1017.0ZM321.9,1076.7L335.3,1076.7L322.7,1075.9L321.9,1076.7Z"},{"n":"Germany","d":"M-144.8,168.1L-144.8,1076.7L-68.9,1076.7L-70.8,1053.0L-16.8,1018.6L-9.8,990.9L7.4,999.6L17.4,990.1L20.0,963.6L-4.2,935.2L-41.2,905.9L-61.5,880.5L-70.9,880.7L-87.4,861.2L-109.3,820.2L-99.6,803.4L-103.2,788.3L-119.6,775.5L-119.6,755.0L-103.6,730.2L-11.0,690.8L-6.1,679.6L27.7,669.5L70.4,649.2L82.9,632.8L102.6,661.6L110.4,655.0L124.4,620.2L129.2,597.0L119.1,565.9L102.7,557.0L103.9,541.7L91.5,511.5L105.2,474.7L87.2,433.7L93.1,408.8L83.6,391.5L48.5,357.2L70.3,323.7L74.5,297.4L60.4,231.6L39.1,226.1L24.7,213.4L11.8,169.1L-13.3,171.0L-40.6,150.0L-51.3,131.1L-92.5,122.8L-134.6,166.9L-144.8,168.1ZM56.1,199.1L29.8,192.2L30.1,209.6L56.3,210.8L56.1,199.1ZM10.5,135.3L7.0,112.8L-15.6,88.6L-37.9,111.5L-36.7,143.7L-20.9,155.5L-10.2,142.0L10.5,135.3Z"},{"n":"Denmark","d":"M-93.1,-71.5L-97.1,-91.2L-92.2,-112.7L-124.9,-120.8L-144.8,-108.1L-144.8,73.2L-140.2,71.5L-136.6,16.5L-107.2,2.0L-109.8,-12.6L-125.2,-24.6L-115.6,-42.5L-92.9,-56.8L-93.1,-71.5ZM135.6,41.0L139.7,22.9L106.4,0.5L99.0,29.2L135.6,41.0Z"},{"n":"Czechia","d":"M475.7,853.9L473.4,838.7L454.1,817.5L451.2,799.5L427.8,794.4L402.7,776.6L388.7,785.8L362.8,758.5L374.7,737.7L347.0,744.2L323.1,725.9L297.4,720.6L308.7,743.4L280.2,767.4L237.6,719.2L256.6,697.1L244.1,685.0L219.1,691.5L194.0,672.6L159.9,662.0L151.2,640.4L127.1,632.1L126.1,651.0L110.4,655.0L102.6,661.6L82.9,632.8L70.4,649.2L27.7,669.5L-6.1,679.6L-11.0,690.8L-103.6,730.2L-119.6,755.0L-119.6,775.5L-103.2,788.3L-99.6,803.4L-109.3,820.2L-87.4,861.2L-70.9,880.7L-61.5,880.5L-41.2,905.9L-4.2,935.2L20.0,963.6L41.3,987.9L70.2,991.8L81.2,984.5L99.6,988.4L111.5,962.6L120.6,963.0L125.2,931.6L155.9,933.1L191.3,949.8L202.6,949.2L223.7,965.4L251.8,967.8L261.9,958.7L298.7,973.0L305.0,988.4L315.0,961.6L326.4,949.8L353.1,954.7L378.2,945.8L407.9,919.6L414.7,891.3L433.2,879.7L454.3,856.8L475.7,853.9Z"},{"n":"Belarus","d":"M1172.0,515.0L1172.0,24.6L1149.4,25.9L1142.5,43.8L1113.8,56.2L1101.4,85.9L1101.6,108.5L1085.5,142.8L1099.6,148.5L1103.8,168.6L1087.8,171.1L1077.7,148.6L1040.0,172.1L1019.9,174.2L1014.7,195.5L1001.3,194.7L973.8,207.5L962.3,199.1L920.8,204.7L898.2,200.6L908.5,250.9L925.8,299.3L934.7,335.2L937.3,373.1L930.9,388.8L897.7,405.4L872.7,436.9L872.0,448.9L895.8,461.7L913.4,480.8L911.0,514.9L903.6,529.5L909.1,557.9L918.3,539.7L940.5,548.0L956.5,536.2L977.8,506.3L1060.0,495.9L1119.8,499.5L1172.0,515.0Z"},{"n":"Austria","d":"M-68.9,1076.7L321.9,1076.7L322.7,1075.9L306.8,1047.5L297.1,1019.7L305.0,988.4L298.7,973.0L261.9,958.7L251.8,967.8L223.7,965.4L202.6,949.2L191.3,949.8L155.9,933.1L125.2,931.6L120.6,963.0L111.5,962.6L99.6,988.4L81.2,984.5L70.2,991.8L41.3,987.9L20.0,963.6L17.4,990.1L7.4,999.6L-9.8,990.9L-16.8,1018.6L-70.8,1053.0L-68.9,1076.7Z"}],"R":["M365.4,820.2L370.8,819.4L378.5,823.2L389.1,835.3L396.7,833.0L416.8,818.7L420.4,812.2L420.8,805.0L427.6,799.9L429.9,789.1L421.4,772.6L420.6,766.4L423.9,754.4L421.6,742.1L410.7,725.2L409.2,720.8L402.2,716.0L396.0,707.8L396.7,692.2L392.2,679.6L385.7,670.0L382.3,669.5L365.8,659.5L363.0,655.4L354.3,655.0L348.9,647.5L338.0,641.6L338.0,634.6L332.3,627.3L326.9,628.1L321.3,619.0L312.3,617.1L303.3,607.9L298.9,599.7L293.0,595.7L281.5,598.2L275.2,596.7L263.1,600.7L257.2,590.6L262.1,579.2L259.2,572.6L261.2,556.6L259.9,550.7L250.2,543.1L246.6,537.0L237.3,533.1L228.2,536.2L210.2,526.0L204.9,527.0L194.3,515.9L199.9,503.8L197.8,489.8L190.6,489.7L186.2,481.5L166.0,477.8L160.2,479.4L147.3,475.6L136.7,479.5L130.2,475.4L124.1,478.4L106.0,475.4L99.1,468.9L101.5,454.9L100.1,449.3L91.9,446.0L86.4,430.3L85.8,424.5L94.2,413.4L92.1,410.3L95.4,401.6L92.6,399.3L86.8,392.9L76.0,385.5L71.5,377.8L56.4,366.1L48.1,361.2L51.4,357.4L49.9,345.1L68.0,332.0L72.2,319.8L71.1,313.2L76.9,302.1L79.8,291.5L85.7,283.1L93.7,265.2L91.0,251.0","M473.7,792.8L485.2,791.8","M485.2,791.8L502.0,786.9L506.0,773.2L511.7,771.6L522.8,774.0L529.1,777.7L537.5,777.3L546.8,784.8L560.5,784.8L568.4,776.1L580.7,772.6L596.5,775.7L606.3,771.0L608.1,767.5L619.6,761.8L636.1,759.5L651.7,741.3L668.9,735.4L677.0,734.8L683.4,730.3L689.0,732.0L712.1,710.0L726.6,704.4L740.2,682.2L745.8,679.8L749.6,666.8L748.8,656.2L745.2,644.6L746.9,628.1L742.6,611.9L745.5,597.6L751.9,589.7L761.2,583.7L757.0,567.6L749.5,560.7L747.1,551.3L733.8,549.2L722.7,537.0L715.6,536.0L709.6,526.0L711.2,519.8L706.7,512.1L698.1,507.8L693.4,500.7L697.2,491.0L692.1,486.9L690.9,471.4L679.7,455.4L676.4,453.9L671.0,443.1L663.3,432.5L656.1,431.0L643.9,424.3L630.7,423.9L616.5,430.5L606.5,429.6L596.1,431.5L584.3,429.4L570.4,418.3L559.8,415.3L554.3,407.8L540.6,403.2L525.6,393.5L518.3,393.3L496.0,387.1L484.4,369.4L482.4,362.2L475.3,354.0L465.4,347.9L460.9,337.4L455.4,339.1L441.1,336.0L427.9,328.1L416.1,325.2L413.3,320.4L418.3,314.7L420.9,305.0L428.6,299.3L433.9,287.4L444.1,279.9L461.9,274.4L468.4,265.4L470.1,252.3L468.1,243.0L471.7,235.1L477.8,232.2L476.8,217.2L480.6,209.5L479.3,198.3L475.0,186.2L474.7,178.4L478.4,164.6L486.2,156.0L486.8,138.9M479.9,834.3L475.3,826.6L473.8,812.3L469.2,796.7L473.7,792.8","M535.3,710.0L531.7,710.2L519.1,696.9L505.8,676.6L506.7,670.5L502.4,663.4L505.0,660.2L518.0,659.8L530.9,649.3L531.8,634.9L528.2,630.1L494.0,625.4L480.6,616.9L462.2,620.0L468.3,612.6L473.1,599.8L471.8,591.7L474.2,583.9L473.7,571.5L479.9,557.2L472.7,547.1L461.9,537.0L459.1,524.6L463.3,509.3L473.1,492.7L466.7,484.5L462.3,462.3L456.8,457.5L420.1,453.3L393.4,459.3L382.5,456.5L369.0,465.2L355.2,465.3L352.4,470.2L342.0,472.5L319.1,471.4L311.9,472.4L308.9,468.6L307.6,454.3L302.0,454.3L298.3,446.2L305.9,423.3L306.3,401.6L300.9,395.3L285.1,387.5L277.7,386.4L272.4,381.5L250.3,382.2L245.4,379.5L226.7,389.8L211.9,393.3L204.9,396.6L196.0,391.9L184.4,395.7L176.0,394.0L169.6,396.2L164.8,388.5L164.1,377.4L149.6,379.1L145.1,381.5L143.6,388.6L135.5,395.7L127.5,390.4L117.5,393.0L98.7,400.2L92.6,399.3","M869.4,445.2L858.9,441.1L847.1,431.8L840.1,432.8L816.3,428.5L812.3,423.4L809.7,407.8L792.9,389.9L776.1,382.5L767.7,386.4L749.1,383.4L731.2,397.5L724.1,395.0L711.5,401.8L705.5,407.2L693.7,407.7L678.1,412.7L675.4,418.9L665.0,413.8L651.8,416.8L643.6,423.9M1031.3,798.9L1016.4,796.8L1003.4,790.9L994.4,782.6L988.4,773.7L976.6,765.5L982.1,755.4L975.3,741.3L966.0,731.2L969.7,713.0L968.5,706.9L972.7,698.7L964.7,694.8L959.9,687.3L954.8,688.8L951.7,679.9L942.6,667.2L942.2,660.0L956.8,658.0L956.8,653.5L943.0,643.4L936.9,633.2L933.6,614.1L921.6,602.3L911.7,584.2L917.5,574.6L909.9,560.9L903.1,544.7L905.0,535.1L905.0,522.9L911.2,514.8L908.1,509.8L912.9,490.5L915.5,487.6L912.0,474.3L906.7,468.8L900.7,468.4L898.1,463.3L890.1,457.3L873.4,452.5L869.4,444.1"]};
+
+// ===== język =====
+let LANG=(typeof DEFAULT_LANG!=='undefined'?DEFAULT_LANG:'pl');
+const L=(pl,en)=>LANG==='en'?en:pl;
+const CITY_EN={'Warszawa':'Warsaw'};
+const cityName=n=>LANG==='en'?(CITY_EN[n]||n):n;
+// ===== projekcja =====
+const MW=1000, MH=930;
+const LON0=19.1, LATT=55.3, CC=Math.cos(52*Math.PI/180), KK=147.5;
+const proj=(lon,lat)=>[500+(lon-LON0)*CC*KK,(LATT-lat)*KK];
+const unproj=(x,y)=>[LON0+(x-500)/(CC*KK),LATT-y/KK];
+
+// [nazwa, lat, lon, w wersji prostej, pozycja podpisu]
+const CITIES=[
+ ['Gdańsk',54.35,18.65,1],['Szczecin',53.43,14.55,1],['Koszalin',54.19,16.17,0],['Olsztyn',53.78,20.49,1],
+ ['Suwałki',54.10,22.93,0],['Białystok',53.13,23.16,1],['Bydgoszcz',53.12,18.01,0],['Poznań',52.41,16.93,1],
+ ['Zielona Góra',51.94,15.51,1],['Warszawa',52.23,21.01,1],['Łódź',51.76,19.46,1],['Wrocław',51.11,17.03,1],
+ ['Lublin',51.25,22.57,1],['Opole',50.67,17.93,0],['Kielce',50.87,20.63,0],['Katowice',50.26,19.02,0],
+ ['Kraków',50.06,19.94,1],['Rzeszów',50.04,22.00,1],['Zakopane',49.30,19.95,0]
+];
+const NEIGH_LABELS=[['NIEMCY','GERMANY',22,470,-90],['CZECHY','CZECHIA',205,742,0],['SŁOWACJA','SLOVAKIA',660,910,0],['UKRAINA','UKRAINE',950,800,0],['BIAŁORUŚ','BELARUS',978,430,-90],['LITWA','LITHUANIA',925,88,0],['ROSJA','RUSSIA',690,72,0]];
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const r1=v=>Math.round(v*10)/10;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const FONT_D="'Baloo 2','Arial Rounded MT Bold',Arial,sans-serif";
+const FONT_B="'Atkinson Hyperlegible',Arial,sans-serif";
+
+// ===== ikony (pole 100×100) =====
+function cloudShape(fill,stroke){
+  const sh=a=>`<circle cx="32" cy="60" r="15" ${a}/><circle cx="52" cy="47" r="19" ${a}/><circle cx="71" cy="60" r="15" ${a}/><rect x="32" y="56" width="39" height="19" ${a}/>`;
+  return sh(`fill="${stroke}" stroke="${stroke}" stroke-width="6" stroke-linejoin="round"`)+sh(`fill="${fill}"`);
+}
+const cloud=(tx,ty,s,fill='#FFFFFF',stroke='#5D6D7E')=>`<g transform="translate(${tx} ${ty}) scale(${s})">${cloudShape(fill,stroke)}</g>`;
+function sun(cx,cy,r){
+  let rays='';
+  for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);
+    rays+=`<line x1="${r1(cx+c*(r+5))}" y1="${r1(cy+s*(r+5))}" x2="${r1(cx+c*(r+13))}" y2="${r1(cy+s*(r+13))}"/>`;}
+  return `<g stroke="#F0A300" stroke-width="5" stroke-linecap="round">${rays}</g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#FFC83A" stroke="#E39400" stroke-width="3"/>`;
+}
+const moon=(tx,ty,s)=>`<g transform="translate(${tx} ${ty}) scale(${s})"><path d="M58 18 A32 32 0 1 0 84 66 A25 25 0 1 1 58 18Z" fill="#F6DE7A" stroke="#C9A227" stroke-width="3" stroke-linejoin="round"/></g>`;
+const drop=(x,y,s=1)=>`<path transform="translate(${x} ${y}) scale(${s})" d="M0 -9 C5 -2 6 2 6 4 A6 6 0 0 1 -6 4 C-6 2 -5 -2 0 -9Z" fill="#2D7FF9" stroke="#1A5CC0" stroke-width="1.5"/>`;
+const flake=(x,y,r=7)=>{let l='';for(let i=0;i<3;i++){const a=i*Math.PI/3,c=Math.cos(a)*r,s=Math.sin(a)*r;l+=`<line x1="${r1(x-c)}" y1="${r1(y-s)}" x2="${r1(x+c)}" y2="${r1(y+s)}"/>`;}return `<g stroke="#3A9AD9" stroke-width="3" stroke-linecap="round">${l}</g>`;};
+const bolt=`<polygon points="54,58 40,82 51,82 45,99 66,72 55,72 61,58" fill="#FFD23F" stroke="#B87A00" stroke-width="2.5" stroke-linejoin="round"/>`;
+const hailB=(x,y)=>`<circle cx="${x}" cy="${y}" r="5" fill="#FFFFFF" stroke="#6E8193" stroke-width="2.5"/>`;
+const thermo=(col)=>`<rect x="42" y="14" width="16" height="56" rx="8" fill="#FFFFFF" stroke="#4A5C6E" stroke-width="3"/><circle cx="50" cy="76" r="14" fill="${col}" stroke="#4A5C6E" stroke-width="3"/><rect x="46.5" y="${col==='#E8413B'?24:52}" width="7" height="${col==='#E8413B'?50:22}" rx="3" fill="${col}"/>`;
+
+const DARK='#93A0AE', DARKS='#56636F', GREY='#C9D2DB';
+const ICONS={
+ sun:      sun(50,50,20),
+ moon:     moon(2,2,0.95),
+ mostly_sun: sun(40,38,17)+cloud(30,30,0.72),
+ mostly_moon: moon(-4,-6,0.75)+cloud(30,30,0.72),
+ partly:   sun(36,34,16)+cloud(8,10,0.95),
+ partly_night: moon(-6,-8,0.72)+cloud(8,10,0.95),
+ cloudy:   cloud(-3,-2,1.05),
+ overcast: cloud(16,-12,0.8,'#C3CCD6','#6E7B88')+cloud(-6,4,1.0,DARK,DARKS),
+ fog:      cloud(4,-22,0.85,'#E3E8ED','#7D8A97')+`<g stroke="#8C99A6" stroke-width="6" stroke-linecap="round"><line x1="18" y1="62" x2="82" y2="62"/><line x1="26" y1="75" x2="88" y2="75"/><line x1="14" y1="88" x2="72" y2="88"/></g>`,
+ drizzle:  cloud(-2,-14,1.0,GREY)+`<g fill="#2D7FF9"><circle cx="34" cy="80" r="3.2"/><circle cx="52" cy="86" r="3.2"/><circle cx="70" cy="80" r="3.2"/><circle cx="43" cy="93" r="3.2"/><circle cx="61" cy="94" r="3.2"/></g>`,
+ rain:     cloud(-2,-16,1.0,GREY)+drop(34,82)+drop(52,90)+drop(70,82),
+ heavy_rain: cloud(-2,-20,1.0,DARK,DARKS)+drop(26,78,.9)+drop(42,89,.9)+drop(58,78,.9)+drop(74,89,.9)+drop(50,97,.6),
+ showers:  sun(34,30,14)+cloud(10,-4,0.9)+drop(42,84)+drop(62,88),
+ storm:    cloud(-2,-20,1.0,DARK,DARKS)+bolt+drop(30,86,.8)+drop(76,84,.8),
+ snow:     cloud(-2,-16,1.0,'#E6ECF2')+flake(32,82)+flake(52,92)+flake(72,82),
+ snow_showers: sun(34,30,14)+cloud(10,-4,0.9)+flake(42,86)+flake(64,88),
+ sleet:    cloud(-2,-16,1.0,GREY)+drop(36,84)+flake(62,86)+drop(52,96,.7),
+ freezing: cloud(-2,-20,1.0,GREY)+drop(34,74,.85)+drop(52,80,.85)+drop(70,74,.85)+`<line x1="24" y1="92" x2="80" y2="92" stroke="#7FB8E6" stroke-width="5" stroke-linecap="round"/><g fill="#7FB8E6"><polygon points="34,92 37,92 35.5,98"/><polygon points="52,92 55,92 53.5,99"/><polygon points="68,92 71,92 69.5,97"/></g>`,
+ hail:     cloud(-2,-20,1.0,DARK,DARKS)+hailB(32,78)+hailB(50,86)+hailB(68,78)+hailB(41,93)+hailB(60,93),
+ wind:     `<g fill="none" stroke="#4C6A85" stroke-width="6" stroke-linecap="round"><path d="M12 38 H62 a10 10 0 1 0 -10 -10"/><path d="M12 54 H76 a11 11 0 1 1 -11 11"/><path d="M12 70 H44 a8 8 0 1 1 -8 8"/></g>`,
+ hot:      thermo('#E8413B')+sun(80,22,9).replace(/stroke-width="5"/,'stroke-width="3"'),
+ frost:    thermo('#3A9AD9')+flake(80,24,9),
+};
+const ICON_META=[
+ // [id, nazwa, opis, poziom, grupa]
+ ['sun','Słonecznie','Bezchmurne niebo w dzień. Świeci słońce.','s','Zachmurzenie'],
+ ['moon','Pogodnie w nocy','Bezchmurne niebo w nocy. Często jest wtedy chłodniej, bo ciepło ucieka w górę.','s','Zachmurzenie'],
+ ['mostly_sun','Małe zachmurzenie','Przeważnie słońce, na niebie tylko pojedyncze chmury.','s','Zachmurzenie'],
+ ['mostly_moon','Małe zachmurzenie w nocy','Noc z pojedynczymi chmurami.','s','Zachmurzenie'],
+ ['partly','Zachmurzenie umiarkowane','Słońce i chmury na zmianę. Raz świeci, raz się chowa.','s','Zachmurzenie'],
+ ['partly_night','Zachmurzenie umiarkowane w nocy','Noc z chmurami, przez które czasem widać księżyc.','s','Zachmurzenie'],
+ ['cloudy','Pochmurno','Chmury zakrywają większość nieba, słońca prawie nie widać.','s','Zachmurzenie'],
+ ['overcast','Duże zachmurzenie','Całe niebo zakryte grubymi, szarymi chmurami.','s','Zachmurzenie'],
+ ['fog','Mgła','Chmura przy samej ziemi. Widać na mniej niż 1 km. Kierowcy muszą jechać ostrożnie.','s','Zjawiska'],
+ ['drizzle','Mżawka','Bardzo drobne kropelki, które jakby wiszą w powietrzu.','s','Opady'],
+ ['rain','Deszcz','Opad ciągły, który może trwać wiele godzin.','s','Opady'],
+ ['heavy_rain','Ulewa','Silny deszcz. W krótkim czasie spada dużo wody, mogą tworzyć się kałuże i podtopienia.','s','Opady'],
+ ['showers','Przelotny deszcz','Przelotne opady: chwilę pada, potem wychodzi słońce.','s','Opady'],
+ ['storm','Burza','Pioruny, grzmoty, często ulewa i silne porywy wiatru.','s','Opady'],
+ ['snow','Śnieg','Opad płatków śniegu. Zwykle przy temperaturze poniżej 2°C.','s','Opady'],
+ ['snow_showers','Przelotny śnieg','Krótkie śnieżyce przerywane przejaśnieniami.','s','Opady'],
+ ['sleet','Deszcz ze śniegiem','Pada jednocześnie deszcz i śnieg. Temperatura blisko 0°C.','s','Opady'],
+ ['freezing','Marznący deszcz','Deszcz zamarza na ziemi i tworzy gołoledź, czyli lodową szklankę.','a','Opady'],
+ ['hail','Grad','Kulki lodu spadające z chmur burzowych.','a','Opady'],
+ ['wind','Silny wiatr','Wieje mocno, w porywach powyżej 50 km/h.','s','Zjawiska'],
+ ['hot','Upał','Temperatura 30°C lub więcej. Pij dużo wody i unikaj słońca w południe.','s','Zjawiska'],
+ ['frost','Mróz','Temperatura poniżej 0°C przez cały dzień.','s','Zjawiska'],
+];
+const ICON_EN={
+ sun:['Sunny','Clear sky during the day. The sun is shining.'],
+ moon:['Clear night','Clear sky at night. It is often colder, because heat escapes upwards.'],
+ mostly_sun:['Mostly sunny','Mostly sunshine, with just a few clouds in the sky.'],
+ mostly_moon:['Mostly clear night','A night with only a few clouds.'],
+ partly:['Partly cloudy','Sun and clouds taking turns. Now it shines, now it hides.'],
+ partly_night:['Partly cloudy night','A night with clouds; sometimes you can see the moon through them.'],
+ cloudy:['Cloudy','Clouds cover most of the sky; you can hardly see the sun.'],
+ overcast:['Overcast','The whole sky is covered with thick grey clouds.'],
+ fog:['Fog','A cloud at ground level. You can see less than 1 km. Drivers must be careful.'],
+ drizzle:['Drizzle','Very fine droplets that seem to float in the air.'],
+ rain:['Rain','Continuous rain that can last for many hours.'],
+ heavy_rain:['Heavy rain','A downpour. A lot of water falls quickly; puddles and local flooding can form.'],
+ showers:['Showers','Rain that comes and goes: it rains for a while, then the sun comes out.'],
+ storm:['Thunderstorm','Lightning, thunder, often heavy rain and strong gusts of wind.'],
+ snow:['Snow','Falling snowflakes. Usually when the temperature is below 2°C.'],
+ snow_showers:['Snow showers','Short bursts of snow with sunny spells in between.'],
+ sleet:['Sleet','Rain and snow falling together. The temperature is close to 0°C.'],
+ freezing:['Freezing rain','Rain that freezes on the ground and makes it as slippery as glass.'],
+ hail:['Hail','Balls of ice falling from thunderclouds.'],
+ wind:['Strong wind','A strong wind, with gusts above 50 km/h.'],
+ hot:['Heat','30°C or more. Drink lots of water and stay out of the midday sun.'],
+ frost:['Frost','Below 0°C all day long.'],
+};
+const GROUP_EN={'Zachmurzenie':'Cloud cover','Zjawiska':'Other weather','Opady':'Precipitation','Fronty':'Fronts','Ciśnienie':'Pressure','Wiatr i opady':'Wind, temperature and rain'};
+const groupName=g=>L(g,GROUP_EN[g]||g);
+const ICON_PL=Object.fromEntries(ICON_META.map(m=>[m[0],[m[1],m[2]]]));
+const ICON_NAME=new Proxy({},{get:(_,k)=>(LANG==='en'?ICON_EN:ICON_PL)[k]?.[0]});
+const iconDesc=k=>(LANG==='en'?ICON_EN:ICON_PL)[k][1];
+const iconDefs=()=>'<defs>'+Object.entries(ICONS).map(([k,v])=>`<symbol id="ic-${k}" viewBox="0 0 100 100" overflow="visible">${v}</symbol>`).join('')+'</defs>';
+const useIcon=(id,x,y,s)=>`<use href="#ic-${id}" x="${r1(x)}" y="${r1(y)}" width="${s}" height="${s}"/>`;
+const iconSVGInner=id=>ICONS[id]||'';
+
+// WMO → ikona
+function wmoIcon(c,day){
+  if(c===0) return day?'sun':'moon';
+  if(c===1) return day?'mostly_sun':'mostly_moon';
+  if(c===2) return day?'partly':'partly_night';
+  if(c===3) return 'overcast';
+  if(c===45||c===48) return 'fog';
+  if(c>=51&&c<=55) return 'drizzle';
+  if(c===56||c===57||c===66||c===67) return 'freezing';
+  if(c===61||c===63) return 'rain';
+  if(c===65||c===82) return 'heavy_rain';
+  if(c>=71&&c<=77) return 'snow';
+  if(c===80||c===81) return day?'showers':'rain';
+  if(c===85||c===86) return day?'snow_showers':'snow';
+  if(c>=95) return c===95?'storm':'storm';
+  return 'cloudy';
+}
+
+// ===== skala temperatur =====
+const TSTOPS=[[-20,'#5A2D82'],[-10,'#3B5BDB'],[-5,'#4DABF7'],[0,'#A5D8FF'],[5,'#B9EBC3'],[10,'#FFE680'],[15,'#FFC27A'],[20,'#FF9B3D'],[25,'#F2543D'],[30,'#C92A2A'],[35,'#7A1C3B']];
+function hex2rgb(h){return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));}
+function tRGB(t){
+  if(t<=TSTOPS[0][0]) return hex2rgb(TSTOPS[0][1]);
+  for(let i=1;i<TSTOPS.length;i++){ if(t<=TSTOPS[i][0]){const a=TSTOPS[i-1],b=TSTOPS[i],f=(t-a[0])/(b[0]-a[0]);const A=hex2rgb(a[1]),B=hex2rgb(b[1]);return A.map((v,j)=>Math.round(v+(B[j]-v)*f));}}
+  return hex2rgb(TSTOPS[TSTOPS.length-1][1]);
+}
+const tColor=t=>{const c=tRGB(t);return `rgb(${c[0]},${c[1]},${c[2]})`;};
+const tText=t=>{const c=tRGB(t);return (0.299*c[0]+0.587*c[1]+0.114*c[2])<140?'#FFFFFF':'#16324F';};
+const fmtT=t=>(Math.round(t)===0?'0':(Math.round(t)>0?'':'−')+Math.abs(Math.round(t)))+'°';
+
+// ===== baza mapy =====
+function mapBase(o){
+  let s=`<rect x="0" y="0" width="${MW}" height="${MH}" fill="#CFE5F4"/>`;
+  s+=`<g fill="#E9E7E2" stroke="#FFFFFF" stroke-width="1.5">${GEO.NB.map(n=>`<path d="${n.d}"/>`).join('')}</g>`;
+  s+=`<path d="${GEO.PL}" fill="#F4F8EC"/>`;
+  if(o.under) s+=o.under;
+  if(o.woj) s+=`<g fill="none" stroke="#A9B7A0" stroke-width="1.3" stroke-dasharray="5 4">${GEO.W.map(w=>`<path d="${w.d}"/>`).join('')}</g>`;
+  if(o.riv) s+=`<g fill="none" stroke="#5E9FD6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">${GEO.R.map(d=>`<path d="${d}"/>`).join('')}</g>`;
+  s+=`<path d="${GEO.PL}" fill="none" stroke="#2F4858" stroke-width="3" stroke-linejoin="round"/>`;
+  s+=`<g font-family="${FONT_D}" font-weight="700" font-size="17" fill="#9A9890" letter-spacing="2" text-anchor="middle">${NEIGH_LABELS.map(([tp,te,x,y,r])=>{const t=L(tp,te);return `<text x="${x}" y="${y}"${r?` transform="rotate(${r} ${x} ${y})"`:''}>${t}</text>`;}).join('')}</g>`;
+  s+=`<text x="230" y="58" font-family="${FONT_D}" font-style="italic" font-weight="600" font-size="22" fill="#4C86B8" text-anchor="middle">${L('Morze Bałtyckie','Baltic Sea')}</text>`;
+  return s;
+}
+function cityLayer(list,o={}){
+  return list.map(c=>{const [x,y]=proj(c[2],c[1]);
+    return `<circle cx="${r1(x)}" cy="${r1(y)}" r="4.5" fill="#16324F" stroke="#fff" stroke-width="1.5"/>`+
+      (o.names===false?'':`<text x="${r1(x)}" y="${r1(y+20)}" font-family="${FONT_B}" font-size="15" font-weight="700" fill="#16324F" text-anchor="middle" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke">${esc(cityName(c[0]))}</text>`);
+  }).join('');
+}
+function tempBox(x,y,t,o={}){
+  const w=o.w||50,h=o.h||32;
+  if(o.blank) return `<rect x="${r1(x)}" y="${r1(y)}" width="${w}" height="${h}" rx="7" fill="#FFFFFF" stroke="#16324F" stroke-width="2"/><text x="${r1(x+w-5)}" y="${r1(y+h-8)}" font-family="${FONT_B}" font-size="14" fill="#16324F" text-anchor="end">°C</text>`;
+  const fs=o.fs||(h>=30?22:Math.round(h*0.7));
+  return `<rect x="${r1(x)}" y="${r1(y)}" width="${w}" height="${h}" rx="7" fill="${tColor(t)}" stroke="#16324F" stroke-width="1.5"/><text x="${r1(x+w/2)}" y="${r1(y+h/2+fs*0.36)}" font-family="${FONT_D}" font-size="${fs}" font-weight="800" fill="${tText(t)}" text-anchor="middle">${fmtT(t)}</text>`;
+}
+function windArrow(x,y,dirFrom,speed,o={}){
+  const L=o.len||Math.max(26,Math.min(52,20+speed*0.75)), col=o.col||'#16324F';
+  const rot=(dirFrom+180)%360;
+  let s=`<g transform="translate(${r1(x)} ${r1(y)}) rotate(${r1(rot)})"><line x1="0" y1="${r1(L/2)}" x2="0" y2="${r1(-L/2+10)}" stroke="${col}" stroke-width="4" stroke-linecap="round"/><polygon points="0,${r1(-L/2-2)} -8,${r1(-L/2+12)} 8,${r1(-L/2+12)}" fill="${col}"/></g>`;
+  if(o.label!==false) s+=`<text x="${r1(x)}" y="${r1(y+(o.ly||34))}" font-family="${FONT_B}" font-size="15" font-weight="700" fill="${col}" text-anchor="middle" stroke="#FFFFFF" stroke-width="3.5" paint-order="stroke">${Math.round(speed)}</text>`;
+  return s;
+}
+const pLetter=k=>LANG==='en'?(k==='W'?'H':'L'):k;
+function pressLetter(x,y,kind,val){
+  const col=kind==='W'?'#1F64C8':'#D9363E';
+  return `<text x="${r1(x)}" y="${r1(y+16)}" font-family="${FONT_D}" font-size="58" font-weight="800" fill="${col}" text-anchor="middle" stroke="#FFFFFF" stroke-width="5" paint-order="stroke">${pLetter(kind)}</text>`+
+    (val?`<text x="${r1(x)}" y="${r1(y+40)}" font-family="${FONT_B}" font-size="15" font-weight="700" fill="${col}" text-anchor="middle" stroke="#FFFFFF" stroke-width="3.5" paint-order="stroke">${Math.round(val)} hPa</text>`:'');
+}
+
+// ===== linie: wygładzanie i fronty =====
+function smooth(pts,seg=10){
+  if(pts.length<3) return pts.slice();
+  const out=[];
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    for(let t=0;t<seg;t++){const u=t/seg,u2=u*u,u3=u2*u;
+      out.push([0,1].map(k=>0.5*(2*p1[k]+(-p0[k]+p2[k])*u+(2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*u2+(-p0[k]+3*p1[k]-3*p2[k]+p3[k])*u3)));}
+  }
+  out.push(pts[pts.length-1]);return out;
+}
+const dPath=s=>'M'+s.map(p=>r1(p[0])+','+r1(p[1])).join('L');
+function alongPath(s,step,start){
+  const res=[];let acc=0,next=start;
+  for(let i=1;i<s.length;i++){const a=s[i-1],b=s[i],dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);if(!L)continue;
+    while(acc+L>=next){const f=(next-acc)/L;res.push({x:a[0]+dx*f,y:a[1]+dy*f,tx:dx/L,ty:dy/L});next+=step;}
+    acc+=L;}
+  return {pts:res,len:acc};
+}
+const FCOL={warm:'#D9363E',cold:'#1F64C8',occl:'#8E3FB0',stat:'#D9363E'};
+const FNAME_PL={warm:'Front ciepły',cold:'Front chłodny',occl:'Front zokludowany',stat:'Front stacjonarny'};
+const FNAME_EN={warm:'Warm front',cold:'Cold front',occl:'Occluded front',stat:'Stationary front'};
+const FNAME=new Proxy(FNAME_PL,{get:(t,k)=>(LANG==='en'?FNAME_EN:FNAME_PL)[k]});
+function frontSVG(pts,kind,flip,w=5){
+  const s=smooth(pts),d=dPath(s),col=FCOL[kind];
+  let g=`<path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  if(kind==='stat') g+=`<path d="${d}" fill="none" stroke="#1F64C8" stroke-width="${w}" stroke-dasharray="36 36" stroke-dashoffset="-2"/>`;
+  const R=w*2.1, {pts:P}=alongPath(s,36,20), sg=flip?-1:1;
+  P.forEach((p,k)=>{
+    let type,c=col,side=sg;
+    if(kind==='warm') type='semi'; else if(kind==='cold') type='tri';
+    else if(kind==='occl') type=k%2?'semi':'tri';
+    else {type=k%2?'tri':'semi'; if(type==='tri'){c='#1F64C8';side=-sg;}}
+    const nx=-p.ty*side, ny=p.tx*side;
+    if(type==='tri'){
+      g+=`<polygon points="${r1(p.x-p.tx*R)},${r1(p.y-p.ty*R)} ${r1(p.x+p.tx*R)},${r1(p.y+p.ty*R)} ${r1(p.x+nx*R*1.5)},${r1(p.y+ny*R*1.5)}" fill="${c}"/>`;
+    }else{
+      let q=[];for(let i=0;i<=10;i++){const th=Math.PI*i/10;q.push(`${r1(p.x-p.tx*Math.cos(th)*R+nx*Math.sin(th)*R)},${r1(p.y-p.ty*Math.cos(th)*R+ny*Math.sin(th)*R)}`);}
+      g+=`<polygon points="${q.join(' ')}" fill="${c}"/>`;
+    }
+  });
+  return g;
+}
+function isobarSVG(pts,val,o={}){
+  const s=o.raw?pts:smooth(pts),d=dPath(s);
+  let g=`<path d="${d}" fill="none" stroke="${o.col||'#3D4F60'}" stroke-width="${o.w||2.2}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  if(val!=null&&val!==''){const m=s[Math.floor(s.length/2)];
+    g+=`<text x="${r1(m[0])}" y="${r1(m[1]+5)}" font-family="${FONT_B}" font-size="14" font-weight="700" fill="${o.col||'#3D4F60'}" text-anchor="middle" stroke="#FFFFFF" stroke-width="5" paint-order="stroke">${esc(val)}</text>`;}
+  return g;
+}
+
+// ===== arkusz A4 (poziomo) =====
+const SW=1414, SH=1000, MS=0.93, MX=28, MY=104;
+function prefixIds(str,p){return str.replace(/(id="|url\(#|href="#)(ic-|mapclip|plclip|lgT|tfimg|mapg)/g,(m,a,b)=>a+p+b);}
+function sheetSVG({title,sub,map,legend,footer,showLegend=true,pfx='x'}){
+  const mx=showLegend?MX:(SW-MW*MS)/2;
+  let s=`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${SW} ${SH}" width="${SW}" height="${SH}">${iconDefs()}`;
+  s+=`<defs><clipPath id="mapclip"><rect x="0" y="0" width="${MW}" height="${MH}" rx="8"/></clipPath><clipPath id="plclip"><path d="${GEO.PL}"/></clipPath></defs>`;
+  s+=`<rect width="${SW}" height="${SH}" fill="#FFFFFF"/>`;
+  s+=`<text x="${mx}" y="62" font-family="${FONT_D}" font-size="40" font-weight="800" fill="#16324F">${esc(title)}</text>`;
+  if(sub) s+=`<text x="${mx}" y="92" font-family="${FONT_B}" font-size="20" fill="#557089">${esc(sub)}</text>`;
+  s+=`<g id="mapg" transform="translate(${r1(mx)} ${MY}) scale(${MS})"><g clip-path="url(#mapclip)">${map}</g><rect x="0" y="0" width="${MW}" height="${MH}" rx="8" fill="none" stroke="#16324F" stroke-width="2"/></g>`;
+  if(showLegend&&legend) s+=legend;
+  if(footer) s+=`<text x="${SW-28}" y="${SH-12}" font-family="${FONT_B}" font-size="13" fill="#7F93A6" text-anchor="end">${esc(footer)}</text>`;
+  return prefixIds(s+'</svg>',pfx);
+}
+// legenda: lista wpisów {kind:'icon'|'html', id, label, svg}
+function legendSVG(items){
+  const x0=MX+MW*MS+24, y0=MY, w=SW-x0-28, h=MH*MS;
+  let s=`<g><rect x="${x0}" y="${y0}" width="${w}" height="${h}" rx="12" fill="#F2F8FC" stroke="#C6D8E6" stroke-width="2"/>`;
+  s+=`<text x="${x0+18}" y="${y0+38}" font-family="${FONT_D}" font-size="26" font-weight="800" fill="#16324F">${L('Legenda','Key')}</text>`;
+  const n=items.length, two=n>15, colW=two?(w-20)/2:w-20, rowH=Math.min(50,(h-62)/Math.ceil(two?n/2:n));
+  const isz=Math.min(44,rowH-4);
+  if(!items.length) s+=`<text x="${x0+18}" y="${y0+72}" font-family="${FONT_B}" font-size="15" fill="#7F93A6">${L('Uzupełni się sama, gdy dodasz symbole.','Fills in by itself as you add symbols.')}</text>`;
+  items.forEach((it,i)=>{
+    const col=two?Math.floor(i/Math.ceil(n/2)):0, row=two?i%Math.ceil(n/2):i;
+    const x=x0+12+col*colW, y=y0+56+row*rowH;
+    s+=`<g transform="translate(${r1(x)} ${r1(y)})">`;
+    if(it.kind==='icon') s+=useIcon(it.id,2,(rowH-isz)/2,isz);
+    else s+=`<g transform="translate(0 ${r1((rowH-44)/2)})">${it.svg}</g>`;
+    const fs=two?14:16;
+    s+=`<text x="${isz+12}" y="${r1(rowH/2+fs*0.36)}" font-family="${FONT_B}" font-size="${fs}" fill="#16324F">${esc(it.label)}</text></g>`;
+  });
+  return s+'</g>';
+}
+function buildLEG(){const LEG={
+  temp:{kind:'html',label:L('Temperatura w °C','Temperature in °C'),svg:tempBox(0,6,18,{w:44,h:30})},
+  tempBlank:{kind:'html',label:L('Wpisz temperaturę','Write the temperature'),svg:tempBox(0,6,0,{w:44,h:30,blank:true})},
+  wind:{kind:'html',label:L('Wiatr: dokąd wieje, km/h','Wind: where it blows to, km/h'),svg:`<g transform="translate(22 22)">${windArrow(0,0,225,20,{label:false,len:34})}</g>`},
+  rainmm:{kind:'html',label:L('Suma opadu w mm','Rainfall in mm'),svg:`<g transform="translate(0 2)">${drop(12,22,1.3)}<text x="24" y="30" font-family="${FONT_B}" font-size="15" font-weight="700" fill="#1A5CC0">mm</text></g>`},
+  isobar:{kind:'html',label:L('Izobara (ciśnienie, hPa)','Isobar (pressure, hPa)'),svg:`<path d="M2 30 C14 14 30 14 44 26" fill="none" stroke="#3D4F60" stroke-width="2.2"/><text x="24" y="14" font-family="${FONT_B}" font-size="11" font-weight="700" fill="#3D4F60" text-anchor="middle">1015</text>`},
+  W:{kind:'html',label:L('Wyż (wysokie ciśnienie)','High (high pressure)'),svg:`<text x="22" y="38" font-family="${FONT_D}" font-size="40" font-weight="800" fill="#1F64C8" text-anchor="middle">${pLetter('W')}</text>`},
+  N:{kind:'html',label:L('Niż (niskie ciśnienie)','Low (low pressure)'),svg:`<text x="22" y="38" font-family="${FONT_D}" font-size="40" font-weight="800" fill="#D9363E" text-anchor="middle">${pLetter('N')}</text>`},
+  tfield:{kind:'html',label:L('Kolory: temperatura','Colours: temperature'),svg:`<defs><linearGradient id="lgT"><stop offset="0" stop-color="${tColor(-5)}"/><stop offset=".33" stop-color="${tColor(5)}"/><stop offset=".66" stop-color="${tColor(15)}"/><stop offset="1" stop-color="${tColor(28)}"/></linearGradient></defs><rect x="0" y="12" width="44" height="20" rx="4" fill="url(#lgT)" stroke="#16324F" stroke-width="1"/>`},
+};
+['warm','cold','occl','stat'].forEach(k=>LEG['f_'+k]={kind:'html',label:FNAME[k],svg:frontSVG([[2,28],[44,28]],k,false,4).replace('stroke-dashoffset="-2"','stroke-dasharray="12 12"')});
+return LEG;}
+const _LEGC={};const LEG=new Proxy({},{get:(_,k)=>(_LEGC[LANG]=_LEGC[LANG]||buildLEG())[k]});
+
+// ===== zapis plików i druk =====
+function saveBlob(blob,name){
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);
+}
+function downloadPNG(svgStr,name){
+  const img=new Image();
+  const url=URL.createObjectURL(new Blob([svgStr],{type:'image/svg+xml;charset=utf-8'}));
+  img.onload=()=>{const c=document.createElement('canvas');c.width=SW*2;c.height=SH*2;const g=c.getContext('2d');
+    g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);
+    c.toBlob(b=>saveBlob(b,name+'.png'),'image/png');};
+  img.onerror=()=>{try{alert(L('Nie udało się zapisać obrazu. Spróbuj przycisku Drukuj i zapisz jako PDF.','Could not save the image. Try Print and save as PDF.'));}catch(e){}};
+  img.src=url;
+}
+const FONTLINK='<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;700;800&display=swap">';
+function printSheet(svgStr,title){
+  let w=null; try{w=window.open('','_blank');}catch(e){}
+  if(w&&w.document){
+    w.document.write(`<!doctype html><html lang="${LANG}"><head><meta charset="utf-8"><title>${esc(title)}</title>${FONTLINK}<style>@page{size:A4 landscape;margin:7mm}html,body{margin:0;background:#fff}svg{width:100%;height:auto;display:block}</style></head><body>${svgStr}<script>(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(()=>{window.focus();window.print();},300));<\/script></body></html>`);
+    w.document.close();
+  }else{
+    $('#printArea').innerHTML=svgStr;
+    try{window.print();}catch(e){alert(L('Drukowanie jest zablokowane w tym oknie. Użyj „Pobierz PNG” i wydrukuj obraz.','Printing is blocked here. Use “Download PNG” and print the image.'));}
+  }
+}
+const LOC=()=>L('pl-PL','en-GB');
+const dateFmt={format:d=>new Intl.DateTimeFormat(LOC(),{weekday:'long',day:'numeric',month:'long'}).format(d)};
+const dayShort={format:d=>new Intl.DateTimeFormat(LOC(),{weekday:'short'}).format(d)};
+const dmShort={format:d=>new Intl.DateTimeFormat(LOC(),{day:'numeric',month:'numeric'}).format(d)};
+
+// ===== AKTUALNA PROGNOZA =====
+const GLON=[],GLAT=[];for(let i=12;i<=27;i++)GLON.push(i);for(let j=47;j<=56;j++)GLAT.push(j);
+const FC={data:null,grid:null,day:0,slot:13,level:'simple',fetched:null,demo:false};
+const SLOTS=[[1,'Noc','1:00','Night'],[7,'Rano','7:00','Morning'],[13,'Południe','13:00','Midday'],[19,'Wieczór','19:00','Evening'],['day','Cały dzień','max i min','Whole day','max and min']];
+const LAYERS=[
+ ['sym','Symbole pogody',1,1,'Weather symbols'],['temp','Temperatura (liczby)',1,1,'Temperature (numbers)'],['tfield','Mapa temperatur (kolory)',1,0,'Temperature map (colours)'],
+ ['wind','Wiatr',1,0,'Wind'],['rain','Opady w mm',0,0,'Rainfall in mm'],['isob','Izobary',0,0,'Isobars'],['wn','Wyż i niż (W, N)',0,0,'Highs and lows (H, L)'],
+ ['names','Nazwy miast',1,1,'City names'],['woj','Granice województw',1,0,'Province borders'],['riv','Rzeki',1,1,'Rivers']
+]; // [id, etykieta, widoczna w prostej, domyślnie w prostej, label EN]
+const fcOn={};
+
+const API='https://api.open-meteo.com/v1/forecast';
+async function fetchJSON(url){const r=await fetch(url);if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}
+function fcStatus(){
+  const st=$('#fcStatus');if(!st)return;
+  if(FC.stKey==='load'){st.className='status';st.textContent=L('Pobieram prognozę…','Downloading the forecast…');}
+  else if(FC.stKey==='ok'){st.className='status';st.textContent=L('Prognoza pobrana: ','Forecast downloaded: ')+FC.fetched.toLocaleString(LOC(),{day:'numeric',month:'numeric',hour:'2-digit',minute:'2-digit'})+'.';}
+  else if(FC.stKey==='err'){st.className='status err';st.textContent=L('Nie udało się pobrać prognozy (brak internetu albo blokada sieci). Pokazuję przykładowe dane, które nie są prawdziwą prognozą.','Could not download the forecast (no internet or the network is blocked). Showing sample data, which is not a real forecast.');}
+}
+async function loadForecast(){
+  const st=$('#fcStatus');st.className='status';st.textContent=L('Pobieram prognozę…','Downloading the forecast…');FC.stKey='load';
+  const lat=CITIES.map(c=>c[1]).join(','),lon=CITIES.map(c=>c[2]).join(',');
+  const q=`latitude=${lat}&longitude=${lon}&hourly=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,precipitation,is_day,pressure_msl&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Europe%2FWarsaw&forecast_days=7`;
+  try{
+    let d=await fetchJSON(API+'?'+q); if(!Array.isArray(d)) d=[d];
+    FC.data=d; FC.demo=false; FC.fetched=new Date();
+    FC.stKey='ok';fcStatus();
+  }catch(e){
+    FC.data=demoData(); FC.demo=true; FC.fetched=new Date();
+    FC.stKey='err';fcStatus();
+  }
+  FC.grid=null; buildDayChips(); pickDefaultTime(); renderFC();
+  if(!FC.demo) loadGrid();
+}
+async function loadGrid(){
+  const la=[],lo=[];GLAT.forEach(a=>GLON.forEach(o=>{la.push(a);lo.push(o);}));
+  try{
+    let g=await fetchJSON(`${API}?latitude=${la.join(',')}&longitude=${lo.join(',')}&hourly=pressure_msl&timezone=Europe%2FWarsaw&forecast_days=7`);
+    if(!Array.isArray(g))g=[g]; FC.grid=g.map(p=>p.hourly.pressure_msl); renderFC();
+  }catch(e){ FC.grid=null; }
+}
+function demoData(){
+  const days=[],t0=new Date();t0.setHours(0,0,0,0);
+  for(let i=0;i<7;i++){const d=new Date(t0.getTime()+i*864e5);days.push(d.toISOString().slice(0,10));}
+  return CITIES.map((c,ci)=>{
+    const H={time:[],temperature_2m:[],weather_code:[],wind_speed_10m:[],wind_direction_10m:[],precipitation:[],is_day:[],pressure_msl:[]};
+    const D={time:days,weather_code:[],temperature_2m_max:[],temperature_2m_min:[],precipitation_sum:[],precipitation_probability_max:[],wind_speed_10m_max:[],wind_direction_10m_dominant:[]};
+    const codes=[0,1,2,3,61,80,3,2,95,63,1,45];
+    for(let dd=0;dd<7;dd++){
+      const base=12+4*Math.sin(dd/2)+(c[1]<50.5?-2:0)-(c[0]==='Zakopane'?5:0)+(c[1]>54?-1:0);
+      let mx=-99,mn=99,ps=0;
+      for(let h=0;h<24;h++){const t=base+6*Math.sin((h-9)/24*2*Math.PI);mx=Math.max(mx,t);mn=Math.min(mn,t);
+        const code=codes[(ci*3+dd*5+Math.floor(h/6))%codes.length];const pr=code>=61?0.6:code>=51?0.2:0;ps+=pr;
+        H.temperature_2m.push(r1(t));H.weather_code.push(code);H.wind_speed_10m.push(8+((ci*7+dd*3+h)%20));H.wind_direction_10m.push((240+dd*20+ci*4)%360);
+        H.precipitation.push(pr);H.is_day.push(h>6&&h<18?1:0);H.pressure_msl.push(1012+dd-ci*0.3);}
+      D.weather_code.push(codes[(ci*3+dd*5+2)%codes.length]);D.temperature_2m_max.push(r1(mx));D.temperature_2m_min.push(r1(mn));
+      D.precipitation_sum.push(r1(ps));D.precipitation_probability_max.push(ps>0?70:10);D.wind_speed_10m_max.push(25+ci%10);D.wind_direction_10m_dominant.push((240+dd*20)%360);
+    }
+    return {hourly:H,daily:D};
+  });
+}
+function pickDefaultTime(){
+  const h=new Date().getHours();
+  if(h<11){FC.day=0;FC.slot=13;} else if(h<17){FC.day=0;FC.slot=19;} else {FC.day=1;FC.slot=13;}
+  syncChips();
+}
+function buildDayChips(){
+  const days=FC.data[0].daily.time;
+  $('#fcDays').innerHTML=days.map((d,i)=>{const dt=new Date(d+'T12:00:00');
+    const lab=i===0?L('Dziś','Today'):i===1?L('Jutro','Tomorrow'):dayShort.format(dt);
+    return `<button data-d="${i}" aria-pressed="false">${lab}<small>${dmShort.format(dt)}</small></button>`;}).join('');
+  $$('#fcDays button').forEach(b=>b.onclick=()=>{FC.day=+b.dataset.d;syncChips();renderFC();});
+}
+function buildSlotChips(){
+  $('#fcSlots').innerHTML=SLOTS.map(s=>`<button data-s="${s[0]}" aria-pressed="false">${L(s[1],s[3])}<small>${L(s[2],s[4]||s[2])}</small></button>`).join('');
+  $$('#fcSlots button').forEach(b=>b.onclick=()=>{FC.slot=b.dataset.s==='day'?'day':+b.dataset.s;syncChips();renderFC();});
+}
+function syncChips(){
+  $$('#fcDays button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.d===FC.day));
+  $$('#fcSlots button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.s)===String(FC.slot)));
+}
+function buildLayers(){
+  const adv=FC.level==='adv';
+  LAYERS.forEach(l=>fcOn[l[0]]=adv?true:!!l[3]);
+  if(adv){fcOn.woj=true;}
+  $('#fcLayers').innerHTML=LAYERS.filter(l=>adv||l[2]).map(l=>`<label><input type="checkbox" data-l="${l[0]}" ${fcOn[l[0]]?'checked':''}> ${L(l[1],l[4])}</label>`).join('');
+  $$('#fcLayers input').forEach(i=>i.onchange=()=>{fcOn[i.dataset.l]=i.checked;renderFC();});
+}
+function cityVals(){
+  const D=FC.data, day=FC.day, isDayAll=FC.slot==='day';
+  return CITIES.map((c,ci)=>{
+    const d=D[ci];
+    if(isDayAll){const k=day;return {code:d.daily.weather_code[k],isDay:1,tmax:d.daily.temperature_2m_max[k],tmin:d.daily.temperature_2m_min[k],t:d.daily.temperature_2m_max[k],
+      wind:d.daily.wind_speed_10m_max[k],dir:d.daily.wind_direction_10m_dominant[k],pr:d.daily.precipitation_sum[k],prob:d.daily.precipitation_probability_max[k],p:d.hourly.pressure_msl[day*24+12]};}
+    const h=day*24+FC.slot, H=d.hourly; let pr=0;for(let k=h-2;k<=h+3;k++)pr+=(H.precipitation[k]||0);
+    return {code:H.weather_code[h],isDay:H.is_day[h],t:H.temperature_2m[h],wind:H.wind_speed_10m[h],dir:H.wind_direction_10m[h],pr,p:H.pressure_msl[h]};
+  });
+}
+function gridAt(arr,lon,lat){
+  const fi=Math.max(0,Math.min(GLON.length-1.001,lon-GLON[0])),fj=Math.max(0,Math.min(GLAT.length-1.001,lat-GLAT[0]));
+  const i=Math.floor(fi),j=Math.floor(fj),u=fi-i,v=fj-j,n=GLON.length;
+  const a=arr[j*n+i],b=arr[j*n+i+1],c=arr[(j+1)*n+i],d=arr[(j+1)*n+i+1];
+  return a*(1-u)*(1-v)+b*u*(1-v)+c*(1-u)*v+d*u*v;
+}
+function tempFieldImage(vals){
+  const st=5,nx=MW/st,ny=Math.ceil(MH/st),cv=document.createElement('canvas');cv.width=nx;cv.height=ny;
+  const g=cv.getContext('2d'),im=g.createImageData(nx,ny);
+  const P=CITIES.map((c,i)=>{const [x,y]=proj(c[2],c[1]);return [x,y,vals[i].t];});
+  for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){
+    const x=i*st+st/2,y=j*st+st/2;let sw=0,sv=0;
+    for(const p of P){const d2=(x-p[0])**2+(y-p[1])**2+400;const w=1/(d2*d2);sw+=w;sv+=w*p[2];}
+    const c=tRGB(sv/sw),k=(j*nx+i)*4;im.data[k]=c[0];im.data[k+1]=c[1];im.data[k+2]=c[2];im.data[k+3]=255;
+  }
+  g.putImageData(im,0,0);
+  return `<image id="tfimg" href="${cv.toDataURL('image/png')}" x="0" y="0" width="${MW}" height="${ny*st}" preserveAspectRatio="none" clip-path="url(#plclip)" opacity="0.62"/>`;
+}
+// izolinie metodą marching squares
+const MSQ={1:[[3,2]],2:[[2,1]],3:[[3,1]],4:[[0,1]],5:[[3,0],[2,1]],6:[[0,2]],7:[[3,0]],8:[[3,0]],9:[[0,2]],10:[[0,1],[3,2]],11:[[0,1]],12:[[3,1]],13:[[2,1]],14:[[3,2]]};
+function isolines(F,nx,ny,st,level){
+  const segs=[];
+  for(let j=0;j<ny-1;j++)for(let i=0;i<nx-1;i++){
+    const a=F[j][i],b=F[j][i+1],c=F[j+1][i+1],d=F[j+1][i];
+    const id=(a>level?8:0)|(b>level?4:0)|(c>level?2:0)|(d>level?1:0);if(!MSQ[id])continue;
+    const E=e=>e===0?[i+(level-a)/(b-a),j]:e===1?[i+1,j+(level-b)/(c-b)]:e===2?[i+(level-d)/(c-d),j+1]:[i,j+(level-a)/(d-a)];
+    MSQ[id].forEach(([e1,e2])=>segs.push([E(e1).map(v=>v*st),E(e2).map(v=>v*st)]));
+  }
+  // łączenie odcinków w linie
+  const key=p=>Math.round(p[0]*10)+'_'+Math.round(p[1]*10), map=new Map();
+  segs.forEach((s,k)=>{[0,1].forEach(e=>{const kk=key(s[e]);if(!map.has(kk))map.set(kk,[]);map.get(kk).push(k);});});
+  const used=new Array(segs.length).fill(false),lines=[];
+  for(let k=0;k<segs.length;k++){if(used[k])continue;used[k]=true;let line=[segs[k][0],segs[k][1]];
+    for(const dir of [1,0]){let guard=0;
+      while(guard++<5000){const end=dir?line[line.length-1]:line[0];const cand=(map.get(key(end))||[]).find(q=>!used[q]);if(cand==null)break;used[cand]=true;
+        const s=segs[cand],nxt=key(s[0])===key(end)?s[1]:s[0];if(dir)line.push(nxt);else line.unshift(nxt);}}
+    lines.push(line);}
+  return lines;
+}
+function isobarLayer(){
+  if(!FC.grid) return {svg:'',wn:'',list:[]};
+  const h=FC.slot==='day'?FC.day*24+12:FC.day*24+FC.slot;
+  const arr=FC.grid.map(p=>p[h]); if(arr.some(v=>v==null)) return {svg:'',wn:'',list:[]};
+  const st=10,nx=MW/st+1,ny=Math.ceil(MH/st)+1,F=[];let mn=1e9,mx=-1e9;
+  for(let j=0;j<ny;j++){F.push([]);for(let i=0;i<nx;i++){const [lo,la]=unproj(i*st,j*st);const v=gridAt(arr,lo,la);F[j].push(v);mn=Math.min(mn,v);mx=Math.max(mx,v);}}
+  const range=mx-mn, step=range>24?4:range>7?2:1;
+  let svg='';
+  for(let L=Math.ceil(mn/step)*step;L<=mx;L+=step){
+    isolines(F,nx,ny,st,L+0.0001).forEach(line=>{if(line.length<6)return;
+      svg+=isobarSVG(line,line.length>25?L:null,{raw:true,w:2,col:'#4A5A6A'});});
+  }
+  // wyże i niże na siatce
+  let wn='';const list=[];const n=GLON.length;
+  for(let j=1;j<GLAT.length-1;j++)for(let i=1;i<n-1;i++){
+    const v=arr[j*n+i];let lo=true,hi=true;
+    for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){if(!di&&!dj)continue;const w=arr[(j+dj)*n+i+di];if(w<=v)lo=false;if(w>=v)hi=false;}
+    if(!lo&&!hi)continue;const [x,y]=proj(GLON[i],GLAT[j]);if(x<40||x>MW-40||y<40||y>MH-50)continue;
+    wn+=pressLetter(x,y,hi?'W':'N',v);list.push({k:hi?'W':'N',x,y});
+  }
+  return {svg,wn,list};
+}
+function fcItems(vals,adv,hideT,hideS){
+  const list=CITIES.map((c,i)=>[c,vals[i]]).filter(([c])=>adv||c[3]);
+  const all=FC.slot==='day';
+  let s='';const S=adv?52:72;
+  list.forEach(([c,v])=>{
+    const [x,y]=proj(c[2],c[1]);
+    if(fcOn.sym&&!hideS) s+=useIcon(wmoIcon(v.code,v.isDay),x-S/2,y-S-8,S);
+    if(fcOn.temp){
+      const bx=x+S/2-6, by=y-S+2;
+      if(all){s+=tempBox(bx,by,v.tmax,{blank:hideT,w:adv?46:50,h:adv?28:32});s+=tempBox(bx,by+(adv?30:34),v.tmin,{blank:hideT,w:adv?40:44,h:adv?24:28});}
+      else s+=tempBox(bx,by+8,v.t,{blank:hideT,w:adv?46:50,h:adv?28:32});
+    }
+    if(fcOn.wind) s+=windArrow(x-S/2-12,y-S/2-4,v.dir,v.wind,{ly:30,label:true});
+    if(fcOn.rain&&v.pr>=0.1){const ty=fcOn.names?y+40:y+22;s+=drop(x-14,ty-5,1.05)+`<text x="${r1(x-4)}" y="${r1(ty+1)}" font-family="${FONT_B}" font-size="14" font-weight="700" fill="#1A5CC0" stroke="#FFFFFF" stroke-width="3.5" paint-order="stroke">${v.pr<1?'<1':Math.round(v.pr)} mm</text>`;}
+  });
+  return {svg:s+cityLayer(list.map(l=>l[0]),{names:fcOn.names}),list};
+}
+let FC_SVG='';
+function renderFC(){
+  if(!FC.data) return;
+  const adv=FC.level==='adv',hideT=$('#fcHideT').checked,hideS=$('#fcHideS').checked;
+  const vals=cityVals();
+  const under=fcOn.tfield?tempFieldImage(vals):'';
+  const iso=(fcOn.isob||fcOn.wn)?isobarLayer():{svg:'',wn:'',list:[]};
+  const items=fcItems(vals,adv,hideT,hideS);
+  let map=mapBase({woj:fcOn.woj,riv:fcOn.riv,under});
+  if(fcOn.isob) map+=iso.svg;
+  if(fcOn.wn) map+=iso.wn;
+  map+=items.svg;
+  // legenda
+  const leg=[];
+  if(fcOn.sym&&!hideS){const used=[...new Set(items.list.map(([c,v])=>wmoIcon(v.code,v.isDay)))];
+    ICON_META.forEach(m=>{if(used.includes(m[0]))leg.push({kind:'icon',id:m[0],label:ICON_NAME[m[0]]});});}
+  else if(hideS) leg.push({kind:'html',label:L('Narysuj symbol pogody','Draw the weather symbol'),svg:`<rect x="2" y="4" width="40" height="36" rx="6" fill="none" stroke="#16324F" stroke-width="2" stroke-dasharray="5 4"/>`});
+  if(fcOn.temp) leg.push(hideT?(FC.slot==='day'?{...LEG.tempBlank,label:L('Wpisz temp. max (u góry) i min','Write max (top) and min temp.')}:LEG.tempBlank):(FC.slot==='day'?{kind:'html',label:L('Temperatura max i min, °C','Max and min temperature, °C'),svg:tempBox(0,0,18,{w:40,h:24})+tempBox(4,24,8,{w:36,h:20})}:LEG.temp));
+  if(fcOn.tfield) leg.push(LEG.tfield);
+  if(fcOn.wind) leg.push(LEG.wind);
+  if(fcOn.rain) leg.push({...LEG.rainmm,label:FC.slot==='day'?L('Suma opadu w ciągu dnia, mm','Rainfall over the day, mm'):L('Opad w ciągu ok. 6 godzin, mm','Rainfall over about 6 hours, mm')});
+  if(fcOn.isob&&FC.grid) leg.push(LEG.isobar);
+  if(fcOn.wn&&iso.list&&iso.list.some(p=>p.k==='W')) leg.push(LEG.W);
+  if(fcOn.wn&&iso.list&&iso.list.some(p=>p.k==='N')) leg.push(LEG.N);
+  const dt=new Date(FC.data[0].daily.time[FC.day]+'T12:00:00');
+  let sub=dateFmt.format(dt);sub=sub[0].toUpperCase()+sub.slice(1);
+  sub+=FC.slot==='day'?L(', cały dzień',', whole day'):L(`, godz. ${FC.slot}:00`,`, ${FC.slot}:00`);
+  const foot=FC.demo?L('Dane przykładowe, nie jest to prawdziwa prognoza','Sample data, not a real forecast'):L('Dane: Open-Meteo.com (CC BY 4.0), pobrane ','Data: Open-Meteo.com (CC BY 4.0), downloaded ')+FC.fetched.toLocaleString(LOC(),{day:'numeric',month:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  FC_SVG=sheetSVG({title:$('#fcTitle').value||L('Prognoza pogody','Weather forecast'),sub,map,legend:legendSVG(leg),footer:foot,pfx:'fc'});
+  $('#fcSheet').innerHTML=FC_SVG;
+  FC.lastVals=vals;FC.lastSub=sub;FC.lastIso=iso;
+}
+function fcToCreator(){
+  if(!FC.lastVals) return;
+  const adv=FC.level==='adv',items=[],all=FC.slot==='day';const S=adv?52:72;
+  CITIES.forEach((c,i)=>{if(!adv&&!c[3])return;const v=FC.lastVals[i];const [x,y]=proj(c[2],c[1]);
+    if(fcOn.sym) items.push({t:'icon',id:wmoIcon(v.code,v.isDay),x,y:y-S/2-8,s:S});
+    if(fcOn.temp) items.push({t:'temp',x:x+S/2+19,y:y-S+(all?18:26),v:Math.round(v.t)});
+    if(fcOn.wind) items.push({t:'wind',x:x-S/2-12,y:y-S/2-4,dir:Math.round(v.dir/45)*45%360,v:Math.round(v.wind)});
+  });
+  if(fcOn.wn&&FC.lastIso&&FC.lastIso.list) FC.lastIso.list.forEach(p=>items.push({t:p.k,x:p.x,y:p.y}));
+  CR.setFromForecast(items,$('#fcTitle').value,FC.lastSub,adv);
+  showTab('creator');
+}
+function initFC(){
+  buildSlotChips();buildLayers();
+  $$('#fcLevel button').forEach(b=>b.onclick=()=>{FC.level=b.dataset.v;$$('#fcLevel button').forEach(x=>x.setAttribute('aria-pressed',x===b));buildLayers();renderFC();});
+  ['#fcHideT','#fcHideS'].forEach(s=>$(s).onchange=renderFC);
+  $('#fcTitle').oninput=()=>{clearTimeout(FC.tt);FC.tt=setTimeout(renderFC,250);};
+  $('#fcPrint').onclick=()=>printSheet(FC_SVG,$('#fcTitle').value);
+  $('#fcPng').onclick=()=>downloadPNG(FC_SVG,'mapa-pogody');
+  $('#fcReload').onclick=loadForecast;
+  $('#fcToCreator').onclick=fcToCreator;
+}
+
+// ===== KREATOR =====
+const DIR8_PL=[[315,'Pn-Zach'],[0,'Pn'],[45,'Pn-Wsch'],[270,'Zach'],[null,''],[90,'Wsch'],[225,'Pd-Zach'],[180,'Pd'],[135,'Pd-Wsch']];
+const DIR8_EN=[[315,'NW'],[0,'N'],[45,'NE'],[270,'W'],[null,''],[90,'E'],[225,'SW'],[180,'S'],[135,'SE']];
+const DIR8=new Proxy([],{get:(_,k)=>{const a=LANG==='en'?DIR8_EN:DIR8_PL;const v=a[k];return typeof v==='function'?v.bind(a):v;}});
+const DIRNAME_PL={0:'północny',45:'północno-wschodni',90:'wschodni',135:'południowo-wschodni',180:'południowy',225:'południowo-zachodni',270:'zachodni',315:'północno-zachodni'};
+const DIRNAME_EN={0:'northerly',45:'north-easterly',90:'easterly',135:'south-easterly',180:'southerly',225:'south-westerly',270:'westerly',315:'north-westerly'};
+const DIRNAME=new Proxy({},{get:(_,k)=>(LANG==='en'?DIRNAME_EN:DIRNAME_PL)[k]});
+const CR={items:[],level:'simple',tool:'select',sel:null,hist:[],draft:null,drag:null,nid:1};
+const SEL_SVG=`<path d="M30 14 L30 82 L46 66 L58 92 L68 87 L56 62 L78 62 Z" fill="#FFFFFF" stroke="#16324F" stroke-width="5" stroke-linejoin="round"/>`;
+function toolList(){
+  const adv=CR.level==='adv';
+  const t=[['select',L('Zaznacz','Select'),SEL_SVG]];
+  const SH={moon:'Pogodnie (noc)',mostly_sun:'Małe zachm.',mostly_moon:'Małe zachm. (noc)',partly:'Umiarkowane zachm.',partly_night:'Umiark. (noc)',overcast:'Duże zachm.',snow_showers:'Przelotny śnieg',sleet:'Deszcz ze śniegiem',showers:'Przelotny deszcz',freezing:'Marznący deszcz'};
+  const SHE={moon:'Clear (night)',mostly_moon:'Mostly clear (night)',partly_night:'Partly cloudy (night)',snow_showers:'Snow showers'};
+  ICON_META.forEach(m=>{if(adv||m[3]==='s')t.push(['icon:'+m[0],LANG==='en'?(SHE[m[0]]||ICON_NAME[m[0]]):(SH[m[0]]||m[1]),ICONS[m[0]]]);});
+  t.push(['temp',L('Temperatura','Temperature'),tempBox(14,32,15,{w:72,h:40,fs:28})]);
+  t.push(['wind',L('Wiatr','Wind'),windArrow(50,50,225,20,{label:false,len:60})]);
+  if(adv){
+    t.push(['W',L('Wyż','High'),`<text x="50" y="72" font-family="${FONT_D}" font-size="64" font-weight="800" fill="#1F64C8" text-anchor="middle">${pLetter('W')}</text>`]);
+    t.push(['N',L('Niż','Low'),`<text x="50" y="72" font-family="${FONT_D}" font-size="64" font-weight="800" fill="#D9363E" text-anchor="middle">${pLetter('N')}</text>`]);
+    ['warm','cold','occl','stat'].forEach(k=>t.push(['front:'+k,L(FNAME[k].replace('Front ','Fr. '),FNAME[k].replace(' front','')),frontSVG([[8,62],[50,44],[92,62]],k,false,6)]));
+    t.push(['isobar',L('Izobara','Isobar'),`<path d="M6 70 C30 30 70 30 94 62" fill="none" stroke="#3D4F60" stroke-width="4"/><text x="50" y="30" font-family="${FONT_B}" font-size="20" font-weight="700" fill="#3D4F60" text-anchor="middle">1010</text>`]);
+    t.push(['rainmm',L('Opad mm','Rain mm'),drop(32,52,2.2)+`<text x="54" y="66" font-family="${FONT_B}" font-size="26" font-weight="700" fill="#1A5CC0">mm</text>`]);
+  }
+  t.push(['text',L('Napis','Text'),`<text x="50" y="66" font-family="${FONT_D}" font-size="44" font-weight="800" fill="#16324F" text-anchor="middle">Aa</text>`]);
+  return t;
+}
+function buildPalette(){
+  $('#crPalette').innerHTML=toolList().map(([id,lab,svg])=>`<button data-tool="${id}" aria-pressed="${CR.tool===id}" title="${esc(lab)}"><svg viewBox="0 0 100 100" aria-hidden="true">${svg}</svg>${esc(lab)}</button>`).join('');
+  $$('#crPalette button').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
+}
+function setTool(t){
+  if(CR.draft) finishLine();
+  CR.tool=t;$$('#crPalette button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tool===t));
+  const line=t.startsWith('front')||t==='isobar';
+  $('#crHint').innerHTML=t==='select'?L('Kliknij element, żeby go zaznaczyć. Przeciągnij, żeby przesunąć.','Click an element to select it. Drag it to move it.')
+    :line?L('Klikaj na mapie kolejne punkty linii. Zakończ dwuklikiem albo przyciskiem.','Click points of the line on the map. Finish with a double click or the button.')+`<br><button class="btn sun" id="crFinish" style="margin-top:6px">${L('Zakończ linię','Finish line')}</button>`
+    :L('Kliknij na mapie, żeby postawić element. Możesz stawiać kilka po kolei.','Click on the map to place the element. You can place several in a row.');
+  const f=$('#crFinish');if(f)f.onclick=finishLine;
+}
+const snap=()=>JSON.stringify(CR.items);
+function pushHist(){CR.hist.push(snap());if(CR.hist.length>60)CR.hist.shift();}
+function undo(){if(CR.draft){CR.draft=null;drawItems();return;}const h=CR.hist.pop();if(h==null)return;CR.items=JSON.parse(h);CR.sel=null;drawItems();}
+function save(){try{localStorage.setItem('mapaPogodyKreator',JSON.stringify({items:CR.items,level:CR.level,title:$('#crTitle').value,sub:$('#crSub').value}));}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem('mapaPogodyKreator')||'null');if(d){CR.items=d.items||[];CR.level=d.level||'simple';$('#crTitle').value=d.title||$('#crTitle').value;$('#crSub').value=d.sub||'';CR.nid=CR.items.reduce((m,i)=>Math.max(m,i.id||0),0)+1;}}catch(e){}}
+
+function itemSVG(it){
+  let s='',hit='';
+  switch(it.t){
+    case 'icon': s=useIcon(it.ic,it.x-it.s/2,it.y-it.s/2,it.s);hit=`<rect x="${r1(it.x-it.s/2)}" y="${r1(it.y-it.s/2)}" width="${it.s}" height="${it.s}" fill="transparent"/>`;break;
+    case 'temp': s=tempBox(it.x-25,it.y-16,it.v);break;
+    case 'wind': s=windArrow(it.x,it.y,it.dir,it.v,{label:it.v>0});hit=`<circle cx="${r1(it.x)}" cy="${r1(it.y)}" r="28" fill="transparent"/>`;break;
+    case 'W': case 'N': s=pressLetter(it.x,it.y,it.t,it.v);break;
+    case 'text': s=`<text x="${r1(it.x)}" y="${r1(it.y+it.fs*0.35)}" font-family="${FONT_D}" font-size="${it.fs}" font-weight="700" fill="#16324F" text-anchor="middle" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round" paint-order="stroke">${esc(it.v)}</text>`;break;
+    case 'rainmm': s=drop(it.x-18,it.y-4,1.2)+`<text x="${r1(it.x-6)}" y="${r1(it.y+3)}" font-family="${FONT_B}" font-size="17" font-weight="700" fill="#1A5CC0" stroke="#FFFFFF" stroke-width="3.5" paint-order="stroke">${esc(it.v)} mm</text>`;break;
+    case 'front': s=frontSVG(it.pts,it.kind,it.flip);hit=`<path d="${dPath(smooth(it.pts))}" fill="none" stroke="transparent" stroke-width="22"/>`;break;
+    case 'isobar': s=isobarSVG(it.pts,it.v);hit=`<path d="${dPath(smooth(it.pts))}" fill="none" stroke="transparent" stroke-width="20"/>`;break;
+  }
+  return `<g data-id="${it.id}" style="cursor:move">${hit}${s}</g>`;
+}
+function crLegend(){
+  const leg=[],seen=new Set();
+  ICON_META.forEach(m=>{if(CR.items.some(i=>i.t==='icon'&&i.ic===m[0]))leg.push({kind:'icon',id:m[0],label:ICON_NAME[m[0]]});});
+  const has=t=>CR.items.some(i=>i.t===t);
+  if(has('temp'))leg.push(LEG.temp);
+  if(has('wind'))leg.push(LEG.wind);
+  if(has('rainmm'))leg.push(LEG.rainmm);
+  ['warm','cold','occl','stat'].forEach(k=>{if(CR.items.some(i=>i.t==='front'&&i.kind===k))leg.push(LEG['f_'+k]);});
+  if(has('isobar'))leg.push(LEG.isobar);
+  if(has('W'))leg.push(LEG.W); if(has('N'))leg.push(LEG.N);
+  return leg;
+}
+function buildSheet(){
+  const map=mapBase({woj:$('#crWoj').checked,riv:$('#crRiv').checked})+($('#crCity').checked?cityLayer(CITIES.filter(c=>CR.level==='adv'||c[3])):'')+'<g id="crItems"></g><g id="crUi" class="ui-only"></g>';
+  $('#crSheet').innerHTML=sheetSVG({title:$('#crTitle').value||' ',sub:$('#crSub').value,map,legend:'<g id="crLegend"></g>',showLegend:$('#crLeg').checked,pfx:'cr'});
+  const svg=$('#crSheet svg');
+  svg.addEventListener('pointerdown',onDown);svg.addEventListener('pointermove',onMove);
+  svg.addEventListener('pointerup',onUp);svg.addEventListener('pointercancel',onUp);svg.addEventListener('dblclick',e=>{if(CR.draft){e.preventDefault();finishLine(true);}});
+  drawItems();
+}
+function drawItems(){
+  const g=$('#crItems');if(!g)return;
+  g.innerHTML=prefixIds(CR.items.map(itemSVG).join(''),'cr');
+  const lg=$('#crLegend');if(lg)lg.innerHTML=$('#crLeg').checked?prefixIds(legendSVG(crLegend()),'cr'):'';
+  // UI: zaznaczenie i szkic linii
+  let ui='';
+  if(CR.sel!=null){const el=g.querySelector(`[data-id="${CR.sel}"]`);if(el){const b=el.getBBox();ui+=`<rect x="${r1(b.x-6)}" y="${r1(b.y-6)}" width="${r1(b.width+12)}" height="${r1(b.height+12)}" rx="8" fill="none" stroke="#F5B400" stroke-width="3" stroke-dasharray="8 6" pointer-events="none"/>`;}}
+  if(CR.draft){const d=CR.draft;
+    if(d.pts.length>1) ui+=d.t==='front'?frontSVG(d.pts,d.kind,false):isobarSVG(d.pts,null);
+    d.pts.forEach(p=>ui+=`<circle cx="${r1(p[0])}" cy="${r1(p[1])}" r="6" fill="#F5B400" stroke="#16324F" stroke-width="2"/>`);}
+  $('#crUi').innerHTML=ui;
+  save();
+}
+function mapPt(e){const svg=$('#crSheet svg'),mg=$('#crSheet #crmapg');const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(mg.getScreenCTM().inverse());return [p.x,p.y];}
+function onDown(e){
+  const p=mapPt(e);const inMap=p[0]>=0&&p[0]<=MW&&p[1]>=0&&p[1]<=MH;
+  const tool=CR.tool;
+  if(tool.startsWith('front')||tool==='isobar'){
+    if(!inMap)return;
+    if(!CR.draft)CR.draft=tool==='isobar'?{t:'isobar',pts:[],v:''}:{t:'front',kind:tool.split(':')[1],pts:[],flip:false};
+    const last=CR.draft.pts[CR.draft.pts.length-1];
+    if(!last||Math.hypot(last[0]-p[0],last[1]-p[1])>6)CR.draft.pts.push([r1(p[0]),r1(p[1])]);
+    drawItems();return;
+  }
+  const tgt=e.target.closest&&e.target.closest('#crItems [data-id]');
+  if(tgt){const id=+tgt.dataset.id;CR.sel=id;const it=CR.items.find(i=>i.id===id);
+    CR.drag={id,start:p,orig:JSON.parse(JSON.stringify(it)),moved:false,before:snap()};
+    e.currentTarget.setPointerCapture(e.pointerId);drawItems();showEdit();return;}
+  if(!inMap)return;
+  if(tool==='select'){CR.sel=null;drawItems();showEdit();return;}
+  pushHist();
+  const it={id:CR.nid++,x:r1(p[0]),y:r1(p[1])};
+  if(tool.startsWith('icon:')){it.t='icon';it.ic=tool.slice(5);it.s=62;}
+  else if(tool==='temp'){it.t='temp';it.v=15;}
+  else if(tool==='wind'){it.t='wind';it.dir=270;it.v=15;}
+  else if(tool==='W'||tool==='N'){it.t=tool;it.v='';}
+  else if(tool==='rainmm'){it.t='rainmm';it.v=5;}
+  else if(tool==='text'){it.t='text';it.v=L('Napis','Text');it.fs=26;}
+  CR.items.push(it);CR.sel=it.id;drawItems();showEdit(true);
+}
+// ikony trzymają nazwę symbolu w polu "ic" (pole "id" to numer elementu)
+function onMove(e){
+  if(!CR.drag)return;const p=mapPt(e),d=CR.drag,dx=p[0]-d.start[0],dy=p[1]-d.start[1];
+  if(!d.moved&&Math.hypot(dx,dy)<3)return;d.moved=true;
+  const it=CR.items.find(i=>i.id===d.id);if(!it)return;
+  if(it.pts)it.pts=d.orig.pts.map(q=>[r1(q[0]+dx),r1(q[1]+dy)]);else{it.x=r1(d.orig.x+dx);it.y=r1(d.orig.y+dy);}
+  if(!CR.raf)CR.raf=requestAnimationFrame(()=>{CR.raf=null;drawItems();});
+}
+function onUp(){if(CR.drag){if(CR.drag.moved){CR.hist.push(CR.drag.before);}CR.drag=null;drawItems();}}
+function finishLine(fromDbl){
+  const d=CR.draft;if(!d)return;CR.draft=null;
+  if(d.pts.length>=2){pushHist();d.id=CR.nid++;CR.items.push(d);CR.sel=d.id;}
+  drawItems();showEdit();
+}
+function selItem(){return CR.items.find(i=>i.id===CR.sel);}
+function upd(fn,hist=true){const it=selItem();if(!it)return;if(hist)pushHist();fn(it);drawItems();}
+function showEdit(focus){
+  const it=selItem(),box=$('#crEdit');if(!it){box.hidden=true;return;}box.hidden=false;
+  let h='',title='';
+  if(it.t==='icon'){title=ICON_NAME[it.ic]||'Symbol';
+    h=`<label>${L('Wielkość','Size')}</label><input type="range" min="30" max="130" value="${it.s}" id="eS"><label style="margin-top:6px">${L('Zamień na','Change to')}</label><select id="eIc">${ICON_META.filter(m=>CR.level==='adv'||m[3]==='s').map(m=>`<option value="${m[0]}" ${m[0]===it.ic?'selected':''}>${ICON_NAME[m[0]]}</option>`).join('')}</select>`;}
+  else if(it.t==='temp'){title=L('Temperatura','Temperature');h=`<label>${L('Wartość w °C','Value in °C')}</label><input type="number" id="eV" min="-40" max="45" step="1" value="${it.v}">`;}
+  else if(it.t==='wind'){title=L('Wiatr','Wind');h=`<label>${L('Skąd wieje?','Where does it blow from?')}</label><div class="dir8">${DIR8.map(([v,l])=>v==null?'<span></span>':`<button data-dir="${v}" aria-pressed="${it.dir===v}">${l}</button>`).join('')}</div><p class="hint" id="eDirTxt">${L('Wiatr '+(DIRNAME[it.dir]||''),'A '+(DIRNAME[it.dir]||'')+' wind')}</p><label>${L('Prędkość w km/h (0 = bez liczby)','Speed in km/h (0 = no number)')}</label><input type="number" id="eV" min="0" max="200" value="${it.v}">`;}
+  else if(it.t==='W'||it.t==='N'){title=it.t==='W'?L('Wyż','High'):L('Niż','Low');h=`<label>${L('Ciśnienie w hPa (puste = bez liczby)','Pressure in hPa (empty = no number)')}</label><input type="number" id="eV" min="940" max="1070" value="${it.v}"><button class="btn" id="eSwap" style="margin-top:6px">${L('Zamień na '+(it.t==='W'?'niż':'wyż'),'Change to '+(it.t==='W'?'low':'high'))}</button>`;}
+  else if(it.t==='text'){title=L('Napis','Text');h=`<label>${L('Tekst','Text')}</label><input type="text" id="eV" maxlength="40" value="${esc(it.v)}"><label style="margin-top:6px">${L('Wielkość','Size')}</label><input type="range" id="eFs" min="14" max="60" value="${it.fs}">`;}
+  else if(it.t==='rainmm'){title=L('Opad','Rainfall');h=`<label>${L('Suma opadu w mm','Rainfall in mm')}</label><input type="number" id="eV" min="0" max="300" value="${it.v}">`;}
+  else if(it.t==='front'){title=FNAME[it.kind];h=`<label>${L('Rodzaj frontu','Type of front')}</label><select id="eK">${Object.keys(FNAME).map(k=>`<option value="${k}" ${k===it.kind?'selected':''}>${FNAME[k]}</option>`).join('')}</select><button class="btn" id="eFlip" style="margin-top:8px">${L('Odwróć kierunek ruchu','Reverse direction')}</button><p class="hint">${L('Ząbki i półkola pokazują, dokąd przesuwa się front.','Triangles and semicircles show where the front is moving.')}</p>`;}
+  else if(it.t==='isobar'){title=L('Izobara','Isobar');h=`<label>${L('Ciśnienie w hPa','Pressure in hPa')}</label><input type="number" id="eV" min="940" max="1070" value="${it.v}">`;}
+  $('#crEditTitle').textContent=title;$('#crEditBody').innerHTML=h;
+  const v=$('#eV');
+  if(v){v.onfocus=()=>pushHist();v.oninput=()=>upd(i=>{i.v=v.type==='number'?(v.value===''?'':+v.value):v.value;},false);
+    if(focus&&(it.t==='temp'||it.t==='text')){v.focus();v.select();}}
+  const s=$('#eS');if(s){s.onpointerdown=()=>pushHist();s.oninput=()=>upd(i=>i.s=+s.value,false);}
+  const fs=$('#eFs');if(fs){fs.onpointerdown=()=>pushHist();fs.oninput=()=>upd(i=>i.fs=+fs.value,false);}
+  const ic=$('#eIc');if(ic)ic.onchange=()=>{upd(i=>i.ic=ic.value);showEdit();};
+  const k=$('#eK');if(k)k.onchange=()=>{upd(i=>i.kind=k.value);showEdit();};
+  const fl=$('#eFlip');if(fl)fl.onclick=()=>upd(i=>i.flip=!i.flip);
+  const sw=$('#eSwap');if(sw)sw.onclick=()=>{upd(i=>i.t=i.t==='W'?'N':'W');showEdit();};
+  $$('#crEditBody .dir8 button').forEach(b=>b.onclick=()=>{upd(i=>i.dir=+b.dataset.dir);showEdit();});
+}
+CR.setFromForecast=(items,title,sub,adv)=>{
+  pushHist();CR.level=adv?'adv':'simple';
+  CR.items=items.map(i=>{const o={...i,id:CR.nid++};if(o.t==='icon'){o.ic=i.id;}return o;});
+  $('#crTitle').value=title||L('Prognoza pogody','Weather forecast');$('#crSub').value=sub||'';CR.fcSub=sub||'';CR.sel=null;
+  $$('#crLevel button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===CR.level));
+  buildPalette();buildSheet();showEdit();
+};
+function crExport(){
+  const svg=$('#crSheet svg').cloneNode(true);svg.querySelectorAll('.ui-only').forEach(n=>n.remove());
+  return new XMLSerializer().serializeToString(svg);
+}
+function initCR(){
+  load();
+  $$('#crLevel button').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.v===CR.level);b.onclick=()=>{CR.level=b.dataset.v;$$('#crLevel button').forEach(x=>x.setAttribute('aria-pressed',x===b));buildPalette();setTool('select');buildSheet();};});
+  buildPalette();setTool('select');buildSheet();
+  ['#crWoj','#crRiv','#crCity','#crLeg'].forEach(s=>$(s).onchange=buildSheet);
+  ['#crTitle','#crSub'].forEach(s=>$(s).oninput=()=>{clearTimeout(CR.tt);CR.tt=setTimeout(buildSheet,250);});
+  $('#crDel').onclick=()=>{if(CR.sel==null)return;pushHist();CR.items=CR.items.filter(i=>i.id!==CR.sel);CR.sel=null;drawItems();showEdit();};
+  $('#crDup').onclick=()=>{const it=selItem();if(!it)return;pushHist();const c=JSON.parse(JSON.stringify(it));c.id=CR.nid++;
+    if(c.pts)c.pts=c.pts.map(p=>[p[0]+24,p[1]+24]);else{c.x+=30;c.y+=30;}CR.items.push(c);CR.sel=c.id;drawItems();showEdit();};
+  $('#crUndo').onclick=undo;
+  const clr=$('#crClear');
+  clr.onclick=()=>{
+    if(!CR.items.length&&!CR.draft)return;
+    if(!clr.dataset.armed){clr.dataset.armed='1';clr.textContent=L('Na pewno? Kliknij jeszcze raz','Sure? Click again');clr.style.background='var(--warm)';clr.style.color='#fff';
+      clearTimeout(CR.ct);CR.ct=setTimeout(resetClr,4000);return;}
+    resetClr();CR.draft=null;pushHist();CR.items=[];CR.sel=null;drawItems();showEdit();
+  };
+  CR.resetClr=()=>resetClr();
+  function resetClr(){clearTimeout(CR.ct);delete clr.dataset.armed;clr.textContent=L('Wyczyść mapę','Clear map');clr.style.background='';clr.style.color='';}
+  $('#crPrint').onclick=()=>printSheet(crExport(),$('#crTitle').value);
+  $('#crPng').onclick=()=>downloadPNG(crExport(),'moja-mapa-pogody');
+  document.addEventListener('keydown',e=>{
+    if($('#t-creator').hidden)return;const inField=/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&!inField){e.preventDefault();undo();}
+    else if((e.key==='Delete'||e.key==='Backspace')&&!inField&&CR.sel!=null){e.preventDefault();$('#crDel').click();}
+    else if(e.key==='Enter'&&CR.draft){e.preventDefault();finishLine();}
+    else if(e.key==='Escape'){if(CR.draft){CR.draft=null;}CR.sel=null;drawItems();showEdit();}
+  });
+}
+
+// ===== zakładki =====
+function showTab(n){
+  ['guide','symbols','forecast','creator'].forEach(t=>{const on=t===n;$('#t-'+t).hidden=!on;$('#b-'+t).setAttribute('aria-selected',on);});
+  if(n==='forecast'&&!FC.data) loadForecast();
+  if(n==='creator') drawItems();
+}
+// ===== przewodnik =====
+function initGuide(){
+  $$('svg[data-ic]').forEach(s=>s.innerHTML=ICONS[s.dataset.ic]);
+  const mini=['sun','partly','overcast','rain','showers','storm','snow','fog','wind'];
+  $('#miniSyms').innerHTML=mini.map(id=>`<div class="mini"><svg viewBox="0 0 100 100" aria-hidden="true">${ICONS[id]}</svg>${ICON_NAME[id]}</div>`).join('');
+  $('#tscale').innerHTML=[-15,-10,-5,0,5,10,15,20,25,30].map(t=>`<span style="background:${tColor(t)};color:${tText(t)}">${fmtT(t)}</span>`).join('');
+  // kompas
+  $('#dirBtns').innerHTML=DIR8.map(([v,l])=>v==null?'<span></span>':`<button data-dir="${v}" aria-pressed="${v===270}">${l}</button>`).join('');
+  const setDir=d=>{
+    $$('#dirBtns button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.dir===d));
+    const names=LANG==='en'?{0:['north','south'],45:['north-east','south-west'],90:['east','west'],135:['south-east','north-west'],180:['south','north'],225:['south-west','north-east'],270:['west','east'],315:['north-west','south-east']}[d]:{0:['północy','południe'],45:['północnego wschodu','południowy zachód'],90:['wschodu','zachód'],135:['południowego wschodu','północny zachód'],180:['południa','północ'],225:['południowego zachodu','północny wschód'],270:['zachodu','wschód'],315:['północnego zachodu','południowy wschód']}[d];
+    let s=`<circle cx="150" cy="150" r="118" fill="#FFFFFF" stroke="#C6D8E6" stroke-width="4"/>`;
+    [['N',150,26],['E',276,157],['S',150,288],['W',24,157]].forEach(([t,x,y])=>s+=`<text x="${x}" y="${y}" font-family="${FONT_D}" font-size="24" font-weight="800" fill="#557089" text-anchor="middle">${t}</text>`);
+    const a=(d+180)*Math.PI/180, fx=150+Math.sin(d*Math.PI/180)*96, fy=150-Math.cos(d*Math.PI/180)*96;
+    s+=`<circle cx="${r1(fx)}" cy="${r1(fy)}" r="14" fill="#F5B400"/>`;
+    s+=`<g transform="translate(150 150) rotate(${(d+180)%360})"><line x1="0" y1="86" x2="0" y2="-62" stroke="#1F64C8" stroke-width="12" stroke-linecap="round"/><polygon points="0,-96 -24,-56 24,-56" fill="#1F64C8"/></g>`;
+    $('#compassSvg').innerHTML=s;
+    $('#compassTxt').innerHTML=L(`<b>Wiatr ${DIRNAME[d]}</b> wieje z ${names[0]} na ${names[1]}. Żółta kropka pokazuje, skąd przychodzi powietrze, a strzałka, dokąd leci.`,`<b>A ${DIRNAME[d]} wind</b> blows from the ${names[0]} towards the ${names[1]}. The yellow dot shows where the air comes from, and the arrow shows where it goes.`);
+  };
+  $$('#dirBtns button').forEach(b=>b.onclick=()=>setDir(+b.dataset.dir));setDir(270);
+  // wyż / niż
+  const swirl=(cw,col)=>{let s='';[60,92].forEach(r=>{s+=`<ellipse cx="150" cy="110" rx="${r*1.25}" ry="${r*0.85}" fill="none" stroke="#9FB4C6" stroke-width="2"/>`;});
+    for(let k=0;k<4;k++){const th=k*Math.PI/2+0.4,rx=76*1.25,ry=76*0.85,x=150+Math.cos(th)*rx,y=110+Math.sin(th)*ry;const tx=-Math.sin(th)*rx,ty=Math.cos(th)*ry,LL=Math.hypot(tx,ty);const dx=(cw?1:-1)*tx/LL,dy=(cw?1:-1)*ty/LL;
+      s+=`<g transform="translate(${r1(x)} ${r1(y)}) rotate(${r1(Math.atan2(dy,dx)*180/Math.PI+90)})"><line x1="0" y1="14" x2="0" y2="-6" stroke="${col}" stroke-width="5" stroke-linecap="round"/><polygon points="0,-16 -9,-3 9,-3" fill="${col}"/></g>`;}
+    return s;};
+  $('#figW').innerHTML=swirl(true,'#1F64C8')+sun(250,40,13)+`<text x="150" y="132" font-family="${FONT_D}" font-size="64" font-weight="800" fill="#1F64C8" text-anchor="middle">${pLetter('W')}</text>`;
+  $('#figN').innerHTML=swirl(false,'#D9363E')+`<g transform="translate(222 4) scale(.62)">${ICONS.rain}</g><text x="150" y="132" font-family="${FONT_D}" font-size="64" font-weight="800" fill="#D9363E" text-anchor="middle">${pLetter('N')}</text>`;
+  // izobary
+  const iso=(x0,gap,lab)=>{let s=`<rect x="${x0}" y="10" width="300" height="190" rx="14" fill="#FFFFFF"/>`;
+    for(let k=0;k<5;k++){const y=40+k*gap;s+=`<path d="M${x0+14} ${y} C${x0+90} ${y-24} ${x0+200} ${y+24} ${x0+286} ${y}" fill="none" stroke="#3D4F60" stroke-width="2.5"/><text x="${x0+150}" y="${y+5}" font-family="${FONT_B}" font-size="12" font-weight="700" fill="#3D4F60" text-anchor="middle" stroke="#fff" stroke-width="4" paint-order="stroke">${1000+k*4}</text>`;}
+    return s+`<text x="${x0+150}" y="222" font-family="${FONT_D}" font-size="20" font-weight="700" fill="#16324F" text-anchor="middle">${lab}</text>`;};
+  $('#figIzo').innerHTML=iso(10,18,L('Gęsto: silny wiatr','Close together: strong wind'))+`<g transform="translate(180 140)">${windArrow(0,0,270,50,{label:false,len:60,col:'#1F64C8'})}</g>`+iso(330,40,L('Rzadko: słaby wiatr','Far apart: light wind'))+`<g transform="translate(560 150) scale(.6)">${windArrow(0,0,270,10,{label:false,len:40,col:'#1F64C8'})}</g>`;
+  // fronty
+  const fr=LANG==='en'?[['warm','Getting warmer. Long, steady rain or drizzle, then it gets warmer.'],['cold','Getting colder. Short but heavy downpours and thunderstorms, strong wind, then clearer skies.'],['occl','A cold front has caught up with a warm one. Cloudy and rainy.'],['stat','The front stays in one place. The weather does not change for a long time; it often rains.']]
+   :[['warm','Ocieplenie. Długi, spokojny deszcz albo mżawka, potem robi się cieplej.'],['cold','Ochłodzenie. Krótkie, ale gwałtowne ulewy i burze, silny wiatr, potem przejaśnienia.'],['occl','Front zimny dogonił ciepły. Pochmurno i deszczowo.'],['stat','Front stoi w miejscu. Pogoda długo się nie zmienia, często pada.']];
+  $('#figFront').innerHTML=fr.map(([k,t])=>`<div class="frow"><svg viewBox="0 0 180 50" aria-hidden="true">${frontSVG([[10,30],[90,18],[170,30]],k,false,5)}</svg><div><b class="disp" style="color:${FCOL[k]};font-size:20px">${FNAME[k]}</b><br>${t}</div></div>`).join('');
+  initQuiz();initJoke();
+}
+const QUIZ_PL=[
+ ['storm','Co oznacza ten symbol?',['Burza','Grad','Ulewa','Silny wiatr'],0,'Błyskawica pod chmurą to burza.'],
+ [null,'Wiatr zachodni wieje…',['z zachodu na wschód','ze wschodu na zachód','z północy na południe','w stronę zachodu'],0,'Wiatr nazywamy od kierunku, z którego przychodzi.'],
+ ['showers','Co oznacza ten symbol?',['Przelotny deszcz','Deszcz przez cały dzień','Mżawka','Deszcz ze śniegiem'],0,'Słońce + chmura + krople to opady przelotne: popada i przestaje.'],
+ [null,'Linia z czerwonymi półkolami to…',['front ciepły','front chłodny','izobara','granica województwa'],0,'Front ciepły rysujemy na czerwono, z półkolami.'],
+ [null,'Gęsto narysowane izobary oznaczają…',['silny wiatr','upał','mgłę','brak wiatru'],0,'Im gęściej izobary, tym mocniej wieje.'],
+ [null,'Litera N na mapie pogody to…',['niż: zwykle chmury i opady','północ','noc','wyż: zwykle słońce'],0,'N to niż, czyli obszar niskiego ciśnienia.'],
+ [null,'„70% szans na deszcz” znaczy, że…',['na 10 takich dni w 7 padało','będzie padać przez 70% dnia','spadnie 70 mm deszczu','deszcz obejmie 70% miasta'],0,'Procent mówi o szansie, a nie o czasie ani ilości.'],
+ ['fog','Co oznacza ten symbol?',['Mgła','Silny wiatr','Pochmurno','Śnieg'],0,'Poziome kreski pod chmurą to mgła. Widoczność spada.'],
+];
+const QUIZ_EN=[
+ ['storm','What does this symbol mean?',['Thunderstorm','Hail','Heavy rain','Strong wind'],0,'Lightning under a cloud means a thunderstorm.'],
+ [null,'A westerly wind blows…',['from the west to the east','from the east to the west','from the north to the south','towards the west'],0,'A wind is named after the direction it comes from.'],
+ ['showers','What does this symbol mean?',['Showers','Rain all day','Drizzle','Sleet'],0,'Sun + cloud + drops means showers: it rains, then stops.'],
+ [null,'A line with red semicircles is…',['a warm front','a cold front','an isobar','a province border'],0,'A warm front is drawn in red, with semicircles.'],
+ [null,'Isobars drawn close together mean…',['strong wind','heat','fog','no wind'],0,'The closer the isobars, the stronger the wind.'],
+ [null,'The letter L on a weather map means…',['a low: usually clouds and rain','left','late','a high: usually sunshine'],0,'L stands for low, an area of low pressure.'],
+ [null,'“70% chance of rain” means that…',['it rained on 7 out of 10 days like this','it will rain for 70% of the day','70 mm of rain will fall','rain will cover 70% of the town'],0,'The percentage is about the chance, not the time or the amount.'],
+ ['fog','What does this symbol mean?',['Fog','Strong wind','Cloudy','Snow'],0,'Horizontal lines under a cloud mean fog. You cannot see far.'],
+];
+const QUIZ=new Proxy([],{get:(_,k)=>{const a=LANG==='en'?QUIZ_EN:QUIZ_PL;const v=a[k];return typeof v==='function'?v.bind(a):v;}});
+let qScore=0,qDone=0;
+function initQuiz(){
+  qScore=0;qDone=0;$('#quizScore').textContent='';
+  $('#quizBox').innerHTML=QUIZ.map((q,i)=>{const order=q[2].map((t,k)=>k).sort(()=>Math.random()-.5);
+    return `<div class="q" data-q="${i}">${q[0]?`<svg class="qi" viewBox="0 0 100 100" aria-hidden="true">${ICONS[q[0]]}</svg>`:''}<p>${i+1}. ${q[1]}</p><div class="opts">${order.map(k=>`<button data-k="${k}">${q[2][k]}</button>`).join('')}</div><div class="fb"></div></div>`;}).join('');
+  $$('#quizBox .q').forEach(box=>{const q=QUIZ[+box.dataset.q];
+    box.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(box.dataset.done)return;box.dataset.done=1;qDone++;
+      const ok=+b.dataset.k===q[3];if(ok)qScore++;b.classList.add(ok?'ok':'no');
+      if(!ok)box.querySelector(`button[data-k="${q[3]}"]`).classList.add('ok');
+      box.querySelector('.fb').textContent=(ok?L('Dobrze! ','Correct! '):L('Nie tym razem. ','Not this time. '))+q[4];
+      if(qDone===QUIZ.length)$('#quizScore').textContent=L(`Wynik: ${qScore} na ${QUIZ.length}. `,`Score: ${qScore} out of ${QUIZ.length}. `)+(qScore===QUIZ.length?L('Zostajesz synoptykiem!','You could be a weather forecaster!'):qScore>=6?L('Świetnie, prawie bez chmurki!','Great, almost cloudless!'):L('Przeczytaj przewodnik jeszcze raz i spróbuj ponownie.','Read the guide again and have another go.'));});});
+  $('#quizReset').onclick=initQuiz;
+}
+const JOKES_PL=[
+ 'Co mówi jedna chmura do drugiej? „Nie płacz, bo cała Polska zmoknie”.',
+ 'Synoptyk: „Jutro 50% szans na deszcz”. Uczeń: „To będzie padać czy nie?”. Synoptyk: „Pół kropli spadnie, a pół się jeszcze zastanowi”.',
+ 'Dlaczego termometr nigdy nie kłamie? Bo zawsze trzyma się skali.',
+ 'Co robi mróz, kiedy się nudzi? Maluje na szybach.',
+ 'Dlaczego wiatr nie gra w karty? Bo zawsze wieje mu wszystko ze stołu.',
+ 'Jasiu, jaka będzie jutro pogoda? Nie wiem, proszę pani, ale na pewno będzie jutro.',
+ 'Dlaczego chmura nie dostała szóstki? Bo cały sprawdzian przepadało.',
+];
+const JOKES_EN=[
+ 'What did one cloud say to the other? “Don’t cry, or the whole of Poland will get wet.”',
+ 'Why did the forecaster bring a bar of soap to work? He was expecting showers.',
+ 'Why don’t thermometers ever lie? They always stick to the scale.',
+ 'What does a cloud wear under its raincoat? Thunderwear.',
+ 'How do hurricanes see? With one eye.',
+ 'What’s a tornado’s favourite game? Twister.',
+ 'Why was the weather map so good at tests? It always knew the highs and lows.',
+];
+const JOKES=new Proxy([],{get:(_,k)=>{const a=LANG==='en'?JOKES_EN:JOKES_PL;const v=a[k];return typeof v==='function'?v.bind(a):v;}});
+let jk=Math.floor(Math.random()*7);
+function initJoke(){const show=()=>$('#jokeTxt').textContent=JOKES[jk%JOKES.length];show();$('#jokeNext').onclick=()=>{jk++;show();};}
+
+// ===== zakładka symboli =====
+const ADV_SYMS_PL=()=>[
+ ['f_warm','Front ciepły','Czerwona linia z półkolami. Ciepłe powietrze napływa na miejsce zimnego. Przynosi długi deszcz i ocieplenie.','Fronty',frontSVG([[8,56],[50,40],[92,56]],'warm',false,6)],
+ ['f_cold','Front chłodny','Niebieska linia z trójkątami. Zimne powietrze wypiera ciepłe. Przynosi ulewy, burze i ochłodzenie.','Fronty',frontSVG([[8,56],[50,40],[92,56]],'cold',false,6)],
+ ['f_occl','Front zokludowany','Fioletowa linia z trójkątami i półkolami na zmianę. Front chłodny dogonił ciepły.','Fronty',frontSVG([[8,56],[50,40],[92,56]],'occl',false,6)],
+ ['f_stat','Front stacjonarny','Linia czerwono-niebieska. Front prawie się nie przesuwa, pogoda długo się nie zmienia.','Fronty',frontSVG([[8,56],[50,40],[92,56]],'stat',false,6).replace('stroke-dasharray="36 36"','stroke-dasharray="16 16"')],
+ ['W','Wyż (W)','Obszar wysokiego ciśnienia. Zwykle pogodnie i sucho. Po angielsku H.','Ciśnienie',`<text x="50" y="74" font-family="${FONT_D}" font-size="70" font-weight="800" fill="#1F64C8" text-anchor="middle">${pLetter('W')}</text>`],
+ ['N','Niż (N)','Obszar niskiego ciśnienia. Zwykle chmury, opady i wiatr. Po angielsku L.','Ciśnienie',`<text x="50" y="74" font-family="${FONT_D}" font-size="70" font-weight="800" fill="#D9363E" text-anchor="middle">${pLetter('N')}</text>`],
+ ['isobar','Izobara','Linia łącząca miejsca o tym samym ciśnieniu (w hPa). Gęste izobary to silny wiatr.','Ciśnienie',`<path d="M6 68 C30 30 70 30 94 60" fill="none" stroke="#3D4F60" stroke-width="3.5"/><path d="M6 88 C30 54 70 54 94 82" fill="none" stroke="#3D4F60" stroke-width="3.5"/><text x="50" y="30" font-family="${FONT_B}" font-size="18" font-weight="700" fill="#3D4F60" text-anchor="middle">1012</text>`],
+ ['wind','Strzałka wiatru','Pokazuje, dokąd wieje wiatr. Liczba to prędkość w km/h. Ta strzałka to wiatr południowo-zachodni.','Wiatr i opady',windArrow(50,46,225,30,{label:false,len:56})+`<text x="50" y="94" font-family="${FONT_B}" font-size="16" font-weight="700" fill="#16324F" text-anchor="middle">30 km/h</text>`],
+ ['temp','Temperatura','Liczba w stopniach Celsjusza. Kolor podpowiada: niebieski zimno, czerwony ciepło.','Wiatr i opady',tempBox(16,22,-3,{w:68,h:30,fs:22})+tempBox(16,58,24,{w:68,h:30,fs:22})],
+ ['rainmm','Suma opadu','Ile wody spadło lub spadnie, w milimetrach. 1 mm to 1 litr wody na 1 m².','Wiatr i opady',drop(30,52,2.2)+`<text x="52" y="62" font-family="${FONT_B}" font-size="24" font-weight="700" fill="#1A5CC0">5 mm</text>`],
+];
+const ADV_EN={f_warm:['Warm front','A red line with semicircles. Warm air moves in to replace cold air. Brings long rain and warmer weather.'],
+ f_cold:['Cold front','A blue line with triangles. Cold air pushes out warm air. Brings downpours, thunderstorms and colder weather.'],
+ f_occl:['Occluded front','A purple line with triangles and semicircles in turn. A cold front has caught up with a warm front.'],
+ f_stat:['Stationary front','A red and blue line. The front hardly moves, so the weather stays the same for a long time.'],
+ W:['High (H)','An area of high pressure. Usually fine and dry. On Polish maps marked W.'],
+ N:['Low (L)','An area of low pressure. Usually clouds, rain and wind. On Polish maps marked N.'],
+ isobar:['Isobar','A line joining places with the same pressure (in hPa). Isobars close together mean strong wind.'],
+ wind:['Wind arrow','Shows where the wind is blowing to. The number is the speed in km/h. This arrow is a south-westerly wind.'],
+ temp:['Temperature','A number in degrees Celsius. The colour helps: blue is cold, red is warm.'],
+ rainmm:['Rainfall','How much water has fallen or will fall, in millimetres. 1 mm is 1 litre of water per 1 m².']};
+function renderSymbols(f){
+  const all=ICON_META.map(m=>[ICON_NAME[m[0]],iconDesc(m[0]),ICONS[m[0]],m[3]==='s'?'simple':'adv',m[4]])
+    .concat(ADV_SYMS_PL().map(m=>[LANG==='en'?ADV_EN[m[0]][0]:m[1],LANG==='en'?ADV_EN[m[0]][1]:m[2],m[4],(m[0]==='wind'||m[0]==='temp')?'simple':'adv',m[3]]));
+  const groups={};
+  all.filter(x=>f==='all'||x[3]===f).forEach(x=>(groups[x[4]]=groups[x[4]]||[]).push(x));
+  $('#symList').innerHTML=Object.entries(groups).map(([g,list])=>`<h3 class="symgroup">${groupName(g)}</h3><div class="symgrid">${list.map(([n,d,svg,l])=>`<div class="sym"><svg viewBox="0 0 100 100" aria-hidden="true">${svg}</svg><div><h3>${n}</h3><p>${d}</p><span class="tag">${l==='simple'?L('prosty','basic'):L('zaawansowany','advanced')}</span></div></div>`).join('')}</div>`).join('');
+}
+function initSymbols(){
+  $$('#symFilter button').forEach(b=>b.onclick=()=>{$$('#symFilter button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderSymbols(b.dataset.f);});
+  renderSymbols('all');
+}
+// ===== przełącznik języka =====
+const DEF_TITLES={fc:['Prognoza pogody dla Polski','Weather forecast for Poland'],cr:['Moja prognoza pogody','My weather forecast']};
+function setLang(lg,first){
+  const prev=LANG;LANG=lg;document.documentElement.lang=lg;
+  $$('[data-en]').forEach(el=>{if(el.dataset.pl==null)el.dataset.pl=el.innerHTML;el.innerHTML=lg==='en'?el.dataset.en:el.dataset.pl;});
+  $$('[data-en-ph]').forEach(el=>{if(el.dataset.plPh==null)el.dataset.plPh=el.placeholder;el.placeholder=lg==='en'?el.dataset.enPh:el.dataset.plPh;});
+  $$('#langSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lg));
+  const swapT=(sel,pair)=>{const i=$(sel);if(i&&(first||i.value===pair[prev==='en'?1:0]))i.value=pair[lg==='en'?1:0];};
+  if(first){const i=$('#crTitle');} 
+  swapT('#fcTitle',DEF_TITLES.fc);
+  if(!(first&&localHasCreator())){swapT('#crTitle',DEF_TITLES.cr);if(!first)swapT('#crTitle',DEF_TITLES.fc);}
+  if(first)return;
+  // przebuduj dynamiczne części
+  initGuide();
+  renderSymbols(($$('#symFilter button').find(b=>b.getAttribute('aria-pressed')==='true')||{dataset:{f:'all'}}).dataset.f);
+  buildSlotChips();if(FC.data){buildDayChips();}syncChips();
+  const on={...fcOn};buildLayers();Object.assign(fcOn,on);$$('#fcLayers input').forEach(i=>i.checked=!!fcOn[i.dataset.l]);
+  fcStatus();renderFC();
+  if(CR.fcSub&&$('#crSub').value===CR.fcSub&&FC.lastSub){$('#crSub').value=FC.lastSub;CR.fcSub=FC.lastSub;}
+  buildPalette();setTool(CR.tool);buildSheet();showEdit();CR.resetClr&&CR.resetClr();
+}
+function localHasCreator(){try{return !!localStorage.getItem('mapaPogodyKreator');}catch(e){return false;}}
+// ===== start =====
+document.addEventListener('DOMContentLoaded',()=>{
+  $$('nav.tabs button').forEach(b=>b.onclick=()=>showTab(b.id.slice(2)));
+  document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('[data-goto]');if(a){e.preventDefault();showTab(a.dataset.goto);}});
+  $$('#langSeg button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+  setLang(LANG,true);
+  initGuide();initSymbols();initFC();initCR();
+  if(LANG==='en'){$('#crClear').textContent='Clear map';}
+});
+</script>
+<a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><script>(function(){var a=document.getElementById('home-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+</body></html>

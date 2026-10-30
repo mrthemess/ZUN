@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('genLang',l)}catch(e){}})();</script><!--site-lang-->
+
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Krzyżówki genetyczne – Genetic crosses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+<style>
+:root{--bg:#f0eff4;--paper:#fdfcff;--ink:#1d1a26;--muted:#5e5a6c;--line:#d8d4e3;--soft:#e7e4f0;--acc:#5b3fa8;--acc-t:#5b3fa8;--acc-ink:#fff;--ok:#2e7d4f;--no:#b4432a;--focus:#c2571a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14121a;--paper:#1c1924;--ink:#e8e4f2;--muted:#a49fb5;--line:#322d40;--soft:#25212f;--acc:#8a6fe0;--acc-t:#b9a6f5;--acc-ink:#140f22;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14121a;--paper:#1c1924;--ink:#e8e4f2;--muted:#a49fb5;--line:#322d40;--soft:#25212f;--acc:#8a6fe0;--acc-t:#b9a6f5;--acc-ink:#140f22;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 'Atkinson Hyperlegible',system-ui,sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;letter-spacing:-.015em;line-height:1.15}
+.wrap{max-width:1160px;margin:0 auto;padding:20px 20px 70px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+header h1{margin:0;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800}header p{margin:2px 0 0;color:var(--muted)}
+.hr{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:5px 12px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--paper);font-weight:700}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 16px}
+.tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.btn{font:inherit;font-size:.95rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:8px 14px}
+.btn:hover{border-color:var(--acc)}.btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:700}.btn:disabled{opacity:.5}
+section.s{margin-top:28px}section.s>h2{font-size:1.5rem;margin:0 0 10px}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px}
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.terms div{background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.terms b{display:block;color:var(--acc-t);font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.modes .card h3{margin:0 0 6px;font-size:1.15rem}.modes .card p{margin:0 0 6px;font-size:.95rem}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.builder{display:grid;grid-template-columns:320px minmax(0,1fr);gap:20px;margin-top:20px;align-items:start}
+.builder aside{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:16px;position:sticky;top:12px}
+aside label{display:flex;flex-direction:column;gap:3px;font-size:.85rem;color:var(--muted);margin:10px 0}
+select,input{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:7px 9px}
+aside select{width:100%;font-size:1.05rem}
+.parent{font-size:.95rem;color:var(--ink);margin:2px 0 0}
+.gam{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0}
+.gam span{border:1.5px solid var(--acc);border-radius:999px;padding:2px 10px;font-weight:700}
+table.pun{border-collapse:separate;border-spacing:4px;margin:6px 0}
+table.pun th{font-weight:700;padding:8px 12px;background:var(--soft);border-radius:8px;min-width:60px}
+table.pun td{padding:8px 10px;border-radius:10px;text-align:center;min-width:92px;border:1.5px solid rgba(0,0,0,.12)}
+table.pun td b{display:block;font-size:1.15rem}
+table.pun td small{display:block;font-size:.78rem;line-height:1.2}
+table.pun th.corner{background:none}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.res h3{margin:0 0 6px;font-size:1.05rem}
+.res ul{margin:0;padding-left:0;list-style:none}.res li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--line)}
+.res i{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px;border:1px solid rgba(0,0,0,.2)}
+.ratio{margin-top:8px;font-weight:700}
+.probs{display:grid;gap:12px;margin-top:14px;counter-reset:z}
+.prob{background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;counter-increment:z}
+.prob .q::before{content:attr(data-n) " " counter(z) ". ";font-weight:700}
+.prob .q{margin:0 0 10px}
+.ans{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ans input[type=text]{width:120px}
+.ans label{display:inline-flex;gap:5px;align-items:center;border:1.5px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
+.fb{font-weight:700}.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.sol{margin-top:10px;padding:12px;border-radius:12px;background:var(--soft);overflow-x:auto}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin-top:16px}
+.bar label{display:flex;flex-direction:column;gap:3px;font-size:.85rem;color:var(--muted)}
+.status{font-size:.88rem;color:var(--muted)}
+.note{font-size:.88rem;color:var(--muted)}
+@media (max-width:880px){.builder{grid-template-columns:1fr}.builder aside{position:static}.res{grid-template-columns:1fr}.hr{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div><h1 id="t1"></h1><p id="t2"></p></div>
+<div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
+<div class="tabs" role="tablist"><button role="tab" data-tab="theory"></button><button role="tab" data-tab="cross"></button><button role="tab" data-tab="probs"></button></div></div></header>
+<main id="app"></main>
+</div>
+<script>
+// ---------- cechy ----------
+const TR={
+ pea_color:{type:'mono',n:['Groch – barwa nasion','Pea – seed colour'],al:['A','a'],ph:{D:['żółte','yellow','#e9c13b'],R:['zielone','green','#6aa84f']},who:['roślina','plant']},
+ pea_shape:{type:'mono',n:['Groch – kształt nasion','Pea – seed shape'],al:['R','r'],ph:{D:['gładkie','round','#c9a77c'],R:['pomarszczone','wrinkled','#8d6e63']},who:['roślina','plant']},
+ albinism:{type:'mono',n:['Człowiek – albinizm (recesywny)','Human – albinism (recessive)'],al:['A','a'],ph:{D:['prawidłowa pigmentacja','normal pigmentation','#c28e6a'],R:['albinizm','albinism','#f1e4d8']},who:['osoba','person']},
+ cf:{type:'mono',n:['Człowiek – mukowiscydoza (recesywna)','Human – cystic fibrosis (recessive)'],al:['F','f'],ph:{D:['zdrowy','unaffected','#5aa469'],R:['mukowiscydoza','cystic fibrosis','#d9534f']},who:['osoba','person']},
+ huntington:{type:'mono',n:['Człowiek – choroba Huntingtona (dominująca)','Human – Huntington’s disease (dominant)'],al:['H','h'],ph:{D:['choroba Huntingtona','Huntington’s disease','#d9534f'],R:['zdrowy','unaffected','#5aa469']},who:['osoba','person']},
+ snapdragon:{type:'incomplete',n:['Lwia paszcza – barwa kwiatów (niepełna dominacja)','Snapdragon – flower colour (incomplete dominance)'],al:['C','c'],ph:{DD:['czerwone','red','#d64545'],Dd:['różowe','pink','#f2a5b8'],dd:['białe','white','#f4f1ec']},who:['roślina','plant']},
+ blood:{type:'blood',n:['Człowiek – grupy krwi AB0 (kodominacja)','Human – ABO blood groups (codominance)'],who:['osoba','person']},
+ colorblind:{type:'x',n:['Człowiek – daltonizm (sprzężony z płcią)','Human – colour blindness (sex-linked)'],al:['D','d'],ph:{D:['prawidłowe widzenie barw','normal colour vision','#5aa469'],R:['daltonizm','colour blindness','#d9534f']},carrier:['nosicielka','carrier']},
+ hemophilia:{type:'x',n:['Człowiek – hemofilia (sprzężona z płcią)','Human – haemophilia (sex-linked)'],al:['H','h'],ph:{D:['prawidłowe krzepnięcie krwi','normal blood clotting','#5aa469'],R:['hemofilia','haemophilia','#d9534f']},carrier:['nosicielka','carrier']},
+ pea_di:{type:'di',n:['Groch – barwa i kształt nasion (dwie cechy)','Pea – seed colour and shape (two traits)'],loci:['pea_color','pea_shape'],who:['roślina','plant']}
+};
+const SUP={A:'ᴬ',B:'ᴮ',D:'ᴰ',d:'ᵈ',H:'ᴴ',h:'ʰ'};
+// genotypy do wyboru
+function genotypes(id,sex){const t=TR[id];
+ if(t.type==='mono'||t.type==='incomplete'){const[D,r]=t.al;return [[D,D],[D,r],[r,r]];}
+ if(t.type==='blood')return [['Iᴬ','Iᴬ'],['Iᴬ','i'],['Iᴮ','Iᴮ'],['Iᴮ','i'],['Iᴬ','Iᴮ'],['i','i']];
+ if(t.type==='x'){const[D,r]=t.al.map(a=>'X'+SUP[a]);return sex==='m'?[[D,'Y'],[r,'Y']]:[[D,D],[D,r],[r,r]];}
+ if(t.type==='di'){const a=TR[t.loci[0]].al,b=TR[t.loci[1]].al,g=[];for(const x of [[a[0],a[0]],[a[0],a[1]],[a[1],a[1]]])for(const y of [[b[0],b[0]],[b[0],b[1]],[b[1],b[1]]])g.push([...x,...y]);return g;}}
+const rank=a=>({'Iᴬ':0,'Iᴮ':1,'i':2,'Y':9}[a]??(a.startsWith('X')?(/[ᴬᴮᴰᴴ]/.test(a)?3:4):(a===a.toUpperCase()?0:1)));
+const sortPair=p=>[...p].sort((x,y)=>rank(x)-rank(y)||(x<y?-1:1));
+const gtxt=g=>g.join('');
+// gamety
+function gametes(id,g){const t=TR[id];if(t.type==='di')return [[g[0],g[2]],[g[0],g[3]],[g[1],g[2]],[g[1],g[3]]];return [[g[0]],[g[1]]];}
+// genotyp potomka
+function child(id,ga,gb){const t=TR[id];if(t.type==='di')return [...sortPair([ga[0],gb[0]]),...sortPair([ga[1],gb[1]])];return sortPair([ga[0],gb[0]]);}
+// fenotyp: {k: klucz, n:[pl,en], c: kolor, sex}
+function pheno(id,g){const t=TR[id];
+ if(t.type==='mono'){const d=g.some(a=>a===t.al[0]);const p=t.ph[d?'D':'R'];return {k:d?'D':'R',n:[p[0],p[1]],c:p[2]};}
+ if(t.type==='incomplete'){const n=g.filter(a=>a===t.al[0]).length;const k=n===2?'DD':n===1?'Dd':'dd';const p=t.ph[k];return {k,n:[p[0],p[1]],c:p[2]};}
+ if(t.type==='blood'){const A=g.includes('Iᴬ'),B=g.includes('Iᴮ');const k=A&&B?'AB':A?'A':B?'B':'0';const c={A:'#e57373',B:'#64b5f6',AB:'#ba68c8','0':'#ffd54f'}[k];return {k,n:['grupa '+k,'group '+(k==='0'?'O':k)],c};}
+ if(t.type==='x'){const male=g.includes('Y');const rec=g.filter(a=>a.startsWith('X')&&!/[ᴬᴮᴰᴴ]/.test(a)).length;const aff=male?rec===1:rec===2;const p=t.ph[aff?'R':'D'];
+  if(!male&&rec===1&&!aff)return {k:'C',n:[p[0]+' ('+t.carrier[0]+')',p[1]+' ('+t.carrier[1]+')'],c:p[2],sex:'f',carrier:1};
+  return {k:aff?'R':'D',n:[p[0],p[1]],c:p[2],sex:male?'m':'f'};}
+ if(t.type==='di'){const a=pheno(t.loci[0],g.slice(0,2)),b=pheno(t.loci[1],g.slice(2));return {k:a.k+b.k,n:[a.n[0]+', '+b.n[0],a.n[1]+', '+b.n[1]],c:a.c,c2:b.c};}}
+// pełna krzyżówka
+function cross(id,ma,fa){const gm=gametes(id,ma),gf=gametes(id,fa);const grid=gm.map(a=>gf.map(b=>{const g=child(id,a,b);return {g,p:pheno(id,g)};}));
+ const all=grid.flat(),n=all.length;const cnt=(f)=>{const m=new Map();all.forEach(c=>{const k=f(c);m.set(k,(m.get(k)||0)+1);});return [...m.entries()];};
+ return {gm,gf,grid,n,geno:cnt(c=>gtxt(c.g)),phen:cnt(c=>c.p.n.join('|')),all};}
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+const ratio=arr=>{const g=arr.reduce((a,b)=>gcd(a,b));return arr.map(x=>x/g).join(' : ');};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let L='pl';try{const s=localStorage.getItem('genLang');if(s==='pl'||s==='en')L=s;}catch(e){}
+const li=()=>L==='pl'?0:1;
+const T={pl:{t1:'Krzyżówki genetyczne',t2:'Szachownica Punnetta, dziedziczenie cech i zadania z rozwiązaniami.',theory:'Podstawy',cross:'Krzyżówka',probs:'Zadania',
+ trait:'Cecha',p1:'Matka',p2:'Ojciec',pl1:'Rodzic 1',pl2:'Rodzic 2',gam:'Gamety',pun:'Szachownica Punnetta',geno:'Genotypy potomstwa',phen:'Fenotypy potomstwa',ratioG:'Stosunek genotypów',ratioP:'Stosunek fenotypów',daughters:'Córki',sons:'Synowie',
+ range:'Rodzaj zadań',all:'wszystkie',rMono:'jedna cecha (proste dominowanie)',rInc:'niepełna dominacja',rBlood:'grupy krwi',rX:'cechy sprzężone z płcią',rDi:'dwie cechy',n:'Liczba zadań',newP:'Nowe zadania',word:'Pobierz plik Word',key:'Klucz w pliku Word',check:'Sprawdź',show:'Pokaż rozwiązanie',ok:'Dobrze!',no:'Spróbuj jeszcze raz.',task:'Zadanie',ansLbl:'Odpowiedź',name:'Imię i nazwisko',docTitle:'Krzyżówki genetyczne',keyTitle:'Klucz odpowiedzi',saved:'Plik zapisany.',prep:'Przygotowuję plik…'},
+ en:{t1:'Genetic crosses',t2:'Punnett squares, patterns of inheritance and practice problems with worked solutions.',theory:'Basics',cross:'Cross builder',probs:'Problems',
+ trait:'Trait',p1:'Mother',p2:'Father',pl1:'Parent 1',pl2:'Parent 2',gam:'Gametes',pun:'Punnett square',geno:'Offspring genotypes',phen:'Offspring phenotypes',ratioG:'Genotype ratio',ratioP:'Phenotype ratio',daughters:'Daughters',sons:'Sons',
+ range:'Problem types',all:'all',rMono:'one trait (complete dominance)',rInc:'incomplete dominance',rBlood:'blood groups',rX:'sex-linked traits',rDi:'two traits',n:'Number of problems',newP:'New problems',word:'Download Word file',key:'Answer key in Word file',check:'Check',show:'Show solution',ok:'Correct!',no:'Try again.',task:'Question',ansLbl:'Answer',name:'Name',docTitle:'Genetic crosses',keyTitle:'Answer key (for the teacher)',saved:'File saved.',prep:'Preparing the file…'}};
+const t=k=>T[L][k];
+const pct=x=>{const v=Math.round(x*10000)/100;return (Number.isInteger(v)?v:v.toString().replace('.',L==='pl'?',':'.'))+'%';};
+const human=id=>TR[id].who&&TR[id].who[0]==='osoba'||TR[id].type==='x'||TR[id].type==='blood';
+const S={tab:'theory',trait:'albinism',ma:1,fa:1,range:'all',nP:5,probs:[]};
+// ---------- TEORIA ----------
+const TERMS=[['Gen','Gene','Fragment DNA, który zawiera informację o jednej cesze, np. o barwie nasion.','A section of DNA that carries information for one trait, e.g. seed colour.'],
+ ['Allel','Allele','Wersja genu. Każdy organizm ma po dwa allele danego genu – jeden od matki, drugi od ojca.','A version of a gene. Each organism has two alleles of a gene – one from the mother, one from the father.'],
+ ['Allel dominujący','Dominant allele','Ujawnia się zawsze, nawet w jednej kopii. Oznaczamy go wielką literą, np. A.','Shows its effect even in a single copy. Written with a capital letter, e.g. A.'],
+ ['Allel recesywny','Recessive allele','Ujawnia się tylko wtedy, gdy organizm ma dwie jego kopie. Oznaczamy go małą literą, np. a.','Only shows its effect when there are two copies. Written with a lowercase letter, e.g. a.'],
+ ['Genotyp','Genotype','Zestaw alleli danego organizmu, np. AA, Aa albo aa.','The combination of alleles an organism has, e.g. AA, Aa or aa.'],
+ ['Fenotyp','Phenotype','Cecha, którą widać lub można zbadać, np. żółte nasiona albo grupa krwi A.','The observable trait, e.g. yellow seeds or blood group A.'],
+ ['Homozygota','Homozygote','Organizm z dwoma takimi samymi allelami: AA (homozygota dominująca) lub aa (recesywna).','An organism with two identical alleles: AA (homozygous dominant) or aa (homozygous recessive).'],
+ ['Heterozygota','Heterozygote','Organizm z dwoma różnymi allelami: Aa.','An organism with two different alleles: Aa.'],
+ ['Gamety','Gametes','Komórki rozrodcze (komórka jajowa, plemnik). Każda zawiera tylko jeden allel danego genu.','Sex cells (egg, sperm). Each carries only one allele of each gene.'],
+ ['Szachownica Punnetta','Punnett square','Tabelka, w której łączymy gamety matki (wiersze) i ojca (kolumny), żeby zobaczyć wszystkie możliwe genotypy potomstwa i ich prawdopodobieństwa.','A grid combining the mother’s gametes (rows) and the father’s (columns) to show all possible offspring genotypes and their probabilities.']];
+const MODES=[['Proste dominowanie','Complete dominance','Allel dominujący całkowicie ukrywa recesywny: AA i Aa wyglądają tak samo.','The dominant allele completely masks the recessive one: AA and Aa look the same.','Aa × Aa → 3 : 1'],
+ ['Niepełna dominacja','Incomplete dominance','Heterozygota ma cechę pośrednią: czerwona × biała lwia paszcza daje kwiaty różowe.','The heterozygote shows an intermediate trait: red × white snapdragons give pink flowers.','Cc × Cc → 1 : 2 : 1'],
+ ['Kodominacja i allele wielokrotne','Codominance and multiple alleles','Grupy krwi: allele Iᴬ i Iᴮ ujawniają się oba (grupa AB), a allel i jest recesywny wobec nich (grupa 0 = ii).','Blood groups: alleles Iᴬ and Iᴮ are both expressed (group AB), while i is recessive to both (group O = ii).','Iᴬi × Iᴮi → A, B, AB, 0'],
+ ['Cechy sprzężone z płcią','Sex-linked traits','Geny leżą na chromosomie X. Kobieta (XX) może być nosicielką, a mężczyzna (XY) ma tylko jeden X – dlatego daltonizm i hemofilia częściej dotykają mężczyzn.','The genes are on the X chromosome. A woman (XX) can be a carrier; a man (XY) has only one X, which is why colour blindness and haemophilia affect men more often.','XᴰXᵈ × XᴰY → 50% synów chorych'],
+ ['Dwie cechy naraz','Two traits at once','Gdy geny leżą na różnych chromosomach, dziedziczą się niezależnie (II prawo Mendla). Każdy rodzic tworzy 4 rodzaje gamet.','Genes on different chromosomes are inherited independently (Mendel’s second law). Each parent makes 4 kinds of gametes.','AaRr × AaRr → 9 : 3 : 3 : 1']];
+function viewTheory(){return `<section class="s"><h2>${L==='pl'?'Najważniejsze pojęcia':'Key terms'}</h2><div class="terms">${TERMS.map(x=>`<div><b>${x[li()]}</b>${esc(x[2+li()])}</div>`).join('')}</div></section>
+ <section class="s"><h2>${L==='pl'?'Jak rozwiązać krzyżówkę – krok po kroku':'Solving a cross – step by step'}</h2><div class="card"><ol style="margin:0;padding-left:22px">${(L==='pl'?['Zapisz genotypy rodziców, np. Aa × aa.','Wypisz gamety każdego rodzica – każda gameta dostaje jeden allel: Aa → A, a.','Narysuj szachownicę: gamety matki w wierszach, ojca w kolumnach.','Wpisz w każde pole połączenie gamet z wiersza i kolumny.','Policz pola: każde pole to 1/4 (25%) przy jednej cesze albo 1/16 przy dwóch.','Odczytaj genotypy i fenotypy potomstwa, a potem zapisz stosunek albo prawdopodobieństwo.']:['Write the parents’ genotypes, e.g. Aa × aa.','List each parent’s gametes – each gamete gets one allele: Aa → A, a.','Draw the grid: mother’s gametes in rows, father’s in columns.','Fill each box with the combination of its row and column gametes.','Count the boxes: each is 1/4 (25%) for one trait or 1/16 for two traits.','Read off offspring genotypes and phenotypes, then write the ratio or probability.']).map(x=>`<li>${x}</li>`).join('')}</ol></div></section>
+ <section class="s"><h2>${L==='pl'?'Sposoby dziedziczenia':'Patterns of inheritance'}</h2><div class="modes">${MODES.map(m=>`<div class="card"><h3>${m[li()]}</h3><p>${esc(m[2+li()])}</p><p class="mono" style="color:var(--acc-t);font-weight:700">${L==='en'?m[4].replace('synów chorych','of sons affected').replace('0','O'):m[4]}</p></div>`).join('')}</div>
+ <p class="note">${L==='pl'?'Prawdopodobieństwo dotyczy każdego dziecka osobno: jeśli wynosi 25%, to nie znaczy, że w rodzinie z czworgiem dzieci dokładnie jedno będzie miało tę cechę.':'Probability applies to each child separately: 25% does not mean that exactly one child in a family of four will have the trait.'}</p></section>`;}
+// ---------- KRZYŻÓWKA ----------
+function phenTxt(id,g){return pheno(id,g).n[li()];}
+function punnettHTML(id,ma,fa){const c=cross(id,ma,fa);const g=x=>esc(x.join(''));
+ return `<table class="pun"><tr><th class="corner">${TR[id].type==='x'||human(id)?'♀ \\ ♂':'1 \\ 2'}</th>${c.gf.map(x=>`<th>${g(x)}</th>`).join('')}</tr>${c.grid.map((row,i)=>`<tr><th>${g(c.gm[i])}</th>${row.map(cell=>`<td style="background:${cell.p.c2?`linear-gradient(135deg,${cell.p.c} 50%,${cell.p.c2} 50%)`:cell.p.c};${cell.p.carrier?'background-image:repeating-linear-gradient(45deg,transparent 0 6px,rgba(0,0,0,.08) 6px 12px)':''}"><b>${esc(cell.g.join(''))}</b><small>${esc(cell.p.n[li()])}</small></td>`).join('')}</tr>`).join('')}</table>`;}
+function resultsHTML(id,ma,fa){const c=cross(id,ma,fa);const n=c.n;
+ const list=(arr,col)=>`<ul>${arr.map(([k,v])=>{const label=k.includes('|')?k.split('|')[li()]:k;const cl=col?c.all.find(x=>x.p.n.join('|')===k).p.c:null;return `<li><span>${cl?`<i style="background:${cl}"></i>`:''}${esc(label)}</span><span>${v}/${n} = ${pct(v/n)}</span></li>`;}).join('')}</ul>`;
+ let h=`<div class="res"><div><h3>${t('geno')}</h3>${list(c.geno)}<p class="ratio">${t('ratioG')}: ${ratio(c.geno.map(x=>x[1]))}</p></div><div><h3>${t('phen')}</h3>${list(c.phen,1)}<p class="ratio">${t('ratioP')}: ${ratio(c.phen.map(x=>x[1]))}</p></div></div>`;
+ if(TR[id].type==='x'){const sub=sex=>{const a=c.all.filter(x=>x.p.sex===sex),m=new Map();a.forEach(x=>m.set(x.p.n[li()],(m.get(x.p.n[li()])||0)+1));return [...m.entries()].map(([k,v])=>`<li><span>${esc(k)}</span><span>${v}/${a.length} = ${pct(v/a.length)}</span></li>`).join('');};
+  h+=`<div class="res"><div><h3>♀ ${t('daughters')}</h3><ul>${sub('f')}</ul></div><div><h3>♂ ${t('sons')}</h3><ul>${sub('m')}</ul></div></div>`;}
+ return h;}
+function viewCross(){const id=S.trait,tr=TR[id],gs1=genotypes(id,'f'),gs2=genotypes(id,'m');S.ma=Math.min(S.ma,gs1.length-1);S.fa=Math.min(S.fa,gs2.length-1);
+ const ma=gs1[S.ma],fa=gs2[S.fa],h=human(id),l1=h?'♀ '+t('p1'):t('pl1'),l2=h?'♂ '+t('p2'):t('pl2');const c=cross(id,ma,fa);
+ return `<div class="builder"><aside><label>${t('trait')}<select id="trait">${Object.keys(TR).map(k=>`<option value="${k}" ${k===id?'selected':''}>${esc(TR[k].n[li()])}</option>`).join('')}</select></label>
+  <label>${l1}<select id="ma">${gs1.map((g,i)=>`<option value="${i}" ${i===S.ma?'selected':''}>${esc(g.join(''))} – ${esc(phenTxt(id,g))}</option>`).join('')}</select></label>
+  <label>${l2}<select id="fa">${gs2.map((g,i)=>`<option value="${i}" ${i===S.fa?'selected':''}>${esc(g.join(''))} – ${esc(phenTxt(id,g))}</option>`).join('')}</select></label>
+  ${tr.al&&tr.type!=='x'?`<p class="note">${tr.al[0]} – ${esc(tr.ph.D?tr.ph.D[li()]:tr.ph.DD[li()])}, ${tr.al[1]} – ${esc(tr.ph.R?tr.ph.R[li()]:tr.ph.dd[li()])}</p>`:''}</aside>
+  <div class="card"><h3 style="margin:0 0 6px">${esc(ma.join(''))} × ${esc(fa.join(''))}</h3>
+   <p class="parent">${t('gam')} ${esc(l1)}:</p><div class="gam">${c.gm.map(x=>`<span>${esc(x.join(''))}</span>`).join('')}</div>
+   <p class="parent">${t('gam')} ${esc(l2)}:</p><div class="gam">${c.gf.map(x=>`<span>${esc(x.join(''))}</span>`).join('')}</div>
+   <h3 style="margin:14px 0 4px">${t('pun')}</h3><div style="overflow-x:auto">${punnettHTML(id,ma,fa)}</div>${resultsHTML(id,ma,fa)}</div></div>`;}
+// ---------- ZADANIA ----------
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function legend(id){const tr=TR[id];if(tr.type==='mono')return `${tr.al[0]} – ${tr.ph.D[li()]}, ${tr.al[1]} – ${tr.ph.R[li()]}`;if(tr.type==='incomplete')return `${tr.al[0]}${tr.al[0]} – ${tr.ph.DD[li()]}, ${tr.al[0]}${tr.al[1]} – ${tr.ph.Dd[li()]}, ${tr.al[1]}${tr.al[1]} – ${tr.ph.dd[li()]}`;
+ if(tr.type==='di'){const a=TR[tr.loci[0]],b=TR[tr.loci[1]];return `${a.al[0]} – ${a.ph.D[li()]}, ${a.al[1]} – ${a.ph.R[li()]}; ${b.al[0]} – ${b.ph.D[li()]}, ${b.al[1]} – ${b.ph.R[li()]}`;}return '';}
+function parentsTxt(id,ma,fa){const g=x=>x.join('');if(human(id))return L==='pl'?`Matka ma genotyp ${g(ma)} (${phenTxt(id,ma)}), a ojciec ${g(fa)} (${phenTxt(id,fa)}).`:`The mother has genotype ${g(ma)} (${phenTxt(id,ma)}) and the father ${g(fa)} (${phenTxt(id,fa)}).`;
+ return L==='pl'?`Skrzyżowano dwie rośliny o genotypach ${g(ma)} i ${g(fa)}.`:`Two plants with genotypes ${g(ma)} and ${g(fa)} were crossed.`;}
+function genProblem(kind,tries=0){const P={};
+ const traitsBy={mono:['pea_color','pea_shape','albinism','cf','huntington'],inc:['snapdragon'],blood:['blood'],x:['colorblind','hemophilia'],di:['pea_di']};
+ let k=kind==='all'?pick(['mono','mono','inc','blood','x','di']):kind;const id=pick(traitsBy[k]);P.id=id;
+ const gs1=genotypes(id,'f'),gs2=genotypes(id,'m');let ma,fa,c;
+ for(let n=0;n<50;n++){ma=pick(gs1);fa=pick(gs2);c=cross(id,ma,fa);if(c.phen.length>1)break;}
+ P.ma=ma;P.fa=fa;P.c=c;
+ const lg=legend(id),lgT=lg?(L==='pl'?` (${lg})`:` (${lg})`):'';
+ if(k==='blood'&&Math.random()<.5){P.kind='multi';const groups=['A','B','AB','0'];const poss=[...new Set(c.all.map(x=>x.p.k))];P.answer=poss;P.options=groups;
+  P.q=(L==='pl'?`${parentsTxt(id,ma,fa)} Jakie grupy krwi może mieć ich dziecko? Zaznacz wszystkie możliwe.`:`${parentsTxt(id,ma,fa)} Which blood groups can their child have? Tick all possible.`);
+  P.solT=(L==='pl'?'Możliwe grupy: ':'Possible groups: ')+poss.map(x=>L==='en'&&x==='0'?'O':x).join(', ');return P;}
+ if(k==='mono'&&Math.random()<.35){const tr=TR[id];const D=tr.al[0],r=tr.al[1];P.kind='choice';P.options=[`${D}${D} × ${D}${D}`,`${D}${r} × ${D}${r}`,`${D}${D} × ${r}${r}`,`${D}${D} × ${D}${r}`];P.answer=P.options[1];P.ma=[D,r];P.fa=[D,r];P.c=cross(id,P.ma,P.fa);
+  P.q=human(id)?(L==='pl'?`Oboje rodzice mają cechę: ${tr.ph.D[0]}, a ich dziecko – ${tr.ph.R[0]}. Jakie genotypy mają rodzice? (${lg})`:`Both parents show: ${tr.ph.D[1]}, but their child has ${tr.ph.R[1]}. What are the parents’ genotypes? (${lg})`)
+   :(L==='pl'?`Dwie rośliny o nasionach ${tr.ph.D[0]} dały potomstwo, wśród którego są też rośliny o nasionach ${tr.ph.R[0]}. Jakie genotypy miały rośliny rodzicielskie? (${lg})`:`Two plants with ${tr.ph.D[1]} seeds produced some offspring with ${tr.ph.R[1]} seeds. What were the parents’ genotypes? (${lg})`);
+  P.solT=(L==='pl'?`Dziecko ${tr.ph.R[0]} musi mieć genotyp ${r}${r}, więc każdy z rodziców przekazał mu allel ${r}. Rodzice mają cechę dominującą, czyli mają też allel ${D}: oboje są heterozygotami ${D}${r}.`:`A child with ${tr.ph.R[1]} must be ${r}${r}, so each parent passed on an ${r}. The parents show the dominant trait, so they also carry ${D}: both are heterozygous ${D}${r}.`);return P;}
+ if((k==='mono'||k==='inc')&&Math.random()<.4){P.kind='ratio';const arr=c.phen.map(x=>x[1]);P.answer=ratio(arr);
+  P.q=`${parentsTxt(id,ma,fa)}${lgT} `+(L==='pl'?'Podaj stosunek fenotypów w potomstwie (np. 3 : 1).':'Give the phenotype ratio of the offspring (e.g. 3 : 1).');
+  P.solT=c.phen.map(([kk,v])=>`${kk.split('|')[li()]}: ${v}`).join(', ')+' → '+P.answer;return P;}
+ // procent
+ P.kind='pct';let pool=c.all,cond='';
+ if(k==='x'){const sex=pick(['m','f','any']);if(sex!=='any'){pool=c.all.filter(x=>x.p.sex===sex);cond=sex;}}
+ const base=x=>{if(TR[id].type==='x'){const ph=TR[id].ph[x.p.k==='R'?'R':'D'];return ph[0]+'|'+ph[1];}return x.p.n.join('|');};
+ const opts=[...new Set(pool.map(base))];const tgt=pick(opts);const v=pool.filter(x=>base(x)===tgt).length;P.answer=Math.round(v/pool.length*10000)/100;
+ const tn=tgt.split('|')[li()];
+ const who=k==='x'?(cond==='m'?(L==='pl'?'ich syn':'their son'):cond==='f'?(L==='pl'?'ich córka':'their daughter'):(L==='pl'?'ich dziecko':'their child')):(human(id)?(L==='pl'?'ich dziecko':'their child'):(L==='pl'?'roślina potomna':'an offspring plant'));
+ P.q=`${parentsTxt(id,ma,fa)}${lgT} `+(L==='pl'?`Jakie jest prawdopodobieństwo, że ${who} będzie mieć cechę: ${tn}? Podaj w procentach.`:`What is the probability that ${who} will have: ${tn}? Give your answer as a percentage.`);
+ if((P.answer>=100||P.answer<=0)&&tries<15)return genProblem(kind,tries+1);
+ P.solT=(L==='pl'?`Pasuje ${v} z ${pool.length} ${cond?'pól z dziećmi tej płci':'pól'} → ${pct(v/pool.length)}.`:`${v} of ${pool.length} ${cond?'boxes for children of that sex':'boxes'} match → ${pct(v/pool.length)}.`);
+ return P;}
+function newProblems(){S.probs=Array.from({length:S.nP},()=>genProblem(S.range));}
+function viewProbs(){if(!S.probs.length)newProblems();
+ return `<div class="bar"><label>${t('range')}<select id="range">${[['all',t('all')],['mono',t('rMono')],['inc',t('rInc')],['blood',t('rBlood')],['x',t('rX')],['di',t('rDi')]].map(([v,n])=>`<option value="${v}" ${v===S.range?'selected':''}>${n}</option>`).join('')}</select></label>
+  <label>${t('n')}<select id="nP">${[3,4,5,6,8,10].map(n=>`<option ${n===S.nP?'selected':''}>${n}</option>`).join('')}</select></label>
+  <button class="btn primary" id="newP">${t('newP')}</button><button class="btn" id="word">${t('word')}</button><label style="flex-direction:row;align-items:center;gap:6px;color:var(--ink)"><input type="checkbox" id="key"> ${t('key')}</label><span class="status" id="status"></span></div>
+  <div class="probs">${S.probs.map((p,i)=>`<div class="prob"><p class="q" data-n="${t('task')}">${esc(p.q)}</p><div class="ans">${
+   p.kind==='pct'?`<input type="text" data-in="${i}" inputmode="decimal"> % <button class="btn" data-ck="${i}">${t('check')}</button>`:
+   p.kind==='ratio'?`<input type="text" data-in="${i}" placeholder="3 : 1"> <button class="btn" data-ck="${i}">${t('check')}</button>`:
+   p.kind==='choice'?p.options.map(o=>`<button class="btn" data-ch="${i}" data-v="${esc(o)}">${esc(o)}</button>`).join(''):
+   p.options.map(o=>`<label><input type="checkbox" data-mu="${i}" value="${o}"> ${L==='en'&&o==='0'?'O':o}</label>`).join('')+` <button class="btn" data-ck="${i}">${t('check')}</button>`
+  } <button class="btn" data-sol="${i}">${t('show')}</button><span class="fb" id="fb${i}"></span></div><div class="sol" id="sol${i}" hidden><p style="margin:0 0 6px"><b>${esc(p.solT)}</b></p>${punnettHTML(p.id,p.ma,p.fa)}</div></div>`).join('')}</div>`;}
+function checkP(i,val){const p=S.probs[i],f=$('#fb'+i);let ok=false;
+ if(p.kind==='pct'){const v=parseFloat(String(val).replace(',','.').replace('%',''));ok=Math.abs(v-p.answer)<0.02;}
+ else if(p.kind==='ratio'){const a=String(val).split(/[:;\/\s]+/).filter(Boolean).map(Number);const b=p.answer.split(' : ').map(Number);const n=x=>{const g=x.reduce((u,w)=>gcd(u,w));return x.map(y=>y/g).sort((u,w)=>u-w).join(',');};ok=a.length===b.length&&a.every(isFinite)&&n(a)===n(b);}
+ else if(p.kind==='choice')ok=val===p.answer;
+ else{const sel=$$(`[data-mu="${i}"]`).filter(x=>x.checked).map(x=>x.value).sort();ok=sel.join()===[...p.answer].sort().join();}
+ f.textContent=ok?t('ok'):t('no');f.className='fb '+(ok?'ok':'no');}
+// ---------- Word ----------
+let DL={save:async({filename,data})=>{const u=URL.createObjectURL(data);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);return{status:'saved'};}};
+if(window.claude&&window.claude.use)window.claude.use('downloads').then(d=>{if(d)DL=d;}).catch(()=>{});
+async function word(){if(!window.docx){$('#status').textContent='docx?';return;}$('#status').textContent=t('prep');
+ try{const D=window.docx,F='Kohinoor Bangla',W=10466;const R=(x,o={})=>new D.TextRun(Object.assign({text:x,font:F,color:'000000',size:22},o));const P=(r,o={})=>new D.Paragraph(Object.assign({children:r},o));
+  const cellB=(txt,w,head)=>new D.TableCell({width:{size:w,type:D.WidthType.DXA},shading:head?{fill:'D9D9D9',type:D.ShadingType.CLEAR,color:'auto'}:undefined,margins:{top:80,bottom:80,left:100,right:100},children:[P([R(txt,{bold:!!head})],{alignment:D.AlignmentType.CENTER})]});
+  const grid=(p,fill)=>{const c=cross(p.id,p.ma,p.fa),n=c.gf.length,w=Math.min(1700,Math.floor(8000/(n+1)));const rows=[new D.TableRow({children:[cellB(fill?(human(p.id)?'♀ \\ ♂':''):'',w,1),...c.gf.map(g=>cellB(fill?g.join(''):'',w,1))]})];
+   c.grid.forEach((row,i)=>rows.push(new D.TableRow({height:{value:fill?400:600,rule:D.HeightRule.ATLEAST},children:[cellB(fill?c.gm[i].join(''):'',w,1),...row.map(x=>cellB(fill?x.g.join(''):'',w))]})));
+   return new D.Table({width:{size:w*(n+1),type:D.WidthType.DXA},columnWidths:Array(n+1).fill(w),rows});};
+  const ch=[P([R(t('docTitle'),{bold:true,size:32})],{alignment:D.AlignmentType.CENTER,spacing:{after:160}}),P([R(t('name')+': ..................................................................')],{spacing:{after:160}})];
+  S.probs.forEach((p,i)=>{ch.push(P([R(`${t('task')} ${i+1}.`,{bold:true,size:24})],{spacing:{before:200,after:60}}));ch.push(P([R(p.q,{italics:true})],{spacing:{after:100}}));ch.push(grid(p,false));
+   ch.push(P([R(t('ansLbl')+': ..................................................................')],{spacing:{before:120,after:80}}));});
+  if($('#key').checked){ch.push(P([R(t('keyTitle'),{bold:true,size:24})],{spacing:{before:360,after:100}}));
+   S.probs.forEach((p,i)=>{ch.push(P([R(`${t('task')} ${i+1}`,{bold:true})],{spacing:{before:120,after:40}}));ch.push(P([R(p.solT)],{spacing:{after:60}}));ch.push(grid(p,true));});}
+  const doc=new D.Document({styles:{default:{document:{run:{font:F,size:22}}}},sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:720,bottom:720,left:720,right:720}}},children:ch}]});
+  await DL.save({filename:t('docTitle')+'.docx',data:await D.Packer.toBlob(doc)});$('#status').textContent=t('saved');}catch(e){console.error(e);$('#status').textContent='Error';}}
+// ---------- render ----------
+function render(){document.documentElement.lang=L;$('#t1').textContent=t('t1');$('#t2').textContent=t('t2');
+ $$('[data-tab]').forEach(b=>{b.textContent=t(b.dataset.tab);b.setAttribute('aria-selected',b.dataset.tab===S.tab);});$$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
+ $('#app').innerHTML=S.tab==='theory'?viewTheory():S.tab==='cross'?viewCross():viewProbs();try{localStorage.setItem('genLang',L);}catch(e){}}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.lang){L=b.dataset.lang;if(S.probs.length)newProblems();render();}
+ else if(b.dataset.tab){S.tab=b.dataset.tab;render();}
+ else if(b.id==='newP'){newProblems();render();}
+ else if(b.id==='word')word();
+ else if(b.dataset.sol!=null){const s=$('#sol'+b.dataset.sol);s.hidden=!s.hidden;}
+ else if(b.dataset.ck!=null){const i=+b.dataset.ck;const inp=$(`[data-in="${i}"]`);checkP(i,inp?inp.value:null);}
+ else if(b.dataset.ch!=null)checkP(+b.dataset.ch,b.dataset.v);});
+document.addEventListener('change',e=>{const id=e.target.id;if(id==='trait'){S.trait=e.target.value;S.ma=1;S.fa=0;render();}else if(id==='ma'){S.ma=+e.target.value;render();}else if(id==='fa'){S.fa=+e.target.value;render();}
+ else if(id==='range'){S.range=e.target.value;newProblems();render();}else if(id==='nP'){S.nP=+e.target.value;newProblems();render();}});
+render();
+
+</script>
+<a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><script>(function(){var a=document.getElementById('home-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+</body>
+</html>

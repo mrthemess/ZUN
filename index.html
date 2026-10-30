@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zakład utylizacji niewiedzy – geografia i biologia</title>
+<meta name="description" content="Interaktywne narzędzia do nauki geografii i biologii oraz sprawdzone linki. Interactive tools for learning geography and biology.">
+<link rel="icon" href="img/geografia.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<script>
+// język wybieramy przed narysowaniem strony, żeby nie mrugała
+(function(){var l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}
+if(l==='en')document.documentElement.lang='en';})();
+</script>
+<style>
+:root{--bg:#f2efe8;--paper:#fdfcf8;--ink:#231f17;--muted:#62594a;--line:#dcd4c3;--soft:#ebe5d6;--acc:#8a5a1f;--acc-t:#8a5a1f;--acc-ink:#fff;--focus:#1f5fa8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15130f;--paper:#1e1b15;--ink:#ece6da;--muted:#a99f8d;--line:#373126;--soft:#26221b;--acc:#c48a45;--acc-t:#e2b27a;--acc-ink:#1a140c;--focus:#86b4ec}}
+:root[data-theme="dark"]{--bg:#15130f;--paper:#1e1b15;--ink:#ece6da;--muted:#a99f8d;--line:#373126;--soft:#26221b;--acc:#c48a45;--acc-t:#e2b27a;--acc-ink:#1a140c;--focus:#86b4ec}
+*,*::before,*::after{box-sizing:border-box}
+html[lang=pl] [data-l=en],html[lang=en] [data-l=pl]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 'Atkinson Hyperlegible',system-ui,sans-serif}
+h1,h2,h3{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;letter-spacing:-.015em;line-height:1.15}
+a{color:var(--acc-t)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.topbar{background:#0f120e;color:#ece6da}
+.topbar .in{max-width:1160px;margin:0 auto;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.topbar b{font:800 1.05rem 'Bricolage Grotesque',sans-serif}
+.langsw{display:flex;border:1.5px solid #4a4436;border-radius:999px;padding:3px;gap:2px}
+.langsw button{font:700 .9rem 'Atkinson Hyperlegible',sans-serif;cursor:pointer;border:0;border-radius:999px;padding:6px 12px;background:transparent;color:#ece6da;display:flex;gap:6px;align-items:center}
+.langsw button{white-space:nowrap}.langsw .ls{display:none}
+.langsw button[aria-pressed=true]{background:#e2b27a;color:#1a140c}
+.hero{background:#0f120e}
+.hero img{display:block;width:100%;max-width:1600px;height:auto;margin:0 auto}
+.wrap{max-width:1160px;margin:0 auto;padding:28px 16px 70px}
+.intro{max-width:80ch;margin:0 auto;font-size:1.05rem}
+.intro p{margin:0}
+.langnote{text-align:center;font-size:.9rem;color:var(--muted);border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);padding:10px;margin:28px 0}
+.subjects{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.subj{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:20px}
+.subj-head{display:flex;gap:16px;align-items:center;margin-bottom:12px}
+.subj-head img{width:84px;height:84px;border-radius:12px;flex:none}
+.subj-head h2{margin:0;font-size:2rem;font-weight:800}
+.subj>p{margin:0 0 8px;font-size:.95rem}
+.tools{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.tools button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;cursor:pointer;font:700 1rem 'Atkinson Hyperlegible',sans-serif;color:var(--ink);background:var(--soft);border:1.5px solid transparent;border-radius:12px;padding:11px 14px}
+.tools button:hover{border-color:var(--acc)}
+.tools button::after{content:"→";color:var(--acc-t)}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.03em;border:1.5px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--muted);margin-left:auto;white-space:nowrap}
+section.more{margin-top:40px}
+section.more>h2{font-size:1.6rem;margin:0 0 14px}
+.links{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.links>div{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px}
+.links h3{margin:0 0 8px;font-size:1.15rem}
+.links ul{margin:0;padding-left:18px}.links li{margin:5px 0}
+footer{margin-top:44px;border-top:2px solid var(--ink);padding-top:18px;font-size:.95rem;max-width:80ch;margin-left:auto;margin-right:auto}
+footer p{margin:0 0 10px}
+.credit{font-size:.85rem;color:var(--muted);text-align:center;margin-top:18px}
+.about-link{text-align:center;margin-top:22px}
+.about-link button{font:inherit;font-size:.82rem;color:var(--muted);background:none;border:0;padding:4px 6px;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.about-link button:hover{color:var(--acc-t);text-decoration-color:currentColor}
+#about .dlg p{line-height:1.6}
+#about .dlg p+p{margin-top:.85em}
+/* okno z opisem narzędzia */
+dialog{border:0;padding:0;border-radius:20px;background:var(--paper);color:var(--ink);width:min(640px,calc(100vw - 32px));max-height:calc(100dvh - 32px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(15,18,14,.6)}
+.dlg{padding:22px 24px 24px;display:flex;flex-direction:column;gap:14px}
+.dlg-top{display:flex;gap:14px;align-items:center}
+.dlg-top img{width:56px;height:56px;border-radius:10px;flex:none}
+.dlg-top small{display:block;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.75rem}
+.dlg h2{margin:2px 0 0;font-size:1.7rem;font-weight:800}
+.dlg p{margin:0}
+.dlg h3{margin:4px 0 -6px;font-size:1rem}
+.dlg ul{margin:0;padding-left:20px}.dlg li{margin:4px 0}
+.badge{align-self:flex-start;background:var(--soft);border-radius:10px;padding:8px 12px;font-size:.9rem}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;margin-top:4px}
+.btn{font:700 1rem 'Atkinson Hyperlegible',sans-serif;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:11px 18px;text-decoration:none}
+.btn:hover{border-color:var(--acc)}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+@media (max-width:760px){.subjects,.links{grid-template-columns:1fr}.topbar b{font-size:.95rem}.langsw .lf{display:none}.langsw .ls{display:inline}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <b><span data-l="pl">Zakład utylizacji niewiedzy</span><span data-l="en">The ignorance disposal facility</span></b>
+  <div class="langsw" role="group" aria-label="Język / Language">
+    <button type="button" data-set="pl" aria-pressed="true">🇵🇱 <span class="lf">Polski</span><span class="ls">PL</span></button>
+    <button type="button" data-set="en" aria-pressed="false">🇬🇧 <span class="lf">English</span><span class="ls">EN</span></button>
+  </div>
+</div></div>
+<header class="hero"><img src="img/baner.jpg" alt="Wykorzystaj internet do czegoś innego niż YouTube / Use the internet for something other than YouTube" width="2048" height="737"></header>
+<main class="wrap">
+  <div class="intro">
+    <p data-l="pl">Nie wiesz, od czego zacząć naukę? A może szukasz czegoś, co wreszcie pomoże Ci ogarnąć poziomice, klimatogramy albo mejozę? Jesteś we właściwym miejscu! Znajdziesz tu interaktywne narzędzia do nauki biologii i geografii oraz przydatne, sprawdzone linki, które pomogą Ci zrozumieć trudniejsze tematy, poćwiczyć przed sprawdzianem i odkryć, że nauka nie musi boleć. No dobra, przynajmniej nie zawsze.</p>
+    <p data-l="en">Not sure where to start studying? Or looking for something that will finally help you make sense of contour lines, climographs or meiosis? You're in the right place! Here you'll find interactive tools for learning biology and geography, along with useful, carefully checked links to help you understand tricky topics, practise for tests and discover that learning doesn't have to hurt. Well, at least not all the time.</p>
+  </div>
+  <p class="langnote">
+    <span data-l="pl">Kliknij narzędzie, żeby zobaczyć jego opis. Wszystkie narzędzia (poza konkursem geograficznym) mają też wersję angielską.</span>
+    <span data-l="en">Click a tool to read what it does. Every tool is available in English, except the Polish geography contest practice.</span>
+  </p>
+
+  <div class="subjects">
+    <section class="subj" id="geografia">
+      <div class="subj-head"><img src="img/geografia.jpg" alt=""><h2><span data-l="pl">Geografia</span><span data-l="en">Geography</span></h2></div>
+      <p data-l="pl">Mapy, państwa, kontynenty i inne rzeczy, które trzeba umieć, żeby nie pomylić Australii z Austrią. Narzędzia, które pomogą ci ogarnąć geografię bez płaczu nad atlasem. Wchodzisz, korzystasz, zdajesz. Taki jest plan.</p>
+      <p data-l="en">Maps, countries, continents, and other things you should probably know before accidentally booking a flight to Austria instead of Australia. Tools to help you get your geography together without crying over an atlas. Click, use, pass. That's the plan.</p>
+      <ul class="tools" data-subject="geo"></ul>
+    </section>
+    <section class="subj" id="biologia">
+      <div class="subj-head"><img src="img/biologia.jpg" alt=""><h2><span data-l="pl">Biologia</span><span data-l="en">Biology</span></h2></div>
+      <p data-l="pl">Życie na Ziemi to nie tylko ludzie, koty i dziwne rzeczy znalezione pod kamieniem. Odkrywaj organizmy, ogarniaj gatunki i poznawaj tajemnice życia bez udawania, że mitochondrium to twój ulubiony organellum. No dobra, może trochę.</p>
+      <p data-l="en">Life on Earth is more than humans, cats, and weird stuff you find under a rock. Explore organisms, identify species, and figure out how life works without pretending mitochondria is your favourite organelle. Okay, maybe just a little.</p>
+      <ul class="tools" data-subject="bio"></ul>
+    </section>
+  </div>
+
+  <section class="more" id="materialy">
+    <h2><span data-l="pl">Materiały dodatkowe</span><span data-l="en">Extra resources</span></h2>
+    <div class="links">
+      <div>
+        <h3><span data-l="pl">Geografia</span><span data-l="en">Geography</span></h3>
+        <ul>
+          <li><a href="https://www.geografia24.eu" target="_blank" rel="noopener"><span data-l="pl">Kompendium wiedzy geograficznej</span><span data-l="en">Geography compendium (PL)</span></a></li>
+          <li><a href="https://zpe.gov.pl/modulowe-podreczniki/LPV6e89ez3" target="_blank" rel="noopener"><span data-l="pl">Podręcznik do geografii – ZPE</span><span data-l="en">Geography textbook – ZPE (PL)</span></a></li>
+          <li><a href="https://mapswire.com" target="_blank" rel="noopener"><span data-l="pl">Darmowe mapy – mapswire</span><span data-l="en">Free maps – mapswire</span></a></li>
+          <li><a href="https://www.geoguessr.com/quiz/seterra" target="_blank" rel="noopener"><span data-l="pl">Quizy geograficzne</span><span data-l="en">Geography quizzes</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h3><span data-l="pl">Biologia</span><span data-l="en">Biology</span></h3>
+        <ul>
+          <li><a href="https://zpe.gov.pl/modulowe-podreczniki/LP39PsV0tl" target="_blank" rel="noopener"><span data-l="pl">Podręcznik do biologii – ZPE</span><span data-l="en">Biology textbook – ZPE (PL)</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p data-l="pl">Korzystajcie, uczcie się, zdajcie te sprawdziany i żyjcie długo i szczęśliwie. Pamiętajcie tylko, kto Wam to wszystko ogarnął. Autor tej strony nie oczekuje wiele. Wystarczy dozgonna wdzięczność, pomnik przed szkołą i ewentualnie Nobel. Kolejność dowolna.</p>
+    <p data-l="en">Use the tools, learn some stuff, pass your tests, and live happily ever after. Just remember who made all this possible. The creator of this website doesn't ask for much. Eternal gratitude, a statue in front of the school, and maybe a Nobel Prize. In any order you like.</p>
+    <p class="credit" data-l="pl">Grafiki i kod? To sprawka Claude’a. Dostał materiały, instrukcje i najwyraźniej za dużo swobody.<br>Ja odpowiadam tylko za wdzięczność. Wszelkie reklamacje proszę kierować bezpośrednio do niego.</p>
+    <p class="credit" data-l="en">Graphics and code? Blame Claude. It got the materials, the instructions and apparently far too much freedom.<br>I'm only responsible for the gratitude. Please send all complaints directly to it.</p>
+    <p class="about-link"><button type="button" data-about><span data-l="pl">O autorze</span><span data-l="en">About the author</span></button></p>
+  </footer>
+</main>
+
+<dialog id="about" aria-labelledby="aboutTitle">
+  <div class="dlg">
+    <div class="dlg-top"><div><small><span data-l="pl">O autorze</span><span data-l="en">About the author</span></small><h2 id="aboutTitle">Bartłomiej Wrona</h2></div></div>
+    <div data-l="pl">
+      <p>Jestem nauczycielem geografii i biologii. Od 2018 roku próbuję przekonać kolejne pokolenia, że geografia to coś więcej niż kolorowanie mapek, a biologia to nie tylko zapamiętywanie nazw organelli komórkowych, których wymowa potrafi być osobnym wyzwaniem.</p>
+      <p>W pewnym momencie uznałem, że skoro i tak wszyscy siedzimy w internecie, to może warto zrobić z tym coś sensownego. Technologia jest świetna, daje nam masę możliwości i naprawdę szkoda wykorzystywać ją wyłącznie do scrollowania rolek, oglądania kotów i sprawdzania, co właśnie zjadł ktoś, kogo nawet nie znamy. Chociaż koty akurat rozumiem.</p>
+      <p>Dlatego stworzyłem to miejsce. Znajdziesz tu autorskie narzędzia, materiały do nauki, ciekawostki i linki do rzeczy, które faktycznie warto odwiedzić. Trochę geografii, trochę biologii, trochę technologii i całkiem sporo pracy, której nikt mi nie kazał wykonywać. XD</p>
+      <p>Rozgość się, korzystaj i pamiętaj: Twój telefon potrafi znacznie więcej niż pokazywać Ci kolejną rolkę z przepisem na makaron, którego i tak nigdy nie ugotujesz.</p>
+    </div>
+    <div data-l="en">
+      <p>I'm a geography and biology teacher. Since 2018, I've been trying to convince my students that geography is about a lot more than colouring maps, and biology isn't just about memorising the names of cell organelles – some of which are hard enough to pronounce, let alone remember.</p>
+      <p>At some point, I figured that if we're all spending half our lives online anyway, we might as well make that time count. Technology is brilliant, and there's so much you can do with it. It seems like a bit of a waste to use all that potential just to scroll through endless reels, watch cat videos and find out what complete strangers had for breakfast. Don't get me wrong, though. I have nothing against cats.</p>
+      <p>So, I built this website. Here you'll find tools I've made myself, study resources, interesting facts and links to websites that are actually worth your time. A little geography, a little biology, a fair bit of technology and a frankly questionable amount of time spent making things nobody explicitly asked for. XD</p>
+      <p>Have a look around, try things out and make yourself at home. And remember: your phone is capable of so much more than showing you a pasta recipe you'll save, forget about and never cook.</p>
+    </div>
+    <div class="actions"><button type="button" class="btn" data-close-about autofocus><span data-l="pl">Zamknij</span><span data-l="en">Close</span></button></div>
+  </div>
+</dialog>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg">
+    <div class="dlg-top"><img id="dlgImg" src="" alt=""><div><small id="dlgSubj"></small><h2 id="dlgTitle"></h2></div></div>
+    <p id="dlgDesc"></p>
+    <h3 id="dlgInside"></h3>
+    <ul id="dlgList"></ul>
+    <div class="badge" id="dlgLang"></div>
+    <div class="actions">
+      <button type="button" class="btn" id="dlgClose"></button>
+      <a class="btn primary" id="dlgGo" href="#" autofocus></a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+// lang: full = przełącznik PL/EN w narzędziu, contest = tylko po polsku (polski konkurs)
+const TOOLS = [
+  {id:'wspolrzedne', s:'geo', file:'geografia/wspolrzedne-geograficzne.html', lang:'full',
+   pl:['Współrzędne geograficzne','Siatka geograficzna krok po kroku: równoleżniki, południki i odczytywanie szerokości oraz długości geograficznej z mapy. Na koniec możesz wygenerować zestaw zadań dla klasy.',
+       ['interaktywna mapa – kliknij punkt i zobacz, jak odczytać jego współrzędne','wyjaśnienie, skąd biorą się stopnie i jak poprawnie zapisać współrzędne','generator zadań z mapą do wydruku lub pobrania']],
+   en:['Geographic coordinates','The geographic grid step by step: parallels, meridians and how to read latitude and longitude from a map. You can also generate a set of exercises for a class.',
+       ['interactive map – click a point and see how to read its coordinates','why coordinates are measured in degrees and how to write them correctly','exercise generator with a map to print or download']]},
+  {id:'skala', s:'geo', file:'geografia/kalkulator-skali-i-czasu.html', lang:'full',
+   pl:['Kalkulator skali i czasu na Ziemi','Przeliczanie odległości na mapie i w terenie, rodzaje skali oraz czas na Ziemi: strefy czasowe i czas słoneczny. W części „Praktyka” rozwiązujesz zadania na różnych poziomach trudności.',
+       ['kalkulatory: odległość w terenie, odległość na mapie, obliczanie skali','skala liczbowa, mianowana i liniowa; która skala jest większa','zegary świata, przeliczanie godzin i czas słoneczny','zadania do ćwiczenia z punktacją']],
+   en:['Map scale and time calculator','Converting distances between the map and the real world, types of scale, and time on Earth: time zones and solar time. The Practice section has exercises at several difficulty levels.',
+       ['calculators: real distance, map distance, working out the scale','numerical, verbal and linear scale; which scale is larger','world clocks, time conversion and solar time','practice exercises with a score']]},
+  {id:'panstwa', s:'geo', file:'geografia/dane-o-panstwach.html', lang:'full',
+   pl:['Dane o państwach','Porównywarka państw świata z aktualnymi danymi z Banku Światowego i Wikidata: ludność, gospodarka, środowisko i poziom życia.',
+       ['porównanie do 5 państw w wybranych cechach','zmiany w czasie, rankingi i mapa świata','wykres zależności między dwiema cechami','quiz sprawdzający wiedzę o państwach']],
+   en:['Country data','A world country comparator with live data from the World Bank and Wikidata: population, economy, environment and living standards.',
+       ['compare up to 5 countries across chosen indicators','change over time, rankings and a world map','scatter chart showing how two indicators are related','a quiz to test what you know']]},
+  {id:'kontury', s:'geo', file:'geografia/generator-map-konturowych.html', lang:'full',
+   pl:['Generator map konturowych','Narzędzie do przygotowania lekcji: tworzy kartę pracy z mapą konturową. Wybierasz obiekty do podpisania lub zaznaczenia, a narzędzie przygotowuje gotową kartę.',
+       ['obiekty z numerami do podpisania i obiekty do samodzielnego zaznaczenia','gotowe zestawy, losowanie obiektów, rzeki i jeziora na mapie','punktacja, klucz odpowiedzi i druga grupa (A i B)','tryb mapy do wyświetlania na lekcji i pobieranie karty']],
+   en:['Outline map generator','A teacher tool that builds a worksheet with an outline map. You choose objects to label or mark, and it prepares the finished worksheet.',
+       ['numbered objects to label and objects for students to mark','ready-made sets, random picks, rivers and lakes on the map','scoring, answer key and a second version (groups A and B)','display mode for the classroom and worksheet download']]},
+  {id:'europa', s:'geo', file:'geografia/europa-polityczna.html', lang:'full',
+   pl:['Europa polityczna','Interaktywna mapa państw Europy. Kliknij państwo, żeby poznać jego podstawowe dane, albo sprawdź, kto należy do NATO, UE, strefy Schengen i strefy euro.',
+       ['mapa z wszystkimi państwami Europy i listą do wyboru','stolica, powierzchnia, ludność, flaga i inne podstawowe dane','mapy członkostwa: NATO, UE, Schengen, strefa euro']],
+   en:['Political map of Europe','An interactive map of European countries. Click a country to see its key facts, or check who belongs to NATO, the EU, Schengen and the euro area.',
+       ['a map of every European country plus a list to choose from','capital, area, population, flag and other key facts','membership maps: NATO, EU, Schengen, euro area']]},
+  {id:'konkurs', s:'geo', file:'geografia/konkurs-geograficzny.html', lang:'contest',
+   pl:['Konkurs geograficzny – ćwiczenia','Losowanie zadań z konkursu geograficznego dla szkół podstawowych województwa mazowieckiego. Wybierz etap, wylosuj zadanie, rozwiąż je i sprawdź odpowiedź w kluczu.',
+       ['etapy: szkolny, rejonowy i wojewódzki','zadania z arkuszy konkursowych 2019–2025 i arkuszy ćwiczeniowych','licznik rozwiązanych zadań i zdobytych punktów']],
+   en:['Geography contest – practice','Random tasks from the Masovian geography contest for primary schools. Pick a stage, draw a task, solve it and check the answer key.',
+       ['school, district and regional stages','tasks from the 2019–2025 contest papers and practice papers','tracks solved tasks and points scored']]},
+  {id:'poziomice', s:'geo', file:'geografia/poziomice.html', lang:'full',
+   pl:['Poziomice – ćwiczenia','Wysokość bezwzględna i względna, poziomice i skala barw na mapie. Najpierw teoria z interaktywnymi przykładami, potem zadania i quiz.',
+       ['przekrój terenu z suwakami: szczyt, dolina, depresja','czym są poziomice i jak czytać mapę hipsometryczną','zadania do rozwiązania i pobrania','quiz: rozpoznaj formę terenu po poziomicach']],
+   en:['Contour lines – practice','Absolute and relative height, contour lines and the colour scale on maps. Theory with interactive examples first, then exercises and a quiz.',
+       ['terrain cross-section with sliders: peak, valley, depression','what contour lines are and how to read a relief map','exercises to solve and download','quiz: recognise the landform from its contour lines']]},
+  {id:'klimat', s:'geo', file:'geografia/klimatogramy.html', lang:'full',
+   pl:['Klimat i klimatogramy','Jak czytać klimatogram, czym różnią się strefy klimatyczne i jak je rozpoznać. Prawdziwe dane ze stacji z całego świata.',
+       ['krok po kroku: temperatura, opady, amplituda, półkula','strefy klimatyczne z przykładowymi stacjami','ćwiczenia: rozpoznaj klimat po klimatogramie']],
+   en:['Climate and climographs','How to read a climograph, how climate zones differ and how to recognise them, using real data from weather stations around the world.',
+       ['step by step: temperature, precipitation, range, hemisphere','climate zones with example stations','practice: identify the climate from a climograph']]},
+  {id:'pogoda', s:'geo', file:'geografia/mapa-pogody.html', lang:'full',
+   pl:['Mapa pogody','Wszystko o prognozie pogody dla Polski: jak czytać mapę, co oznaczają symbole, aktualna prognoza i kreator własnej mapy pogody.',
+       ['przewodnik: wyż i niż, izobary, fronty atmosferyczne, szansa opadu','słowniczek symboli pogodowych','aktualna prognoza dla Polski (dane na żywo)','kreator: narysuj własną mapę pogody i ją pobierz']],
+   en:['Weather map','All about weather forecasts for Poland: how to read the map, what the symbols mean, the current forecast and a creator for your own weather map.',
+       ['guide: highs and lows, isobars, weather fronts, chance of rain','glossary of weather symbols','current forecast for Poland (live data)','creator: draw your own weather map and download it']]},
+  {id:'ruchy', s:'geo', file:'geografia/ruchy-ziemi.html', lang:'full',
+   pl:['Ruchy obrotowy i obiegowy Ziemi','Dzień i noc, pory roku, wysokość Słońca i jego pozorna droga po niebie – z animacjami i obliczeniami dla wybranego miejsca i dnia.',
+       ['ruch obrotowy: dzień i noc, oświetlenie Ziemi','ruch obiegowy i pory roku','wysokość Słońca i długość dnia w wybranym mieście','zadania do ćwiczenia']],
+   en:["Earth's rotation and orbit",'Day and night, the seasons, the height of the Sun and its apparent path across the sky – with animations and calculations for a chosen place and day.',
+       ['rotation: day and night, how Earth is lit','orbit and the seasons','Sun height and day length for a chosen city','practice exercises']]},
+  {id:'uklady', s:'bio', file:'biologia/uklady-narzadow.html', lang:'full',
+   pl:['Układy narządów','Interaktywny atlas ciała człowieka. Wybierz układ, a potem kliknij narząd na schemacie, żeby poznać jego budowę i funkcje.',
+       ['10 układów: od nerwowego po powłokowy','schemat ciała z klikalnymi narządami','poziom podstawowy i zaawansowany']],
+   en:['Organ systems','An interactive atlas of the human body. Choose a system, then click an organ on the diagram to learn about its structure and function.',
+       ['10 systems, from nervous to integumentary','body diagram with clickable organs','basic and advanced level']]},
+  {id:'klucz', s:'bio', file:'biologia/klucz-do-oznaczania.html', lang:'full',
+   pl:['Klucz do oznaczania gatunków','Klucz dwudzielny do oznaczania roślin i zwierząt Polski i Europy Środkowo-Wschodniej, a także roślin ogrodów i domów. Odpowiadasz na kolejne pytania i dochodzisz do gatunku.',
+       ['grupy organizmów do wyboru','pytania krok po kroku z możliwością cofnięcia','opis gatunku z linkiem do Wikipedii','wydruk ścieżki oznaczania']],
+   en:['Species identification key','A dichotomous key for plants and animals of Poland and Central-Eastern Europe, plus garden and house plants. Answer one question at a time until you reach the species.',
+       ['several groups of organisms to choose from','step-by-step questions you can go back on','species info with a Wikipedia link','print your identification path']]},
+  {id:'taksonomia', s:'bio', file:'biologia/taksonomia.html', lang:'full',
+   pl:['Taksonomia','Jak naukowcy porządkują organizmy – od królestwa do gatunku – i jak blisko jesteśmy spokrewnieni z lisem, dębem czy muchomorem.',
+       ['jednostki systematyczne wyjaśnione na przykładach','wyszukiwarka gatunków z pełną klasyfikacją','gra i zagadki: kto jest z kim spokrewniony?']],
+   en:['Taxonomy','How scientists organise living things – from kingdom to species – and how closely we are related to a fox, an oak or a fly agaric.',
+       ['taxonomic ranks explained with examples','species search with full classification','game and puzzles: who is related to whom?']]},
+  {id:'genetyka', s:'bio', file:'biologia/krzyzowki-genetyczne.html', lang:'full',
+   pl:['Krzyżówki genetyczne','Szachownica Punnetta, dziedziczenie cech i zadania z rozwiązaniami krok po kroku.',
+       ['najważniejsze pojęcia: gen, allel, genotyp, fenotyp','kreator krzyżówek z szachownicą Punnetta','zadania z rozwiązaniami, także dziedziczenie sprzężone z płcią i grupy krwi']],
+   en:['Genetic crosses','Punnett squares, patterns of inheritance and practice problems with worked solutions.',
+       ['key terms: gene, allele, genotype, phenotype','cross builder with a Punnett square','problems with solutions, including sex-linked traits and blood groups']]},
+  {id:'lancuchy', s:'bio', file:'biologia/lancuchy-pokarmowe.html', lang:'full',
+   pl:['Łańcuchy i sieci pokarmowe','Producenci, konsumenci, destruenci i to, kto tu właściwie kogo zje – w różnych ekosystemach.',
+       ['teoria: poziomy troficzne i przepływ energii','budowanie łańcuchów i sieci pokarmowych','piramidy ekologiczne','zadania do ćwiczenia']],
+   en:['Food chains and webs','Producers, consumers, decomposers and who actually eats whom – across different ecosystems.',
+       ['theory: trophic levels and energy flow','build food chains and food webs','ecological pyramids','practice exercises']]},
+];
+const UI = {
+  pl:{geo:'Geografia',bio:'Biologia',inside:'Co znajdziesz w środku',go:'Uruchom narzędzie →',close:'Wróć',
+      full:'🇵🇱 🇬🇧 Dostępne po polsku i po angielsku.',contest:'🇵🇱 Tylko po polsku – to zadania z polskiego konkursu.',
+      title:'Zakład utylizacji niewiedzy – geografia i biologia'},
+  en:{geo:'Geography',bio:'Biology',inside:"What's inside",go:'Open the tool →',close:'Back',
+      full:'🇬🇧 Opens in English (Polish also available).',contest:'🇵🇱 Polish only – these are tasks from a Polish-language contest, so there is no English version.',
+      title:'The ignorance disposal facility – geography and biology'},
+};
+const IMG = {geo:'img/geografia.jpg', bio:'img/biologia.jpg'};
+const $ = s => document.querySelector(s);
+let L = document.documentElement.lang === 'en' ? 'en' : 'pl';
+
+function renderLists(){
+  document.querySelectorAll('.tools').forEach(ul => {
+    ul.innerHTML = '';
+    TOOLS.filter(t => t.s === ul.dataset.subject).forEach(t => {
+      const li = document.createElement('li'), b = document.createElement('button');
+      b.type = 'button'; b.dataset.tool = t.id;
+      b.textContent = t[L][0];
+      if (t.lang === 'contest') { const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = L === 'en' ? 'PL only' : 'tylko PL'; b.append(tag); }
+      li.append(b); ul.append(li);
+    });
+  });
+}
+
+function setLang(l){
+  L = l;
+  document.documentElement.lang = l;
+  document.title = UI[l].title;
+  document.querySelectorAll('.langsw button').forEach(b => b.setAttribute('aria-pressed', b.dataset.set === l));
+  try { localStorage.setItem('siteLang', l); } catch(e) {}
+  renderLists();
+}
+
+function openTool(id){
+  const t = TOOLS.find(x => x.id === id); if (!t) return;
+  const [name, desc, items] = t[L], u = UI[L];
+  $('#dlgImg').src = IMG[t.s];
+  $('#dlgSubj').textContent = u[t.s];
+  $('#dlgTitle').textContent = name;
+  $('#dlgDesc').textContent = desc;
+  $('#dlgInside').textContent = u.inside;
+  $('#dlgList').replaceChildren(...items.map(x => { const li = document.createElement('li'); li.textContent = x; return li; }));
+  $('#dlgLang').textContent = u[t.lang];
+  $('#dlgClose').textContent = u.close;
+  $('#dlgGo').textContent = u.go;
+  $('#dlgGo').href = t.file + '?lang=' + L;
+  history.replaceState(null, '', '#' + id);
+  $('#dlg').showModal();
+}
+
+document.addEventListener('click', e => {
+  const sw = e.target.closest('[data-set]'); if (sw) return setLang(sw.dataset.set);
+  const tb = e.target.closest('[data-tool]'); if (tb) return openTool(tb.dataset.tool);
+  if (e.target.closest('[data-about]')) { history.replaceState(null, '', '#o-autorze'); return $('#about').showModal(); }
+  if (e.target.closest('[data-close-about]')) return $('#about').close();
+});
+$('#about').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+$('#about').addEventListener('close', () => history.replaceState(null, '', location.pathname + location.search));
+$('#dlgClose').onclick = () => $('#dlg').close();
+$('#dlg').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+$('#dlg').addEventListener('close', () => history.replaceState(null, '', location.pathname + location.search));
+
+setLang(L);
+if (location.hash === '#o-autorze') $('#about').showModal();
+else if (location.hash) openTool(location.hash.slice(1));
+</script>
+</body>
+</html>
