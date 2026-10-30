@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://narzedzia.netlify.app/sitemap.xml
