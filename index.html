@@ -6,6 +6,19 @@
 <title>Zakład utylizacji niewiedzy – geografia i biologia</title>
 <meta name="description" content="Interaktywne narzędzia do nauki geografii i biologii oraz sprawdzone linki. Interactive tools for learning geography and biology.">
 <link rel="icon" href="img/geografia.jpg">
+<!-- podgląd linku (Messenger, Teams, WhatsApp, Librus…) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zakład utylizacji niewiedzy">
+<meta property="og:title" content="Zakład utylizacji niewiedzy – geografia i biologia">
+<meta property="og:description" content="Interaktywne narzędzia do nauki geografii i biologii: mapy, klimatogramy, poziomice, genetyka, klucz do oznaczania gatunków i więcej. Także po angielsku.">
+<meta property="og:url" content="https://narzedzia.netlify.app/">
+<meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wykorzystaj internet do czegoś innego niż YouTube">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
 <script>
@@ -61,6 +74,25 @@ footer p{margin:0 0 10px}
 .about-link button:hover{color:var(--acc-t);text-decoration-color:currentColor}
 #about .dlg p{line-height:1.6}
 #about .dlg p+p{margin-top:.85em}
+/* zgłoszenia */
+.report-cta{text-align:center;margin:26px 0 8px}
+.dlg-report{margin-right:auto;font:inherit;font-size:.88rem;color:var(--muted);background:none;border:0;padding:4px 0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.dlg-report:hover{color:var(--acc-t)}
+form.dlg fieldset{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+form.dlg legend{font-weight:700;padding:0;margin-bottom:8px;font-size:.95rem}
+.rep-kind label{display:flex;gap:6px;align-items:center;background:var(--soft);border:1.5px solid transparent;border-radius:999px;padding:7px 13px;cursor:pointer;font-size:.95rem}
+.rep-kind label:has(input:checked){border-color:var(--acc)}
+.rep-kind input{accent-color:var(--acc);margin:0}
+.fld{display:flex;flex-direction:column;gap:5px;font-weight:700;font-size:.95rem}
+.fld small{font-weight:400;color:var(--muted)}
+.fld select,.fld textarea,.fld input{font:400 1rem 'Atkinson Hyperlegible',system-ui,sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;width:100%}
+.fld textarea{resize:vertical;min-height:110px}
+.dlg .note{font-size:.85rem;color:var(--muted)}
+.rep-msg{border-radius:10px;padding:10px 12px;background:var(--soft);font-weight:700}
+.rep-msg:empty{display:none}
+.rep-msg.ok{border-left:4px solid #2e7d4f}
+.rep-msg.err{border-left:4px solid #b4432a}
+.btn:disabled{opacity:.55;cursor:wait}
 /* okno z opisem narzędzia */
 dialog{border:0;padding:0;border-radius:20px;background:var(--paper);color:var(--ink);width:min(640px,calc(100vw - 32px));max-height:calc(100dvh - 32px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
 dialog::backdrop{background:rgba(15,18,14,.6)}
@@ -138,6 +170,7 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
   <footer>
     <p data-l="pl">Korzystajcie, uczcie się, zdajcie te sprawdziany i żyjcie długo i szczęśliwie. Pamiętajcie tylko, kto Wam to wszystko ogarnął. Autor tej strony nie oczekuje wiele. Wystarczy dozgonna wdzięczność, pomnik przed szkołą i ewentualnie Nobel. Kolejność dowolna.</p>
     <p data-l="en">Use the tools, learn some stuff, pass your tests, and live happily ever after. Just remember who made all this possible. The creator of this website doesn't ask for much. Eternal gratitude, a statue in front of the school, and maybe a Nobel Prize. In any order you like.</p>
+    <p class="report-cta"><button type="button" class="btn" data-report>🐞 <span data-l="pl">Zgłoś błąd albo pomysł</span><span data-l="en">Report a bug or share an idea</span></button></p>
     <p class="credit" data-l="pl">Grafiki i kod? To sprawka Claude’a. Dostał materiały, instrukcje i najwyraźniej za dużo swobody.<br>Ja odpowiadam tylko za wdzięczność. Wszelkie reklamacje proszę kierować bezpośrednio do niego.</p>
     <p class="credit" data-l="en">Graphics and code? Blame Claude. It got the materials, the instructions and apparently far too much freedom.<br>I'm only responsible for the gratitude. Please send all complaints directly to it.</p>
     <p class="about-link"><button type="button" data-about><span data-l="pl">O autorze</span><span data-l="en">About the author</span></button></p>
@@ -163,6 +196,35 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
   </div>
 </dialog>
 
+<!-- Zgłoszenia zbiera Netlify Forms (data-netlify); bot-field to pułapka na spamboty -->
+<dialog id="report" aria-labelledby="repTitle">
+  <form class="dlg" id="repForm" name="zgloszenie" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="zgloszenie">
+    <input type="hidden" name="jezyk" id="repLang" value="pl">
+    <p hidden><label>Nie wypełniaj tego pola: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+    <div class="dlg-top"><div><small><span data-l="pl">Pomóż ulepszyć stronę</span><span data-l="en">Help improve the site</span></small><h2 id="repTitle"><span data-l="pl">Zgłoś błąd albo pomysł</span><span data-l="en">Report a bug or share an idea</span></h2></div></div>
+    <p><span data-l="pl">Coś nie działa, w zadaniu jest błąd albo brakuje Ci jakiegoś narzędzia? Napisz – zgłoszenie trafi prosto do autora.</span><span data-l="en">Something not working, a mistake in a task, or a tool you'd like to see? Let me know – your message goes straight to the author.</span></p>
+    <fieldset class="rep-kind">
+      <legend><span data-l="pl">Czego dotyczy zgłoszenie?</span><span data-l="en">What is it about?</span></legend>
+      <label><input type="radio" name="rodzaj" value="błąd" checked> 🐞 <span data-l="pl">Coś nie działa</span><span data-l="en">Something's broken</span></label>
+      <label><input type="radio" name="rodzaj" value="pomysł"> 💡 <span data-l="pl">Mam pomysł</span><span data-l="en">I have an idea</span></label>
+      <label><input type="radio" name="rodzaj" value="inne"> 💬 <span data-l="pl">Inne</span><span data-l="en">Other</span></label>
+    </fieldset>
+    <label class="fld"><span><span data-l="pl">Którego narzędzia dotyczy?</span><span data-l="en">Which tool?</span></span>
+      <select name="narzedzie" id="repTool"></select></label>
+    <label class="fld"><span><span data-l="pl">Opis</span><span data-l="en">Description</span></span>
+      <textarea name="opis" id="repText" rows="5" maxlength="3000" required></textarea></label>
+    <label class="fld"><span><span data-l="pl">E-mail do odpowiedzi</span><span data-l="en">Email for a reply</span> <small><span data-l="pl">(nieobowiązkowy)</span><span data-l="en">(optional)</span></small></span>
+      <input type="email" name="email" autocomplete="email" maxlength="200"></label>
+    <p class="note"><span data-l="pl">Podaj e-mail tylko wtedy, gdy chcesz dostać odpowiedź. Nie wpisuj w opisie innych danych osobowych.</span><span data-l="en">Only add your email if you'd like a reply. Please don't include any other personal details in the description.</span></p>
+    <p class="rep-msg" id="repMsg" role="status" aria-live="polite"></p>
+    <div class="actions">
+      <button type="button" class="btn" data-close-report><span data-l="pl">Zamknij</span><span data-l="en">Close</span></button>
+      <button type="submit" class="btn primary" id="repSend"><span data-l="pl">Wyślij zgłoszenie</span><span data-l="en">Send</span></button>
+    </div>
+  </form>
+</dialog>
+
 <dialog id="dlg" aria-labelledby="dlgTitle">
   <div class="dlg">
     <div class="dlg-top"><img id="dlgImg" src="" alt=""><div><small id="dlgSubj"></small><h2 id="dlgTitle"></h2></div></div>
@@ -171,6 +233,7 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
     <ul id="dlgList"></ul>
     <div class="badge" id="dlgLang"></div>
     <div class="actions">
+      <button type="button" class="dlg-report" id="dlgReport"></button>
       <button type="button" class="btn" id="dlgClose"></button>
       <a class="btn primary" id="dlgGo" href="#" autofocus></a>
     </div>
@@ -258,9 +321,15 @@ const TOOLS = [
 ];
 const UI = {
   pl:{geo:'Geografia',bio:'Biologia',inside:'Co znajdziesz w środku',go:'Uruchom narzędzie →',close:'Wróć',
+      report:'Coś nie działa? Zgłoś',general:'Ogólnie / strona główna',
+      repPh:'Co się stało albo co warto dodać? Jeśli to błąd: co klikasz i co się wtedy dzieje.',
+      sending:'Wysyłam…',thanks:'Dzięki! Zgłoszenie dotarło do autora.',fail:'Nie udało się wysłać. Sprawdź internet i spróbuj ponownie za chwilę.',
       full:'🇵🇱 🇬🇧 Dostępne po polsku i po angielsku.',contest:'🇵🇱 Tylko po polsku – to zadania z polskiego konkursu.',
       title:'Zakład utylizacji niewiedzy – geografia i biologia'},
   en:{geo:'Geography',bio:'Biology',inside:"What's inside",go:'Open the tool →',close:'Back',
+      report:'Something wrong? Report it',general:'General / home page',
+      repPh:"What happened, or what would be worth adding? If it's a bug: what do you click and what happens then.",
+      sending:'Sending…',thanks:'Thanks! Your message has reached the author.',fail:"Couldn't send it. Check your internet connection and try again in a moment.",
       full:'🇬🇧 Opens in English (Polish also available).',contest:'🇵🇱 Polish only – these are tasks from a Polish-language contest, so there is no English version.',
       title:'The ignorance disposal facility – geography and biology'},
 };
@@ -288,7 +357,44 @@ function setLang(l){
   document.querySelectorAll('.langsw button').forEach(b => b.setAttribute('aria-pressed', b.dataset.set === l));
   try { localStorage.setItem('siteLang', l); } catch(e) {}
   renderLists();
+  renderReportTools();
+  $('#repText').placeholder = UI[l].repPh;
+  $('#repLang').value = l;
 }
+
+// Lista narzędzi w formularzu: wartość zawsze po polsku (dla autora), napis w bieżącym języku.
+function renderReportTools(){
+  const sel = $('#repTool'), keep = sel.value;
+  const opt = (v, txt) => { const o = document.createElement('option'); o.value = v; o.textContent = txt; return o; };
+  sel.replaceChildren(opt('ogólnie', UI[L].general), ...TOOLS.map(t => opt(t.pl[0], t[L][0])));
+  if (keep) sel.value = keep;
+}
+
+function openReport(toolId){
+  const t = TOOLS.find(x => x.id === toolId);
+  $('#repTool').value = t ? t.pl[0] : 'ogólnie';
+  const m = $('#repMsg'); m.textContent = ''; m.className = 'rep-msg';
+  if ($('#dlg').open) $('#dlg').close();
+  history.replaceState(null, '', '#zglos');
+  $('#report').showModal();
+  $('#repText').focus();
+}
+
+$('#repForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const f = e.currentTarget, m = $('#repMsg'), send = $('#repSend');
+  send.disabled = true; m.className = 'rep-msg'; m.textContent = UI[L].sending;
+  try {
+    const r = await fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+                               body:new URLSearchParams(new FormData(f)).toString()});
+    if (!r.ok) throw new Error(r.status);
+    f.reset(); $('#repLang').value = L;
+    m.className = 'rep-msg ok'; m.textContent = UI[L].thanks;
+  } catch(err) {
+    m.className = 'rep-msg err'; m.textContent = UI[L].fail;
+  }
+  send.disabled = false;
+});
 
 function openTool(id){
   const t = TOOLS.find(x => x.id === id); if (!t) return;
@@ -301,6 +407,8 @@ function openTool(id){
   $('#dlgList').replaceChildren(...items.map(x => { const li = document.createElement('li'); li.textContent = x; return li; }));
   $('#dlgLang').textContent = u[t.lang];
   $('#dlgClose').textContent = u.close;
+  $('#dlgReport').textContent = u.report;
+  $('#dlgReport').dataset.reportTool = id;
   $('#dlgGo').textContent = u.go;
   $('#dlgGo').href = t.file + '?lang=' + L;
   history.replaceState(null, '', '#' + id);
@@ -312,7 +420,11 @@ document.addEventListener('click', e => {
   const tb = e.target.closest('[data-tool]'); if (tb) return openTool(tb.dataset.tool);
   if (e.target.closest('[data-about]')) { history.replaceState(null, '', '#o-autorze'); return $('#about').showModal(); }
   if (e.target.closest('[data-close-about]')) return $('#about').close();
+  const rb = e.target.closest('[data-report],[data-report-tool]'); if (rb) return openReport(rb.dataset.reportTool);
+  if (e.target.closest('[data-close-report]')) return $('#report').close();
 });
+$('#report').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+$('#report').addEventListener('close', () => history.replaceState(null, '', location.pathname));
 $('#about').addEventListener('click', e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
 $('#about').addEventListener('close', () => history.replaceState(null, '', location.pathname + location.search));
 $('#dlgClose').onclick = () => $('#dlg').close();
@@ -320,7 +432,11 @@ $('#dlg').addEventListener('click', e => { if (e.target === e.currentTarget) e.c
 $('#dlg').addEventListener('close', () => history.replaceState(null, '', location.pathname + location.search));
 
 setLang(L);
-if (location.hash === '#o-autorze') $('#about').showModal();
+// ?zglos=geografia/poziomice – link „Zgłoś błąd” z wnętrza narzędzia
+const fromTool = new URLSearchParams(location.search).get('zglos');
+if (fromTool !== null) openReport((TOOLS.find(t => t.file === fromTool + '.html') || {}).id);
+else if (location.hash === '#zglos') openReport();
+else if (location.hash === '#o-autorze') $('#about').showModal();
 else if (location.hash) openTool(location.hash.slice(1));
 </script>
 </body>
