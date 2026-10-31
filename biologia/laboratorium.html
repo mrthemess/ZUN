@@ -4,6 +4,7 @@
 <!--og--><meta property="og:type" content="website"><meta property="og:site_name" content="Zakład utylizacji niewiedzy"><meta property="og:title" content="Wirtualne laboratorium"><meta property="og:url" content="https://narzedzia.netlify.app/biologia/laboratorium.html"><meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><!--og-->
 <!--seo--><meta name="description" content="Wirtualne laboratorium: doświadczenia z fotosyntezą, enzymami, oddychaniem i fermentacją, krok po kroku według metody naukowej, plus teoria i karta pracy."><meta property="og:description" content="Wirtualne laboratorium: doświadczenia z fotosyntezą, enzymami, oddychaniem i fermentacją, krok po kroku według metody naukowej, plus teoria i karta pracy."><link rel="canonical" href="https://narzedzia.netlify.app/biologia/laboratorium.html"><!--seo-->
 <!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('labLang',l)}catch(e){}})();</script><!--site-lang-->
+<!--tryb--><script>var GEN=new URLSearchParams(location.search).get('tryb')==='generator';document.documentElement.dataset.tryb=GEN?'generator':'lekcja';</script><!--tryb-->
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -143,6 +144,7 @@ table.atoms input.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}table
 @media (max-width:560px){dl.frame{grid-template-columns:1fr}dl.frame dt{border-bottom:0;padding-bottom:0}}
 @media (max-width:480px){.seg button{padding:6px 9px;font-size:.86rem}.card{padding:14px 14px}.sheet{padding:14px 12px}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+html[data-tryb=generator] #tabs{display:none!important}
 </style>
 </head>
 <body>
@@ -175,6 +177,8 @@ const subH=s=>esc(s).replace(/[₀-₉]+/g,m=>'<sub>'+[...m].map(c=>SUBS.indexOf
 const UI={
  t1:['Wirtualne laboratorium','Virtual laboratory'],
  t2:['Doświadczenia i teoria: fotosynteza, oddychanie, fermentacja i enzymy.','Experiments and theory: photosynthesis, respiration, fermentation and enzymes.'],
+ gt1:['Generator kart pracy: wirtualne laboratorium','Worksheet generator: virtual laboratory'],
+ gt2:['Karty pracy do pobrania w Wordzie, z kluczem odpowiedzi na osobnej stronie.','Downloadable Word worksheets with the answer key on a separate page.'],
  tabs:{exp:['Doświadczenia','Experiments'],err:['Znajdź błąd','Spot the flaw'],theory:['Teoria','Theory'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
 };
 // ---------- modele ----------
@@ -344,7 +348,7 @@ const EXORD=['photo','cat','amy','seeds','yeast'];
 const MAT={potato:['surowy ziemniak','raw potato'],yeast:['drożdże','yeast']},MATB={potato:['ziemniak ugotowany','boiled potato'],yeast:['drożdże zagotowane','boiled yeast']};
 
 // ---------- stan ----------
-const S={tab:'exp',lvl:'B',ex:'photo',inv:{photo:'light',cat:'temp',amy:'temp',seeds:'state',yeast:'temp'},mat:'potato',x:{},data:{},run:null,last:null,pngSt:'',
+const S={tab:GEN?'sheet':'exp',lvl:'B',ex:'photo',inv:{photo:'light',cat:'temp',amy:'temp',seeds:'state',yeast:'temp'},mat:'potato',x:{},data:{},run:null,last:null,pngSt:'',
  err:{ord:null,i:0,pick:null,opts:null,ok:0,all:0},atom:{eq:'photo',v:{},res:{},show:{}},lf:{fam:'co2',I:40},q:null,qSeen:[],ok:0,all:0,
  ws:{inv:'photo.light',proto:true,data:'sample',eq:true,cmp:true,org:true,err:true,key:true,seed:1+Math.floor(Math.random()*99999)},wsSt:'',cyPng:''};
 const up=s=>s.charAt(0).toUpperCase()+s.slice(1);
@@ -990,10 +994,10 @@ function focusKey(el){if(!el||el===document.body)return null;if(el.id)return '#'
 function render(keep=true){
   const fk=keep?focusKey(document.activeElement):null;
   const sl=$$('#app .tablewrap').map(e=>e.scrollLeft);
-  document.documentElement.lang=L;document.title=T(UI.t1);
-  $('#t1').textContent=T(UI.t1);$('#t2').textContent=T(UI.t2);
+  document.documentElement.lang=L;document.title=T(GEN?UI.gt1:UI.t1);
+  $('#t1').textContent=T(GEN?UI.gt1:UI.t1);$('#t2').textContent=T(GEN?UI.gt2:UI.t2);
   $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
-  $('#tabs').innerHTML=Object.entries(UI.tabs).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
+  $('#tabs').innerHTML=Object.entries(UI.tabs).filter(([k])=>GEN===(k==='sheet')).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
   $('#app').innerHTML={exp:viewExp,err:viewErr,theory:viewTheory,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
   $$('#app .tablewrap').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
   if(fk){const el=$(fk);if(el&&el!==document.activeElement&&!el.disabled)try{el.focus({preventScroll:true});}catch(_){}}

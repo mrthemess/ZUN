@@ -5,6 +5,7 @@
 <!--seo--><meta name="description" content="Szachownica Punnetta, dziedziczenie cech i zadania z rozwiązaniami krok po kroku."><meta property="og:description" content="Szachownica Punnetta, dziedziczenie cech i zadania z rozwiązaniami krok po kroku."><link rel="canonical" href="https://narzedzia.netlify.app/biologia/krzyzowki-genetyczne.html"><!--seo-->
 
 <!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('genLang',l)}catch(e){}})();</script><!--site-lang-->
+<!--tryb--><script>var GEN=new URLSearchParams(location.search).get('tryb')==='generator';document.documentElement.dataset.tryb=GEN?'generator':'lekcja';</script><!--tryb-->
 
 
 
@@ -77,6 +78,8 @@ table.pun th.corner{background:none}
 .status{font-size:.88rem;color:var(--muted)}
 .note{font-size:.88rem;color:var(--muted)}
 @media (max-width:880px){.builder{grid-template-columns:1fr}.builder aside{position:static}.res{grid-template-columns:1fr}.hr{align-items:flex-start}}
+/* tryb lekcyjny: zadania do rozwiązania na ekranie; plik Word i klucz tylko w trybie generatora (?tryb=generator) */
+html[data-tryb=generator] .tabs,html[data-tryb=lekcja] #word,html[data-tryb=lekcja] label:has(#key){display:none!important}
 </style>
 </head>
 <body>
@@ -133,16 +136,16 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let L='pl';try{const s=localStorage.getItem('genLang');if(s==='pl'||s==='en')L=s;}catch(e){}
 const li=()=>L==='pl'?0:1;
-const T={pl:{t1:'Krzyżówki genetyczne',t2:'Szachownica Punnetta, dziedziczenie cech i zadania z rozwiązaniami.',theory:'Podstawy',cross:'Krzyżówka',probs:'Zadania',
+const T={pl:{t1:'Krzyżówki genetyczne',gt1:'Generator zadań: krzyżówki genetyczne',gt2:'Zadania z genetyki do pobrania w Wordzie, z kluczem odpowiedzi.',t2:'Szachownica Punnetta, dziedziczenie cech i zadania z rozwiązaniami.',theory:'Podstawy',cross:'Krzyżówka',probs:'Zadania',
  trait:'Cecha',p1:'Matka',p2:'Ojciec',pl1:'Rodzic 1',pl2:'Rodzic 2',gam:'Gamety',pun:'Szachownica Punnetta',geno:'Genotypy potomstwa',phen:'Fenotypy potomstwa',ratioG:'Stosunek genotypów',ratioP:'Stosunek fenotypów',daughters:'Córki',sons:'Synowie',
  range:'Rodzaj zadań',all:'wszystkie',rMono:'jedna cecha (proste dominowanie)',rInc:'niepełna dominacja',rBlood:'grupy krwi',rX:'cechy sprzężone z płcią',rDi:'dwie cechy',n:'Liczba zadań',newP:'Nowe zadania',word:'Pobierz plik Word',key:'Klucz w pliku Word',check:'Sprawdź',show:'Pokaż rozwiązanie',ok:'Dobrze!',no:'Spróbuj jeszcze raz.',task:'Zadanie',ansLbl:'Odpowiedź',name:'Imię i nazwisko',docTitle:'Krzyżówki genetyczne',keyTitle:'Klucz odpowiedzi',saved:'Plik zapisany.',prep:'Przygotowuję plik…'},
- en:{t1:'Genetic crosses',t2:'Punnett squares, patterns of inheritance and practice problems with worked solutions.',theory:'Basics',cross:'Cross builder',probs:'Problems',
+ en:{t1:'Genetic crosses',gt1:'Problem generator: genetic crosses',gt2:'Genetics problems to download as a Word file, with an answer key.',t2:'Punnett squares, patterns of inheritance and practice problems with worked solutions.',theory:'Basics',cross:'Cross builder',probs:'Problems',
  trait:'Trait',p1:'Mother',p2:'Father',pl1:'Parent 1',pl2:'Parent 2',gam:'Gametes',pun:'Punnett square',geno:'Offspring genotypes',phen:'Offspring phenotypes',ratioG:'Genotype ratio',ratioP:'Phenotype ratio',daughters:'Daughters',sons:'Sons',
  range:'Problem types',all:'all',rMono:'one trait (complete dominance)',rInc:'incomplete dominance',rBlood:'blood groups',rX:'sex-linked traits',rDi:'two traits',n:'Number of problems',newP:'New problems',word:'Download Word file',key:'Answer key in Word file',check:'Check',show:'Show solution',ok:'Correct!',no:'Try again.',task:'Question',ansLbl:'Answer',name:'Name',docTitle:'Genetic crosses',keyTitle:'Answer key (for the teacher)',saved:'File saved.',prep:'Preparing the file…'}};
 const t=k=>T[L][k];
 const pct=x=>{const v=Math.round(x*10000)/100;return (Number.isInteger(v)?v:v.toString().replace('.',L==='pl'?',':'.'))+'%';};
 const human=id=>TR[id].who&&TR[id].who[0]==='osoba'||TR[id].type==='x'||TR[id].type==='blood';
-const S={tab:'theory',trait:'albinism',ma:1,fa:1,range:'all',nP:5,probs:[]};
+const S={tab:GEN?'probs':'theory',trait:'albinism',ma:1,fa:1,range:'all',nP:5,probs:[]};
 // ---------- TEORIA ----------
 const TERMS=[['Gen','Gene','Fragment DNA, który zawiera informację o jednej cesze, np. o barwie nasion.','A section of DNA that carries information for one trait, e.g. seed colour.'],
  ['Allel','Allele','Wersja genu. Każdy organizm ma po dwa allele danego genu – jeden od matki, drugi od ojca.','A version of a gene. Each organism has two alleles of a gene – one from the mother, one from the father.'],
@@ -251,7 +254,7 @@ async function word(){if(!window.docx){$('#status').textContent='docx?';return;}
   const doc=new D.Document({styles:{default:{document:{run:{font:F,size:22}}}},sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:720,bottom:720,left:720,right:720}}},children:ch}]});
   await DL.save({filename:t('docTitle')+'.docx',data:await D.Packer.toBlob(doc)});$('#status').textContent=t('saved');}catch(e){console.error(e);$('#status').textContent='Error';}}
 // ---------- render ----------
-function render(){document.documentElement.lang=L;$('#t1').textContent=t('t1');$('#t2').textContent=t('t2');
+function render(){document.documentElement.lang=L;$('#t1').textContent=t(GEN?'gt1':'t1');$('#t2').textContent=t(GEN?'gt2':'t2');if(GEN)document.title=t('gt1');
  $$('[data-tab]').forEach(b=>{b.textContent=t(b.dataset.tab);b.setAttribute('aria-selected',b.dataset.tab===S.tab);});$$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
  $('#app').innerHTML=S.tab==='theory'?viewTheory():S.tab==='cross'?viewCross():viewProbs();try{localStorage.setItem('genLang',L);}catch(e){}}
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;

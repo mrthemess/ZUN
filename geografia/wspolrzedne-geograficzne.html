@@ -5,6 +5,7 @@
 <!--seo--><meta name="description" content="Siatka geograficzna krok po kroku: równoleżniki, południki i odczytywanie szerokości oraz długości geograficznej z mapy. Na koniec możesz wygenerować zestaw zadań dla klasy."><meta property="og:description" content="Siatka geograficzna krok po kroku: równoleżniki, południki i odczytywanie szerokości oraz długości geograficznej z mapy. Na koniec możesz wygenerować zestaw zadań dla klasy."><link rel="canonical" href="https://narzedzia.netlify.app/geografia/wspolrzedne-geograficzne.html"><!--seo-->
 
 <!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('wspLang',l)}catch(e){}})();</script><!--site-lang-->
+<!--tryb--><script>var GEN=new URLSearchParams(location.search).get('tryb')==='generator';document.documentElement.dataset.tryb=GEN?'generator':'lekcja';</script><!--tryb-->
 
 
 <meta charset="utf-8">
@@ -27,6 +28,7 @@ h1,h2,h3{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,san
 .top p{margin:2px 0 0;color:var(--muted)}
 .tabs{display:flex;gap:6px}
 .tabs button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 18px}
+html[data-tryb] .tabs{display:none}
 .tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
 .hr{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
@@ -94,7 +96,7 @@ input.s{width:5.5em}
 </style>
 </head>
 <body>
-<div class="top"><div><h1 data-i="h1">Współrzędne geograficzne</h1><p data-i="sub">Naucz się je odczytywać, a potem wygeneruj zadania dla klasy.</p></div>
+<div class="top"><div><h1 data-i="h1">Współrzędne geograficzne</h1><p data-i="sub">Naucz się odczytywać szerokość i długość geograficzną z mapy.</p></div>
 <div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
 <div class="tabs" role="tablist"><button role="tab" data-tab="learn" aria-selected="true" data-i="tabLearn">Nauka</button><button role="tab" data-tab="gen" aria-selected="false" data-i="tabGen">Generator zadań</button></div></div></div>
 <hr class="rule">
@@ -178,7 +180,7 @@ const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 // --- język / language
 let L='pl';try{const s=localStorage.getItem('wspLang');if(s==='pl'||s==='en')L=s;}catch(e){}
 const T={pl:{
- docTitle:'Współrzędne geograficzne – nauka i zadania',h1:'Współrzędne geograficzne',sub:'Naucz się je odczytywać, a potem wygeneruj zadania dla klasy.',tabLearn:'Nauka',tabGen:'Generator zadań',
+ docTitle:GEN?'Generator zadań – współrzędne geograficzne':'Współrzędne geograficzne',h1:GEN?'Generator zadań: współrzędne geograficzne':'Współrzędne geograficzne',sub:GEN?'Zadania z mapą dla klasy: plik Word, wydruk i klucz odpowiedzi.':'Naucz się odczytywać szerokość i długość geograficzną z mapy.',tabLearn:'Nauka',tabGen:'Generator zadań',
  s1h:'Siatka geograficzna',s1p:'Na mapie i globusie rysuje się dwa rodzaje linii. <b>Równoleżniki</b> biegną poziomo, równolegle do równika, i wyznaczają <b>szerokość geograficzną</b>. <b>Południki</b> łączą biegun północny z południowym i wyznaczają <b>długość geograficzną</b>. Dwie linie są wyjątkowe: <b>równik (0°)</b> dzieli Ziemię na półkulę północną i południową, a <b>południk 0° (Greenwich)</b> na półkulę wschodnią i zachodnią.',
  L1hint:'Kliknij w dowolne miejsce na mapie.',L1def:'Tu pojawi się, jak odczytać współrzędne klikniętego punktu.',
  s2h:'Skąd biorą się stopnie?',s2p:'Współrzędne to <b>kąty</b> mierzone ze środka Ziemi, dlatego zapisujemy je w stopniach.',
@@ -201,7 +203,7 @@ const T={pl:{
  wsName:'Imię i nazwisko: ..................................................................',wsTask:'Zadanie',wsPoint:'Punkt',wsLat:'Szerokość geograficzna',wsLon:'Długość geograficzna',wsKey:'Klucz odpowiedzi',
  stLib:'Nie udało się wczytać biblioteki do plików Word. Odśwież stronę.',stPrep:'Przygotowuję plik…',stSaved:'Plik zapisany.',stCancel:'Pobieranie anulowane.',stErr:'Nie udało się przygotować pliku. Spróbuj ponownie.'
 },en:{
- docTitle:'Geographic coordinates – learning and exercises',h1:'Geographic coordinates',sub:'Learn how to read them, then generate exercises for your class.',tabLearn:'Learn',tabGen:'Exercise generator',
+ docTitle:GEN?'Exercise generator – geographic coordinates':'Geographic coordinates',h1:GEN?'Exercise generator: geographic coordinates':'Geographic coordinates',sub:GEN?'Map exercises for your class: Word file, printout and answer key.':'Learn to read latitude and longitude from a map.',tabLearn:'Learn',tabGen:'Exercise generator',
  s1h:'The geographic grid',s1p:'Two kinds of lines are drawn on maps and globes. <b>Parallels</b> run horizontally, parallel to the equator, and give the <b>latitude</b>. <b>Meridians</b> join the North Pole to the South Pole and give the <b>longitude</b>. Two lines are special: <b>the equator (0°)</b> divides the Earth into the Northern and Southern Hemispheres, and <b>the prime meridian, 0° (Greenwich)</b>, divides it into the Eastern and Western Hemispheres.',
  L1hint:'Click anywhere on the map.',L1def:'This is where you will see how to read the coordinates of the point you click.',
  s2h:'Where do the degrees come from?',s2p:'Coordinates are <b>angles</b> measured from the centre of the Earth, which is why we write them in degrees.',
@@ -382,6 +384,8 @@ function applyLang(prev){
 $$('[data-lang]').forEach(b=>b.addEventListener('click',()=>{const prev=L;L=b.dataset.lang;try{localStorage.setItem('wspLang',L);}catch(e){}applyLang(prev);if(prev!==L){precOpts();sheet();}}));
 if(L!=='pl')applyLang('pl');else applyLang();
 drawL1();drawL4();newQ();precOpts();regen();
+// tryb lekcyjny pokazuje tylko naukę, tryb generatora (?tryb=generator) tylko generator
+if(GEN)$('[data-tab="gen"]').click();
 
 </script>
 <a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><a id="report-link" href="../index.html?zglos=geografia/wspolrzedne-geograficzne" style="position:fixed;right:12px;bottom:12px;z-index:9999;font:700 13px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#231f17;background:#fdfcf8;border:1.5px solid #dcd4c3;border-radius:999px;padding:9px 12px;box-shadow:0 2px 8px rgba(0,0,0,.18)">🐞 Zgłoś błąd</a><script>(function(){var a=document.getElementById('home-link'),r=document.getElementById('report-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x;r.textContent=x==='en'?'🐞 Report a bug':'🐞 Zgłoś błąd';r.href='../index.html?lang='+x+'&zglos=geografia/wspolrzedne-geograficzne'}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>

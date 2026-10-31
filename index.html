@@ -70,7 +70,11 @@ a{color:var(--acc-t)}
 .tools button:hover{border-color:var(--acc)}
 .tools button::after{content:"→";color:var(--acc-t)}
 .tag{font-size:.72rem;font-weight:700;letter-spacing:.03em;border:1.5px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--muted);margin-left:auto;white-space:nowrap}
-section.more{margin-top:40px}
+section.more,section.gens{margin-top:40px}
+section.gens>h2{font-size:1.6rem;margin:0 0 6px}
+section.gens>p{margin:0 0 14px;color:var(--muted)}
+.gens .subj h3{margin:0;font-size:1.3rem}
+.gens .tools{margin-top:10px}
 section.more>h2{font-size:1.6rem;margin:0 0 14px}
 .links{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .links>div{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px}
@@ -155,6 +159,16 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
       <ul class="tools" data-subject="bio"></ul>
     </section>
   </div>
+
+  <section class="gens" id="generatory">
+    <h2><span data-l="pl">Generatory kart pracy</span><span data-l="en">Worksheet generators</span></h2>
+    <p data-l="pl">Dla nauczycieli: kartkówki i karty pracy do pobrania w Wordzie albo do wydruku, z grupami i kluczem odpowiedzi. Uczniowie korzystają z narzędzi powyżej, tutaj są tylko generatory.</p>
+    <p data-l="en">For teachers: quizzes and worksheets to download as Word files or print, with groups and answer keys. Students use the tools above; this section holds only the generators.</p>
+    <div class="subjects">
+      <div class="subj"><h3><span data-l="pl">Geografia</span><span data-l="en">Geography</span></h3><ul class="tools" data-subject="geo" data-gen="1"></ul></div>
+      <div class="subj"><h3><span data-l="pl">Biologia</span><span data-l="en">Biology</span></h3><ul class="tools" data-subject="bio" data-gen="1"></ul></div>
+    </div>
+  </section>
 
   <section class="more" id="materialy">
     <h2><span data-l="pl">Materiały dodatkowe</span><span data-l="en">Extra resources</span></h2>
@@ -254,10 +268,10 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
 // lang: full = przełącznik PL/EN w narzędziu, contest = tylko po polsku (polski konkurs)
 const TOOLS = [
   {id:'wspolrzedne', s:'geo', file:'geografia/wspolrzedne-geograficzne.html', lang:'full',
-   pl:['Współrzędne geograficzne','Siatka geograficzna krok po kroku: równoleżniki, południki i odczytywanie szerokości oraz długości geograficznej z mapy. Na koniec możesz wygenerować zestaw zadań dla klasy.',
-       ['interaktywna mapa – kliknij punkt i zobacz, jak odczytać jego współrzędne','wyjaśnienie, skąd biorą się stopnie i jak poprawnie zapisać współrzędne','generator zadań z mapą do wydruku lub pobrania']],
-   en:['Geographic coordinates','The geographic grid step by step: parallels, meridians and how to read latitude and longitude from a map. You can also generate a set of exercises for a class.',
-       ['interactive map – click a point and see how to read its coordinates','why coordinates are measured in degrees and how to write them correctly','exercise generator with a map to print or download']]},
+   pl:['Współrzędne geograficzne','Siatka geograficzna krok po kroku: równoleżniki, południki i odczytywanie szerokości oraz długości geograficznej z mapy.',
+       ['interaktywna mapa – kliknij punkt i zobacz, jak odczytać jego współrzędne','wyjaśnienie, skąd biorą się stopnie i jak poprawnie zapisać współrzędne','ćwiczenia z podpowiedziami']],
+   en:['Geographic coordinates','The geographic grid step by step: parallels, meridians and how to read latitude and longitude from a map.',
+       ['interactive map – click a point and see how to read its coordinates','why coordinates are measured in degrees and how to write them correctly','practice with hints']]},
   {id:'skala', s:'geo', file:'geografia/kalkulator-skali-i-czasu.html', lang:'full',
    pl:['Kalkulator skali i czasu na Ziemi','Przeliczanie odległości na mapie i w terenie, rodzaje skali oraz czas na Ziemi: strefy czasowe i czas słoneczny. W części „Praktyka” rozwiązujesz zadania na różnych poziomach trudności.',
        ['kalkulatory: odległość w terenie, odległość na mapie, obliczanie skali','skala liczbowa, mianowana i liniowa; która skala jest większa','zegary świata, przeliczanie godzin i czas słoneczny','zadania do ćwiczenia z punktacją']],
@@ -269,10 +283,10 @@ const TOOLS = [
    en:['Country data','A world country comparator with live data from the World Bank and Wikidata: population, economy, environment and living standards.',
        ['compare up to 5 countries across chosen indicators','change over time, rankings and a world map','scatter chart showing how two indicators are related','a quiz to test what you know']]},
   {id:'kontury', s:'geo', file:'geografia/generator-map-konturowych.html', lang:'full',
-   pl:['Generator map konturowych','Narzędzie do przygotowania lekcji: tworzy kartę pracy z mapą konturową. Wybierasz obiekty do podpisania lub zaznaczenia, a narzędzie przygotowuje gotową kartę.',
-       ['obiekty z numerami do podpisania i obiekty do samodzielnego zaznaczenia','gotowe zestawy, losowanie obiektów, rzeki i jeziora na mapie','punktacja, klucz odpowiedzi i druga grupa (A i B)','tryb mapy do wyświetlania na lekcji i pobieranie karty']],
-   en:['Outline map generator','A teacher tool that builds a worksheet with an outline map. You choose objects to label or mark, and it prepares the finished worksheet.',
-       ['numbered objects to label and objects for students to mark','ready-made sets, random picks, rivers and lakes on the map','scoring, answer key and a second version (groups A and B)','display mode for the classroom and worksheet download']]},
+   pl:['Interaktywna mapa Polski','Mapa Polski z warstwami do włączania i wyłączania: podział administracyjny, rzeźba terenu, krainy, rzeki i jeziora. Dobra do wyświetlania na lekcji.',
+       ['województwa, powiaty, gminy i dzielnice Warszawy','pasy rzeźby, makroregiony i mezoregiony','przybliżanie i przesuwanie mapy']],
+   en:['Interactive map of Poland','A map of Poland with layers you can switch on and off: administrative divisions, relief, regions, rivers and lakes. Good for showing in class.',
+       ['provinces, counties, municipalities and Warsaw districts','relief belts, macroregions and mesoregions','zoom and pan the map']]},
   {id:'europa', s:'geo', file:'geografia/europa-polityczna.html', lang:'full',
    pl:['Europa polityczna','Interaktywna mapa państw Europy. Kliknij państwo, żeby poznać jego podstawowe dane, albo sprawdź, kto należy do NATO, UE, strefy Schengen i strefy euro.',
        ['mapa z wszystkimi państwami Europy i listą do wyboru','stolica, powierzchnia, ludność, flaga i inne podstawowe dane','mapy członkostwa: NATO, UE, Schengen, strefa euro']],
@@ -285,9 +299,9 @@ const TOOLS = [
        ['school, district and regional stages','tasks from the 2019–2025 contest papers and practice papers','tracks solved tasks and points scored']]},
   {id:'poziomice', s:'geo', file:'geografia/poziomice.html', lang:'full',
    pl:['Poziomice – ćwiczenia','Wysokość bezwzględna i względna, poziomice i skala barw na mapie. Najpierw teoria z interaktywnymi przykładami, potem zadania i quiz.',
-       ['przekrój terenu z suwakami: szczyt, dolina, depresja','czym są poziomice i jak czytać mapę hipsometryczną','zadania do rozwiązania i pobrania','quiz: rozpoznaj formę terenu po poziomicach']],
+       ['przekrój terenu z suwakami: szczyt, dolina, depresja','czym są poziomice i jak czytać mapę hipsometryczną','zadania do rozwiązania na losowej mapie','quiz: rozpoznaj formę terenu po poziomicach']],
    en:['Contour lines – practice','Absolute and relative height, contour lines and the colour scale on maps. Theory with interactive examples first, then exercises and a quiz.',
-       ['terrain cross-section with sliders: peak, valley, depression','what contour lines are and how to read a relief map','exercises to solve and download','quiz: recognise the landform from its contour lines']]},
+       ['terrain cross-section with sliders: peak, valley, depression','what contour lines are and how to read a relief map','exercises on a random map','quiz: recognise the landform from its contour lines']]},
   {id:'klimat', s:'geo', file:'geografia/klimatogramy.html', lang:'full',
    pl:['Klimat i klimatogramy','Jak czytać klimatogram, czym różnią się strefy klimatyczne i jak je rozpoznać. Prawdziwe dane ze stacji z całego świata.',
        ['krok po kroku: temperatura, opady, amplituda, półkula','strefy klimatyczne z przykładowymi stacjami','ćwiczenia: rozpoznaj klimat po klimatogramie']],
@@ -310,19 +324,19 @@ const TOOLS = [
        ['interactive Solar System – including true-to-scale sizes','a card for each planet and the Sun: data, structure, atmosphere, fun facts','planet comparison and a calculator: what the scales would show and how old you’d be on another planet','theory: the Big Bang, galaxies, stars, comets, meteors, units of distance','a quiz with random questions']]},
   {id:'komorki', s:'bio', file:'biologia/komorki.html', lang:'full',
    pl:['Komórki i wirusy','Interaktywne modele komórek: zwierzęcej, roślinnej, grzybowej, bakteryjnej, eugleny i pantofelka. Kliknij organellum, żeby poznać jego budowę i funkcję. Do tego wirusy, baza wiedzy o komórkach i quiz.',
-       ['modele komórek na dwóch poziomach: podstawowym i rozszerzonym','karta każdego organellum: budowa, funkcja, porównanie, ciekawostka','porównanie komórek i budowa wirusów z cyklem litycznym i lizogenicznym','baza wiedzy: teoria komórkowa, endosymbioza, skala wielkości, osmoza','quiz i generator kart pracy w Wordzie (także wersje A i B)']],
+       ['modele komórek na dwóch poziomach: podstawowym i rozszerzonym','karta każdego organellum: budowa, funkcja, porównanie, ciekawostka','porównanie komórek i budowa wirusów z cyklem litycznym i lizogenicznym','baza wiedzy: teoria komórkowa, endosymbioza, skala wielkości, osmoza','quiz z losowanymi pytaniami']],
    en:['Cells and viruses','Interactive models of animal, plant, fungal and bacterial cells, plus Euglena and Paramecium. Click an organelle to see its structure and function. Plus viruses, a cell knowledge base and a quiz.',
-       ['cell models on two levels: basic and advanced','a card for every organelle: structure, function, analogy, fun fact','cell comparison and virus structure with the lytic and lysogenic cycles','knowledge base: cell theory, endosymbiosis, size scale, osmosis','a quiz and a Word worksheet generator (including A and B versions)']]},
+       ['cell models on two levels: basic and advanced','a card for every organelle: structure, function, analogy, fun fact','cell comparison and virus structure with the lytic and lysogenic cycles','knowledge base: cell theory, endosymbiosis, size scale, osmosis','a quiz with random questions']]},
   {id:'podzial', s:'bio', file:'biologia/podzial-komorki.html', lang:'full',
-   pl:['Mitoza i mejoza','Interaktywne animacje mitozy i mejozy z licznikami chromosomów i DNA, cyklem komórkowym, quizem i generatorem kart pracy.',
-       ['cykl komórkowy: fazy G₁, S, G₂, M, punkty kontrolne i p53','animowana mitoza w komórce zwierzęcej i roślinnej','mejoza z crossing-over i losową segregacją chromosomów','liczba chromosomów (n) i ilość DNA (c) na każdym etapie, z wykresem','quiz, gametogeneza, nondysjunkcja i karta pracy do Worda']],
-   en:['Mitosis and meiosis','Interactive animations of mitosis and meiosis with chromosome and DNA counters, the cell cycle, a quiz and a worksheet generator.',
-       ['the cell cycle: G₁, S, G₂, M phases, checkpoints and p53','animated mitosis in animal and plant cells','meiosis with crossing over and independent assortment','chromosome number (n) and DNA content (c) at every stage, with a chart','quiz, gametogenesis, nondisjunction and a Word worksheet']]},
+   pl:['Mitoza i mejoza','Interaktywne animacje mitozy i mejozy z licznikami chromosomów i DNA, cyklem komórkowym i quizem.',
+       ['cykl komórkowy: fazy G₁, S, G₂, M, punkty kontrolne i p53','animowana mitoza w komórce zwierzęcej i roślinnej','mejoza z crossing-over i losową segregacją chromosomów','liczba chromosomów (n) i ilość DNA (c) na każdym etapie, z wykresem','quiz, gametogeneza i nondysjunkcja']],
+   en:['Mitosis and meiosis','Interactive animations of mitosis and meiosis with chromosome and DNA counters, the cell cycle and a quiz.',
+       ['the cell cycle: G₁, S, G₂, M phases, checkpoints and p53','animated mitosis in animal and plant cells','meiosis with crossing over and independent assortment','chromosome number (n) and DNA content (c) at every stage, with a chart','quiz, gametogenesis and nondisjunction']]},
   {id:'laboratorium', s:'bio', file:'biologia/laboratorium.html', lang:'full',
    pl:['Wirtualne laboratorium','Doświadczenia z fotosyntezą, enzymami, oddychaniem i fermentacją, krok po kroku według metody naukowej. Do tego teoria z równaniami reakcji i porównaniem procesów.',
-       ['doświadczenia z moczarką, katalazą, amylazą, kiełkującymi nasionami i drożdżami','problem, hipoteza, zmienne, próba kontrolna, tabela wyników ze średnią i wykres','„Znajdź błąd w doświadczeniu” – zadania jak na egzaminie ósmoklasisty i maturze','teoria: równania fotosyntezy, oddychania i fermentacji z liczeniem atomów oraz porównanie, które organizmy je przeprowadzają','quiz i karta pracy w Wordzie z kluczem odpowiedzi']],
+       ['doświadczenia z moczarką, katalazą, amylazą, kiełkującymi nasionami i drożdżami','problem, hipoteza, zmienne, próba kontrolna, tabela wyników ze średnią i wykres','„Znajdź błąd w doświadczeniu” – zadania jak na egzaminie ósmoklasisty i maturze','teoria: równania fotosyntezy, oddychania i fermentacji z liczeniem atomów oraz porównanie, które organizmy je przeprowadzają','quiz z wyjaśnieniami']],
    en:['Virtual laboratory','Experiments on photosynthesis, enzymes, respiration and fermentation, done step by step with the scientific method. Plus theory with reaction equations and a comparison of the processes.',
-       ['experiments with waterweed, catalase, amylase, germinating seeds and yeast','research question, hypothesis, variables, control, a results table with means, and a graph','“Spot the flaw” tasks modelled on Polish exam questions','theory: equations of photosynthesis, respiration and fermentation with atom counting, and which organisms carry them out','a quiz and a Word worksheet with an answer key']]},
+       ['experiments with waterweed, catalase, amylase, germinating seeds and yeast','research question, hypothesis, variables, control, a results table with means, and a graph','“Spot the flaw” tasks modelled on Polish exam questions','theory: equations of photosynthesis, respiration and fermentation with atom counting, and which organisms carry them out','a quiz with explanations']]},
   {id:'uklady', s:'bio', file:'biologia/uklady-narzadow.html', lang:'full',
    pl:['Układy narządów','Interaktywny atlas ciała człowieka. Wybierz układ, a potem kliknij narząd na schemacie, żeby poznać jego budowę i funkcje.',
        ['10 układów: od nerwowego po powłokowy','schemat ciała z klikalnymi narządami','poziom podstawowy i zaawansowany']],
@@ -348,15 +362,37 @@ const TOOLS = [
        ['teoria: poziomy troficzne i przepływ energii','budowanie łańcuchów i sieci pokarmowych','piramidy ekologiczne','zadania do ćwiczenia']],
    en:['Food chains and webs','Producers, consumers, decomposers and who actually eats whom – across different ecosystems.',
        ['theory: trophic levels and energy flow','build food chains and food webs','ecological pyramids','practice exercises']]},
+  // generatory: te same pliki otwierane z ?tryb=generator (karty pracy, grupy, klucz)
+  {id:'gen-wspolrzedne', g:1, s:'geo', file:'geografia/wspolrzedne-geograficzne.html', lang:'full',
+   pl:['Współrzędne geograficzne','Zestawy zadań z mapą do odczytywania i zaznaczania współrzędnych.',['wybór obszaru, rodzaju siatki i dokładności','plik Word i wydruk','klucz odpowiedzi']],
+   en:['Geographic coordinates','Sets of map exercises for reading and plotting coordinates.',['choose the area, grid type and precision','Word file and printout','answer key']]},
+  {id:'gen-poziomice', g:1, s:'geo', file:'geografia/poziomice.html', lang:'full',
+   pl:['Poziomice','Losowa mapa poziomicowa z zadaniami o wysokości bezwzględnej i względnej.',['teren nizinny, wyżynny lub górski','trzy poziomy trudności i wybór cięcia poziomicowego','plik Word, wydruk i klucz odpowiedzi']],
+   en:['Contour lines','A random contour map with tasks on absolute and relative height.',['lowland, upland or mountain terrain','three difficulty levels and a choice of contour interval','Word file, printout and answer key']]},
+  {id:'gen-kontury', g:1, s:'geo', file:'geografia/generator-map-konturowych.html', lang:'full',
+   pl:['Mapy konturowe','Karta pracy z mapą konturową Polski. Wybierasz obiekty do podpisania lub zaznaczenia, a narzędzie przygotowuje gotową kartę.',['obiekty z numerami do podpisania i obiekty do samodzielnego zaznaczenia','gotowe zestawy, losowanie obiektów, rzeki i jeziora na mapie','punktacja, klucz odpowiedzi i grupy A i B']],
+   en:['Outline maps','A worksheet with an outline map of Poland. You choose objects to label or mark, and it prepares the finished worksheet.',['numbered objects to label and objects for students to mark','ready-made sets, random picks, rivers and lakes on the map','scoring, answer key and groups A and B']]},
+  {id:'gen-komorki', g:1, s:'bio', file:'biologia/komorki.html', lang:'full',
+   pl:['Komórki i wirusy','Karty pracy o budowie komórek, organellach i wirusach.',['dwa poziomy: podstawowy i rozszerzony','grupy A i B','plik Word z kluczem odpowiedzi na osobnej stronie']],
+   en:['Cells and viruses','Worksheets on cell structure, organelles and viruses.',['two levels: basic and advanced','groups A and B','Word file with the answer key on a separate page']]},
+  {id:'gen-podzial', g:1, s:'bio', file:'biologia/podzial-komorki.html', lang:'full',
+   pl:['Mitoza i mejoza','Karty pracy z rysunkami faz podziału, tabelą n i c oraz porównaniem mitozy z mejozą.',['dwa poziomy: podstawowy i rozszerzony','grupy A i B, nowa losowa wersja jednym kliknięciem','plik Word z kluczem odpowiedzi na osobnej stronie']],
+   en:['Mitosis and meiosis','Worksheets with drawings of division phases, an n and c table and a mitosis–meiosis comparison.',['two levels: basic and advanced','groups A and B, a new random version in one click','Word file with the answer key on a separate page']]},
+  {id:'gen-laboratorium', g:1, s:'bio', file:'biologia/laboratorium.html', lang:'full',
+   pl:['Wirtualne laboratorium','Protokół doświadczenia do uzupełnienia i zadania z fotosyntezy, oddychania i fermentacji.',['11 doświadczeń do wyboru','równania reakcji, tabela porównawcza, „znajdź błąd”','plik Word z kluczem odpowiedzi na osobnej stronie']],
+   en:['Virtual laboratory','An experiment record to fill in plus tasks on photosynthesis, respiration and fermentation.',['11 investigations to choose from','reaction equations, a comparison table, “spot the flaw”','Word file with the answer key on a separate page']]},
+  {id:'gen-genetyka', g:1, s:'bio', file:'biologia/krzyzowki-genetyczne.html', lang:'full',
+   pl:['Krzyżówki genetyczne','Losowe zadania z genetyki: dziedziczenie jednej i dwóch cech, grupy krwi, cechy sprzężone z płcią.',['wybór rodzaju i liczby zadań','plik Word','klucz odpowiedzi']],
+   en:['Genetic crosses','Random genetics problems: one and two traits, blood groups, sex-linked traits.',['choose the type and number of problems','Word file','answer key']]},
 ];
 const UI = {
-  pl:{geo:'Geografia',bio:'Biologia',inside:'Co znajdziesz w środku',go:'Uruchom narzędzie →',close:'Wróć',
+  pl:{geo:'Geografia',bio:'Biologia',gen:'Generator',inside:'Co znajdziesz w środku',go:'Uruchom narzędzie →',close:'Wróć',
       report:'Coś nie działa? Zgłoś',general:'Ogólnie / strona główna',
       repPh:'Co się stało albo co warto dodać? Jeśli to błąd: co klikasz i co się wtedy dzieje.',
       sending:'Wysyłam…',thanks:'Dzięki! Zgłoszenie dotarło do autora.',fail:'Nie udało się wysłać. Sprawdź internet i spróbuj ponownie za chwilę.',
       full:'🇵🇱 🇬🇧 Dostępne po polsku i po angielsku.',contest:'🇵🇱 Tylko po polsku – to zadania z polskiego konkursu.',
       title:'Zakład utylizacji niewiedzy – narzędzia do nauki geografii i biologii'},
-  en:{geo:'Geography',bio:'Biology',inside:"What's inside",go:'Open the tool →',close:'Back',
+  en:{geo:'Geography',bio:'Biology',gen:'Generator',inside:"What's inside",go:'Open the tool →',close:'Back',
       report:'Something wrong? Report it',general:'General / home page',
       repPh:"What happened, or what would be worth adding? If it's a bug: what do you click and what happens then.",
       sending:'Sending…',thanks:'Thanks! Your message has reached the author.',fail:"Couldn't send it. Check your internet connection and try again in a moment.",
@@ -370,7 +406,7 @@ let L = document.documentElement.lang === 'en' ? 'en' : 'pl';
 function renderLists(){
   document.querySelectorAll('.tools').forEach(ul => {
     ul.innerHTML = '';
-    TOOLS.filter(t => t.s === ul.dataset.subject).forEach(t => {
+    TOOLS.filter(t => t.s === ul.dataset.subject && !t.g === !ul.dataset.gen).forEach(t => {
       const li = document.createElement('li'), b = document.createElement('button');
       b.type = 'button'; b.dataset.tool = t.id;
       b.textContent = t[L][0];
@@ -396,13 +432,13 @@ function setLang(l){
 function renderReportTools(){
   const sel = $('#repTool'), keep = sel.value;
   const opt = (v, txt) => { const o = document.createElement('option'); o.value = v; o.textContent = txt; return o; };
-  sel.replaceChildren(opt('ogólnie', UI[L].general), ...TOOLS.map(t => opt(t.pl[0], t[L][0])));
+  sel.replaceChildren(opt('ogólnie', UI[L].general), ...TOOLS.map(t => t.g ? opt('Generator: ' + t.pl[0], UI[L].gen + ': ' + t[L][0]) : opt(t.pl[0], t[L][0])));
   if (keep) sel.value = keep;
 }
 
 function openReport(toolId){
   const t = TOOLS.find(x => x.id === toolId);
-  $('#repTool').value = t ? t.pl[0] : 'ogólnie';
+  $('#repTool').value = t ? (t.g ? 'Generator: ' : '') + t.pl[0] : 'ogólnie';
   const m = $('#repMsg'); m.textContent = ''; m.className = 'rep-msg';
   if ($('#dlg').open) $('#dlg').close();
   history.replaceState(null, '', '#zglos');
@@ -430,7 +466,7 @@ function openTool(id){
   const t = TOOLS.find(x => x.id === id); if (!t) return;
   const [name, desc, items] = t[L], u = UI[L];
   $('#dlgImg').src = IMG[t.s];
-  $('#dlgSubj').textContent = u[t.s];
+  $('#dlgSubj').textContent = t.g ? u.gen + ' · ' + u[t.s] : u[t.s];
   $('#dlgTitle').textContent = name;
   $('#dlgDesc').textContent = desc;
   $('#dlgInside').textContent = u.inside;
@@ -440,7 +476,7 @@ function openTool(id){
   $('#dlgReport').textContent = u.report;
   $('#dlgReport').dataset.reportTool = id;
   $('#dlgGo').textContent = u.go;
-  $('#dlgGo').href = t.file + '?lang=' + L;
+  $('#dlgGo').href = t.file + '?lang=' + L + (t.g ? '&tryb=generator' : '');
   history.replaceState(null, '', '#' + id);
   $('#dlg').showModal();
 }

@@ -5,6 +5,7 @@
 <!--seo--><meta name="description" content="Narzędzie do przygotowania lekcji: tworzy kartę pracy z mapą konturową. Wybierasz obiekty do podpisania lub zaznaczenia, a narzędzie przygotowuje gotową kartę."><meta property="og:description" content="Narzędzie do przygotowania lekcji: tworzy kartę pracy z mapą konturową. Wybierasz obiekty do podpisania lub zaznaczenia, a narzędzie przygotowuje gotową kartę."><link rel="canonical" href="https://narzedzia.netlify.app/geografia/generator-map-konturowych.html"><!--seo-->
 
 <!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('konturLang',l)}catch(e){}})();</script><!--site-lang-->
+<!--tryb--><script>var GEN=new URLSearchParams(location.search).get('tryb')==='generator';document.documentElement.dataset.tryb=GEN?'generator':'lekcja';</script><!--tryb-->
 
 
 <meta charset="utf-8">
@@ -132,6 +133,7 @@ body{display:flex;flex-direction:column}
 .modebar .lang button{font:inherit;font-size:.85rem;font-weight:700;border:0;border-radius:0;background:transparent;color:var(--ink);padding:5px 12px;cursor:pointer}
 .modebar .lang button+button{border-left:1px solid var(--line)}
 .modebar .lang button[aria-pressed=true]{background:var(--accent);color:var(--accent-ink)}
+html[data-tryb] .modebar>b,html[data-tryb] .modebar [data-mode]{display:none!important}
 </style>
 </head>
 <body>
@@ -289,7 +291,7 @@ const UI_ATTR=[['.modebar','aria-label','Tryb','Mode'],['#instr','aria-label','I
  ['#q','placeholder','Szukaj, np. Wisła','Search, e.g. Vistula'],['#q','aria-label','Szukaj obiektu','Search for an object'],
  ['#vzin','aria-label','Przybliż','Zoom in'],['#vzout','aria-label','Oddal','Zoom out']];
 function applyStatic(){
- document.title=tr('Karta pracy z mapą konturową','Outline map worksheet');
+ document.title=GEN?tr('Generator map konturowych','Outline map generator'):tr('Interaktywna mapa Polski','Interactive map of Poland');
  document.querySelectorAll('[data-t]').forEach(el=>{if(el.dataset.pl==null)el.dataset.pl=el.textContent;const p=el.dataset.pl,k=p.trim(),pre=p.match(/^\s*/)[0];el.textContent=EN()&&UI[k]!=null?pre+UI[k]:p;});
  UI_ATTR.forEach(([s,a,pl,en])=>{const el=document.querySelector(s);if(el)el.setAttribute(a,tr(pl,en));});
  document.querySelectorAll('.lang [data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===L)));
@@ -681,7 +683,8 @@ new ResizeObserver(()=>{if(!Q('#viewer').hidden)sched();}).observe(stage);
 function mode(m){Q('.app').hidden=m!=='gen';Q('#viewer').hidden=m!=='view';document.querySelectorAll('.modebar [data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===m));try{localStorage.setItem('plMode',m);}catch(e){}
  if(m==='view'){if(!built){base();}vis();requestAnimationFrame(fitAll);}else if(typeof fit==='function')fit();}
 document.querySelectorAll('.modebar [data-mode]').forEach(b=>b.addEventListener('click',()=>mode(b.dataset.mode)));
-let m0='gen';try{m0=localStorage.getItem('plMode')||'gen';}catch(e){}if(m0==='view')mode('view');
+// tryb lekcyjny pokazuje tylko mapę do wyświetlania, generator (?tryb=generator) tylko kartę pracy
+if(!GEN)mode('view');
 })();
 
 </script>

@@ -4,6 +4,7 @@
 <!--og--><meta property="og:type" content="website"><meta property="og:site_name" content="Zakład utylizacji niewiedzy"><meta property="og:title" content="Mitoza i mejoza"><meta property="og:url" content="https://narzedzia.netlify.app/biologia/podzial-komorki.html"><meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><!--og-->
 <!--seo--><meta name="description" content="Interaktywne animacje mitozy i mejozy z licznikami chromosomów i DNA, cyklem komórkowym, quizem i generatorem kart pracy."><meta property="og:description" content="Interaktywne animacje mitozy i mejozy z licznikami chromosomów i DNA, cyklem komórkowym, quizem i generatorem kart pracy."><link rel="canonical" href="https://narzedzia.netlify.app/biologia/podzial-komorki.html"><!--seo-->
 <!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('podzialLang',l)}catch(e){}})();</script><!--site-lang-->
+<!--tryb--><script>var GEN=new URLSearchParams(location.search).get('tryb')==='generator';document.documentElement.dataset.tryb=GEN?'generator':'lekcja';</script><!--tryb-->
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -117,6 +118,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .status{font-size:.9rem;color:var(--muted);margin-left:4px}
 @media (max-width:820px){.mgrid,.ugrid{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}.sheet ol{columns:1}}
 @media (max-width:480px){.seg button{padding:6px 9px;font-size:.86rem}.card{padding:14px 14px}.sheet{padding:14px 12px}.cnt{grid-template-columns:1fr 1fr}.ord svg{width:84px}}
+html[data-tryb=generator] #tabs{display:none!important}
 </style>
 </head>
 <body>
@@ -142,7 +144,9 @@ const SUP=n=>String(n).split('').map(d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[+d]).join(
 
 const UI={
  t1:['Mitoza i mejoza','Mitosis and meiosis'],
- t2:['Cykl komórkowy, animacje podziałów, liczba chromosomów i ilość DNA, quiz i karta pracy.','The cell cycle, animated divisions, chromosome number and DNA content, a quiz and a worksheet.'],
+ t2:['Cykl komórkowy, animacje podziałów, liczba chromosomów i ilość DNA oraz quiz.','The cell cycle, animated divisions, chromosome number and DNA content, and a quiz.'],
+ gt1:['Generator kart pracy: mitoza i mejoza','Worksheet generator: mitosis and meiosis'],
+ gt2:['Karty pracy do pobrania w Wordzie, z kluczem odpowiedzi na osobnej stronie.','Downloadable Word worksheets with the answer key on a separate page.'],
  tabs:{cycle:['Cykl komórkowy','Cell cycle'],mitosis:['Mitoza','Mitosis'],meiosis:['Mejoza','Meiosis'],compare:['Porównanie','Comparison'],extras:['Gamety i błędy podziału','Gametes and division errors'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
 };
 
@@ -480,7 +484,7 @@ function dnaChart(kind,key){
 }
 
 // ================= stan =================
-const S={tab:'cycle',lvl:'B',cyc:'G1',n2:4,mit:{key:'int',cell:'animal'},mei:{key:'int',orient:[0,1,0],xo:[.7,.66,.72]},t:1,playing:false,labels:true,gam:23,nd:'mi',q:null,ok:0,all:0,
+const S={tab:GEN?'sheet':'cycle',lvl:'B',cyc:'G1',n2:4,mit:{key:'int',cell:'animal'},mei:{key:'int',orient:[0,1,0],xo:[.7,.66,.72]},t:1,playing:false,labels:true,gam:23,nd:'mi',q:null,ok:0,all:0,
  ws:{groups:false,key:true,plant:false,mei:true,seed:1+Math.floor(Math.random()*99999)},wsSt:'',pngSt:''};
 const keysOf=kind=>kind==='mit'?mitKeys(S.lvl):MEIK;
 const curKind=()=>S.tab==='mitosis'?'mit':'mei';
@@ -927,10 +931,10 @@ function focusKey(el){if(!el||el===document.body)return null;if(el.id)return '#'
 function render(keep=true){
   const fk=keep?focusKey(document.activeElement):null;
   const sl=$$('#app .scroll, #app .tablewrap').map(e=>e.scrollLeft);
-  document.documentElement.lang=L;document.title=T(UI.t1);
-  $('#t1').textContent=T(UI.t1);$('#t2').textContent=T(UI.t2);
+  document.documentElement.lang=L;document.title=T(GEN?UI.gt1:UI.t1);
+  $('#t1').textContent=T(GEN?UI.gt1:UI.t1);$('#t2').textContent=T(GEN?UI.gt2:UI.t2);
   $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
-  $('#tabs').innerHTML=Object.entries(UI.tabs).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
+  $('#tabs').innerHTML=Object.entries(UI.tabs).filter(([k])=>GEN===(k==='sheet')).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
   $('#app').innerHTML={cycle:viewCycle,mitosis:()=>viewDiv('mit'),meiosis:()=>viewDiv('mei'),compare:viewCompare,extras:viewExtras,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
   $$('#app .scroll, #app .tablewrap').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
   if(fk){const el=$(fk);if(el&&el!==document.activeElement)try{el.focus({preventScroll:true});}catch(_){}}

@@ -5,6 +5,7 @@
 <!--seo--><meta name="description" content="Interaktywne modele komórek: zwierzęcej, roślinnej, grzybowej, bakteryjnej, eugleny i pantofelka. Kliknij organellum, żeby poznać jego budowę i funkcję. Do tego wirusy, baza wiedzy o komórkach i quiz."><meta property="og:description" content="Interaktywne modele komórek: zwierzęcej, roślinnej, grzybowej, bakteryjnej, eugleny i pantofelka. Kliknij organellum, żeby poznać jego budowę i funkcję. Do tego wirusy, baza wiedzy o komórkach i quiz."><link rel="canonical" href="https://narzedzia.netlify.app/biologia/komorki.html"><!--seo-->
 
 <!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('komorkiLang',l)}catch(e){}})();</script><!--site-lang-->
+<!--tryb--><script>var GEN=new URLSearchParams(location.search).get('tryb')==='generator';document.documentElement.dataset.tryb=GEN?'generator':'lekcja';</script><!--tryb-->
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -126,6 +127,7 @@ ul.feat{margin:0 0 14px;padding-left:22px}
 .status{font-size:.9rem;color:var(--muted);margin-left:4px}
 @media (max-width:820px){.mgrid,.ugrid{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}.sheet ol{columns:1}}
 @media (max-width:480px){.seg button{padding:6px 9px;font-size:.86rem}.card{padding:14px 14px}.sheet{padding:14px 12px}}
+html[data-tryb=generator] #tabs{display:none!important}
 </style>
 </head>
 <body>
@@ -150,6 +152,8 @@ const rngOf=seed=>{let s=seed%2147483647;if(s<=0)s+=2147483646;return()=>(s=s*16
 const UI={
  t1:['Komórki i wirusy','Cells and viruses'],
  t2:['Modele komórek, organella, wirusy, baza wiedzy i quiz.','Cell models, organelles, viruses, a knowledge base and a quiz.'],
+ gt1:['Generator kart pracy: komórki i wirusy','Worksheet generator: cells and viruses'],
+ gt2:['Karty pracy do pobrania w Wordzie, z kluczem odpowiedzi na osobnej stronie.','Downloadable Word worksheets with the answer key on a separate page.'],
  tabs:{models:['Modele komórek','Cell models'],compare:['Porównaj','Compare'],viruses:['Wirusy','Viruses'],kb:['Baza wiedzy','Knowledge base'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
 };
 // typy komórek
@@ -540,7 +544,7 @@ async function downloadPng(type){
 }
 
 // ---------- stan ----------
-const S={tab:'models',lvl:'B',cell:'animal',org:null,labels:true,virus:'t4',vorg:null,cyc:'lytic',step:0,playing:false,zoom:-5,osmC:'animal',osmS:'hypo',q:null,ok:0,all:0,
+const S={tab:GEN?'sheet':'models',lvl:'B',cell:'animal',org:null,labels:true,virus:'t4',vorg:null,cyc:'lytic',step:0,playing:false,zoom:-5,osmC:'animal',osmS:'hypo',q:null,ok:0,all:0,
  ws:{cells:['animal'],n:0,bank:false,func:true,groups:false,key:true,seed:1+Math.floor(Math.random()*99999)},wsSt:'',pngSt:''};
 
 // gdzie występuje dany element
@@ -1009,10 +1013,10 @@ function focusKey(el){if(!el||el===document.body)return null;if(el.id)return '#'
 function render(keep=true){
   const fk=keep?focusKey(document.activeElement):null;
   const sl=$$('#app .scroll, #app .tablewrap').map(e=>e.scrollLeft);
-  document.documentElement.lang=L;document.title=T(UI.t1);
-  $('#t1').textContent=T(UI.t1);$('#t2').textContent=T(UI.t2);
+  document.documentElement.lang=L;document.title=T(GEN?UI.gt1:UI.t1);
+  $('#t1').textContent=T(GEN?UI.gt1:UI.t1);$('#t2').textContent=T(GEN?UI.gt2:UI.t2);
   $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
-  $('#tabs').innerHTML=Object.entries(UI.tabs).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
+  $('#tabs').innerHTML=Object.entries(UI.tabs).filter(([k])=>GEN===(k==='sheet')).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
   $('#app').innerHTML={models:viewModels,compare:viewCompare,viruses:viewViruses,kb:viewKB,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
   $$('#app .scroll, #app .tablewrap').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
   if(fk){const el=$(fk);if(el&&el!==document.activeElement)try{el.focus({preventScroll:true});}catch(_){}}
