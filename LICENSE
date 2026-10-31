@@ -1,0 +1,67 @@
+Zakład utylizacji niewiedzy / The ignorance disposal facility
+https://narzedzia.netlify.app
+
+Ten projekt ma dwie licencje: jedną dla kodu i drugą dla treści.
+This project uses two licences: one for the code and one for the content.
+
+1. Kod / Code – MIT License (tekst poniżej / full text below)
+   HTML, CSS i JavaScript wszystkich narzędzi w tym repozytorium.
+   The HTML, CSS and JavaScript of every tool in this repository.
+
+2. Treści / Content – CC BY-NC-SA 4.0
+   https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pl
+   Teksty edukacyjne, opisy, pytania quizowe i zadania napisane dla tej strony.
+   Wolno je kopiować i przerabiać z podaniem autora, bez celów komercyjnych
+   i na tej samej licencji.
+   Educational texts, descriptions, quiz questions and exercises written for
+   this site. You may copy and adapt them with attribution, for non-commercial
+   purposes, under the same licence.
+
+Wyłączenia – te materiały NIE są objęte żadną z powyższych licencji
+Exclusions – the following are NOT covered by either licence above:
+
+- Zadania w pliku geografia/konkurs-geograficzny.html pochodzą z arkuszy
+  Konkursu Geograficznego dla szkół podstawowych województwa mazowieckiego
+  i należą do ich autorów i organizatora konkursu. Źródła rysunków, map
+  i tekstów w tych zadaniach są podane przy zadaniach.
+  The tasks in geografia/konkurs-geograficzny.html come from the papers of the
+  Masovian Voivodeship geography contest for primary schools and belong to
+  their authors and the contest organiser.
+- Nazwa „Zakład utylizacji niewiedzy” / "The ignorance disposal facility"
+  oraz grafiki banerów w folderze img/.
+  The site name and the banner images in the img/ folder.
+- Materiały innych autorów, które mają własne licencje / third-party material
+  under its own licence:
+  - czcionki Atkinson Hyperlegible i Bricolage Grotesque – SIL Open Font
+    License 1.1 (wczytywane z Google Fonts / loaded from Google Fonts),
+  - biblioteka docx (https://github.com/dolanmiu/docx) – MIT,
+  - dane i obrazy pobierane na żywo z zewnętrznych serwisów, m.in. Wikidata
+    (CC0), Wikimedia Commons, Bank Światowy / World Bank (CC BY 4.0),
+    Open-Meteo (CC BY 4.0) – na licencjach tych serwisów,
+  - dane NASA (domena publiczna / public domain),
+  - geometrie map wbudowane w narzędzia geograficzne – na licencjach
+    zbiorów danych, z których pochodzą.
+
+-------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2026 Bartłomiej Wrona
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
