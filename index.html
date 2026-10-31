@@ -291,10 +291,15 @@ const TOOLS = [
    en:['Geographic coordinates','The geographic grid step by step: parallels, meridians and how to read latitude and longitude from a map.',
        ['interactive map – click a point and see how to read its coordinates','why coordinates are measured in degrees and how to write them correctly','practice with hints']]},
   {id:'skala', s:'geo', file:'geografia/kalkulator-skali-i-czasu.html', lang:'full',
-   pl:['Kalkulator skali i czasu na Ziemi','Przeliczanie odległości na mapie i w terenie, rodzaje skali oraz czas na Ziemi: strefy czasowe i czas słoneczny. W części „Praktyka” rozwiązujesz zadania na różnych poziomach trudności.',
-       ['kalkulatory: odległość w terenie, odległość na mapie, obliczanie skali','skala liczbowa, mianowana i liniowa; która skala jest większa','zegary świata, przeliczanie godzin i czas słoneczny','zadania do ćwiczenia z punktacją']],
-   en:['Map scale and time calculator','Converting distances between the map and the real world, types of scale, and time on Earth: time zones and solar time. The Practice section has exercises at several difficulty levels.',
-       ['calculators: real distance, map distance, working out the scale','numerical, verbal and linear scale; which scale is larger','world clocks, time conversion and solar time','practice exercises with a score']]},
+   pl:['Obliczenia skali','Przeliczanie odległości na mapie i w terenie oraz rodzaje skali. W części „Praktyka” rozwiązujesz zadania na różnych poziomach trudności.',
+       ['kalkulatory: odległość w terenie, odległość na mapie, obliczanie skali','skala liczbowa, mianowana i liniowa; która skala jest większa','zadania do ćwiczenia z punktacją, także z powierzchnią']],
+   en:['Map scale calculations','Converting distances between the map and the real world, and types of scale. The Practice section has exercises at several difficulty levels.',
+       ['calculators: real distance, map distance, working out the scale','numerical, verbal and linear scale; which scale is larger','practice exercises with a score, including area']]},
+  {id:'czas', s:'geo', file:'geografia/kalkulator-skali-i-czasu.html', q:'&czesc=czas', lang:'full',
+   pl:['Rachuba czasu na Ziemi','Strefy czasowe i czas słoneczny: która godzina jest teraz w różnych miejscach świata i jak ją obliczyć.',
+       ['zegary świata z paskiem dnia i nocy','przeliczanie godziny między miastami, z czasem letnim i zmianą daty','czas słoneczny z długości geograficznej: 15° to godzina, 1° to 4 minuty']],
+   en:['Time on Earth','Time zones and solar time: what time it is now in different places and how to work it out.',
+       ['world clocks with a day and night strip','converting the time between cities, including daylight saving and date changes','solar time from longitude: 15° is an hour, 1° is 4 minutes']]},
   {id:'panstwa', s:'geo', file:'geografia/dane-o-panstwach.html', lang:'full',
    pl:['Dane o państwach','Porównywarka państw świata z aktualnymi danymi z Banku Światowego i Wikidata: ludność, gospodarka, środowisko i poziom życia.',
        ['porównanie do 5 państw w wybranych cechach','zmiany w czasie, rankingi i mapa świata','wykres zależności między dwiema cechami','quiz sprawdzający wiedzę o państwach']],
@@ -311,14 +316,14 @@ const TOOLS = [
    en:['Political map of Europe','An interactive map of European countries. Click a country to see its key facts, or check who belongs to NATO, the EU, Schengen and the euro area.',
        ['a map of every European country plus a list to choose from','capital, area, population, flag and other key facts','membership maps: NATO, EU, Schengen, euro area']]},
   {id:'konkurs', s:'geo', solo:1, file:'geografia/konkurs-geograficzny.html', lang:'contest',
-   pl:['Konkurs geograficzny – ćwiczenia','Losowanie zadań z konkursu geograficznego dla szkół podstawowych województwa mazowieckiego. Wybierz etap, wylosuj zadanie, rozwiąż je i sprawdź odpowiedź w kluczu.',
+   pl:['Konkurs geograficzny','Losowanie zadań z konkursu geograficznego dla szkół podstawowych województwa mazowieckiego. Wybierz etap, wylosuj zadanie, rozwiąż je i sprawdź odpowiedź w kluczu.',
        ['etapy: szkolny, rejonowy i wojewódzki','zadania z arkuszy konkursowych 2019–2025 i arkuszy ćwiczeniowych','licznik rozwiązanych zadań i zdobytych punktów']],
-   en:['Geography contest – practice','Random tasks from the Masovian geography contest for primary schools. Pick a stage, draw a task, solve it and check the answer key.',
+   en:['Geography contest','Random tasks from the Masovian geography contest for primary schools. Pick a stage, draw a task, solve it and check the answer key.',
        ['school, district and regional stages','tasks from the 2019–2025 contest papers and practice papers','tracks solved tasks and points scored']]},
   {id:'poziomice', s:'geo', file:'geografia/poziomice.html', lang:'full',
-   pl:['Poziomice – ćwiczenia','Wysokość bezwzględna i względna, poziomice i skala barw na mapie. Najpierw teoria z interaktywnymi przykładami, potem zadania i quiz.',
+   pl:['Poziomice','Wysokość bezwzględna i względna, poziomice i skala barw na mapie. Najpierw teoria z interaktywnymi przykładami, potem zadania i quiz.',
        ['przekrój terenu z suwakami: szczyt, dolina, depresja','czym są poziomice i jak czytać mapę hipsometryczną','zadania do rozwiązania na losowej mapie','quiz: rozpoznaj formę terenu po poziomicach']],
-   en:['Contour lines – practice','Absolute and relative height, contour lines and the colour scale on maps. Theory with interactive examples first, then exercises and a quiz.',
+   en:['Contour lines','Absolute and relative height, contour lines and the colour scale on maps. Theory with interactive examples first, then exercises and a quiz.',
        ['terrain cross-section with sliders: peak, valley, depression','what contour lines are and how to read a relief map','exercises on a random map','quiz: recognise the landform from its contour lines']]},
   {id:'klimat', s:'geo', file:'geografia/klimatogramy.html', lang:'full',
    pl:['Klimat i klimatogramy','Jak czytać klimatogram, czym różnią się strefy klimatyczne i jak je rozpoznać. Prawdziwe dane ze stacji z całego świata.',
@@ -502,7 +507,7 @@ function openTool(id){
   $('#dlgReport').textContent = u.report;
   $('#dlgReport').dataset.reportTool = id;
   $('#dlgGo').textContent = u.go;
-  $('#dlgGo').href = t.file + '?lang=' + L + (t.g ? '&tryb=generator' : '');
+  $('#dlgGo').href = t.file + '?lang=' + L + (t.q || '') + (t.g ? '&tryb=generator' : '');
   history.replaceState(null, '', '#' + id);
   $('#dlg').showModal();
 }

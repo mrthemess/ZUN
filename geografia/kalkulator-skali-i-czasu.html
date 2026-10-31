@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<!--og--><meta property="og:type" content="website"><meta property="og:site_name" content="Zakład utylizacji niewiedzy"><meta property="og:title" content="Kalkulator skali i stref czasowych"><meta property="og:url" content="https://narzedzia.netlify.app/geografia/kalkulator-skali-i-czasu.html"><meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><!--og-->
+<!--og--><meta property="og:type" content="website"><meta property="og:site_name" content="Zakład utylizacji niewiedzy"><meta property="og:title" content="Obliczenia skali"><meta property="og:url" content="https://narzedzia.netlify.app/geografia/kalkulator-skali-i-czasu.html"><meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><!--og-->
 <!--seo--><meta name="description" content="Przeliczanie odległości na mapie i w terenie, rodzaje skali oraz czas na Ziemi: strefy czasowe i czas słoneczny. W części „Praktyka” rozwiązujesz zadania na różnych poziomach trudności."><meta property="og:description" content="Przeliczanie odległości na mapie i w terenie, rodzaje skali oraz czas na Ziemi: strefy czasowe i czas słoneczny. W części „Praktyka” rozwiązujesz zadania na różnych poziomach trudności."><link rel="canonical" href="https://narzedzia.netlify.app/geografia/kalkulator-skali-i-czasu.html"><!--seo-->
 
 <!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('skalaPrLang',l)}catch(e){}})();</script><!--site-lang-->
+<!--czesc--><script>var CZESC=new URLSearchParams(location.search).get('czesc')==='czas'?'czas':'skala';document.documentElement.dataset.czesc=CZESC;</script><!--czesc-->
 
 
 
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Kalkulator skali i stref czasowych</title>
+<title>Obliczenia skali</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
 <style>
@@ -123,11 +124,12 @@ input.w-num{width:8.5em}input.w-sc{width:7.5em}input.w-sm{width:5em}
 #praktyka .mut{color:var(--muted);font-size:.9rem}
 .main-tabs{flex-wrap:wrap}
 @media (max-width:640px){.main-tabs button{padding:7px 13px;font-size:.95rem}}
+html[data-czesc=czas] .main-tabs,html[data-czesc=skala] [data-main=czas]{display:none!important}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><h1 data-i18n="h1">Kalkulator skali i stref czasowych</h1>
+<header><h1 data-i18n="h1">Obliczenia skali</h1>
 <div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
 <div class="main-tabs" role="tablist"><button role="tab" data-main="skala" aria-selected="true" data-i18n="tabScale">Skala mapy</button><button role="tab" data-main="czas" aria-selected="false" data-i18n="tabTime">Czas na Ziemi</button><button role="tab" data-main="praktyka" aria-selected="false" data-i18n="tabPr">Praktyka</button></div></div></header>
 
@@ -253,7 +255,7 @@ const num=v=>numL(v,L);
 const scl=v=>{const s=String(v).replace(/[\s  ]/g,'');const m=s.match(L==='en'?/^(?:1:)?(\d+(?:[.,]\d+)*)$/:/^(?:1:)?(\d+(?:[.,]\d+)?)$/);return m?num(m[1]):NaN;};
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const err=t=>`<div class="answer err"><p style="margin:0">${t}</p></div>`;
-const I18N_EN={h1:'Scale and time zone calculator',tabScale:'Map scale',tabTime:'Time on Earth',tabPr:'Practice',
+const I18N_EN={h1:CZESC==='czas'?'Time on Earth':'Map scale calculations',tabScale:'Map scale',tabTime:'Time on Earth',tabPr:'Practice',
  sTeren:'Distance on the ground',sMapa:'Distance on the map',sOblicz:'Find the scale',sZamiana:'Types of scale',sPorownaj:'Which scale is larger?',
  tH:'How far is it on the ground?',tSub:'Measure the distance on the map with a ruler and enter the map scale.',lMapDist:'Distance on the map',lScale:'Map scale',
  mH:'How long is it on the map?',mSub:'Enter the distance on the ground and the map scale.',lGroundDist:'Distance on the ground',
@@ -269,7 +271,9 @@ const I18N_EN={h1:'Scale and time zone calculator',tabScale:'Map scale',tabTime:
 const I18N_PL={};
 $$('[data-i18n]').forEach(el=>{I18N_PL[el.dataset.i18n]=el.innerHTML;});
 $$('[data-i18n-title]').forEach(el=>{I18N_PL[el.dataset.i18nTitle]=el.title;});
-const TITLE_PL=document.title, TITLE_EN='Scale and time zone calculator';
+// jeden plik, dwa narzędzia na stronie głównej: obliczenia skali (z praktyką) i rachuba czasu (?czesc=czas)
+if(CZESC==='czas')I18N_PL.h1='Rachuba czasu na Ziemi';
+const TITLE_PL=I18N_PL.h1, TITLE_EN=I18N_EN.h1;
 function applyStatic(){
   const D=L==='en'?I18N_EN:I18N_PL;
   $$('[data-i18n]').forEach(el=>{el.innerHTML=D[el.dataset.i18n];});
@@ -585,6 +589,7 @@ function relang(old){const tk=P.task;if(!tk)return;
  render();}
 window.__skalaPr={P,newTask,render,stash,relang};
 QA('[data-main]').forEach(b=>b.addEventListener('click',()=>{const on=b.dataset.main==='praktyka';Q('#praktyka').hidden=!on;if(on){if(!P.task)newTask();render();}}));
+if(CZESC==='czas')Q('[data-main="czas"]').click();
 })();
 
 </script>
