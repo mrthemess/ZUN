@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!--og--><meta property="og:type" content="website"><meta property="og:site_name" content="Zakład utylizacji niewiedzy"><meta property="og:title" content="Wirtualne laboratorium"><meta property="og:url" content="https://narzedzia.netlify.app/biologia/laboratorium.html"><meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><!--og-->
+<!--seo--><meta name="description" content="Wirtualne laboratorium: doświadczenia z fotosyntezą, enzymami, oddychaniem i fermentacją, krok po kroku według metody naukowej, plus teoria i karta pracy."><meta property="og:description" content="Wirtualne laboratorium: doświadczenia z fotosyntezą, enzymami, oddychaniem i fermentacją, krok po kroku według metody naukowej, plus teoria i karta pracy."><link rel="canonical" href="https://narzedzia.netlify.app/biologia/laboratorium.html"><!--seo-->
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('labLang',l)}catch(e){}})();</script><!--site-lang-->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wirtualne laboratorium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+<style>
+:root{--bg:#edf3ef;--paper:#fcfdfc;--ink:#14201a;--muted:#53645b;--line:#cfdcd4;--soft:#e2ede6;--acc:#1d7a58;--acc-t:#16684a;--acc-ink:#fff;--ok:#2e7d4f;--no:#b4432a;--focus:#c2571a;--stage:#f7fbf8;--hl:#e8a400;--ctl:#a85512;--s1:#2563a8;--s2:#1d7a58;--s3:#b4432a;--glass:#7b8c84;--bath:#cfe6f3;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1714;--paper:#16201c;--ink:#e2ece6;--muted:#97a9a0;--line:#2a3a33;--soft:#1d2a25;--acc:#3fae84;--acc-t:#8fdcb8;--acc-ink:#08140f;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--stage:#1b2722;--hl:#ffc233;--ctl:#f0a868;--s1:#7fb2ef;--s2:#5cc28a;--s3:#f08a70;--glass:#9fb3aa;--bath:#24435a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1714;--paper:#16201c;--ink:#e2ece6;--muted:#97a9a0;--line:#2a3a33;--soft:#1d2a25;--acc:#3fae84;--acc-t:#8fdcb8;--acc-ink:#08140f;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--stage:#1b2722;--hl:#ffc233;--ctl:#f0a868;--s1:#7fb2ef;--s2:#5cc28a;--s3:#f08a70;--glass:#9fb3aa;--bath:#24435a;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 'Atkinson Hyperlegible',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;letter-spacing:-.015em;line-height:1.15}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 80px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+header h1{margin:0;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800}header p{margin:2px 0 0;color:var(--muted)}
+.hr{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:5px 12px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--paper);font-weight:700}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 15px}
+.tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.btn{font:inherit;font-size:.95rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:8px 14px}
+.btn:hover:not(:disabled){border-color:var(--acc)}.btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:700}
+.btn.ctl{border-color:var(--ctl);color:var(--ctl);font-weight:700}
+.btn:disabled{opacity:.5;cursor:default}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;min-width:0}
+.card h2{margin:0 0 6px;font-size:1.45rem}.card h3{margin:14px 0 6px;font-size:1.12rem}
+.card p{margin:0 0 10px}.card ul,.card ol{margin:0 0 10px;padding-left:20px}.card li{margin:3px 0}
+.note{font-size:.88rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:5px 12px;display:flex;gap:6px;align-items:center}
+.chips button[aria-pressed=true]{border-color:var(--acc);background:var(--soft);color:var(--acc-t)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:14px}
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.seg button+button{border-left:1.5px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:700}
+.seg button:disabled{opacity:.55;cursor:default}
+.bar .lbl,.lbl{font-size:.88rem;color:var(--muted);font-weight:700}
+label.ck{display:inline-flex;gap:7px;align-items:center;cursor:pointer;font-size:.95rem}
+label.ck input{accent-color:var(--acc);width:18px;height:18px;margin:0}
+.intro{margin:12px 0 0;color:var(--muted)}
+.kicker{display:block;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.75rem}
+/* laboratorium */
+.xgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:16px;align-items:start}
+.stage{background:var(--stage);border:1.5px solid var(--line);border-radius:16px;padding:8px;min-width:0}
+.stage svg{display:block;width:100%;height:auto}
+.stage .cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:4px 6px 2px;font-size:.88rem;color:var(--muted)}
+dl.frame{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr);margin:6px 0 0;border-top:1px solid var(--line)}
+dl.frame dt{color:var(--muted);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:9px 10px 9px 0;border-bottom:1px solid var(--line)}
+dl.frame dd{margin:0;padding:8px 0;border-bottom:1px solid var(--line);min-width:0}
+dl.frame dd.pb{font-weight:700}
+dd .ctlt{color:var(--ctl);font-weight:700}
+.hyps{display:grid;gap:6px}
+.hyps label{display:flex;gap:9px;align-items:flex-start;cursor:pointer;border:1.5px solid var(--line);border-radius:10px;padding:7px 10px}
+.hyps label:has(input:checked){border-color:var(--acc);background:var(--soft)}
+.hyps input{accent-color:var(--acc);width:18px;height:18px;margin:3px 0 0;flex:none}
+.hyps input:disabled+span{opacity:.85}
+.ctrlbox{margin-top:12px;display:grid;gap:10px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.xval{font-weight:700;font-size:1.15rem;color:var(--acc-t)}
+.rng{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.readout{background:var(--soft);border-radius:12px;padding:8px 12px;font-weight:700}
+.readout small{font-weight:400;color:var(--muted)}
+ul.chk{list-style:none;padding:0;margin:6px 0 12px}ul.chk li{display:flex;gap:8px;align-items:flex-start;margin:4px 0}
+ul.chk li b{flex:none;width:1.4em;text-align:center}ul.chk li.ok b{color:var(--ok)}ul.chk li.todo b{color:var(--muted)}
+.cons{display:grid;gap:8px}
+.cons button{font:inherit;text-align:left;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:10px 12px}
+.cons button:hover:not(:disabled){border-color:var(--acc)}
+.cons button:disabled{cursor:default;color:var(--ink)}
+.cons button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--paper))}
+.cons button.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 12%,var(--paper))}
+.fun{background:var(--soft);border-radius:12px;padding:10px 12px;margin-top:12px}
+.fun::before{content:"🔬 "}
+/* tabele */
+.tablewrap{overflow-x:auto;margin-top:10px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:center;vertical-align:top}
+th:first-child,td:first-child{text-align:left}
+thead th{background:var(--soft);font-size:.88rem}
+tr.ctlrow td:first-child{color:var(--ctl);font-weight:700}
+table.cmp{min-width:780px}table.cmp td{text-align:left;font-size:.92rem}table.cmp th{text-align:left}
+table.cmp tbody th{background:var(--soft);font-size:.85rem;width:150px}
+table.stg{min-width:680px}table.stg td{text-align:left;font-size:.92rem}
+sup{font-size:.7em}sub{font-size:.7em}
+.ugrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
+.ucard h3{margin-top:0;display:flex;gap:8px;align-items:center;font-size:1.2rem}
+.myth{border-left:6px solid var(--ctl)}
+/* równania */
+.eqbox{background:var(--stage);border:1.5px solid var(--line);border-radius:14px;padding:16px 12px;margin:12px 0;overflow-x:auto}
+.eq{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:center;gap:10px 10px;font-size:clamp(1.1rem,2.6vw,1.65rem);font-weight:700}
+.eq .sp{display:inline-flex;flex-direction:column;align-items:center;line-height:1.2}
+.eq .sp small{font-size:.78rem;font-weight:400;color:var(--muted);margin-top:3px;max-width:9em;text-align:center}
+.eq .ar small.ov{font-size:.72rem;white-space:nowrap;margin:0 0 -2px}
+.eq .ar span{line-height:1.2}
+.eq .en{color:var(--ctl)}
+table.atoms{max-width:520px}
+table.atoms input{width:4.4em;font:inherit;padding:4px 6px;border:1.5px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);text-align:center}
+table.atoms input.ok{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}table.atoms input.no{border-color:var(--no);box-shadow:0 0 0 1px var(--no)}
+.dots{display:inline-flex;flex-wrap:wrap;gap:2px;max-width:200px;vertical-align:middle}
+.dots i{width:9px;height:9px;border-radius:50%;display:inline-block;border:1px solid #33413a}
+.fb{margin-top:14px;font-weight:700}.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.expl{margin:6px 0 12px}
+.q{font-size:1.2rem;font-weight:700;margin:4px 0 14px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opts button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:12px 14px;text-align:left}
+.opts button:hover:not(:disabled){border-color:var(--acc)}
+.opts button:disabled{cursor:default;color:var(--ink)}
+.opts button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--paper))}
+.opts button.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 12%,var(--paper))}
+.score{color:var(--muted);font-size:.95rem;margin:0 0 6px}
+.scen{background:var(--stage);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 14px;font-size:1.05rem}
+.diag svg{display:block;width:100%;height:auto;max-height:420px}
+.lfread{display:grid;gap:4px;margin-top:8px;font-size:.95rem}
+.lfread span i{display:inline-block;width:14px;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
+/* karta pracy */
+.sheet{background:#fff;color:#111;border-radius:6px;padding:22px 24px;margin-top:16px;box-shadow:0 1px 6px rgba(0,0,0,.15);font-family:'Atkinson Hyperlegible',system-ui,sans-serif;overflow-x:auto}
+.sheet h3{text-align:center;margin:0 0 10px;font-size:1.3rem;color:#111}
+.sheet p{margin:0 0 6px}
+.sheet .tk{font-weight:700;margin:14px 0 2px}.sheet .ins{font-style:italic;margin:0 0 6px}
+.sheet svg{display:block;width:auto;height:auto;max-width:100%;max-height:360px;margin:4px auto}
+.sheet table{border-collapse:collapse;width:100%;font-size:.9rem;margin:4px 0 10px}
+.sheet th,.sheet td{border:1px solid #000;padding:5px 7px;color:#111;text-align:left;vertical-align:top;background:#fff}
+.sheet th{background:#d9d9d9}.sheet td.bl{height:2.2em}
+.sheet .bank{border:1px solid #444;padding:6px 10px;margin:4px 0 8px;font-size:.92rem}
+.sheet ol.abc{list-style:upper-alpha;padding-left:26px;margin:4px 0}
+.sheet .key{border-top:2px dashed #999;margin-top:18px;padding-top:8px}
+.wsopt{display:grid;gap:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.status{font-size:.9rem;color:var(--muted);margin-left:4px}
+@media (max-width:860px){.xgrid,.ugrid{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}}
+@media (max-width:560px){dl.frame{grid-template-columns:1fr}dl.frame dt{border-bottom:0;padding-bottom:0}}
+@media (max-width:480px){.seg button{padding:6px 9px;font-size:.86rem}.card{padding:14px 14px}.sheet{padding:14px 12px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div><h1 id="t1"></h1><p id="t2"></p></div>
+<div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
+<div class="tabs" role="tablist" id="tabs"></div></div></header>
+<main id="app"></main>
+</div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let L='pl';try{const s=localStorage.getItem('labLang');if(s==='pl'||s==='en')L=s;}catch(e){}
+const tr=(pl,en)=>L==='pl'?pl:en, T=a=>a[L==='pl'?0:1];
+// liczby w zapisie danego języka, z prawdziwym minusem
+const NF=(n,d=0)=>n.toLocaleString(L==='pl'?'pl-PL':'en-GB',{maximumFractionDigits:d,minimumFractionDigits:0}).replace('-','−');
+const NFx=(n,d)=>n.toLocaleString(L==='pl'?'pl-PL':'en-GB',{maximumFractionDigits:d,minimumFractionDigits:d}).replace('-','−');
+const shuffle=(a,r=Math.random)=>{const c=[...a];for(let i=c.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c;};
+const pick=(a,n,r)=>shuffle(a,r).slice(0,n);
+const rngOf=seed=>{let s=seed%2147483647;if(s<=0)s+=2147483646;return()=>(s=s*16807%2147483647)/2147483647;};
+const gauss=r=>{let u=0;while(!u)u=r();const v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);};
+const rnd=(v,d=0)=>{const k=Math.pow(10,d);return Math.round(v*k)/k;};
+const RM=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+// wzory chemiczne: cyfry → indeksy dolne
+const SUBS='₀₁₂₃₄₅₆₇₈₉';
+const fU=f=>f.replace(/\d/g,d=>SUBS[+d]);
+const fH=f=>esc(f).replace(/(\d+)/g,'<sub>$1</sub>');
+const subH=s=>esc(s).replace(/[₀-₉]+/g,m=>'<sub>'+[...m].map(c=>SUBS.indexOf(c)).join('')+'</sub>');
+
+const UI={
+ t1:['Wirtualne laboratorium','Virtual laboratory'],
+ t2:['Doświadczenia i teoria: fotosynteza, oddychanie, fermentacja i enzymy.','Experiments and theory: photosynthesis, respiration, fermentation and enzymes.'],
+ tabs:{exp:['Doświadczenia','Experiments'],err:['Znajdź błąd','Spot the flaw'],theory:['Teoria','Theory'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
+};
+// ---------- modele ----------
+// aktywność enzymu: wzrost do optimum (Q10), powyżej – denaturacja aż do zera w temperaturze "end"
+const enzT=(t,opt,end,q=2)=>t<=opt?Math.pow(q,(t-opt)/10):Math.max(0,1-Math.pow((t-opt)/(end-opt),2));
+const gpH=(v,opt,w)=>Math.exp(-Math.pow((v-opt)/w,2));
+// tempo fotosyntezy: gładkie minimum czynnika świetlnego (a) i ograniczenia przez CO2 i temperaturę (b)
+function photoCore(I,co2,temp,eff=1){const a=.75*I*eff,C=co2+.03,b=60*C/(C+.3)*enzT(temp,30,44),th=.9,s=a+b;return {r:(s-Math.sqrt(s*s-4*th*a*b))/(2*th),a,b};}
+const SPECIAL={dark:['ciemność','darkness'],boiled:['materiał ugotowany','boiled material'],boiledS:['ślina przegotowana','boiled saliva'],nosugar:['bez cukru (woda)','no sugar (water)']};
+
+const EX={
+ photo:{n:['Fotosynteza – moczarka kanadyjska','Photosynthesis – Canadian waterweed'],sh:['Fotosynteza (moczarka)','Photosynthesis (waterweed)'],ic:'🌿',
+  setup:['Pęd moczarki kanadyjskiej (Elodea canadensis) umieszczono w zlewce z wodą, ściętym końcem do góry, i oświetlono lampą. Z przeciętej łodygi wydobywają się pęcherzyki gazu bogatego w tlen. Liczba pęcherzyków w ciągu 1 minuty jest miarą intensywności fotosyntezy.','A shoot of Canadian waterweed (Elodea canadensis) was placed in a beaker of water, cut end up, and lit by a lamp. Bubbles of oxygen-rich gas come out of the cut stem. The number of bubbles per minute is a measure of the rate of photosynthesis.'],
+  dep:{n:['liczba pęcherzyków tlenu wydzielonych w ciągu 1 min','number of oxygen bubbles given off in 1 min'],ax:['pęcherzyki / min','bubbles / min'],u:'',d:0},
+  params:{
+   dist:{n:['odległość lampy od zlewki','distance of the lamp from the beaker'],u:'cm',vals:[5,10,15,20,30,40,50],def:20},
+   co2:{n:['stężenie NaHCO₃ (źródło CO₂)','NaHCO₃ concentration (CO₂ source)'],u:'%',d:1,vals:[0,.1,.2,.4,.6,.8,1],def:.5},
+   temp:{n:['temperatura wody','water temperature'],u:'°C',vals:[5,10,15,20,25,30,35,40,45],def:25},
+   col:{n:['barwa światła','colour of light'],cat:[{v:'white',n:['białe','white']},{v:'red',n:['czerwone','red']},{v:'blue',n:['niebieskie','blue']},{v:'green',n:['zielone','green']}],def:'white'}},
+  fixed:[['ten sam pęd moczarki (ta sama długość)','the same waterweed shoot (same length)'],['ta sama objętość wody w zlewce','the same volume of water in the beaker'],['czas liczenia: 1 min, po 5 min odczekania','counting time: 1 min, after a 5-minute wait']],
+  model(p,r){if(p.flag==='dark')return 0;const eff={white:1,red:.85,blue:.75,green:.2}[p.col];const m=photoCore(100*Math.pow(10/p.dist,2),p.co2,p.temp,eff).r;return Math.max(0,Math.round(m*(1+.07*gauss(r))+.6*gauss(r)));},
+  inv:{
+   light:{x:'dist',std:{co2:.5,temp:25,col:'white'},need:4,ctrl:{flag:'dark',d:['zestaw zaciemniony (lampa wyłączona, zlewka przykryta)','a darkened set-up (lamp off, beaker covered)']},
+    ws:[10,20,30,40,50],extra:[['między lampą a zlewką stoi naczynie z wodą, które pochłania ciepło lampy','a container of water between lamp and beaker absorbs the heat from the lamp']],
+    prob:['Czy natężenie światła wpływa na intensywność fotosyntezy moczarki?','Does light intensity affect the rate of photosynthesis in waterweed?'],
+    tip:['Im bliżej lampa, tym więcej światła dociera do rośliny.','The closer the lamp, the more light reaches the plant.'],
+    hyps:[['Im większe natężenie światła, tym intensywniejsza fotosynteza.','The higher the light intensity, the faster the rate of photosynthesis.',1],['Natężenie światła nie wpływa na intensywność fotosyntezy.','Light intensity has no effect on the rate of photosynthesis.',0],['Im większe natężenie światła, tym słabsza fotosynteza.','The higher the light intensity, the slower the rate of photosynthesis.',0]],
+    concl:[[['Wraz ze wzrostem natężenia światła (zbliżaniem lampy) intensywność fotosyntezy rośnie – ale tylko do pewnej granicy, powyżej której już się nie zwiększa.','As light intensity increases (lamp moved closer), the rate of photosynthesis rises – but only up to a limit, above which it no longer increases.'],['Tak. Przy silnym świetle czynnikiem ograniczającym staje się coś innego, np. stężenie CO₂ lub temperatura.','Yes. In strong light something else becomes the limiting factor, e.g. the CO₂ concentration or temperature.']],
+     [['Im dalej od lampy, tym intensywniejsza fotosynteza.','The further from the lamp, the faster photosynthesis.'],['Wyniki pokazują odwrotną zależność: najmniej pęcherzyków jest wtedy, gdy lampa stoi najdalej.','The results show the opposite: the fewest bubbles appear when the lamp is furthest away.']],
+     [['Moczarka wydziela pęcherzyki dwutlenku węgla, bo w świetle szybciej oddycha.','Waterweed gives off bubbles of carbon dioxide because it respires faster in light.'],['Pęcherzyki zawierają głównie tlen – produkt fotosyntezy. W ciemności (próba kontrolna) prawie ich nie ma.','The bubbles contain mainly oxygen – a product of photosynthesis. In darkness (the control) there are almost none.']],
+     [['Natężenie światła jest jedynym czynnikiem wpływającym na fotosyntezę.','Light intensity is the only factor that affects photosynthesis.'],['To zbyt daleko idący wniosek – zbadano tylko jeden czynnik. Na fotosyntezę wpływają też m.in. CO₂ i temperatura.','This goes too far – only one factor was tested. CO₂ and temperature, among others, also affect photosynthesis.']]],
+    adv:['Natężenie światła maleje z kwadratem odległości: lampa 2 razy dalej to ok. 4 razy mniej światła. Wypłaszczenie (plateau) wykresu oznacza, że światło przestało być czynnikiem ograniczającym – teraz tempo fotosyntezy ogranicza stężenie CO₂ (prawo czynnika ograniczającego).','Light intensity falls with the square of the distance: a lamp twice as far away gives about 4 times less light. The plateau on the graph means light is no longer the limiting factor – the rate is now limited by the CO₂ concentration (the limiting-factor principle).']},
+   co2:{x:'co2',std:{dist:10,temp:25,col:'white'},need:4,ctrl:{x:0,d:['woda przegotowana (bez CO₂), bez dodatku NaHCO₃','boiled water (CO₂ removed), no NaHCO₃ added']},
+    ws:[.1,.2,.4,.6,1],
+    prob:['Czy stężenie dwutlenku węgla w wodzie wpływa na intensywność fotosyntezy moczarki?','Does the concentration of carbon dioxide in the water affect the rate of photosynthesis in waterweed?'],
+    tip:['NaHCO₃ (wodorowęglan sodu) jest w wodzie źródłem CO₂.','NaHCO₃ (sodium hydrogencarbonate) releases CO₂ in water.'],
+    hyps:[['Im więcej CO₂ (NaHCO₃) w wodzie, tym intensywniejsza fotosynteza.','The more CO₂ (NaHCO₃) in the water, the faster photosynthesis.',1],['Stężenie CO₂ nie wpływa na fotosyntezę.','CO₂ concentration has no effect on photosynthesis.',0],['Im więcej CO₂, tym słabsza fotosynteza.','The more CO₂, the slower photosynthesis.',0]],
+    concl:[[['Dodatek NaHCO₃ (źródła CO₂) zwiększa intensywność fotosyntezy; przy wyższych stężeniach przyrost jest coraz mniejszy.','Adding NaHCO₃ (a source of CO₂) increases the rate of photosynthesis; at higher concentrations the increase gets smaller and smaller.'],['Tak. CO₂ jest substratem fotosyntezy. Gdy jest go dużo, tempo zaczynają ograniczać inne czynniki.','Yes. CO₂ is a substrate of photosynthesis. When there is plenty, other factors start to limit the rate.']],
+     [['Moczarka nie potrzebuje CO₂, bo węgiel pobiera z wody.','Waterweed does not need CO₂ because it takes carbon from the water.'],['Woda (H₂O) nie zawiera węgla. W wodzie przegotowanej, bez CO₂, fotosynteza prawie ustaje.','Water (H₂O) contains no carbon. In boiled water with no CO₂, photosynthesis almost stops.']],
+     [['NaHCO₃ jest pokarmem moczarki, który zastępuje jej fotosyntezę.','NaHCO₃ is food for the waterweed that replaces photosynthesis.'],['NaHCO₃ to tylko źródło CO₂ – substratu fotosyntezy. Roślina sama wytwarza pokarm.','NaHCO₃ is only a source of CO₂ – a substrate of photosynthesis. The plant makes its own food.']],
+     [['Im więcej NaHCO₃, tym fotosynteza rośnie bez końca.','The more NaHCO₃, the more photosynthesis increases – without limit.'],['Wyniki pokazują, że przyrost słabnie – krzywa się wypłaszcza.','The results show the increase slowing down – the curve levels off.']]],
+    adv:['NaHCO₃ dostarcza do wody jony HCO₃⁻ i CO₂. Lampa stoi blisko (10 cm), więc światła jest dużo i to CO₂ ogranicza tempo fotosyntezy – dopóki jest go mało. CO₂ jest wiązany w cyklu Calvina przez enzym RuBisCO.','NaHCO₃ supplies HCO₃⁻ ions and CO₂ to the water. The lamp is close (10 cm), so there is plenty of light and CO₂ limits the rate while it is scarce. CO₂ is fixed in the Calvin cycle by the enzyme RuBisCO.']},
+   temp:{x:'temp',std:{dist:10,co2:1,col:'white'},need:4,ctrl:{x:20,d:['temperatura pokojowa (20 °C)','room temperature (20 °C)']},
+    ws:[10,15,25,30,35,40],extra:[['zlewka stoi w łaźni wodnej o ustalonej temperaturze','the beaker stands in a water bath at a set temperature']],
+    prob:['Jak temperatura wpływa na intensywność fotosyntezy moczarki?','How does temperature affect the rate of photosynthesis in waterweed?'],
+    tip:['Temperaturę wody ustala się w łaźni wodnej.','The water temperature is set with a water bath.'],
+    hyps:[['Fotosynteza jest najintensywniejsza w umiarkowanej temperaturze, a w bardzo niskiej i bardzo wysokiej słabnie.','Photosynthesis is fastest at a moderate temperature and slows down when it is very cold or very hot.',1],['Im wyższa temperatura, tym zawsze intensywniejsza fotosynteza.','The higher the temperature, the faster photosynthesis – always.',0],['Temperatura nie wpływa na fotosyntezę.','Temperature has no effect on photosynthesis.',0]],
+    concl:[[['Intensywność fotosyntezy rośnie wraz z temperaturą do ok. 30 °C, a powyżej ok. 35–40 °C gwałtownie spada.','The rate of photosynthesis rises with temperature up to about 30 °C and falls sharply above about 35–40 °C.'],['Tak. Reakcje fotosyntezy katalizują enzymy – w wysokiej temperaturze ulegają one uszkodzeniu (denaturacji).','Yes. The reactions of photosynthesis are catalysed by enzymes – at high temperatures they are damaged (denatured).']],
+     [['Im cieplej, tym więcej pęcherzyków.','The warmer it is, the more bubbles.'],['To prawda tylko do ok. 30 °C. Powyżej 35 °C liczba pęcherzyków maleje.','That is only true up to about 30 °C. Above 35 °C the number of bubbles falls.']],
+     [['W 45 °C roślina przestaje fotosyntetyzować, bo woda paruje.','At 45 °C the plant stops photosynthesising because the water evaporates.'],['Woda w zlewce nie wyparowała. Przyczyną jest uszkodzenie enzymów w wysokiej temperaturze.','The water in the beaker has not evaporated. The cause is damage to enzymes at high temperature.']],
+     [['Temperatura wpływa na fotosyntezę tylko w ciemności.','Temperature affects photosynthesis only in the dark.'],['W ciemności fotosynteza w ogóle nie zachodzi.','Photosynthesis does not happen at all in the dark.']]],
+    adv:['Etap zależny od światła słabo zależy od temperatury, ale reakcje cyklu Calvina katalizują enzymy (m.in. RuBisCO), więc w cieple przyspieszają – aż do optimum. Powyżej ok. 40 °C białka ulegają denaturacji; rośnie też tempo oddychania, które zużywa część wytworzonego tlenu.','The light-dependent stage depends little on temperature, but the Calvin-cycle reactions are catalysed by enzymes (e.g. RuBisCO), so they speed up with warmth – up to the optimum. Above about 40 °C proteins denature; respiration also speeds up and uses some of the oxygen produced.']},
+   col:{x:'col',std:{dist:15,co2:1,temp:25},need:3,ctrl:{x:'white',d:['światło białe (bez filtra)','white light (no filter)']},
+    ws:['red','blue','green'],extra:[['jednakowe natężenie światła za każdym filtrem','equal light intensity behind every filter']],
+    prob:['Czy barwa światła wpływa na intensywność fotosyntezy moczarki?','Does the colour of light affect the rate of photosynthesis in waterweed?'],
+    tip:['Barwę światła zmienia się kolorowymi filtrami.','The colour of light is changed with coloured filters.'],
+    hyps:[['Fotosynteza zachodzi najsłabiej w świetle zielonym.','Photosynthesis is slowest in green light.',1],['Barwa światła nie ma wpływu na fotosyntezę.','The colour of light has no effect on photosynthesis.',0],['Fotosynteza zachodzi najintensywniej w świetle zielonym, bo liście są zielone.','Photosynthesis is fastest in green light because leaves are green.',0]],
+    concl:[[['W świetle czerwonym i niebieskim fotosynteza zachodzi intensywnie, a w zielonym – najsłabiej.','Photosynthesis is fast in red and blue light and slowest in green light.'],['Tak. Chlorofil pochłania głównie światło czerwone i niebieskie, a zielone w większości odbija – dlatego liście są zielone.','Yes. Chlorophyll absorbs mainly red and blue light and reflects most green light – that is why leaves look green.']],
+     [['Liście są zielone, więc najlepiej wykorzystują światło zielone.','Leaves are green, so they use green light best.'],['Jest odwrotnie: zielona barwa liści to światło odbite, a nie pochłonięte.','It is the other way round: the green colour of leaves is light that is reflected, not absorbed.']],
+     [['W świetle zielonym fotosynteza nie zachodzi wcale.','Photosynthesis does not happen at all in green light.'],['Wyniki pokazują, że zachodzi, choć słabo – część światła zielonego jest pochłaniana.','The results show that it does happen, though slowly – some green light is absorbed.']],
+     [['Barwa światła nie ma znaczenia, liczy się tylko natężenie.','The colour of light does not matter, only its intensity.'],['Natężenie było jednakowe, a wyniki dla różnych barw wyraźnie się różnią.','The intensity was the same, yet the results for different colours clearly differ.']]],
+    adv:['Widmo czynnościowe fotosyntezy pokrywa się z widmem absorpcji chlorofilu a i b (maksima w świetle niebieskim i czerwonym). Barwniki pomocnicze – karotenoidy – poszerzają zakres wykorzystywanego światła.','The action spectrum of photosynthesis matches the absorption spectrum of chlorophylls a and b (peaks in blue and red light). Accessory pigments – carotenoids – widen the range of light that can be used.']}}},
+ cat:{n:['Katalaza – rozkład wody utlenionej','Catalase – breaking down hydrogen peroxide'],sh:['Katalaza','Catalase'],ic:'🥔',
+  setup:['Do probówek z 5 cm³ 3% wody utlenionej (H₂O₂) z kroplą płynu do mycia naczyń dodawano jednakowe porcje materiału z katalazą. Enzym katalaza rozkłada H₂O₂ na wodę i tlen (2 H₂O₂ → 2 H₂O + O₂). Tlen tworzy pianę – jej wysokość po 1 minucie jest miarą aktywności enzymu.','Equal portions of material containing catalase were added to test tubes with 5 cm³ of 3% hydrogen peroxide (H₂O₂) and a drop of washing-up liquid. The enzyme catalase breaks H₂O₂ down into water and oxygen (2 H₂O₂ → 2 H₂O + O₂). The oxygen forms foam – its height after 1 minute is a measure of the enzyme’s activity.'],
+  dep:{n:['wysokość piany po 1 min','foam height after 1 min'],ax:['wysokość piany [mm]','foam height [mm]'],u:'mm',d:0},
+  params:{temp:{n:['temperatura','temperature'],u:'°C',vals:[0,10,20,30,40,50,60,70,80],def:20},
+   pH:{n:['pH roztworu','pH of the solution'],u:'',pre:'pH ',vals:[2,3,4,5,6,7,8,9,10,11,12],def:7}},
+  fixed:[['ta sama masa materiału (1 g)','the same mass of material (1 g)'],['ta sama objętość i stężenie H₂O₂','the same volume and concentration of H₂O₂'],['tyle samo płynu do mycia','the same amount of washing-up liquid'],['czas pomiaru: 1 min','measuring time: 1 min']],
+  model(p,r){if(p.flag==='boiled')return Math.max(0,Math.round(Math.abs(gauss(r))*.6));const h=48*(p.mat==='yeast'?1.25:1)*enzT(p.temp,37,68,1.6)*gpH(p.pH,7,2.5);return Math.max(0,Math.round(h*(1+.06*gauss(r))+.8*gauss(r)));},
+  inv:{
+   temp:{x:'temp',std:{pH:7},need:4,ctrl:{flag:'boiled',set:{temp:20},d:['materiał ugotowany (enzym zniszczony), 20 °C','boiled material (enzyme destroyed), 20 °C']},
+    ws:[10,20,40,60,80],
+    prob:['Jak temperatura wpływa na aktywność katalazy?','How does temperature affect the activity of catalase?'],
+    tip:['Probówki ogrzewa się lub chłodzi w łaźni wodnej przed dodaniem materiału.','The tubes are warmed or cooled in a water bath before the material is added.'],
+    hyps:[['Katalaza działa najlepiej w umiarkowanej temperaturze, a w wysokiej przestaje działać.','Catalase works best at a moderate temperature and stops working when it is hot.',1],['Im wyższa temperatura, tym więcej piany.','The higher the temperature, the more foam.',0],['Temperatura nie wpływa na działanie katalazy.','Temperature has no effect on catalase.',0]],
+    concl:[[['Katalaza jest najaktywniejsza w temperaturze ok. 35–40 °C; w niskiej działa wolno, a powyżej ok. 60 °C traci aktywność.','Catalase is most active at about 35–40 °C; it works slowly in the cold and loses its activity above about 60 °C.'],['Tak. Katalaza jest białkiem – wysoka temperatura nieodwracalnie niszczy jej budowę (denaturacja).','Yes. Catalase is a protein – high temperature irreversibly destroys its structure (denaturation).']],
+     [['Materiał w gorącej wodzie utlenionej wytwarza najwięcej tlenu.','Material in hot hydrogen peroxide produces the most oxygen.'],['W 70–80 °C piany prawie nie ma – enzym jest zniszczony.','At 70–80 °C there is hardly any foam – the enzyme has been destroyed.']],
+     [['Piana to dwutlenek węgla z oddychania komórek.','The foam is carbon dioxide from cell respiration.'],['Piana zawiera tlen z rozkładu H₂O₂. Ugotowany materiał (próba kontrolna) prawie jej nie daje.','The foam contains oxygen from the breakdown of H₂O₂. Boiled material (the control) gives almost none.']],
+     [['W niskiej temperaturze katalaza zostaje trwale zniszczona.','Low temperature permanently destroys catalase.'],['Chłód tylko spowalnia enzym; po ogrzaniu znów działa. Trwale niszczy go wysoka temperatura.','Cold only slows the enzyme down; once warmed it works again. High temperature destroys it permanently.']]],
+    adv:['Katalaza chroni komórki przed szkodliwym H₂O₂, który powstaje m.in. w peroksysomach. Wraz z temperaturą cząsteczki poruszają się szybciej i częściej zderzają się z enzymem, ale powyżej optimum pękają wiązania utrzymujące przestrzenną budowę białka – centrum aktywne traci kształt.','Catalase protects cells from harmful H₂O₂, which forms e.g. in peroxisomes. As temperature rises, molecules move faster and meet the enzyme more often, but above the optimum the bonds holding the protein’s 3-D shape break – the active site loses its shape.']},
+   pH:{x:'pH',std:{temp:20},need:4,ctrl:{flag:'boiled',set:{pH:7},d:['materiał ugotowany (enzym zniszczony), pH 7','boiled material (enzyme destroyed), pH 7']},
+    ws:[3,5,7,9,11],extra:[['pH ustala się roztworami buforowymi','the pH is set with buffer solutions']],
+    prob:['Jak pH wpływa na aktywność katalazy?','How does pH affect the activity of catalase?'],
+    tip:['Do probówek dodaje się roztwory buforowe o różnym pH.','Buffer solutions of different pH are added to the tubes.'],
+    hyps:[['Katalaza działa najlepiej w odczynie obojętnym, a w silnie kwasowym i zasadowym słabiej.','Catalase works best at neutral pH and more slowly in strongly acidic or alkaline conditions.',1],['Im bardziej kwasowy odczyn, tym aktywniejsza katalaza.','The more acidic the conditions, the more active catalase is.',0],['pH nie wpływa na działanie katalazy.','pH has no effect on catalase.',0]],
+    concl:[[['Katalaza jest najaktywniejsza przy pH ok. 7; w roztworach silnie kwasowych i silnie zasadowych jej aktywność wyraźnie spada.','Catalase is most active at about pH 7; in strongly acidic and strongly alkaline solutions its activity drops markedly.'],['Tak. Każdy enzym ma swoje optimum pH – zmiana odczynu zmienia kształt jego cząsteczki.','Yes. Every enzyme has its own optimum pH – changing the pH changes the shape of the molecule.']],
+     [['Katalaza działa jednakowo przy każdym pH.','Catalase works equally well at every pH.'],['Wysokość piany wyraźnie zależy od pH.','The foam height clearly depends on pH.']],
+     [['Najwięcej piany powstaje przy pH 2, bo kwas rozkłada wodę utlenioną.','The most foam forms at pH 2 because acid breaks down hydrogen peroxide.'],['Przy pH 2 piany jest bardzo mało.','At pH 2 there is very little foam.']],
+     [['Wszystkie enzymy mają optimum przy pH 7.','All enzymes have their optimum at pH 7.'],['Za daleko idący wniosek – zbadano jeden enzym. Np. pepsyna w żołądku działa najlepiej przy pH ok. 2.','Too far-reaching – only one enzyme was tested. Pepsin in the stomach, for example, works best at about pH 2.']]],
+    adv:['Zmiana pH zmienia ładunki elektryczne grup bocznych aminokwasów enzymu, co wpływa na kształt centrum aktywnego i wiązanie substratu. Skrajne pH może denaturować białko trwale.','A change in pH alters the electric charges on the amino-acid side groups of the enzyme, which affects the shape of the active site and substrate binding. Extreme pH can denature the protein permanently.']}}},
+ amy:{n:['Amylaza ślinowa – trawienie skrobi','Salivary amylase – digesting starch'],sh:['Amylaza ślinowa','Salivary amylase'],ic:'🧪',
+  setup:['Do probówek z 1% kleikiem skrobiowym dodawano tyle samo rozcieńczonej śliny. Co 30 s pobierano kroplę mieszaniny na płytkę z kroplami płynu Lugola. Skrobia barwi płyn Lugola na granatowo; gdy cała skrobia zostanie strawiona (rozłożona głównie do maltozy), kropla pozostaje żółtobrązowa. Mierzono czas do zaniku granatowego zabarwienia.','The same amount of diluted saliva was added to test tubes of 1% starch solution. Every 30 s a drop of the mixture was placed on a spotting tile with drops of Lugol’s iodine. Starch turns the iodine blue-black; once all the starch has been digested (broken down mainly to maltose), the drop stays yellow-brown. The time until the blue-black colour disappeared was measured.'],
+  dep:{n:['czas do zaniku granatowego zabarwienia z płynem Lugola','time until the blue-black colour with iodine disappears'],ax:['czas [min]','time [min]'],u:'min',d:1},cap:20,lower:true,
+  params:{temp:{n:['temperatura','temperature'],u:'°C',vals:[0,10,20,30,37,40,50,60,70,80],def:37},
+   pH:{n:['pH roztworu','pH of the solution'],u:'',pre:'pH ',vals:[3,4,5,6,7,8,9,10,11],def:7}},
+  fixed:[['ta sama objętość i stężenie kleiku skrobiowego','the same volume and concentration of starch solution'],['ta sama ilość śliny (od tej samej osoby, tak samo rozcieńczonej)','the same amount of saliva (from the same person, diluted the same way)'],['próbki pobierane co 30 s','samples taken every 30 s']],
+  model(p,r){if(p.flag==='boiled')return null;const a=enzT(p.temp,37,62,2)*gpH(p.pH,6.8,1.6);if(a<=0)return null;const t=2/a*(1+.08*gauss(r));return t>20?null:Math.max(.5,Math.round(t*2)/2);},
+  inv:{
+   temp:{x:'temp',std:{pH:7},need:4,ctrl:{flag:'boiled',set:{temp:37},sp:'boiledS',d:['ślina przegotowana, 37 °C','boiled saliva, 37 °C']},
+    ws:[10,20,37,50,70],
+    prob:['Jak temperatura wpływa na aktywność amylazy ślinowej?','How does temperature affect the activity of salivary amylase?'],
+    tip:['Krótszy czas odbarwienia = szybsze trawienie skrobi, czyli wyższa aktywność enzymu.','A shorter time = faster starch digestion, i.e. higher enzyme activity.'],
+    hyps:[['Amylaza trawi skrobię najszybciej w temperaturze ciała człowieka (ok. 37 °C).','Amylase digests starch fastest at human body temperature (about 37 °C).',1],['Im wyższa temperatura, tym szybciej amylaza trawi skrobię.','The higher the temperature, the faster amylase digests starch.',0],['Temperatura nie wpływa na trawienie skrobi.','Temperature does not affect starch digestion.',0]],
+    concl:[[['Amylaza ślinowa najszybciej trawi skrobię w temperaturze ok. 37–40 °C; w niskiej temperaturze działa wolno, a powyżej ok. 60 °C przestaje działać.','Salivary amylase digests starch fastest at about 37–40 °C; it works slowly in the cold and stops working above about 60 °C.'],['Tak. Optimum enzymów człowieka odpowiada temperaturze ciała. Przegotowana ślina nie trawi skrobi – enzym uległ denaturacji.','Yes. The optimum of human enzymes matches body temperature. Boiled saliva does not digest starch – the enzyme has been denatured.']],
+     [['Im dłuższy czas odbarwienia, tym aktywniejszy enzym.','The longer it takes for the colour to go, the more active the enzyme.'],['Odwrotnie: aktywny enzym szybko rozkłada skrobię, więc czas jest krótki.','The other way round: an active enzyme breaks down starch quickly, so the time is short.']],
+     [['Płyn Lugola sam traci barwę w wysokiej temperaturze.','Lugol’s iodine loses its colour by itself at high temperature.'],['W 70–80 °C granatowe zabarwienie nie znika – skrobia pozostaje niestrawiona.','At 70–80 °C the blue-black colour does not disappear – the starch stays undigested.']],
+     [['Amylaza rozkłada skrobię w każdej temperaturze tak samo szybko.','Amylase breaks starch down equally fast at any temperature.'],['W 0 °C i powyżej 60 °C trawienie nie zachodzi w czasie doświadczenia, a czasy w innych temperaturach są różne.','At 0 °C and above 60 °C no digestion happens during the experiment, and the times at other temperatures differ.']]],
+    adv:['Amylaza ślinowa (ptialina) hydrolizuje wiązania glikozydowe skrobi do dekstryn i maltozy. Granatowe zabarwienie powstaje, gdy jod wnika do wnętrza helisy amylozy – po rozłożeniu łańcuchów barwny kompleks nie powstaje.','Salivary amylase (ptyalin) hydrolyses the glycosidic bonds of starch to dextrins and maltose. The blue-black colour forms when iodine fits inside the amylose helix – once the chains are broken down, the coloured complex can no longer form.']},
+   pH:{x:'pH',std:{temp:37},need:4,ctrl:{flag:'boiled',set:{pH:7},sp:'boiledS',d:['ślina przegotowana, pH 7','boiled saliva, pH 7']},
+    ws:[4,5,7,9,11],extra:[['pH ustala się roztworami buforowymi','the pH is set with buffer solutions']],
+    prob:['Jak pH wpływa na aktywność amylazy ślinowej?','How does pH affect the activity of salivary amylase?'],
+    tip:['Krótszy czas odbarwienia = szybsze trawienie skrobi, czyli wyższa aktywność enzymu.','A shorter time = faster starch digestion, i.e. higher enzyme activity.'],
+    hyps:[['Amylaza ślinowa działa najlepiej w odczynie zbliżonym do obojętnego.','Salivary amylase works best at a roughly neutral pH.',1],['Amylaza działa najlepiej w odczynie silnie kwasowym, jak w żołądku.','Amylase works best at a strongly acidic pH, as in the stomach.',0],['pH nie wpływa na działanie amylazy.','pH has no effect on amylase.',0]],
+    concl:[[['Amylaza ślinowa najszybciej trawi skrobię przy pH ok. 7; w środowisku kwasowym (pH 4 i niższym) oraz silnie zasadowym trawienie nie zachodzi.','Salivary amylase digests starch fastest at about pH 7; in acidic conditions (pH 4 and below) and strongly alkaline conditions no digestion takes place.'],['Tak. Dlatego trawienie skrobi zaczyna się w jamie ustnej, a w kwaśnym żołądku amylaza ślinowa przestaje działać.','Yes. That is why starch digestion starts in the mouth, and salivary amylase stops working in the acidic stomach.']],
+     [['Amylaza ślinowa najlepiej działa w żołądku.','Salivary amylase works best in the stomach.'],['Przy pH 3–4 skrobia nie została strawiona.','At pH 3–4 the starch was not digested.']],
+     [['pH nie ma znaczenia, bo ślina zawsze ma pH 7.','pH does not matter because saliva always has pH 7.'],['W doświadczeniu zmieniano pH roztworu, a czas odbarwienia wyraźnie się zmieniał.','In the experiment the pH of the solution was changed, and the time clearly changed too.']],
+     [['W kwaśnym środowisku skrobia rozkłada się szybciej.','Starch breaks down faster in acidic conditions.'],['W kwaśnym środowisku granatowe zabarwienie się utrzymuje – skrobia nie jest rozkładana.','In acidic conditions the blue-black colour stays – the starch is not broken down.']]],
+    adv:['W niewłaściwym pH zmienia się jonizacja grup w centrum aktywnym amylazy, co utrudnia wiązanie skrobi. Trawienie skrobi dokańcza w dwunastnicy amylaza trzustkowa, działająca w odczynie lekko zasadowym.','At the wrong pH the ionisation of groups in amylase’s active site changes, making it harder to bind starch. Starch digestion is completed in the duodenum by pancreatic amylase, which works at a slightly alkaline pH.']}}},
+ seeds:{n:['Oddychanie kiełkujących nasion','Respiration in germinating seeds'],sh:['Oddychanie nasion','Seed respiration'],ic:'🌱',
+  setup:['Do trzech jednakowych termosów wsypano po tyle samo nasion grochu: kiełkujących, suchych i ugotowanych (martwych). Wszystkie nasiona wcześniej wypłukano w środku odkażającym, aby zabić bakterie i grzyby. W korku każdego termosu umieszczono termometr i rurkę, przez którą gaz z termosu przepływał przez wodę wapienną. Po 24 h odczytano wzrost temperatury i sprawdzono, czy woda wapienna zmętniała (mętnieje w obecności CO₂).','Three identical vacuum flasks were filled with equal amounts of pea seeds: germinating, dry and boiled (dead). All the seeds had first been rinsed in disinfectant to kill bacteria and fungi. Each stopper held a thermometer and a tube through which gas from the flask passed through limewater. After 24 h the rise in temperature was read and the limewater was checked for cloudiness (it turns cloudy with CO₂).'],
+  dep:{n:['wzrost temperatury w termosie po 24 h','temperature rise in the flask after 24 h'],ax:['wzrost temperatury [°C]','temperature rise [°C]'],u:'°C',d:1},
+  params:{state:{n:['stan nasion','state of the seeds'],cat:[{v:'germ',n:['kiełkujące','germinating']},{v:'dry',n:['suche','dry']},{v:'boiled',n:['ugotowane','boiled']}],def:'germ'}},
+  fixed:[['ta sama masa nasion tego samego gatunku','the same mass of seeds of the same species'],['jednakowe termosy i ta sama temperatura początkowa (20 °C)','identical flasks and the same starting temperature (20 °C)'],['nasiona odkażone','disinfected seeds'],['czas: 24 h','time: 24 h']],
+  model(p,r){const b={germ:3.8,dry:.3,boiled:0}[p.state],sd={germ:.4,dry:.15,boiled:.1}[p.state];return Math.max(0,rnd(b+sd*gauss(r),1));},
+  lime:s=>s==='germ',
+  inv:{
+   state:{x:'state',std:{},need:2,ctrl:{x:'boiled',d:['nasiona ugotowane (martwe)','boiled (dead) seeds']},
+    ws:['germ','dry'],
+    prob:['Czy kiełkujące nasiona oddychają – wydzielają CO₂ i ciepło?','Do germinating seeds respire – giving off CO₂ and heat?'],
+    tip:['Termos ogranicza utratę ciepła, a woda wapienna wykrywa CO₂.','The vacuum flask stops heat escaping, and limewater detects CO₂.'],
+    hyps:[['Kiełkujące nasiona intensywnie oddychają, wydzielając CO₂ i energię w postaci ciepła.','Germinating seeds respire intensively, giving off CO₂ and energy as heat.',1],['Nasiona nie oddychają, bo nie mają liści.','Seeds do not respire because they have no leaves.',0],['Wszystkie nasiona – także martwe – wydzielają tyle samo ciepła.','All seeds – even dead ones – give off the same amount of heat.',0]],
+    concl:[[['Kiełkujące nasiona intensywnie oddychają: wydzielają CO₂ (woda wapienna mętnieje) i ciepło. Nasiona ugotowane nie oddychają, a suche – oddychają bardzo słabo.','Germinating seeds respire intensively: they give off CO₂ (the limewater turns cloudy) and heat. Boiled seeds do not respire, and dry seeds respire only very slowly.'],['Tak. Część energii uwalnianej w oddychaniu jest tracona jako ciepło – termos nie pozwala mu uciec.','Yes. Part of the energy released in respiration is lost as heat – the vacuum flask stops it escaping.']],
+     [['Kiełkujące nasiona wydzielają tlen, który zmętnia wodę wapienną.','Germinating seeds give off oxygen, which turns limewater cloudy.'],['Wodę wapienną zmętnia dwutlenek węgla, a nie tlen. Kiełkujące nasiona tlen pobierają.','Limewater is turned cloudy by carbon dioxide, not oxygen. Germinating seeds take oxygen in.']],
+     [['Temperatura wzrosła, bo termos ogrzał się od otoczenia.','The temperature rose because the flask was warmed by its surroundings.'],['Wszystkie termosy stały w tych samych warunkach, a temperatura wyraźnie wzrosła tylko u nasion kiełkujących.','All the flasks stood in the same conditions, but the temperature clearly rose only with the germinating seeds.']],
+     [['Suche nasiona są martwe.','Dry seeds are dead.'],['Suche nasiona żyją, ale są w stanie spoczynku – ich metabolizm jest bardzo powolny.','Dry seeds are alive but dormant – their metabolism is very slow.']]],
+    adv:['Podczas kiełkowania materiały zapasowe (skrobia, tłuszcze, białka) są rozkładane, a energia z oddychania tlenowego napędza wzrost zarodka. Odkażenie nasion jest konieczne – bez niego bakterie i grzyby rozkładające martwe nasiona też wydzielałyby CO₂ i ciepło.','During germination stored food (starch, fats, proteins) is broken down, and energy from aerobic respiration powers the growth of the embryo. Disinfecting the seeds is essential – otherwise bacteria and fungi decomposing the dead seeds would also give off CO₂ and heat.']}}},
+ yeast:{n:['Fermentacja drożdży – próba z balonikiem','Yeast fermentation – the balloon test'],sh:['Fermentacja drożdży','Yeast fermentation'],ic:'🎈',
+  setup:['Do kolb ze 100 cm³ 10% roztworu cukru dodano po tyle samo drożdży piekarskich i wymieszano. Na szyjkę każdej kolby nałożono balonik, a kolby wstawiono do łaźni wodnej. Po 30 min zmierzono objętość CO₂ zebranego w baloniku.','Equal amounts of baker’s yeast were stirred into flasks containing 100 cm³ of 10% sugar solution. A balloon was fitted over the neck of each flask, and the flasks were placed in a water bath. After 30 min the volume of CO₂ collected in each balloon was measured.'],
+  dep:{n:['objętość CO₂ w baloniku po 30 min','volume of CO₂ in the balloon after 30 min'],ax:['objętość CO₂ [cm³]','CO₂ volume [cm³]'],u:'cm³',d:0},
+  params:{temp:{n:['temperatura łaźni wodnej','water-bath temperature'],u:'°C',vals:[5,10,20,30,35,40,50,60],def:30},
+   sugar:{n:['rodzaj cukru','type of sugar'],cat:[{v:'glu',n:['glukoza','glucose']},{v:'suc',n:['sacharoza','sucrose']},{v:'starch',n:['skrobia','starch']},{v:'none',n:['brak (woda)','none (water)']}],def:'glu'}},
+  fixed:[['ta sama masa drożdży','the same mass of yeast'],['ta sama objętość i stężenie roztworu (10%)','the same volume and concentration of solution (10%)'],['jednakowe kolby i baloniki','identical flasks and balloons'],['czas: 30 min','time: 30 min']],
+  model(p,r){if(p.flag==='nosugar'||p.sugar==='none')return 0;const s={glu:1,suc:.85,starch:.04}[p.sugar];const v=50*enzT(p.temp,35,52,2)*s;return Math.max(0,Math.round(v*(1+.07*gauss(r))+.5*gauss(r)));},
+  inv:{
+   temp:{x:'temp',std:{sugar:'glu'},need:4,ctrl:{flag:'nosugar',set:{temp:30},d:['drożdże w wodzie bez cukru, 30 °C','yeast in water with no sugar, 30 °C']},
+    ws:[10,20,35,50,60],
+    prob:['Jak temperatura wpływa na intensywność fermentacji drożdży?','How does temperature affect the rate of fermentation by yeast?'],
+    tip:['Im więcej CO₂, tym większy balonik – i tym intensywniejsza fermentacja.','The more CO₂, the bigger the balloon – and the faster the fermentation.'],
+    hyps:[['Drożdże fermentują najintensywniej w temperaturze ok. 30–35 °C, a w gorącej wodzie giną.','Yeast ferments fastest at about 30–35 °C and dies in hot water.',1],['Im wyższa temperatura, tym większy balonik.','The higher the temperature, the bigger the balloon.',0],['Temperatura nie ma wpływu na drożdże.','Temperature has no effect on yeast.',0]],
+    concl:[[['Najwięcej CO₂ drożdże wytwarzają w temperaturze ok. 30–40 °C; w niskiej fermentacja jest powolna, a powyżej ok. 45 °C gwałtownie słabnie i ustaje, bo drożdże giną.','Yeast produces the most CO₂ at about 30–40 °C; in the cold fermentation is slow, and above about 45 °C it falls sharply and stops because the yeast dies.'],['Tak. Dlatego ciasto drożdżowe stawia się w ciepłym miejscu, ale drożdży nie zalewa się wrzątkiem.','Yes. That is why yeast dough is left somewhere warm, but yeast is never mixed with boiling water.']],
+     [['Im cieplej, tym intensywniejsza fermentacja.','The warmer it is, the faster fermentation goes.'],['Tylko do ok. 35–40 °C. W 60 °C balonik pozostaje pusty.','Only up to about 35–40 °C. At 60 °C the balloon stays empty.']],
+     [['Balonik napełnia się tlenem wydzielanym przez drożdże.','The balloon fills with oxygen given off by the yeast.'],['Drożdże nie wytwarzają tlenu. W fermentacji alkoholowej powstają etanol i CO₂.','Yeast does not produce oxygen. Alcoholic fermentation produces ethanol and CO₂.']],
+     [['Drożdże w zimnie giną.','Yeast dies in the cold.'],['W zimnie drożdże tylko spowalniają przemiany – po ogrzaniu znów fermentują. Giną w wysokiej temperaturze.','In the cold yeast only slows down – once warmed it ferments again. High temperature kills it.']]],
+    adv:['Na początku, gdy w kolbie jest jeszcze tlen, drożdże oddychają tlenowo; po jego zużyciu przeprowadzają fermentację alkoholową (są względnymi beztlenowcami). W obu procesach powstaje CO₂. Enzymy fermentacji (np. dekarboksylaza pirogronianowa) mają optimum ok. 30–35 °C.','At first, while there is still oxygen in the flask, yeast respires aerobically; once it is used up, yeast switches to alcoholic fermentation (yeasts are facultative anaerobes). Both processes release CO₂. The fermentation enzymes (such as pyruvate decarboxylase) have an optimum of about 30–35 °C.']},
+   sugar:{x:'sugar',std:{temp:30},need:3,ctrl:{x:'none',d:['drożdże w wodzie bez cukru','yeast in water with no sugar']},
+    ws:['glu','suc','starch'],
+    prob:['Czy rodzaj cukru wpływa na intensywność fermentacji drożdży?','Does the type of sugar affect the rate of fermentation by yeast?'],
+    tip:['Glukoza – cukier prosty, sacharoza – dwucukier, skrobia – wielocukier.','Glucose is a simple sugar, sucrose a disaccharide, starch a polysaccharide.'],
+    hyps:[['Drożdże fermentują glukozę i sacharozę, ale nie wykorzystują skrobi.','Yeast ferments glucose and sucrose but cannot use starch.',1],['Drożdże jednakowo dobrze fermentują każdy cukier.','Yeast ferments every sugar equally well.',0],['Drożdże nie potrzebują cukru do fermentacji.','Yeast does not need sugar to ferment.',0]],
+    concl:[[['Drożdże intensywnie fermentują glukozę i sacharozę, a skrobi praktycznie nie wykorzystują; bez cukru CO₂ nie powstaje.','Yeast ferments glucose and sucrose rapidly but hardly uses starch at all; without sugar no CO₂ is produced.'],['Tak. Drożdże nie wytwarzają amylazy, więc nie rozkładają skrobi. Sacharozę najpierw rozkładają na glukozę i fruktozę.','Yes. Yeast makes no amylase, so it cannot break down starch. It first splits sucrose into glucose and fructose.']],
+     [['Skrobia jest najlepszym pokarmem drożdży, bo w mące jest jej najwięcej.','Starch is the best food for yeast because flour contains the most of it.'],['Balonik ze skrobią prawie się nie napełnia. W cieście część skrobi rozkładają enzymy pochodzące z mąki, a drożdże korzystają z powstałych cukrów.','The starch balloon hardly fills. In dough some starch is broken down by enzymes from the flour, and the yeast uses the sugars formed.']],
+     [['Drożdże w czystej wodzie fermentują tak samo jak w roztworze cukru.','Yeast in plain water ferments just as in sugar solution.'],['Próba kontrolna (bez cukru) nie daje CO₂ – cukier jest substratem fermentacji.','The control (no sugar) gives no CO₂ – sugar is the substrate of fermentation.']],
+     [['Sacharoza i glukoza to ten sam cukier.','Sucrose and glucose are the same sugar.'],['Glukoza to cukier prosty, a sacharoza – dwucukier zbudowany z glukozy i fruktozy.','Glucose is a simple sugar; sucrose is a disaccharide made of glucose and fructose.']]],
+    adv:['Sacharozę rozkłada na glukozę i fruktozę enzym drożdży – inwertaza, dlatego fermentacja rusza nieco wolniej. Drożdże piekarskie (Saccharomyces cerevisiae) nie wydzielają amylaz, więc skrobia jest dla nich niedostępna. Równanie: C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ + energia.','Sucrose is split into glucose and fructose by the yeast enzyme invertase, so fermentation starts a little more slowly. Baker’s yeast (Saccharomyces cerevisiae) secretes no amylases, so starch is unavailable to it. Equation: C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ + energy.']}}},
+};
+const EXORD=['photo','cat','amy','seeds','yeast'];
+const MAT={potato:['surowy ziemniak','raw potato'],yeast:['drożdże','yeast']},MATB={potato:['ziemniak ugotowany','boiled potato'],yeast:['drożdże zagotowane','boiled yeast']};
+
+// ---------- stan ----------
+const S={tab:'exp',lvl:'B',ex:'photo',inv:{photo:'light',cat:'temp',amy:'temp',seeds:'state',yeast:'temp'},mat:'potato',x:{},data:{},run:null,last:null,pngSt:'',
+ err:{ord:null,i:0,pick:null,opts:null,ok:0,all:0},atom:{eq:'photo',v:{},res:{},show:{}},lf:{fam:'co2',I:40},q:null,qSeen:[],ok:0,all:0,
+ ws:{inv:'photo.light',proto:true,data:'sample',eq:true,cmp:true,org:true,err:true,key:true,seed:1+Math.floor(Math.random()*99999)},wsSt:'',cyPng:''};
+const up=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const curE=()=>EX[S.ex],curI=()=>EX[S.ex].inv[S.inv[S.ex]],curP=()=>EX[S.ex].params[curI().x];
+const KEY=()=>S.ex+'.'+S.inv[S.ex]+(S.ex==='cat'?'.'+S.mat:'');
+function D(k=KEY()){if(!S.data[k])S.data[k]={t:[],hyp:null,tried:[],ord:shuffle([0,1,2,3])};return S.data[k];}
+const catOpts=(P,inv)=>P.cat.filter(c=>!(inv.ctrl.x!==undefined&&c.v===inv.ctrl.x));
+function curX(){const k=KEY(),P=curP(),inv=curI();if(S.x[k]===undefined){if(P.cat)S.x[k]=catOpts(P,inv)[0].v;else{const i=P.vals.indexOf(P.def);S.x[k]=i>=0?i:Math.floor(P.vals.length/2);}}return S.x[k];}
+const xVal=()=>{const P=curP(),v=curX();return P.cat?v:P.vals[v];};
+const unitS=u=>u?(u==='%'?'%':' '+u):'';
+function fmtV(P,v){if(P.cat){const c=P.cat.find(c=>c.v===v);return c?T(c.n):String(v);}return (P.pre||'')+NF(v,P.d||0)+unitS(P.u);}
+function params(ctrl,e=curE(),inv=curI(),xv=xVal()){const p={};for(const [k,P] of Object.entries(e.params))p[k]=P.def;Object.assign(p,inv.std);p[inv.x]=xv;p.mat=S.mat;
+  if(ctrl){Object.assign(p,inv.ctrl.set||{});if(inv.ctrl.flag)p.flag=inv.ctrl.flag;if(inv.ctrl.x!==undefined)p[inv.x]=inv.ctrl.x;}return p;}
+const sdOf=ys=>{if(ys.length<2||ys.some(y=>y===null))return null;const m=ys.reduce((a,b)=>a+b,0)/ys.length;return Math.sqrt(ys.reduce((a,y)=>a+(y-m)*(y-m),0)/(ys.length-1));};
+function groupsOf(ts,inv,P){const m=new Map();
+  for(const o of ts){const c=o.x===null||(inv.ctrl.x!==undefined&&o.x===inv.ctrl.x);const k=(c?'c':'r')+'|'+o.x;if(!m.has(k))m.set(k,{c,x:o.x,ys:[]});m.get(k).ys.push(o.y);}
+  const ord=v=>v===null?-1:P.cat?P.cat.findIndex(c=>c.v===v):v;
+  return [...m.values()].map(g=>({...g,mean:g.ys.some(y=>y===null)?null:g.ys.reduce((a,b)=>a+b,0)/g.ys.length,sd:sdOf(g.ys)})).sort((a,b)=>(b.c-a.c)||(ord(a.x)-ord(b.x)));}
+const ctrlName=inv=>T(SPECIAL[inv.ctrl.sp||inv.ctrl.flag]);
+const gLabel=(g,inv,P)=>g.x===null?ctrlName(inv):fmtV(P,g.x);
+const yFmt=(e,y)=>y===null?`> ${e.cap}`:NF(y,e.dep.d);
+const mFmt=(e,m)=>m===null?`> ${e.cap}`:NF(m,e.dep.d+1);
+function status(){const inv=curI(),d=D(),gs=groupsOf(d.t,inv,curP());const ctrlN=gs.filter(g=>g.c).reduce((a,g)=>a+g.ys.length,0),rs=gs.filter(g=>!g.c);
+  const o={hyp:d.hyp!==null,ctrl:ctrlN>=3,vals:rs.length>=inv.need,reps:rs.length>0&&rs.every(g=>g.ys.length>=3)};o.ready=o.hyp&&o.ctrl&&o.vals&&o.reps;return o;}
+
+// ---------- aparatura (SVG) ----------
+const TX=(x,y,s,o='')=>`<text x="${x}" y="${y}" fill="var(--ink)" font-size="14" ${o}>${esc(s)}</text>`;
+function appPhoto(p,ctrl,t,y){
+  const dark=p.flag==='dark',lx=250-p.dist*4,cl={white:'#f2c230',red:'#e0453a',blue:'#3d6fd6',green:'#38a44f'}[p.col],I=Math.min(1,100/(p.dist*p.dist));
+  let s='';
+  if(!dark)for(let k=-2;k<=2;k++)s+=`<line x1="${lx+14}" y1="${128+k*4}" x2="272" y2="${132+k*22}" stroke="${cl}" stroke-width="3" opacity="${(.18+.72*I).toFixed(2)}"/>`;
+  s+=`<rect x="${lx-28}" y="232" width="38" height="6" rx="2" fill="var(--glass)"/><line x1="${lx-12}" y1="232" x2="${lx-12}" y2="142" stroke="var(--glass)" stroke-width="4"/>
+   <path d="M${lx-32} 110 L${lx+2} 115 L${lx+2} 141 L${lx-32} 146 Z" fill="#59656b"/>
+   <circle cx="${lx+5}" cy="128" r="9" fill="${dark?'#8a9499':cl}" ${dark?'':`stroke="${cl}" stroke-width="7" stroke-opacity=".3"`}/>`;
+  if(p.col!=='white'&&!dark)s+=`<rect x="${lx+20}" y="104" width="6" height="48" rx="2" fill="${cl}" opacity=".9"/>`;
+  s+=`<rect x="272" y="96" width="116" height="132" fill="#cfe6f5"/>`;
+  if(p.co2>0)for(let i=0;i<Math.round(p.co2*14);i++)s+=`<circle cx="${282+(i*37)%96}" cy="${110+(i*53)%105}" r="1.3" fill="#7fa9c4"/>`;
+  // moczarka
+  s+=`<path d="M334 226 C 331 200 327 175 323 150" stroke="#2f7d2a" stroke-width="3.2" fill="none"/>`;
+  for(let i=0;i<9;i++){const yy=221-i*8.4,xx=334-i*1.25;s+=`<ellipse cx="${xx-7}" cy="${yy}" rx="8" ry="2.6" fill="#48a43f" transform="rotate(-28 ${xx-7} ${yy})"/><ellipse cx="${xx+7}" cy="${yy}" rx="8" ry="2.6" fill="#3f9a37" transform="rotate(28 ${xx+7} ${yy})"/>`;}
+  s+=`<path d="M319 150 h8" stroke="#2f7d2a" stroke-width="2"/>`;
+  let cnt=0;
+  if(!dark&&y>0&&t>0){for(let i=0;i<y;i++){const ti=(i+.5)/y,age=t-ti;if(age>=0)cnt++;if(age>=0&&age<=.13){const by=147-age/.13*50;s+=`<circle cx="${(323+Math.sin(i*1.7)*2.5).toFixed(1)}" cy="${by.toFixed(1)}" r="3.2" fill="#fff" stroke="#5f9fc4" stroke-width="1"/>`;}}}
+  // termometr
+  const h=Math.max(4,112*p.temp/50);
+  s+=`<rect x="369" y="80" width="7" height="122" rx="3.5" fill="#fff" stroke="#7c8a90"/><rect x="371" y="${200-h}" width="3" height="${h}" fill="#d0392b"/><circle cx="372.5" cy="207" r="6.5" fill="#d0392b"/>`;
+  s+=`<path d="M272 68 V223 Q272 230 279 230 H381 Q388 230 388 223 V68" fill="none" stroke="var(--glass)" stroke-width="2.5"/><line x1="40" y1="239" x2="410" y2="239" stroke="var(--glass)" stroke-width="1.5"/>`;
+  if(dark)s+=`<rect x="262" y="56" width="136" height="178" rx="6" fill="#111" opacity=".94"/><text x="330" y="148" text-anchor="middle" fill="#eee" font-size="14">${esc(tr('zaciemnienie','covered'))}</text>`;
+  s+=`<line x1="${lx+5}" y1="250" x2="272" y2="250" stroke="var(--muted)" stroke-width="1.3"/><line x1="${lx+5}" y1="245" x2="${lx+5}" y2="255" stroke="var(--muted)"/><line x1="272" y1="245" x2="272" y2="255" stroke="var(--muted)"/>
+   <text x="${(lx+277)/2}" y="266" text-anchor="middle" fill="var(--muted)" font-size="13">${NF(p.dist)} cm</text>`;
+  s+=TX(12,22,`${tr('Pęcherzyki','Bubbles')}: ${dark?0:cnt}`,'font-weight="700"')+TX(12,42,`${tr('Czas','Time')}: ${Math.round(t*60)} s`);
+  s+=`<text x="410" y="22" text-anchor="end" fill="var(--muted)" font-size="13">${esc(`${NF(p.temp)} °C · NaHCO₃ ${NF(p.co2,1)}%`)}</text><text x="410" y="40" text-anchor="end" fill="var(--muted)" font-size="13">${esc(tr('światło','light')+': '+fmtV(EX.photo.params.col,p.col))}</text>`;
+  return s;
+}
+function appCat(p,ctrl,t,y){
+  const boiled=p.flag==='boiled',yeast=p.mat==='yeast',fh=(y||0)*t*1.5;let s='';
+  s+=`<rect x="140" y="140" width="150" height="96" rx="8" fill="var(--bath)" opacity=".75"/><text x="215" y="252" text-anchor="middle" fill="var(--muted)" font-size="12.5">${esc(tr('łaźnia wodna','water bath')+` ${NF(p.temp)} °C`)}</text>`;
+  s+=`<path d="M192 165 V200 A23 23 0 0 0 238 200 V165 Z" fill="#e8f3fb"/>`;
+  if(yeast)s+=`<ellipse cx="215" cy="210" rx="16" ry="7" fill="${boiled?'#a98d5c':'#d9b77e'}"/>`;
+  else s+=`<rect x="202" y="196" width="26" height="17" rx="3" fill="${boiled?'#c9ae6a':'#f3e3a0'}" stroke="#a08a4a"/>`;
+  if(fh>0){s+=`<rect x="192" y="${165-fh}" width="46" height="${fh}" fill="#fffef6"/><line x1="192" x2="238" y1="${165-fh}" y2="${165-fh}" stroke="#9fb3c2"/>`;for(let j=0;j<fh/4;j++){s+=`<circle cx="${196+(j*13)%40}" cy="${(165-fh+3+j*4*.97).toFixed(1)}" r="${2+(j%3)}" fill="none" stroke="#8aa3b5" stroke-width="1"/>`;}}
+  if(t>0&&t<1&&y>0)for(let j=0;j<6;j++){const yy=208-((t*7+j*.17)%1)*40;s+=`<circle cx="${203+j*5}" cy="${yy.toFixed(1)}" r="1.8" fill="#fff" stroke="#9bb4c4" stroke-width=".7"/>`;}
+  s+=`<path d="M190 28 V200 A25 25 0 0 0 240 200 V28" fill="none" stroke="var(--glass)" stroke-width="2.5"/>`;
+  s+=`<line x1="252" y1="165" x2="252" y2="45" stroke="var(--muted)" stroke-width="1.2"/>`;for(let m=0;m<=80;m+=10){const yy=165-m*1.5;s+=`<line x1="252" y1="${yy}" x2="${m%20?257:261}" y2="${yy}" stroke="var(--muted)"/>${m%20?'':`<text x="265" y="${yy+4}" fill="var(--muted)" font-size="11">${m}</text>`}`;}
+  s+=`<text x="282" y="56" fill="var(--muted)" font-size="11">mm</text>`;
+  s+=TX(12,22,`${tr('Piana','Foam')}: ${NF(Math.round((y||0)*t))} mm`,'font-weight="700"')+TX(12,42,`${tr('Czas','Time')}: ${Math.round(t*60)} s`);
+  s+=`<text x="410" y="22" text-anchor="end" fill="var(--muted)" font-size="13">${esc(`${NF(p.temp)} °C · pH ${NF(p.pH)}`)}</text><text x="410" y="40" text-anchor="end" fill="var(--muted)" font-size="13">${esc(T(boiled?MATB[p.mat]:MAT[p.mat]))}</text>`;
+  s+=`<text x="120" y="182" text-anchor="end" fill="var(--muted)" font-size="12.5">H₂O₂ 3%</text><line x1="124" y1="178" x2="190" y2="182" stroke="var(--muted)"/>`;
+  return s;
+}
+function appAmy(p,ctrl,t,y){
+  const boiled=p.flag==='boiled',iv=(y!==null&&y<=11.5)?.5:1,tend=y!==null?y:20,now=t*tend;let s='';
+  s+=`<rect x="30" y="140" width="96" height="96" rx="8" fill="var(--bath)" opacity=".75"/><text x="78" y="252" text-anchor="middle" fill="var(--muted)" font-size="12">${esc(`${NF(p.temp)} °C · pH ${NF(p.pH)}`)}</text>`;
+  s+=`<path d="M64 120 V205 A14 14 0 0 0 92 205 V120 Z" fill="#f3ecd6"/><path d="M62 70 V205 A16 16 0 0 0 94 205 V70" fill="none" stroke="var(--glass)" stroke-width="2.5"/>`;
+  s+=`<text x="78" y="60" text-anchor="middle" fill="var(--muted)" font-size="12">${esc(tr('skrobia + ','starch + ')+(boiled?tr('ślina przegot.','boiled saliva'):tr('ślina','saliva')))}</text>`;
+  s+=`<rect x="160" y="86" width="250" height="118" rx="12" fill="#f6f6f4" stroke="var(--glass)" stroke-width="1.5"/>`;
+  const n=Math.min(24,Math.floor(tend/iv)+1);
+  for(let k=0;k<24;k++){const cx=180+(k%8)*30,cy=108+Math.floor(k/8)*36;const st=k*iv;let fill='#f1e2b4',stroke='#c9b27a',dash='';
+    if(k<n&&st<=now+1e-9&&t>0){fill=(y===null||st<y*.6)?'#1f2350':st<y?'#6b4b5a':'#c99a33';}else dash='stroke-dasharray="3 2"';
+    if(k>=n&&t>=1){fill='none';stroke='#ddd';}
+    s+=`<circle cx="${cx}" cy="${cy}" r="10" fill="${fill}" stroke="${stroke}" ${dash}/>`;}
+  s+=`<text x="285" y="222" text-anchor="middle" fill="var(--muted)" font-size="12">${esc(tr('płytka z płynem Lugola – próbka co ','spotting tile with iodine – a sample every ')+(iv===.5?'30 s':'1 min'))}</text>`;
+  s+=TX(12,22,`t = ${NFx(rnd(now,1),1)} min`,'font-weight="700"');
+  if(t>=1)s+=TX(12,42,y===null?tr('Granatowe zabarwienie nie znikło (> 20 min)','The blue-black colour did not go (> 20 min)'):tr(`Zabarwienie znikło po ${NF(y,1)} min`,`The colour disappeared after ${NF(y,1)} min`));
+  return s;
+}
+function appSeeds(p,ctrl,t,y){
+  const st=p.state,rise=(y||0)*t,lime=EX.seeds.lime(st);let s='';
+  s+=`<rect x="150" y="62" width="90" height="170" rx="16" fill="#c4ced5" stroke="var(--glass)" stroke-width="2"/><rect x="161" y="76" width="68" height="146" rx="11" fill="#eef2f4"/>`;
+  const col={germ:'#c9b15a',dry:'#d9c27a',boiled:'#a58a55'}[st];
+  for(let i=0;i<34;i++){const cx=168+(i%7)*9.2+((Math.floor(i/7)%2)*4),cy=214-Math.floor(i/7)*10;s+=`<ellipse cx="${cx}" cy="${cy}" rx="5" ry="4" fill="${col}" stroke="#7d6a35" stroke-width=".6"/>`;if(st==='germ'&&i%3===0)s+=`<path d="M${cx} ${cy-3} q3 -6 -1 -9" stroke="#6bb04f" stroke-width="1.6" fill="none"/>`;}
+  s+=`<rect x="168" y="52" width="54" height="16" rx="3" fill="#8a6a4a"/>`;
+  const temp=20+rise,hh=Math.max(6,(temp-16)/12*110);
+  s+=`<rect x="179" y="14" width="8" height="160" rx="4" fill="#fff" stroke="#7c8a90"/><rect x="181" y="${172-hh}" width="4" height="${hh}" fill="#d0392b"/><circle cx="183" cy="178" r="6" fill="#d0392b"/>`;
+  s+=`<path d="M210 52 V30 H330 V100" fill="none" stroke="var(--glass)" stroke-width="4"/><path d="M210 52 V30 H330 V100" fill="none" stroke="#f4f7f8" stroke-width="1.6"/>`;
+  s+=`<rect x="316" y="118" width="32" height="96" fill="#e9f5fb"/><rect x="316" y="118" width="32" height="96" fill="#f7f7f2" opacity="${(lime?.9*t:0).toFixed(2)}"/>`;
+  if(lime&&t>0&&t<1)for(let j=0;j<5;j++){const yy=205-((t*9+j*.21)%1)*80;s+=`<circle cx="${328+(j%2)*5}" cy="${yy.toFixed(1)}" r="2.2" fill="#fff" stroke="#9bb4c4" stroke-width=".7"/>`;}
+  s+=`<path d="M314 96 V214 A18 18 0 0 0 350 214 V96" fill="none" stroke="var(--glass)" stroke-width="2.5"/><line x1="40" y1="236" x2="410" y2="236" stroke="var(--glass)" stroke-width="1.5"/>`;
+  s+=`<text x="332" y="252" text-anchor="middle" fill="var(--muted)" font-size="12">${esc(tr('woda wapienna','limewater'))}</text><text x="195" y="252" text-anchor="middle" fill="var(--muted)" font-size="12">${esc(tr('nasiona: ','seeds: ')+fmtV(EX.seeds.params.state,st))}</text>`;
+  s+=TX(12,22,`${NFx(temp,1)} °C (+${NFx(rise,1)} °C)`,'font-weight="700"')+TX(12,42,`${tr('Czas','Time')}: ${Math.round(t*24)} h`);
+  const lw=!lime||t<.25?tr('przejrzysta','clear'):t<1?tr('mętnieje…','turning cloudy…'):tr('zmętniała','cloudy');
+  s+=`<text x="410" y="22" text-anchor="end" fill="var(--muted)" font-size="13">${esc(tr('woda wapienna: ','limewater: ')+lw)}</text>`;
+  return s;
+}
+function appYeast(p,ctrl,t,y){
+  const sug=p.flag==='nosugar'?'none':p.sugar,V=(y||0)*t,r=6+Math.sqrt(V)*4.6;let s='';
+  s+=`<rect x="110" y="150" width="220" height="86" rx="8" fill="var(--bath)" opacity=".75"/><text x="220" y="252" text-anchor="middle" fill="var(--muted)" font-size="12.5">${esc(tr('łaźnia wodna','water bath')+` ${NF(p.temp)} °C`)}</text>`;
+  s+=`<path d="M178 170 L150 222 Q148 228 155 228 H285 Q292 228 290 222 L262 170 Z" fill="${sug==='none'?'#e8eef2':'#f0e2bb'}"/>`;
+  if(t>0&&t<1&&y>0)for(let j=0;j<8;j++){const yy=222-((t*6+j*.13)%1)*50;s+=`<circle cx="${180+(j*11)%80}" cy="${yy.toFixed(1)}" r="2" fill="#fff" stroke="#b39a5f" stroke-width=".7"/>`;}
+  s+=`<path d="M200 88 V130 L150 222 Q148 228 155 228 H285 Q292 228 290 222 L240 130 V88" fill="none" stroke="var(--glass)" stroke-width="2.5"/>`;
+  if(V<1)s+=`<path d="M211 88 q-4 -12 4 -22 q8 -6 12 2 q4 10 -3 20 Z" fill="#e2574c"/>`;
+  else s+=`<ellipse cx="220" cy="${(86-r*.92).toFixed(1)}" rx="${(r*.86).toFixed(1)}" ry="${r.toFixed(1)}" fill="#e2574c" opacity=".93"/><ellipse cx="${(220-r*.35).toFixed(1)}" cy="${(86-r*1.3).toFixed(1)}" rx="${(r*.16).toFixed(1)}" ry="${(r*.28).toFixed(1)}" fill="#fff" opacity=".35"/>`;
+  s+=`<rect x="207" y="82" width="26" height="9" rx="2" fill="#b3352a"/>`;
+  s+=TX(12,22,`CO₂: ${NF(Math.round(V))} cm³`,'font-weight="700"')+TX(12,42,`${tr('Czas','Time')}: ${Math.round(t*30)} min`);
+  s+=`<text x="410" y="22" text-anchor="end" fill="var(--muted)" font-size="13">${esc(tr('cukier: ','sugar: ')+fmtV(EX.yeast.params.sugar,sug))}</text>`;
+  return s;
+}
+const APP={photo:appPhoto,cat:appCat,amy:appAmy,seeds:appSeeds,yeast:appYeast};
+function appSVG(ex,p,ctrl,t,y){
+  return `<svg viewBox="0 0 420 270" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, system-ui, sans-serif" role="img" aria-label="${esc(T(EX[ex].n))}">${APP[ex](p,ctrl,t,y)}</svg>`;
+}
+function idleApp(){const k=KEY(),l=S.last;
+  if(l&&l.k===k&&(l.ctrl||l.xv===xVal()))return appSVG(S.ex,l.p,l.ctrl,1,l.y);
+  return appSVG(S.ex,params(false),false,0,null);}
+function drawApp(t){const el=$('#appar');if(!el||!S.run||S.run.k!==KEY())return;el.innerHTML=appSVG(S.run.ex,S.run.p,S.run.ctrl,t,S.run.y);}
+function runTrial(ctrl,n){
+  if(S.run)return;const e=curE(),inv=curI(),p=params(ctrl),k=KEY();
+  const xv=ctrl?(inv.ctrl.x!==undefined?inv.ctrl.x:null):xVal();const ys=[];for(let i=0;i<n;i++)ys.push(e.model(p,Math.random));
+  S.run={ex:S.ex,k,ctrl,p,y:ys[ys.length-1],ys,xv,t0:performance.now(),dur:RM()?250:(S.ex==='amy'?2600:1900)};render();
+  const step=now=>{if(!S.run)return;const t=Math.min(1,(now-S.run.t0)/S.run.dur);drawApp(t);if(t<1)requestAnimationFrame(step);else finishTrial();};
+  requestAnimationFrame(step);
+  const t0=S.run.t0;setTimeout(()=>{if(S.run&&S.run.t0===t0)finishTrial();},S.run.dur+500);
+}
+function finishTrial(){const r=S.run;if(!r)return;S.run=null;const d=D(r.k);r.ys.forEach(y=>d.t.push({x:r.xv,y}));S.last={k:r.k,ctrl:r.ctrl,xv:r.xv,y:r.y,p:r.p,ys:r.ys};
+  if(S.tab!=='exp')return;render(false);const b=$(r.ctrl?`[data-act="ctrl"][data-n="${r.ys.length}"]`:`[data-act="run"][data-n="${r.ys.length}"]`);if(b)b.focus({preventScroll:true});}
+
+// ---------- wykres ----------
+const LIT={ink:'#14201a',muted:'#53645b',line:'#d5e0d9',acc:'#1d7a58',ctl:'#a85512',paper:'#ffffff'};
+function niceTop(m){for(const s of [1,2,2.5,5,10,20,25,50,100])if(m/s<=6)return{top:Math.ceil(m/s)*s,step:s};return{top:Math.ceil(m/100)*100,step:100};}
+function chartSVG(exp){
+  const e=curE(),inv=curI(),P=curP(),d=D(),gs=groupsOf(d.t,inv,P),C=k=>exp?LIT[k]:`var(--${k})`,cap=e.cap;
+  const W=600,H=340,l=66,r=18,t=40,b=62,pw=W-l-r,ph=H-t-b;
+  const vals=d.t.map(o=>o.y===null?cap:o.y);
+  const {top,step}=cap?{top:25,step:5}:niceTop(Math.max(5,...vals)*1.06);
+  const Y=v=>t+ph-(v/top)*ph;
+  let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, system-ui, sans-serif" role="img" aria-label="${esc(tr('Wykres wyników: ','Results graph: ')+T(e.dep.n))}">`;
+  if(exp)s+=`<rect width="${W}" height="${H}" fill="#fff"/><text x="${W/2}" y="16" text-anchor="middle" font-size="14" font-weight="700" fill="${C('ink')}">${esc(T(curI().prob))}</text>`;
+  for(let v=0;v<=top+1e-9;v+=step)s+=`<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="${C('line')}"/><text x="${l-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="${C('muted')}">${NF(v,1)}</text>`;
+  if(cap)s+=`<line x1="${l}" x2="${W-r}" y1="${Y(cap)}" y2="${Y(cap)}" stroke="${C('muted')}" stroke-dasharray="6 4"/><text x="${W-r-4}" y="${Y(cap)-5}" text-anchor="end" font-size="11.5" fill="${C('muted')}">${esc(tr('koniec obserwacji (20 min)','end of observation (20 min)'))}</text>`;
+  s+=`<line x1="${l}" y1="${t-6}" x2="${l}" y2="${t+ph}" stroke="${C('ink')}" stroke-width="1.5"/><line x1="${l}" y1="${t+ph}" x2="${W-r}" y2="${t+ph}" stroke="${C('ink')}" stroke-width="1.5"/>`;
+  s+=`<text transform="translate(16 ${t+ph/2}) rotate(-90)" text-anchor="middle" font-size="13" fill="${C('ink')}">${esc(T(e.dep.ax))}</text>`;
+  s+=`<text x="${l+pw/2}" y="${H-10}" text-anchor="middle" font-size="13" fill="${C('ink')}">${esc(up(T(P.n))+(P.u?` [${P.u}]`:''))}</text>`;
+  const ly=exp?32:16;
+  s+=`<circle cx="${l+6}" cy="${ly-4}" r="5" fill="${C('acc')}"/><text x="${l+16}" y="${ly}" font-size="12.5" fill="${C('ink')}">${esc(tr('próba badawcza','experimental'))}</text><circle cx="${l+146}" cy="${ly-4}" r="5" fill="${C('ctl')}"/><text x="${l+156}" y="${ly}" font-size="12.5" fill="${C('ink')}">${esc(tr('próba kontrolna','control'))}</text><text x="${W-r}" y="${ly}" text-anchor="end" font-size="12" fill="${C('muted')}">${esc(tr('● pomiar  ○ średnia','● measurement  ○ mean'))}</text>`;
+  const tri=(x,y,c)=>`<path d="M${x-5} ${y+4} L${x} ${y-5} L${x+5} ${y+4} Z" fill="${c}"/>`;
+  if(!P.cat){
+    const v0=P.vals[0],v1=P.vals[P.vals.length-1],X=v=>l+14+(v-v0)/(v1-v0)*(pw-28);
+    for(const v of P.vals)s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${t+ph}" y2="${t+ph+5}" stroke="${C('ink')}"/><text x="${X(v)}" y="${t+ph+19}" text-anchor="middle" font-size="12" fill="${C('muted')}">${NF(v,P.d||0)}</text>`;
+    for(const g of gs){if(g.x===null){const yy=Y(g.mean===null?cap:g.mean);s+=`<line x1="${l}" x2="${W-r}" y1="${yy}" y2="${yy}" stroke="${C('ctl')}" stroke-width="2" stroke-dasharray="8 5"/><text x="${W-r-4}" y="${yy-6}" text-anchor="end" font-size="12" fill="${C('ctl')}">${esc(tr('próba kontrolna','control')+` (${ctrlName(inv)}): ${mFmt(e,g.mean)}`)}</text>`;continue;}
+      g.ys.forEach((y,i)=>{const x=X(g.x)+(i%2?1:-1)*Math.ceil(i/2)*3;s+=y===null?tri(x,Y(cap),C(g.c?'ctl':'acc')):`<circle cx="${x}" cy="${Y(y)}" r="3.6" fill="${C(g.c?'ctl':'acc')}" opacity=".55"/>`;});}
+    const line=gs.filter(g=>g.x!==null&&g.mean!==null);
+    if(line.length>1)s+=`<polyline points="${line.map(g=>`${X(g.x)},${Y(g.mean)}`).join(' ')}" fill="none" stroke="${C('acc')}" stroke-width="2.4"/>`;
+    for(const g of gs.filter(g=>g.x!==null)){if(g.mean===null){s+=`<text x="${X(g.x)}" y="${Y(cap)-10}" text-anchor="middle" font-size="11" font-weight="700" fill="${C(g.c?'ctl':'acc')}">&gt; 20</text>`;continue;}
+      s+=`<circle cx="${X(g.x)}" cy="${Y(g.mean)}" r="5.5" fill="${C('paper')}" stroke="${C(g.c?'ctl':'acc')}" stroke-width="2.6"/>`;}
+  }else{
+    const cats=P.cat,band=pw/cats.length;
+    cats.forEach((c,i)=>{const cx=l+band*(i+.5);s+=`<text x="${cx}" y="${t+ph+19}" text-anchor="middle" font-size="12.5" fill="${C('muted')}">${esc(T(c.n))}</text>`;
+      const g=gs.find(g=>g.x===c.v);if(!g)return;const col=C(g.c?'ctl':'acc'),bw=Math.min(70,band*.5);
+      s+=`<rect x="${cx-bw/2}" y="${Y(g.mean)}" width="${bw}" height="${Math.max(0,t+ph-Y(g.mean))}" fill="${col}" opacity=".78" rx="3"/>`;
+      g.ys.forEach((y,j)=>{s+=`<circle cx="${cx+bw/2+10+(j%3)*6}" cy="${Y(y)}" r="3.3" fill="${col}" opacity=".7"/>`;});
+      s+=`<text x="${cx}" y="${Y(g.mean)-6}" text-anchor="middle" font-size="12" font-weight="700" fill="${C('ink')}">${mFmt(e,g.mean)}</text>`;});
+  }
+  if(!d.t.length)s+=`<text x="${l+pw/2}" y="${t+ph/2}" text-anchor="middle" font-size="15" fill="${C('muted')}">${esc(tr('Brak pomiarów – wykonaj pierwszą próbę.','No measurements yet – run the first trial.'))}</text>`;
+  return s+'</svg>';
+}
+// SVG → PNG
+function svgToCanvas(svg,w,h,bg='#fff'){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));img.onload=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle=bg;x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);URL.revokeObjectURL(u);res(c);};img.onerror=e=>{URL.revokeObjectURL(u);rej(e);};img.src=u;});}
+const toPng=(svg,w,h)=>svgToCanvas(svg,w,h).then(c=>new Promise((res,rej)=>c.toBlob(b=>b?b.arrayBuffer().then(res):rej(),'image/png')));
+let DL={save:async({filename,data})=>{const u=URL.createObjectURL(data);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);return{status:'saved'};}};
+const dims=svg=>{const m=svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);return[+m[1],+m[2]];};
+async function savePng(svg,name){const [w,h]=dims(svg);const c=await svgToCanvas(svg,w*2,h*2);const blob=await new Promise(r=>c.toBlob(r,'image/png'));await DL.save({filename:name,data:blob});}
+const STATUS={lib:['Nie udało się wczytać biblioteki do plików Word.','Could not load the Word file library.'],prep:['Przygotowuję plik…','Preparing the file…'],saved:['Plik zapisany.','File saved.'],err:['Nie udało się przygotować pliku.','Could not prepare the file.']};
+
+// ---------- widok: doświadczenia ----------
+const lvlSeg=()=>`<span class="lbl" id="lvlLbl">${tr('Poziom','Level')}</span><div class="seg" role="group" aria-labelledby="lvlLbl"><button data-lvl="B" aria-pressed="${S.lvl==='B'}">${tr('Podstawowy','Basic')}</button><button data-lvl="A" aria-pressed="${S.lvl==='A'}">${tr('Rozszerzony','Advanced')}</button></div>`;
+function constList(e,inv){const p=params(false,e,inv),out=[];
+  for(const [k,P] of Object.entries(e.params))if(k!==inv.x)out.push(`${up(T(P.n))}: ${fmtV(P,p[k])}`);
+  if(e===EX.cat)out.push(`${tr('Materiał','Material')}: ${T(MAT[S.mat])}`);
+  return out.concat(e.fixed.map(T),(inv.extra||[]).map(T));}
+function researchDesc(e,inv){const P=e.params[inv.x];const vs=P.cat?catOpts(P,inv).map(c=>T(c.n)).join(', '):`${fmtV(P,P.vals[0])} – ${fmtV(P,P.vals[P.vals.length-1])}`;
+  return tr(`zestawy różniące się tylko jednym czynnikiem – ${T(P.n)} (${vs})`,`set-ups that differ in one factor only – ${T(P.n)} (${vs})`);}
+function resultsTable(){
+  const e=curE(),inv=curI(),P=curP(),d=D(),gs=groupsOf(d.t,inv,P),A=S.lvl==='A',seeds=S.ex==='seeds',u=e.dep.u;
+  const head=`<tr><th>${tr('Próba','Trial')}</th><th>${esc(up(T(P.n)))}</th><th>${tr('Wyniki pomiarów','Measurements')}${u?` [${u}]`:''}</th><th>${tr('Średnia','Mean')}${u?` [${u}]`:''}</th>${A?`<th>${tr('Odch. std.','Std. dev.')}</th>`:''}${seeds?`<th>${tr('Woda wapienna','Limewater')}</th>`:''}</tr>`;
+  const rows=gs.map(g=>`<tr class="${g.c?'ctlrow':''}"><td>${g.c?tr('kontrolna','control'):tr('badawcza','experimental')}</td><td>${esc(gLabel(g,inv,P))}</td><td>${g.ys.map(y=>yFmt(e,y)).join('; ')}</td><td><b>${mFmt(e,g.mean)}</b></td>${A?`<td>${g.sd===null?'–':NF(g.sd,2)}</td>`:''}${seeds?`<td>${e.lime(g.x)?tr('zmętniała','cloudy'):tr('bez zmian','no change')}</td>`:''}</tr>`).join('');
+  return `<div class="tablewrap"><table><thead>${head}</thead><tbody>${rows||`<tr><td colspan="${4+(A?1:0)+(seeds?1:0)}" class="note">${tr('Brak pomiarów.','No measurements yet.')}</td></tr>`}</tbody></table></div>`;
+}
+function lastReadout(){const l=S.last,e=curE();if(!l||l.k!==KEY())return `<p class="readout"><small>${tr('Ustaw warunki i wykonaj próbę. Każdy pomiar trafia do tabeli i na wykres.','Set the conditions and run a trial. Every measurement goes into the table and onto the graph.')}</small></p>`;
+  const v=l.ys.map(y=>yFmt(e,y)).join('; ');
+  const inv=curI(),lab=l.ctrl?(inv.ctrl.x!==undefined?fmtV(curP(),inv.ctrl.x):ctrlName(inv)):fmtV(curP(),l.xv);
+  return `<p class="readout" role="status">${l.ctrl?tr('Próba kontrolna','Control'):tr('Próba badawcza','Experimental trial')}: ${v}${e.dep.u?' '+e.dep.u:''} <small>(${esc(lab)})</small></p>`;}
+function viewExp(){
+  const e=curE(),inv=curI(),P=curP(),d=D(),st=status(),busy=!!S.run,locked=d.t.length>0,dis=busy||d.hyp===null?'disabled':'';
+  const chips=`<div class="chips" style="margin-top:14px" role="group" aria-label="${esc(tr('Wybierz doświadczenie','Choose an experiment'))}">${EXORD.map(k=>`<button data-ex="${k}" aria-pressed="${S.ex===k}" ${busy?'disabled':''}><span aria-hidden="true">${EX[k].ic}</span>${esc(T(EX[k].sh))}</button>`).join('')}</div>`;
+  const ik=Object.keys(e.inv);
+  const invSeg=ik.length>1?`<span class="lbl" id="invL">${tr('Badany czynnik','Factor tested')}</span><div class="seg" role="group" aria-labelledby="invL">${ik.map(k=>`<button data-inv="${k}" aria-pressed="${S.inv[S.ex]===k}" ${busy?'disabled':''}>${esc(up(T(e.params[e.inv[k].x].n)))}</button>`).join('')}</div>`:'';
+  const matSeg=S.ex==='cat'?`<span class="lbl" id="matL">${tr('Materiał z katalazą','Catalase source')}</span><div class="seg" role="group" aria-labelledby="matL">${Object.keys(MAT).map(k=>`<button data-mat="${k}" aria-pressed="${S.mat===k}" ${busy?'disabled':''}>${esc(T(MAT[k]))}</button>`).join('')}</div>`:'';
+  const hyps=inv.hyps.map((h,i)=>`<label><input type="radio" name="hyp" data-hyp="${i}" ${d.hyp===i?'checked':''} ${locked?'disabled':''}><span>${esc(T(h))}</span></label>`).join('');
+  const frame=`<section class="card"><span class="kicker">${tr('Doświadczenie','Experiment')}</span><h2>${esc(T(e.n))}</h2><p>${esc(T(e.setup))}</p>
+   ${invSeg||matSeg?`<div class="bar" style="margin:0 0 10px">${invSeg}${matSeg}</div>`:''}
+   <dl class="frame"><dt>${tr('Problem badawczy','Research question')}</dt><dd class="pb">${esc(T(inv.prob))}</dd>
+   <dt>${tr('Hipoteza','Hypothesis')}</dt><dd><div class="hyps" role="radiogroup" aria-label="${esc(tr('Hipoteza','Hypothesis'))}">${hyps}</div><p class="note" style="margin:6px 0 0">${locked?tr('Hipotezę stawia się przed doświadczeniem – po pierwszym pomiarze nie można jej już zmienić.','A hypothesis is made before the experiment – it cannot be changed after the first measurement.'):tr('Wybierz jedną hipotezę, zanim zaczniesz pomiary. Hipoteza to przypuszczalna odpowiedź na problem badawczy.','Choose one hypothesis before you start measuring. A hypothesis is a possible answer to the research question.')}</p></dd>
+   <dt>${tr('Zmienna niezależna','Independent variable')}</dt><dd>${esc(up(T(P.n)))} <span class="note">– ${tr('to, co celowo zmieniamy','what we deliberately change')}</span></dd>
+   <dt>${tr('Zmienna zależna','Dependent variable')}</dt><dd>${esc(up(T(e.dep.n)))} <span class="note">– ${tr('to, co mierzymy','what we measure')}</span></dd>
+   <dt>${tr('Stałe warunki','Controlled variables')}</dt><dd><ul style="margin:0">${constList(e,inv).map(c=>`<li>${esc(c)}</li>`).join('')}</ul></dd>
+   <dt>${tr('Próba kontrolna','Control')}</dt><dd><span class="ctlt">${esc(T(inv.ctrl.d))}</span> <span class="note">– ${tr('punkt odniesienia do porównania','a reference point for comparison')}</span></dd>
+   <dt>${tr('Próba badawcza','Experimental trials')}</dt><dd>${esc(researchDesc(e,inv))}</dd></dl></section>`;
+  let ctl='';
+  if(P.cat){const opts=catOpts(P,inv);ctl=`<span class="lbl" id="xcL">${esc(up(T(P.n)))}</span><div class="seg" role="group" aria-labelledby="xcL">${opts.map(c=>`<button data-xcat="${c.v}" aria-pressed="${xVal()===c.v}" ${busy?'disabled':''}>${esc(T(c.n))}</button>`).join('')}</div>`;}
+  else{const i=curX();ctl=`<label for="xr" class="lbl">${esc(up(T(P.n)))}: <span class="xval" id="xv">${esc(fmtV(P,P.vals[i]))}</span></label><input type="range" id="xr" min="0" max="${P.vals.length-1}" step="1" value="${i}" aria-valuetext="${esc(fmtV(P,P.vals[i]))}" ${busy?'disabled':''}><div class="rng"><span>${esc(fmtV(P,P.vals[0]))}</span><span>${esc(fmtV(P,P.vals[P.vals.length-1]))}</span></div>`;}
+  const bench=`<section class="card"><h2>${tr('Stanowisko','Lab bench')}</h2><div class="stage"><div id="appar">${S.run&&S.run.k===KEY()?appSVG(S.ex,S.run.p,S.run.ctrl,0,S.run.y):idleApp()}</div></div>
+   <div class="ctrlbox"><div>${ctl}</div><p class="note" style="margin:0">💡 ${esc(T(inv.tip))}</p>
+   <div class="bar" style="margin-top:0"><button class="btn primary" data-act="run" data-n="1" ${dis}>▶ ${tr('Próba badawcza','Experimental trial')}</button><button class="btn" data-act="run" data-n="3" ${dis} aria-label="${esc(tr('Próba badawcza – 3 powtórzenia','Experimental trial – 3 repeats'))}">▶ ×3</button>
+   <button class="btn ctl" data-act="ctrl" data-n="1" ${dis}>▶ ${tr('Próba kontrolna','Control')}</button><button class="btn ctl" data-act="ctrl" data-n="3" ${dis} aria-label="${esc(tr('Próba kontrolna – 3 powtórzenia','Control – 3 repeats'))}">▶ ×3</button></div>
+   ${d.hyp===null?`<p class="note" style="margin:0;color:var(--ctl);font-weight:700">${tr('Najpierw wybierz hipotezę (powyżej).','Choose a hypothesis first (above).')}</p>`:''}
+   ${lastReadout()}</div></section>`;
+  const res=`<section class="card"><h2>${tr('Wyniki','Results')}</h2>${resultsTable()}
+   <div class="stage" style="margin-top:12px">${chartSVG(false)}</div>
+   <div class="bar"><button class="btn" data-act="png">${tr('Pobierz wykres (PNG)','Download graph (PNG)')}</button><button class="btn" data-act="clear" ${d.t.length&&!busy?'':'disabled'}>${tr('Wyczyść wyniki','Clear results')}</button><span class="status" role="status">${S.pngSt?esc(T(STATUS[S.pngSt])):''}</span></div>
+   <p class="note" style="margin-top:8px">${tr('Pomiary różnią się nieco między powtórzeniami – tak jest w każdym prawdziwym doświadczeniu. Średnia z kilku powtórzeń jest bardziej wiarygodna niż pojedynczy wynik.','Measurements differ a little between repeats – this happens in every real experiment. The mean of several repeats is more reliable than a single result.')}${e.dep.u==='min'?' '+tr('„> 20” oznacza, że zabarwienie nie znikło w czasie obserwacji.','“> 20” means the colour did not disappear during the observation time.'):''}</p></section>`;
+  // wniosek
+  const ck=(ok,txt)=>`<li class="${ok?'ok':'todo'}"><b aria-hidden="true">${ok?'✔':'○'}</b><span>${txt}<span class="sr">${ok?tr(' – zrobione',' – done'):''}</span></span></li>`;
+  let concl=`<section class="card"><h2>${tr('Wniosek','Conclusion')}</h2><ul class="chk">${ck(st.hyp,tr('Wybrana hipoteza','A hypothesis is chosen'))}${ck(st.ctrl,tr('Próba kontrolna wykonana co najmniej 3 razy','The control has been run at least 3 times'))}${ck(st.vals,tr(`Próby badawcze dla co najmniej ${inv.need} różnych wartości zmiennej niezależnej`,`Experimental trials for at least ${inv.need} different values of the independent variable`))}${ck(st.reps,tr('Każda próba badawcza powtórzona co najmniej 3 razy','Every experimental trial repeated at least 3 times'))}</ul>`;
+  if(!st.ready)concl+=`<p class="note">${tr('Gdy wszystkie punkty będą spełnione, można sformułować wniosek.','Once every point is ticked, the conclusion can be drawn.')}</p>`;
+  else{const done=d.tried.includes(0);
+    concl+=`<p><b>${tr('Który wniosek wynika z wyników doświadczenia?','Which conclusion follows from the results?')}</b></p><div class="cons">${d.ord.map(i=>{const c=inv.concl[i],cls=d.tried.includes(i)?(i===0?'ok':'no'):'';return `<button data-con="${i}" class="${cls}" ${done||d.tried.includes(i)?'disabled':''}>${esc(T(c[0]))}</button>`;}).join('')}</div>`;
+    const lastT=d.tried[d.tried.length-1];
+    if(lastT!==undefined){const ok=lastT===0;concl+=`<p class="fb ${ok?'ok':'no'}" role="status">${ok?tr('✅ Udało się! To poprawny wniosek.','✅ Well done! That is the correct conclusion.'):tr('❌ Ten wniosek nie wynika z wyników. Spróbuj jeszcze raz.','❌ This conclusion does not follow from the results. Try again.')}</p><p class="expl">${esc(T(inv.concl[lastT][1]))}</p>`;
+      if(ok){const h=inv.hyps[d.hyp];concl+=`<p class="readout">${h[2]?tr('Wybrana hipoteza została potwierdzona przez wyniki.','The chosen hypothesis is supported by the results.'):tr('Wybrana hipoteza nie została potwierdzona – wyniki ją obaliły. To także wartościowy wynik: hipotezę się odrzuca, a nie „poprawia” wyniki.','The chosen hypothesis is not supported – the results reject it. That is a valuable result too: the hypothesis is rejected, the results are never “adjusted”.')}<br><small>${esc(T(h))}</small></p>${S.lvl==='A'?`<p class="fun">${esc(T(inv.adv))}</p>`:''}`;}}}
+  concl+='</section>';
+  return `${chips}<div class="bar">${lvlSeg()}</div>${frame}<div class="xgrid">${bench}${res}</div>${concl}`;
+}
+
+// ---------- znajdź błąd ----------
+const FL={
+ noctrl:['Brak próby kontrolnej','There is no control'],
+ twovar:['Próby różnią się więcej niż jednym czynnikiem','The trials differ in more than one factor'],
+ few:['Za mało prób lub brak powtórzeń','Too few samples or no repeats'],
+ badctrl:['Niewłaściwa próba kontrolna','The control is wrong'],
+ concl:['Wniosek nie wynika z wyników (jest zbyt ogólny)','The conclusion does not follow from the results (it is too general)'],
+ measure:['Wynik nie jest mierzony obiektywnie','The result is not measured objectively']};
+const ERR=[
+ {a:'twovar',s:['Uczniowie badali, czy światło jest potrzebne do kiełkowania fasoli. Jedną szalkę z nasionami na mokrej wacie postawili na parapecie w klasie, a drugą – w ciemnej i zimnej piwnicy.','Students tested whether bean seeds need light to germinate. They put one dish of seeds on damp cotton wool on the classroom windowsill and the other in a dark, cold cellar.'],e:['Szalki różnią się światłem i temperaturą. Jeśli wyniki będą różne, nie wiadomo, który czynnik to spowodował. Obie szalki powinny stać w tej samej temperaturze, np. jedna przykryta czarnym pudełkiem.','The dishes differ in both light and temperature. If the results differ, there is no way to tell which factor caused it. Both dishes should be at the same temperature, e.g. with one covered by a black box.'],no:['few']},
+ {a:'noctrl',s:['Do 5 doniczek z rzeżuchą dodano nawóz. Po tygodniu rośliny miały średnio 6 cm wysokości. Wniosek: nawóz przyspiesza wzrost rzeżuchy.','Fertiliser was added to 5 pots of cress. After a week the plants were 6 cm tall on average. Conclusion: fertiliser speeds up the growth of cress.'],e:['Nie wiadomo, jak wysoka byłaby rzeżucha bez nawozu. Potrzebne są doniczki kontrolne – takie same, ale bez nawozu.','We do not know how tall the cress would have grown without fertiliser. Control pots are needed – identical, but with no fertiliser.'],no:['badctrl','concl']},
+ {a:'few',s:['Aby sprawdzić wpływ temperatury na katalazę, do trzech probówek z wodą utlenioną (10 °C, 30 °C i 60 °C) wrzucono po jednym kawałku ziemniaka i jeden raz zmierzono wysokość piany.','To test the effect of temperature on catalase, one piece of potato was dropped into each of three tubes of hydrogen peroxide (10 °C, 30 °C and 60 °C) and the foam height was measured once.'],e:['Pojedynczy pomiar może być przypadkowy (np. jeden kawałek miał większą powierzchnię). Każdą próbę trzeba powtórzyć kilka razy i obliczyć średnią.','A single measurement may be a fluke (e.g. one piece had a larger surface). Each trial must be repeated several times and the mean calculated.'],no:['noctrl','badctrl']},
+ {a:'badctrl',s:['Badano, czy drożdże do fermentacji potrzebują cukru. Próba badawcza: drożdże w roztworze glukozy. Próba kontrolna: drożdże w roztworze sacharozy.','The question was whether yeast needs sugar to ferment. Experimental trial: yeast in glucose solution. Control: yeast in sucrose solution.'],e:['Sacharoza też jest cukrem, więc w próbie kontrolnej badany czynnik wcale nie jest wyeliminowany. Prawidłowa próba kontrolna: drożdże w wodzie bez cukru.','Sucrose is also a sugar, so the factor being tested has not been removed in the control. The correct control: yeast in water with no sugar.'],no:['twovar','noctrl']},
+ {a:'twovar',s:['Badano wpływ CO₂ na fotosyntezę moczarki. Zlewkę z dodatkiem NaHCO₃ ustawiono 10 cm od lampy, a zlewkę bez NaHCO₃ – 40 cm od lampy.','The effect of CO₂ on photosynthesis in waterweed was tested. The beaker with added NaHCO₃ was placed 10 cm from the lamp, and the beaker without NaHCO₃ 40 cm away.'],e:['Zestawy różnią się stężeniem CO₂ i natężeniem światła. Oba muszą stać w tej samej odległości od lampy.','The set-ups differ in CO₂ concentration and in light intensity. Both must be at the same distance from the lamp.'],no:['badctrl','few']},
+ {a:'twovar',s:['Badano wpływ temperatury na trawienie skrobi przez ślinę. Do probówki w 37 °C dodano 2 cm³ śliny, a do probówki w 10 °C – 5 cm³ śliny.','The effect of temperature on starch digestion by saliva was tested. 2 cm³ of saliva was added to the tube at 37 °C, and 5 cm³ to the tube at 10 °C.'],e:['Oprócz temperatury różni się ilość enzymu. Wszystkie probówki muszą zawierać tyle samo śliny i kleiku skrobiowego.','Besides temperature, the amount of enzyme differs. All the tubes must contain the same amount of saliva and of starch solution.'],no:['few','noctrl']},
+ {a:'concl',s:['Wyhodowano po 20 siewek fasoli w świetle i w ciemności, w tej samej temperaturze. Po tygodniu siewki z ciemności były wyższe, ale blade. Wniosek: światło nie jest roślinom potrzebne do życia.','20 bean seedlings were grown in light and 20 in darkness at the same temperature. After a week the seedlings in the dark were taller but pale. Conclusion: plants do not need light to live.'],e:['Wyniki dotyczą tylko wysokości siewek w krótkim czasie. Siewki w ciemności rosną dzięki zapasom z nasion i wydłużają się (etiolacja), ale bez światła nie prowadzą fotosyntezy i po wyczerpaniu zapasów zamierają.','The results only concern seedling height over a short time. Seedlings in the dark grow on food stored in the seed and stretch (etiolation), but without light they cannot photosynthesise and die once the stores run out.'],no:['few','noctrl','twovar']},
+ {a:'measure',s:['Badano wpływ nawozu na pomidory. Po miesiącu uczniowie ocenili, które rośliny „wyglądają zdrowiej”, i uznali, że te nawożone.','The effect of fertiliser on tomato plants was tested. After a month the students judged which plants “looked healthier” and decided it was the fertilised ones.'],e:['Ocena „na oko” jest subiektywna. Trzeba zmierzyć konkretną wielkość, np. wysokość roślin, liczbę liści albo masę owoców.','Judging “by eye” is subjective. A specific quantity must be measured, e.g. plant height, number of leaves or mass of fruit.'],no:['few','noctrl']},
+ {a:'noctrl',s:['Do termosu wsypano kiełkujące nasiona grochu i włożono termometr. Po dobie temperatura wzrosła o 3 °C. Wniosek: kiełkujące nasiona wydzielają ciepło.','Germinating pea seeds were put into a vacuum flask with a thermometer. After a day the temperature had risen by 3 °C. Conclusion: germinating seeds give off heat.'],e:['Brakuje termosu z martwymi (ugotowanymi) nasionami. Bez niego nie wiadomo, czy temperatura nie wzrosłaby z innego powodu, np. przez ogrzanie pomieszczenia.','A flask with dead (boiled) seeds is missing. Without it there is no way to know whether the temperature would have risen for another reason, e.g. the room warming up.'],no:['few','badctrl']},
+ {a:'badctrl',s:['Chciano wykazać, że ślina trawi skrobię. Probówka A: kleik skrobiowy + ślina. Probówka B (kontrolna): woda + ślina, bez skrobi. Po 10 min do obu dodano płyn Lugola.','The aim was to show that saliva digests starch. Tube A: starch solution + saliva. Tube B (control): water + saliva, no starch. After 10 min Lugol’s iodine was added to both.'],e:['W probówce B od początku nie ma skrobi, więc i tak nie zabarwi się na granatowo – porównanie niczego nie wykazuje. Próba kontrolna powinna zawierać kleik skrobiowy i wodę (albo przegotowaną ślinę) zamiast śliny.','Tube B never had any starch, so it cannot turn blue-black anyway – the comparison shows nothing. The control should contain starch solution and water (or boiled saliva) instead of saliva.'],no:['twovar','noctrl']},
+ {a:'few',s:['Badano wpływ kwaśnego deszczu na kiełkowanie rzeżuchy: jedno nasiono podlewano wodą destylowaną, a drugie – roztworem kwasu.','The effect of acid rain on cress germination was tested: one seed was watered with distilled water and another with an acid solution.'],e:['Jedno nasiono w każdej próbie to za mało – mogło być np. nieżywotne. Trzeba użyć wielu nasion (np. po 30) i porównać odsetek tych, które wykiełkowały.','One seed per trial is far too few – it might, for example, not have been viable. Many seeds are needed (e.g. 30 each) and the percentage that germinate should be compared.'],no:['noctrl','badctrl']},
+ {a:'twovar',s:['Porównywano fermentację glukozy i sacharozy przez drożdże. Kolbę z glukozą wstawiono do łaźni wodnej o temperaturze 30 °C, a kolbę z sacharozą zostawiono na stole w 20 °C.','Yeast fermentation of glucose and of sucrose was compared. The glucose flask was put in a 30 °C water bath, and the sucrose flask was left on the bench at 20 °C.'],e:['Kolby różnią się rodzajem cukru i temperaturą. Obie muszą stać w tej samej łaźni wodnej.','The flasks differ in sugar type and in temperature. Both must stand in the same water bath.'],no:['few','noctrl']},
+ {a:'concl',s:['Moczarka oświetlana z 10 cm wydzielała średnio 25 pęcherzyków/min, a z 20 cm – 15 pęcherzyków/min (po 5 powtórzeń). Wniosek: im silniejsze światło, tym zawsze szybsza fotosynteza – bez żadnej granicy.','Waterweed lit from 10 cm gave off 25 bubbles/min on average, and from 20 cm 15 bubbles/min (5 repeats each). Conclusion: the stronger the light, the faster photosynthesis – always, without any limit.'],e:['Zbadano tylko dwie odległości, więc nie można wnioskować o całym zakresie natężenia światła. W bardzo silnym świetle tempo fotosyntezy przestaje rosnąć, bo ogranicza je inny czynnik (np. CO₂).','Only two distances were tested, so nothing can be concluded about the whole range of light intensity. In very strong light the rate stops rising because another factor (e.g. CO₂) limits it.'],no:['noctrl','few','twovar']},
+ {a:'measure',s:['Wpływ temperatury na fermentację drożdży oceniano, patrząc, w której kolbie balonik „wydaje się większy”.','The effect of temperature on yeast fermentation was judged by looking at which flask’s balloon “seemed bigger”.'],e:['Trzeba mierzyć obiektywnie, np. obwód balonika taśmą mierniczą albo objętość zebranego gazu.','It must be measured objectively, e.g. the balloon’s circumference with a tape measure, or the volume of gas collected.'],no:['noctrl','few']},
+];
+function newErr(){const E=S.err;if(!E.ord||E.i>=E.ord.length){E.ord=shuffle(ERR.map((_,i)=>i));E.i=0;}const sc=ERR[E.ord[E.i]];
+  E.opts=shuffle([sc.a,...pick(Object.keys(FL).filter(k=>k!==sc.a&&!(sc.no||[]).includes(k)),3)]);E.pick=null;}
+function viewErr(){
+  const E=S.err;if(!E.opts)newErr();const sc=ERR[E.ord[E.i]],done=E.pick!==null,ok=done&&E.pick===sc.a;
+  return `<section class="card"><h2>${tr('Znajdź błąd w doświadczeniu','Spot the flaw in the experiment')}</h2><p class="note">${tr('Takie zadania często pojawiają się na egzaminie ósmoklasisty i na maturze. Przeczytaj opis i wskaż, co jest nie tak z planem doświadczenia.','Tasks like these often appear in Polish school-leaving exams. Read the description and decide what is wrong with how the experiment was planned.')}</p>
+   <p class="score">${tr('Wynik','Score')}: ${E.ok} / ${E.all} · ${tr('opis','case')} ${E.i+1} ${tr('z','of')} ${ERR.length}</p>
+   <div class="scen">${subH(T(sc.s))}</div><p class="q" style="font-size:1.05rem">${tr('Jaki błąd popełniono?','What is the flaw?')}</p>
+   <div class="opts">${E.opts.map(o=>`<button data-errans="${o}" class="${done?(o===sc.a?'ok':o===E.pick?'no':''):''}" ${done?'disabled':''}>${esc(T(FL[o]))}</button>`).join('')}</div>
+   ${done?`<p class="fb ${ok?'ok':'no'}" role="status">${ok?tr('✅ Dobrze!','✅ Correct!'):tr(`❌ Niestety. Błąd to: ${T(FL[sc.a]).toLowerCase()}.`,`❌ Not quite. The flaw is: ${T(FL[sc.a]).toLowerCase()}.`)}</p><p class="expl">${subH(T(sc.e))}</p><button class="btn primary" id="nextE">${tr('Następny opis →','Next case →')}</button>`:''}</section>
+   <section class="card"><h3 style="margin-top:0">${tr('Zasady dobrze zaplanowanego doświadczenia','Rules of a well-planned experiment')}</h3><ul>
+    <li>${tr('Próba badawcza i kontrolna różnią się <b>tylko jednym</b> czynnikiem – badanym.','The experimental and control trials differ in <b>one factor only</b> – the one being tested.')}</li>
+    <li>${tr('Próba kontrolna to punkt odniesienia: badany czynnik jest w niej nieobecny lub niezmieniony.','The control is a reference point: the tested factor is absent or unchanged in it.')}</li>
+    <li>${tr('Wszystkie inne warunki są jednakowe (stałe).','All other conditions are kept the same (controlled).')}</li>
+    <li>${tr('Doświadczenie wykonuje się na wielu osobnikach lub powtarza kilka razy i liczy średnią.','The experiment uses many individuals or is repeated several times, and the mean is calculated.')}</li>
+    <li>${tr('Wynik mierzy się obiektywnie – liczbą, w jednostkach.','The result is measured objectively – as a number, in units.')}</li>
+    <li>${tr('Wniosek odnosi się tylko do tego, co zbadano, i odpowiada na problem badawczy.','The conclusion only covers what was tested and answers the research question.')}</li></ul></section>`;
+}
+
+// ---------- teoria ----------
+const CN={CO2:['dwutlenek węgla','carbon dioxide'],H2O:['woda','water'],C6H12O6:['glukoza','glucose'],O2:['tlen','oxygen'],C2H5OH:['etanol (alkohol etylowy)','ethanol'],C3H6O3:['kwas mlekowy','lactic acid']};
+const EQ={photo:{n:['Fotosynteza','Photosynthesis'],L:[[6,'CO2'],[6,'H2O']],R:[[1,'C6H12O6'],[6,'O2']],over:['światło, chlorofil','light, chlorophyll']},
+ resp:{n:['Oddychanie tlenowe','Aerobic respiration'],L:[[1,'C6H12O6'],[6,'O2']],R:[[6,'CO2'],[6,'H2O']],en:['energia (ATP)','energy (ATP)']},
+ alc:{n:['Fermentacja alkoholowa','Alcoholic fermentation'],L:[[1,'C6H12O6']],R:[[2,'C2H5OH'],[2,'CO2']],en:['energia','energy']},
+ lac:{n:['Fermentacja mlekowa','Lactic acid fermentation'],L:[[1,'C6H12O6']],R:[[2,'C3H6O3']],en:['energia','energy']}};
+const PROC=['photo','resp','alc','lac'];
+function atomsOf(f){const o={};for(const m of f.matchAll(/([A-Z][a-z]?)(\d*)/g))o[m[1]]=(o[m[1]]||0)+(m[2]?+m[2]:1);return o;}
+const sideCount=(side,el)=>side.reduce((a,[c,f])=>a+c*(atomsOf(f)[el]||0),0);
+const ELS=['C','H','O'],ELC={C:'#3b3b3b',H:'#ffffff',O:'#e0453a'},ELN={C:['węgiel','carbon'],H:['wodór','hydrogen'],O:['tlen','oxygen']};
+function eqHTML(id){const q=EQ[id];const sp=([c,f])=>`<span class="sp"><span>${c>1?c+' ':''}${fH(f)}</span><small>${esc(T(CN[f]))}</small></span>`,plus='<span class="sp op"><span>+</span><small>&nbsp;</small></span>';
+  return `<div class="eq" role="math" aria-label="${esc(T(q.n))}">${q.L.map(sp).join(plus)}<span class="sp ar"><small class="ov">${q.over?esc(T(q.over)):'&nbsp;'}</small><span aria-hidden="true">→</span><small>&nbsp;</small></span>${q.R.map(sp).join(plus)}${q.en?`${plus}<span class="sp en"><span>${esc(T(q.en))}</span><small>&nbsp;</small></span>`:''}</div>`;}
+const dotsH=(el,n)=>`<span class="dots" aria-hidden="true">${Array.from({length:n},()=>`<i style="background:${ELC[el]}"></i>`).join('')}</span>`;
+function atomsCard(){
+  const id=S.atom.eq,q=EQ[id],v=S.atom.v[id]||(S.atom.v[id]={}),res=S.atom.res[id],show=S.atom.show[id];
+  const allOk=res&&Object.values(res).every(Boolean);
+  const inp=(side,el)=>{const k=side+'.'+el,val=show?sideCount(q[side],el):(v[k]??'');const cls=res&&!show?(res[k]?'ok':'no'):'';
+    return `<input type="number" inputmode="numeric" min="0" max="99" data-atom="${k}" value="${val}" class="${cls}" aria-label="${esc(tr(`${T(ELN[el])} – ${side==='L'?'substraty':'produkty'}`,`${T(ELN[el])} – ${side==='L'?'reactants':'products'}`))}" ${show?'readonly':''}>`;};
+  const brk=(side,el)=>q[side].filter(([c,f])=>atomsOf(f)[el]).map(([c,f])=>`${c} × ${atomsOf(f)[el]}`).join(' + ')+` = ${sideCount(q[side],el)}`;
+  return `<section class="card"><h2>${tr('Równania sumaryczne','Summary equations')}</h2>
+   <div class="chips" role="group" aria-label="${esc(tr('Wybierz proces','Choose a process'))}">${PROC.map(k=>`<button data-eq="${k}" aria-pressed="${id===k}">${esc(T(EQ[k].n))}</button>`).join('')}</div>
+   <div class="eqbox">${eqHTML(id)}</div>
+   ${S.lvl==='A'&&id==='photo'?`<p class="note">${tr('Aby pokazać, że cały wydzielany tlen pochodzi z wody, równanie zapisuje się też tak: 6 CO₂ + 12 H₂O → C₆H₁₂O₆ + 6 O₂ + 6 H₂O. Wykazano to, znakując wodę izotopem tlenu ¹⁸O.','To show that all the oxygen released comes from water, the equation is also written as: 6 CO₂ + 12 H₂O → C₆H₁₂O₆ + 6 O₂ + 6 H₂O. This was proved by labelling water with the oxygen isotope ¹⁸O.')}</p>`:''}
+   <h3>${tr('Policz atomy','Count the atoms')}</h3><p class="note">${tr('Ile atomów każdego pierwiastka jest po lewej stronie (substraty), a ile po prawej (produkty)? Współczynnik przed wzorem mnoży wszystkie atomy w cząsteczce, np. 6 CO₂ to 6 atomów C i 12 atomów O. Energii nie liczymy – to nie są atomy.','How many atoms of each element are on the left (reactants) and on the right (products)? The number in front of a formula multiplies every atom in the molecule, e.g. 6 CO₂ means 6 C atoms and 12 O atoms. Energy is not counted – it is not made of atoms.')}</p>
+   <div class="tablewrap"><table class="atoms"><thead><tr><th>${tr('Pierwiastek','Element')}</th><th>${tr('Substraty','Reactants')}</th><th>${tr('Produkty','Products')}</th></tr></thead><tbody>
+   ${ELS.map(el=>`<tr><td><b>${el}</b> <span class="note">(${esc(T(ELN[el]))})</span></td><td>${inp('L',el)}${show?`<div class="note">${esc(brk('L',el))}</div>${dotsH(el,sideCount(q.L,el))}`:''}</td><td>${inp('R',el)}${show?`<div class="note">${esc(brk('R',el))}</div>${dotsH(el,sideCount(q.R,el))}`:''}</td></tr>`).join('')}</tbody></table></div>
+   <div class="bar"><button class="btn primary" data-act="atomChk" ${show?'disabled':''}>${tr('Sprawdź','Check')}</button><button class="btn" data-act="atomShow">${show?tr('Ukryj rozwiązanie','Hide the answer'):tr('Pokaż rozwiązanie','Show the answer')}</button></div>
+   ${res&&!show?`<p class="fb ${allOk?'ok':'no'}" role="status">${allOk?tr('✅ Udało się! Po obu stronach jest tyle samo atomów każdego pierwiastka – równanie jest uzgodnione.','✅ Well done! Both sides have the same number of atoms of each element – the equation is balanced.'):tr('❌ Nie wszystko się zgadza – popraw zaznaczone pola.','❌ Not everything matches – correct the highlighted boxes.')}</p>`:''}
+   ${show||allOk?`<p class="expl">${tr('W reakcji chemicznej atomy nie znikają i nie powstają z niczego – zmienia się tylko sposób, w jaki są połączone. Dlatego liczba atomów C, H i O jest taka sama po obu stronach strzałki.','In a chemical reaction atoms are neither destroyed nor created – only the way they are joined changes. That is why the numbers of C, H and O atoms are the same on both sides of the arrow.')}</p>`:''}</section>`;
+}
+function cycleSVG(exp){
+  const ink=exp?LIT.ink:'var(--ink)',mu=exp?LIT.muted:'var(--muted)',id='ah'+(exp?'x':'');
+  let s=`<svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, system-ui, sans-serif" role="img" aria-label="${esc(tr('Obieg substancji między chloroplastem a mitochondrium','The cycle of substances between the chloroplast and the mitochondrion'))}">`;
+  if(exp)s+=`<rect width="680" height="340" fill="#fff"/>`;
+  s+=`<defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="${ink}"/></marker></defs>`;
+  s+=`<ellipse cx="150" cy="180" rx="108" ry="62" fill="#8fce78" stroke="#2c6b23" stroke-width="3"/><ellipse cx="150" cy="180" rx="99" ry="54" fill="none" stroke="#2c6b23" stroke-width="1"/><path d="M70 180 H230" stroke="#2f7d2a" stroke-width="2"/>`;
+  for(const gx of [-62,-26,10,46])for(let k=0;k<4;k++)s+=`<rect x="${150+gx-13}" y="${166+k*8}" width="26" height="6" rx="2" fill="#2f7d2a"/>`;
+  s+=`<ellipse cx="530" cy="180" rx="108" ry="60" fill="#f4ad6c" stroke="#b5561f" stroke-width="3"/><polyline points="${Array.from({length:15},(_,i)=>`${440+i*13},${i%2?208:152}`).join(' ')}" fill="none" stroke="#fff1e0" stroke-width="4" stroke-linejoin="round"/>`;
+  s+=`<path d="M235 128 C 300 60 380 60 445 128" fill="none" stroke="${ink}" stroke-width="3" marker-end="url(#${id})"/><path d="M445 236 C 380 304 300 304 235 236" fill="none" stroke="${ink}" stroke-width="3" marker-end="url(#${id})"/>`;
+  s+=`<text x="340" y="38" text-anchor="middle" font-size="15" font-weight="700" fill="${ink}">${esc(tr('glukoza + tlen','glucose + oxygen'))}</text><text x="340" y="58" text-anchor="middle" font-size="14" fill="${mu}">C₆H₁₂O₆ + 6 O₂</text>`;
+  s+=`<text x="340" y="314" text-anchor="middle" font-size="15" font-weight="700" fill="${ink}">${esc(tr('dwutlenek węgla + woda','carbon dioxide + water'))}</text><text x="340" y="333" text-anchor="middle" font-size="14" fill="${mu}">6 CO₂ + 6 H₂O</text>`;
+  s+=`<circle cx="40" cy="44" r="18" fill="#f6c431"/>${Array.from({length:8},(_,i)=>{const a=i*Math.PI/4;return `<line x1="${40+Math.cos(a)*23}" y1="${44+Math.sin(a)*23}" x2="${40+Math.cos(a)*31}" y2="${44+Math.sin(a)*31}" stroke="#f6c431" stroke-width="3"/>`;}).join('')}`;
+  s+=`<path d="M62 70 L100 122" stroke="#d9a400" stroke-width="3" marker-end="url(#${id})"/><text x="78" y="40" font-size="14" fill="${ink}">${esc(tr('energia świetlna','light energy'))}</text>`;
+  s+=`<path d="M600 128 L636 76" stroke="${ink}" stroke-width="3" marker-end="url(#${id})"/><text x="676" y="40" text-anchor="end" font-size="14" font-weight="700" fill="${ink}">${esc(tr('energia (ATP)','energy (ATP)'))}</text><text x="676" y="58" text-anchor="end" font-size="13" fill="${mu}">${esc(tr('+ ciepło','+ heat'))}</text>`;
+  s+=`<text x="150" y="264" text-anchor="middle" font-size="15" font-weight="700" fill="${ink}">${esc(tr('Fotosynteza','Photosynthesis'))}</text><text x="150" y="282" text-anchor="middle" font-size="13" fill="${mu}">${esc(tr('(chloroplast)','(chloroplast)'))}</text>`;
+  s+=`<text x="530" y="264" text-anchor="middle" font-size="15" font-weight="700" fill="${ink}">${esc(tr('Oddychanie tlenowe','Aerobic respiration'))}</text><text x="530" y="282" text-anchor="middle" font-size="13" fill="${mu}">${esc(tr('(mitochondrium)','(mitochondrion)'))}</text>`;
+  return s+'</svg>';
+}
+const DK='#17221c';
+function phSVG(){const id='ahp',t=(x,y,s,o='')=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="13" fill="${DK}" ${o}>${esc(s)}</text>`,ink='var(--ink)';
+  let s=`<svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, system-ui, sans-serif" role="img" aria-label="${esc(tr('Dwie fazy fotosyntezy w chloroplaście','The two stages of photosynthesis in the chloroplast'))}"><defs>${[['D',DK],['Y','#d9a400'],['B','#2f6fb0'],['G','#2c6b23']].map(([k,c])=>`<marker id="${id+k}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="${c}"/></marker>`).join('')}</defs>`;
+  s+=`<rect x="30" y="50" width="620" height="230" rx="110" fill="#dff2d6" stroke="#2c6b23" stroke-width="3"/>`;
+  for(let k=0;k<5;k++)s+=`<rect x="112" y="${118+k*16}" width="118" height="12" rx="6" fill="#4f9e3f" stroke="#2c6b23"/>`;
+  s+=t(171,214,tr('tylakoidy (granum)','thylakoids (granum)'),'font-size="12" font-style="italic"');
+  s+=`<path d="M70 18 L120 110" stroke="#d9a400" stroke-width="4" marker-end="url(#${id}Y)"/><text x="80" y="16" font-size="14" fill="${ink}">${esc(tr('światło','light'))}</text>`;
+  s+=`<path d="M62 160 L106 152" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#${id}B)"/>`+t(70,185,'H₂O','font-weight="700"');
+  s+=`<path d="M206 114 L236 26" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#${id}B)"/><text x="244" y="30" font-size="14" font-weight="700" fill="${ink}">O₂</text>`;
+  s+=`<path d="M238 140 L404 140" stroke="${DK}" stroke-width="2.5" marker-end="url(#${id}D)"/>`+t(322,132,'ATP + NADPH','font-weight="700"');
+  s+=`<path d="M404 182 L238 182" stroke="${DK}" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#${id}D)"/>`+t(322,200,'ADP + NADP⁺');
+  s+=`<path d="M470 104 A56 56 0 1 1 414 160" fill="none" stroke="#2c6b23" stroke-width="3" marker-end="url(#${id}G)"/>`+t(470,152,tr('cykl','Calvin'))+t(470,170,tr('Calvina','cycle'),'font-weight="700"')+t(470,192,'RuBisCO','font-size="12"');
+  s+=`<path d="M470 12 L470 98" stroke="#2f6fb0" stroke-width="2.5" marker-end="url(#${id}B)"/><text x="480" y="30" font-size="14" font-weight="700" fill="${ink}">CO₂</text>`;
+  s+=`<path d="M530 160 L600 160" stroke="${DK}" stroke-width="2.5" marker-end="url(#${id}D)"/>`+t(586,150,tr('cukry','sugars'),'font-weight="700"');
+  s+=t(171,240,tr('faza zależna od światła','light-dependent stage'),'font-weight="700"')+t(171,258,tr('(błony tylakoidów)','(thylakoid membranes)'));
+  s+=t(470,240,tr('faza niezależna od światła','light-independent stage'),'font-weight="700"')+t(470,258,tr('(stroma)','(stroma)'));
+  return s+'</svg>';}
+function rsSVG(){const id='ahr',t=(x,y,s,o='')=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="13" fill="${DK}" ${o}>${esc(s)}</text>`;
+  let s=`<svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, system-ui, sans-serif" role="img" aria-label="${esc(tr('Etapy oddychania komórkowego','The stages of cellular respiration'))}"><defs><marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="${DK}"/></marker></defs>`;
+  s+=`<rect x="6" y="6" width="668" height="308" rx="20" fill="#fbf3df" stroke="#c9a66a" stroke-width="2"/>`+t(60,30,tr('cytozol','cytosol'),'font-weight="700"');
+  s+=`<rect x="40" y="46" width="130" height="34" rx="8" fill="#fff" stroke="#8a6a3a"/>`+t(105,68,tr('glukoza','glucose'),'font-weight="700"');
+  s+=`<path d="M105 82 V146" stroke="${DK}" stroke-width="2.5" marker-end="url(#${id})"/>`+`<text x="114" y="108" font-size="13" font-weight="700" fill="${DK}">${esc(tr('glikoliza','glycolysis'))}</text><text x="114" y="126" font-size="12" fill="${DK}">2 ATP, 2 NADH</text>`;
+  s+=`<rect x="28" y="150" width="154" height="34" rx="8" fill="#fff" stroke="#8a6a3a"/>`+t(105,172,tr('2 pirogronian','2 pyruvate'),'font-weight="700"');
+  s+=`<path d="M105 186 V236" stroke="${DK}" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#${id})"/><text x="114" y="216" font-size="12" fill="${DK}">${esc(tr('brak O₂','no O₂'))}</text>`;
+  s+=`<rect x="18" y="240" width="190" height="56" rx="8" fill="#fff" stroke="#8a6a3a" stroke-dasharray="5 3"/>`+t(113,262,tr('fermentacja:','fermentation:'),'font-weight="700"')+t(113,282,tr('etanol + CO₂ albo mleczan','ethanol + CO₂ or lactate'),'font-size="12"');
+  s+=`<path d="M184 167 L262 167" stroke="${DK}" stroke-width="2.5" marker-end="url(#${id})"/><text x="222" y="158" text-anchor="middle" font-size="12" fill="${DK}">${esc(tr('jest O₂','O₂ present'))}</text>`;
+  s+=`<ellipse cx="462" cy="170" rx="196" ry="128" fill="#f8c08c" stroke="#b5561f" stroke-width="3"/><ellipse cx="462" cy="170" rx="176" ry="108" fill="#fde3c8" stroke="#b5561f" stroke-width="1.5"/>`;
+  s+=t(462,30,tr('mitochondrium','mitochondrion'),'font-weight="700"');
+  s+=t(462,88,tr('reakcja pomostowa','link reaction'),'font-weight="700"')+t(462,106,tr('pirogronian → acetylo-CoA + CO₂','pyruvate → acetyl-CoA + CO₂'),'font-size="12"');
+  s+=`<path d="M462 112 V130" stroke="${DK}" stroke-width="2" marker-end="url(#${id})"/><circle cx="462" cy="168" r="34" fill="none" stroke="#b5561f" stroke-width="2.5"/>`+t(462,164,tr('cykl','Krebs'))+t(462,181,tr('Krebsa','cycle'),'font-weight="700"');
+  s+=t(372,164,tr('macierz','matrix'),'font-size="12" font-style="italic"')+t(566,162,'CO₂, NADH,','font-size="12"')+t(566,178,'FADH₂, 2 ATP','font-size="12"');
+  s+=t(462,252,tr('łańcuch oddechowy (błona wewnętrzna)','electron transport chain (inner membrane)'),'font-weight="700" font-size="12.5"')+t(462,268,tr('O₂ → H₂O, ok. 26–28 ATP','O₂ → H₂O, about 26–28 ATP'),'font-size="12"');
+  return s+'</svg>';}
+// tempo fotosyntezy vs światło (czynnik ograniczający)
+const LFAM={co2:[{co2:.1,T:25,l:'0,1% NaHCO₃',le:'0.1% NaHCO₃'},{co2:.4,T:25,l:'0,4% NaHCO₃',le:'0.4% NaHCO₃'},{co2:1,T:25,l:'1% NaHCO₃',le:'1% NaHCO₃'}],
+ temp:[{co2:1,T:15,l:'15 °C',le:'15 °C'},{co2:1,T:25,l:'25 °C',le:'25 °C'},{co2:1,T:35,l:'35 °C',le:'35 °C'}]};
+function lfSVG(){
+  const W=600,H=320,l=62,r=22,t=20,b=52,pw=W-l-r,ph=H-t-b,fam=LFAM[S.lf.fam],top=45,cols=['var(--s1)','var(--s2)','var(--s3)'];
+  const X=v=>l+v/100*pw,Y=v=>t+ph-v/top*ph;
+  let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, system-ui, sans-serif" role="img" aria-label="${esc(tr('Wykres: intensywność fotosyntezy w zależności od natężenia światła','Graph: rate of photosynthesis against light intensity'))}">`;
+  for(let v=0;v<=top;v+=5)s+=`<line x1="${l}" x2="${W-r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${l-8}" y="${Y(v)+4}" text-anchor="end" font-size="12" fill="var(--muted)">${v}</text>`;
+  for(let v=0;v<=100;v+=20)s+=`<text x="${X(v)}" y="${t+ph+18}" text-anchor="middle" font-size="12" fill="var(--muted)">${v}</text>`;
+  s+=`<line x1="${l}" y1="${t}" x2="${l}" y2="${t+ph}" stroke="var(--ink)" stroke-width="1.5"/><line x1="${l}" y1="${t+ph}" x2="${W-r}" y2="${t+ph}" stroke="var(--ink)" stroke-width="1.5"/>`;
+  s+=`<text transform="translate(16 ${t+ph/2}) rotate(-90)" text-anchor="middle" font-size="13" fill="var(--ink)">${esc(tr('intensywność fotosyntezy','rate of photosynthesis'))}</text><text x="${l+pw/2}" y="${H-8}" text-anchor="middle" font-size="13" fill="var(--ink)">${esc(tr('natężenie światła [% maksymalnego]','light intensity [% of maximum]'))}</text>`;
+  fam.forEach((f,i)=>{const pts=[];for(let I=0;I<=100;I+=2)pts.push(`${X(I).toFixed(1)},${Y(photoCore(I,f.co2,f.T).r).toFixed(1)}`);s+=`<polyline points="${pts.join(' ')}" fill="none" stroke="${cols[i]}" stroke-width="3"/>`;
+    const yEnd=photoCore(100,f.co2,f.T).r;s+=`<text x="${W-r-4}" y="${Y(yEnd)-7}" text-anchor="end" font-size="12.5" font-weight="700" fill="${cols[i]}">${esc(L==='pl'?f.l:f.le)}</text>`;});
+  const I=S.lf.I;s+=`<line x1="${X(I)}" x2="${X(I)}" y1="${t}" y2="${t+ph}" stroke="var(--muted)" stroke-dasharray="5 4"/>`;
+  fam.forEach((f,i)=>{s+=`<circle cx="${X(I)}" cy="${Y(photoCore(I,f.co2,f.T).r)}" r="5" fill="var(--paper)" stroke="${cols[i]}" stroke-width="2.5"/>`;});
+  return s+'</svg>';
+}
+function lfRead(){const fam=LFAM[S.lf.fam],cols=['var(--s1)','var(--s2)','var(--s3)'],I=S.lf.I;
+  return fam.map((f,i)=>{const c=photoCore(I,f.co2,f.T);const lim=c.a<.8*c.b?tr('światło','light'):c.a>1.25*c.b?(S.lf.fam==='co2'?tr('stężenie CO₂','CO₂ concentration'):tr('temperatura','temperature')):tr('oba czynniki (przejście)','both factors (transition)');
+    return `<span><i style="background:${cols[i]}"></i><b>${esc(L==='pl'?f.l:f.le)}</b>: ${NF(c.r,1)} – ${tr('ogranicza','limited by')}: <b>${esc(lim)}</b></span>`;}).join('');}
+const CMP=[
+ {k:'where',h:['Miejsce w komórce','Where in the cell'],v:[{b:['chloroplasty','chloroplasts'],a:['chloroplasty (u sinic – błony tylakoidów w cytoplazmie)','chloroplasts (in cyanobacteria – thylakoid membranes in the cytoplasm)']},{b:['cytoplazma i mitochondria','cytoplasm and mitochondria'],a:['cytozol (glikoliza) i mitochondria (pozostałe etapy)','cytosol (glycolysis) and mitochondria (the other stages)']},{b:['cytoplazma','cytoplasm']},{b:['cytoplazma','cytoplasm']}]},
+ {k:'o2',h:['Czy potrzebny jest tlen?','Is oxygen needed?'],v:[{b:['nie – tlen jest produktem','no – oxygen is a product']},{b:['tak','yes']},{b:['nie (warunki beztlenowe)','no (anaerobic conditions)']},{b:['nie (warunki beztlenowe)','no (anaerobic conditions)']}]},
+ {k:'sub',h:['Substraty','Substrates'],v:[{b:['CO₂ + H₂O (+ energia świetlna)','CO₂ + H₂O (+ light energy)']},{b:['glukoza + O₂','glucose + O₂']},{b:['glukoza','glucose']},{b:['glukoza','glucose']}]},
+ {k:'prod',h:['Produkty','Products'],v:[{b:['glukoza + O₂','glucose + O₂']},{b:['CO₂ + H₂O','CO₂ + H₂O']},{b:['etanol (alkohol etylowy) + CO₂','ethanol + CO₂']},{b:['kwas mlekowy (mleczan)','lactic acid (lactate)']}]},
+ {k:'kind',h:['Rodzaj przemiany','Type of process'],v:[{b:['synteza (anabolizm) – energia jest magazynowana w glukozie','synthesis (anabolism) – energy is stored in glucose']},{b:['rozkład (katabolizm) – całkowity','breakdown (catabolism) – complete']},{b:['rozkład (katabolizm) – niecałkowity','breakdown (catabolism) – incomplete']},{b:['rozkład (katabolizm) – niecałkowity','breakdown (catabolism) – incomplete']}]},
+ {k:'energy',h:['Ilość uzyskanej energii','Energy released'],v:[{b:['nie uwalnia, lecz pochłania energię (świetlną)','releases none – it absorbs (light) energy'],a:['pochłania energię świetlną; cykl Calvina zużywa ATP i NADPH z fazy zależnej od światła','absorbs light energy; the Calvin cycle uses ATP and NADPH from the light-dependent stage']},{b:['dużo','a lot'],a:['ok. 30–32 ATP z 1 cząsteczki glukozy','about 30–32 ATP per glucose molecule']},{b:['mało','little'],a:['2 ATP z 1 cząsteczki glukozy','2 ATP per glucose molecule']},{b:['mało','little'],a:['2 ATP z 1 cząsteczki glukozy','2 ATP per glucose molecule']}]},
+ {k:'who',h:['Kto ją przeprowadza?','Which organisms do it?'],v:[{b:['rośliny, glony, sinice, niektóre protisty (np. euglena)','plants, algae, cyanobacteria, some protists (e.g. euglena)']},{b:['większość organizmów: zwierzęta, rośliny, grzyby, wiele protistów i bakterii','most organisms: animals, plants, fungi, many protists and bacteria']},{b:['drożdże; komórki roślin bez dostępu tlenu (np. korzenie w zalanej glebie); niektóre bakterie','yeasts; plant cells without oxygen (e.g. roots in waterlogged soil); some bacteria']},{b:['bakterie fermentacji mlekowej (np. Lactobacillus); komórki mięśni szkieletowych człowieka podczas intensywnego wysiłku; czerwone krwinki','lactic-acid bacteria (e.g. Lactobacillus); human skeletal muscle cells during intense exercise; red blood cells']}]},
+ {k:'use',h:['Znaczenie i zastosowanie','Importance and uses'],v:[{b:['wytwarza pokarm i tlen dla niemal wszystkich organizmów','makes food and oxygen for almost all living things']},{b:['dostarcza energii do procesów życiowych','supplies energy for life processes']},{b:['pieczenie chleba, produkcja wina i piwa, bioetanol','bread-making, wine and beer, bioethanol']},{b:['jogurt, kefir, kiszonki, kiszonka dla zwierząt, zakwas chlebowy','yoghurt, kefir, pickles, silage for livestock, sourdough']}]}];
+const cmpCell=(row,i)=>{const c=row.v[i];return T(S.lvl==='A'&&c.a?c.a:c.b);};
+function viewTheory(){
+  const A=S.lvl==='A';
+  let h=`<div class="bar">${lvlSeg()}</div>${atomsCard()}`;
+  h+=`<section class="card"><h2>${tr('Fotosynteza i oddychanie – procesy przeciwne','Photosynthesis and respiration – opposite processes')}</h2>
+   <p>${tr('Porównaj równania: substraty fotosyntezy (CO₂ i H₂O) są produktami oddychania tlenowego, a produkty fotosyntezy (glukoza i O₂) – substratami oddychania. Fotosynteza magazynuje energię światła w glukozie, a oddychanie uwalnia ją w postaci ATP (część jest tracona jako ciepło). Oba procesy zachodzą w komórkach roślin – oddychanie stale, w dzień i w nocy, fotosynteza tylko na świetle.','Compare the equations: the substrates of photosynthesis (CO₂ and H₂O) are the products of aerobic respiration, and the products of photosynthesis (glucose and O₂) are the substrates of respiration. Photosynthesis stores light energy in glucose; respiration releases it as ATP (some is lost as heat). Plant cells carry out both – respiration all the time, day and night, photosynthesis only in light.')}</p>
+   <div class="stage diag">${cycleSVG(false)}</div><div class="bar"><button class="btn" data-act="cyPng">${tr('Pobierz schemat (PNG)','Download diagram (PNG)')}</button><span class="status" role="status">${S.cyPng?esc(T(STATUS[S.cyPng])):''}</span></div>
+   <p class="note" style="margin-top:8px">${tr('To nie są dokładnie „te same reakcje w drugą stronę” – oba procesy przebiegają przez wiele różnych etapów i zachodzą w różnych organellach. Przeciwne są ich sumaryczne równania.','They are not literally “the same reactions run backwards” – each process goes through many different steps in different organelles. It is their summary equations that are opposite.')}</p></section>`;
+  h+=`<section class="card"><h2>${tr('Porównanie procesów','Comparing the processes')}</h2><div class="tablewrap"><table class="cmp"><thead><tr><th></th>${PROC.map(k=>`<th>${esc(T(EQ[k].n))}</th>`).join('')}</tr></thead><tbody>
+   ${CMP.map(r=>`<tr><th scope="row">${esc(T(r.h))}</th>${PROC.map((_,i)=>`<td>${subH(cmpCell(r,i))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+   ${A?`<p class="note">${tr('Starsze podręczniki podają 36–38 ATP z jednej cząsteczki glukozy; nowsze, uwzględniające rzeczywiste straty energii w mitochondrium, ok. 30–32 ATP. Fermentacja daje tylko 2 ATP – z glikolizy.','Older textbooks give 36–38 ATP per glucose molecule; newer ones, which account for real energy losses in the mitochondrion, about 30–32 ATP. Fermentation gives only 2 ATP – from glycolysis.')}</p>`:`<p class="note">${tr('Drożdże i komórki mięśni potrafią przeprowadzać i oddychanie tlenowe, i fermentację – zależnie od dostępu tlenu.','Yeasts and muscle cells can carry out both aerobic respiration and fermentation – depending on whether oxygen is available.')}</p>`}</section>`;
+  h+=`<div class="ugrid"><section class="card ucard"><h3><span aria-hidden="true">🍞</span>${tr('Fermentacja w praktyce','Fermentation in everyday life')}</h3><ul>
+   <li>${tr('<b>Chleb drożdżowy</b> – fermentacja alkoholowa: CO₂ spulchnia ciasto, a alkohol odparowuje podczas pieczenia.','<b>Yeast bread</b> – alcoholic fermentation: CO₂ makes the dough rise, and the alcohol evaporates during baking.')}</li>
+   <li>${tr('<b>Wino i piwo</b> – fermentacja alkoholowa prowadzona przez drożdże; produktem jest etanol.','<b>Wine and beer</b> – alcoholic fermentation by yeasts; the product is ethanol.')}</li>
+   <li>${tr('<b>Jogurt</b> – fermentacja mlekowa: bakterie zakwaszają mleko, a jego białka ścinają się.','<b>Yoghurt</b> – lactic fermentation: bacteria make the milk acidic, and its proteins set.')}</li>
+   <li>${tr('<b>Kefir</b> – ziarna kefirowe zawierają bakterie fermentacji mlekowej i drożdże, więc zachodzą obie fermentacje.','<b>Kefir</b> – kefir grains contain lactic-acid bacteria and yeasts, so both kinds of fermentation take place.')}</li>
+   <li>${tr('<b>Kiszonki</b> (kapusta, ogórki) – kwas mlekowy obniża pH i hamuje rozwój bakterii gnilnych, dzięki czemu warzywa długo się przechowują.','<b>Pickles</b> (sauerkraut, pickled cucumbers) – lactic acid lowers the pH and stops spoilage bacteria growing, so the vegetables keep for a long time.')}</li>
+   <li>${tr('<b>Kiszonka dla zwierząt</b> (np. z kukurydzy, sianokiszonka) – pasza konserwowana fermentacją mlekową.','<b>Silage</b> (e.g. from maize or grass) – animal feed preserved by lactic fermentation.')}</li>
+   <li>${tr('<b>Zakwas chlebowy</b> – bakterie fermentacji mlekowej razem z dzikimi drożdżami.','<b>Sourdough</b> – lactic-acid bacteria together with wild yeasts.')}</li></ul></section>
+   <section class="card ucard myth"><h3><span aria-hidden="true">🏃</span>${tr('Mit: „zakwasy” to kwas mlekowy w mięśniach','Myth: muscle soreness is caused by lactic acid')}</h3>
+   <p>${tr('Podczas bardzo intensywnego wysiłku do mięśni dociera za mało tlenu i część glukozy ulega fermentacji mlekowej. Powstający mleczan (kwas mlekowy) nie zostaje jednak w mięśniach na kilka dni – w ciągu mniej więcej godziny po wysiłku jest usuwany: serce i inne mięśnie wykorzystują go jako paliwo, a wątroba przekształca go z powrotem w glukozę.','During very intense exercise the muscles get too little oxygen, and some glucose undergoes lactic fermentation. But the lactate (lactic acid) produced does not stay in the muscles for days – within about an hour after exercise it is cleared: the heart and other muscles use it as fuel, and the liver turns it back into glucose.')}</p>
+   <p>${tr('Ból mięśni pojawiający się dzień lub dwa po nietypowym wysiłku (potocznie „zakwasy”, fachowo: opóźniona bolesność mięśniowa) wynika z drobnych uszkodzeń włókien mięśniowych i stanu zapalnego, który towarzyszy ich naprawie. Najsilniejszy bywa po ćwiczeniach, w których mięsień pracuje, wydłużając się – np. przy zbieganiu z góry.','The muscle pain that appears a day or two after unaccustomed exercise (delayed-onset muscle soreness) is caused by tiny injuries to muscle fibres and the inflammation that goes with their repair. It is often worst after exercise in which the muscle works while lengthening – e.g. running downhill.')}</p>
+   <p class="note">${tr('Pieczenie mięśni w trakcie wysiłku wiąże się z gromadzeniem się produktów przemian w pracującym mięśniu i mija wkrótce po odpoczynku.','The burning feeling during exercise is linked to the build-up of metabolic products in the working muscle and fades soon after resting.')}</p></section></div>`;
+  h+=`<section class="card"><h2>${tr('Czynniki wpływające na intensywność fotosyntezy','Factors affecting the rate of photosynthesis')}</h2><ul>
+   <li>${tr('<b>Natężenie światła</b> – im więcej światła, tym szybsza fotosynteza (do pewnej granicy).','<b>Light intensity</b> – the more light, the faster photosynthesis (up to a limit).')}</li>
+   <li>${tr('<b>Barwa światła</b> – chlorofil najlepiej pochłania światło czerwone i niebieskie.','<b>Colour of light</b> – chlorophyll absorbs red and blue light best.')}</li>
+   <li>${tr('<b>Stężenie CO₂</b> – CO₂ jest substratem; w powietrzu jest go mało (ok. 0,04%), dlatego w szklarniach się go dodaje.','<b>CO₂ concentration</b> – CO₂ is a substrate; air contains little of it (about 0.04%), so it is added in greenhouses.')}</li>
+   <li>${tr('<b>Temperatura</b> – działa przez enzymy: optimum zwykle ok. 25–30 °C, powyżej ok. 40 °C enzymy ulegają denaturacji.','<b>Temperature</b> – acts through enzymes: the optimum is usually about 25–30 °C, and above about 40 °C enzymes are denatured.')}</li>
+   <li>${tr('<b>Woda</b> – jest substratem, a przy jej niedoborze roślina zamyka aparaty szparkowe i ogranicza pobieranie CO₂.','<b>Water</b> – it is a substrate, and when it is short the plant closes its stomata and takes in less CO₂.')}</li>
+   <li>${tr('<b>Sole mineralne</b> – np. magnez i azot są potrzebne do wytwarzania chlorofilu.','<b>Mineral salts</b> – e.g. magnesium and nitrogen are needed to make chlorophyll.')}</li></ul>
+   <p>${tr('<b>Czynnik ograniczający</b> to ten czynnik, którego jest „najmniej w stosunku do potrzeb” – to on decyduje o tempie procesu. Zwiększanie innych czynników niczego wtedy nie zmienia.','<b>The limiting factor</b> is the one in shortest supply compared with what is needed – it decides the rate of the process. Increasing any other factor then changes nothing.')}</p>
+   ${A?`<div class="bar"><span class="lbl" id="famL">${tr('Krzywe dla różnych wartości','Curves for different values of')}</span><div class="seg" role="group" aria-labelledby="famL"><button data-fam="co2" aria-pressed="${S.lf.fam==='co2'}">${tr('stężenia CO₂','CO₂ concentration')}</button><button data-fam="temp" aria-pressed="${S.lf.fam==='temp'}">${tr('temperatury','temperature')}</button></div></div>
+   <div class="stage diag" style="margin-top:10px" id="lfBox">${lfSVG()}</div>
+   <label for="lfI" class="lbl" style="display:block;margin-top:10px">${tr('Natężenie światła','Light intensity')}: <span class="xval" id="lfV">${S.lf.I}%</span></label><input type="range" id="lfI" min="0" max="100" step="2" value="${S.lf.I}" aria-valuetext="${S.lf.I}%">
+   <div class="lfread" id="lfR" aria-live="polite">${lfRead()}</div>
+   <p class="note" style="margin-top:8px">${tr('Przy słabym świetle wszystkie krzywe się pokrywają – ogranicza światło. Przy silnym świetle krzywe wypłaszczają się na różnych wysokościach – ogranicza teraz CO₂ albo temperatura.','In dim light all the curves overlap – light is limiting. In bright light the curves level off at different heights – now CO₂ or temperature is limiting.')}</p>`:''}</section>`;
+  if(A){
+   h+=`<section class="card"><h2>${tr('Dwie fazy fotosyntezy','The two stages of photosynthesis')}</h2><div class="stage diag">${phSVG()}</div>
+    <div class="ugrid" style="margin-top:10px"><div><h3>${tr('Faza zależna od światła','The light-dependent stage')}</h3><ul>
+     <li>${tr('zachodzi w <b>błonach tylakoidów</b> (grana)','takes place in the <b>thylakoid membranes</b> (grana)')}</li>
+     <li>${tr('chlorofil i inne barwniki pochłaniają energię światła','chlorophyll and other pigments absorb light energy')}</li>
+     <li>${tr('<b>fotoliza wody</b>: 2 H₂O → 4 H⁺ + 4 e⁻ + O₂ – <b>cały tlen wydzielany w fotosyntezie pochodzi z wody</b>, a nie z CO₂','<b>photolysis of water</b>: 2 H₂O → 4 H⁺ + 4 e⁻ + O₂ – <b>all the oxygen released in photosynthesis comes from water</b>, not from CO₂')}</li>
+     <li>${tr('powstają <b>ATP</b> (fotofosforylacja) i <b>NADPH</b> – „paliwo” dla cyklu Calvina','<b>ATP</b> (photophosphorylation) and <b>NADPH</b> are made – the “fuel” for the Calvin cycle')}</li></ul></div>
+    <div><h3>${tr('Faza niezależna od światła – cykl Calvina','The light-independent stage – the Calvin cycle')}</h3><ul>
+     <li>${tr('zachodzi w <b>stromie</b> chloroplastu','takes place in the chloroplast <b>stroma</b>')}</li>
+     <li>${tr('<b>karboksylacja</b>: enzym <b>RuBisCO</b> przyłącza CO₂ do RuBP (rybulozo-1,5-bisfosforanu) – powstają 2 cząsteczki 3-fosfoglicerynianu (PGA)','<b>carboxylation</b>: the enzyme <b>RuBisCO</b> attaches CO₂ to RuBP (ribulose-1,5-bisphosphate) – giving 2 molecules of 3-phosphoglycerate (PGA)')}</li>
+     <li>${tr('<b>redukcja</b>: z użyciem ATP i NADPH powstaje aldehyd 3-fosfoglicerynowy (PGAL) – z niego roślina buduje glukozę, sacharozę i skrobię','<b>reduction</b>: using ATP and NADPH, glyceraldehyde-3-phosphate (G3P) is made – from it the plant builds glucose, sucrose and starch')}</li>
+     <li>${tr('<b>regeneracja</b> RuBP (zużywa ATP)','<b>regeneration</b> of RuBP (uses ATP)')}</li>
+     <li>${tr('na 1 cząsteczkę glukozy: 6 CO₂, 18 ATP i 12 NADPH; bez światła cykl szybko staje, bo brakuje ATP i NADPH','per glucose molecule: 6 CO₂, 18 ATP and 12 NADPH; in darkness the cycle soon stops because ATP and NADPH run out')}</li></ul></div></div></section>`;
+   h+=`<section class="card"><h2>${tr('Etapy oddychania komórkowego','The stages of cellular respiration')}</h2><div class="stage diag">${rsSVG()}</div>
+    <div class="tablewrap"><table class="stg"><thead><tr><th>${tr('Etap','Stage')}</th><th>${tr('Miejsce','Where')}</th><th>${tr('Przebieg','What happens')}</th><th>${tr('Zysk (z 1 glukozy)','Yield (per glucose)')}</th></tr></thead><tbody>
+     <tr><td><b>${tr('Glikoliza','Glycolysis')}</b></td><td>${tr('cytozol','cytosol')}</td><td>${tr('glukoza → 2 pirogronian; nie wymaga tlenu','glucose → 2 pyruvate; no oxygen needed')}</td><td>2 ATP, 2 NADH</td></tr>
+     <tr><td><b>${tr('Reakcja pomostowa','Link reaction')}</b></td><td>${tr('macierz mitochondrium','mitochondrial matrix')}</td><td>${subH(tr('2 pirogronian → 2 acetylo-CoA + 2 CO₂ (oksydacyjna dekarboksylacja)','2 pyruvate → 2 acetyl-CoA + 2 CO₂ (oxidative decarboxylation)'))}</td><td>2 NADH</td></tr>
+     <tr><td><b>${tr('Cykl Krebsa','Krebs cycle')}</b></td><td>${tr('macierz mitochondrium','mitochondrial matrix')}</td><td>${subH(tr('acetylo-CoA zostaje utleniony do CO₂ (4 CO₂ z 1 glukozy)','acetyl-CoA is oxidised to CO₂ (4 CO₂ per glucose)'))}</td><td>${subH('2 ATP, 6 NADH, 2 FADH₂')}</td></tr>
+     <tr><td><b>${tr('Łańcuch oddechowy i fosforylacja oksydacyjna','Electron transport chain and oxidative phosphorylation')}</b></td><td>${tr('błona wewnętrzna mitochondrium (grzebienie)','inner mitochondrial membrane (cristae)')}</td><td>${subH(tr('elektrony z NADH i FADH₂ trafiają na tlen – ostateczny akceptor elektronów; powstaje woda','electrons from NADH and FADH₂ are passed to oxygen – the final electron acceptor; water is formed'))}</td><td>${tr('ok. 26–28 ATP','about 26–28 ATP')}</td></tr></tbody></table></div>
+    <p style="margin-top:10px">${tr('<b>Razem: ok. 30–32 ATP.</b> W fermentacji po glikolizie pirogronian nie trafia do mitochondrium: w fermentacji alkoholowej przekształca się w aldehyd octowy (z wydzieleniem CO₂), a ten w etanol; w fermentacji mlekowej – w mleczan. Te reakcje nie dają ATP – służą odtworzeniu NAD⁺, bez którego glikoliza by stanęła. Dlatego zysk to tylko 2 ATP.','<b>Total: about 30–32 ATP.</b> In fermentation, after glycolysis pyruvate does not enter the mitochondrion: in alcoholic fermentation it is turned into acetaldehyde (releasing CO₂) and then into ethanol; in lactic fermentation into lactate. These reactions make no ATP – they regenerate NAD⁺, without which glycolysis would stop. That is why the yield is only 2 ATP.')}</p></section>`;
+  }
+  return h;
+}
+
+// ---------- quiz ----------
+const QZ=[
+ {lv:'B',q:['Gdzie w komórce roślinnej zachodzi fotosynteza?','Where in a plant cell does photosynthesis take place?'],o:[['w chloroplastach','in chloroplasts'],['w mitochondriach','in mitochondria'],['w jądrze komórkowym','in the nucleus'],['w wakuoli','in the vacuole']],e:['Chloroplasty zawierają chlorofil, który pochłania światło.','Chloroplasts contain chlorophyll, which absorbs light.']},
+ {lv:'B',q:['Jakie są substraty fotosyntezy?','What are the substrates of photosynthesis?'],o:[['dwutlenek węgla i woda','carbon dioxide and water'],['glukoza i tlen','glucose and oxygen'],['tlen i woda','oxygen and water'],['glukoza i dwutlenek węgla','glucose and carbon dioxide']],e:['6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂ – po lewej stronie są substraty.','6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂ – the substrates are on the left.']},
+ {lv:'B',q:['Jaki gaz wydziela oświetlona moczarka kanadyjska?','Which gas does an illuminated waterweed give off?'],o:[['tlen','oxygen'],['dwutlenek węgla','carbon dioxide'],['azot','nitrogen'],['wodór','hydrogen']],e:['Tlen jest produktem fotosyntezy; liczba pęcherzyków mówi o jej intensywności.','Oxygen is a product of photosynthesis; the number of bubbles shows its rate.']},
+ {lv:'B',q:['Gdzie zachodzi większość etapów oddychania tlenowego?','Where do most stages of aerobic respiration take place?'],o:[['w mitochondriach','in mitochondria'],['w chloroplastach','in chloroplasts'],['w rybosomach','on ribosomes'],['w ścianie komórkowej','in the cell wall']],e:['Mitochondria to „centra energetyczne” komórki. Pierwszy etap – glikoliza – zachodzi w cytoplazmie.','Mitochondria are the cell’s “power stations”. The first stage – glycolysis – happens in the cytoplasm.']},
+ {lv:'B',q:['Które organizmy przeprowadzają fermentację alkoholową wykorzystywaną przy pieczeniu chleba?','Which organisms carry out the alcoholic fermentation used in bread-making?'],o:[['drożdże','yeasts'],['bakterie fermentacji mlekowej','lactic-acid bacteria'],['sinice','cyanobacteria'],['pantofelki','paramecia']],e:['Drożdże to jednokomórkowe grzyby; wytwarzają etanol i CO₂, który spulchnia ciasto.','Yeasts are single-celled fungi; they produce ethanol and CO₂, which makes the dough rise.']},
+ {lv:'B',q:['Co jest produktem fermentacji mlekowej?','What is the product of lactic fermentation?'],o:[['kwas mlekowy','lactic acid'],['alkohol etylowy','ethyl alcohol'],['tlen','oxygen'],['skrobia','starch']],e:['C₆H₁₂O₆ → 2 C₃H₆O₃ + energia. W fermentacji mlekowej nie powstaje CO₂.','C₆H₁₂O₆ → 2 C₃H₆O₃ + energy. No CO₂ is produced in lactic fermentation.']},
+ {lv:'B',q:['Woda wapienna mętnieje w obecności…','Limewater turns cloudy in the presence of…'],o:[['dwutlenku węgla','carbon dioxide'],['tlenu','oxygen'],['azotu','nitrogen'],['pary wodnej','water vapour']],e:['CO₂ reaguje z wodorotlenkiem wapnia i powstaje nierozpuszczalny węglan wapnia.','CO₂ reacts with calcium hydroxide to form insoluble calcium carbonate.']},
+ {lv:'B',q:['Który proces dostarcza najwięcej energii z jednej cząsteczki glukozy?','Which process releases the most energy from one glucose molecule?'],o:[['oddychanie tlenowe','aerobic respiration'],['fermentacja alkoholowa','alcoholic fermentation'],['fermentacja mlekowa','lactic fermentation'],['wszystkie tyle samo','all the same']],e:['W oddychaniu tlenowym glukoza rozkłada się całkowicie do CO₂ i H₂O; w fermentacji – tylko częściowo.','In aerobic respiration glucose is broken down completely to CO₂ and H₂O; in fermentation only partly.']},
+ {lv:'B',q:['Czy rośliny oddychają?','Do plants respire?'],o:[['tak – stale, w dzień i w nocy, we wszystkich żywych komórkach','yes – all the time, day and night, in all living cells'],['tylko w nocy','only at night'],['nie, rośliny tylko fotosyntetyzują','no, plants only photosynthesise'],['tylko w korzeniach','only in their roots']],e:['Każda żywa komórka potrzebuje energii, więc oddycha. W dzień fotosynteza zwykle przewyższa oddychanie.','Every living cell needs energy, so it respires. In daylight photosynthesis usually outweighs respiration.']},
+ {lv:'B',q:['Który produkt powstaje dzięki bakteriom fermentacji mlekowej?','Which food is made with the help of lactic-acid bacteria?'],o:[['jogurt','yoghurt'],['wino','wine'],['piwo','beer'],['bioetanol','bioethanol']],e:['Jogurt, kefir i kiszonki powstają dzięki fermentacji mlekowej.','Yoghurt, kefir and pickles are made by lactic fermentation.']},
+ {lv:'B',q:['Dlaczego ciasto drożdżowe rośnie?','Why does yeast dough rise?'],o:[['bo drożdże wydzielają CO₂','because the yeast gives off CO₂'],['bo drożdże wydzielają tlen','because the yeast gives off oxygen'],['bo mąka pęcznieje od wody','because the flour swells with water'],['bo powstaje kwas mlekowy','because lactic acid forms']],e:['Pęcherzyki CO₂ z fermentacji alkoholowej spulchniają ciasto.','Bubbles of CO₂ from alcoholic fermentation make the dough rise.']},
+ {lv:'B',q:['Zmienna niezależna w doświadczeniu to…','The independent variable in an experiment is…'],o:[['czynnik celowo zmieniany przez badacza','the factor the researcher deliberately changes'],['wynik, który mierzymy','the result we measure'],['warunki utrzymywane na stałym poziomie','the conditions kept the same'],['wniosek z doświadczenia','the conclusion of the experiment']],e:['To, co mierzymy, to zmienna zależna – zależy od zmiennej niezależnej.','What we measure is the dependent variable – it depends on the independent variable.']},
+ {lv:'B',q:['Do czego służy próba kontrolna?','What is the control for?'],o:[['jest punktem odniesienia do porównania wyników','it is a reference point to compare the results with'],['zastępuje powtórzenia','it replaces repeats'],['potwierdza każdą hipotezę','it confirms any hypothesis'],['pozwala zmienić kilka czynników naraz','it lets several factors be changed at once']],e:['W próbie kontrolnej badany czynnik jest nieobecny lub niezmieniony – dzięki temu widać, jaki ma wpływ.','In the control the tested factor is absent or unchanged – so its effect can be seen.']},
+ {lv:'B',q:['Po co powtarza się pomiary w doświadczeniu?','Why are measurements repeated in an experiment?'],o:[['aby zmniejszyć wpływ przypadkowych błędów','to reduce the effect of random errors'],['aby uzyskać wynik zgodny z hipotezą','to get a result that fits the hypothesis'],['bo jeden pomiar jest zawsze błędny','because one measurement is always wrong'],['aby nie trzeba było robić próby kontrolnej','so that no control is needed']],e:['Średnia z kilku powtórzeń jest bardziej wiarygodna niż pojedynczy wynik.','The mean of several repeats is more reliable than a single result.']},
+ {lv:'B',q:['Które organizmy przeprowadzają fotosyntezę?','Which organisms carry out photosynthesis?'],o:[['sinice','cyanobacteria'],['drożdże','yeasts'],['pałeczki kwasu mlekowego','lactic-acid bacteria'],['pantofelki','paramecia']],e:['Sinice to bakterie fotosyntetyzujące. Fotosyntezę prowadzą też rośliny, glony i niektóre protisty, np. euglena.','Cyanobacteria are photosynthetic bacteria. Plants, algae and some protists, e.g. euglena, also photosynthesise.']},
+ {lv:'B',q:['Jak czerwone krwinki człowieka uzyskują energię?','How do human red blood cells get their energy?'],o:[['w fermentacji mlekowej','by lactic fermentation'],['w oddychaniu tlenowym w mitochondriach','by aerobic respiration in mitochondria'],['w fotosyntezie','by photosynthesis'],['w fermentacji alkoholowej','by alcoholic fermentation']],e:['Dojrzałe erytrocyty nie mają mitochondriów, dlatego – choć przenoszą tlen – nie oddychają tlenowo.','Mature red blood cells have no mitochondria, so – although they carry oxygen – they do not respire aerobically.']},
+ {lv:'B',q:['Dlaczego ugotowany ziemniak nie wytwarza piany z wodą utlenioną?','Why does boiled potato not make foam with hydrogen peroxide?'],o:[['bo wysoka temperatura zniszczyła enzym katalazę','because high temperature destroyed the enzyme catalase'],['bo woda utleniona wyparowała','because the hydrogen peroxide evaporated'],['bo w ziemniaku nie ma wody','because there is no water in the potato'],['bo skrobia się rozpuściła','because the starch dissolved']],e:['Katalaza jest białkiem – w wysokiej temperaturze ulega denaturacji.','Catalase is a protein – it is denatured at high temperature.']},
+ {lv:'B',q:['Na jaki kolor płyn Lugola barwi skrobię?','What colour does Lugol’s iodine turn starch?'],o:[['granatowy (niemal czarny)','blue-black'],['czerwony','red'],['zielony','green'],['nie zmienia barwy','it does not change colour']],e:['To popularny odczynnik do wykrywania skrobi.','It is a common test for starch.']},
+ {lv:'B',q:['Na co amylaza ślinowa rozkłada skrobię?','What does salivary amylase break starch down into?'],o:[['głównie na dwucukier maltozę','mainly into the disaccharide maltose'],['na aminokwasy','into amino acids'],['na kwasy tłuszczowe','into fatty acids'],['na kwas mlekowy','into lactic acid']],e:['Trawienie skrobi zaczyna się w jamie ustnej.','Starch digestion begins in the mouth.']},
+ {lv:'B',q:['Co jest główną przyczyną „zakwasów” – bólu mięśni dzień lub dwa po wysiłku?','What mainly causes muscle soreness a day or two after exercise?'],o:[['drobne uszkodzenia włókien mięśniowych i stan zapalny','tiny injuries to muscle fibres and inflammation'],['kwas mlekowy, który zalega w mięśniach','lactic acid left in the muscles'],['brak tlenu w mięśniach przez kilka dni','lack of oxygen in the muscles for several days'],['nadmiar glukozy','too much glucose']],e:['Mleczan zostaje usunięty z mięśni w ciągu ok. godziny po wysiłku.','Lactate is cleared from the muscles within about an hour after exercise.']},
+ {lv:'A',q:['Skąd pochodzi tlen wydzielany w fotosyntezie?','Where does the oxygen released in photosynthesis come from?'],o:[['z wody (fotoliza)','from water (photolysis)'],['z dwutlenku węgla','from carbon dioxide'],['z glukozy','from glucose'],['z RuBP','from RuBP']],e:['Wykazano to, znakując tlen w wodzie izotopem ¹⁸O.','This was shown by labelling the oxygen in water with the isotope ¹⁸O.']},
+ {lv:'A',q:['Jaką reakcję katalizuje RuBisCO?','Which reaction does RuBisCO catalyse?'],o:[['przyłączenie CO₂ do RuBP','attaching CO₂ to RuBP'],['fotolizę wody','the photolysis of water'],['glikolizę','glycolysis'],['syntezę ATP w mitochondrium','ATP synthesis in the mitochondrion']],e:['To pierwszy etap cyklu Calvina – karboksylacja.','It is the first step of the Calvin cycle – carboxylation.']},
+ {lv:'A',q:['Gdzie zachodzi cykl Calvina?','Where does the Calvin cycle take place?'],o:[['w stromie chloroplastu','in the chloroplast stroma'],['w błonach tylakoidów','in the thylakoid membranes'],['w macierzy mitochondrium','in the mitochondrial matrix'],['w cytozolu','in the cytosol']],e:['Faza zależna od światła zachodzi w tylakoidach, a cykl Calvina – w stromie.','The light-dependent stage happens in the thylakoids, the Calvin cycle in the stroma.']},
+ {lv:'A',q:['Które produkty fazy zależnej od światła są zużywane w cyklu Calvina?','Which products of the light-dependent stage are used in the Calvin cycle?'],o:[['ATP i NADPH','ATP and NADPH'],['O₂ i glukoza','O₂ and glucose'],['CO₂ i H₂O','CO₂ and H₂O'],['NADH i FADH₂','NADH and FADH₂']],e:['Tlen jest „produktem ubocznym” – wydziela się do otoczenia.','Oxygen is a by-product – it is released into the surroundings.']},
+ {lv:'A',q:['Gdzie zachodzi glikoliza?','Where does glycolysis take place?'],o:[['w cytozolu','in the cytosol'],['w macierzy mitochondrium','in the mitochondrial matrix'],['na wewnętrznej błonie mitochondrium','on the inner mitochondrial membrane'],['w stromie chloroplastu','in the chloroplast stroma']],e:['Glikoliza jest wspólna dla oddychania tlenowego i fermentacji.','Glycolysis is shared by aerobic respiration and fermentation.']},
+ {lv:'A',q:['Gdzie zachodzi cykl Krebsa?','Where does the Krebs cycle take place?'],o:[['w macierzy mitochondrium','in the mitochondrial matrix'],['w cytozolu','in the cytosol'],['w przestrzeni międzybłonowej','in the intermembrane space'],['w tylakoidach','in the thylakoids']],e:['W macierzy zachodzą reakcja pomostowa i cykl Krebsa.','The link reaction and the Krebs cycle happen in the matrix.']},
+ {lv:'A',q:['Co jest ostatecznym akceptorem elektronów w łańcuchu oddechowym?','What is the final electron acceptor in the electron transport chain?'],o:[['tlen','oxygen'],['NAD⁺','NAD⁺'],['CO₂','CO₂'],['glukoza','glucose']],e:['Tlen przyjmuje elektrony i protony – powstaje woda. Bez tlenu łańcuch staje.','Oxygen accepts electrons and protons – water forms. Without oxygen the chain stops.']},
+ {lv:'A',q:['Jaką funkcję pełnią reakcje fermentacji zachodzące po glikolizie?','What is the role of the fermentation reactions that follow glycolysis?'],o:[['odtwarzają NAD⁺, dzięki czemu glikoliza może trwać','they regenerate NAD⁺ so glycolysis can continue'],['wytwarzają dużo ATP','they make a lot of ATP'],['wytwarzają tlen','they produce oxygen'],['przenoszą pirogronian do mitochondrium','they move pyruvate into the mitochondrion']],e:['Cały zysk energetyczny fermentacji (2 ATP) pochodzi z glikolizy.','All the energy gained in fermentation (2 ATP) comes from glycolysis.']},
+ {lv:'A',q:['Przy silnym świetle tempo fotosyntezy przestało rosnąć, a po dodaniu NaHCO₃ wzrosło. Co było czynnikiem ograniczającym?','In bright light the rate of photosynthesis stopped rising, but rose again after NaHCO₃ was added. What was the limiting factor?'],o:[['stężenie CO₂','CO₂ concentration'],['natężenie światła','light intensity'],['barwa światła','colour of light'],['ilość chlorofilu','amount of chlorophyll']],e:['Zwiększenie czynnika ograniczającego przyspiesza proces; zwiększanie innych – nie.','Increasing the limiting factor speeds the process up; increasing the others does not.']},
+ {lv:'A',q:['Co powstaje w reakcji pomostowej?','What is formed in the link reaction?'],o:[['acetylo-CoA i CO₂','acetyl-CoA and CO₂'],['pirogronian i ATP','pyruvate and ATP'],['glukoza i O₂','glucose and O₂'],['mleczan','lactate']],e:['Pirogronian ulega oksydacyjnej dekarboksylacji w macierzy mitochondrium.','Pyruvate undergoes oxidative decarboxylation in the mitochondrial matrix.']},
+];
+function newQ(){const pool=QZ.map((q,i)=>i).filter(i=>QZ[i].lv==='B'||S.lvl==='A');let av=pool.filter(i=>!S.qSeen.includes(i));if(!av.length){S.qSeen=[];av=pool;}
+  const i=pick(av,1)[0];S.qSeen.push(i);S.q={i,opts:shuffle([0,1,2,3]),picked:null};}
+function viewQuiz(){
+  if(!S.q||(QZ[S.q.i].lv==='A'&&S.lvl==='B'))newQ();
+  const q=S.q,z=QZ[q.i],done=q.picked!==null,ok=done&&q.picked===0;
+  return `<div class="bar">${lvlSeg()}</div><section class="card"><p class="score">${tr('Twój wynik','Your score')}: ${S.ok} / ${S.all}</p><p class="q">${subH(T(z.q))}</p>
+   <div class="opts">${q.opts.map(o=>`<button data-ans="${o}" class="${done?(o===0?'ok':o===q.picked?'no':''):''}" ${done?'disabled':''}>${subH(T(z.o[o]))}</button>`).join('')}</div>
+   ${done?`<p class="fb ${ok?'ok':'no'}" role="status">${ok?tr('✅ Dobrze!','✅ Correct!'):tr(`❌ Niestety. Poprawna odpowiedź: ${T(z.o[0])}.`,`❌ Not quite. The right answer is: ${T(z.o[0])}.`)}</p><p class="expl">${subH(T(z.e))}</p><button class="btn primary" id="nextQ">${tr('Następne pytanie →','Next question →')}</button>`:''}</section>`;
+}
+
+// ---------- karta pracy ----------
+const WSINV=EXORD.flatMap(ex=>Object.keys(EX[ex].inv).map(k=>ex+'.'+k));
+const wsInvName=id=>{const [ex,k]=id.split('.'),e=EX[ex];return Object.keys(e.inv).length>1?`${T(e.sh)}: ${T(e.params[e.inv[k].x].n)}`:T(e.sh);};
+const PROTO=[['Problem badawczy','Research question'],['Hipoteza','Hypothesis'],['Zmienna niezależna','Independent variable'],['Zmienna zależna','Dependent variable'],['Stałe warunki (podaj co najmniej dwa)','Controlled variables (give at least two)'],['Próba kontrolna','Control'],['Próba badawcza','Experimental trials']];
+const WEQ=[{s:['dwutlenek węgla + woda —(światło, chlorofil)→ __________ + __________','carbon dioxide + water —(light, chlorophyll)→ __________ + __________'],k:['glukoza, tlen','glucose, oxygen']},
+ {s:['glukoza + __________ → dwutlenek węgla + __________ + energia','glucose + __________ → carbon dioxide + __________ + energy'],k:['tlen, woda','oxygen, water']},
+ {s:['glukoza → __________ + dwutlenek węgla + energia','glucose → __________ + carbon dioxide + energy'],k:['alkohol etylowy (etanol)','ethyl alcohol (ethanol)']},
+ {s:['glukoza → __________ + energia','glucose → __________ + energy'],k:['kwas mlekowy','lactic acid']}];
+const CEQ=[{s:['6 CO₂ + 6 ______ —(światło, chlorofil)→ C₆H₁₂O₆ + ____ O₂','6 CO₂ + 6 ______ —(light, chlorophyll)→ C₆H₁₂O₆ + ____ O₂'],k:'H₂O; 6'},
+ {s:['C₆H₁₂O₆ + 6 ______ → 6 CO₂ + 6 ______ + energia (ATP)','C₆H₁₂O₆ + 6 ______ → 6 CO₂ + 6 ______ + energy (ATP)'],k:'O₂; H₂O'},
+ {s:['C₆H₁₂O₆ → 2 ______ + ____ CO₂ + energia','C₆H₁₂O₆ → 2 ______ + ____ CO₂ + energy'],k:'C₂H₅OH; 2'},
+ {s:['C₆H₁₂O₆ → ____ C₃H₆O₃ + energia','C₆H₁₂O₆ → ____ C₃H₆O₃ + energy'],k:'2'}];
+const ORGS=[[['moczarka kanadyjska (komórki liścia)','Canadian waterweed (leaf cells)'],[0,1]],[['drożdże piekarskie','baker’s yeast'],[1,2]],[['pałeczki kwasu mlekowego (Lactobacillus)','lactic-acid bacteria (Lactobacillus)'],[3]],[['sinice','cyanobacteria'],[0,1]],[['euglena zielona','euglena'],[0,1]],
+ [['komórki mięśni szkieletowych człowieka','human skeletal muscle cells'],[1,3]],[['czerwone krwinki człowieka','human red blood cells'],[3]],[['komórki korzenia w zalanej, beztlenowej glebie','root cells in waterlogged, oxygen-free soil'],[2]],[['pantofelek','paramecium'],[1]],[['komórki nerwowe człowieka','human nerve cells'],[1]],[['komórki skórki cebuli (bez chloroplastów)','onion epidermis cells (no chloroplasts)'],[1]]];
+const LET='ABCD';
+function gridSVG(xl,yl){const W=640,H=400,l=70,t=20,r=20,b=60,pw=W-l-r,ph=H-t-b;let s=`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" font-family="Atkinson Hyperlegible, Arial, sans-serif"><rect width="${W}" height="${H}" fill="#fff"/>`;
+  for(let x=l;x<=l+pw+.1;x+=20)s+=`<line x1="${x}" x2="${x}" y1="${t}" y2="${t+ph}" stroke="#cfcfcf" stroke-width="${(x-l)%100?0.7:1.2}"/>`;
+  for(let y=t+ph;y>=t-.1;y-=20)s+=`<line x1="${l}" x2="${l+pw}" y1="${y}" y2="${y}" stroke="#cfcfcf" stroke-width="${(t+ph-y)%100?0.7:1.2}"/>`;
+  s+=`<path d="M${l} ${t+ph} V${t-6} M${l-5} ${t+2} L${l} ${t-8} L${l+5} ${t+2}" fill="none" stroke="#000" stroke-width="2"/><path d="M${l} ${t+ph} H${l+pw+8} M${l+pw} ${t+ph-5} L${l+pw+10} ${t+ph} L${l+pw} ${t+ph+5}" fill="none" stroke="#000" stroke-width="2"/>`;
+  s+=`<text transform="translate(22 ${t+ph/2}) rotate(-90)" text-anchor="middle" font-size="15" fill="#000">${esc(yl)}</text><text x="${l+pw/2}" y="${H-14}" text-anchor="middle" font-size="15" fill="#000">${esc(xl)}</text>`;
+  return s+'</svg>';}
+function wsBuild(){
+  const ws=S.ws,r=rngOf(ws.seed),A=S.lvl==='A',tasks=[];let no=0;const add=(ins,items,key)=>tasks.push({no:++no,ins,items,key});
+  let title=tr('Karta pracy – fotosynteza, oddychanie i fermentacja','Worksheet – photosynthesis, respiration and fermentation');
+  if(ws.proto){
+    const [ex,ik]=ws.inv.split('.'),e=EX[ex],inv=e.inv[ik],P=e.params[inv.x],u=e.dep.u,seeds=ex==='seeds',sample=ws.data==='sample';
+    title=tr('Karta pracy – ','Worksheet – ')+T(e.n);
+    const vals=inv.ws.map(v=>fmtV(P,v)).join(', ');
+    const sup=inv.hyps.find(h=>h[2]);
+    add(tr('Przeczytaj opis doświadczenia i uzupełnij protokół.','Read the description of the experiment and complete the record.'),
+     [{t:'p',s:T(e.setup)+' '+tr(`W kolejnych zestawach zmieniano tylko jeden czynnik – ${T(P.n)} (${vals}). Przygotowano też próbę kontrolną.`,`In the different set-ups only one factor was changed – ${T(P.n)} (${vals}). A control was also set up.`)},
+      {t:'table',rows:PROTO.map(k=>[T(k),'']),widths:[3000,7466],head:0,col0:true,minH:620}],
+     [`${T(PROTO[0])}: ${T(inv.prob)}`,`${T(PROTO[1])}: ${tr('np. ','e.g. ')}${T(sup)}`,`${T(PROTO[2])}: ${T(P.n)}`,`${T(PROTO[3])}: ${T(e.dep.n)}`,`${tr('Stałe warunki','Controlled variables')}: ${constList(e,inv).join('; ')}`,`${T(PROTO[5])}: ${T(inv.ctrl.d)}`,`${T(PROTO[6])}: ${researchDesc(e,inv)}`].join('. ')+'.');
+    // wyniki
+    const mk=(ctrl,xv)=>{const p=params(ctrl,e,inv,xv);p.mat='potato';return [0,1,2].map(()=>e.model(p,r));};
+    const ctrlRow={c:true,label:inv.ctrl.x!==undefined?fmtV(P,inv.ctrl.x):T(SPECIAL[inv.ctrl.sp||inv.ctrl.flag]),x:inv.ctrl.x,ys:mk(true,inv.ws[0])};
+    const rows=[ctrlRow,...inv.ws.map(v=>({c:false,label:fmtV(P,v),x:v,ys:mk(false,v)}))];
+    const mean=ys=>ys.some(y=>y===null)?null:ys.reduce((a,b)=>a+b,0)/ys.length;
+    const head=[tr('Próba','Trial'),up(T(P.n)),tr('Pomiar 1','Reading 1'),tr('Pomiar 2','Reading 2'),tr('Pomiar 3','Reading 3'),tr('Średnia','Mean')+(u?` [${u}]`:'')];if(seeds)head.push(tr('Woda wapienna','Limewater'));
+    const trows=rows.map(rw=>{const a=[rw.c?tr('kontrolna','control'):tr('badawcza','experimental'),rw.label,...rw.ys.map(y=>sample?yFmt(e,y):''),''];if(seeds)a.push(sample?(e.lime(rw.x)?tr('zmętniała','cloudy'):tr('bez zmian','no change')):'');return a;});
+    const widths=seeds?[1500,1866,1300,1300,1300,1500,1700]:[1700,2366,1500,1500,1500,1900];
+    add(sample?tr(`W tabeli podano wyniki trzech powtórzeń (${T(e.dep.n)}${u?', '+u:''}). Oblicz średnie i wpisz je do tabeli.`,`The table shows the results of three repeats (${T(e.dep.n)}${u?', '+u:''}). Calculate the means and write them in the table.`)+(e.cap?tr(' Zapis „> 20” oznacza, że zabarwienie nie znikło w ciągu 20 minut – wtedy jako średnią wpisz „> 20”.',' “> 20” means the colour did not disappear within 20 minutes – in that case write “> 20” as the mean.'):'')
+       :tr(`Wykonaj doświadczenie (lub skorzystaj z wirtualnego laboratorium) i zapisz wyniki w tabeli (${T(e.dep.n)}${u?', '+u:''}). Oblicz średnie.`,`Carry out the experiment (or use the virtual laboratory) and record the results in the table (${T(e.dep.n)}${u?', '+u:''}). Calculate the means.`),
+     [{t:'table',rows:[head,...trows],widths,head:1,minH:sample?0:440}],
+     (sample?tr('Średnie: ','Means: '):tr('Przykładowe średnie (z wirtualnego laboratorium): ','Example means (from the virtual laboratory): '))+rows.map(rw=>`${rw.label} – ${mFmt(e,mean(rw.ys))}`).join('; ')+'.');
+    // wykres
+    add(P.cat?tr(`Na podstawie średnich narysuj wykres słupkowy: ${T(e.dep.n)} dla różnych wartości czynnika: ${T(P.n)}. Wynik próby kontrolnej zaznacz innym kolorem.`,`Using the means, draw a bar chart of ${T(e.dep.n)} for the different values of: ${T(P.n)}. Mark the control result in a different colour.`)
+      :tr(`Na podstawie średnich narysuj wykres liniowy zależności: ${T(e.dep.n)} od czynnika: ${T(P.n)}. Opisz osie i dobierz skalę.`,`Using the means, draw a line graph of ${T(e.dep.n)} against ${T(P.n)}. Label the axes and choose a scale.`),
+     [{t:'img',svg:gridSVG(up(T(P.n))+(P.u?` [${P.u}]`:''),T(e.dep.ax))}],
+     tr(`Oś pozioma: ${T(P.n)}; oś pionowa: ${T(e.dep.ax)}. Przebieg wykresu zgodny z wnioskiem: `,`Horizontal axis: ${T(P.n)}; vertical axis: ${T(e.dep.ax)}. The shape of the graph matches the conclusion: `)+T(inv.concl[0][0]));
+    // wniosek
+    const ord=shuffle([0,1,2,3],r);
+    add(tr('Zaznacz wniosek, który wynika z wyników doświadczenia.','Choose the conclusion that follows from the results of the experiment.'),[{t:'abc',opts:ord.map(i=>T(inv.concl[i][0]))}],`${LET[ord.indexOf(0)]} – ${T(inv.concl[0][0])}`);
+  }
+  if(ws.eq){
+    if(A)add(tr('Uzupełnij równania reakcji – wpisz brakujące wzory i współczynniki. Pod każdym równaniem podaj nazwę procesu.','Complete the equations – fill in the missing formulas and coefficients. Under each equation write the name of the process.'),CEQ.map((q,i)=>({t:'p',s:`${'abcd'[i]}) ${T(q.s)}`,gap:true})),CEQ.map((q,i)=>`${'abcd'[i]}) ${q.k} – ${T(EQ[PROC[i]].n).toLowerCase()}`).join('; '));
+    else add(tr('Uzupełnij słowne równania procesów. Wybierz nazwy z ramki – niektóre wykorzystasz więcej niż raz, a jedna jest zbędna.','Complete the word equations. Use the names in the box – some are used more than once, and one is not needed.'),
+      [{t:'bank',words:[tr('glukoza','glucose'),tr('tlen','oxygen'),tr('woda','water'),tr('alkohol etylowy','ethyl alcohol'),tr('kwas mlekowy','lactic acid'),tr('skrobia','starch')].sort((a,b)=>a.localeCompare(b,L))},...WEQ.map((q,i)=>({t:'p',s:`${'abcd'[i]}) ${T(EQ[PROC[i]].n)}: ${T(q.s)}`,gap:true}))],WEQ.map((q,i)=>`${'abcd'[i]}) ${T(q.k)}`).join('; '));
+  }
+  if(ws.cmp){
+    const keys=['where','o2','sub','prod','energy'].concat(ws.org?[]:['who']);const rows=CMP.filter(c=>keys.includes(c.k));const blanks=[];
+    const trs=rows.map(rw=>[T(rw.h),...PROC.map((p,i)=>{if(r()<.55){blanks.push(`${T(EQ[p].n)} – ${T(rw.h).toLowerCase()}: ${cmpCell(rw,i)}`);return '';}return cmpCell(rw,i);})]);
+    if(!blanks.length){const rw=rows[0];trs[0][1]='';blanks.push(`${T(EQ.photo.n)} – ${T(rw.h).toLowerCase()}: ${cmpCell(rw,0)}`);}
+    add(tr('Uzupełnij tabelę porównującą procesy.','Complete the table comparing the processes.'),[{t:'table',rows:[['',...PROC.map(p=>T(EQ[p].n))],...trs],widths:[2066,2100,2100,2100,2100],head:1,col0:true,minH:520}],blanks.join('; ')+'.');
+  }
+  if(ws.org){
+    const pk=pick(ORGS.map((_,i)=>i),7,r).sort((a,b)=>a-b);
+    add(tr('Zaznacz znakiem X, jaki proces (procesy) przeprowadzają podane organizmy lub komórki. W jednym wierszu może być więcej niż jeden znak X.','Mark with an X which process (or processes) each organism or cell carries out. A row may have more than one X.'),
+     [{t:'table',rows:[[tr('Organizm / komórki','Organism / cells'),...PROC.map(p=>T(EQ[p].n))],...pk.map(i=>[T(ORGS[i][0]),'','','',''])],widths:[3266,1800,1800,1800,1800],head:1}],
+     pk.map(i=>`${T(ORGS[i][0])} – ${ORGS[i][1].map(j=>T(EQ[PROC[j]].n).toLowerCase()).join(', ')}`).join('; ')+'.'+(pk.some(i=>i===1||i===5)?tr(' Drożdże i komórki mięśni wybierają proces zależnie od dostępu tlenu.',' Yeasts and muscle cells switch process depending on oxygen supply.'):''));
+  }
+  if(ws.err){
+    const pk=pick(ERR.map((_,i)=>i),2,r);
+    add(tr('Przeczytaj opisy doświadczeń. Wskaż błąd w planie każdego z nich i zaproponuj, jak go poprawić. Zapisz odpowiedź w zeszycie.','Read the descriptions of the experiments. Identify the flaw in how each one was planned and suggest how to fix it. Write your answers in your exercise book.'),
+     pk.map((i,j)=>({t:'p',s:`${'ab'[j]}) ${T(ERR[i].s)}`})),pk.map((i,j)=>`${'ab'[j]}) ${T(FL[ERR[i].a])}. ${T(ERR[i].e)}`).join(' '));
+  }
+  return {title,tasks};
+}
+function viewSheet(){
+  const ws=S.ws,{title,tasks}=wsBuild(),any=ws.proto||ws.eq||ws.cmp||ws.org||ws.err;
+  const ck=(k,pl,en)=>`<label class="ck"><input type="checkbox" data-wsopt="${k}" ${ws[k]?'checked':''}> ${tr(pl,en)}</label>`;
+  const opt=`<section class="card"><h2>${tr('Generator karty pracy','Worksheet generator')}</h2><p class="note">${tr('Wybierz zadania i poziom. Podgląd poniżej odpowiada plikowi Word; przykładowe wyniki i kolejność odpowiedzi losują się od nowa po kliknięciu „Losuj”.','Choose the tasks and the level. The preview below matches the Word file; the sample results and answer order are re-drawn when “Shuffle” is clicked.')}</p>
+   <div class="wsopt"><div class="bar" style="margin-top:0">${lvlSeg()}</div>
+   <div class="bar" style="margin-top:0">${ck('proto','Protokół doświadczenia (problem, hipoteza, zmienne, wyniki, wykres, wniosek)','Experiment record (question, hypothesis, variables, results, graph, conclusion)')}</div>
+   ${ws.proto?`<div><span class="lbl">${tr('Doświadczenie','Experiment')}</span><div class="chips" style="margin-top:6px" role="group" aria-label="${esc(tr('Doświadczenie','Experiment'))}">${WSINV.map(id=>`<button data-wsinv="${id}" aria-pressed="${ws.inv===id}">${esc(wsInvName(id))}</button>`).join('')}</div></div>
+   <div class="bar" style="margin-top:0"><span class="lbl" id="wsdL">${tr('Tabela wyników','Results table')}</span><div class="seg" role="group" aria-labelledby="wsdL"><button data-wsdata="sample" aria-pressed="${ws.data==='sample'}">${tr('z przykładowymi wynikami','with sample results')}</button><button data-wsdata="blank" aria-pressed="${ws.data==='blank'}">${tr('pusta','blank')}</button></div></div>`:''}
+   <div class="bar" style="margin-top:0">${ck('eq','Uzupełnianie równań','Completing the equations')}${ck('cmp','Tabela porównawcza procesów','Process comparison table')}${ck('org','Organizmy i procesy','Organisms and processes')}${ck('err','Znajdź błąd w doświadczeniu','Spot the flaw')}${ck('key','Klucz odpowiedzi','Answer key')}</div>
+   <div class="bar" style="margin-top:0"><button class="btn" data-act="wsNew">${tr('🎲 Losuj','🎲 Shuffle')}</button><button class="btn primary" data-act="docx" ${any?'':'disabled'}>${tr('Pobierz kartę (Word)','Download worksheet (Word)')}</button><span class="status" role="status">${S.wsSt?esc(T(STATUS[S.wsSt])):''}</span></div></div></section>`;
+  if(!any)return opt+`<p class="note" style="margin-top:14px">${tr('Wybierz co najmniej jedno zadanie.','Choose at least one task.')}</p>`;
+  const item=it=>{
+    if(it.t==='p')return `<p${it.gap?' style="margin:10px 0"':''}>${subH(it.s)}</p>`;
+    if(it.t==='bank')return `<div class="bank">${it.words.map(esc).join(' • ')}</div>`;
+    if(it.t==='abc')return `<ol class="abc">${it.opts.map(o=>`<li>${subH(o)}</li>`).join('')}</ol>`;
+    if(it.t==='img')return it.svg;
+    if(it.t==='table')return `<table style="table-layout:fixed"><colgroup>${it.widths.map(w=>`<col style="width:${(w/104.66).toFixed(1)}%">`).join('')}</colgroup>${it.rows.map((rw,ri)=>`<tr>${rw.map((c,ci)=>{const th=ri<it.head||(it.col0&&ci===0);return th?`<th>${subH(c)}</th>`:`<td class="${c===''?'bl':''}" ${it.minH&&c===''?`style="height:${(it.minH/360).toFixed(1)}em"`:''}>${subH(c)}</td>`;}).join('')}</tr>`).join('')}</table>`;
+    return '';};
+  const sheet=`<article class="sheet" aria-label="${esc(title)}"><h3>${esc(title)}</h3><p>${tr('Imię i nazwisko','Name')}: ..................................................................</p><p class="ins">${tr('Przeczytaj uważnie polecenia i wykonaj zadania.','Read the instructions carefully and complete the tasks.')}</p>
+   ${tasks.map(t=>`<p class="tk">${tr('Zadanie','Task')} ${t.no}.</p><p class="ins">${subH(t.ins)}</p>${t.items.map(item).join('')}`).join('')}
+   ${ws.key?`<div class="key"><p class="tk">${tr('Klucz odpowiedzi (dla nauczyciela)','Answer key (for the teacher)')}</p>${tasks.map(t=>`<p><b>${tr('Zadanie','Task')} ${t.no}:</b> ${subH(t.key)}</p>`).join('')}</div>`:''}</article>`;
+  return opt+sheet;
+}
+async function buildDocx(){
+  const D=window.docx,F='Kohinoor Bangla',ws=S.ws,{title,tasks}=wsBuild();
+  const R=(t,o={})=>new D.TextRun(Object.assign({text:t,font:F,color:'000000',size:22},o));const Pp=(r,o={})=>new D.Paragraph(Object.assign({children:r},o));
+  const runs=(text,o={})=>{const out=[];for(const m of String(text).matchAll(/([₀-₉]+)|([^₀-₉]+)/g))out.push(m[1]?R([...m[1]].map(c=>SUBS.indexOf(c)).join(''),Object.assign({},o,{subScript:true})):R(m[2],o));return out.length?out:[R('',o)];};
+  const bord={style:D.BorderStyle.SINGLE,size:6,color:'000000',space:4};
+  const table=it=>new D.Table({width:{size:10466,type:D.WidthType.DXA},columnWidths:it.widths,rows:it.rows.map((rw,ri)=>new D.TableRow({cantSplit:true,...(it.minH&&ri>=it.head?{height:{value:it.minH,rule:D.HeightRule.ATLEAST}}:{}),
+    children:rw.map((c,ci)=>{const sh=ri<it.head||(it.col0&&ci===0);return new D.TableCell({width:{size:it.widths[ci],type:D.WidthType.DXA},...(sh?{shading:{type:D.ShadingType.CLEAR,fill:'D9D9D9',color:'auto'}}:{}),margins:{top:60,bottom:60,left:100,right:100},children:[Pp(runs(c,Object.assign({size:20},sh?{bold:true}:{})))]});})}))});
+  const ch=[];
+  ch.push(Pp([R(title,{bold:true,size:32})],{alignment:D.AlignmentType.CENTER,spacing:{after:160}}));
+  ch.push(Pp([R(tr('Imię i nazwisko: ','Name: ')+'..................................................................')],{spacing:{after:120}}));
+  ch.push(Pp([R(tr('Przeczytaj uważnie polecenia i wykonaj zadania.','Read the instructions carefully and complete the tasks.'),{italics:true})],{spacing:{after:120}}));
+  for(const t of tasks){
+    ch.push(Pp([R(`${tr('Zadanie','Task')} ${t.no}.`,{bold:true,size:24})],{spacing:{before:200,after:40},keepNext:true}));
+    ch.push(Pp(runs(t.ins,{italics:true}),{spacing:{after:80},keepNext:true}));
+    for(const it of t.items){
+      if(it.t==='p')ch.push(Pp(runs(it.s),{spacing:{before:it.gap?100:0,after:it.gap?140:80}}));
+      else if(it.t==='bank')ch.push(Pp([R(it.words.join('  •  '))],{border:{top:bord,bottom:bord,left:bord,right:bord},spacing:{after:120}}));
+      else if(it.t==='abc')it.opts.forEach((o,i)=>ch.push(Pp([R(`${LET[i]}. `,{bold:true}),...runs(o)],{indent:{left:360,hanging:360},spacing:{after:60}})));
+      else if(it.t==='img'){const [w,h]=dims(it.svg),iw=520;ch.push(Pp([new D.ImageRun({data:await toPng(it.svg,w*2,h*2),transformation:{width:iw,height:Math.round(iw*h/w)}})],{alignment:D.AlignmentType.CENTER,spacing:{after:80}}));}
+      else if(it.t==='table'){ch.push(table(it));ch.push(Pp([R('')],{spacing:{after:60}}));}
+    }
+  }
+  if(ws.key){ch.push(Pp([R(tr('Klucz odpowiedzi (dla nauczyciela)','Answer key (for the teacher)'),{bold:true,size:26})],{pageBreakBefore:true,spacing:{after:120}}));
+    for(const t of tasks)ch.push(Pp([R(`${tr('Zadanie','Task')} ${t.no}: `,{bold:true}),...runs(t.key)],{spacing:{after:100}}));}
+  const doc=new D.Document({creator:'Zakład utylizacji niewiedzy',title,styles:{default:{document:{run:{font:F,size:22}}}},sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:720,bottom:720,left:720,right:720}}},children:ch}]});
+  return {blob:await D.Packer.toBlob(doc),title};
+}
+async function docxClick(){
+  if(!window.docx){S.wsSt='lib';render();return;}
+  S.wsSt='prep';render();
+  try{const {blob,title}=await buildDocx();await DL.save({filename:title.replace(/[\\/:*?"<>|]/g,'')+'.docx',data:blob});S.wsSt='saved';}
+  catch(e){console.error(e);S.wsSt='err';}
+  render();
+}
+async function pngClick(){S.pngSt='prep';render();
+  try{await savePng(chartSVG(true),`${T(curE().sh)} – ${up(T(curP().n))} – ${tr('wykres','graph')}.png`.replace(/[\\/:*?"<>|]/g,''));S.pngSt='saved';}catch(e){console.error(e);S.pngSt='err';}render();}
+async function cyPngClick(){S.cyPng='prep';render();
+  try{await savePng(cycleSVG(true),tr('Fotosynteza i oddychanie – schemat.png','Photosynthesis and respiration – diagram.png'));S.cyPng='saved';}catch(e){console.error(e);S.cyPng='err';}render();}
+
+// ---------- całość ----------
+function focusKey(el){if(!el||el===document.body)return null;if(el.id)return '#'+CSS.escape(el.id);
+  const a=[...el.attributes].filter(x=>x.name.startsWith('data-')).map(x=>`[${x.name}="${CSS.escape(x.value)}"]`).join('');if(!a)return null;
+  return el.tagName.toLowerCase()+a;}
+function render(keep=true){
+  const fk=keep?focusKey(document.activeElement):null;
+  const sl=$$('#app .tablewrap').map(e=>e.scrollLeft);
+  document.documentElement.lang=L;document.title=T(UI.t1);
+  $('#t1').textContent=T(UI.t1);$('#t2').textContent=T(UI.t2);
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
+  $('#tabs').innerHTML=Object.entries(UI.tabs).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
+  $('#app').innerHTML={exp:viewExp,err:viewErr,theory:viewTheory,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
+  $$('#app .tablewrap').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
+  if(fk){const el=$(fk);if(el&&el!==document.activeElement&&!el.disabled)try{el.focus({preventScroll:true});}catch(_){}}
+}
+function act(b){
+  const d=b.dataset;let after=null;
+  if(d.lang){L=d.lang;try{localStorage.setItem('labLang',L);}catch(_){}}
+  else if(d.tab)S.tab=d.tab;
+  else if(d.lvl){if(S.lvl!==d.lvl){S.lvl=d.lvl;if(S.q&&QZ[S.q.i].lv==='A'&&d.lvl==='B')S.q=null;}}
+  else if(d.ex){if(S.run)return;S.ex=d.ex;S.pngSt='';}
+  else if(d.inv){if(S.run)return;S.inv[S.ex]=d.inv;S.pngSt='';}
+  else if(d.mat){if(S.run)return;S.mat=d.mat;S.pngSt='';}
+  else if(d.xcat){if(S.run)return;S.x[KEY()]=d.xcat;}
+  else if(d.con!==undefined){const dd=D(),i=+d.con;if(!dd.tried.includes(i)&&!dd.tried.includes(0))dd.tried.push(i);after='.cons button:not(:disabled), .fb';}
+  else if(d.act==='run'||d.act==='ctrl'){runTrial(d.act==='ctrl',+d.n);return;}
+  else if(d.act==='clear'){if(!confirm(tr('Usunąć wszystkie wyniki tego doświadczenia?','Delete all the results of this experiment?')))return;const k=KEY();delete S.data[k];if(S.last&&S.last.k===k)S.last=null;}
+  else if(d.act==='png'){pngClick();return;}
+  else if(d.act==='cyPng'){cyPngClick();return;}
+  else if(d.act==='docx'){docxClick();return;}
+  else if(d.act==='wsNew'){S.ws.seed=1+Math.floor(Math.random()*99999);S.wsSt='';}
+  else if(d.act==='atomChk'){const id=S.atom.eq,q=EQ[id],v=S.atom.v[id]||{},res={};for(const sd of ['L','R'])for(const el of ELS){const k=sd+'.'+el;res[k]=String(v[k]??'').trim()!==''&&+v[k]===sideCount(q[sd],el);}S.atom.res[id]=res;}
+  else if(d.act==='atomShow'){const id=S.atom.eq;S.atom.show[id]=!S.atom.show[id];}
+  else if(d.eq)S.atom.eq=d.eq;
+  else if(d.fam)S.lf.fam=d.fam;
+  else if(d.ans!==undefined){if(S.q&&S.q.picked===null){S.q.picked=+d.ans;S.all++;if(+d.ans===0)S.ok++;}after='#nextQ';}
+  else if(b.id==='nextQ'){newQ();after='.opts button';}
+  else if(d.errans){const E=S.err;if(E.pick===null){E.pick=d.errans;E.all++;if(d.errans===ERR[E.ord[E.i]].a)E.ok++;}after='#nextE';}
+  else if(b.id==='nextE'){S.err.i++;newErr();after='.opts button';}
+  else if(d.wsinv){S.ws.inv=d.wsinv;S.wsSt='';}
+  else if(d.wsdata){S.ws.data=d.wsdata;S.wsSt='';}
+  else return;
+  render();
+  if(after){const el=$(after);if(el)el.focus({preventScroll:true});}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-lang],[data-tab],[data-lvl],[data-ex],[data-inv],[data-mat],[data-xcat],[data-con],[data-act],[data-eq],[data-fam],[data-ans],#nextQ,[data-errans],#nextE,[data-wsinv],[data-wsdata]');
+  if(!b||b.disabled)return;
+  if(b.matches('.sheet *'))return;
+  act(b);
+});
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.dataset.hyp!==undefined){const d=D();if(!d.t.length){d.hyp=+t.dataset.hyp;render();}}
+  else if(t.dataset.wsopt){S.ws[t.dataset.wsopt]=t.checked;S.wsSt='';render();}});
+document.addEventListener('input',e=>{const t=e.target;
+  if(t.id==='xr'){if(S.run)return;const P=curP();S.x[KEY()]=+t.value;const s=fmtV(P,P.vals[+t.value]);t.setAttribute('aria-valuetext',s);$('#xv').textContent=s;$('#appar').innerHTML=idleApp();}
+  else if(t.id==='lfI'){S.lf.I=+t.value;t.setAttribute('aria-valuetext',S.lf.I+'%');$('#lfV').textContent=S.lf.I+'%';$('#lfBox').innerHTML=lfSVG();$('#lfR').innerHTML=lfRead();}
+  else if(t.dataset.atom){const id=S.atom.eq;(S.atom.v[id]||(S.atom.v[id]={}))[t.dataset.atom]=t.value;if(S.atom.res[id]){S.atom.res[id]=null;$$('[data-atom]').forEach(i=>i.classList.remove('ok','no'));const f=$('#app .eqbox ~ .fb, #app table.atoms ~ .fb');$$('#app .fb').forEach(x=>x.remove());}}});
+render();
+</script>
+<a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><a id="report-link" href="../index.html?zglos=biologia/laboratorium" style="position:fixed;right:12px;bottom:12px;z-index:9999;font:700 13px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#231f17;background:#fdfcf8;border:1.5px solid #dcd4c3;border-radius:999px;padding:9px 12px;box-shadow:0 2px 8px rgba(0,0,0,.18)">🐞 Zgłoś błąd</a><script>(function(){var a=document.getElementById('home-link'),r=document.getElementById('report-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x;r.textContent=x==='en'?'🐞 Report a bug':'🐞 Zgłoś błąd';r.href='../index.html?lang='+x+'&zglos=biologia/laboratorium'}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+<!--stats--><script>window.goatcounter={path:function(){return location.pathname.replace(/index\.html$/,"")}}</script><script data-goatcounter="https://zun.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script><!--stats-->
+</body>
+</html>
