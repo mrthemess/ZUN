@@ -150,7 +150,7 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
   </div>
   <p class="langnote">
     <span data-l="pl">Kliknij narzędzie, żeby zobaczyć jego opis. Wszystkie narzędzia (poza konkursem geograficznym) mają też wersję angielską.</span>
-    <span data-l="en">Click a tool to read what it does. Every tool is available in English, except the Polish geography contest practice.</span>
+    <span data-l="en">Click a tool to read what it does. Every tool is available in English.</span>
   </p>
 
   <div class="subjects">
@@ -178,13 +178,12 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
     </div>
   </section>
 
-  <section class="contest" id="konkurs-sekcja">
+  <section class="contest" id="konkurs-sekcja" data-l="pl">
     <button type="button" class="contest-btn" data-tool="konkurs">
       <span class="contest-ic" aria-hidden="true">🏆</span>
       <span class="contest-tx">
-        <b><span data-l="pl">Przygotowanie do konkursu geograficznego</span><span data-l="en">Geography contest practice</span></b>
+        <b><span data-l="pl">Przygotowanie do konkursu geograficznego</span></b>
         <span data-l="pl">Zbiór zadań z Konkursu Geograficznego dla szkół podstawowych województwa mazowieckiego: etap szkolny, rejonowy i wojewódzki.</span>
-        <span data-l="en">A collection of tasks from the Masovian Voivodeship geography contest for primary schools: school, district and regional stages. Polish only.</span>
       </span>
     </button>
   </section>
@@ -459,7 +458,7 @@ function setLang(l){
 function renderReportTools(){
   const sel = $('#repTool'), keep = sel.value;
   const opt = (v, txt) => { const o = document.createElement('option'); o.value = v; o.textContent = txt; return o; };
-  sel.replaceChildren(opt('ogólnie', UI[L].general), ...TOOLS.map(t => t.g ? opt('Generator: ' + t.pl[0], UI[L].gen + ': ' + t[L][0]) : opt(t.pl[0], t[L][0])));
+  sel.replaceChildren(opt('ogólnie', UI[L].general), ...TOOLS.filter(t => !(t.solo && L === 'en')).map(t => t.g ? opt('Generator: ' + t.pl[0], UI[L].gen + ': ' + t[L][0]) : opt(t.pl[0], t[L][0])));
   if (keep) sel.value = keep;
 }
 
