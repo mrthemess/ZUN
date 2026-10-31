@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<!--og--><meta property="og:type" content="website"><meta property="og:site_name" content="Zakład utylizacji niewiedzy"><meta property="og:title" content="DNA i synteza białek"><meta property="og:url" content="https://narzedzia.netlify.app/biologia/dna.html"><meta property="og:image" content="https://narzedzia.netlify.app/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><!--og-->
+<!--seo--><meta name="description" content="Interaktywne DNA: budowa podwójnej helisy, replikacja, transkrypcja, translacja, kod genetyczny i mutacje, z laboratorium sekwencji i quizem."><meta property="og:description" content="Interaktywne DNA: budowa podwójnej helisy, replikacja, transkrypcja, translacja, kod genetyczny i mutacje, z laboratorium sekwencji i quizem."><link rel="canonical" href="https://narzedzia.netlify.app/biologia/dna.html"><!--seo-->
+<!--site-lang--><script>(function(){var l=new URLSearchParams(location.search).get('lang');if(l!=='pl'&&l!=='en')return;try{localStorage.setItem('dnaLang',l)}catch(e){}})();</script><!--site-lang-->
+
+<!--tryb--><script>var GEN=new URLSearchParams(location.search).get('tryb')==='generator';document.documentElement.dataset.tryb=GEN?'generator':'lekcja';</script><!--tryb-->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DNA i synteza białek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+<style>
+:root{--bg:#edf3ef;--paper:#fcfdfc;--ink:#14201a;--muted:#53645b;--line:#cfdcd4;--soft:#e2ede6;--acc:#1d7a58;--acc-t:#16684a;--acc-ink:#fff;--ok:#2e7d4f;--no:#b4432a;--focus:#c2571a;--stage:#f7fbf8;--hl:#e8a400;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1714;--paper:#16201c;--ink:#e2ece6;--muted:#97a9a0;--line:#2a3a33;--soft:#1d2a25;--acc:#3fae84;--acc-t:#8fdcb8;--acc-ink:#08140f;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--stage:#1b2722;--hl:#ffc233;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1714;--paper:#16201c;--ink:#e2ece6;--muted:#97a9a0;--line:#2a3a33;--soft:#1d2a25;--acc:#3fae84;--acc-t:#8fdcb8;--acc-ink:#08140f;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--stage:#1b2722;--hl:#ffc233;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 'Atkinson Hyperlegible',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;letter-spacing:-.015em;line-height:1.15}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 80px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+header h1{margin:0;font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800}header p{margin:2px 0 0;color:var(--muted)}
+.hr{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.lang{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:5px 12px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:var(--paper);font-weight:700}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 15px}
+.tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.btn{font:inherit;font-size:.95rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:8px 14px}
+.btn:hover:not(:disabled){border-color:var(--acc)}.btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:700}
+.btn:disabled{opacity:.5;cursor:default}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;margin-top:16px;min-width:0}
+.card h2{margin:0 0 6px;font-size:1.45rem}.card h3{margin:14px 0 6px;font-size:1.12rem}
+.card p{margin:0 0 10px}.card ul,.card ol{margin:0 0 10px;padding-left:20px}.card li{margin:3px 0}
+.note{font-size:.88rem;color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:14px}
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{font:inherit;font-size:.9rem;border:0;background:var(--paper);color:var(--ink);padding:6px 12px;cursor:pointer}
+.seg button+button{border-left:1.5px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--acc);color:var(--acc-ink);font-weight:700}
+.seg button:disabled{opacity:.4;cursor:default}
+.bar .lbl{font-size:.88rem;color:var(--muted);font-weight:700}
+label.ck{display:inline-flex;gap:7px;align-items:center;cursor:pointer;font-size:.95rem}
+label.ck input{accent-color:var(--acc);width:18px;height:18px;margin:0}
+.mgrid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.stage{background:var(--stage);border:1.5px solid var(--line);border-radius:16px;padding:8px;margin-top:16px;min-width:0}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.stage svg{display:block;width:100%;height:auto}
+@media (max-width:640px){.scroll svg.wide{min-width:560px}}
+.dz .tx{fill:var(--ink)}.dz .mu{fill:var(--muted)}.dz .halo{stroke:var(--stage)}.dz .ln{stroke:var(--muted)}
+.dz [data-part]{cursor:pointer}.dz [data-part]:focus{outline:none}
+.dz [data-part]:hover{filter:brightness(1.07)}
+.dz [data-part]:focus-visible .hit,.dz [data-part].sel .hit{stroke:var(--focus);stroke-width:4}
+.ocard .kicker{display:block;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.75rem}
+.ocard h2{font-size:1.6rem;margin:2px 0 10px}
+.tablewrap{overflow-x:auto;margin-top:10px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{background:var(--soft);font-size:.88rem}
+table.cmp{min-width:560px}table.cmp th[scope=row]{width:22%}
+.ugrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
+.u3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 16px}
+.ucard h3{margin-top:0}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
+.steps button{font:inherit;font-size:.85rem;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:4px 10px}
+.steps button[aria-current=step]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:700}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.88rem;color:var(--muted);margin:6px 4px 2px}
+.lg i{display:inline-block;width:22px;height:9px;border-radius:4px;vertical-align:middle;margin-right:5px;border:1px solid rgba(0,0,0,.35)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;padding:6px 4px 2px}
+.status{font-size:.9rem;color:var(--muted);margin-left:4px}
+/* sekwencje */
+.sq{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-weight:700;letter-spacing:.12em;word-break:break-all}
+.sqbox{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1.5px solid var(--line);border-radius:12px;background:var(--stage);padding:8px 8px 10px;margin-top:10px}
+.sgrid{display:grid;gap:3px 2px;width:max-content;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:.95rem}
+.sgrid .rl{position:sticky;left:0;z-index:1;background:var(--stage);font-family:'Atkinson Hyperlegible',system-ui,sans-serif;font-size:.78rem;font-weight:700;color:var(--muted);padding:3px 8px 0 0;white-space:nowrap;line-height:1.15}
+.nt{width:24px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:5px;font-weight:700;color:#111;border:1.5px solid rgba(0,0,0,.18)}
+button.nt{font:inherit;font-weight:700;cursor:pointer;padding:0}
+.nA{background:#ffa8a8}.nT{background:#ffe066}.nC{background:#74c0fc}.nG{background:#8ce99a}.nU{background:#d0bfff}
+.nt.dim{opacity:.38}.nt.gap{background:transparent;color:var(--muted);border-style:dashed}
+.nt.mk{outline:3px solid var(--focus);outline-offset:1px}.nt.selp{outline:3px solid var(--ink);outline-offset:1px}
+.cdn{height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;font-weight:700;color:#111;font-size:.85rem;margin:0 2px;border:1.5px solid rgba(0,0,0,.2)}
+.cdn.df{outline:3px solid var(--no);outline-offset:1px}
+.gh{background:#ffe08a}.gp{background:#b2f2bb}.ga{background:#ffc9c9}.gb{background:#a5d8ff}.gs{background:#495057;color:#fff!important}
+.chain{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.aa{display:inline-flex;flex-direction:column;border-radius:10px;padding:4px 9px;color:#111;border:1.5px solid rgba(0,0,0,.2);font-size:.82rem;line-height:1.2}
+.aa b{font-size:1rem}.aa.df{outline:3px solid var(--no);outline-offset:1px}.aa.st{outline:3px solid var(--acc);outline-offset:1px}
+.msg{border-radius:12px;padding:10px 14px;margin:10px 0;border:1.5px solid var(--line);background:var(--soft)}
+.msg.no{border-color:var(--no);color:var(--no);background:color-mix(in srgb,var(--no) 10%,var(--paper))}
+.msg.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--paper))}
+.msg.mbig{font-size:1.05rem}
+input.tin{font:inherit;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:1.05rem;letter-spacing:.08em;width:100%;max-width:100%;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);text-transform:uppercase}
+input.tin:focus{border-color:var(--acc)}
+input.sin{font:inherit;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);width:100%;max-width:340px}
+.cmpchk{display:flex;flex-wrap:wrap;gap:3px;margin-top:8px}
+.cmpchk span{width:24px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:5px;font-weight:700;font-family:ui-monospace,Menlo,monospace;border:1.5px solid var(--line)}
+.cmpchk .ok{background:color-mix(in srgb,var(--ok) 25%,var(--paper));border-color:var(--ok)}.cmpchk .no{background:color-mix(in srgb,var(--no) 25%,var(--paper));border-color:var(--no)}
+/* tabela kodu */
+table.code{min-width:600px;font-size:.88rem;table-layout:fixed}
+table.code th,table.code td{border:1px solid var(--line);text-align:center;padding:2px;vertical-align:middle}
+table.code th.b1,table.code td.b3{width:44px;font-weight:800;font-size:1.05rem}
+table.code button{font:inherit;width:100%;border:0;border-radius:6px;padding:4px 2px;cursor:pointer;color:#111;display:flex;justify-content:space-between;gap:4px;align-items:center;font-size:.86rem}
+table.code button .cd{font-family:ui-monospace,Menlo,monospace;font-weight:700;letter-spacing:.05em}
+table.code button.on{outline:3px solid var(--ink);outline-offset:-1px}
+table.code button.hit{outline:3px solid var(--focus);outline-offset:-1px}
+table.code button.fade{opacity:.35}
+table.code .tag{font-size:.65rem;font-weight:800;border-radius:4px;padding:0 3px;background:#2b8a3e;color:#fff}
+.reslist{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.big{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',sans-serif;font-size:1.6rem;font-weight:800;color:var(--acc-t);word-break:break-all}
+.feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:8px}
+.feat div{background:var(--soft);border-radius:12px;padding:10px 12px}
+.feat b{display:block}
+/* quiz */
+.q{font-size:1.2rem;font-weight:700;margin:4px 0 14px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opts button{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:12px 14px;text-align:left;min-width:0;overflow-wrap:anywhere}
+.opts button:hover:not(:disabled){border-color:var(--acc)}
+.opts button:disabled{cursor:default;color:var(--ink)}
+.opts button.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--paper))}
+.opts button.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 12%,var(--paper))}
+.fb{margin-top:14px;font-weight:700}.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.expl{margin:6px 0 12px}
+.score{color:var(--muted);font-size:.95rem;margin:0 0 6px}
+.qseq{background:var(--stage);border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:0 0 12px;overflow-x:auto}
+.qseq div{white-space:nowrap}
+/* karta */
+.sheet{background:#fff;color:#111;border-radius:6px;padding:22px 24px;margin-top:16px;box-shadow:0 1px 6px rgba(0,0,0,.15);font-family:'Atkinson Hyperlegible',system-ui,sans-serif}
+.sheet h3{text-align:center;margin:0 0 10px;font-size:1.3rem;color:#111}
+.sheet .tk{font-weight:700;margin:14px 0 2px}.sheet .ins{font-style:italic;margin:0 0 6px}
+.sheet .key{border-top:2px dashed #999;margin-top:18px;padding-top:8px}
+.sheet table{font-size:.9rem;margin:6px 0}.sheet th,.sheet td{border:1px solid #111;color:#111;padding:6px 8px;height:2.1em}.sheet thead th{background:#d9d9d9}
+.sheet .ws{font-family:'Courier New',ui-monospace,monospace;font-weight:700;letter-spacing:.06em;white-space:pre;overflow-x:auto;margin:4px 0}
+.sheet table.ct{font-size:.74rem;table-layout:fixed;min-width:520px}.sheet table.ct td,.sheet table.ct th{height:auto;padding:3px 4px;text-align:center;vertical-align:middle;font-family:'Courier New',monospace}
+.sheet .app{font-size:.8rem;margin-top:4px}
+.wsopt{display:grid;gap:12px}
+@media (max-width:820px){.mgrid,.ugrid,.u3{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}}
+@media (max-width:480px){.seg button{padding:6px 9px;font-size:.86rem}.card{padding:14px 14px}.sheet{padding:14px 12px}}
+html[data-tryb=generator] #tabs{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div><h1 id="t1"></h1><p id="t2"></p></div>
+<div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
+<div class="tabs" role="tablist" id="tabs"></div></div></header>
+<main id="app"></main>
+</div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let L='pl';try{const s=localStorage.getItem('dnaLang');if(s==='pl'||s==='en')L=s;}catch(e){}
+const tr=(pl,en)=>L==='pl'?pl:en, T=a=>a[L==='pl'?0:1];
+const shuffle=(a,r=Math.random)=>{const c=[...a];for(let i=c.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[c[i],c[j]]=[c[j],c[i]];}return c;};
+const pick=(a,n,r)=>shuffle(a,r).slice(0,n);
+const rngOf=seed=>{let s=seed%2147483647;if(s<=0)s+=2147483646;return()=>(s=s*16807%2147483647)/2147483647;};
+const f1=n=>Math.round(n*10)/10;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const clamp01=t=>Math.max(0,Math.min(1,t));
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+const seg01=(t,a,b)=>clamp01((t-a)/(b-a));
+const cap=s=>s[0].toUpperCase()+s.slice(1);
+
+const UI={
+ t1:['DNA i synteza białek','DNA and protein synthesis'],
+ t2:['Budowa DNA i RNA, replikacja, transkrypcja, translacja, kod genetyczny, mutacje i quiz.','DNA and RNA structure, replication, transcription, translation, the genetic code, mutations and a quiz.'],
+ gt1:['Generator kart pracy: DNA i synteza białek','Worksheet generator: DNA and protein synthesis'],
+ gt2:['Karty pracy do pobrania w Wordzie, z kluczem odpowiedzi na osobnej stronie.','Downloadable Word worksheets with the answer key on a separate page.'],
+ tabs:{struct:['Budowa DNA i RNA','DNA and RNA structure'],rep:['Replikacja','Replication'],tt:['Transkrypcja i translacja','Transcription and translation'],lab:['Laboratorium sekwencji','Sequence lab'],code:['Kod genetyczny','Genetic code'],mut:['Mutacje','Mutations'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
+};
+
+// ================= kod genetyczny =================
+// standardowy kod genetyczny; kolejność: 1., 2., 3. zasada – U, C, A, G
+const RB='UCAG',CODE_STR='FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG';
+const CODE={};for(let i=0;i<64;i++)CODE[RB[i>>4]+RB[(i>>2)&3]+RB[i&3]]=CODE_STR[i];
+// [skrót, nazwa PL, nazwa EN, grupa: h – niepolarne (hydrofobowe), p – polarne, a – kwasowe, b – zasadowe]
+const AA={A:['Ala','alanina','alanine','h'],R:['Arg','arginina','arginine','b'],N:['Asn','asparagina','asparagine','p'],D:['Asp','kwas asparaginowy','aspartic acid','a'],C:['Cys','cysteina','cysteine','p'],
+ Q:['Gln','glutamina','glutamine','p'],E:['Glu','kwas glutaminowy','glutamic acid','a'],G:['Gly','glicyna','glycine','h'],H:['His','histydyna','histidine','b'],I:['Ile','izoleucyna','isoleucine','h'],
+ L:['Leu','leucyna','leucine','h'],K:['Lys','lizyna','lysine','b'],M:['Met','metionina','methionine','h'],F:['Phe','fenyloalanina','phenylalanine','h'],P:['Pro','prolina','proline','h'],
+ S:['Ser','seryna','serine','p'],T:['Thr','treonina','threonine','p'],W:['Trp','tryptofan','tryptophan','h'],Y:['Tyr','tyrozyna','tyrosine','p'],V:['Val','walina','valine','h'],'*':['STOP','kodon STOP','STOP codon','s']};
+const aaAb=a=>AA[a][0], aaNm=a=>L==='pl'?AA[a][1]:AA[a][2], aaCls=a=>'g'+AA[a][3];
+const GRP={h:['niepolarne (hydrofobowe)','non-polar (hydrophobic)'],p:['polarne','polar'],a:['kwasowe (ładunek −)','acidic (charge −)'],b:['zasadowe (ładunek +)','basic (charge +)'],s:['kodon STOP','STOP codon']};
+const codonsOf=a=>Object.keys(CODE).filter(c=>CODE[c]===a);
+const aaLegend=()=>`<div class="lg">${['h','p','a','b','s'].map(g=>`<span><i class="g${g}"></i>${esc(T(GRP[g]))}</span>`).join('')}</div>`;
+
+// ================= sekwencje =================
+const CMP={A:'T',T:'A',C:'G',G:'C'},RCMP={A:'U',U:'A',C:'G',G:'C'};
+const comp=s=>s.replace(/./g,c=>CMP[c]||c);
+const toRNA=s=>s.replace(/T/g,'U');
+const toDNA=s=>s.replace(/U/g,'T');
+const STOPS=['TAA','TAG','TGA'];
+function translateFrom(m,from){const out=[];for(let i=from;i+3<=m.length;i+=3){const c=m.substr(i,3),a=CODE[c];out.push({i,c,a});if(a==='*')break;}return out;}
+function analyse(coding){const m=toRNA(coding),st=m.indexOf('AUG');if(st<0)return{m,st:-1,cod:[],stop:false,end:coding.length};
+  const cod=translateFrom(m,st),stop=cod.length>0&&cod[cod.length-1].a==='*';return{m,st,cod,stop,end:stop?st+3*cod.length:coding.length};}
+const protOf=an=>an.cod.filter(x=>x.a!=='*').map(x=>x.a);
+const SENSE=Object.keys(CODE).filter(c=>CODE[c]!=='*'&&c!=='AUG').map(toDNA);
+const rb=r=>'ATCG'[Math.floor(r()*4)];
+// losowa nić kodująca: [przed START] ATG [nc kodonów] STOP [za STOP]
+function rndSeq(r=Math.random,nc=6,pre=null,post=null){
+  for(let k=0;k<200;k++){const np=pre??Math.floor(r()*3)+1;let s='';for(let i=0;i<np;i++)s+=rb(r);s+='ATG';
+    for(let i=0;i<nc;i++)s+=SENSE[Math.floor(r()*SENSE.length)];s+=STOPS[Math.floor(r()*3)];const nq=post??Math.floor(r()*3);for(let i=0;i<nq;i++)s+=rb(r);
+    const an=analyse(s);if(an.st===np&&an.stop&&an.cod.length===nc+2)return s;}
+  return 'GCATGGCTAAAGGTTTCTGGTAAGC';
+}
+const rndPlain=(r,n)=>{let s='';for(let i=0;i<n;i++)s+=rb(r);return s;};
+const spaced=s=>s.split('').join(' ');
+const trip=(s,from=0)=>{const o=[];if(from)o.push(s.slice(0,from));for(let i=from;i<s.length;i+=3)o.push(s.slice(i,i+3));return o.join(' ');};
+const protTxt=(p,sep='–')=>p.map(aaAb).join(sep);
+
+// ---- mutacje ----
+function applyMut(s,m){if(m.type==='sub')return s.slice(0,m.pos)+m.base+s.slice(m.pos+1);if(m.type==='ins')return s.slice(0,m.pos)+m.ins+s.slice(m.pos);return s.slice(0,m.pos)+s.slice(m.pos+m.del);}
+function classify(orig,m){
+  const A=analyse(orig),mut=applyMut(orig,m),B=analyse(mut),n=m.type==='sub'?0:m.type==='ins'?m.ins.length:m.del;
+  const r={A,B,mut,n};
+  if(A.st<0)return Object.assign(r,{c:'noOrig'});
+  const st=A.st,end=A.end,delta=m.type==='ins'?n:m.type==='del'?-n:0;
+  const up=m.type==='sub'?m.pos<st:m.type==='ins'?m.pos<=st:m.pos+n<=st;
+  const down=m.pos>=end;
+  if(up||down){const exp=up?st+delta:st;return Object.assign(r,{c:B.st===exp?'outside':'startChange'});}
+  if(m.pos<st+3&&!(m.type==='ins'&&m.pos===st)){if(B.st!==st)return Object.assign(r,{c:'startLoss'});}
+  if(m.type==='sub'){const k=Math.floor((m.pos-st)/3),o=A.cod[k],nw=B.cod[k];if(!o||!nw)return Object.assign(r,{c:'outside'});
+    r.k=k;r.from=o.a;r.to=nw.a;
+    if(o.a===nw.a)r.c='silent';else if(nw.a==='*')r.c='nonsense';else if(o.a==='*')r.c='stopLoss';else r.c='missense';return r;}
+  r.c=n%3?'frameshift':'inframe';return r;
+}
+const MUTC={
+ silent:['Mutacja milcząca (cicha)','Silent mutation'],missense:['Mutacja zmiany sensu (missense)','Missense mutation'],nonsense:['Mutacja nonsensowna','Nonsense mutation'],
+ stopLoss:['Utrata kodonu STOP','Loss of the STOP codon'],startLoss:['Uszkodzenie kodonu START','Loss of the START codon'],frameshift:['Przesunięcie ramki odczytu','Frameshift mutation'],
+ inframe:['Mutacja bez przesunięcia ramki odczytu','In-frame mutation'],outside:['Mutacja poza odcinkiem kodującym','Mutation outside the coding region'],startChange:['Zmiana miejsca startu translacji','Change in the translation start site'],noOrig:['Brak białka','No protein']};
+const MTYPE={sub:['Substytucja (zamiana nukleotydu)','Substitution (one nucleotide swapped)'],ins:['Insercja (wstawienie nukleotydu)','Insertion (a nucleotide added)'],del:['Delecja (utrata nukleotydu)','Deletion (a nucleotide lost)']};
+function mutExpl(c){
+  const x=c.c,ab=a=>`${aaAb(a)} (${aaNm(a)})`;
+  if(x==='silent')return tr(`Nowy kodon nadal koduje ${ab(c.from)} – białko się nie zmienia. To możliwe, bo kod genetyczny jest zdegenerowany: jeden aminokwas może być kodowany przez kilka kodonów.`,`The new codon still codes for ${ab(c.from)} – the protein does not change. This is possible because the genetic code is degenerate: one amino acid can be coded for by several codons.`);
+  if(x==='missense')return tr(`Jeden aminokwas zostaje zastąpiony innym: ${ab(c.from)} → ${ab(c.to)}. Reszta białka się nie zmienia. Białko może działać normalnie, gorzej albo wcale – zależy to od miejsca i rodzaju zmiany.`,`One amino acid is replaced by another: ${ab(c.from)} → ${ab(c.to)}. The rest of the protein is unchanged. The protein may work normally, less well or not at all – it depends on where the change is and what it is.`);
+  if(x==='nonsense')return tr(`Kodon aminokwasu ${ab(c.from)} zmienił się w kodon STOP. Translacja kończy się za wcześnie – białko jest skrócone i zwykle nie działa.`,`The codon for ${ab(c.from)} has turned into a STOP codon. Translation ends too early – the protein is shortened and usually does not work.`);
+  if(x==='stopLoss')return tr('Kodon STOP zmienił się w kodon aminokwasu. Rybosom czyta dalej, więc białko jest dłuższe niż powinno.','The STOP codon has turned into a codon for an amino acid. The ribosome reads on, so the protein is longer than it should be.');
+  if(x==='startLoss')return tr('Zniszczony został kodon START (AUG). Translacja nie zacznie się w tym miejscu – białko nie powstanie albo powstanie od innego, dalszego kodonu AUG.','The START codon (AUG) has been destroyed. Translation cannot begin here – the protein is not made, or it starts from a different AUG further on.');
+  if(x==='frameshift')return tr(`Zmiana dotyczy ${c.n} ${c.n===1?'nukleotydu':'nukleotydów'} – to nie jest wielokrotność 3, więc od miejsca mutacji zmienia się podział mRNA na kodony – wszystkie kolejne kodony są inne. Powstaje zupełnie inne białko, a często szybko pojawia się przypadkowy kodon STOP.`,`The change involves ${c.n} nucleotide${c.n===1?'':'s'} – not a multiple of 3, so from the mutation onwards the mRNA is split into codons differently – every codon after it changes. A completely different protein is made, and a random STOP codon often appears soon.`);
+  if(x==='inframe')return tr(`${c.n} nukleotydy to pełny kodon (wielokrotność 3), więc ramka odczytu zostaje zachowana. W białku ${c.B&&protOf(c.B).length>protOf(c.A).length?'przybywa':'brakuje'} aminokwasu, a dalsza część się nie zmienia – tak jak w najczęstszej mutacji powodującej mukowiscydozę (ΔF508).`,`${c.n} nucleotides make a whole codon (a multiple of 3), so the reading frame is kept. The protein ${c.B&&protOf(c.B).length>protOf(c.A).length?'gains':'loses'} an amino acid, while the rest stays the same – as in the most common mutation causing cystic fibrosis (ΔF508).`);
+  if(x==='outside')return tr('Zmiana leży przed kodonem START albo za kodonem STOP – poza odcinkiem, który jest tłumaczony na białko. Sekwencja aminokwasów się nie zmienia.','The change lies before the START codon or after the STOP codon – outside the part that is translated into protein. The amino-acid sequence does not change.');
+  if(x==='startChange')return tr('Mutacja zmieniła położenie pierwszego kodonu AUG – translacja zaczyna się w innym miejscu, więc białko jest inne.','The mutation has moved the first AUG codon – translation starts somewhere else, so the protein is different.');
+  return tr('W prawidłowej sekwencji nie ma kodonu START (AUG), więc białko nie powstaje. Należy wylosować lub wpisać inną sekwencję.','The original sequence has no START codon (AUG), so no protein is made. Pick or type a different sequence.');
+}
+// mutacja określonego rodzaju (do quizu i kart)
+function genMut(r,cat){
+  for(let k=0;k<400;k++){const s=rndSeq(r,4+Math.floor(r()*2),0,0),an=analyse(s),lo=3,hi=an.end-3;
+    let type=cat==='sub'||cat==='silent'||cat==='missense'||cat==='nonsense'?'sub':cat==='ins'?'ins':cat==='del'?'del':(r()<.5?'ins':'del');
+    const pos=lo+Math.floor(r()*(hi-lo)),m={type,pos};
+    if(type==='sub'){m.base=pick([...'ATCG'].filter(b=>b!==s[pos]),1,r)[0];}else if(type==='ins')m.ins=rb(r);else m.del=1;
+    const c=classify(s,m);
+    if(['silent','missense','nonsense'].includes(cat)?c.c===cat:cat==='frameshift'?c.c==='frameshift':!['startLoss','stopLoss','outside','startChange'].includes(c.c))return{s,m,c};}
+  return null;
+}
+
+// ================= rysunki: wspólne =================
+const SW=840,SH=460;
+const BC={A:'#ffa8a8',T:'#ffe066',C:'#74c0fc',G:'#8ce99a',U:'#d0bfff'};
+const BSt={A:'#c92a2a',T:'#e67700',C:'#1864ab',G:'#2b8a3e',U:'#6741d9'};
+const COLS={old:'#5c7cfa',nw:'#f76707',pr:'#cc5de8',dna:'#5c7cfa',rna:'#ae3ec9'};
+const op_=o=>o==null||o>=1?'':` opacity="${f1(Math.max(0,o))}"`;
+const TX=(x,y,s,o={})=>`<text x="${f1(x)}" y="${f1(y)}"${o.a?` text-anchor="${o.a}"`:''} font-size="${o.fs||14}"${o.b?' font-weight="700"':''} class="${o.mu?'mu':'tx'}${o.h?' halo':''}" fill="${o.mu?'#56645c':'#1c2621'}"${o.h?' stroke="#f7fbf8" stroke-width="4" paint-order="stroke"':''}${op_(o.op)}>${esc(s)}</text>`;
+function bRect(x,y,w,h,b,o={}){if(o.op!=null&&o.op<=.01)return '';const ow=op_(o.op);
+  return `<g${ow}><rect x="${f1(x)}" y="${f1(y)}" width="${w}" height="${h}" rx="4" fill="${BC[b]}" stroke="${o.st||BSt[b]}" stroke-width="${o.sw||1.4}"/><text x="${f1(x+w/2)}" y="${f1(y+h/2+5)}" text-anchor="middle" font-size="${o.fs||14}" font-weight="700" fill="#111">${b}</text></g>`;}
+function pill(x,y,rx,ry,fill,stroke,label,o={}){if(o.op!=null&&o.op<=.01)return '';
+  return `<g${op_(o.op)}><ellipse cx="${f1(x)}" cy="${f1(y)}" rx="${rx}" ry="${ry}" fill="${fill}" fill-opacity="${o.fo??.85}" stroke="${stroke}" stroke-width="2"/>${label?`<text x="${f1(x)}" y="${f1(y+4)}" text-anchor="middle" font-size="${o.fs||12}" font-weight="700" fill="#111">${esc(label)}</text>`:''}</g>`;}
+function svgWrap(inner,o={}){
+  const W=o.W||SW,H=o.H||SH,ff=o.exp?` font-family="Atkinson Hyperlegible, Arial, Helvetica, sans-serif"`:'';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" class="dz${o.wide===false?'':' wide'}" role="img" aria-label="${esc(o.aria||'')}"${ff}>${o.exp?`<rect width="${W}" height="${H}" fill="#ffffff"/>`:''}${o.title?`<text x="16" y="26" font-size="18" font-weight="700" fill="#1c2621">${esc(o.title)}</text>`:''}${inner}</svg>`;
+}
+
+// ================= 1. budowa DNA =================
+const ST_TOP='ATGCAG',isPur=b=>b==='A'||b==='G';
+const PARTS={
+ nuc:{n:['Nukleotyd','Nucleotide'],B:['Podstawowa „cegiełka” DNA. Każdy nukleotyd składa się z trzech części: reszty fosforanowej, cukru (deoksyrybozy) i zasady azotowej. DNA to bardzo długi łańcuch połączonych nukleotydów.','The basic building block of DNA. Each nucleotide has three parts: a phosphate group, a sugar (deoxyribose) and a nitrogenous base. DNA is a very long chain of linked nucleotides.'],
+  A:['Sąsiednie nukleotydy w nici łączą się wiązaniami fosfodiestrowymi: reszta fosforanowa łączy węgiel 5′ jednej deoksyrybozy z węglem 3′ następnej. DNA to polinukleotyd.','Neighbouring nucleotides in a strand are joined by phosphodiester bonds: the phosphate links carbon 5′ of one deoxyribose to carbon 3′ of the next. DNA is a polynucleotide.']},
+ P:{n:['Reszta fosforanowa','Phosphate group'],B:['Reszta kwasu fosforowego. Łączy cukry sąsiednich nukleotydów. Fosforany i cukry na przemian tworzą szkielet nici – „boki drabiny”.','The remains of phosphoric acid. It links the sugars of neighbouring nucleotides. Alternating phosphates and sugars form the backbone of each strand – the “sides of the ladder”.'],
+  A:['Reszty fosforanowe mają ładunek ujemny, dlatego cała cząsteczka DNA jest naładowana ujemnie (wykorzystuje się to w elektroforezie).','The phosphate groups carry a negative charge, so the whole DNA molecule is negatively charged (this is used in electrophoresis).']},
+ S:{n:['Deoksyryboza','Deoxyribose'],B:['Cukier pięciowęglowy (pentoza). Do niego przyłączona jest zasada azotowa i reszta fosforanowa. W RNA zamiast deoksyrybozy występuje ryboza.','A five-carbon sugar (a pentose). The base and the phosphate are attached to it. In RNA, ribose is found instead of deoxyribose.'],
+  A:['Atomy węgla cukru numeruje się od 1′ do 5′. Zasada jest przyłączona do węgla 1′, reszta fosforanowa do węgla 5′, a grupa –OH przy węglu 3′ wiąże następny nukleotyd. Deoksyryboza ma przy węglu 2′ atom H zamiast grupy –OH (stąd „deoksy-”).','The sugar carbons are numbered 1′ to 5′. The base is attached to carbon 1′, the phosphate to carbon 5′, and the –OH on carbon 3′ links the next nucleotide. Deoxyribose has an H instead of an –OH on carbon 2′ (hence “deoxy-”).']},
+ A:{n:['Adenina (A)','Adenine (A)'],B:['Jedna z czterech zasad azotowych DNA. W DNA zawsze łączy się z tyminą (T) – dwoma wiązaniami wodorowymi.','One of the four bases of DNA. In DNA it always pairs with thymine (T) – through two hydrogen bonds.'],A:['Adenina to zasada purynowa (dwa pierścienie). W RNA łączy się z uracylem (U).','Adenine is a purine (two rings). In RNA it pairs with uracil (U).']},
+ T:{n:['Tymina (T)','Thymine (T)'],B:['Zasada azotowa występująca tylko w DNA. Łączy się z adeniną (A). W RNA jej miejsce zajmuje uracyl (U).','A base found only in DNA. It pairs with adenine (A). In RNA its place is taken by uracil (U).'],A:['Tymina to zasada pirymidynowa (jeden pierścień). Para puryna–pirymidyna ma zawsze tę samą długość, więc helisa ma stałą szerokość (ok. 2 nm).','Thymine is a pyrimidine (one ring). A purine–pyrimidine pair always has the same length, so the helix has a constant width (about 2 nm).']},
+ G:{n:['Guanina (G)','Guanine (G)'],B:['Zasada azotowa, która zawsze łączy się z cytozyną (C) – trzema wiązaniami wodorowymi.','A base that always pairs with cytosine (C) – through three hydrogen bonds.'],A:['Guanina to zasada purynowa (dwa pierścienie).','Guanine is a purine (two rings).']},
+ C:{n:['Cytozyna (C)','Cytosine (C)'],B:['Zasada azotowa, która zawsze łączy się z guaniną (G) – trzema wiązaniami wodorowymi.','A base that always pairs with guanine (G) – through three hydrogen bonds.'],A:['Cytozyna to zasada pirymidynowa (jeden pierścień).','Cytosine is a pyrimidine (one ring).']},
+ H2:{n:['Para A–T: 2 wiązania wodorowe','A–T pair: 2 hydrogen bonds'],B:['Adeninę i tyminę łączą dwa wiązania wodorowe. Wiązania wodorowe są słabe, dlatego nici dają się rozdzielić, np. podczas replikacji i transkrypcji.','Adenine and thymine are held together by two hydrogen bonds. Hydrogen bonds are weak, so the strands can be separated, e.g. during replication and transcription.'],A:['DNA bogate w pary A–T łatwiej się rozdziela – takie odcinki często występują w miejscach startu replikacji i w promotorach.','DNA rich in A–T pairs separates more easily – such stretches are common at replication origins and in promoters.']},
+ H3:{n:['Para C–G: 3 wiązania wodorowe','C–G pair: 3 hydrogen bonds'],B:['Cytozynę i guaninę łączą trzy wiązania wodorowe, więc para C–G jest trwalsza niż A–T. Zasada komplementarności: A łączy się tylko z T, a C tylko z G.','Cytosine and guanine are held together by three hydrogen bonds, so a C–G pair is stronger than A–T. The complementarity rule: A pairs only with T, and C only with G.'],A:['Im więcej par C–G, tym wyższej temperatury trzeba, by rozdzielić nici DNA (denaturacja).','The more C–G pairs, the higher the temperature needed to separate the DNA strands (denaturation).']},
+ bb:{n:['Szkielet cukrowo-fosforanowy','Sugar–phosphate backbone'],B:['Na przemian ułożone cząsteczki cukru i reszty fosforanowe tworzą „boki drabiny”. Zasady azotowe to „szczeble” skierowane do środka cząsteczki.','Alternating sugars and phosphates form the “sides of the ladder”. The bases are the “rungs”, pointing to the inside of the molecule.'],A:['Szkielet jest na zewnątrz helisy i kontaktuje się z wodą; hydrofobowe zasady są ukryte w środku.','The backbone is on the outside of the helix, in contact with water; the hydrophobic bases are hidden inside.']},
+ end:{n:['Końce 5′ i 3′ – nici antyrównoległe','5′ and 3′ ends – antiparallel strands'],B:['',''],A:['Każda nić ma kierunek. Na końcu 5′ jest wolna reszta fosforanowa (przy węglu 5′ deoksyrybozy), a na końcu 3′ – grupa –OH przy węglu 3′. Dwie nici biegną w przeciwnych kierunkach: jedna 5′→3′, druga 3′→5′ – są antyrównoległe. Ma to duże znaczenie podczas replikacji i transkrypcji.','Each strand has a direction. At the 5′ end there is a free phosphate (on carbon 5′ of deoxyribose); at the 3′ end there is an –OH on carbon 3′. The two strands run in opposite directions – one 5′→3′, the other 3′→5′: they are antiparallel. This matters a lot during replication and transcription.']},
+ helix:{n:['Podwójna helisa','The double helix'],B:['Dwie nici DNA są skręcone wokół wspólnej osi jak spiralne schody. Model podwójnej helisy przedstawili w 1953 r. James Watson i Francis Crick, korzystając m.in. ze zdjęć rentgenowskich Rosalind Franklin.','The two DNA strands are twisted around a common axis like a spiral staircase. The double-helix model was published in 1953 by James Watson and Francis Crick, using X-ray images by Rosalind Franklin, among others.'],
+  A:['Helisa jest prawoskrętna, ma średnicę ok. 2 nm, a jeden pełny skręt obejmuje ok. 10 par zasad (3,4 nm). U eukariontów DNA jest nawinięte na białka histonowe – tworzy chromatynę.','The helix is right-handed, about 2 nm wide, and one full turn covers about 10 base pairs (3.4 nm). In eukaryotes DNA is wound around histone proteins, forming chromatin.']},
+};
+function structSVG(o={}){
+  const A=S.lvl==='A',sel=o.sel||'',top=ST_TOP,bot=comp(top),cx=i=>300+i*92;
+  const hit=(k,inner,label)=>`<g data-part="${k}" tabindex="0" role="button" aria-label="${esc(label)}" class="${sel===k?'sel':''}">${inner}</g>`;
+  let g='';
+  // helisa
+  let rungs='',s1='',s2='';const hx=110,amp=52;
+  for(let y=34;y<=400;y+=4){const a=(y-34)/180*2*Math.PI,x1=hx+amp*Math.sin(a),x2=hx+amp*Math.sin(a+2.4);s1+=(y===34?'M':'L')+f1(x1)+' '+f1(y);s2+=(y===34?'M':'L')+f1(x2)+' '+f1(y);
+    if((y-34)%16===8){const b='ATGC'[((y-34)/16|0)%4],c=CMP[b],xm=(x1+x2)/2;rungs+=`<line x1="${f1(x1)}" y1="${y}" x2="${f1(xm)}" y2="${y}" stroke="${BSt[b]}" stroke-width="5"/><line x1="${f1(xm)}" y1="${y}" x2="${f1(x2)}" y2="${y}" stroke="${BSt[c]}" stroke-width="5"/>`;}}
+  g+=hit('helix',`<rect class="hit" x="40" y="24" width="140" height="390" rx="14" fill="transparent" stroke="transparent"/>${rungs}<path d="${s1}" fill="none" stroke="${COLS.old}" stroke-width="6" stroke-linecap="round"/><path d="${s2}" fill="none" stroke="#364fc7" stroke-width="6" stroke-linecap="round"/>`,T(PARTS.helix.n));
+  g+=`<path d="M180 175 L240 40 M180 260 L240 410" class="ln" stroke="#56645c" stroke-width="1.2" stroke-dasharray="4 4" fill="none"/><rect x="40" y="175" width="140" height="85" rx="8" fill="none" class="ln" stroke="#56645c" stroke-dasharray="4 4"/>`;
+  // szkielety
+  const tb=[],bb=[];for(let i=0;i<6;i++){tb.push([cx(i)-46,70],[cx(i),95]);bb.push([cx(i),325],[cx(i)+46,350]);}
+  const pth=a=>'M'+a.map(p=>p.join(' ')).join(' L');
+  g+=hit('bb',`<path class="hit" d="${pth(tb)}" fill="none" stroke="transparent" stroke-width="16"/><path d="${pth(tb)}" fill="none" stroke="#868e96" stroke-width="4"/><path class="hit" d="${pth(bb)}" fill="none" stroke="transparent" stroke-width="16"/><path d="${pth(bb)}" fill="none" stroke="#868e96" stroke-width="4"/>`,T(PARTS.bb.n));
+  const pent=(x,y)=>{let d='';for(let k=0;k<5;k++){const a=-Math.PI/2+k*2*Math.PI/5;d+=(k?'L':'M')+f1(x+17*Math.cos(a))+' '+f1(y+17*Math.sin(a));}return d+'Z';};
+  for(let i=0;i<6;i++){const x=cx(i);
+    for(const [b,sy,py,px,dir] of [[top[i],95,70,x-46,1],[bot[i],325,350,x+46,-1]]){
+      const pur=isPur(b),len=pur?100:70,y0=dir>0?sy+16:sy-16-len;
+      g+=hit('P',`<circle class="hit" cx="${px}" cy="${py}" r="15" fill="#ffd43b" stroke="#a87b00" stroke-width="2"/><text x="${px}" y="${py+5}" text-anchor="middle" font-size="14" font-weight="700" fill="#111">P</text>`,T(PARTS.P.n));
+      g+=hit('S',`<path class="hit" d="${pent(x,sy)}" fill="#ffc9de" stroke="#c2255c" stroke-width="2"/><text x="${x}" y="${sy+5}" text-anchor="middle" font-size="12" font-weight="700" fill="#111">D</text>`,T(PARTS.S.n));
+      g+=hit(b,`<rect class="hit" x="${x-20}" y="${y0}" width="40" height="${len}" rx="6" fill="${BC[b]}" stroke="${BSt[b]}" stroke-width="2"/><text x="${x}" y="${y0+len/2+7}" text-anchor="middle" font-size="20" font-weight="800" fill="#111">${b}</text>`,T(PARTS[b].n));}
+    const at=top[i]==='A'||top[i]==='T',y1=isPur(top[i])?211:181,nb=at?2:3,k=at?'H2':'H3';
+    let hl='';for(let j=0;j<nb;j++){const xx=x-12+j*(24/(nb-1));hl+=`<line x1="${f1(xx)}" y1="${y1+3}" x2="${f1(xx)}" y2="${y1+25}" stroke="#1c2621" class="ln" stroke-width="2.4" stroke-dasharray="3 3"/>`;}
+    g+=hit(k,`<rect class="hit" x="${x-22}" y="${y1}" width="44" height="28" rx="5" fill="transparent" stroke="transparent"/>${hl}`,T(PARTS[k].n));}
+  // nukleotyd
+  g+=hit('nuc',`<rect class="hit" x="${cx(0)-66}" y="50" width="94" height="${16+100+64}" rx="12" fill="none" stroke="${COLS.nw}" stroke-width="2.5" stroke-dasharray="7 5"/>`+TX(cx(0)-19,44,tr('nukleotyd','nucleotide'),{a:'middle',b:1,fs:13}),T(PARTS.nuc.n));
+  if(A){g+=hit('end',`<rect class="hit" x="210" y="56" width="32" height="28" rx="6" fill="transparent" stroke="transparent"/><rect class="hit" x="${cx(5)+22}" y="80" width="34" height="28" rx="6" fill="transparent" stroke="transparent"/><rect class="hit" x="236" y="312" width="34" height="28" rx="6" fill="transparent" stroke="transparent"/><rect class="hit" x="${cx(5)+61}" y="336" width="22" height="28" rx="6" fill="transparent" stroke="transparent"/>`
+    +TX(226,76,'5′',{a:'middle',b:1,fs:17})+TX(cx(5)+39,100,'3′',{a:'middle',b:1,fs:17})+TX(253,332,'3′',{a:'middle',b:1,fs:17})+TX(cx(5)+72,356,'5′',{a:'middle',b:1,fs:17})
+    +`<path d="M300 30 L700 30" stroke="#1c2621" class="ln" stroke-width="2" marker-end="url(#ar)"/><path d="M700 398 L300 398" stroke="#1c2621" class="ln" stroke-width="2" marker-end="url(#ar)"/>`,T(PARTS.end.n));
+    g=`<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#56645c"/></marker></defs>`+g+TX(500,24,tr('nić 5′→3′','strand 5′→3′'),{a:'middle',mu:1,fs:13})+TX(500,420,tr('nić 3′→5′ (biegnie w przeciwną stronę)','strand 3′→5′ (runs the other way)'),{a:'middle',mu:1,fs:13});}
+  return svgWrap(g,Object.assign({aria:tr('Model budowy DNA: helisa i powiększony fragment','DNA structure model: the helix and an enlarged section')},o));
+}
+const DNARNA=[
+ [['Cukier (pentoza)','Sugar (pentose)'],['deoksyryboza','deoxyribose'],['ryboza','ribose'],'B'],
+ [['Zasady azotowe','Bases'],['A, T, C, G','A, T, C, G'],['A, U, C, G (uracyl zamiast tyminy)','A, U, C, G (uracil instead of thymine)'],'B'],
+ [['Liczba nici','Number of strands'],['dwie – podwójna helisa','two – a double helix'],['zwykle jedna','usually one'],'B'],
+ [['Gdzie występuje w komórce eukariotycznej','Where it is found in a eukaryotic cell'],['głównie w jądrze komórkowym; także w mitochondriach i chloroplastach','mainly in the nucleus; also in mitochondria and chloroplasts'],['powstaje w jądrze, działa głównie w cytoplazmie (rybosomy)','made in the nucleus, works mainly in the cytoplasm (ribosomes)'],'B'],
+ [['Funkcja','Function'],['przechowuje informację genetyczną i przekazuje ją komórkom potomnym','stores genetic information and passes it on to daughter cells'],['uczestniczy w odczytywaniu informacji i syntezie białek','takes part in reading the information and making proteins'],'B'],
+ [['Wielkość cząsteczki','Size of the molecule'],['bardzo długa (miliony par nukleotydów)','very long (millions of base pairs)'],['znacznie krótsza (od kilkudziesięciu do kilku tysięcy nukleotydów)','much shorter (from tens to a few thousand nucleotides)'],'A'],
+ [['Trwałość','Stability'],['trwała, uszkodzenia są naprawiane','stable; damage is repaired'],['nietrwała – mRNA jest szybko rozkładane po użyciu','short-lived – mRNA is broken down soon after use'],'A'],
+];
+const RNAT=[
+ ['mRNA',['informacyjny (matrycowy) RNA','messenger RNA'],['Kopia informacji z genu. Przenosi ją z jądra do rybosomów, gdzie służy jako matryca do budowy białka.','A copy of the information in a gene. It carries it from the nucleus to the ribosomes, where it is the template for building a protein.'],['Zawiera kodony – trójki nukleotydów. U eukariontów powstaje najpierw jako pre-mRNA, z którego wycinane są introny.','It contains codons – triplets of nucleotides. In eukaryotes it is first made as pre-mRNA, from which introns are cut out.']],
+ ['tRNA',['transportujący RNA','transfer RNA'],['Przynosi aminokwasy do rybosomu. Ma antykodon, który pasuje do kodonu w mRNA.','Brings amino acids to the ribosome. It has an anticodon that matches a codon in the mRNA.'],['Mała cząsteczka (ok. 75–90 nukleotydów) w kształcie liścia koniczyny; aminokwas przyłącza się do jej końca 3′.','A small molecule (about 75–90 nucleotides) shaped like a cloverleaf; the amino acid attaches to its 3′ end.']],
+ ['rRNA',['rybosomowy RNA','ribosomal RNA'],['Razem z białkami buduje rybosomy. Najczęstszy rodzaj RNA w komórce.','Together with proteins it builds ribosomes. The most common kind of RNA in the cell.'],['To rRNA (a nie białko) katalizuje powstawanie wiązania peptydowego – rybosom jest rybozymem. rRNA powstaje w jąderku.','It is the rRNA (not a protein) that catalyses peptide-bond formation – the ribosome is a ribozyme. rRNA is made in the nucleolus.']],
+];
+function viewStruct(){
+  const A=S.lvl==='A',p=PARTS[S.part]||PARTS.nuc;
+  const ex=S.ex;if(!ex.s)ex.s=rndPlain(Math.random,10);
+  return `<div class="bar">${lvlSeg()}</div>
+   <div class="mgrid"><div class="stage" data-ctx="str"><div class="scroll">${structSVG({sel:S.part})}</div>
+    <div class="lg"><span><i style="background:#ffd43b"></i>${tr('P – reszta fosforanowa','P – phosphate')}</span><span><i style="background:#ffc9de"></i>${tr('D – deoksyryboza','D – deoxyribose')}</span>${'ATCG'.split('').map(b=>`<span><i class="n${b}"></i>${esc(T(PARTS[b].n))}</span>`).join('')}<span><i style="background:transparent;border:1.5px dashed #56645c"></i>${tr('wiązania wodorowe','hydrogen bonds')}</span></div>
+    <div class="ctl"><button class="btn" data-act="png">${tr('Pobierz rysunek (PNG)','Download diagram (PNG)')}</button><span class="status" role="status">${S.pngSt?esc(T(STATUS[S.pngSt])):''}</span></div></div>
+   <section class="card ocard" aria-live="polite"><span class="kicker">${tr('Kliknij element rysunku','Click part of the diagram')}</span><h2>${esc(T(p.n))}</h2>${T(p.B)?`<p>${esc(T(p.B))}</p>`:''}${A&&T(p.A)?`<p>${esc(T(p.A))}</p>`:''}
+    <p class="note">${tr('Elementy do kliknięcia: helisa, nukleotyd, P, D, zasady (A, T, C, G), wiązania wodorowe między zasadami, szkielet','Clickable: the helix, the nucleotide, P, D, the bases (A, T, C, G), the hydrogen bonds between bases, the backbone')}${A?tr(', końce 5′ i 3′.',', the 5′ and 3′ ends.'):'.'}</p></section></div>
+   <section class="card"><h2>${tr('Zasada komplementarności','The complementarity rule')}</h2>
+    <p>${tr('Zasady azotowe w dwóch niciach DNA łączą się zawsze w te same pary: <b>A – T</b> (2 wiązania wodorowe) i <b>C – G</b> (3 wiązania wodorowe). Dlatego znając jedną nić, można odtworzyć drugą – to podstawa kopiowania DNA.','The bases in the two DNA strands always form the same pairs: <b>A – T</b> (2 hydrogen bonds) and <b>C – G</b> (3 hydrogen bonds). So if one strand is known, the other can be worked out – this is the basis of copying DNA.')}</p>
+    <h3>${tr('Ćwiczenie: nić komplementarna','Exercise: the complementary strand')}</h3>
+    <p>${tr('Wpisz nić DNA komplementarną do podanej. Sprawdzanie jest natychmiastowe.','Type the DNA strand complementary to the one given. It is checked as you type.')}</p>
+    <div class="qseq"><div class="sq">${A?'5′ – ':''}${ex.s}${A?' – 3′':''}</div></div>
+    <label for="exIn" class="note">${tr('Nić komplementarna','Complementary strand')}${A?' (3′ → 5′)':''}</label>
+    <input id="exIn" class="tin" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="20" value="${esc(ex.a)}">
+    <div id="exFb">${exFb()}</div>
+    <div class="bar"><button class="btn" data-act="exNew">${tr('🎲 Nowa nić','🎲 New strand')}</button><button class="btn" data-act="exShow">${tr('Pokaż odpowiedź','Show the answer')}</button></div></section>
+   <section class="card"><h2>${tr('DNA a RNA','DNA vs RNA')}</h2><div class="tablewrap"><table class="cmp"><thead><tr><th>${tr('Cecha','Feature')}</th><th>DNA</th><th>RNA</th></tr></thead><tbody>${DNARNA.filter(r=>r[3]==='B'||A).map(r=>`<tr><th scope="row">${esc(T(r[0]))}</th><td>${esc(T(r[1]))}</td><td>${esc(T(r[2]))}</td></tr>`).join('')}</tbody></table></div>
+    <p class="note" style="margin-top:8px">${tr('DNA – kwas deoksyrybonukleinowy, RNA – kwas rybonukleinowy. Oba są kwasami nukleinowymi zbudowanymi z nukleotydów.','DNA – deoxyribonucleic acid, RNA – ribonucleic acid. Both are nucleic acids made of nucleotides.')}</p></section>
+   <div class="u3">${RNAT.map(r=>`<section class="card ucard"><h3>${r[0]}</h3><p class="note" style="margin-top:-4px">${esc(T(r[1]))}</p><p>${esc(T(r[2]))}</p>${A?`<p>${esc(T(r[3]))}</p>`:''}</section>`).join('')}</div>`;
+}
+function exFb(){const ex=S.ex,a=ex.a.toUpperCase().replace(/\s/g,''),c=comp(ex.s);if(!a)return '';
+  const cells=c.split('').map((x,i)=>i<a.length?`<span class="${a[i]===x?'ok':'no'}">${esc(a[i])}</span>`:'<span>·</span>').join('');
+  const bad=/[^ATCG]/.test(a),done=a===c,long=a.length>c.length;
+  return `<div class="cmpchk" aria-hidden="true">${cells}</div><p class="fb ${done?'ok':bad||[...a].some((x,i)=>x!==c[i])?'no':''}" role="status">${done?tr('✅ Dobrze! Nić jest komplementarna.','✅ Correct! The strand is complementary.'):bad?(/U/.test(a)?tr('W DNA nie ma uracylu (U) – zamiast niego jest tymina (T).','DNA has no uracil (U) – it has thymine (T) instead.'):tr('Można wpisywać tylko litery A, T, C, G.','Only the letters A, T, C, G are allowed.')):long?tr('Za dużo liter.','Too many letters.'):[...a].some((x,i)=>x!==c[i])?tr('Czerwone pola to błędy. Pamiętaj: A–T, C–G.','Red boxes are mistakes. Remember: A–T, C–G.'):a.length>c.length?tr('Za dużo liter.','Too many letters.'):tr(`Dobrze do tej pory (${a.length}/${c.length}).`,`Correct so far (${a.length}/${c.length}).`)}</p>`;}
+
+// ================= 2. replikacja =================
+const REP_TOP='ATGCCGTAACTGAT',RN=14,FE=15.4,RDX=52,RX0=82,rxp=i=>RX0+i*RDX;
+const REPK={B:['start','heli','tmpl','poly','done'],A:['start','heli','prim','elong','lig','done']};
+const REPN={start:['Cząsteczka DNA','The DNA molecule'],heli:['Rozplatanie – helikaza','Unwinding – helicase'],tmpl:['Nici jako matryce','Strands as templates'],poly:['Budowa nowych nici','Building new strands'],
+ prim:['Startery – prymaza','Primers – primase'],elong:['Nić wiodąca i opóźniona','Leading and lagging strands'],lig:['Łączenie fragmentów – ligaza','Joining fragments – ligase'],done:['Dwie cząsteczki DNA','Two DNA molecules']};
+const REPD={
+ start:{B:['Przed replikacją cząsteczka DNA składa się z dwóch komplementarnych nici połączonych wiązaniami wodorowymi między zasadami (A–T, C–G).','Before replication the DNA molecule is made of two complementary strands held together by hydrogen bonds between the bases (A–T, C–G).'],
+  A:['Replikacja zaczyna się w ściśle określonych miejscach – miejscach inicjacji replikacji (ori). Kolista cząsteczka DNA bakterii ma jedno takie miejsce, a każdy chromosom eukariontów – bardzo wiele.','Replication begins at specific sites – origins of replication (ori). The circular DNA of a bacterium has one such site, while each eukaryotic chromosome has very many.']},
+ heli:{B:['Enzym helikaza rozplata podwójną helisę i rozrywa wiązania wodorowe między zasadami. Nici rozchodzą się jak zamek błyskawiczny – powstają widełki replikacyjne.','The enzyme helicase unwinds the double helix and breaks the hydrogen bonds between the bases. The strands come apart like a zip, forming a replication fork.'],
+  A:['Białka SSB przyłączają się do pojedynczych nici i nie pozwalają im ponownie się połączyć, a topoizomeraza usuwa napięcia (nadmierne skręcenie) DNA przed widełkami.','SSB proteins bind to the single strands and stop them re-joining, while topoisomerase relieves the strain (overwinding) in the DNA ahead of the fork.']},
+ tmpl:{B:['Każda z rozdzielonych nici staje się matrycą, czyli wzorem. Wolne nukleotydy z jądra komórkowego dopasowują się do niej zgodnie z zasadą komplementarności: naprzeciw A staje T, naprzeciw C – G.','Each separated strand becomes a template – a pattern. Free nucleotides in the nucleus line up against it according to the complementarity rule: T goes opposite A, G goes opposite C.']},
+ poly:{B:['Enzym polimeraza DNA łączy dopasowane nukleotydy w nową nić. Nowe nici rosną wzdłuż obu matryc, aż cała cząsteczka zostanie skopiowana.','The enzyme DNA polymerase joins the matched nucleotides into a new strand. The new strands grow along both templates until the whole molecule is copied.']},
+ prim:{A:['Polimeraza DNA nie potrafi rozpocząć nowej nici od zera – może tylko dołączać nukleotydy do istniejącego końca 3′. Dlatego enzym prymaza buduje najpierw krótkie odcinki RNA – startery (primery).','DNA polymerase cannot start a new strand from scratch – it can only add nucleotides to an existing 3′ end. So the enzyme primase first builds short pieces of RNA – primers.']},
+ elong:{A:['Polimeraza DNA dobudowuje nukleotydy wyłącznie do końca 3′, więc nowa nić zawsze rośnie w kierunku 5′→3′. Na jednej matrycy oznacza to syntezę ciągłą, w stronę widełek – to nić wiodąca.','DNA polymerase adds nucleotides only to the 3′ end, so a new strand always grows in the 5′→3′ direction. On one template this means continuous synthesis towards the fork – the leading strand.',],
+  A2:['Na drugiej matrycy synteza biegnie w przeciwną stronę niż ruch widełek, więc nić powstaje odcinkami – fragmentami Okazakiego. Każdy fragment zaczyna się od własnego startera. To nić opóźniona.','On the other template synthesis runs away from the moving fork, so the strand is made in pieces – Okazaki fragments. Each fragment begins with its own primer. This is the lagging strand.']},
+ lig:{A:['Startery RNA są usuwane i zastępowane DNA, a ligaza DNA łączy fragmenty Okazakiego w ciągłą nić – zamyka przerwy w szkielecie cukrowo-fosforanowym. Polimeraza sprawdza też poprawność wstawionych nukleotydów i usuwa błędy.','The RNA primers are removed and replaced with DNA, and DNA ligase joins the Okazaki fragments into one strand – it seals the gaps in the sugar–phosphate backbone. The polymerase also proofreads the new nucleotides and removes mistakes.']},
+ done:{B:['Powstały dwie identyczne cząsteczki DNA – takie same jak cząsteczka wyjściowa. Każda ma jedną nić starą (macierzystą) i jedną nową. Taki sposób kopiowania to replikacja semikonserwatywna (półzachowawcza).','Two identical DNA molecules have been made – the same as the original one. Each has one old (parent) strand and one new strand. This way of copying is called semi-conservative replication.'],
+  A:['Semikonserwatywny charakter replikacji potwierdzili w 1958 r. M. Meselson i F. Stahl, hodując bakterie na pożywkach z ciężkim (¹⁵N) i lekkim (¹⁴N) azotem.','The semi-conservative nature of replication was confirmed in 1958 by M. Meselson and F. Stahl, who grew bacteria on media with heavy (¹⁵N) and light (¹⁴N) nitrogen.']},
+};
+const repKeys=()=>REPK[S.lvl];
+function repState(key,t,A){
+  const s={F:0,lead:0,lag:0,frags:null,lp:0,heli:0,prima:0,free:0,pol:0,lig:0,done:0};
+  const FR=[[0,3],[4,7],[8,11],[12,13]];
+  if(!A){if(key==='heli'){s.F=lerp(0,9,t);s.heli=1;}else if(key==='tmpl'){s.F=9;s.heli=1;s.free=t;}
+    else if(key==='poly'){s.F=lerp(9,FE,Math.min(1,t*1.15));s.heli=1-seg01(t,.85,1);s.free=1-t;s.lead=s.lag=lerp(0,RN,t);s.pol=1-seg01(t,.9,1);}
+    else if(key==='done'){s.F=FE;s.lead=s.lag=RN;s.done=t;}return s;}
+  const fr=(p,pr)=>FR.map((f,k)=>({a:f[0],b:f[1],p:p[k],pr:pr[k]}));
+  if(key==='heli'){s.F=lerp(0,6,t);s.heli=1;}
+  else if(key==='prim'){s.F=6;s.heli=1;s.lp=t;s.prima=1;s.frags=fr([0,0,0,0],[t,0,0,0]);}
+  else if(key==='elong'){s.F=6+(FE-6)*Math.min(1,t/.7);s.heli=1-seg01(t,.9,1);s.lp=1;s.lead=Math.min(RN,s.F-.4);s.pol=1-seg01(t,.92,1);
+    s.frags=fr([seg01(t,0,.3),seg01(t,.24,.5),seg01(t,.48,.75),seg01(t,.73,1)],[1,seg01(t,.2,.26),seg01(t,.45,.5),seg01(t,.7,.75)]);}
+  else if(key==='lig'||key==='done'){s.F=FE;s.lp=1;s.lead=RN;s.frags=fr([1,1,1,1],[1,1,1,1]);s.lig=key==='lig'?t:1;s.done=key==='done'?t:0;}
+  return s;
+}
+function repSVG(key,t,o={}){
+  const A=S.lvl==='A',st=repState(key,t,A),top=REP_TOP,bot=comp(top);
+  const Y={ct:190,cb:260,ot:95-12*st.done,ob:355+12*st.done},opn=i=>ease(clamp01((st.F-i+.3)/1.6));
+  const yt=i=>lerp(Y.ct,Y.ot,opn(i)),yb=i=>lerp(Y.cb,Y.ob,opn(i));
+  let g='';
+  // szkielety starych nici
+  const line=(f,col,w=5)=>{let d='';for(let x=-.5;x<=RN-.5+1e-6;x+=.25)d+=(x===-.5?'M':'L')+f1(RX0+x*RDX)+' '+f1(f(x));return `<path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`;};
+  const fx=(fn)=>x=>{const i=Math.floor(x),j=Math.ceil(x),k=x-i;return lerp(fn(Math.max(0,Math.min(RN-1,i))),fn(Math.max(0,Math.min(RN-1,j))),k);};
+  g+=line(fx(yt),COLS.old)+line(fx(yb),COLS.old);
+  for(let i=0;i<RN;i++){const x=rxp(i)-15,o_=opn(i);
+    g+=bRect(x,yt(i)+4,30,28,top[i])+bRect(x,yb(i)-32,30,28,bot[i]);
+    if(o_<.25)g+=`<line x1="${rxp(i)}" y1="${f1(yt(i)+32)}" x2="${rxp(i)}" y2="${f1(yb(i)-32)}" stroke="#1c2621" class="ln" stroke-width="2" stroke-dasharray="2 2" opacity="${f1(1-o_*4)}"/>`;}
+  // nowe nici: status nukleotydu
+  const lagSt=i=>{if(!A)return i<Math.floor(st.lag+1e-6)?'d':'';if(!st.frags)return '';for(const f of st.frags){if(i===f.b&&f.pr>0)return st.lig>.5?'d':'p';if(i>=f.a&&i<f.b&&i>=f.b-Math.round(f.p*(f.b-f.a)))return 'd';}return '';};
+  const leadSt=i=>{if(!A)return i<Math.floor(st.lead+1e-6)?'d':'';if(i===0&&st.lp>0)return st.lig>.5?'d':'p';return i>0&&i<=Math.floor(st.lead-1e-6)+(st.lead>=RN?0:0)&&i<st.lead?'d':'';};
+  const prOp=(i,lag)=>{if(!A)return 1;if(lag){for(const f of st.frags||[])if(i===f.b)return f.pr;return 1;}return i===0?st.lp:1;};
+  const nick=i=>A&&st.lig<.75&&[4,8,12].includes(i);
+  for(const lag of [true,false]){let bb='',nts='';
+    for(let i=0;i<RN;i++){const s_=lag?lagSt(i):leadSt(i);if(!s_)continue;const pr=s_==='p',op=prOp(i,lag);
+      const yN=lag?yt(i)+70:yb(i)-70,col=pr?COLS.pr:COLS.nw,x0=rxp(i)-RDX/2+(nick(i)&&lag?4:0),x1=rxp(i)+RDX/2-(lag&&nick(i+1)?4:0);
+      bb+=`<line x1="${f1(x0)}" y1="${f1(yN)}" x2="${f1(x1)}" y2="${f1(yN)}" stroke="${col}" stroke-width="5"${op_(op)}/>`;
+      const b=lag?CMP[top[i]]:CMP[bot[i]],bl=pr?toRNA(b):b;
+      nts+=bRect(rxp(i)-15,lag?yN-32:yN+4,30,28,bl,{op,st:pr?COLS.pr:undefined,sw:pr?2.5:1.4});}
+    g+=bb+nts;}
+  // wolne nukleotydy
+  if(st.free>0){const fb='TAGCCATG';for(let k=0;k<8;k++){const i=k%2?1+k:k+.5,x=rxp(Math.min(i,8))+((k*37)%20)-10,y=200+((k*53)%50);g+=`<g opacity="${f1(st.free)}"><line x1="${f1(x)}" y1="${f1(y)}" x2="${f1(x+14)}" y2="${f1(y)}" stroke="${COLS.nw}" stroke-width="4"/>${bRect(x+14,y-12,24,24,fb[k],{fs:12})}</g>`;}}
+  // enzymy
+  if(st.heli>0&&st.F>0&&st.F<RN+.5)g+=pill(rxp(st.F)-RDX*.4,225,40,20,'#ffd43b','#a87b00',tr('helikaza','helicase'),{op:st.heli,fs:12});
+  if(st.prima>0&&key==='prim'){g+=pill(rxp(3),205,38,18,'#e599f7','#9c36b5',tr('prymaza','primase'),{op:t});g+=pill(rxp(0)+20,245,38,18,'#e599f7','#9c36b5',tr('prymaza','primase'),{op:t});}
+  if(st.pol>0){const pl=tr('polimeraza DNA','DNA polymerase');
+    if(st.lead>0&&st.lead<RN)g+=pill(rxp(st.lead)-RDX*.3,yb(Math.floor(st.lead))-70+18,54,17,'#63e6be','#0ca678',pl,{op:st.pol,fs:11});
+    if(!A&&st.lag>0&&st.lag<RN)g+=pill(rxp(st.lag)-RDX*.3,yt(Math.floor(st.lag))+70-18,54,17,'#63e6be','#0ca678',pl,{op:st.pol,fs:11});
+    if(A&&st.frags){const f=st.frags.find(f=>f.pr>0&&f.p>0&&f.p<1);if(f){const i=f.b-Math.round(f.p*(f.b-f.a));g+=pill(rxp(i),yt(i)+70-18,54,17,'#63e6be','#0ca678',pl,{op:st.pol,fs:11});}}}
+  if(A&&key==='lig'){const lo=Math.sin(Math.PI*clamp01(t*1.05));for(const i of [4,8,12])g+=pill(rxp(i)-RDX/2,Y.ot+70+22,30,15,'#ffa94d','#d9480f',tr('ligaza','ligase'),{op:lo,fs:11});}
+  // podpisy
+  const lab=(x,y,s,c)=>TX(x,y,s,{fs:13,b:1,h:1})+(c?'':'');
+  if(st.F<1)g+=lab(rxp(0)-12,Y.ct-12,tr('nić DNA','DNA strand'))+lab(rxp(0)-12,Y.cb+22,tr('nić DNA (komplementarna)','DNA strand (complementary)'));
+  else{g+=lab(rxp(0)-12,Y.ot-12,tr('nić stara (matryca)','old strand (template)'))+lab(rxp(0)-12,Y.ob+24,tr('nić stara (matryca)','old strand (template)'));
+    if(lagSt(1)||lagSt(3))g+=lab(rxp(0)-12,Y.ot+70+24,A&&st.done<.01?tr('nić opóźniona (fragmenty Okazakiego)','lagging strand (Okazaki fragments)'):tr('nić nowa','new strand'));
+    if(leadSt(1)||leadSt(0))g+=lab(rxp(0)-12,Y.ob-70-12,A&&st.done<.01?tr('nić wiodąca (ciągła)','leading strand (continuous)'):tr('nić nowa','new strand'));}
+  if(key==='done'){g+=TX(420,30,tr('Cząsteczka 1: nić stara + nić nowa','Molecule 1: old strand + new strand'),{a:'middle',b:1,fs:15,op:t})+TX(420,448,tr('Cząsteczka 2: nić nowa + nić stara','Molecule 2: new strand + old strand'),{a:'middle',b:1,fs:15,op:t});}
+  if(A){const e=(x,y,s)=>TX(x,y,s,{a:'middle',b:1,fs:14});
+    g+=e(rxp(0)-34,yt(0)+5,'5′')+e(rxp(RN-1)+34,yt(RN-1)+5,'3′')+e(rxp(0)-34,yb(0)+5,'3′')+e(rxp(RN-1)+34,yb(RN-1)+5,'5′');
+    if(lagSt(RN-1)&&lagSt(0))g+=e(rxp(0)-34,yt(0)+75,'3′')+e(rxp(RN-1)+34,yt(RN-1)+75,'5′');
+    if(leadSt(RN-1)&&leadSt(0))g+=e(rxp(0)-34,yb(0)-65,'5′')+e(rxp(RN-1)+34,yb(RN-1)-65,'3′');}
+  return svgWrap(g,Object.assign({aria:tr('Animacja replikacji DNA: ','DNA replication animation: ')+T(REPN[key])},o));
+}
+function viewRep(){
+  const A=S.lvl==='A',ks=repKeys(),key=S.rep,i=ks.indexOf(key),d=REPD[key];
+  const ps=[d.B,d.A&&(A||!d.B)?d.A:null,A?d.A2:null].filter(Boolean);
+  return `<div class="bar">${lvlSeg()}</div>
+   <div class="steps" role="group" aria-label="${esc(tr('Etapy','Stages'))}">${ks.map((k,j)=>`<button data-step="${k}" ${k===key?'aria-current="step"':''}>${j+1}. ${esc(T(REPN[k]))}</button>`).join('')}</div>
+   <div class="mgrid"><div class="stage" data-ctx="anim"><div class="scroll" id="scene">${curScene()}</div>
+    ${animCtl(i,ks.length)}
+    <div class="lg"><span><i style="background:${COLS.old}"></i>${tr('nić stara (macierzysta)','old (parent) strand')}</span><span><i style="background:${COLS.nw}"></i>${tr('nić nowa','new strand')}</span>${A?`<span><i style="background:${COLS.pr}"></i>${tr('starter (RNA)','primer (RNA)')}</span>`:''}</div></div>
+   <section class="card ocard" aria-live="polite"><span class="kicker">${tr('Replikacja DNA','DNA replication')} · ${tr('etap','stage')} ${i+1}/${ks.length}</span><h2>${esc(T(REPN[key]))}</h2>${ps.map(p=>`<p>${esc(T(p))}</p>`).join('')}</section></div>
+   <div class="ugrid"><section class="card"><h3 style="margin-top:0">${tr('Kiedy zachodzi replikacja?','When does replication happen?')}</h3>
+    <p>${tr('DNA kopiuje się przed każdym podziałem komórki – w <b>fazie S interfazy</b>. Po replikacji każdy chromosom składa się z dwóch identycznych <b>chromatyd siostrzanych</b>. W czasie mitozy chromatydy rozchodzą się do dwóch komórek potomnych, więc obie dostają taką samą informację genetyczną.','DNA is copied before every cell division – in the <b>S phase of interphase</b>. After replication each chromosome is made of two identical <b>sister chromatids</b>. During mitosis the chromatids are separated into the two daughter cells, so both get the same genetic information.')}</p>
+    <p class="note">${tr('Więcej: narzędzie „Mitoza i mejoza”.','More: the “Mitosis and meiosis” tool.')}</p></section>
+   <section class="card"><h3 style="margin-top:0">${tr('Najważniejsze','Key points')}</h3><ul>
+    <li>${tr('Replikacja to kopiowanie DNA; jej wynikiem są <b>dwie identyczne cząsteczki</b>.','Replication is the copying of DNA; it produces <b>two identical molecules</b>.')}</li>
+    <li>${tr('Każda stara nić jest <b>matrycą</b> dla nowej – nukleotydy dobierane są komplementarnie.','Each old strand is a <b>template</b> for a new one – nucleotides are matched by complementarity.')}</li>
+    <li>${tr('Replikacja jest <b>semikonserwatywna</b>: każda nowa cząsteczka ma jedną nić starą i jedną nową.','Replication is <b>semi-conservative</b>: each new molecule has one old and one new strand.')}</li>
+    ${A?`<li>${tr('Enzymy: helikaza, topoizomeraza, prymaza, polimerazy DNA, ligaza. Synteza zawsze w kierunku <b>5′→3′</b>.','Enzymes: helicase, topoisomerase, primase, DNA polymerases, ligase. Synthesis always runs <b>5′→3′</b>.')}</li>
+    <li>${tr('Polimeraza ma zdolność korekty – myli się średnio raz na ok. 10⁹–10¹⁰ nukleotydów (po naprawie).','The polymerase can proofread – after repair it makes about one error per 10⁹–10¹⁰ nucleotides.')}</li>`:''}</ul></section></div>`;
+}
+const animCtl=(i,n)=>`<div class="ctl"><button class="btn" data-act="prev" ${i===0?'disabled':''}>← ${tr('Wstecz','Back')}</button><button class="btn primary" data-act="play">${S.playing?tr('⏸ Zatrzymaj','⏸ Pause'):tr('▶ Odtwórz','▶ Play')}</button><button class="btn" data-act="next" ${i===n-1?'disabled':''}>${tr('Dalej','Next')} →</button><button class="btn" data-act="replay">${tr('↻ Powtórz animację','↻ Replay')}</button><button class="btn" data-act="png">${tr('Pobierz rysunek (PNG)','Download diagram (PNG)')}</button><span class="status" role="status">${S.pngSt?esc(T(STATUS[S.pngSt])):''}</span></div>`;
+
+// ================= 3. transkrypcja i translacja =================
+const TX_COD='ATGGCTAAATGGTAA',TXN_=15,txx=i=>150+i*44;
+const TXK={B:['bind','elong','term'],A:['bind','elong','term','splice']};
+const TXN={bind:['Przyłączenie polimerazy RNA','RNA polymerase binds'],elong:['Budowa mRNA','Building the mRNA'],term:['Zakończenie transkrypcji','End of transcription'],splice:['Dojrzewanie mRNA','mRNA processing']};
+const TXD={
+ bind:{B:['Enzym polimeraza RNA przyłącza się do DNA na początku genu i rozplata niewielki fragment podwójnej helisy. U roślin, zwierząt i grzybów transkrypcja zachodzi w jądrze komórkowym.','The enzyme RNA polymerase binds to the DNA at the start of a gene and unwinds a short stretch of the double helix. In plants, animals and fungi transcription takes place in the nucleus.'],
+  A:['Polimeraza RNA rozpoznaje promotor – odcinek DNA przed genem, który wyznacza miejsce startu i kierunek transkrypcji, a także to, która nić będzie matrycą. U eukariontów pomagają jej czynniki transkrypcyjne.','RNA polymerase recognises the promoter – a stretch of DNA before the gene that sets the start site and the direction of transcription, and which strand will be the template. In eukaryotes it is helped by transcription factors.']},
+ elong:{B:['Polimeraza przesuwa się wzdłuż genu i buduje mRNA. Wzorem jest tylko jedna nić DNA – nić matrycowa. Nukleotydy RNA dobierane są komplementarnie, ale naprzeciw adeniny (A) staje uracyl (U), bo RNA nie zawiera tyminy. Dzięki temu mRNA ma taką samą sekwencję jak druga nić DNA – nić kodująca – tylko z U zamiast T.','The polymerase moves along the gene and builds mRNA. Only one DNA strand – the template strand – is used as the pattern. RNA nucleotides are matched by complementarity, but uracil (U) goes opposite adenine (A), because RNA has no thymine. As a result the mRNA has the same sequence as the other DNA strand – the coding strand – just with U instead of T.'],
+  A:['Polimeraza RNA odczytuje matrycę w kierunku 3′→5′, a mRNA rośnie w kierunku 5′→3′. W przeciwieństwie do polimerazy DNA nie potrzebuje startera. Za polimerazą helisa DNA ponownie się zamyka.','RNA polymerase reads the template 3′→5′, and the mRNA grows 5′→3′. Unlike DNA polymerase it needs no primer. Behind the polymerase the DNA helix closes up again.']},
+ term:{B:['Na końcu genu polimeraza odłącza się od DNA, a gotowa cząsteczka mRNA zostaje uwolniona. DNA wraca do postaci podwójnej helisy i nie zmienia się – z jednego genu można wykonać wiele kopii mRNA.','At the end of the gene the polymerase detaches from the DNA and the finished mRNA is released. The DNA returns to a double helix and is unchanged – one gene can be copied into many mRNA molecules.'],
+  A:['Koniec transkrypcji wyznacza sekwencja terminatorowa. U eukariontów powstaje najpierw pre-mRNA (transkrypt pierwotny), który musi jeszcze dojrzeć, zanim opuści jądro.','The end of transcription is marked by a terminator sequence. In eukaryotes the first product is pre-mRNA (the primary transcript), which must be processed before it leaves the nucleus.']},
+ splice:{A:['Geny eukariontów są nieciągłe: odcinki kodujące (eksony) przeplatają się z niekodującymi (intronami). Podczas splicingu introny są wycinane z pre-mRNA, a eksony łączone. Na końcu 5′ dobudowana zostaje czapeczka, a na końcu 3′ – ogon poli(A); chronią one mRNA przed rozkładem.','Eukaryotic genes are split: coding stretches (exons) alternate with non-coding ones (introns). During splicing the introns are cut out of the pre-mRNA and the exons are joined. A cap is added to the 5′ end and a poly(A) tail to the 3′ end; they protect the mRNA from being broken down.'],
+  A2:['Dojrzałe mRNA przechodzi przez pory w otoczce jądrowej do cytoplazmy, do rybosomów. Bakterie nie mają jądra ani (zwykle) intronów – u nich translacja może zaczynać się, zanim transkrypcja się skończy.','The mature mRNA passes through pores in the nuclear envelope into the cytoplasm, to the ribosomes. Bacteria have no nucleus and (usually) no introns – in them translation can start before transcription has finished.']},
+};
+function txSVG(key,t,o={}){
+  const A=S.lvl==='A',cod=TX_COD,tem=comp(cod),N=TXN_;let g='';
+  g+=TX(16,28,tr('JĄDRO KOMÓRKOWE','NUCLEUS'),{mu:1,b:1,fs:13});
+  if(key==='splice'){
+    const ex=[['E1',3,'#74c0fc'],['I1',3,'#ced4da'],['E2',4,'#74c0fc'],['I2',3,'#ced4da'],['E3',3,'#74c0fc']],w=34;
+    let x=90;const y1=120,y2=300,joined=[];let xj=210;
+    g+=TX(90,96,tr('pre-mRNA (transkrypt pierwotny)','pre-mRNA (primary transcript)'),{b:1,fs:14});
+    {let gx=90;for(const [nm,n] of ex){g+=`<rect x="${gx}" y="${y1}" width="${n*w}" height="36" rx="6" fill="none" stroke="#868e96" stroke-dasharray="4 4" opacity="${f1(seg01(t,.3,.6)*.8)}"/>`;gx+=n*w;}}
+    for(const [nm,n,col] of ex){const intr=nm[0]==='I',W=n*w;
+      if(intr){const op=1-seg01(t,.15,.6),dy=-40*seg01(t,0,.5);g+=`<g opacity="${f1(op)}"><path d="M${x} ${y1+18+dy} q${W/2} ${-60} ${W} 0" fill="none" stroke="#868e96" stroke-width="3"/><rect x="${x}" y="${y1+dy}" width="${W}" height="36" rx="6" fill="${col}" stroke="#495057" stroke-width="1.5"/><text x="${x+W/2}" y="${y1+dy+23}" text-anchor="middle" font-size="13" font-weight="700" fill="#111">${tr('intron','intron')}</text></g>`;}
+      else{const k=ease(seg01(t,.35,1)),X=lerp(x,xj,k),Y=lerp(y1,y2,k);g+=`<rect x="${f1(X)}" y="${f1(Y)}" width="${W}" height="36" rx="6" fill="${col}" stroke="#1864ab" stroke-width="1.5"/><text x="${f1(X+W/2)}" y="${f1(Y+23)}" text-anchor="middle" font-size="13" font-weight="700" fill="#111">${tr('ekson','exon')} ${nm[1]}</text>`;xj+=W;}
+      x+=W;}
+    const ok=seg01(t,.8,1);
+    g+=`<g opacity="${f1(ok)}"><circle cx="196" cy="${y2+18}" r="13" fill="#ffd43b" stroke="#a87b00" stroke-width="2"/><text x="196" y="${y2+60}" text-anchor="middle" font-size="12" class="tx" fill="#1c2621">${tr('czapeczka 5′','5′ cap')}</text><rect x="${xj}" y="${y2+6}" width="80" height="24" rx="6" fill="#fff3bf" stroke="#a87b00"/><text x="${xj+40}" y="${y2+23}" text-anchor="middle" font-size="12" font-weight="700" fill="#111">AAAA…</text><text x="${xj+40}" y="${y2+60}" text-anchor="middle" font-size="12" class="tx" fill="#1c2621">${tr('ogon poli(A)','poly(A) tail')}</text></g>`;
+    g+=TX(210,y2-14,tr('dojrzałe mRNA','mature mRNA'),{b:1,fs:14,op:ok});
+    g+=`<g opacity="${f1(ok)}"><path d="M640 380 L640 430" stroke="#6a46a6" stroke-width="4" stroke-dasharray="8 6"/><path d="M${xj+90} ${y2+18} Q 640 ${y2+18} 640 372" fill="none" stroke="#1c2621" class="ln" stroke-width="2" marker-end="url(#ar2)"/></g>`+TX(660,420,tr('por jądrowy → cytoplazma','nuclear pore → cytoplasm'),{fs:13,op:ok});
+    return svgWrap(`<defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#56645c"/></marker></defs>`+g,Object.assign({aria:tr('Splicing pre-mRNA','Splicing of pre-mRNA')},o));
+  }
+  let p,bub,pop,fall=0,pdx=0;
+  if(key==='bind'){p=1.5;bub=t;pop=t;pdx=-160*(1-ease(t));}
+  else if(key==='elong'){p=lerp(1.5,16.5,t);bub=1;pop=1;}
+  else{p=16.5;bub=1-t;pop=1-t;fall=t;pdx=120*t;}
+  const c=Math.max(0,Math.min(N,Math.round(p-1.5))),cen=p-1.5;
+  const op=i=>bub*ease(clamp01((3.4-Math.abs(i-cen+.5))/1.4));
+  const yc=i=>200-70*op(i),yt=i=>270+70*op(i);
+  // DNA poza genem
+  const stub=(x0,x1)=>`<line x1="${x0}" y1="200" x2="${x1}" y2="200" stroke="${COLS.dna}" stroke-width="5"/><line x1="${x0}" y1="270" x2="${x1}" y2="270" stroke="${COLS.dna}" stroke-width="5"/>${Array.from({length:Math.floor((x1-x0)/22)},(_,k)=>`<line x1="${x0+11+k*22}" y1="204" x2="${x0+11+k*22}" y2="266" stroke="#adb5bd" stroke-width="6"/>`).join('')}`;
+  g+=stub(30,txx(0)-22)+stub(txx(N-1)+22,830);
+  if(A){g+=`<rect x="30" y="182" width="${txx(0)-52}" height="106" rx="8" fill="#ffe066" fill-opacity=".35" stroke="#e67700" stroke-dasharray="5 4"/>`+TX((30+txx(0)-22)/2,244,tr('promotor','promoter'),{a:'middle',b:1,fs:13,h:1});}
+  g+=`<path d="M${txx(0)-20} 112 L${txx(0)-20} 104 L${txx(N-1)+20} 104 L${txx(N-1)+20} 112" fill="none" stroke="#1c2621" class="ln" stroke-width="2"/>`+TX((txx(0)+txx(N-1))/2,96,tr('gen','gene'),{a:'middle',b:1,fs:14});
+  const ln=f=>{let d='';for(let x=-.5;x<=N-.5+1e-6;x+=.25){const i=Math.floor(x),j=Math.ceil(x),k=x-i,y=lerp(f(Math.max(0,i)),f(Math.min(N-1,j)),k);d+=(x===-.5?'M':'L')+f1(txx(0)+x*44)+' '+f1(y);}return d;};
+  g+=`<path d="${ln(yc)}" fill="none" stroke="${COLS.dna}" stroke-width="5"/><path d="${ln(yt)}" fill="none" stroke="${COLS.dna}" stroke-width="5"/>`;
+  for(let i=0;i<N;i++){g+=bRect(txx(i)-15,yc(i)+4,30,28,cod[i])+bRect(txx(i)-15,yt(i)-32,30,28,tem[i]);if(op(i)<.2)g+=`<line x1="${txx(i)}" y1="${f1(yc(i)+32)}" x2="${txx(i)}" y2="${f1(yt(i)-32)}" stroke="#1c2621" class="ln" stroke-width="2" stroke-dasharray="2 2"/>`;}
+  // mRNA
+  let mb='',mn='';
+  for(let j=0;j<c;j++){const k=Math.max(fall,ease(clamp01((cen-2.5-j)/2))),y=lerp(270,416,k),x=txx(j);
+    mb+=`<line x1="${x-22}" y1="${f1(y)}" x2="${x+22}" y2="${f1(y)}" stroke="${COLS.rna}" stroke-width="5"/>`;mn+=bRect(x-15,k<.5?y+4:y-32,30,28,toRNA(cod[j]));}
+  g+=mb+mn;
+  if(c>0)g+=TX(txx(0)-28,412,'mRNA',{a:'end',b:1,fs:14});
+  if(pop>0){const X=txx(0)+(cen-.5)*44+pdx;g+=`<g opacity="${f1(pop)}"><ellipse cx="${f1(X)}" cy="240" rx="130" ry="118" fill="#63e6be" fill-opacity=".28" stroke="#0ca678" stroke-width="2.5"/></g>`+TX(X,374,tr('polimeraza RNA','RNA polymerase'),{a:'middle',b:1,fs:13,h:1,op:pop});}
+  const sl=(y,s)=>TX(26,y,s,{fs:12,b:1,h:1});
+  g+=sl(192,tr('nić kodująca','coding strand'))+sl(292,tr('nić matrycowa','template strand'));
+  if(A){const e=(x,y,s)=>TX(x,y,s,{a:'middle',b:1,fs:13});g+=e(txx(N-1)+30,yc(N-1)-6,'3′')+e(txx(N-1)+30,yt(N-1)+20,'5′');if(c>1)g+=e(txx(0)-30,436,'5′');}
+  return svgWrap(g,Object.assign({aria:tr('Animacja transkrypcji: ','Transcription animation: ')+T(TXN[key])},o));
+}
+// translacja
+const TL_M='GC'+toRNA(TX_COD)+'CA',TL_ST=2,TL_C=translateFrom(TL_M,TL_ST);
+const TLK=['init','e1','e2','e3','stop'];
+const tlName=k=>{if(k==='init')return tr('Inicjacja – kodon START','Initiation – START codon');if(k==='stop')return tr('Terminacja – kodon STOP','Termination – STOP codon');const n=+k[1],a=TL_C[n].a;return tr(`Elongacja: ${n+1}. aminokwas (${aaAb(a)})`,`Elongation: amino acid ${n+1} (${aaAb(a)})`);};
+const ANTI=c=>c.replace(/./g,x=>RCMP[x]);
+function tlDesc(k){const A=S.lvl==='A';
+  if(k==='init')return [tr('Translacja zachodzi w cytoplazmie, na rybosomach. Mała podjednostka rybosomu przyłącza się do mRNA i przesuwa się wzdłuż niego aż do kodonu START (AUG). Pasuje do niego tRNA z antykodonem UAC, niosące metioninę (Met). Następnie dołącza duża podjednostka.','Translation takes place in the cytoplasm, on ribosomes. The small ribosomal subunit binds to the mRNA and moves along it to the START codon (AUG). A tRNA with the anticodon UAC, carrying methionine (Met), matches it. Then the large subunit joins.'),
+    A?tr('Inicjatorowe tRNA wiąże się w miejscu P rybosomu. Z tego powodu prawie każde nowo powstałe białko zaczyna się od metioniny (często później usuwanej).','The initiator tRNA binds in the P site of the ribosome. That is why almost every newly made protein starts with methionine (often removed later).'):''];
+  if(k==='stop')return [tr('Rybosom dochodzi do kodonu STOP (UAA). Nie pasuje do niego żadne tRNA, więc synteza się kończy: gotowy łańcuch aminokwasów zostaje uwolniony, a rybosom rozpada się na podjednostki. Łańcuch zwija się i przyjmuje kształt potrzebny białku do działania.','The ribosome reaches the STOP codon (UAA). No tRNA matches it, so synthesis ends: the finished chain of amino acids is released and the ribosome splits into its subunits. The chain folds into the shape the protein needs in order to work.'),
+    A?tr('Do kodonu STOP w miejscu A przyłącza się białkowy czynnik uwalniający (terminacyjny). Kodony STOP: UAA, UAG, UGA. Jedno mRNA może być jednocześnie odczytywane przez wiele rybosomów (polisom).','A protein release (termination) factor binds to the STOP codon in the A site. The STOP codons are UAA, UAG and UGA. One mRNA can be read by many ribosomes at once (a polysome).'):''];
+  const n=+k[1],x=TL_C[n];
+  return [tr(`Do kolejnego kodonu (${x.c}) przyłącza się tRNA z pasującym antykodonem (${ANTI(x.c)}), niosące ${aaNm(x.a)} (${aaAb(x.a)}). Między aminokwasami powstaje wiązanie peptydowe – łańcuch wydłuża się o jeden aminokwas.`,`An tRNA with the matching anticodon (${ANTI(x.c)}), carrying ${aaNm(x.a)} (${aaAb(x.a)}), binds to the next codon (${x.c}). A peptide bond forms between the amino acids – the chain grows by one amino acid.`).replace('An tRNA','A tRNA'),
+    tr('Rybosom przesuwa się o jeden kodon (3 nukleotydy). Wolne tRNA odłącza się i może przyłączyć następną cząsteczkę swojego aminokwasu.','The ribosome moves along by one codon (3 nucleotides). The empty tRNA leaves and can pick up another molecule of its amino acid.'),
+    A?tr('W rybosomie są trzy miejsca: A (przyłącza tRNA z aminokwasem), P (trzyma tRNA z rosnącym łańcuchem) i E (stąd odchodzi wolne tRNA). Aminokwasy przyłącza do tRNA enzym – syntetaza aminoacylo-tRNA, zużywając ATP.','The ribosome has three sites: A (takes in the tRNA with its amino acid), P (holds the tRNA with the growing chain) and E (where the empty tRNA leaves). Amino acids are attached to tRNA by an enzyme – aminoacyl-tRNA synthetase – using ATP.'):''].filter(Boolean);
+}
+function tlSVG(key,t,o={}){
+  const A=S.lvl==='A',M=TL_M,nx=k=>150+k*30,ccx=c=>nx(TL_ST+3*c+1);let g='';
+  g+=TX(16,28,tr('CYTOPLAZMA','CYTOPLASM'),{mu:1,b:1,fs:13});
+  const tRNA=(c,dx,dy,op,chainUp)=>{if(op<=.01)return '';const x=ccx(c)+dx,y=dy,cd=TL_C[c].c,an=ANTI(cd);
+    let s=`<g opacity="${f1(op)}"><path d="M${f1(x-34)} ${f1(258+y)} L${f1(x-34)} ${f1(210+y)} Q${f1(x-34)} ${f1(186+y)} ${f1(x-10)} ${f1(186+y)} L${f1(x-6)} ${f1(168+y)} L${f1(x+6)} ${f1(168+y)} L${f1(x+10)} ${f1(186+y)} Q${f1(x+34)} ${f1(186+y)} ${f1(x+34)} ${f1(210+y)} L${f1(x+34)} ${f1(258+y)} Z" fill="#fcc2d7" stroke="#c2255c" stroke-width="2"/><text x="${f1(x)}" y="${f1(232+y)}" text-anchor="middle" font-size="12" font-weight="700" fill="#111">tRNA</text>`;
+    for(let m=0;m<3;m++)s+=bRect(x-43+m*30-1,262+y,28,28,an[m],{fs:13});
+    return s+'</g>';};
+  const aaC=(x,y,a,op=1)=>`<g${op_(op)}><circle cx="${f1(x)}" cy="${f1(y)}" r="18" fill="${{h:'#ffe08a',p:'#b2f2bb',a:'#ffc9c9',b:'#a5d8ff'}[AA[a][3]]}" stroke="#495057" stroke-width="1.8"/><text x="${f1(x)}" y="${f1(y+4)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#111">${aaAb(a)}</text></g>`;
+  const chainAt=(list,x,y,op=1)=>{let s='';for(let k=list.length-1;k>=0;k--){const j=list.length-1-k,X=x-28*j,Y=y-30*j;if(j)s+=`<line x1="${f1(X)}" y1="${f1(Y)}" x2="${f1(X+28)}" y2="${f1(Y+30)}" stroke="#495057" stroke-width="3"${op_(op)}/>`;}
+    for(let k=list.length-1;k>=0;k--){const j=list.length-1-k;s+=aaC(x-28*j,y-30*j,list[k],op);}return s;};
+  // stan
+  let r=0,rdx=0,lgOp=1,lgDy=0,smOp=1,smDy=0,smDx=0,trs=[],chain=[],cx_=0,cy_=150,cOp=1,rf=0,stopMk=0;
+  const aas=TL_C.map(x=>x.a);
+  if(key==='init'){const a=ease(seg01(t,0,.5)),b=ease(seg01(t,.5,1));smOp=a;smDx=-160*(1-a);lgOp=b;lgDy=-90*(1-b);trs=[[0,0,-130*(1-a),a]];chain=[aas[0]];cx_=ccx(0);cy_=150-130*(1-a);cOp=a;}
+  else if(key==='stop'){r=3;const a=ease(seg01(t,0,.35)),b=ease(seg01(t,.35,.7)),c=ease(seg01(t,.7,1));rf=a;
+    trs=[[3,-40*c,-120*c,1-c]];chain=aas.slice(0,4);cx_=ccx(3)+150*b;cy_=150-22*b;lgDy=-70*c;smDy=60*c;lgOp=smOp=1-.75*c;stopMk=1;}
+  else{const n=+key[1],a=ease(seg01(t,0,.4)),b=ease(seg01(t,.4,.7)),c=ease(seg01(t,.7,1));r=n-1;rdx=90*c;
+    trs=[[n-1,-50*c,-110*c,1-c],[n,0,-140*(1-a),a]];
+    chain=aas.slice(0,n);cx_=lerp(ccx(n-1),ccx(n)-28,b);cy_=lerp(150,120,b);trs.push(['aa',n,a,-140*(1-a),b]);}
+  const X=(ccx(r)+ccx(r+1))/2+rdx;
+  // duża podjednostka
+  g+=`<g opacity="${f1(lgOp)}"><path d="M${f1(X-150)} ${f1(296+lgDy)} L${f1(X-150)} ${f1(200+lgDy)} Q${f1(X-150)} ${f1(150+lgDy)} ${f1(X-90)} ${f1(150+lgDy)} L${f1(X+90)} ${f1(150+lgDy)} Q${f1(X+140)} ${f1(150+lgDy)} ${f1(X+140)} ${f1(200+lgDy)} L${f1(X+140)} ${f1(296+lgDy)} Z" fill="#ffd8a8" fill-opacity=".55" stroke="#e8590c" stroke-width="2.5"/></g>`;
+  // mRNA
+  g+=`<line x1="${nx(0)-15}" y1="330" x2="${nx(M.length-1)+15}" y2="330" stroke="${COLS.rna}" stroke-width="5"/>`;
+  for(let c=0;c<TL_C.length;c++)g+=`<rect x="${nx(TL_ST+3*c)-15}" y="292" width="90" height="42" rx="6" fill="${c%2?'#e9ecef':'#f8f9fa'}" opacity=".6"/>`;
+  for(let k=0;k<M.length;k++)g+=bRect(nx(k)-13,298,26,28,M[k],{fs:13});
+  g+=TX(nx(0)-22,335,'mRNA 5′',{a:'end',b:1,fs:13})+TX(nx(M.length-1)+22,335,'3′',{b:1,fs:13});
+  TL_C.forEach((x,c)=>{g+=TX(ccx(c),352,x.a==='*'?'STOP':c===0?'START':'',{a:'middle',b:1,fs:11});});
+  // tRNA
+  for(const q of trs){if(q[0]==='aa')continue;g+=tRNA(q[0],q[1],q[2],q[3]);}
+  // łańcuch
+  const pend=trs.find(q=>q[0]==='aa');
+  if(pend&&pend[4]>.9)g+=`<line x1="${f1(ccx(pend[1]))}" y1="150" x2="${f1(cx_)}" y2="${f1(cy_)}" stroke="#495057" stroke-width="3"/>`;
+  if(chain.length)g+=chainAt(chain,cx_,cy_,cOp);
+  if(pend)g+=aaC(ccx(pend[1]),150+pend[3],aas[pend[1]],pend[2]);
+  // mała podjednostka
+  g+=`<g opacity="${f1(smOp)}"><rect x="${f1(X-130+smDx)}" y="${f1(338+smDy)}" width="260" height="58" rx="26" fill="#ffd8a8" fill-opacity=".75" stroke="#e8590c" stroke-width="2.5"/></g>`;
+  if(lgOp>.5&&key!=='stop')g+=TX(X+smDx,416+smDy,tr('rybosom','ribosome'),{a:'middle',b:1,fs:13,h:1});
+  if(A&&smOp>.6&&key!=='stop'&&!(key==='init'&&t<.6)){for(const [l,dc] of [['E',-1],['P',0],['A',1]]){const xx=ccx(r)+dc*90+rdx;if(Math.abs(xx-X)<150)g+=TX(xx,384+smDy,l,{a:'middle',b:1,fs:15});}}
+  if(rf>0){const x=ccx(4),y=-120*(1-rf);if(A)g+=`<g opacity="${f1(rf)}"><rect x="${x-32}" y="${f1(180+y)}" width="64" height="108" rx="14" fill="#ced4da" stroke="#495057" stroke-width="2"/><text x="${x}" y="${f1(230+y)}" text-anchor="middle" font-size="11" font-weight="700" fill="#111">${tr('czynnik','release')}</text><text x="${x}" y="${f1(245+y)}" text-anchor="middle" font-size="11" font-weight="700" fill="#111">${tr('uwalniający','factor')}</text></g>`;
+    else g+=`<g opacity="${f1(rf)}"><polygon points="${[0,1,2,3,4,5,6,7].map(k=>{const a=Math.PI/8+k*Math.PI/4;return f1(x+30*Math.cos(a))+','+f1(230+30*Math.sin(a));}).join(' ')}" fill="#e03131" stroke="#fff" stroke-width="2"/><text x="${x}" y="235" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">STOP</text></g>`;}
+  if(key==='stop'&&t>.6)g+=TX(cx_-20,cy_-112,tr('białko (łańcuch polipeptydowy)','protein (polypeptide chain)'),{a:'middle',b:1,fs:13,h:1,op:seg01(t,.6,.8)});
+  if(key!=='stop'&&key!=='init'&&t>.4&&t<.75)g+=TX(ccx(+key[1])+24,118,tr('wiązanie peptydowe','peptide bond'),{b:1,fs:12,h:1,op:Math.sin(Math.PI*seg01(t,.4,.75))});
+  return svgWrap(g,Object.assign({aria:tr('Animacja translacji: ','Translation animation: ')+tlName(key)},o));
+}
+function dogmaSVG(o={}){
+  const A=S.lvl==='A';let g='';
+  g+=`<rect x="8" y="34" width="430" height="150" rx="40" fill="#e5dbff" fill-opacity=".45" stroke="#7048e8" stroke-width="2" stroke-dasharray="7 5"/>`+TX(26,58,tr('jądro komórkowe','nucleus'),{b:1,fs:13,mu:1})+TX(820,58,tr('cytoplazma','cytoplasm'),{a:'end',b:1,fs:13,mu:1});
+  const box=(x,y,w,txt,sub,fill,st)=>`<rect x="${x}" y="${y}" width="${w}" height="56" rx="12" fill="${fill}" stroke="${st}" stroke-width="2"/><text x="${x+w/2}" y="${y+26}" text-anchor="middle" font-size="18" font-weight="800" fill="#111">${esc(txt)}</text><text x="${x+w/2}" y="${y+45}" text-anchor="middle" font-size="11.5" fill="#333">${esc(sub)}</text>`;
+  const arr=(x1,x2,y,lab,sub)=>`<line x1="${x1}" y1="${y}" x2="${x2-4}" y2="${y}" stroke="#1c2621" class="ln" stroke-width="3" marker-end="url(#ar3)"/>`+TX((x1+x2)/2,y-12,lab,{a:'middle',b:1,fs:13})+(sub?TX((x1+x2)/2,y+22,sub,{a:'middle',fs:11.5,mu:1}):'');
+  g+=box(40,90,130,'DNA',tr('gen','gene'),'#a5d8ff','#1864ab')+box(380,90,130,'mRNA',tr('kopia genu','copy of the gene'),'#d0bfff','#6741d9')+box(680,90,140,tr('BIAŁKO','PROTEIN'),tr('łańcuch aminokwasów','chain of amino acids'),'#ffe08a','#e67700');
+  g+=arr(172,378,118,tr('transkrypcja','transcription'),tr('polimeraza RNA','RNA polymerase'))+arr(512,678,118,tr('translacja','translation'),tr('rybosom, tRNA','ribosome, tRNA'));
+  g+=`<path d="M70 90 C 40 40, 140 40, 115 86" fill="none" stroke="#1c2621" class="ln" stroke-width="2.5" marker-end="url(#ar3)"/>`+TX(150,36,tr('replikacja','replication'),{b:1,fs:13});
+  if(A)g+=`<path d="M420 148 C 360 190, 200 190, 130 150" fill="none" stroke="#c92a2a" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#ar4)"/>`+TX(275,200,tr('odwrotna transkrypcja (retrowirusy, np. HIV)','reverse transcription (retroviruses, e.g. HIV)'),{a:'middle',fs:12,b:1});
+  return svgWrap(`<defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#56645c"/></marker><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#c92a2a"/></marker></defs>`+g,Object.assign({W:840,H:A?212:192,aria:tr('Schemat: DNA → mRNA → białko','Diagram: DNA → mRNA → protein')},o));
+}
+const ttKeys=()=>S.tt.mode==='tx'?TXK[S.lvl]:TLK;
+function viewTT(){
+  const A=S.lvl==='A',ks=ttKeys(),key=S.tt[S.tt.mode],i=ks.indexOf(key),tx=S.tt.mode==='tx';
+  const nm=k=>tx?T(TXN[k]):tlName(k);
+  const ps=tx?[TXD[key].B,(A||!TXD[key].B)?TXD[key].A:null,A?TXD[key].A2:null].filter(Boolean).map(T):tlDesc(key);
+  return `<div class="bar">${lvlSeg()}</div>
+   <section class="card"><h2>${tr('Od genu do białka','From gene to protein')}</h2><div class="scroll">${dogmaSVG()}</div>
+    <p class="note">${tr('Informacja genetyczna płynie od DNA przez mRNA do białka. Gen to odcinek DNA, który zawiera informację o budowie jednego białka (albo cząsteczki RNA). Kolejność nukleotydów w genie wyznacza kolejność aminokwasów w białku.','Genetic information flows from DNA through mRNA to protein. A gene is a stretch of DNA that holds the information for building one protein (or an RNA molecule). The order of nucleotides in the gene sets the order of amino acids in the protein.')}${A?' '+tr('To tzw. centralny dogmat biologii molekularnej.','This is the so-called central dogma of molecular biology.'):''}</p></section>
+   <div class="bar"><div class="seg" role="group" aria-label="${esc(tr('Proces','Process'))}"><button data-ttm="tx" aria-pressed="${tx}">1. ${tr('Transkrypcja','Transcription')}</button><button data-ttm="tl" aria-pressed="${!tx}">2. ${tr('Translacja','Translation')}</button></div></div>
+   <div class="steps" role="group" aria-label="${esc(tr('Etapy','Stages'))}">${ks.map((k,j)=>`<button data-step="${k}" ${k===key?'aria-current="step"':''}>${j+1}. ${esc(nm(k))}</button>`).join('')}</div>
+   <div class="mgrid"><div class="stage" data-ctx="anim"><div class="scroll" id="scene">${curScene()}</div>${animCtl(i,ks.length)}
+    <div class="lg">${tx?`<span><i style="background:${COLS.dna}"></i>DNA</span><span><i style="background:${COLS.rna}"></i>mRNA</span>`:`<span><i style="background:#fcc2d7"></i>tRNA</span><span><i style="background:#ffd8a8"></i>${tr('rybosom','ribosome')}</span><span><i style="background:${COLS.rna}"></i>mRNA</span>`}</div></div>
+   <section class="card ocard" aria-live="polite"><span class="kicker">${tx?tr('Transkrypcja','Transcription'):tr('Translacja','Translation')} · ${tr('etap','stage')} ${i+1}/${ks.length}</span><h2>${esc(nm(key))}</h2>${ps.map(p=>`<p>${esc(p)}</p>`).join('')}</section></div>
+   <div class="ugrid"><section class="card"><h3 style="margin-top:0">${tr('Kodon i antykodon','Codon and anticodon')}</h3>
+    <p>${tr('<b>Kodon</b> to trzy kolejne nukleotydy mRNA, które kodują jeden aminokwas (albo oznaczają STOP). <b>Antykodon</b> to trzy nukleotydy tRNA komplementarne do kodonu. Przykład: kodon <b>GCU</b> – antykodon <b>CGA</b> – aminokwas alanina (Ala).','A <b>codon</b> is three consecutive mRNA nucleotides that code for one amino acid (or mean STOP). An <b>anticodon</b> is three tRNA nucleotides complementary to the codon. Example: codon <b>GCU</b> – anticodon <b>CGA</b> – the amino acid alanine (Ala).')}</p>
+    ${A?`<p>${tr('Antykodon zapisuje się zwykle w kierunku 3′→5′, tak by stał naprzeciw kodonu zapisanego 5′→3′.','The anticodon is usually written 3′→5′, so that it lines up with the codon written 5′→3′.')}</p>`:''}</section>
+   <section class="card"><h3 style="margin-top:0">${tr('Transkrypcja a translacja','Transcription vs translation')}</h3><div class="tablewrap"><table><thead><tr><th></th><th>${tr('Transkrypcja','Transcription')}</th><th>${tr('Translacja','Translation')}</th></tr></thead><tbody>
+    <tr><th scope="row">${tr('Gdzie?','Where?')}</th><td>${tr('jądro komórkowe','nucleus')}</td><td>${tr('cytoplazma (rybosomy)','cytoplasm (ribosomes)')}</td></tr>
+    <tr><th scope="row">${tr('Matryca','Template')}</th><td>${tr('nić matrycowa DNA','DNA template strand')}</td><td>mRNA</td></tr>
+    <tr><th scope="row">${tr('Produkt','Product')}</th><td>mRNA${A?tr(' (też tRNA, rRNA)',' (also tRNA, rRNA)'):''}</td><td>${tr('białko (łańcuch polipeptydowy)','protein (polypeptide chain)')}</td></tr>
+    <tr><th scope="row">${tr('Główne „narzędzie”','Main “machine”')}</th><td>${tr('polimeraza RNA','RNA polymerase')}</td><td>${tr('rybosom i tRNA','ribosome and tRNA')}</td></tr></tbody></table></div></section></div>`;
+}
+
+// ================= siatka sekwencji =================
+function sgrid(n,rows){
+  return `<div class="sqbox"><div class="sgrid" style="grid-template-columns:max-content repeat(${n},24px)">${rows.map((r,ri)=>`<div class="rl" style="grid-row:${ri+1};grid-column:1">${r.l}</div>`+r.cells.map(c=>{const tg=c.tag||'div';return `<${tg} class="${c.cls}" style="grid-row:${ri+1};grid-column:${c.c+2}${c.span>1?` / span ${c.span}`:''}"${c.at||''}>${c.h}</${tg}>`;}).join('')).join('')}</div></div>`;}
+const ntRow=(l,s,f)=>({l,cells:s.split('').map((b,i)=>{const c={c:i,span:1,cls:'nt n'+b,h:b};if(f)Object.assign(c,f(i,b,c));return c;})});
+const codRow=(l,an,diff)=>({l,cells:an.cod.map((x,k)=>({c:x.i,span:3,cls:'cdn '+aaCls(x.a)+(diff&&diff(k)?' df':''),h:x.c}))});
+const aaRow=(l,an,diff)=>({l,cells:an.cod.map((x,k)=>({c:x.i,span:3,cls:'cdn '+aaCls(x.a)+(diff&&diff(k)?' df':''),h:aaAb(x.a),at:` title="${esc(aaNm(x.a))}"`}))});
+const dimF=an=>(i,b,c)=>({cls:c.cls+(an.st<0||i<an.st||i>=an.end?' dim':'')});
+const chainHTML=(an,diff)=>`<div class="chain">${an.cod.map((x,k)=>`<span class="aa ${aaCls(x.a)}${k===0?' st':''}${diff&&diff(k)?' df':''}"><b>${x.a==='*'?'STOP':`${k+1}. ${aaAb(x.a)}`}</b>${esc(x.a==='*'?tr('koniec','end'):aaNm(x.a))}</span>`).join('')}</div>`;
+
+// ================= 4. laboratorium =================
+function seqParse(raw){const s=raw.toUpperCase().replace(/[\s\-–]/g,'');const bad=[...new Set(s.replace(/[ATCG]/g,''))];
+  if(bad.length)return{err:bad.includes('U')&&bad.length===1?tr('Litera U (uracyl) występuje w RNA, a nie w DNA. W DNA zamiast niej jest T (tymina).','The letter U (uracil) is found in RNA, not DNA. DNA has T (thymine) instead.'):tr(`Niedozwolone znaki: ${bad.map(esc).join(' ')}. Sekwencja DNA może zawierać tylko litery A, T, C, G.`,`Invalid characters: ${bad.map(esc).join(' ')}. A DNA sequence may contain only the letters A, T, C, G.`)};
+  if(s.length<3)return{err:tr('Sekwencja musi mieć co najmniej 3 nukleotydy.','The sequence must have at least 3 nucleotides.')};
+  if(s.length>90)return{err:tr('Sekwencja może mieć najwyżej 90 nukleotydów.','The sequence may have at most 90 nucleotides.')};return{s};}
+const inT=()=>S.lvl==='A'&&S.seq.strand==='t';
+function labOut(){
+  const A=S.lvl==='A',cod=S.seq.cod,an=analyse(cod),tm=comp(cod),it=inT(),pen=' ✎';
+  const rows=[ntRow((A?tr('DNA – nić kodująca 5′→3′','DNA – coding strand 5′→3′'):tr('DNA – nić kodująca','DNA – coding strand'))+(it?'':pen),cod,dimF(an)),
+    ntRow((A?tr('DNA – nić matrycowa 3′→5′','DNA – template strand 3′→5′'):tr('DNA – nić matrycowa','DNA – template strand'))+(it?pen:''),tm,dimF(an)),
+    ntRow(A?'mRNA 5′→3′':'mRNA',an.m,dimF(an)),codRow(tr('kodony','codons'),an),aaRow(tr('aminokwasy','amino acids'),an)];
+  let msg='';
+  if(an.st<0)msg=`<div class="msg no">${tr('W mRNA nie ma kodonu START (AUG) – translacja się nie rozpocznie i białko nie powstanie. Można dopisać ATG w nici kodującej.','There is no START codon (AUG) in the mRNA – translation will not begin and no protein is made. Try adding ATG to the coding strand.')}</div>`;
+  else{const p=protOf(an);msg=`<div class="msg ok">${tr(`Kodon START zaczyna się od ${an.st+1}. nukleotydu. Białko (fragment): <b>${protTxt(p)}</b> – ${p.length} ${p.length===1?'aminokwas':p.length%10>=2&&p.length%10<=4&&(p.length%100<12||p.length%100>14)?'aminokwasy':'aminokwasów'}.`,`The START codon begins at nucleotide ${an.st+1}. Protein (fragment): <b>${protTxt(p)}</b> – ${p.length} amino acid${p.length===1?'':'s'}.`)}</div>`
+    +(an.stop?'':`<div class="msg">${tr('W tej sekwencji nie ma kodonu STOP w ramce odczytu. W komórce rybosom czytałby dalej – to tylko fragment genu.','There is no in-frame STOP codon in this sequence. In a cell the ribosome would read on – this is only part of a gene.')}</div>`);}
+  return sgrid(cod.length,rows)+`<p class="note">${tr('Wyszarzone nukleotydy leżą poza odcinkiem tłumaczonym na białko (przed START lub za STOP). Na telefonie sekwencję można przewijać w bok.','Greyed-out nucleotides lie outside the part translated into protein (before START or after STOP). On a phone the sequence scrolls sideways.')}</p>`+msg
+    +(an.st>=0?`<h3>${tr('Łańcuch aminokwasów','Amino-acid chain')}</h3>${chainHTML(an)}${aaLegend()}`:'');
+}
+function viewLab(){
+  const A=S.lvl==='A',it=inT();
+  return `<div class="bar">${lvlSeg()}</div>
+   <section class="card"><h2>${tr('Laboratorium sekwencji','Sequence lab')}</h2>
+    <p>${it?tr('Wpisz nić matrycową DNA (zapisaną od 3′ do 5′). Narzędzie odtworzy nić kodującą, przepisze ją na mRNA, podzieli na kodony i przetłumaczy na aminokwasy.','Type the DNA template strand (written from 3′ to 5′). The tool rebuilds the coding strand, transcribes it into mRNA, splits it into codons and translates them into amino acids.'):tr('Wpisz nić kodującą DNA albo wylosuj sekwencję. Narzędzie pokaże nić komplementarną, mRNA, kodony i powstający łańcuch aminokwasów.','Type a DNA coding strand or pick a random one. The tool shows the complementary strand, the mRNA, the codons and the resulting amino-acid chain.')}</p>
+    ${A?`<div class="bar" style="margin-top:0"><span class="lbl" id="strL">${tr('Wpisywana nić','Strand to type')}</span><div class="seg" role="group" aria-labelledby="strL"><button data-strand="c" aria-pressed="${!it}">${tr('kodująca 5′→3′','coding 5′→3′')}</button><button data-strand="t" aria-pressed="${it}">${tr('matrycowa 3′→5′','template 3′→5′')}</button></div></div>`:''}
+    <label for="seqIn" class="note" style="display:block;margin-top:10px">${it?tr('Nić matrycowa DNA (A, T, C, G)','DNA template strand (A, T, C, G)'):tr('Nić kodująca DNA (A, T, C, G)','DNA coding strand (A, T, C, G)')}</label>
+    <input id="seqIn" class="tin" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="120" value="${esc(S.seq.raw)}">
+    <div id="seqErr" role="status">${S.seq.err?`<div class="msg no">${S.seq.err}</div>`:''}</div>
+    <div class="bar"><button class="btn primary" data-act="seqRnd">${tr('🎲 Losuj sekwencję','🎲 Random sequence')}</button><button class="btn" data-act="seqEx">${tr('Przykład','Example')}</button></div></section>
+   <section class="card"><h2>${tr('Od DNA do białka','From DNA to protein')}</h2><div id="labOut">${labOut()}</div></section>
+   <section class="card"><h3 style="margin-top:0">${tr('Jak to działa?','How does it work?')}</h3><ol>
+    <li>${tr('Nić matrycowa jest komplementarna do nici kodującej (A–T, C–G).','The template strand is complementary to the coding strand (A–T, C–G).')}</li>
+    <li>${tr('mRNA powstaje na nici matrycowej, więc jest do niej komplementarne – i ma taką samą sekwencję jak nić kodująca, tylko z U zamiast T.','mRNA is made on the template strand, so it is complementary to it – and has the same sequence as the coding strand, just with U instead of T.')}</li>
+    <li>${tr('Rybosom szuka pierwszego kodonu START (AUG) i od niego czyta mRNA trójkami – kodon po kodonie – aż do kodonu STOP (UAA, UAG lub UGA).','The ribosome looks for the first START codon (AUG) and from there reads the mRNA in triplets – codon by codon – until a STOP codon (UAA, UAG or UGA).')}</li></ol></section>`;
+}
+function seqSet(cod){S.seq.cod=cod;S.seq.raw=inT()?comp(cod):cod;S.seq.err='';S.mut.pos=null;}
+
+// ================= 5. kod genetyczny =================
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ł/g,'l');
+function codeHits(q){q=q.trim();if(!q)return null;const u=q.toUpperCase().replace(/\s/g,'');
+  if(/^[ACGTU]{1,3}$/.test(u)){const p=toRNA(u);return new Set(Object.keys(CODE).filter(c=>c.startsWith(p)));}
+  const n=norm(q),out=new Set();for(const c in CODE){const a=CODE[c],d=AA[a];const ws=x=>norm(x).split(/[\s()]+/).some(w=>w.startsWith(n))||norm(x).startsWith(n);if(norm(d[0]).startsWith(n)||ws(d[1])||ws(d[2])||(c==='AUG'&&'start'.startsWith(n)))out.add(c);}return out;}
+function codeArea(){
+  const hits=codeHits(S.code.q);
+  const tbl=`<div class="tablewrap"><table class="code"><thead><tr><th class="b1" rowspan="2">${tr('1.','1st')}</th><th colspan="4">${tr('2. zasada (środkowa)','2nd base (middle)')}</th><th class="b1" rowspan="2">${tr('3.','3rd')}</th></tr><tr>${[...RB].map(b=>`<th style="text-align:center">${b}</th>`).join('')}</tr></thead><tbody>${[...RB].map(f=>[...RB].map((th,ti)=>`<tr>${ti===0?`<th class="b1" rowspan="4" scope="rowgroup">${f}</th>`:''}${[...RB].map(s=>{const c=f+s+th,a=CODE[c];
+    return `<td><button data-cod="${c}" class="${aaCls(a)}${S.code.sel===c?' on':''}${hits?(hits.has(c)?' hit':' fade'):''}" aria-label="${c}: ${esc(a==='*'?'STOP':aaNm(a))}"><span class="cd">${c}</span><span>${a==='*'?'STOP':aaAb(a)}${c==='AUG'?' <span class="tag">START</span>':''}</span></button></td>`;}).join('')}<td class="b3">${th}</td></tr>`).join('')).join('')}</tbody></table></div>`;
+  let res='';
+  if(hits){const aas=[...new Set([...hits].map(c=>CODE[c]))];res=hits.size?`<div class="reslist">${aas.map(a=>`<span class="aa ${aaCls(a)}"><b>${a==='*'?'STOP':`${aaAb(a)} – ${esc(aaNm(a))}`}</b>${[...hits].filter(c=>CODE[c]===a).join(', ')}</span>`).join('')}</div>`:`<p class="note">${tr('Brak wyników.','No results.')}</p>`;}
+  return res+tbl;
+}
+function codeInfo(){
+  const A=S.lvl==='A',c=S.code.sel,a=CODE[c],same=codonsOf(a);
+  return `<span class="kicker">${tr('Kodon','Codon')} (mRNA)</span><h2 class="big">${c}</h2>
+   <p><b>${a==='*'?tr('Kodon STOP','STOP codon'):`${aaAb(a)} – ${esc(aaNm(a))}`}</b>${a!=='*'?` <span class="note">(${esc(T(GRP[AA[a][3]]))})</span>`:''}</p>
+   ${a==='*'?`<p>${tr('Nie koduje żadnego aminokwasu – kończy translację. Nie ma tRNA z pasującym antykodonem.','It codes for no amino acid – it ends translation. No tRNA has a matching anticodon.')}</p>`:''}
+   ${c==='AUG'?`<p>${tr('To kodon START: od niego zaczyna się translacja. Jednocześnie koduje metioninę – także wewnątrz białka.','This is the START codon: translation begins here. It also codes for methionine – inside the protein too.')}</p>`:''}
+   <p>${a==='*'?tr('Wszystkie kodony STOP','All STOP codons'):tr('Kodony tego aminokwasu','Codons for this amino acid')} (${same.length}): <span class="sq">${same.join(', ')}</span></p>
+   ${same.length>1&&a!=='*'?`<p class="note">${tr('Kilka kodonów – jeden aminokwas: to przykład degeneracji kodu.','Several codons – one amino acid: an example of the code’s degeneracy.')}</p>`:''}
+   <p>${tr('Nić kodująca DNA','DNA coding strand')}: <span class="sq">${toDNA(c)}</span>${A?`<br>${tr('Nić matrycowa DNA (3′→5′)','DNA template strand (3′→5′)')}: <span class="sq">${comp(toDNA(c))}</span>`:''}${a!=='*'?`<br>${tr('Antykodon tRNA','tRNA anticodon')}${A?' (3′→5′)':''}: <span class="sq">${ANTI(c)}</span>`:''}</p>`;
+}
+const FEAT=[
+ ['B',['trójkowy','triplet'],['Jeden aminokwas koduje trójka nukleotydów – kodon. Z 4 rodzajów nukleotydów można utworzyć 4³ = 64 kodony.','Each amino acid is coded for by three nucleotides – a codon. Four kinds of nucleotide give 4³ = 64 codons.']],
+ ['B',['uniwersalny','universal'],['Prawie wszystkie organizmy – od bakterii po człowieka – odczytują kodony tak samo (nieliczne wyjątki są m.in. w mitochondriach). Dzięki temu bakteria może wytwarzać np. ludzką insulinę.','Almost all organisms – from bacteria to humans – read codons the same way (there are a few exceptions, e.g. in mitochondria). That is why bacteria can make e.g. human insulin.']],
+ ['B',['zdegenerowany','degenerate (redundant)'],['Kodonów sensownych jest 61, a aminokwasów tylko 20, więc większość aminokwasów kodowana jest przez kilka kodonów (np. leucyna – przez 6).','There are 61 sense codons but only 20 amino acids, so most amino acids have several codons (e.g. leucine has 6).']],
+ ['B',['jednoznaczny','unambiguous'],['Każdy kodon oznacza tylko jeden, ściśle określony aminokwas (albo sygnał STOP).','Each codon stands for just one specific amino acid (or the STOP signal).']],
+ ['A',['niezachodzący','non-overlapping'],['Kodony nie nakładają się na siebie – każdy nukleotyd należy tylko do jednego kodonu.','Codons do not overlap – each nucleotide belongs to only one codon.']],
+ ['A',['bezprzecinkowy','comma-free'],['Między kodonami nie ma przerw ani „znaków przestankowych” – mRNA czyta się kodon po kodonie od START do STOP. Dlatego wstawienie lub usunięcie nukleotydu przesuwa ramkę odczytu.','There are no gaps or “punctuation” between codons – mRNA is read codon after codon from START to STOP. That is why adding or removing a nucleotide shifts the reading frame.']],
+];
+function viewCode(){
+  const A=S.lvl==='A';
+  return `<div class="bar">${lvlSeg()}</div>
+   <section class="card"><h2>${tr('Tabela kodu genetycznego','The genetic code table')}</h2>
+    <p>${tr('Jak czytać tabelę: pierwsza zasada kodonu – wiersz po lewej, druga – kolumna u góry, trzecia – w obrębie komórki (po prawej). Kliknij kodon, żeby zobaczyć szczegóły.','How to read the table: the first base of the codon is the row on the left, the second is the column at the top, the third is within the cell (on the right). Click a codon for details.')}</p>
+    <label for="codeQ" class="note" style="display:block">${tr('Szukaj kodonu (np. GGA, ATG) lub aminokwasu (np. Leu, glicyna, stop)','Search for a codon (e.g. GGA, ATG) or an amino acid (e.g. Leu, glycine, stop)')}</label>
+    <input id="codeQ" class="sin" type="search" autocomplete="off" value="${esc(S.code.q)}"></section>
+   <div class="mgrid"><div class="stage" style="padding:10px"><div id="codeArea">${codeArea()}</div>${aaLegend()}</div>
+    <section class="card ocard" aria-live="polite" id="codeInfo">${codeInfo()}</section></div>
+   <section class="card"><h2>${tr('Cechy kodu genetycznego','Features of the genetic code')}</h2><div class="feat">${FEAT.filter(f=>f[0]==='B'||A).map(f=>`<div><b>${esc(cap(T(f[1])))}</b>${esc(T(f[2]))}</div>`).join('')}</div>
+    <p class="note" style="margin-top:10px">${tr('64 kodony = 61 kodonów sensownych (kodujących aminokwasy) + 3 kodony STOP (UAA, UAG, UGA). AUG to kodon START i zarazem kodon metioniny.','64 codons = 61 sense codons (coding for amino acids) + 3 STOP codons (UAA, UAG, UGA). AUG is the START codon and also the codon for methionine.')}</p></section>`;
+}
+
+// ================= 6. mutacje =================
+function mutNow(){
+  const A=S.lvl==='A',cod=S.seq.cod,an=analyse(cod),M=S.mut;
+  if(M.pos==null||M.pos>=cod.length)M.pos=an.st>=0?Math.min(cod.length-1,an.st+4):Math.floor(cod.length/2);
+  if(!A){M.del=1;M.ins=M.ins[0]||'A';}
+  if(M.type==='del')M.pos=Math.min(M.pos,cod.length-M.del);
+  if(M.type==='sub'&&M.base===cod[M.pos])M.base=[...'ATCG'].find(b=>b!==cod[M.pos]);
+  const m={type:M.type,pos:M.pos,base:M.base,ins:M.ins,del:M.del};
+  return{cod,an,m,c:classify(cod,m)};
+}
+function mutRes(){
+  const A=S.lvl==='A',{cod,an,m,c}=mutNow(),B=c.B,mut=c.mut,n=c.n;
+  const dC=k=>!an.cod[k]||!B.cod[k]||an.cod[k].c!==B.cod[k].c,dA=k=>!an.cod[k]||!B.cod[k]||an.cod[k].a!==B.cod[k].a;
+  const hl=(i,b,cc)=>({cls:cc.cls+(B.st<0||i<B.st||i>=B.end?' dim':'')+((m.type==='sub'&&i===m.pos)||(m.type==='ins'&&i>=m.pos&&i<m.pos+n)?' mk':'')});
+  const L5=A?' 5′→3′':'';
+  const what=m.type==='sub'?tr(`${cod[m.pos]} → ${m.base} (${m.pos+1}. nukleotyd)`,`${cod[m.pos]} → ${m.base} (nucleotide ${m.pos+1})`):m.type==='ins'?tr(`wstawiono ${m.ins} przed ${m.pos+1}. nukleotydem`,`${m.ins} inserted before nucleotide ${m.pos+1}`):tr(`usunięto ${cod.substr(m.pos,m.del)} (od ${m.pos+1}. nukleotydu)`,`${cod.substr(m.pos,m.del)} removed (from nucleotide ${m.pos+1})`);
+  const pO=protOf(an),pM=protOf(B);
+  return `<div class="msg mbig ${['silent','outside','inframe'].includes(c.c)?'ok':'no'}"><b>${esc(T(MTYPE[m.type]))}: ${esc(what)}</b><br><b>${esc(T(MUTC[c.c]))}.</b> ${esc(mutExpl(c))}</div>
+   <h3>${tr('Sekwencja prawidłowa','Original sequence')}</h3>${sgrid(cod.length,[ntRow(tr('DNA (nić kodująca)','DNA (coding strand)')+L5,cod,dimF(an)),codRow(tr('kodony mRNA','mRNA codons'),an),aaRow(tr('aminokwasy','amino acids'),an)])}
+   <h3>${tr('Sekwencja zmutowana','Mutated sequence')}</h3>${sgrid(Math.max(mut.length,1),[ntRow(tr('DNA (nić kodująca)','DNA (coding strand)')+L5,mut,hl),codRow(tr('kodony mRNA','mRNA codons'),B,dC),aaRow(tr('aminokwasy','amino acids'),B,dA)])}
+   <div class="ugrid"><div><h3>${tr('Białko prawidłowe','Original protein')} (${pO.length})</h3>${an.st>=0?chainHTML(an):`<p class="note">${tr('brak białka','no protein')}</p>`}</div>
+    <div><h3>${tr('Białko zmutowane','Mutant protein')} (${pM.length})</h3>${B.st>=0?chainHTML(B,dA):`<p class="note">${tr('brak białka – nie ma kodonu START','no protein – no START codon')}</p>`}</div></div>
+   <p class="note">${tr('Czerwona ramka = zmieniony kodon lub aminokwas w porównaniu z sekwencją prawidłową (pozycja po pozycji).','Red outline = codon or amino acid that differs from the original (position by position).')}</p>`;
+}
+const MEX=[
+ {id:'sca',n:['Anemia sierpowata','Sickle-cell anaemia'],o:'ATGGTGCATCTGACTCCTGAGGAGAAG',m:'ATGGTGCATCTGACTCCTGTGGAGAAG',first:0,
+  d:['Substytucja A → T w genie β-globiny (HBB). Kodon GAG zmienia się w GTG, więc w 6. pozycji łańcucha β hemoglobiny kwas glutaminowy (Glu) zostaje zastąpiony waliną (Val) – to mutacja zmiany sensu. Hemoglobina S przy niedoborze tlenu tworzy długie włókna, a erytrocyty przyjmują kształt sierpa: gorzej transportują tlen, łatwo się rozpadają i zatykają drobne naczynia. Nosiciele (heterozygoty) są bardziej odporni na malarię.','A → T substitution in the β-globin gene (HBB). The codon GAG becomes GTG, so at position 6 of the β chain of haemoglobin glutamic acid (Glu) is replaced by valine (Val) – a missense mutation. When oxygen is low, haemoglobin S forms long fibres and red blood cells become sickle-shaped: they carry oxygen poorly, break down easily and block small blood vessels. Carriers (heterozygotes) are more resistant to malaria.'],
+  nt:['Fragment początku genu; numeracja aminokwasów w białku nie uwzględnia początkowej metioniny, która jest usuwana.','The start of the gene; amino-acid numbering in the protein leaves out the initial methionine, which is removed.']},
+ {id:'cf',n:['Mukowiscydoza – mutacja ΔF508','Cystic fibrosis – the ΔF508 mutation'],o:'GAAAATATCATCTTTGGTGTTTCCTAT',m:'GAAAATATCATTGGTGTTTCCTAT',first:504,del:[11,14,4],
+  d:['Delecja trzech nukleotydów (CTT) w genie CFTR. Ramka odczytu zostaje zachowana, ale z białka znika jeden aminokwas – fenyloalanina w pozycji 508 (ΔF508; F to jednoliterowy symbol fenyloalaniny). Kodon ATC izoleucyny 507 zmienia się w ATT, który nadal koduje izoleucynę. Białko CFTR (kanał chlorkowy) źle się zwija i nie dociera do błony komórkowej – śluz w drogach oddechowych i przewodach trzustki jest gęsty i lepki.','Deletion of three nucleotides (CTT) in the CFTR gene. The reading frame is kept, but one amino acid disappears from the protein – phenylalanine at position 508 (ΔF508; F is the one-letter symbol for phenylalanine). The isoleucine-507 codon ATC becomes ATT, which still codes for isoleucine. The CFTR protein (a chloride channel) folds wrongly and does not reach the cell membrane – mucus in the airways and pancreatic ducts becomes thick and sticky.'],
+  nt:['Fragment środka genu (kodony 504–512).','A section from the middle of the gene (codons 504–512).']},
+];
+function exHTML(e){
+  const mk=s=>{const m=toRNA(s),cod=translateFrom(m,0);return{m,st:0,cod,end:s.length};};
+  const a=mk(e.o),b=mk(e.m),dA=k=>!a.cod[k]||!b.cod[k]||a.cod[k].a!==b.cod[k].a;
+  const num=(an,first)=>({l:tr('nr','no.'),cells:an.cod.map((x,k)=>({c:x.i,span:3,cls:'note',h:String(first?first+k:k)}))});
+  const dl=e.del;
+  return `<section class="card"><h3 style="margin-top:0">${esc(T(e.n))}</h3><p>${esc(T(e.d))}</p>
+   ${sgrid(e.o.length,[ntRow(tr('DNA prawidłowe','normal DNA'),e.o,dl?(i,bb,c)=>({cls:c.cls+(i>=dl[0]&&i<dl[1]?' mk':'')}):null),aaRow(tr('białko','protein'),a,dl?k=>k===dl[2]:null),num(a,e.first),ntRow(tr('DNA zmutowane','mutant DNA'),e.m,dl?null:(i,bb,c)=>({cls:c.cls+(e.o[i]!==bb?' mk':'')})),aaRow(tr('białko','protein'),b,dl?null:dA)])}
+   <p class="note">${esc(T(e.nt))}</p></section>`;
+}
+function viewMut(){
+  const A=S.lvl==='A',{cod,an,m}=mutNow(),M=S.mut;
+  const sel=(i,b,c)=>({tag:'button',cls:c.cls+(an.st>=0&&(i<an.st||i>=an.end)?' dim':'')+((M.type==='del'&&i>=M.pos&&i<M.pos+M.del)||i===M.pos?' selp':''),at:` data-mpos="${i}" aria-label="${esc(tr(`Nukleotyd ${i+1}: ${b}`,`Nucleotide ${i+1}: ${b}`))}" aria-pressed="${i===M.pos}"`});
+  const baseBtns=(attr,cur,dis)=>`<div class="seg" role="group">${[...'ATCG'].map(b=>`<button ${attr}="${b}" aria-pressed="${cur===b}" ${dis===b?'disabled':''}>${b}</button>`).join('')}</div>`;
+  let ctl='';
+  if(M.type==='sub')ctl=`<span class="lbl">${tr('Zamień na','Change to')}</span>${baseBtns('data-mb',M.base,cod[M.pos])}`;
+  else if(M.type==='ins')ctl=`<span class="lbl">${tr('Wstaw przed zaznaczonym nukleotydem','Insert before the selected nucleotide')}</span>${baseBtns('data-mi',M.ins.length===1?M.ins:'')}${A?`<label class="note" for="insIn">${tr('lub wpisz 1–3 nukleotydy','or type 1–3 nucleotides')}</label><input id="insIn" class="tin" style="width:90px" maxlength="3" autocomplete="off" value="${esc(M.ins)}">`:''}`;
+  else ctl=A?`<span class="lbl">${tr('Usuń nukleotydów','Nucleotides to remove')}</span><div class="seg" role="group">${[1,2,3].map(k=>`<button data-md="${k}" aria-pressed="${M.del===k}">${k}</button>`).join('')}</div>`:`<span class="note">${tr('Zostanie usunięty zaznaczony nukleotyd.','The selected nucleotide will be removed.')}</span>`;
+  return `<div class="bar">${lvlSeg()}</div>
+   <section class="card"><h2>${tr('Symulator mutacji','Mutation simulator')}</h2>
+    <p>${tr('Mutacja to trwała zmiana w sekwencji DNA. Wybierz rodzaj mutacji, a potem kliknij nukleotyd w nici kodującej, żeby wskazać miejsce zmiany.','A mutation is a permanent change in the DNA sequence. Choose a type of mutation, then click a nucleotide in the coding strand to choose where the change happens.')}</p>
+    <div class="bar" style="margin-top:0"><div class="seg" role="group" aria-label="${esc(tr('Rodzaj mutacji','Type of mutation'))}">${['sub','ins','del'].map(k=>`<button data-mt="${k}" aria-pressed="${M.type===k}">${esc({sub:tr('Substytucja','Substitution'),ins:tr('Insercja','Insertion'),del:tr('Delecja','Deletion')}[k])}</button>`).join('')}</div>
+     <button class="btn" data-act="seqRnd">${tr('🎲 Inna sekwencja','🎲 Another sequence')}</button></div>
+    ${sgrid(cod.length,[ntRow(tr('DNA – kliknij nukleotyd','DNA – click a nucleotide'),cod,sel)])}
+    <div class="bar">${ctl}</div>
+    <p class="note">${tr('Sekwencję można też wpisać w zakładce „Laboratorium sekwencji”.','The sequence can also be typed in the “Sequence lab” tab.')}</p></section>
+   <section class="card" aria-live="polite"><h2>${tr('Skutek mutacji','Effect of the mutation')}</h2><div id="mutRes">${mutRes()}</div></section>
+   ${A?`<h2 style="margin:22px 0 0">${tr('Przykłady chorób genetycznych','Examples of genetic diseases')}</h2><div class="ugrid">${MEX.map(exHTML).join('')}</div>`:''}
+   <div class="ugrid"><section class="card"><h3 style="margin-top:0">${tr('Rodzaje mutacji','Kinds of mutation')}</h3><ul>
+    <li>${tr('<b>Genowe (punktowe)</b> – zmiana w obrębie jednego genu: substytucja, insercja, delecja.','<b>Gene (point) mutations</b> – a change within one gene: substitution, insertion, deletion.')}</li>
+    <li>${tr('<b>Chromosomowe strukturalne</b> – zmiana budowy chromosomu: utrata fragmentu (deficjencja), podwojenie (duplikacja), odwrócenie (inwersja), przeniesienie na inny chromosom (translokacja). Przykład: zespół „kociego krzyku” (utrata fragmentu chromosomu 5).','<b>Chromosomal (structural)</b> – a change in chromosome structure: loss of a section (deletion), doubling (duplication), reversal (inversion), moving to another chromosome (translocation). Example: cri-du-chat syndrome (loss of part of chromosome 5).')}</li>
+    <li>${tr('<b>Genomowe (liczbowe)</b> – zmiana liczby chromosomów: brak lub nadmiar pojedynczych chromosomów (np. zespół Downa – trisomia 21, zespół Turnera – 45,X) albo całych zestawów (poliploidia, częsta u roślin uprawnych, np. pszenicy).','<b>Genome (numerical)</b> – a change in chromosome number: a missing or extra single chromosome (e.g. Down syndrome – trisomy 21, Turner syndrome – 45,X) or whole extra sets (polyploidy, common in crop plants such as wheat).')}</li></ul>
+    ${A?`<p>${tr('Mutacje w komórkach płciowych mogą być dziedziczone przez potomstwo; mutacje somatyczne (w komórkach ciała) nie są dziedziczone, ale mogą prowadzić do nowotworów. Mutacje bywają szkodliwe, obojętne lub – rzadko – korzystne; są źródłem zmienności, na którą działa dobór naturalny.','Mutations in sex cells can be inherited by offspring; somatic mutations (in body cells) are not inherited but can lead to cancer. Mutations may be harmful, neutral or – rarely – beneficial; they are a source of the variation that natural selection acts on.')}</p>`:`<p>${tr('Mutacje mogą być szkodliwe, obojętne, a czasem korzystne. Te, które zachodzą w komórkach płciowych, mogą być dziedziczone.','Mutations can be harmful, neutral and sometimes beneficial. Those in sex cells can be inherited.')}</p>`}</section>
+   <section class="card"><h3 style="margin-top:0">${tr('Czynniki mutagenne (mutageny)','Mutagens')}</h3><ul>
+    <li>${tr('<b>Fizyczne</b>: promieniowanie UV, promieniowanie rentgenowskie (X) i gamma.','<b>Physical</b>: UV radiation, X-rays and gamma rays.')}</li>
+    <li>${tr('<b>Chemiczne</b>: m.in. benzo[a]piren i inne substancje z dymu tytoniowego, aflatoksyny (z pleśni na żywności), niektóre barwniki i pestycydy.','<b>Chemical</b>: e.g. benzo[a]pyrene and other substances in tobacco smoke, aflatoxins (from moulds on food), some dyes and pesticides.')}</li>
+    <li>${tr('<b>Biologiczne</b>: niektóre wirusy, np. HPV (wirus brodawczaka ludzkiego) czy HBV (wirus zapalenia wątroby typu B).','<b>Biological</b>: some viruses, e.g. HPV (human papillomavirus) or HBV (hepatitis B virus).')}</li></ul>
+    <p class="note">${tr('Mutacje zachodzą też samorzutnie – np. przez rzadkie błędy polimerazy podczas replikacji.','Mutations also happen spontaneously – e.g. through rare polymerase errors during replication.')}</p></section></div>`;
+}
+
+// ================= 7. quiz =================
+const TF=[
+ {lv:'B',s:['W DNA adenina łączy się z tyminą, a cytozyna z guaniną.','In DNA adenine pairs with thymine, and cytosine with guanine.'],a:1,e:['To zasada komplementarności: A–T i C–G.','This is the complementarity rule: A–T and C–G.']},
+ {lv:'B',s:['RNA zawiera tyminę zamiast uracylu.','RNA contains thymine instead of uracil.'],a:0,e:['Odwrotnie: RNA zawiera uracyl (U) zamiast tyminy (T).','The other way round: RNA contains uracil (U) instead of thymine (T).']},
+ {lv:'B',s:['Cukrem w DNA jest ryboza.','The sugar in DNA is ribose.'],a:0,e:['W DNA jest deoksyryboza, a ryboza – w RNA.','DNA contains deoxyribose; ribose is found in RNA.']},
+ {lv:'B',s:['Kodon to trzy kolejne nukleotydy w mRNA.','A codon is three consecutive nucleotides in mRNA.'],a:1,e:['Kodon koduje jeden aminokwas albo jest sygnałem STOP.','A codon codes for one amino acid or is a STOP signal.']},
+ {lv:'B',s:['Transkrypcja to przepisanie informacji z DNA na mRNA.','Transcription is copying information from DNA into mRNA.'],a:1,e:['Zachodzi w jądrze komórkowym; enzymem jest polimeraza RNA.','It happens in the nucleus; the enzyme is RNA polymerase.']},
+ {lv:'B',s:['Translacja zachodzi w jądrze komórkowym.','Translation takes place in the nucleus.'],a:0,e:['Translacja zachodzi na rybosomach w cytoplazmie.','Translation happens on ribosomes in the cytoplasm.']},
+ {lv:'B',s:['Kod genetyczny jest uniwersalny – prawie wszystkie organizmy odczytują kodony tak samo.','The genetic code is universal – almost all organisms read codons the same way.'],a:1,e:['Dzięki temu np. bakterie mogą wytwarzać ludzką insulinę.','That is why e.g. bacteria can make human insulin.']},
+ {lv:'B',s:['Jeden aminokwas może być kodowany przez kilka różnych kodonów.','One amino acid can be coded for by several different codons.'],a:1,e:['To degeneracja kodu – np. leucynę koduje 6 kodonów.','This is the degeneracy of the code – e.g. leucine has 6 codons.']},
+ {lv:'B',s:['Jeden kodon może oznaczać kilka różnych aminokwasów.','One codon can stand for several different amino acids.'],a:0,e:['Kod jest jednoznaczny – każdy kodon oznacza tylko jeden aminokwas (lub STOP).','The code is unambiguous – each codon means only one amino acid (or STOP).']},
+ {lv:'B',s:['Replikacja DNA zachodzi przed podziałem komórki.','DNA replication happens before cell division.'],a:1,e:['DNA kopiuje się w fazie S interfazy.','DNA is copied in the S phase of interphase.']},
+ {lv:'B',s:['Po replikacji jedna cząsteczka DNA ma dwie stare nici, a druga – dwie nowe.','After replication one DNA molecule has two old strands and the other two new ones.'],a:0,e:['Każda cząsteczka ma jedną nić starą i jedną nową – replikacja jest semikonserwatywna.','Each molecule has one old and one new strand – replication is semi-conservative.']},
+ {lv:'B',s:['Każda mutacja jest szkodliwa.','Every mutation is harmful.'],a:0,e:['Mutacje mogą być szkodliwe, obojętne, a czasem korzystne.','Mutations can be harmful, neutral and sometimes beneficial.']},
+ {lv:'B',s:['Promieniowanie UV może powodować mutacje.','UV radiation can cause mutations.'],a:1,e:['To mutagen fizyczny – dlatego warto chronić skórę przed słońcem.','It is a physical mutagen – which is why skin should be protected from the sun.']},
+ {lv:'B',s:['Gen to odcinek DNA zawierający informację o budowie białka.','A gene is a stretch of DNA that holds the information for building a protein.'],a:1,e:['Kolejność nukleotydów w genie wyznacza kolejność aminokwasów w białku.','The order of nucleotides in the gene sets the order of amino acids in the protein.']},
+ {lv:'B',s:['Kodon AUG rozpoczyna translację i koduje metioninę.','The codon AUG starts translation and codes for methionine.'],a:1,e:['AUG to kodon START.','AUG is the START codon.']},
+ {lv:'B',s:['Parę C–G łączą dwa wiązania wodorowe.','A C–G pair is held by two hydrogen bonds.'],a:0,e:['C–G łączą trzy wiązania wodorowe, a A–T – dwa.','C–G is held by three hydrogen bonds, A–T by two.']},
+ {lv:'B',s:['tRNA przynosi aminokwasy do rybosomu.','tRNA brings amino acids to the ribosome.'],a:1,e:['Antykodon tRNA pasuje do kodonu w mRNA.','The tRNA anticodon matches a codon in the mRNA.']},
+ {lv:'A',s:['Nici w cząsteczce DNA są antyrównoległe.','The strands of a DNA molecule are antiparallel.'],a:1,e:['Jedna biegnie 5′→3′, druga 3′→5′.','One runs 5′→3′, the other 3′→5′.']},
+ {lv:'A',s:['Polimeraza DNA wydłuża nową nić w kierunku 3′→5′.','DNA polymerase extends a new strand in the 3′→5′ direction.'],a:0,e:['Dołącza nukleotydy do końca 3′, więc nić rośnie w kierunku 5′→3′.','It adds nucleotides to the 3′ end, so the strand grows 5′→3′.']},
+ {lv:'A',s:['Fragmenty Okazakiego powstają na nici opóźnionej.','Okazaki fragments are made on the lagging strand.'],a:1,e:['Łączy je później ligaza DNA.','They are later joined by DNA ligase.']},
+ {lv:'A',s:['Polimeraza DNA może rozpocząć syntezę nowej nici bez startera.','DNA polymerase can start a new strand without a primer.'],a:0,e:['Potrzebuje startera RNA, który buduje prymaza.','It needs an RNA primer, made by primase.']},
+ {lv:'A',s:['Introny są wycinane z pre-mRNA podczas splicingu.','Introns are cut out of pre-mRNA during splicing.'],a:1,e:['Eksony są łączone w dojrzałe mRNA.','The exons are joined into mature mRNA.']},
+ {lv:'A',s:['U bakterii transkrypcja zachodzi w jądrze komórkowym.','In bacteria transcription takes place in the nucleus.'],a:0,e:['Bakterie nie mają jądra – transkrypcja i translacja zachodzą w cytoplazmie, nawet jednocześnie.','Bacteria have no nucleus – transcription and translation happen in the cytoplasm, even at the same time.']},
+ {lv:'A',s:['Mutacja nonsensowna wprowadza przedwczesny kodon STOP.','A nonsense mutation introduces an early STOP codon.'],a:1,e:['Białko jest skrócone.','The protein is shortened.']},
+ {lv:'A',s:['Delecja jednego nukleotydu w sekwencji kodującej przesuwa ramkę odczytu.','Deleting one nucleotide in a coding sequence shifts the reading frame.'],a:1,e:['Wszystkie dalsze kodony się zmieniają.','All the following codons change.']},
+ {lv:'A',s:['Anemia sierpowata jest skutkiem delecji trzech nukleotydów.','Sickle-cell anaemia is caused by the deletion of three nucleotides.'],a:0,e:['To substytucja A→T (GAG→GTG): Glu zastępuje Val w β-globinie.','It is an A→T substitution (GAG→GTG): Val replaces Glu in β-globin.']},
+ {lv:'A',s:['Mutacja ΔF508 (mukowiscydoza) to delecja trzech nukleotydów – w białku CFTR brakuje fenyloalaniny.','The ΔF508 mutation (cystic fibrosis) is a deletion of three nucleotides – the CFTR protein lacks a phenylalanine.'],a:1,e:['Ramka odczytu zostaje zachowana, ale białko źle się zwija.','The reading frame is kept, but the protein folds wrongly.']},
+ {lv:'A',s:['Do kodonów STOP przyłączają się specjalne tRNA.','Special tRNAs bind to the STOP codons.'],a:0,e:['Kodony STOP rozpoznaje białkowy czynnik uwalniający, a nie tRNA.','STOP codons are recognised by a protein release factor, not by tRNA.']},
+ {lv:'A',s:['Trisomia 21 jest przykładem mutacji genowej.','Trisomy 21 is an example of a gene mutation.'],a:0,e:['To mutacja genomowa (liczbowa) – zmiana liczby chromosomów.','It is a genome (numerical) mutation – a change in the number of chromosomes.']},
+ {lv:'A',s:['Wiązanie peptydowe tworzy się w rybosomie dzięki aktywności rRNA.','The peptide bond is formed in the ribosome by the activity of rRNA.'],a:1,e:['Rybosom jest rybozymem – katalizuje to rRNA dużej podjednostki.','The ribosome is a ribozyme – the rRNA of the large subunit catalyses it.']},
+];
+function err1(s,r,alph='ATCG'){const i=Math.floor(r()*s.length),b=pick([...alph].filter(x=>x!==s[i]),1,r)[0];return s.slice(0,i)+b+s.slice(i+1);}
+function mkOpts(c,ds,n=4){const o=[c];for(const d of ds)if(d&&!o.includes(d)&&o.length<n)o.push(d);return shuffle(o);}
+function newQ(){
+  const A=S.lvl==='A',r=Math.random,x=r(),k=x<.14?'comp':x<.28?'mrna':x<.43?'trans':x<.55?'anti':x<.7?'mut':'tf';
+  if(k==='comp'){const s=rndPlain(r,9),c=comp(s);S.q={k,s,ans:c,opts:mkOpts(c,[toRNA(c),s,err1(c,r),err1(err1(c,r),r)]),picked:null};return;}
+  if(k==='mrna'){const s=rndPlain(r,9),cod=A&&r()<.5;const m=cod?toRNA(s):toRNA(comp(s));
+    S.q={k,s,cod,ans:m,opts:mkOpts(m,[cod?toRNA(comp(s)):comp(s),cod?s:toRNA(s),err1(m,r,'AUCG'),cod?comp(s):err1(err1(m,r,'AUCG'),r,'AUCG')]),picked:null};return;}
+  if(k==='trans'){const s=rndSeq(r,A?4:3,A?1+Math.floor(r()*2):0,0),an=analyse(s),p=protOf(an),c=protTxt(p);
+    const ch=()=>{const q=[...p],i=1+Math.floor(r()*(q.length-1));q[i]=pick(Object.keys(AA).filter(a=>a!=='*'&&a!==q[i]),1,r)[0];return protTxt(q);};
+    const sh=translateFrom(an.m,an.st+1).filter(z=>z.a!=='*').slice(0,p.length).map(z=>z.a);const sw=[...p];if(sw.length>2)[sw[1],sw[2]]=[sw[2],sw[1]];
+    S.q={k,m:an.m,ans:c,opts:mkOpts(c,[ch(),sh.length>=2?protTxt(sh):ch(),protTxt(sw),ch(),ch()]),picked:null};return;}
+  if(k==='anti'){const cod=toRNA(pick(SENSE,1,r)[0]),an=ANTI(cod);
+    if(!A){S.q={k,A:0,cod,ans:an,opts:mkOpts(an,[cod,toDNA(an)!==an?toDNA(an):null,err1(an,r,'AUCG'),err1(cod,r,'AUCG'),err1(an,r,'AUCG')]),picked:null};return;}
+    const a=CODE[cod],wr=[CODE[an],CODE[an.split('').reverse().join('')],CODE[cod.split('').reverse().join('')],...pick(Object.keys(AA),6,r)].filter(z=>z&&z!=='*'&&z!==a);
+    S.q={k,A:1,anti:an,cod,ans:a,opts:mkOpts(a,wr),picked:null};return;}
+  if(k==='mut'){if(!A){const cat=pick(['sub','ins','del'],1,r)[0],gm=genMut(r,cat);S.q={k,A:0,gm,ans:cat,opts:['sub','ins','del'],picked:null};return;}
+    const cat=pick(['silent','missense','nonsense','frameshift'],1,r)[0],gm=genMut(r,cat);S.q={k,A:1,gm,ans:cat,opts:['silent','missense','nonsense','frameshift'],picked:null};return;}
+  const t=pick(TF.filter(z=>z.lv==='B'||A),1,r)[0];S.q={k:'tf',ti:TF.indexOf(t),ans:t.a?'1':'0',opts:['1','0'],picked:null};
+}
+function qLab(q,o){
+  if(['comp','mrna'].includes(q.k)||(q.k==='anti'&&!q.A))return `<span class="sq">${o}</span>`;
+  if(q.k==='trans')return esc(o);
+  if(q.k==='anti')return esc(`${aaAb(o)} (${aaNm(o)})`);
+  if(q.k==='mut')return esc(q.A?T(MUTC[o]):T(MTYPE[o]));
+  return o==='1'?tr('Prawda','True'):tr('Fałsz','False');
+}
+const qs=(lab,s)=>`<div><span class="note">${lab}</span> <span class="sq">${s}</span></div>`;
+function viewQuiz(){
+  if(!S.q)newQ();const q=S.q,A=S.lvl==='A',done=q.picked!==null,ok=done&&q.picked===q.ans;let question='',pre='',expl='';
+  if(q.k==='comp'){question=tr('Która nić DNA jest komplementarna do podanej?','Which DNA strand is complementary to the one given?');pre=qs(A?'5′':'',q.s+(A?' 3′':''));expl=tr(`A łączy się z T, a C z G: ${q.s} → ${q.ans}.`,`A pairs with T and C with G: ${q.s} → ${q.ans}.`);}
+  else if(q.k==='mrna'){question=q.cod?tr('Podana nić DNA to nić kodująca. Jakie mRNA powstanie w transkrypcji?','The DNA strand given is the coding strand. Which mRNA will be made in transcription?'):tr('Podana nić DNA to nić matrycowa. Jakie mRNA powstanie w transkrypcji?','The DNA strand given is the template strand. Which mRNA will be made in transcription?');
+    pre=qs(q.cod?(A?'5′':''):(A?'3′':''),q.s+(A?(q.cod?' 3′':' 5′'):''));
+    expl=q.cod?tr('mRNA ma taką samą sekwencję jak nić kodująca, tylko z U zamiast T.','mRNA has the same sequence as the coding strand, just with U instead of T.'):tr('mRNA jest komplementarne do nici matrycowej; naprzeciw A staje U (nie T).','mRNA is complementary to the template strand; U (not T) goes opposite A.');}
+  else if(q.k==='trans'){const an=analyse(toDNA(q.m));question=tr('Jaki łańcuch aminokwasów koduje to mRNA? Najpierw odszukaj kodon START.','Which chain of amino acids does this mRNA code for? Find the START codon first.');pre=qs('mRNA',q.m)+`<p class="note" style="margin:6px 0 0">${tr('Tabela kodów: zakładka „Kod genetyczny”.','Codon table: the “Genetic code” tab.')}</p>`;
+    expl=tr(`Kodony od START: ${an.cod.map(z=>z.c).join(' ')} → ${an.cod.map(z=>z.a==='*'?'STOP':aaAb(z.a)).join('–')}.`,`Codons from START: ${an.cod.map(z=>z.c).join(' ')} → ${an.cod.map(z=>z.a==='*'?'STOP':aaAb(z.a)).join('–')}.`);}
+  else if(q.k==='anti'){if(!q.A){question=tr(`Jaki antykodon ma tRNA pasujące do kodonu ${q.cod}?`,`What anticodon does the tRNA matching the codon ${q.cod} have?`);expl=tr(`Antykodon jest komplementarny do kodonu (A–U, C–G) i – jak każde RNA – zawiera U zamiast T: ${q.cod} → ${q.ans}. To tRNA niesie ${aaNm(CODE[q.cod])} (${aaAb(CODE[q.cod])}).`,`The anticodon is complementary to the codon (A–U, C–G) and – like all RNA – has U instead of T: ${q.cod} → ${q.ans}. This tRNA carries ${aaNm(CODE[q.cod])} (${aaAb(CODE[q.cod])}).`);}
+    else{question=tr(`Antykodon tRNA (zapisany 3′→5′) to ${q.anti}. Jaki aminokwas niesie to tRNA?`,`A tRNA has the anticodon ${q.anti} (written 3′→5′). Which amino acid does it carry?`);expl=tr(`Pasujący kodon mRNA (5′→3′) to ${q.cod} – koduje ${aaNm(q.ans)} (${aaAb(q.ans)}). Tabelę kodu czyta się dla kodonów, nie antykodonów.`,`The matching mRNA codon (5′→3′) is ${q.cod} – it codes for ${aaNm(q.ans)} (${aaAb(q.ans)}). The code table is read for codons, not anticodons.`);}}
+  else if(q.k==='mut'){const g=q.gm;pre=qs(tr('prawidłowa:','original:'),g.s)+qs(tr('zmutowana:','mutated:'),g.c.mut);
+    if(q.A){pre+=qs(tr('białko prawidłowe:','original protein:'),protTxt(protOf(g.c.A)));question=tr('Porównaj sekwencje nici kodującej DNA. Jaki jest skutek tej mutacji dla białka?','Compare the DNA coding-strand sequences. What is the effect of this mutation on the protein?');
+      expl=esc(mutExpl(g.c))+' '+tr('Białko zmutowane: ','Mutant protein: ')+protTxt(protOf(g.c.B))+'.';}
+    else{question=tr('Porównaj sekwencje nici kodującej DNA. Jaki to rodzaj mutacji?','Compare the DNA coding-strand sequences. What type of mutation is this?');
+      const m=g.m;expl=m.type==='sub'?tr(`W ${m.pos+1}. pozycji ${g.s[m.pos]} zamieniono na ${m.base} – długość sekwencji się nie zmienia.`,`At position ${m.pos+1}, ${g.s[m.pos]} was replaced by ${m.base} – the length of the sequence stays the same.`):m.type==='ins'?tr(`Przed ${m.pos+1}. nukleotydem wstawiono ${m.ins} – sekwencja wydłużyła się o 1.`,`${m.ins} was inserted before nucleotide ${m.pos+1} – the sequence is 1 longer.`):tr(`Usunięto ${m.pos+1}. nukleotyd (${g.s[m.pos]}) – sekwencja skróciła się o 1.`,`Nucleotide ${m.pos+1} (${g.s[m.pos]}) was removed – the sequence is 1 shorter.`);}}
+  else{const t=TF[q.ti];question=`${tr('Prawda czy fałsz?','True or false?')}<br><span style="font-weight:400">${tr('„','“')}${esc(T(t.s))}”</span>`;expl=esc(T(t.e));}
+  const body=`${pre?`<div class="qseq">${pre}</div>`:''}<div class="opts">${q.opts.map(o=>{const cls=done?(o===q.ans?'ok':o===q.picked?'no':''):'';return `<button data-ans="${o}" class="${cls}" ${done?'disabled':''}>${qLab(q,o)}</button>`;}).join('')}</div>`;
+  const fb=done?`<p class="fb ${ok?'ok':'no'}" role="status">${ok?tr('✅ Dobrze!','✅ Correct!'):tr('❌ Niestety. Poprawna odpowiedź: ','❌ Not quite. The right answer is: ')+qLab(q,q.ans)}</p><p class="expl">${expl}</p><button class="btn primary" id="nextQ">${tr('Następne pytanie →','Next question →')}</button>`:'';
+  return `<div class="bar">${lvlSeg()}</div><section class="card"><p class="score">${tr('Wynik','Score')}: ${S.ok} / ${S.all}</p><p class="q">${question}</p>${body}${fb}</section>`;
+}
+function answer(v){if(!S.q||S.q.picked!==null)return;S.q.picked=v;S.all++;if(v===S.q.ans)S.ok++;}
+
+// ================= 8. karta pracy =================
+const WOPEN={B:[
+ [['Wyjaśnij, na czym polega zasada komplementarności zasad azotowych w DNA.','Explain the complementarity rule for bases in DNA.'],['Zasady w dwóch niciach łączą się zawsze w te same pary: A z T (2 wiązania wodorowe) i C z G (3 wiązania wodorowe). Znając jedną nić, można odtworzyć drugą.','The bases in the two strands always pair the same way: A with T (2 hydrogen bonds) and C with G (3 hydrogen bonds). If one strand is known, the other can be worked out.']],
+ [['Wyjaśnij, dlaczego dwie cząsteczki DNA powstałe w replikacji są identyczne.','Explain why the two DNA molecules made in replication are identical.'],['Każda stara nić jest matrycą, a nowe nukleotydy dobierane są do niej komplementarnie (A–T, C–G), więc powstają dokładne kopie.','Each old strand is a template and new nucleotides are matched to it by complementarity (A–T, C–G), so exact copies are made.']],
+ [['Podaj, w której części komórki zachodzi transkrypcja, a w której translacja.','State where in the cell transcription and translation take place.'],['Transkrypcja – w jądrze komórkowym; translacja – na rybosomach w cytoplazmie.','Transcription – in the nucleus; translation – on ribosomes in the cytoplasm.']],
+ [['Wyjaśnij, czym jest gen.','Explain what a gene is.'],['Gen to odcinek DNA zawierający informację o budowie jednego białka (lub cząsteczki RNA).','A gene is a stretch of DNA that holds the information for building one protein (or RNA molecule).']],
+ [['Podaj dwa przykłady czynników mutagennych.','Give two examples of mutagens.'],['Np. promieniowanie UV, promieniowanie rentgenowskie, substancje z dymu tytoniowego (benzo[a]piren), niektóre wirusy (HPV).','E.g. UV radiation, X-rays, substances in tobacco smoke (benzo[a]pyrene), some viruses (HPV).']],
+ [['Wyjaśnij, jaką rolę w syntezie białka pełni tRNA.','Explain the role of tRNA in protein synthesis.'],['tRNA przynosi aminokwasy do rybosomu; jego antykodon łączy się z pasującym kodonem mRNA, dzięki czemu aminokwasy ustawiają się we właściwej kolejności.','tRNA brings amino acids to the ribosome; its anticodon pairs with the matching mRNA codon, so the amino acids are lined up in the right order.']]],
+ A:[
+ [['Wyjaśnij, dlaczego jedna z nowych nici w replikacji powstaje w postaci fragmentów Okazakiego.','Explain why one of the new strands in replication is made as Okazaki fragments.'],['Polimeraza DNA dołącza nukleotydy tylko do końca 3′ (synteza 5′→3′), a nici są antyrównoległe. Na jednej matrycy synteza biegnie przeciwnie do ruchu widełek, więc nić powstaje odcinkami (każdy od startera), które łączy ligaza.','DNA polymerase adds nucleotides only to the 3′ end (5′→3′ synthesis) and the strands are antiparallel. On one template synthesis runs away from the moving fork, so the strand is made in pieces (each from a primer) that ligase joins.']],
+ [['Wyjaśnij, dlaczego substytucja w sekwencji kodującej nie zawsze zmienia sekwencję aminokwasów w białku.','Explain why a substitution in a coding sequence does not always change the amino-acid sequence.'],['Kod genetyczny jest zdegenerowany – wiele aminokwasów ma kilka kodonów, różniących się często trzecią zasadą. Nowy kodon może kodować ten sam aminokwas (mutacja milcząca).','The genetic code is degenerate – many amino acids have several codons, often differing in the third base. The new codon may code for the same amino acid (a silent mutation).']],
+ [['Wyjaśnij, dlaczego delecja jednego nukleotydu ma zwykle poważniejsze skutki niż delecja trzech sąsiednich nukleotydów.','Explain why deleting one nucleotide usually has more serious effects than deleting three neighbouring nucleotides.'],['Delecja 1 nukleotydu przesuwa ramkę odczytu – zmieniają się wszystkie dalsze kodony i często pojawia się przedwczesny STOP. Delecja 3 nukleotydów usuwa jeden kodon (aminokwas), a ramka zostaje zachowana.','Deleting 1 nucleotide shifts the reading frame – every later codon changes and an early STOP often appears. Deleting 3 removes one codon (amino acid) and keeps the frame.']],
+ [['Opisz, na czym polega splicing i gdzie zachodzi.','Describe splicing and where it happens.'],['Z pre-mRNA wycinane są introny (odcinki niekodujące), a eksony są łączone w dojrzałe mRNA. Zachodzi w jądrze komórkowym eukariontów.','Introns (non-coding stretches) are cut out of pre-mRNA and the exons are joined into mature mRNA. It happens in the nucleus of eukaryotic cells.']],
+ [['Wyjaśnij, jak substytucja w genie β-globiny prowadzi do anemii sierpowatej.','Explain how a substitution in the β-globin gene leads to sickle-cell anaemia.'],['Zamiana A→T zmienia kodon GAG (Glu) na GTG (Val). Hemoglobina S przy niedoborze tlenu tworzy włókna, erytrocyty przyjmują kształt sierpa, gorzej transportują tlen i zatykają naczynia.','An A→T change turns codon GAG (Glu) into GTG (Val). Haemoglobin S forms fibres when oxygen is low, red blood cells become sickle-shaped, carry oxygen poorly and block vessels.']],
+ [['Oblicz, ile nukleotydów mRNA koduje białko złożone ze 150 aminokwasów (nie licząc kodonu STOP). Uzasadnij.','Calculate how many mRNA nucleotides code for a protein of 150 amino acids (not counting the STOP codon). Explain.'],['150 × 3 = 450 nukleotydów, bo każdy aminokwas kodowany jest przez kodon złożony z 3 nukleotydów (z kodonem STOP – 453).','150 × 3 = 450 nucleotides, because each amino acid is coded for by a codon of 3 nucleotides (453 including the STOP codon).']]]};
+function wsBuild(){
+  const ws=S.ws,A=S.lvl==='A',gs=ws.groups?['A','B']:[''];const pool=shuffle(WOPEN[S.lvl],rngOf(ws.seed*3+5)),nq=A?3:2;
+  const cats=A?['missense','nonsense','silent','frameshift']:['sub','ins','del'],c0=Math.floor(rngOf(ws.seed*11+3)()*cats.length);
+  return gs.map((g,gi)=>{const r=rngOf(ws.seed*7+gi*1013+1),tasks=[];let no=0;
+    tasks.push({no:++no,kind:'comp',s:rndPlain(r,A?15:12)});
+    tasks.push({no:++no,kind:'tx',s:rndPlain(r,A?15:12)});
+    tasks.push({no:++no,kind:'tl',m:toRNA(rndSeq(r,A?4:3,1+Math.floor(r()*2),1))});
+    tasks.push({no:++no,kind:'mut',g:genMut(r,cats[(c0+gi)%cats.length])});
+    tasks.push({no:++no,kind:'tbl',rows:DNARNA.filter(x=>x[3]==='B'||A)});
+    for(let i=0;i<nq;i++)tasks.push({no:++no,kind:'open',q:pool[(gi*nq+i)%pool.length]});
+    return{g,tasks};});
+}
+const wsTitle=g=>tr('Karta pracy – DNA i synteza białek','Worksheet – DNA and protein synthesis')+(g?tr(` – grupa ${g}`,` – group ${g}`):'');
+function taskText(t){const A=S.lvl==='A';
+  if(t.kind==='comp')return A?tr('Zapisz nić DNA komplementarną do podanej i oznacz jej końce 5′ i 3′.','Write the DNA strand complementary to the one given and label its 5′ and 3′ ends.'):tr('Zapisz nić DNA komplementarną do podanej.','Write the DNA strand complementary to the one given.');
+  if(t.kind==='tx')return A?tr('Podana nić DNA jest nicią matrycową. Zapisz sekwencję mRNA, która powstanie w transkrypcji, i oznacz jej końce 5′ i 3′.','The DNA strand given is the template strand. Write the mRNA made in transcription and label its 5′ and 3′ ends.'):tr('Podana nić DNA jest nicią matrycową (wzorem). Zapisz sekwencję mRNA, która powstanie w transkrypcji.','The DNA strand given is the template strand (the pattern). Write the mRNA sequence made in transcription.');
+  if(t.kind==='tl')return tr('Odszukaj w mRNA kodon START, podziel dalszą część na kodony i zapisz kolejność aminokwasów (skróty trzyliterowe). Skorzystaj z tabeli kodu genetycznego na końcu karty.','Find the START codon in the mRNA, split the rest into codons and write the order of the amino acids (three-letter abbreviations). Use the genetic code table at the end of the worksheet.');
+  if(t.kind==='mut')return A?tr('Porównaj prawidłową i zmutowaną sekwencję nici kodującej DNA. Podaj rodzaj mutacji i określ jej skutek dla białka (mutacja milcząca, zmiany sensu, nonsensowna albo przesunięcie ramki odczytu). Uzasadnij odpowiedź, zapisując oba łańcuchy aminokwasów.','Compare the original and mutated DNA coding-strand sequences. Name the type of mutation and its effect on the protein (silent, missense, nonsense or frameshift). Justify the answer by writing both amino-acid chains.'):tr('Porównaj prawidłową i zmutowaną sekwencję DNA. Zaznacz miejsce zmiany i podaj rodzaj mutacji (substytucja, insercja czy delecja).','Compare the original and mutated DNA sequences. Mark where the change is and name the type of mutation (substitution, insertion or deletion).');
+  if(t.kind==='tbl')return tr('Uzupełnij tabelę porównującą DNA i RNA.','Complete the table comparing DNA and RNA.');
+  return T(t.q[0])+tr(' Zapisz odpowiedź w zeszycie.',' Write your answer in your exercise book.');
+}
+// wiersze sekwencji: [etykieta, sekwencja] (sekwencja '' = linia do uzupełnienia)
+function taskSeqs(t){const A=S.lvl==='A',sp=s=>spaced(s),bl=n=>Array(n).fill('_').join(' ');
+  if(t.kind==='comp')return [[A?'5′':'',sp(t.s),A?'3′':''],[A?'  ':'',bl(t.s.length),'']];
+  if(t.kind==='tx')return [[A?'3′':'',sp(t.s),A?'5′':''],[A?'  ':'',bl(t.s.length),'']];
+  if(t.kind==='tl')return [[A?'5′':'',sp(t.m),A?'3′':'']];
+  if(t.kind==='mut'){const l1=tr('prawidłowa:','original:'),l2=tr('zmutowana:','mutated:'),n=Math.max(l1.length,l2.length);return [[l1.padEnd(n),sp(t.g.s),''],[l2.padEnd(n),sp(t.g.c.mut),'']];}
+  return [];}
+const seqLine=x=>[x[0],x[1],x[2]].filter(Boolean).join(' ');
+const dnaHead=()=>[tr('Cecha','Feature'),'DNA','RNA'];
+function keyText(t){const A=S.lvl==='A';
+  if(t.kind==='comp')return (A?'3′ ':'')+comp(t.s)+(A?' 5′':'');
+  if(t.kind==='tx')return (A?'5′ ':'')+toRNA(comp(t.s))+(A?' 3′':'');
+  if(t.kind==='tl'){const an=analyse(toDNA(t.m)),p=protOf(an);return tr(`Kodony: ${an.cod.map(z=>z.c).join(' ')}. Białko: ${protTxt(p)} (${p.map(aaNm).join(', ')}); ${an.cod[an.cod.length-1].c} – STOP.`,`Codons: ${an.cod.map(z=>z.c).join(' ')}. Protein: ${protTxt(p)} (${p.map(aaNm).join(', ')}); ${an.cod[an.cod.length-1].c} – STOP.`);}
+  if(t.kind==='mut'){const g=t.g,m=g.m,c=g.c;const w=m.type==='sub'?tr(`${g.s[m.pos]} → ${m.base}, ${m.pos+1}. nukleotyd`,`${g.s[m.pos]} → ${m.base}, nucleotide ${m.pos+1}`):m.type==='ins'?tr(`wstawiono ${m.ins} przed ${m.pos+1}. nukleotydem`,`${m.ins} inserted before nucleotide ${m.pos+1}`):tr(`usunięto ${g.s[m.pos]} (${m.pos+1}. nukleotyd)`,`${g.s[m.pos]} removed (nucleotide ${m.pos+1})`);
+    return `${T(MTYPE[m.type]).split(' (')[0]} (${w})`+(A?`; ${lc1(T(MUTC[c.c]))}. ${tr('Białko prawidłowe','Original protein')}: ${protTxt(protOf(c.A))}; ${tr('zmutowane','mutant')}: ${protTxt(protOf(c.B))}.`:'.');}
+  if(t.kind==='tbl')return t.rows.map(r=>`${T(r[0])} – DNA: ${T(r[1])}; RNA: ${T(r[2])}`).join('. ')+'.';
+  return T(t.q[1]);
+}
+const lc1=x=>x[0].toLowerCase()+x.slice(1);
+const CT_HEAD=()=>[tr('1. zasada','1st base'),'U','C','A','G',tr('3. zasada','3rd base')];
+const ctCell=c=>`${c} ${CODE[c]==='*'?'STOP':aaAb(CODE[c])}${c==='AUG'?' START':''}`;
+const aaList=()=>Object.keys(AA).filter(a=>a!=='*').map(a=>AA[a]).sort((x,y)=>x[0].localeCompare(y[0])).map(d=>`${d[0]} – ${L==='pl'?d[1]:d[2]}`).join('; ')+'.';
+function viewSheet(){
+  const ws=S.ws,data=wsBuild();
+  const opt=`<section class="card"><h2>${tr('Generator karty pracy','Worksheet generator')}</h2><p class="note">${tr('Treść karty zależy od poziomu. Podgląd poniżej odpowiada plikowi Word; klucz odpowiedzi trafia na osobną stronę.','The content depends on the level. The preview below matches the Word file; the answer key goes on a separate page.')}</p>
+   <div class="wsopt"><div class="bar" style="margin-top:0">${lvlSeg()}</div>
+   <div class="bar" style="margin-top:0"><label class="ck"><input type="checkbox" data-wsopt="groups" ${ws.groups?'checked':''}> ${tr('Dwie grupy (A i B)','Two groups (A and B)')}</label>
+   <label class="ck"><input type="checkbox" data-wsopt="key" ${ws.key?'checked':''}> ${tr('Dołącz klucz odpowiedzi','Include an answer key')}</label></div>
+   <div class="bar" style="margin-top:0"><button class="btn" data-act="wsNew">${tr('🎲 Losuj nową wersję','🎲 New random version')}</button><button class="btn primary" data-act="docx">${tr('Pobierz kartę (Word)','Download worksheet (Word)')}</button><span class="status" role="status">${S.wsSt?esc(T(STATUS[S.wsSt])):''}</span></div></div></section>`;
+  const tbl=(head,rows,cls='')=>`<div class="tablewrap"><table class="${cls}"><thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  const codeTbl=`<p class="tk">${tr('Tabela kodu genetycznego (kodony mRNA)','Genetic code table (mRNA codons)')}</p>`+tbl(CT_HEAD(),[...RB].map(f=>[f,...[...RB].map(s=>[...RB].map(th=>ctCell(f+s+th)).join(' · ')),'U C A G']),'ct')+`<p class="app">${esc(aaList())}</p>`;
+  const sheets=data.map(({g,tasks})=>`<article class="sheet" aria-label="${esc(wsTitle(g))}"><h3>${esc(wsTitle(g))}</h3><p>${tr('Imię i nazwisko','Name')}: ..................................................................</p><p class="ins">${tr('Przeczytaj uważnie polecenia i wykonaj zadania.','Read the instructions carefully and complete the tasks.')}</p>
+    ${tasks.map(t=>{let b=taskSeqs(t).map(x=>`<div class="ws">${esc(seqLine(x))}</div>`).join('');
+      if(t.kind==='tl')b+=`<p>${tr('Kodony','Codons')}: ..........................................................</p><p>${tr('Aminokwasy','Amino acids')}: ..........................................................</p>`;
+      if(t.kind==='mut')b+=`<p>${tr('Odpowiedź','Answer')}: ..........................................................</p>${S.lvl==='A'?'<p>..........................................................................</p>':''}`;
+      if(t.kind==='tbl')b+=tbl(dnaHead(),t.rows.map(r=>[T(r[0]),'','']));
+      return `<p class="tk">${tr('Zadanie','Task')} ${t.no}.</p><p class="ins">${esc(taskText(t))}</p>${b}`;}).join('')}
+    ${codeTbl}
+    ${ws.key?`<div class="key"><p class="tk">${tr('Klucz odpowiedzi (dla nauczyciela)','Answer key (for the teacher)')}${g?` – ${tr('grupa','group')} ${g}`:''}</p>${tasks.map(t=>`<p><b>${tr('Zadanie','Task')} ${t.no}:</b> ${esc(keyText(t))}</p>`).join('')}</div>`:''}</article>`).join('');
+  return opt+sheets;
+}
+// SVG → PNG
+function svgToCanvas(svg,w,h,bg='#fff'){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));img.onload=()=>{const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle=bg;x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);URL.revokeObjectURL(u);res(c);};img.onerror=e=>{URL.revokeObjectURL(u);rej(e);};img.src=u;});}
+let DL={save:async({filename,data})=>{const u=URL.createObjectURL(data);const a=document.createElement('a');a.href=u;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);return{status:'saved'};}};
+if(window.claude&&window.claude.use)window.claude.use('downloads').then(d=>{if(d)DL=d;}).catch(()=>{});
+async function buildDocx(){
+  const D=window.docx,F='Kohinoor Bangla',ws=S.ws,data=wsBuild(),A=S.lvl==='A',TW=10466;
+  const R=(t,o={})=>new D.TextRun(Object.assign({text:t,font:F,color:'000000',size:22},o));const Pp=(r,o={})=>new D.Paragraph(Object.assign({children:r},o));
+  const RM=(t,o={})=>R(t,Object.assign({font:'Courier New',bold:true,size:24},o));
+  const bd={style:D.BorderStyle.SINGLE,size:4,color:'000000'};
+  const cell=(txt,w,h)=>{const o={width:{size:w,type:D.WidthType.DXA},margins:{top:60,bottom:60,left:100,right:100},children:[Pp([R(txt,{bold:!!h})])]};if(h)o.shading={fill:'D9D9D9',type:D.ShadingType.CLEAR,color:'auto'};return new D.TableCell(o);};
+  const table=(head,rows,widths)=>new D.Table({width:{size:TW,type:D.WidthType.DXA},columnWidths:widths,borders:{top:bd,bottom:bd,left:bd,right:bd,insideHorizontal:bd,insideVertical:bd},
+    rows:[new D.TableRow({tableHeader:true,children:head.map((h,i)=>cell(h,widths[i],true))}),...rows.map(r=>new D.TableRow({height:{value:520,rule:D.HeightRule.ATLEAST},children:r.map((c,i)=>cell(c,widths[i],false))}))]});
+  const ccell=(lines,w,h)=>{const o={width:{size:w,type:D.WidthType.DXA},margins:{top:40,bottom:40,left:60,right:60},verticalAlign:D.VerticalAlign.CENTER,children:lines.map(l=>Pp([R(l,h?{bold:true,size:20}:{font:'Courier New',size:17})],{alignment:h?D.AlignmentType.CENTER:D.AlignmentType.LEFT}))};if(h)o.shading={fill:'D9D9D9',type:D.ShadingType.CLEAR,color:'auto'};return new D.TableCell(o);};
+  const cw=[1000,2116,2116,2116,2116,1002];
+  const codeTable=()=>new D.Table({width:{size:TW,type:D.WidthType.DXA},columnWidths:cw,borders:{top:bd,bottom:bd,left:bd,right:bd,insideHorizontal:bd,insideVertical:bd},
+    rows:[new D.TableRow({tableHeader:true,children:CT_HEAD().map((h,i)=>ccell([h],cw[i],true))}),...[...RB].map(f=>new D.TableRow({cantSplit:true,children:[ccell([f],cw[0],true),...[...RB].map((s,i)=>ccell([...RB].map(th=>ctCell(f+s+th)),cw[i+1],false)),ccell([...RB],cw[5],true)]}))]});
+  const ch=[];const dots='..........................................................................';
+  for(const [gi,{g,tasks}] of data.entries()){
+    ch.push(Pp([R(wsTitle(g),{bold:true,size:32})],{alignment:D.AlignmentType.CENTER,spacing:{after:160},pageBreakBefore:gi>0}));
+    ch.push(Pp([R(tr('Imię i nazwisko: ','Name: ')+'..................................................................')],{spacing:{after:120}}));
+    ch.push(Pp([R(tr('Przeczytaj uważnie polecenia i wykonaj zadania.','Read the instructions carefully and complete the tasks.'),{italics:true})],{spacing:{after:120}}));
+    for(const t of tasks){
+      ch.push(Pp([R(`${tr('Zadanie','Task')} ${t.no}.`,{bold:true,size:24})],{spacing:{before:160,after:40},keepNext:true}));
+      ch.push(Pp([R(taskText(t),{italics:true})],{spacing:{after:80},keepNext:t.kind!=='open'}));
+      const sq=taskSeqs(t);sq.forEach((x,i)=>ch.push(Pp([RM(seqLine(x))],{spacing:{before:i?200:60,after:60},keepNext:i<sq.length-1||t.kind!=='comp'&&t.kind!=='tx'})));
+      if(t.kind==='tl'){ch.push(Pp([R(tr('Kodony: ','Codons: ')+dots)],{spacing:{before:160,after:60}}));ch.push(Pp([R(tr('Aminokwasy: ','Amino acids: ')+dots)],{spacing:{before:160,after:60}}));}
+      else if(t.kind==='mut'){ch.push(Pp([R(tr('Odpowiedź: ','Answer: ')+dots)],{spacing:{before:160,after:60}}));if(A)ch.push(Pp([R(dots+'.............')],{spacing:{before:160,after:60}}));}
+      else if(t.kind==='tbl'){ch.push(table(dnaHead(),t.rows.map(r=>[T(r[0]),'','']),[3600,3433,3433]));ch.push(Pp([R('')],{spacing:{after:60}}));}
+    }
+    ch.push(Pp([R(tr('Tabela kodu genetycznego (kodony mRNA)','Genetic code table (mRNA codons)'),{bold:true,size:24})],{spacing:{before:240,after:80},keepNext:true}));
+    ch.push(codeTable());
+    ch.push(Pp([R(aaList(),{size:17})],{spacing:{before:80,after:60}}));
+  }
+  if(ws.key){ch.push(Pp([R(tr('Klucz odpowiedzi (dla nauczyciela)','Answer key (for the teacher)'),{bold:true,size:26})],{pageBreakBefore:true,spacing:{after:120}}));
+    for(const {g,tasks} of data){if(g)ch.push(Pp([R(`${tr('Grupa','Group')} ${g}`,{bold:true,size:24})],{spacing:{before:160,after:60}}));
+      for(const t of tasks)ch.push(Pp([R(`${tr('Zadanie','Task')} ${t.no}: `,{bold:true}),R(keyText(t))],{spacing:{after:80}}));}}
+  const doc=new D.Document({creator:'Zakład utylizacji niewiedzy',title:wsTitle(''),styles:{default:{document:{run:{font:F,size:22}}}},sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:720,bottom:720,left:720,right:720}}},children:ch}]});
+  return D.Packer.toBlob(doc);
+}
+const STATUS={lib:['Nie udało się wczytać biblioteki do plików Word.','Could not load the Word file library.'],prep:['Przygotowuję plik…','Preparing the file…'],saved:['Plik zapisany.','File saved.'],err:['Nie udało się przygotować pliku.','Could not prepare the file.']};
+async function docxClick(){
+  if(!window.docx){S.wsSt='lib';render();return;}
+  S.wsSt='prep';render();
+  try{const blob=await buildDocx();await DL.save({filename:tr('Karta pracy – DNA i synteza białek.docx','Worksheet – DNA and protein synthesis.docx'),data:blob});S.wsSt='saved';}
+  catch(e){console.error(e);S.wsSt='err';}
+  render();
+}
+async function pngClick(){
+  let sv,title;
+  if(S.tab==='struct'){sv=structSVG({exp:true});title=tr('Budowa DNA','DNA structure');}
+  else{sv=sceneOf(1,{exp:true});title=(S.tab==='rep'?tr('Replikacja','Replication')+' – '+T(REPN[S.rep]):S.tt.mode==='tx'?tr('Transkrypcja','Transcription')+' – '+T(TXN[S.tt.tx]):tr('Translacja','Translation')+' – '+tlName(S.tt.tl));}
+  S.pngSt='prep';render();
+  try{const c=await svgToCanvas(sv,SW*2,SH*2);const blob=await new Promise(r=>c.toBlob(r,'image/png'));
+    await DL.save({filename:`${title.replace(/[\\/:*?"<>|]/g,'')}.png`,data:blob});S.pngSt='saved';}catch(e){console.error(e);S.pngSt='err';}
+  render();
+}
+
+// ================= stan =================
+const S={tab:GEN?'sheet':'struct',lvl:'B',part:'nuc',ex:{s:'',a:''},rep:'start',tt:{mode:'tx',tx:'bind',tl:'init'},t:1,playing:false,
+ seq:{cod:'GCATGGCTAAAGGTTTCTGGTAAGC',raw:'GCATGGCTAAAGGTTTCTGGTAAGC',strand:'c',err:''},code:{sel:'AUG',q:''},mut:{type:'sub',pos:null,base:'T',ins:'A',del:1},q:null,ok:0,all:0,
+ ws:{groups:false,key:true,seed:1+Math.floor(Math.random()*99999)},wsSt:'',pngSt:''};
+const lvlSeg=()=>`<span class="lbl" id="lvlLbl">${tr('Poziom','Level')}</span><div class="seg" role="group" aria-labelledby="lvlLbl"><button data-lvl="B" aria-pressed="${S.lvl==='B'}">${tr('Podstawowy','Basic')}</button><button data-lvl="A" aria-pressed="${S.lvl==='A'}">${tr('Rozszerzony','Advanced')}</button></div>`;
+function sceneOf(t,o={}){if(S.tab==='rep')return repSVG(S.rep,t,o);if(S.tt.mode==='tx')return txSVG(S.tt.tx,t,o);return tlSVG(S.tt.tl,t,o);}
+const curScene=()=>sceneOf(S.t);
+const keysOf=()=>S.tab==='rep'?repKeys():ttKeys();
+const curKey=()=>S.tab==='rep'?S.rep:S.tt[S.tt.mode];
+const setKey=k=>{if(S.tab==='rep')S.rep=k;else S.tt[S.tt.mode]=k;};
+
+// ================= animacja =================
+let raf=null,hold=null,fin=null;
+const RMo=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+function stopAnim(){if(raf)cancelAnimationFrame(raf);raf=null;if(hold)clearTimeout(hold);hold=null;if(fin)clearTimeout(fin);fin=null;}
+function stopPlay(){S.playing=false;stopAnim();S.t=1;}
+function drawScene(){const el=$('#scene');if(el)el.innerHTML=curScene();}
+function startAnim(){stopAnim();if(RMo()){S.t=1;drawScene();afterAnim();return;}
+  S.t=0;drawScene();const t0=performance.now(),dur=S.tab==='rep'&&S.rep==='elong'||S.tt.mode==='tx'&&S.tt.tx==='elong'&&S.tab==='tt'?4200:2200;
+  const tick=now=>{S.t=Math.min(1,(now-t0)/dur);drawScene();if(S.t<1)raf=requestAnimationFrame(tick);else{raf=null;if(fin)clearTimeout(fin);fin=null;afterAnim();}};raf=requestAnimationFrame(tick);
+  // gdy karta jest w tle, requestAnimationFrame nie działa – wtedy kończymy animację od razu
+  fin=setTimeout(()=>{fin=null;if(raf){cancelAnimationFrame(raf);raf=null;S.t=1;drawScene();afterAnim();}},dur+400);}
+function afterAnim(){if(!S.playing)return;hold=setTimeout(()=>{hold=null;const ks=keysOf(),i=ks.indexOf(curKey());
+  if(i>=ks.length-1){S.playing=false;render();return;}setKey(ks[i+1]);render();startAnim();},RMo()?4000:1800);}
+
+// ================= całość =================
+function focusKey(el){if(!el||el===document.body)return null;if(el.id)return '#'+CSS.escape(el.id);
+  const a=[...el.attributes].filter(x=>x.name.startsWith('data-')).map(x=>`[${x.name}="${CSS.escape(x.value)}"]`).join('');if(!a)return null;
+  const ctx=el.closest('[data-ctx]');return (ctx?`[data-ctx="${ctx.dataset.ctx}"] `:'')+el.tagName.toLowerCase()+a;}
+function render(keep=true){
+  const fk=keep?focusKey(document.activeElement):null;
+  const sl=$$('#app .scroll, #app .tablewrap, #app .sqbox').map(e=>e.scrollLeft);
+  document.documentElement.lang=L;document.title=T(GEN?UI.gt1:UI.t1);
+  $('#t1').textContent=T(GEN?UI.gt1:UI.t1);$('#t2').textContent=T(GEN?UI.gt2:UI.t2);
+  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
+  $('#tabs').innerHTML=Object.entries(UI.tabs).filter(([k])=>GEN===(k==='sheet')).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
+  $('#app').innerHTML={struct:viewStruct,rep:viewRep,tt:viewTT,lab:viewLab,code:viewCode,mut:viewMut,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
+  $$('#app .scroll, #app .tablewrap, #app .sqbox').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
+  if(fk){const el=$(fk);if(el&&el!==document.activeElement)try{el.focus({preventScroll:true});}catch(_){}}
+}
+function fixKeys(){if(!REPK[S.lvl].includes(S.rep))S.rep='start';if(!TXK[S.lvl].includes(S.tt.tx))S.tt.tx='bind';}
+function act(b){
+  const d=b.dataset;let after=null,anim=false;
+  if(d.lang){L=d.lang;try{localStorage.setItem('dnaLang',L);}catch(_){}}
+  else if(d.tab){if(d.tab!==S.tab){stopPlay();S.pngSt='';}S.tab=d.tab;}
+  else if(d.lvl){if(S.lvl!==d.lvl){stopPlay();S.lvl=d.lvl;S.q=null;fixKeys();S.wsSt='';S.pngSt='';
+    if(d.lvl==='B'&&S.seq.strand==='t'){S.seq.strand='c';S.seq.raw=S.seq.cod;S.seq.err='';}}}
+  else if(d.part){S.part=d.part;S.pngSt='';}
+  else if(d.step){stopPlay();setKey(d.step);anim=true;S.pngSt='';}
+  else if(d.ttm){stopPlay();S.tt.mode=d.ttm;S.pngSt='';}
+  else if(d.strand){if(d.strand!==S.seq.strand){S.seq.strand=d.strand;S.seq.raw=inT()?comp(S.seq.cod):S.seq.cod;S.seq.err='';}}
+  else if(d.cod){S.code.sel=d.cod;}
+  else if(d.mt){S.mut.type=d.mt;}
+  else if(d.mb){S.mut.base=d.mb;}
+  else if(d.mi){S.mut.ins=d.mi;}
+  else if(d.md){S.mut.del=+d.md;}
+  else if(d.mpos){S.mut.pos=+d.mpos;}
+  else if(d.ans){answer(d.ans);after='#nextQ';}
+  else if(b.id==='nextQ'){newQ();after='.card .q';}
+  else if(d.act==='prev'||d.act==='next'){stopPlay();const ks=keysOf(),i=ks.indexOf(curKey()),j=Math.max(0,Math.min(ks.length-1,i+(d.act==='next'?1:-1)));setKey(ks[j]);anim=true;S.pngSt='';}
+  else if(d.act==='replay'){stopPlay();anim=true;}
+  else if(d.act==='play'){if(S.playing){stopPlay();}else{const ks=keysOf();if(ks.indexOf(curKey())>=ks.length-1)setKey(ks[0]);S.playing=true;anim=true;}}
+  else if(d.act==='png'){pngClick();return;}
+  else if(d.act==='docx'){docxClick();return;}
+  else if(d.act==='wsNew'){S.ws.seed=1+Math.floor(Math.random()*99999);S.wsSt='';}
+  else if(d.act==='exNew'){S.ex={s:rndPlain(Math.random,10),a:''};}
+  else if(d.act==='exShow'){S.ex.a=comp(S.ex.s);}
+  else if(d.act==='seqRnd'){seqSet(rndSeq(Math.random,4+Math.floor(Math.random()*4)));}
+  else if(d.act==='seqEx'){seqSet('GCATGGCTAAAGGTTTCTGGTAAGC');}
+  else return;
+  render();
+  if(anim)startAnim();
+  if(after){const el=$(after);if(el){if(after==='.card .q')el.setAttribute('tabindex','-1');el.focus({preventScroll:after!=='.card .q'});}}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-lang],[data-tab],[data-lvl],[data-part],[data-step],[data-ttm],[data-strand],[data-cod],[data-mt],[data-mb],[data-mi],[data-md],[data-mpos],[data-ans],#nextQ,[data-act]');
+  if(!b||b.disabled)return;act(b);
+});
+document.addEventListener('keydown',e=>{const g=e.target.closest&&e.target.closest('svg [data-part][tabindex]');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();act(g);}});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.wsopt){S.ws[t.dataset.wsopt]=t.checked;S.wsSt='';render();}});
+document.addEventListener('input',e=>{const t=e.target;
+  if(t.id==='exIn'){S.ex.a=t.value;$('#exFb').innerHTML=exFb();}
+  else if(t.id==='seqIn'){S.seq.raw=t.value;const p=seqParse(t.value);
+    if(p.err){S.seq.err=p.err;$('#seqErr').innerHTML=`<div class="msg no">${p.err}</div>`;}
+    else{S.seq.err='';$('#seqErr').innerHTML='';S.seq.cod=inT()?comp(p.s):p.s;S.mut.pos=null;$('#labOut').innerHTML=labOut();}}
+  else if(t.id==='codeQ'){S.code.q=t.value;$('#codeArea').innerHTML=codeArea();}
+  else if(t.id==='insIn'){const v=t.value.toUpperCase().replace(/\s/g,'');if(/^[ATCG]{1,3}$/.test(v)){S.mut.ins=v;$('#mutRes').innerHTML=mutRes();$$('[data-mi]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.mi===v));}}
+});
+render();
+</script>
+<a id="home-link" href="../index.html" style="position:fixed;left:12px;bottom:12px;z-index:9999;font:700 14px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#fff;background:#231f17;border-radius:999px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25)">← Wszystkie narzędzia</a><a id="report-link" href="../index.html?zglos=biologia/dna" style="position:fixed;right:12px;bottom:12px;z-index:9999;font:700 13px/1 'Atkinson Hyperlegible',system-ui,sans-serif;text-decoration:none;color:#231f17;background:#fdfcf8;border:1.5px solid #dcd4c3;border-radius:999px;padding:9px 12px;box-shadow:0 2px 8px rgba(0,0,0,.18)">🐞 Zgłoś błąd</a><script>(function(){var a=document.getElementById('home-link'),r=document.getElementById('report-link'),h=document.documentElement,l=new URLSearchParams(location.search).get('lang');try{l=l||localStorage.getItem('siteLang')}catch(e){}function s(x){x=x==='en'?'en':'pl';a.textContent=x==='en'?'← All tools':'← Wszystkie narzędzia';a.href='../index.html?lang='+x;r.textContent=x==='en'?'🐞 Report a bug':'🐞 Zgłoś błąd';r.href='../index.html?lang='+x+'&zglos=biologia/dna'}s(h.lang);new MutationObserver(function(){s(h.lang)}).observe(h,{attributes:true,attributeFilter:['lang']})})();</script>
+<!--stats--><script>window.goatcounter={path:function(){return location.pathname.replace(/index\.html$/,"")}}</script><script data-goatcounter="https://zun.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script><!--stats-->
+</body>
+</html>
