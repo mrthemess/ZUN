@@ -71,6 +71,14 @@ a{color:var(--acc-t)}
 .tools button::after{content:"→";color:var(--acc-t)}
 .tag{font-size:.72rem;font-weight:700;letter-spacing:.03em;border:1.5px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--muted);margin-left:auto;white-space:nowrap}
 section.more,section.gens{margin-top:40px}
+section.contest{margin-top:40px}
+.contest-btn{width:100%;display:flex;align-items:center;gap:18px;text-align:left;cursor:pointer;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-left:6px solid var(--acc);border-radius:18px;padding:20px 22px}
+.contest-btn:hover{border-color:var(--acc)}
+.contest-btn::after{content:"→";margin-left:auto;font-size:1.5rem;color:var(--acc-t)}
+.contest-ic{font-size:2.2rem;flex:none}
+.contest-tx{display:flex;flex-direction:column;gap:4px}
+.contest-tx b{font:800 1.35rem/1.2 'Bricolage Grotesque','Atkinson Hyperlegible',sans-serif}
+.contest-tx>span{font-size:.95rem;color:var(--muted)}
 section.gens>h2{font-size:1.6rem;margin:0 0 6px}
 section.gens>p{margin:0 0 14px;color:var(--muted)}
 .gens .subj h3{margin:0;font-size:1.3rem}
@@ -168,6 +176,17 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
       <div class="subj"><h3><span data-l="pl">Geografia</span><span data-l="en">Geography</span></h3><ul class="tools" data-subject="geo" data-gen="1"></ul></div>
       <div class="subj"><h3><span data-l="pl">Biologia</span><span data-l="en">Biology</span></h3><ul class="tools" data-subject="bio" data-gen="1"></ul></div>
     </div>
+  </section>
+
+  <section class="contest" id="konkurs-sekcja">
+    <button type="button" class="contest-btn" data-tool="konkurs">
+      <span class="contest-ic" aria-hidden="true">🏆</span>
+      <span class="contest-tx">
+        <b><span data-l="pl">Przygotowanie do konkursu geograficznego</span><span data-l="en">Geography contest practice</span></b>
+        <span data-l="pl">Zbiór zadań z Konkursu Geograficznego dla szkół podstawowych województwa mazowieckiego: etap szkolny, rejonowy i wojewódzki.</span>
+        <span data-l="en">A collection of tasks from the Masovian Voivodeship geography contest for primary schools: school, district and regional stages. Polish only.</span>
+      </span>
+    </button>
   </section>
 
   <section class="more" id="materialy">
@@ -292,7 +311,7 @@ const TOOLS = [
        ['mapa z wszystkimi państwami Europy i listą do wyboru','stolica, powierzchnia, ludność, flaga i inne podstawowe dane','mapy członkostwa: NATO, UE, Schengen, strefa euro']],
    en:['Political map of Europe','An interactive map of European countries. Click a country to see its key facts, or check who belongs to NATO, the EU, Schengen and the euro area.',
        ['a map of every European country plus a list to choose from','capital, area, population, flag and other key facts','membership maps: NATO, EU, Schengen, euro area']]},
-  {id:'konkurs', s:'geo', file:'geografia/konkurs-geograficzny.html', lang:'contest',
+  {id:'konkurs', s:'geo', solo:1, file:'geografia/konkurs-geograficzny.html', lang:'contest',
    pl:['Konkurs geograficzny – ćwiczenia','Losowanie zadań z konkursu geograficznego dla szkół podstawowych województwa mazowieckiego. Wybierz etap, wylosuj zadanie, rozwiąż je i sprawdź odpowiedź w kluczu.',
        ['etapy: szkolny, rejonowy i wojewódzki','zadania z arkuszy konkursowych 2019–2025 i arkuszy ćwiczeniowych','licznik rozwiązanych zadań i zdobytych punktów']],
    en:['Geography contest – practice','Random tasks from the Masovian geography contest for primary schools. Pick a stage, draw a task, solve it and check the answer key.',
@@ -414,7 +433,7 @@ let L = document.documentElement.lang === 'en' ? 'en' : 'pl';
 function renderLists(){
   document.querySelectorAll('.tools').forEach(ul => {
     ul.innerHTML = '';
-    TOOLS.filter(t => t.s === ul.dataset.subject && !t.g === !ul.dataset.gen).forEach(t => {
+    TOOLS.filter(t => t.s === ul.dataset.subject && !t.g === !ul.dataset.gen && !t.solo).forEach(t => {
       const li = document.createElement('li'), b = document.createElement('button');
       b.type = 'button'; b.dataset.tool = t.id;
       b.textContent = t[L][0];
