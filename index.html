@@ -72,7 +72,8 @@ a{color:var(--acc-t)}
 .tag{font-size:.72rem;font-weight:700;letter-spacing:.03em;border:1.5px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--muted);margin-left:auto;white-space:nowrap}
 section.more,section.gens{margin-top:40px}
 section.contest{margin-top:40px}
-.contest-btn{width:100%;display:flex;align-items:center;gap:18px;text-align:left;cursor:pointer;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-left:6px solid var(--acc);border-radius:18px;padding:20px 22px}
+.contest-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.contest-btn{width:100%;height:100%;display:flex;align-items:center;gap:18px;text-align:left;cursor:pointer;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-left:6px solid var(--acc);border-radius:18px;padding:20px 22px}
 .contest-btn:hover{border-color:var(--acc)}
 .contest-btn::after{content:"→";margin-left:auto;font-size:1.5rem;color:var(--acc-t)}
 .contest-ic{font-size:2.2rem;flex:none}
@@ -133,7 +134,7 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
 .btn{font:700 1rem 'Atkinson Hyperlegible',sans-serif;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:11px 18px;text-decoration:none}
 .btn:hover{border-color:var(--acc)}
 .btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
-@media (max-width:760px){.subjects,.links{grid-template-columns:1fr}.topbar b{font-size:.95rem}.langsw .lf{display:none}.langsw .ls{display:inline}}
+@media (max-width:760px){.subjects,.links,.contest-grid{grid-template-columns:1fr}.topbar b{font-size:.95rem}.langsw .lf{display:none}.langsw .ls{display:inline}}
 </style>
 </head>
 <body>
@@ -151,7 +152,7 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
     <p data-l="en">Not sure where to start studying? Or looking for something that will finally help you make sense of contour lines, climographs or meiosis? You're in the right place! Here you'll find interactive tools for learning biology and geography, along with useful, carefully checked links to help you understand tricky topics, practise for tests and discover that learning doesn't have to hurt. Well, at least not all the time.</p>
   </div>
   <p class="langnote">
-    <span data-l="pl">Kliknij narzędzie, żeby zobaczyć jego opis. Wszystkie narzędzia (poza konkursem geograficznym) mają też wersję angielską.</span>
+    <span data-l="pl">Kliknij narzędzie, żeby zobaczyć jego opis. Wszystkie narzędzia (poza konkursami: geograficznym i biologicznym) mają też wersję angielską.</span>
     <span data-l="en">Click a tool to read what it does. Every tool is available in English.</span>
   </p>
 
@@ -181,13 +182,22 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
   </section>
 
   <section class="contest" id="konkurs-sekcja" data-l="pl">
-    <button type="button" class="contest-btn" data-tool="konkurs">
-      <span class="contest-ic" aria-hidden="true">🏆</span>
-      <span class="contest-tx">
-        <b><span data-l="pl">Przygotowanie do konkursu geograficznego</span></b>
-        <span data-l="pl">Zbiór zadań z Konkursu Geograficznego dla szkół podstawowych województwa mazowieckiego: etap szkolny, rejonowy i wojewódzki.</span>
-      </span>
-    </button>
+    <div class="contest-grid">
+      <button type="button" class="contest-btn" data-tool="konkurs">
+        <span class="contest-ic" aria-hidden="true">🏆</span>
+        <span class="contest-tx">
+          <b><span data-l="pl">Przygotowanie do konkursu geograficznego</span></b>
+          <span data-l="pl">Zbiór zadań z Konkursu Geograficznego dla szkół podstawowych województwa mazowieckiego: etap szkolny, rejonowy i wojewódzki.</span>
+        </span>
+      </button>
+      <button type="button" class="contest-btn" data-tool="konkurs-bio">
+        <span class="contest-ic" aria-hidden="true">🏆</span>
+        <span class="contest-tx">
+          <b><span data-l="pl">Przygotowanie do konkursu biologicznego</span></b>
+          <span data-l="pl">Zbiór zadań z Konkursu Biologicznego dla szkół podstawowych województwa mazowieckiego: etap szkolny, rejonowy i wojewódzki, z podziałem na klasy.</span>
+        </span>
+      </button>
+    </div>
   </section>
 
   <section class="more" id="materialy">
@@ -323,6 +333,11 @@ const TOOLS = [
        ['etapy: szkolny, rejonowy i wojewódzki','zadania z arkuszy konkursowych 2019–2025 i arkuszy ćwiczeniowych','licznik rozwiązanych zadań i zdobytych punktów']],
    en:['Geography contest','Random tasks from the Masovian geography contest for primary schools. Pick a stage, draw a task, solve it and check the answer key.',
        ['school, district and regional stages','tasks from the 2019–2025 contest papers and practice papers','tracks solved tasks and points scored']]},
+  {id:'konkurs-bio', s:'bio', solo:1, file:'biologia/konkurs-biologiczny.html', lang:'contest',
+   pl:['Konkurs biologiczny','Losowanie zadań z konkursu biologicznego dla szkół podstawowych województwa mazowieckiego. Wybierz etap i zakres klas, wylosuj zadanie, rozwiąż je i sprawdź odpowiedź w kluczu.',
+       ['etapy: szkolny, rejonowy i wojewódzki','zadania z arkuszy konkursowych 2019–2026 z modelami odpowiedzi','wybór klas: 5, 6, 7 i 8 – losujesz tylko z materiału, który już znasz','licznik rozwiązanych zadań i zdobytych punktów']],
+   en:['Biology contest','Random tasks from the Masovian biology contest for primary schools. Pick a stage and grades, draw a task, solve it and check the answer key.',
+       ['school, district and regional stages','tasks from the 2019–2026 contest papers with model answers','choose grades 5–8 to practise only what you have covered','tracks solved tasks and points scored']]},
   {id:'poziomice', s:'geo', file:'geografia/poziomice.html', lang:'full',
    pl:['Poziomice','Wysokość bezwzględna i względna, poziomice i skala barw na mapie. Najpierw teoria z interaktywnymi przykładami, potem zadania i quiz.',
        ['przekrój terenu z suwakami: szczyt, dolina, depresja','czym są poziomice i jak czytać mapę hipsometryczną','zadania do rozwiązania na losowej mapie','quiz: rozpoznaj formę terenu po poziomicach']],

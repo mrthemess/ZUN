@@ -33,7 +33,7 @@ Przycisk „Zgłoś błąd albo pomysł” na stronie albo zgłoszenie (Issue) w
 
 - **Kod:** MIT.
 - **Treści edukacyjne:** CC BY-NC-SA 4.0.
-- **Nie są objęte licencją:** zadania z Konkursu Geograficznego województwa mazowieckiego, nazwa strony i banery oraz materiały innych autorów.
+- **Nie są objęte licencją:** zadania z Konkursu Geograficznego i Konkursu Biologicznego województwa mazowieckiego, nazwa strony i banery oraz materiały innych autorów.
 
 Szczegóły: [LICENSE](LICENSE).
 
