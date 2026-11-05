@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f1f0ec;--paper:#fdfcf9;--ink:#1d2124;--muted:#5b6266;--line:#d6d3cb;--soft:#e8e6df;--acc:#3b5bab;--acc-ink:#fff;--c1:#c8432b;--c2:#2f6fb4;--c3:#2e8150;--c4:#8a4fbf;--grid:#d9d6ce;--grid2:#ebe8e1;--ok:#2e7d4f;--no:#b4432a;--focus:#c2571a;--bio:#2e8150;--geo:#1f6f8b;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131619;--paper:#1b1f23;--ink:#e3e7ea;--muted:#9aa4ab;--line:#30363c;--soft:#232a30;--acc:#8ea6ec;--acc-ink:#10141c;--c1:#f08166;--c2:#6fa8ec;--c3:#64c48b;--c4:#c69af0;--grid:#353c43;--grid2:#262c32;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--bio:#64c48b;--geo:#5fb3d1;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#131619;--paper:#1b1f23;--ink:#e3e7ea;--muted:#9aa4ab;--line:#30363c;--soft:#232a30;--acc:#8ea6ec;--acc-ink:#10141c;--c1:#f08166;--c2:#6fa8ec;--c3:#64c48b;--c4:#c69af0;--grid:#353c43;--grid2:#262c32;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--bio:#64c48b;--geo:#5fb3d1;color-scheme:dark}
+:root{--bg:#f1f0ec;--paper:#fdfcf9;--ink:#1d2124;--muted:#5b6266;--line:#d6d3cb;--soft:#e8e6df;--acc:#3b5bab;--acc-ink:#fff;--c1:#c8432b;--c2:#2f6fb4;--c3:#2e8150;--c4:#8a4fbf;--c5:#b07d1a;--grid:#d9d6ce;--grid2:#ebe8e1;--ok:#2e7d4f;--no:#b4432a;--focus:#c2571a;--bio:#2e8150;--geo:#1f6f8b;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131619;--paper:#1b1f23;--ink:#e3e7ea;--muted:#9aa4ab;--line:#30363c;--soft:#232a30;--acc:#8ea6ec;--acc-ink:#10141c;--c1:#f08166;--c2:#6fa8ec;--c3:#64c48b;--c4:#c69af0;--c5:#e2b65a;--grid:#353c43;--grid2:#262c32;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--bio:#64c48b;--geo:#5fb3d1;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131619;--paper:#1b1f23;--ink:#e3e7ea;--muted:#9aa4ab;--line:#30363c;--soft:#232a30;--acc:#8ea6ec;--acc-ink:#10141c;--c1:#f08166;--c2:#6fa8ec;--c3:#64c48b;--c4:#c69af0;--c5:#e2b65a;--grid:#353c43;--grid2:#262c32;--ok:#5cc28a;--no:#f08a70;--focus:#f0a36a;--bio:#64c48b;--geo:#5fb3d1;color-scheme:dark}
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
 html[lang=pl] [data-l=en],html[lang=en] [data-l=pl]{display:none!important}
@@ -35,7 +35,7 @@ section.s{margin-top:30px}section.s>h2{font-size:1.5rem;margin:0 0 10px}
 p.lead{max-width:72ch;margin:0 0 12px}
 .card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px}
 .two{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
-.chart{width:100%;min-width:0}.chart svg{display:block;width:100%;height:auto;touch-action:pan-y}
+.chart{width:100%;min-width:0}.two>div{min-width:0}select{max-width:100%}.chart svg{display:block;width:100%;height:auto;touch-action:pan-y}
 .chart text{font-family:'Atkinson Hyperlegible',system-ui,sans-serif}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;margin:6px 0 0}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -62,7 +62,7 @@ table.dt td:first-child{font-weight:700;text-align:left;background:color-mix(in 
 table.dt tr.hit td{background:color-mix(in srgb,var(--acc) 16%,var(--paper))}
 table.dt td.hit{outline:2.5px solid var(--acc);outline-offset:-2px;font-weight:700}
 .tw{overflow-x:auto;max-width:100%}
-.formula{font-family:ui-monospace,Menlo,monospace;font-size:.9rem;background:var(--soft);border-radius:8px;padding:6px 10px;display:inline-block;margin:2px 0}
+.formula{font-weight:700;font-size:.92rem;background:var(--soft);border-radius:8px;padding:6px 10px;display:inline-block;margin:2px 0}
 .settings{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin-bottom:14px}
 .seg{display:inline-flex;flex-wrap:wrap;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper)}
 .seg button{font:inherit;font-size:.92rem;border:0;background:none;color:var(--ink);padding:6px 13px;cursor:pointer}
@@ -91,6 +91,7 @@ table.tf button.wrong{border-color:var(--no);background:color-mix(in srgb,var(--
 .fb{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--soft);border-left:6px solid var(--acc)}
 .fb.ok{border-color:var(--ok)}.fb.no{border-color:var(--no)}
 .fb p{margin:4px 0}.fb .h{font-weight:700}.fb.ok .h{color:var(--ok)}.fb.no .h{color:var(--no)}
+.fb .alt{background:color-mix(in srgb,var(--c5) 18%,var(--paper));border-radius:8px;padding:8px 10px;margin:8px 0}
 .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 @media (max-width:860px){.two{grid-template-columns:1fr}.hr{align-items:flex-start}.tally{margin-left:0;width:100%}}
 </style>
@@ -105,16 +106,10 @@ table.tf button.wrong{border-color:var(--no);background:color-mix(in srgb,var(--
 <div id="tab-teoria">
  <section class="s"><h2><span data-l="pl">Z czego składa się wykres</span><span data-l="en">The parts of a chart</span></h2>
   <p class="lead"><span data-l="pl">Zanim zaczniesz odczytywać liczby, sprawdź, <b>co</b> przedstawia wykres i <b>w jakich jednostkach</b>. Większość błędów na sprawdzianach i konkursach bierze się z pominięcia tego kroku.</span><span data-l="en">Before you read any numbers, check <b>what</b> the chart shows and <b>in what units</b>. Most mistakes in tests and contests come from skipping this step.</span></p>
-  <div class="card"><div class="two"><div><p class="ctitle" id="anTitle"></p><div class="chart" id="anChart"></div><div class="legend" id="anLeg"></div><p class="src" id="anSrc"></p></div>
-   <div><ol class="steps">
-    <li><span data-l="pl"><b>Tytuł</b> – mówi, czego dotyczą dane, gdzie i kiedy je zebrano.</span><span data-l="en"><b>Title</b> – tells you what the data are about, and where and when they were collected.</span></li>
-    <li><span data-l="pl"><b>Oś pionowa lewa</b> ①: jaka wielkość i w jakich jednostkach (tu: temperatura w °C).</span><span data-l="en"><b>Left vertical axis</b> ①: which quantity and in what units (here: temperature in °C).</span></li>
-    <li><span data-l="pl"><b>Oś pionowa prawa</b> ②: druga wielkość z własną podziałką (tu: opady w mm). Nie każdy wykres ją ma.</span><span data-l="en"><b>Right vertical axis</b> ②: a second quantity with its own scale (here: precipitation in mm). Not every chart has one.</span></li>
-    <li><span data-l="pl"><b>Oś pozioma</b> ③: zwykle czas (miesiące, lata, minuty) albo czynnik, który zmieniano w doświadczeniu.</span><span data-l="en"><b>Horizontal axis</b> ③: usually time (months, years, minutes) or the factor changed in an experiment.</span></li>
-    <li><span data-l="pl"><b>Podziałka i linie siatki</b> ④: sprawdź, co ile jest podziałka i <b>od jakiej wartości</b> zaczyna się oś – nie zawsze od zera.</span><span data-l="en"><b>Scale and grid lines</b> ④: check the interval between marks and <b>which value</b> the axis starts at – it is not always zero.</span></li>
-    <li><span data-l="pl"><b>Legenda</b> – która linia albo który słupek przedstawia którą wielkość.</span><span data-l="en"><b>Legend</b> – which line or bar shows which quantity.</span></li>
-    <li><span data-l="pl"><b>Źródło danych</b> – skąd pochodzą dane (pod wykresem).</span><span data-l="en"><b>Data source</b> – where the data come from (under the chart).</span></li>
-   </ol></div></div></div>
+  <div class="card"><div class="two"><div>
+   <label><span data-l="pl">Wybierz wykres:</span><span data-l="en">Choose a chart:</span> <select id="anSel"></select></label>
+   <p class="ctitle" id="anTitle" style="margin-top:10px"></p><div class="chart" id="anChart"></div><div class="legend" id="anLeg"></div><p class="src" id="anSrc"></p></div>
+   <div><ol class="steps" id="anSteps"></ol><p class="note"><span data-l="pl">Numery w kółkach pokazują te elementy na wykresie. Wykresy z dwiema osiami pionowymi omawia następna część.</span><span data-l="en">The circled numbers mark these parts on the chart. Charts with two vertical axes are covered in the next section.</span></p></div></div></div>
  </section>
 
  <section class="s"><h2><span data-l="pl">Wykres z dwiema osiami – odczyt krok po kroku</span><span data-l="en">Dual-axis charts – reading step by step</span></h2>
@@ -162,10 +157,13 @@ table.tf button.wrong{border-color:var(--no);background:color-mix(in srgb,var(--
  <section class="s"><h2><span data-l="pl">Obliczenia z wykresu i tabeli</span><span data-l="en">Calculations from charts and tables</span></h2>
   <div class="grid3">
    <div class="card"><h3><span data-l="pl">Różnica</span><span data-l="en">Difference</span></h3><p><span class="formula"><span data-l="pl">większa − mniejsza</span><span data-l="en">larger − smaller</span></span></p><p class="note"><span data-l="pl">„O ile więcej…?” – wynik z jednostką.</span><span data-l="en">“How much more…?” – give the unit.</span></p></div>
-   <div class="card"><h3><span data-l="pl">Amplituda (rozpiętość)</span><span data-l="en">Range</span></h3><p><span class="formula">max − min</span></p><p class="note"><span data-l="pl">Roczna amplituda temperatury: najcieplejszy miesiąc − najzimniejszy. Uwaga na minusy: 18 − (−6) = 24.</span><span data-l="en">Annual temperature range: warmest month − coldest. Watch the signs: 18 − (−6) = 24.</span></p></div>
+   <div class="card"><h3><span data-l="pl">Amplituda</span><span data-l="en">Range (amplitude)</span></h3><p><span class="formula"><span data-l="pl">amplituda = wartość największa − wartość najmniejsza</span><span data-l="en">range = highest value − lowest value</span></span></p><p class="note"><span data-l="pl">Roczna amplituda temperatury: najcieplejszy miesiąc − najzimniejszy. Uwaga na minusy: 18 − (−6) = 24.</span><span data-l="en">Annual temperature range: warmest month − coldest. Watch the signs: 18 − (−6) = 24.</span></p></div>
    <div class="card"><h3><span data-l="pl">Suma i średnia</span><span data-l="en">Total and mean</span></h3><p><span class="formula"><span data-l="pl">średnia = suma ÷ liczba wartości</span><span data-l="en">mean = total ÷ number of values</span></span></p><p class="note"><span data-l="pl">Roczna suma opadów to suma 12 miesięcy. Średnia roczna temperatura to suma 12 temperatur ÷ 12.</span><span data-l="en">Annual precipitation is the total of 12 months. Mean annual temperature is the sum of 12 temperatures ÷ 12.</span></p></div>
    <div class="card"><h3><span data-l="pl">Zmiana procentowa</span><span data-l="en">Percentage change</span></h3><p><span class="formula"><span data-l="pl">(nowa − stara) ÷ stara × 100%</span><span data-l="en">(new − old) ÷ old × 100%</span></span></p><p class="note"><span data-l="pl">Z 80 do 100: (100 − 80) ÷ 80 × 100% = 25%. Dzielisz zawsze przez wartość <b>początkową</b>.</span><span data-l="en">From 80 to 100: (100 − 80) ÷ 80 × 100% = 25%. Always divide by the <b>starting</b> value.</span></p></div>
    <div class="card"><h3><span data-l="pl">Ile razy więcej</span><span data-l="en">How many times more</span></h3><p><span class="formula"><span data-l="pl">większa ÷ mniejsza</span><span data-l="en">larger ÷ smaller</span></span></p><p class="note"><span data-l="pl">150 ÷ 50 = 3, czyli trzy razy więcej (o 200% więcej).</span><span data-l="en">150 ÷ 50 = 3, so three times as much (200% more).</span></p></div>
+   <div class="card"><h3><span data-l="pl">Procent a punkty procentowe</span><span data-l="en">Percent vs percentage points</span></h3><p><span data-l="pl">Udział wzrósł z 10% do 15%. To wzrost o <b>5 punktów procentowych</b> (15 − 10 = 5 p.p.), ale o <b>50%</b> ((15 − 10) : 10 × 100%).</span><span data-l="en">A share rose from 10% to 15%. That is a rise of <b>5 percentage points</b> (15 − 10 = 5 pp), but of <b>50%</b> ((15 − 10) ÷ 10 × 100%).</span></p><p class="note"><span data-l="pl"><b>Punkty procentowe</b> – zwykła różnica dwóch wartości podanych w procentach. <b>Procent</b> – o jaką część wartości początkowej coś się zmieniło.</span><span data-l="en"><b>Percentage points</b> – the plain difference between two values given in percent. <b>Percent</b> – what fraction of the starting value something changed by.</span></p></div>
+   <div class="card"><h3><span data-l="pl">Promile (‰)</span><span data-l="en">Per mille (‰)</span></h3><p><span class="formula">1‰ = 1/1000 = 0,1% &nbsp; 1% = 10‰</span></p><p class="note"><span data-l="pl">Promil to tysięczna część całości, procent – setna. Ta sama wielkość w ‰ to liczba <b>10 razy większa</b> niż w %: 9‰ = 0,9%. W promilach podaje się np. współczynniki urodzeń i zgonów – liczbę osób na 1000 mieszkańców.</span><span data-l="en">Per mille is a thousandth of the whole, percent a hundredth. The same quantity in ‰ is a number <b>10 times larger</b> than in %: 9‰ = 0.9%. Birth and death rates, for example, are given in ‰ – people per 1000 inhabitants.</span></p></div>
+   <div class="card"><h3><span data-l="pl">Przyrost naturalny</span><span data-l="en">Natural increase</span></h3><p><span class="formula"><span data-l="pl">przyrost naturalny = urodzenia − zgony</span><span data-l="en">natural increase = births − deaths</span></span></p><p><span class="formula"><span data-l="pl">współczynnik przyrostu naturalnego [‰] = (urodzenia − zgony) : liczba ludności × 1000‰</span><span data-l="en">rate of natural increase [‰] = (births − deaths) ÷ population × 1000‰</span></span></p><p class="note"><span data-l="pl">Albo: współczynnik urodzeń [‰] − współczynnik zgonów [‰]. Wynik ujemny oznacza ubytek naturalny. Uwaga na jednostki: tys. = 1000, mln = 1 000 000.</span><span data-l="en">Or: birth rate [‰] − death rate [‰]. A negative result means natural decrease. Watch the units: thousand = 1,000, million = 1,000,000.</span></p></div>
    <div class="card"><h3><span data-l="pl">Opis i wniosek</span><span data-l="en">Description and conclusion</span></h3><p><span data-l="pl">Opis trendu: „Wraz ze wzrostem <i>X</i> <i>Y</i> rośnie do … , a potem …”. Podawaj liczby z wykresu. Wniosek odnoś do <b>problemu badawczego</b>, a nie do jednej wartości.</span><span data-l="en">Describing a trend: “As <i>X</i> increases, <i>Y</i> rises to … and then …”. Quote numbers from the chart. Relate the conclusion to the <b>research question</b>, not to a single value.</span></p></div>
   </div>
  </section>
@@ -174,8 +172,8 @@ table.tf button.wrong{border-color:var(--no);background:color-mix(in srgb,var(--
 <div id="tab-cwicz" hidden>
  <section class="s">
   <div class="settings">
-   <div><label><span data-l="pl">Przedmiot</span><span data-l="en">Subject</span></label><div class="seg" id="setSubj"><button data-v="all"><span data-l="pl">oba</span><span data-l="en">both</span></button><button data-v="bio"><span data-l="pl">biologia</span><span data-l="en">biology</span></button><button data-v="geo"><span data-l="pl">geografia</span><span data-l="en">geography</span></button></div></div>
-   <div><label><span data-l="pl">Dane</span><span data-l="en">Data</span></label><div class="seg" id="setMode"><button data-v="all"><span data-l="pl">wykresy i tabele</span><span data-l="en">charts and tables</span></button><button data-v="chart"><span data-l="pl">wykresy</span><span data-l="en">charts</span></button><button data-v="table"><span data-l="pl">tabele</span><span data-l="en">tables</span></button></div></div>
+   <div><label><span data-l="pl">Dane</span><span data-l="en">Data</span></label><div class="seg" id="setSubj"><button data-v="bio"><span data-l="pl">biologiczne</span><span data-l="en">biology</span></button><button data-v="geo"><span data-l="pl">geograficzne</span><span data-l="en">geography</span></button><button data-v="all"><span data-l="pl">wszystkie</span><span data-l="en">all</span></button></div></div>
+   <div><label><span data-l="pl">Forma</span><span data-l="en">Format</span></label><div class="seg" id="setMode"><button data-v="all"><span data-l="pl">wykresy i tabele</span><span data-l="en">charts and tables</span></button><button data-v="chart"><span data-l="pl">wykresy</span><span data-l="en">charts</span></button><button data-v="table"><span data-l="pl">tabele</span><span data-l="en">tables</span></button></div></div>
    <div><label><span data-l="pl">Poziom</span><span data-l="en">Level</span></label><div class="seg" id="setLv"><button data-v="1"><span data-l="pl">odczyt</span><span data-l="en">reading</span></button><button data-v="2"><span data-l="pl">porównania</span><span data-l="en">comparing</span></button><button data-v="3"><span data-l="pl">obliczenia</span><span data-l="en">calculating</span></button></div></div>
    <div class="tally" id="tally"></div>
   </div>
@@ -214,6 +212,20 @@ const lat=n=>n===1?'rok':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?'lata':'lat';
 
 // ---------- scenariusze ----------
 // seria: {name:[pl,en], unit:[pl,en], type:'line'|'bar'|'hline', axis:'L'|'R', v:[], d:liczba miejsc po przecinku, c:'c1', sum:bool}
+const MSG_SIGN=P2('Wpisana liczba ma odwrotny znak. Przyrost naturalny liczysz zawsze jako <b>urodzenia − zgony</b>; gdy zgonów jest więcej, wynik jest ujemny (ubytek naturalny).','Your number has the wrong sign. Natural increase is always <b>births − deaths</b>; if there are more deaths, the result is negative (natural decrease).');
+const MSG_PM=P2('Wpisana wartość wygląda na wynik w <b>procentach</b> (%). Pytanie dotyczy <b>promili</b> (‰): 1‰ = 0,1%, więc ta sama wielkość w promilach to liczba 10 razy większa niż w procentach. Współczynniki demograficzne podaje się w ‰ – na 1000 mieszkańców.','Your value looks like a result in <b>percent</b> (%). The question asks for <b>per mille</b> (‰): 1‰ = 0.1%, so the same quantity in per mille is a number 10 times larger than in percent. Demographic rates are given in ‰ – per 1000 inhabitants.');
+function DER_PN(ui,zi){return {name:P2('przyrost naturalny','natural increase'),unit:P2('tys.','thousand'),d:0,how:P2('przyrost naturalny = liczba urodzeń − liczba zgonów','natural increase = births − deaths'),
+ f:(sc,i)=>sc.series[ui].v[i]-sc.series[zi].v[i],calc:(sc,i,k)=>`${F(sc.series[ui].v[i],k)} − ${F(sc.series[zi].v[i],k)}`,tol:sc=>2*sc.tol(sc.series[ui]),guide:(sc,i)=>[{si:ui,i},{si:zi,i}],
+ alts:(sc,i,v,tol)=>[{v:-v,tol,msg:MSG_SIGN}]};}
+function DER_WPN(){return {name:P2('współczynnik przyrostu naturalnego','rate of natural increase'),unit:P2('‰','‰'),d:1,how:P2('współczynnik przyrostu naturalnego [‰] = współczynnik urodzeń [‰] − współczynnik zgonów [‰]','rate of natural increase [‰] = birth rate [‰] − death rate [‰]'),
+ f:(sc,i)=>sc.series[0].v[i]-sc.series[1].v[i],calc:(sc,i,k)=>`${F(sc.series[0].v[i],k,1)}‰ − ${F(sc.series[1].v[i],k,1)}‰`,tol:sc=>2*sc.tol(sc.series[0]),guide:(sc,i)=>[{si:0,i},{si:1,i}],
+ alts:(sc,i,v,tol)=>[{v:-v,tol,msg:MSG_SIGN},{v:v/10,tol:tol/10+.001,msg:MSG_PM}]};}
+function DER_WPN2(){return {name:P2('współczynnik przyrostu naturalnego','rate of natural increase'),unit:P2('‰','‰'),d:1,table:1,how:P2('współczynnik przyrostu naturalnego [‰] = (urodzenia − zgony) : liczba ludności × 1000‰','rate of natural increase [‰] = (births − deaths) ÷ population × 1000‰'),
+ f:(sc,i)=>(sc.series[1].v[i]-sc.series[2].v[i])*1000/(sc.series[0].v[i]*1e6)*1000,
+ calc:(sc,i,k)=>{const u=sc.series[1].v[i],z=sc.series[2].v[i],l=Math.round(sc.series[0].v[i]*1e6);return `(${F(u*1000,k)} − ${F(z*1000,k)}) ${k?'÷':':'} ${F(l,k)} × 1000‰`;},
+ note:P2('Uwaga na jednostki: tys. = 1000, mln = 1 000 000 – najpierw zamień liczby na osoby.','Watch the units: thousand = 1,000, million = 1,000,000 – convert to people first.'),
+ alts:(sc,i,v)=>{const pn=sc.series[1].v[i]-sc.series[2].v[i];return [{v:-v,tol:.051,msg:MSG_SIGN},{v:rnd(v/10,2),tol:.0051,msg:MSG_PM},{v:pn,tol:.001,msg:P2('To przyrost naturalny w tysiącach osób, a pytanie dotyczy <b>współczynnika</b> w promilach: różnicę trzeba jeszcze podzielić przez liczbę ludności i pomnożyć przez 1000‰.','That is natural increase in thousands of people; the question asks for the <b>rate</b> in ‰: divide by the population and multiply by 1000‰.')}];}};}
+function relTol(a,b,t){const r=(x,y)=>(y-x)/x*100;let m=0;for(const da of [-t,t])for(const db of [-t,t])if(a+da>0)m=Math.max(m,Math.abs(r(a+da,b+db)-r(a,b)));return Math.ceil(m)+.5;}
 const SC={
  tetno(){const e0=pick([4,6]),e1=pick([16,18,20]),r=RI(66,78),mx=RI(140,165),br=RI(14,18),bm=RI(32,42),t=range(0,30,2);
   const sh=(x,base,top,tau,tau2)=>{if(x<=e0)return base;const atEnd=base+(top-base)*(1-Math.exp(-(e1-e0)/tau));if(x<=e1)return base+(top-base)*(1-Math.exp(-(x-e0)/tau));return base+(atEnd-base)*Math.exp(-(x-e1)/tau2);};
@@ -294,17 +306,37 @@ const SC={
  urodzenia(){const ys=range(2000,2022,2),n=ys.length,c=RI(5,8);const K0=R(6,10),b0=R(360,390),amp=R(25,45);const b=ys.map((y,i)=>Math.round(b0+amp*Math.sin(Math.PI*i/(n-1)*1.1)-i*4+R(-2,2))),dd=b.map((x,i)=>Math.round(x+K0*(i-c+.5)+R(-1,1)));
   return {subj:'geo',title:P2('Liczba urodzeń i zgonów w państwie X','Births and deaths in country X'),src:P2('Dane przykładowe.','Illustrative data.'),x:XY(ys),ytitle:P2('liczba [tys.]','number [thousand]'),
    series:[{name:P2('urodzenia','births'),unit:P2('tys.','thousand'),type:'line',axis:'L',c:'c3',v:b,sum:1},{name:P2('zgony','deaths'),unit:P2('tys.','thousand'),type:'line',axis:'L',c:'c4',v:dd,sum:1}],
-   derive:{name:P2('przyrost naturalny','natural increase'),unit:P2('tys.','thousand'),f:(sc,i)=>sc.series[0].v[i]-sc.series[1].v[i],how:P2('przyrost naturalny = liczba urodzeń − liczba zgonów','natural increase = births − deaths')},
+   derives:[DER_PN(0,1)],
    extra:[{lv:2,f:sc=>mcQ(sc,P2('Od którego z przedstawionych lat przyrost naturalny jest ujemny?','From which of the years shown is natural increase negative?'),
      shuffle([c,c-1,c+1,c+2].filter(i=>i>=0&&i<n)).map(i=>({ok:i===c,t:P2(String(ys[i]),String(ys[i]))})),
-     P2(`Przyrost naturalny jest ujemny, gdy zgonów jest więcej niż urodzeń – na wykresie linia zgonów jest nad linią urodzeń od ${ys[c]} r.`,`Natural increase is negative when there are more deaths than births – the deaths line is above the births line from ${ys[c]}.`))}]};},
+     P2(`Przyrost naturalny = liczba urodzeń − liczba zgonów. Jest ujemny, gdy zgonów jest więcej niż urodzeń – na wykresie linia zgonów jest nad linią urodzeń od ${ys[c]} r.`,`Natural increase = births − deaths. It is negative when there are more deaths than births – the deaths line is above the births line from ${ys[c]}.`))}]};},
+ kielkowanie(){const t=range(5,35,5),g=[[P2('nasiona grochu','pea seeds'),RI(17,21),R(8,10),RI(88,96)],[P2('nasiona ogórka','cucumber seeds'),RI(28,31),R(5,6.5),RI(85,95)]];
+  return {subj:'bio',title:P2('Odsetek nasion, które wykiełkowały w różnej temperaturze','Percentage of seeds that germinated at different temperatures'),src:P2('Dane przykładowe – po 100 nasion w każdej próbie, liczenie po 7 dniach.','Illustrative data – 100 seeds per sample, counted after 7 days.'),
+   x:XN(t,P2('temperatura [°C]','temperature [°C]'),v=>`${v} °C`,(v,k)=>k?`at ${v} °C`:`w temperaturze ${v} °C`,P2('W ilu wariantach temperatury','At how many of the temperatures')),ytitle:P2('wykiełkowane nasiona [%]','germinated seeds [%]'),
+   series:g.map(([n,o,sg,mx],j)=>({name:n,unit:P2('%','%'),type:'line',axis:'L',c:j?'c3':'c5',zero:1,v:t.map(x=>Math.round(mx*Math.exp(-((x-o)**2)/(2*sg*sg))))}))};},
+ urbanizacja(){const ys=range(1950,2020,10),lg=(i,a,b,m)=>a+(b-a)/(1+Math.exp(-(i-m)*.9)),A0=R(30,38),A1=R(58,64),B0=R(12,20),B1=R(46,56);
+  return {subj:'geo',title:P2('Wskaźnik urbanizacji (odsetek ludności mieszkającej w miastach) w dwóch państwach','Urbanisation rate (share of people living in towns and cities) in two countries'),src:P2('Dane przykładowe.','Illustrative data.'),x:XY(ys),ytitle:P2('ludność miejska [%]','urban population [%]'),
+   series:[{name:P2('wskaźnik urbanizacji w państwie A','urbanisation in country A'),unit:P2('%','%'),type:'line',axis:'L',c:'c4',v:ys.map((y,i)=>Math.round(lg(i,A0,A1,2)))},
+           {name:P2('wskaźnik urbanizacji w państwie B','urbanisation in country B'),unit:P2('%','%'),type:'line',axis:'L',c:'c5',v:ys.map((y,i)=>Math.round(lg(i,B0,B1,4.5)))}]};},
+ wspolczynniki(){const ys=range(1990,2022,4),n=ys.length,u0=R(13.5,15),u1=R(8,9.5),z0=R(9.5,10.5),z1=R(11.5,13);
+  const b=ys.map((y,i)=>rnd(u0+(u1-u0)*Math.pow(i/(n-1),.8)+(i===n-3?R(.3,.8):0)+R(-.2,.2),1)),d=ys.map((y,i)=>rnd(z0+(z1-z0)*Math.pow(i/(n-1),1.6)+R(-.2,.2),1));
+  return {subj:'geo',title:P2('Współczynnik urodzeń i współczynnik zgonów w państwie X','Birth rate and death rate in country X'),src:P2('Dane przykładowe. Współczynnik urodzeń (zgonów) – liczba urodzeń (zgonów) w ciągu roku na 1000 mieszkańców.','Illustrative data. Birth (death) rate = births (deaths) per year per 1000 inhabitants.'),x:XY(ys),ytitle:P2('współczynnik [‰]','rate [‰]'),
+   series:[{name:P2('współczynnik urodzeń','birth rate'),unit:P2('‰','‰'),type:'line',axis:'L',c:'c3',v:b,d:1},{name:P2('współczynnik zgonów','death rate'),unit:P2('‰','‰'),type:'line',axis:'L',c:'c4',v:d,d:1}],
+   derives:[DER_WPN()]};},
+ ludnosc(){const ys=range(2004,2022,3),n=ys.length,L0=R(38.1,38.3);
+  const Lv=ys.map((y,i)=>rnd(L0+.12*Math.sin(Math.PI*i/(n-1))-.35*Math.pow(i/(n-1),2)+R(-.02,.02),2));
+  const U=ys.map((y,i)=>Math.round(360+45*Math.sin(Math.PI*i/(n-1)*1.15)-i*6+R(-3,3))),Z=ys.map((y,i)=>Math.round(365+i*9+(i===n-2?R(40,60):0)+R(-3,3)));
+  return {subj:'geo',dual:1,title:P2('Liczba ludności, urodzeń i zgonów w państwie X','Population, births and deaths in country X'),src:P2('Dane przykładowe.','Illustrative data.'),x:XY(ys),yRtitle:P2('urodzenia i zgony [tys.]','births and deaths [thousand]'),
+   series:[{name:P2('liczba ludności','population'),unit:P2('mln','million'),type:'line',axis:'L',c:'c4',v:Lv,d:2},{name:P2('urodzenia','births'),unit:P2('tys.','thousand'),type:'bar',axis:'R',c:'c3',v:U,sum:1},{name:P2('zgony','deaths'),unit:P2('tys.','thousand'),type:'bar',axis:'R',c:'c1',v:Z,sum:1}],
+   derives:[DER_PN(1,2),DER_WPN2()]};},
  energia(){const ys=range(2000,2024,3),n=ys.length,c0=R(90,96),c1=R(55,65),o0=R(1,3),o1=R(22,30);
   return {subj:'geo',title:P2('Udział węgla i odnawialnych źródeł energii w produkcji energii elektrycznej w państwie X','Share of coal and renewables in electricity generation in country X'),src:P2('Dane przykładowe.','Illustrative data.'),x:XY(ys),ytitle:P2('udział [%]','share [%]'),
-   series:[{name:P2('węgiel','coal'),unit:P2('%','%'),type:'bar',axis:'L',c:'c4',v:ys.map((y,i)=>Math.round(c0+(c1-c0)*Math.pow(i/(n-1),1.4)+R(-1,1)))},
-           {name:P2('odnawialne źródła energii','renewables'),unit:P2('%','%'),type:'bar',axis:'L',c:'c3',v:ys.map((y,i)=>Math.round(o0+(o1-o0)*Math.pow(i/(n-1),1.5)+R(-.6,.6)))}]};}
+   series:[{name:P2('udział węgla','coal share'),unit:P2('%','%'),type:'bar',axis:'L',c:'c4',v:ys.map((y,i)=>Math.round(c0+(c1-c0)*Math.pow(i/(n-1),1.4)+R(-1,1)))},
+           {name:P2('udział odnawialnych źródeł energii','renewables share'),unit:P2('%','%'),type:'bar',axis:'L',c:'c3',v:ys.map((y,i)=>Math.round(o0+(o1-o0)*Math.pow(i/(n-1),1.5)+R(-.6,.6)))}]};}
 };
 const SC_KEYS=Object.keys(SC);
-function make(key){const sc=SC[key]();sc.key=key;sc.ax=scales(sc);sc.tol=s=>sc.ax[s.axis].st/4;sc.data=sc.series.filter(s=>s.type!=='hline');sc.n=sc.x.lab[0].length;return sc;}
+function fin(sc){sc.ax=scales(sc);sc.tol=s=>sc.ax[s.axis||'L'].st/4;sc.data=sc.series.filter(s=>s.type!=='hline');sc.n=sc.x.lab[0].length;return sc;}
+function make(key){const sc=SC[key]();sc.key=key;return fin(sc);}
 
 // ---------- skale ----------
 function niceStep(raw){const p=10**Math.floor(Math.log10(raw)),f=raw/p;return rnd((f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*p,6);}
@@ -322,7 +354,7 @@ function scales(sc){const S=a=>sc.series.filter(s=>(s.axis||'L')===a);const vals
 // ---------- rysowanie wykresu ----------
 const NS='http://www.w3.org/2000/svg';
 const col=c=>`var(--${c||'c1'})`;
-function axisTitle(sc,a,k){const S=sc.series.filter(s=>(s.axis||'L')===a&&s.type!=='hline');if(a==='L'&&sc.ytitle)return sc.ytitle[k];if(S.length===1)return `${S[0].name[k]} [${S[0].unit[k]}]`;return S.length?`[${S[0].unit[k]}]`:'';}
+function axisTitle(sc,a,k){const S=sc.series.filter(s=>(s.axis||'L')===a&&s.type!=='hline');if(a==='L'&&sc.ytitle)return sc.ytitle[k];if(a==='R'&&sc.yRtitle)return sc.yRtitle[k];if(S.length===1)return `${S[0].name[k]} [${S[0].unit[k]}]`;return S.length?`[${S[0].unit[k]}]`:'';}
 function axisColor(sc,a){const S=sc.series.filter(s=>(s.axis||'L')===a&&s.type!=='hline');return S.length===1&&sc.ax.R?col(S[0].c):'var(--ink)';}
 function draw(el,sc,o={}){const k=K(),ax=sc.ax,dual=!!ax.R;
  const W=Math.round(clamp(el.clientWidth||600,280,720)),small=W<460,fs=small?11:12.5;
@@ -358,7 +390,7 @@ function draw(el,sc,o={}){const k=K(),ax=sc.ax,dual=!!ax.R;
   s+=`<circle cx="${bx}" cy="${y}" r="6" fill="none" style="stroke:${col(ser.c)}" stroke-width="2.4"/>`;
   s+=`<polygon points="${a==='L'?`${xa},${y} ${xa+8},${y-5} ${xa+8},${y+5}`:`${xa},${y} ${xa-8},${y-5} ${xa-8},${y+5}`}" style="fill:${col(ser.c)}"/>`;});
  if(o.anno){const b=(x,y,t)=>`<circle cx="${x}" cy="${y}" r="10" style="fill:var(--acc)"/><text x="${x}" y="${y+4.5}" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--acc-ink)">${t}</text>`;
-  s+=b(m.l+14,m.t+12,'1');if(dual)s+=b(m.l+pw-14,m.t+12,'2');s+=b(m.l+pw/2+sc.x.title[k].length*fs*.3+16,H-10,'3');s+=b(m.l+pw*.5,Y('L',A.lo+A.st*Math.max(1,A.n-2)),'4');}
+  let c_=1;s+=b(Math.min(2+axisTitle(sc,'L',k).length*fs*.56+14,W/2),11,c_++);if(dual)s+=b(m.l+pw-14,m.t+12,c_++);s+=b(m.l+pw/2+sc.x.title[k].length*fs*.3+16,H-10,c_++);s+=b(m.l+pw-16,Y('L',A.lo+A.st*Math.max(1,A.n-1)),c_++);}
  if(o.pick)for(let i=0;i<n;i++)s+=`<rect data-i="${i}" x="${m.l+band*i}" y="${m.t}" width="${band}" height="${ph}" fill="transparent" style="cursor:pointer"/>`;
  s+='</svg>';el.innerHTML=s;
  if(o.pick)el.querySelectorAll('rect[data-i]').forEach(r=>{r.addEventListener('click',()=>o.pick(+r.dataset.i));r.addEventListener('pointermove',e=>{if(e.pointerType==='mouse')o.pick(+r.dataset.i);});});}
@@ -426,13 +458,13 @@ const QT={
    P2(`${mode==='table'?'Zaznacz w kolumnie':'Wyobraź sobie poziomą linię na wysokości'} ${F(T,0)} ${U(s,0)}${mode==='table'?' wartości '+(up?'większe':'mniejsze')+' od tej liczby':(sc.ax.R?' (na osi '+axW(s,0)+')':'')+' i policz punkty '+(up?'nad nią':'pod nią')}: jest ich ${cnt}.`,
     `${mode==='table'?'Mark the values in the column that are '+(up?'greater':'smaller')+' than':'Imagine a horizontal line at'} ${F(T,1)} ${U(s,1)}${mode==='table'?'':(sc.ax.R?' (on the '+axW(s,1)+' axis)':'')+' and count the points '+(up?'above':'below')+' it'}: there are ${cnt}.`),
    [],{rows:s.v.map((v,i)=>(up?v>T:v<T)?i:-1).filter(i=>i>=0)});}},
- range:{lv:2,f(sc,mode){const s=sc.climate?sc.series[0]:pick(sc.data),tol=tolOf(sc,s,mode),mx=Math.max(...s.v),mn=Math.min(...s.v),d=rnd(mx-mn,s.d||0);
-  const what=sc.climate?sc.rangeName:P2(`różnicę między najwyższą a najniższą wartością: <b>${N(s,0)}</b>`,`the difference between the highest and lowest <b>${N(s,1)}</b>`);
+ range:{lv:2,w:2,f(sc,mode){const s=sc.climate?sc.series[0]:pick(sc.data),tol=tolOf(sc,s,mode),mx=Math.max(...s.v),mn=Math.min(...s.v),d=rnd(mx-mn,s.d||0);
+  const what=sc.climate?sc.rangeName:P2(`amplitudę wartości „<b>${N(s,0)}</b>”, czyli różnicę między największą a najmniejszą wartością`,`the range of <b>${N(s,1)}</b>, i.e. the difference between the highest and lowest values`);
   return numQ(sc,P2(`Oblicz ${what[0]}.`,`Work out ${what[1]}.`),d,2*tol,s.unit,
-   [`${fv(s,mx,0)} − (${fv(s,mn,0)}) = ${fv(s,d,0)} ${U(s,0)}.${mn<0?' Odjęcie liczby ujemnej to dodanie.':''}${accept(d,2*tol,s,0)}`,`${fv(s,mx,1)} − (${fv(s,mn,1)}) = ${fv(s,d,1)} ${U(s,1)}.${mn<0?' Subtracting a negative number means adding.':''}${accept(d,2*tol,s,1)}`],
+   [`Amplituda = wartość największa − wartość najmniejsza: ${fv(s,mx,0)} − (${fv(s,mn,0)}) = ${fv(s,d,0)} ${U(s,0)}.${mn<0?' Odjęcie liczby ujemnej to dodanie.':''}${accept(d,2*tol,s,0)}`,`Range = highest − lowest: ${fv(s,mx,1)} − (${fv(s,mn,1)}) = ${fv(s,d,1)} ${U(s,1)}.${mn<0?' Subtracting a negative number means adding.':''}${accept(d,2*tol,s,1)}`],
    [{si:si(sc,s),i:s.v.indexOf(mx)},{si:si(sc,s),i:s.v.indexOf(mn)}],{cells:[[s.v.indexOf(mx),si(sc,s)],[s.v.indexOf(mn),si(sc,s)]]});}},
  tf:{lv:2,f(sc,mode){const st=[],gap=s=>mode==='table'?0:3*sc.tol(s);
-  for(let t=0;t<60&&st.length<8;t++){const s=pick(sc.data),i=RI(0,sc.n-1),j=RI(0,sc.n-1),a=s.v[i],b=s.v[j];const kind=RI(0,3);
+  for(let t=0;t<60&&st.length<8;t++){const s=pick(sc.data),i=RI(0,sc.n-1),j=RI(0,sc.n-1),a=s.v[i],b=s.v[j];const kind=RI(0,4);if(kind===4){const mx=Math.max(...s.v),mn=Math.min(...s.v),am=mx-mn,A=sc.ax[s.axis||'L'],T=rnd(A.st*RI(1,A.n),6);if(Math.abs(am-T)<=(mode==='table'?0:4*sc.tol(s))||am===T)continue;st.push({ok:am>T,w:P2(`amplituda: ${fv(s,mx,0)} − (${fv(s,mn,0)}) = ${fv(s,rnd(am,s.d||0),0)} ${U(s,0)}`,`range: ${fv(s,mx,1)} − (${fv(s,mn,1)}) = ${fv(s,rnd(am,s.d||0),1)} ${U(s,1)}`),t:P2(`Amplituda wartości „${N(s,0)}” (różnica między największą a najmniejszą wartością) przekraczała ${F(T,0)} ${U(s,0)}.`,`The range of “${N(s,1)}” (highest − lowest) was more than ${F(T,1)} ${U(s,1)}.`)});continue;}
    if(kind===0&&i!==j&&Math.abs(a-b)>gap(s)&&a!==b){st.push({ok:a>b,w:P2(`${fv(s,a,0)} ${U(s,0)} wobec ${fv(s,b,0)} ${U(s,0)}`,`${fv(s,a,1)} ${U(s,1)} vs ${fv(s,b,1)} ${U(s,1)}`),t:P2(`Wartość „${N(s,0)}” ${XT(sc,i,0)} była wyższa niż ${XT(sc,j,0)}.`,`“${cap(N(s,1))}” was higher ${XT(sc,i,1)} than ${XT(sc,j,1)}.`)});}
    if(kind===1){const im=uniqExt(s,true,mode==='table'?0:2*sc.tol(s));if(im<0)continue;const w=Math.random()<.5?im:j;if(w!==im&&Math.max(...s.v)-s.v[w]<=gap(s))continue;st.push({ok:w===im,w:P2(`najwyższa wartość: ${fv(s,s.v[im],0)} ${U(s,0)} – ${XO(sc,im,0)}`,`highest: ${fv(s,s.v[im],1)} ${U(s,1)} – ${XO(sc,im,1)}`),t:P2(`Najwyższą wartość „${N(s,0)}” odnotowano ${XT(sc,w,0)}.`,`The highest “${N(s,1)}” was recorded ${XT(sc,w,1)}.`)});}
    if(kind===2&&b>0&&i!==j){const r=a/b;if(r>1.75&&r<2.3||r<1.2&&r>.85)continue;if(mode!=='table'&&Math.abs(a-2*b)<4*sc.tol(s))continue;st.push({ok:r>2,w:P2(`${fv(s,a,0)} : ${fv(s,b,0)} ≈ ${F(rnd(r,1),0,1)}`,`${fv(s,a,1)} ÷ ${fv(s,b,1)} ≈ ${F(rnd(r,1),1,1)}`),t:P2(`Wartość „${N(s,0)}” ${XT(sc,i,0)} była ponad dwa razy wyższa niż ${XT(sc,j,0)}.`,`“${cap(N(s,1))}” ${XT(sc,i,1)} was more than twice as high as ${XT(sc,j,1)}.`)});}
@@ -451,9 +483,9 @@ const QT={
  mean:{lv:3,table:1,f(sc){const s=sc.climate?sc.series[0]:pick(sc.data),sum=s.v.reduce((a,b)=>a+b,0),m=sum/s.v.length,r=rnd(m,1);
   return Object.assign(numQ(sc,P2(sc.climate?'Oblicz średnią roczną temperaturę powietrza. Wynik zaokrąglij do 0,1.':`Oblicz średnią wartość <b>${N(s,0)}</b> ze wszystkich pomiarów w tabeli. Wynik zaokrąglij do 0,1.`,sc.climate?'Work out the mean annual air temperature, to 1 decimal place.':`Work out the mean <b>${N(s,1)}</b> of all values in the table, to 1 decimal place.`),r,.051,s.unit,
    [`Suma: ${F(rnd(sum,2),0)} ${U(s,0)}; ${F(rnd(sum,2),0)} : ${s.v.length} = ${F(rnd(m,3),0)} ≈ ${F(r,0,1)} ${U(s,0)}.`,`Sum: ${F(rnd(sum,2),1)} ${U(s,1)}; ${F(rnd(sum,2),1)} ÷ ${s.v.length} = ${F(rnd(m,3),1)} ≈ ${F(r,1,1)} ${U(s,1)}.`],[],{rows:[...Array(sc.n).keys()]}),{dec:1});}},
- pct:{lv:3,table:1,f(sc){const s=pick(sc.data);for(let t=0;t<30;t++){const i=RI(0,sc.n-2),j=RI(i+1,sc.n-1),a=s.v[i],b=s.v[j];if(a<=0||b===a)continue;const p=(b-a)/a*100;if(Math.abs(p)<5||Math.abs(p)>400)continue;const up=p>0,r=Math.round(Math.abs(p));
-   return numQ(sc,P2(`Oblicz, o ile procent ${up?'wzrosła':'zmalała'} wartość <b>${N(s,0)}</b> – od „${XO(sc,i,0)}” do „${XO(sc,j,0)}”. Wynik zaokrąglij do liczby całkowitej.`,`By what percentage did <b>${N(s,1)}</b> ${up?'increase':'decrease'} from “${XO(sc,i,1)}” to “${XO(sc,j,1)}”? Round to a whole number.`),r,.51,P2('%','%'),
-    [`(${fv(s,b,0)} − ${fv(s,a,0)}) : ${fv(s,a,0)} × 100% = ${F(rnd(p,2),0)}% ≈ ${up?'':'−'}${r}%. Dzielisz przez wartość <b>początkową</b> (${fv(s,a,0)}).`,`(${fv(s,b,1)} − ${fv(s,a,1)}) ÷ ${fv(s,a,1)} × 100% = ${F(rnd(p,2),1)}% ≈ ${up?'':'−'}${r}%. Divide by the <b>starting</b> value (${fv(s,a,1)}).`],[],{cells:[[i,si(sc,s)],[j,si(sc,s)]]});}return null;}},
+ pct:{lv:3,table:1,f(sc){const s=pick(sc.data.filter(x=>!['%','‰'].includes(U(x,0))));if(!s)return null;for(let t=0;t<30;t++){const i=RI(0,sc.n-2),j=RI(i+1,sc.n-1),a=s.v[i],b=s.v[j];if(a<=0||b===a)continue;const p=(b-a)/a*100;if(Math.abs(p)<5||Math.abs(p)>400)continue;const up=p>0,r=Math.round(Math.abs(p));
+   return Object.assign(numQ(sc,P2(`Oblicz, o ile procent ${up?'wzrosła':'zmalała'} wartość <b>${N(s,0)}</b> – od „${XO(sc,i,0)}” do „${XO(sc,j,0)}”. Wynik zaokrąglij do liczby całkowitej.`,`By what percentage did <b>${N(s,1)}</b> ${up?'increase':'decrease'} from “${XO(sc,i,1)}” to “${XO(sc,j,1)}”? Round to a whole number.`),r,.51,P2('%','%'),
+    [`(${fv(s,b,0)} − ${fv(s,a,0)}) : ${fv(s,a,0)} × 100% = ${F(rnd(p,2),0)}% ≈ ${up?'':'−'}${r}%. Dzielisz przez wartość <b>początkową</b> (${fv(s,a,0)}).`,`(${fv(s,b,1)} − ${fv(s,a,1)}) ÷ ${fv(s,a,1)} × 100% = ${F(rnd(p,2),1)}% ≈ ${up?'':'−'}${r}%. Divide by the <b>starting</b> value (${fv(s,a,1)}).`],[],{cells:[[i,si(sc,s)],[j,si(sc,s)]]}),{absOK:1,alts:[{v:Math.abs(rnd(b-a,s.d||0)),tol:.001,msg:P2(`Wpisana liczba to różnica w jednostkach (${fv(s,b,0)} − ${fv(s,a,0)} = ${fv(s,rnd(b-a,s.d||0),0)} ${U(s,0)}), a nie zmiana procentowa. Aby ją obliczyć, różnicę dzielisz przez wartość początkową i mnożysz przez 100%.`,`That is the difference in units (${fv(s,b,1)} − ${fv(s,a,1)} = ${fv(s,rnd(b-a,s.d||0),1)} ${U(s,1)}), not the percentage change. To get it, divide the difference by the starting value and multiply by 100%.`)}].filter(a=>Math.abs(a.v-r)>1)});}return null;}},
  ratio:{lv:3,table:1,f(sc){const s=pick(sc.data);for(let t=0;t<30;t++){const i=RI(0,sc.n-1),j=RI(0,sc.n-1),a=s.v[i],b=s.v[j];if(i===j||b<=0||a/b<1.4)continue;const r=rnd(a/b,1);
    return Object.assign(numQ(sc,P2(`Ile razy wartość <b>${N(s,0)}</b> ${XT(sc,i,0)} była większa niż ${XT(sc,j,0)}? Wynik zaokrąglij do 0,1.`,`How many times greater was <b>${N(s,1)}</b> ${XT(sc,i,1)} than ${XT(sc,j,1)}? Round to 1 decimal place.`),r,.051,P2('',''),
     [`${fv(s,a,0)} : ${fv(s,b,0)} = ${F(rnd(a/b,3),0)} ≈ ${F(r,0,1)}.`,`${fv(s,a,1)} ÷ ${fv(s,b,1)} = ${F(rnd(a/b,3),1)} ≈ ${F(r,1,1)}.`],[],{cells:[[i,si(sc,s)],[j,si(sc,s)]]}),{dec:1});}return null;}},
@@ -463,9 +495,38 @@ const QT={
  avg3:{lv:3,f(sc,mode){const s=pick(sc.data),i=RI(0,sc.n-3),ix=[i,i+1,i+2],vs=ix.map(j=>s.v[j]),m=vs.reduce((a,b)=>a+b,0)/3,r=rnd(m,1),tol=mode==='table'?.051:sc.tol(s);
   return Object.assign(numQ(sc,P2(`Oblicz średnią wartość <b>${N(s,0)}</b> dla: ${ix.map(j=>XO(sc,j,0)).join(', ')}.${mode==='table'?' Wynik zaokrąglij do 0,1.':''}`,`Work out the mean <b>${N(s,1)}</b> for ${ix.map(j=>XO(sc,j,1)).join(', ')}.${mode==='table'?' Round to 1 decimal place.':''}`),r,tol,s.unit,
    [`(${vs.map(v=>fv(s,v,0)).join(' + ')}) : 3 = ${F(rnd(m,3),0)} ≈ ${F(r,0,1)} ${U(s,0)}.${mode==='table'?'':accept(r,tol,s,0)}`,`(${vs.map(v=>fv(s,v,1)).join(' + ')}) ÷ 3 = ${F(rnd(m,3),1)} ≈ ${F(r,1,1)} ${U(s,1)}.${mode==='table'?'':accept(r,tol,s,1)}`],ix.map(j=>({si:si(sc,s),i:j})),{cells:ix.map(j=>[j,si(sc,s)])}),{dec:1});}},
- derive:{lv:3,f(sc,mode){const D=sc.derive;if(!D)return null;const i=RI(0,sc.n-1),v=D.f(sc,i),a=sc.series[0],b=sc.series[1],tol=mode==='table'?0:2*sc.tol(a);
-  return numQ(sc,P2(`Oblicz <b>${D.name[0]}</b> ${XT(sc,i,0)}.${v<0?'':''} Jeśli wynik jest ujemny, wpisz go z minusem.`,`Work out the <b>${D.name[1]}</b> ${XT(sc,i,1)}. If it is negative, include the minus sign.`),v,tol,D.unit,
-   [`${D.how[0]}: ${fv(a,a.v[i],0)} − ${fv(b,b.v[i],0)} = ${F(v,0)} ${D.unit[0]}.${tol?accept(v,tol,a,0):''}`,`${D.how[1]}: ${fv(a,a.v[i],1)} − ${fv(b,b.v[i],1)} = ${F(v,1)} ${D.unit[1]}.${tol?accept(v,tol,a,1):''}`],[{si:0,i},{si:1,i}],{rows:[i]});}}
+ range3:{lv:3,w:2,f(sc,mode){if(sc.n<7)return null;const s=sc.climate?sc.series[0]:pick(sc.data),tol=tolOf(sc,s,mode),len=RI(4,Math.min(7,sc.n-2)),i0=RI(0,sc.n-len),ix=[...Array(len).keys()].map(j=>i0+j),vs=ix.map(j=>s.v[j]),mx=Math.max(...vs),mn=Math.min(...vs),d=rnd(mx-mn,s.d||0);if(d<=3*tol||d===0)return null;const imx=ix[vs.indexOf(mx)],imn=ix[vs.indexOf(mn)];
+  return numQ(sc,P2(`Oblicz amplitudę wartości „<b>${N(s,0)}</b>” w okresie od „${XO(sc,i0,0)}” do „${XO(sc,i0+len-1,0)}” (włącznie).`,`Work out the range of <b>${N(s,1)}</b> from “${XO(sc,i0,1)}” to “${XO(sc,i0+len-1,1)}” (inclusive).`),d,2*tol,s.unit,
+   [`Amplituda = wartość największa − wartość najmniejsza <b>w podanym okresie</b> (nie z całego ${mode==='table'?'zestawienia':'wykresu'}): ${fv(s,mx,0)} (${XO(sc,imx,0)}) − (${fv(s,mn,0)}) (${XO(sc,imn,0)}) = ${fv(s,d,0)} ${U(s,0)}.${accept(d,2*tol,s,0)}`,
+    `Range = highest − lowest value <b>within the given period</b> (not the whole ${mode==='table'?'table':'chart'}): ${fv(s,mx,1)} (${XO(sc,imx,1)}) − (${fv(s,mn,1)}) (${XO(sc,imn,1)}) = ${fv(s,d,1)} ${U(s,1)}.${accept(d,2*tol,s,1)}`],
+   [{si:si(sc,s),i:imx},{si:si(sc,s),i:imn}],{cells:[[imx,si(sc,s)],[imn,si(sc,s)]],rows:ix});}},
+ pp:{lv:3,w:3,f(sc,mode){const S=sc.data.filter(s=>U(s,0)==='%');if(!S.length)return null;const s=pick(S),t=sc.tol(s);
+  for(let z=0;z<40;z++){const i=RI(0,sc.n-2),j=RI(i+1,sc.n-1),a=s.v[i],b=s.v[j];if(a<=0||Math.abs(b-a)<3)continue;
+   const up=b>a,pp=rnd(Math.abs(b-a),s.d||0),rel=(b-a)/a*100,rr=Math.round(Math.abs(rel));if(Math.abs(rel)>300)continue;
+   const tPP=mode==='table'?(s.d?.051:0):2*t,tR=mode==='table'?.51:relTol(a,b,t);if(tR>12||Math.abs(rr-pp)<=tPP+tR+1)continue;
+   const askPP=Math.random()<.5,A0=[fv(s,a,0),fv(s,b,0)],A1=[fv(s,a,1),fv(s,b,1)],sg=up?'':'−';
+   const ex=[`<b>Punkty procentowe:</b> ${A0[1]}% − ${A0[0]}% = ${sg}${fv(s,pp,0)} p.p. (zwykła różnica).<br><b>Procent (zmiana procentowa):</b> (${A0[1]} − ${A0[0]}) : ${A0[0]} × 100% ≈ ${sg}${rr}% (różnica w stosunku do wartości początkowej).${mode==='table'?'':' Wartości odczytujesz z wykresu, więc wynik może się nieco różnić.'}`,
+     `<b>Percentage points:</b> ${A1[1]}% − ${A1[0]}% = ${sg}${fv(s,pp,1)} pp (plain difference).<br><b>Percent (percentage change):</b> (${A1[1]} − ${A1[0]}) ÷ ${A1[0]} × 100% ≈ ${sg}${rr}% (difference relative to the starting value).${mode==='table'?'':' The values are read from the chart, so your result may differ slightly.'}`];
+   const pl=[XO(sc,i,0),XO(sc,j,0)],en=[XO(sc,i,1),XO(sc,j,1)],g=[{si:si(sc,s),i},{si:si(sc,s),i:j}],hl={cells:[[i,si(sc,s)],[j,si(sc,s)]]};
+   const q=askPP?numQ(sc,P2(`O ile <b>punktów procentowych</b> ${up?'wzrosła':'zmalała'} wartość <b>${N(s,0)}</b> od „${pl[0]}” do „${pl[1]}”?`,`By how many <b>percentage points</b> did <b>${N(s,1)}</b> ${up?'rise':'fall'} from “${en[0]}” to “${en[1]}”?`),pp,tPP,P2('p.p.','pp'),ex,g,hl)
+    :numQ(sc,P2(`O ile <b>procent</b> ${up?'wzrosła':'zmalała'} wartość <b>${N(s,0)}</b> od „${pl[0]}” do „${pl[1]}”? Wynik zaokrąglij do liczby całkowitej.`,`By what <b>percentage</b> did <b>${N(s,1)}</b> ${up?'rise':'fall'} from “${en[0]}” to “${en[1]}”? Round to a whole number.`),rr,tR,P2('%','%'),ex,g,hl);
+   q.absOK=1;if(!askPP)q.dec=0;
+   q.alts=askPP?[{v:rr,tol:tR,msg:P2(`Wpisana liczba to zmiana <b>procentowa</b> (ok. ${rr}%) – o jaką część wartości początkowej zmieniła się wielkość. Pytanie dotyczy <b>punktów procentowych</b>: gdy obie wartości są podane w procentach, ich zwykła różnica to punkty procentowe (${A0[1]} − ${A0[0]}).`,`Your number is the <b>percentage change</b> (about ${rr}%) – the change relative to the starting value. The question asks for <b>percentage points</b>: when both values are in percent, their plain difference is in percentage points (${A1[1]} − ${A1[0]}).`)}]
+    :[{v:pp,tol:tPP,msg:P2(`Wpisana liczba to różnica w <b>punktach procentowych</b> (${fv(s,pp,0)} p.p.) – zwykła różnica dwóch wartości podanych w procentach. Pytanie dotyczy jednak zmiany <b>procentowej</b>: o jaką część wartości początkowej (${A0[0]}%) zmieniła się wielkość. Różnicę trzeba podzielić przez wartość początkową i pomnożyć przez 100%.`,`Your number is the difference in <b>percentage points</b> (${fv(s,pp,1)} pp) – the plain difference of two values given in percent. But the question asks for the <b>percentage change</b>: what fraction of the starting value (${A1[0]}%) it changed by. Divide the difference by the starting value and multiply by 100%.`)}];
+   return q;}return null;}},
+ conv:{lv:2,f(sc,mode){const S=sc.data.filter(s=>['%','‰'].includes(U(s,0)));if(!S.length)return null;const s=pick(S),pm=U(s,0)==='‰',i=RI(0,sc.n-1),v=s.v[i];if(v===0)return null;
+  const d=Math.max(0,(s.d||0)+(pm?1:-1)),ans=rnd(pm?v/10:v*10,d),tol=mode==='table'?.0001:(pm?sc.tol(s)/10:sc.tol(s)*10),wrong=rnd(pm?v*10:v/10,4);
+  const acc=k=>tol>.001?(k?` Answers from ${F(rnd(ans-tol,d),1,d)} to ${F(rnd(ans+tol,d),1,d)} are accepted.`:` Przyjmujemy od ${F(rnd(ans-tol,d),0,d)} do ${F(rnd(ans+tol,d),0,d)}.`):'';
+  const q=numQ(sc,P2(`Wyraź wartość <b>${N(s,0)}</b> ${XT(sc,i,0)} w ${pm?'procentach (%)':'promilach (‰)'}.`,`Express <b>${N(s,1)}</b> ${XT(sc,i,1)} in ${pm?'percent (%)':'per mille (‰)'}.`),ans,tol,P2(pm?'%':'‰',pm?'%':'‰'),
+   [`1‰ = 0,1%, czyli 1% = 10‰. ${pm?`${fv(s,v,0)}‰ : 10 = ${F(ans,0,d)}%`:`${fv(s,v,0)}% × 10 = ${F(ans,0,d)}‰`}.${acc(0)}`,`1‰ = 0.1%, so 1% = 10‰. ${pm?`${fv(s,v,1)}‰ ÷ 10 = ${F(ans,1,d)}%`:`${fv(s,v,1)}% × 10 = ${F(ans,1,d)}‰`}.${acc(1)}`],[{si:si(sc,s),i}],{cells:[[i,si(sc,s)]]});
+  q.dec=d;q.alts=[{v:wrong,tol:Math.abs(wrong)*.03+.001,msg:P2(`Wynik jest 100 razy za ${pm?'duży':'mały'} – pomnożono zamiast podzielić (albo odwrotnie). 1‰ to tysięczna część całości, a 1% – setna, więc 1‰ = 0,1%: ta sama wielkość w promilach to liczba <b>10 razy większa</b> niż w procentach.`,`The result is 100 times too ${pm?'large':'small'} – you multiplied instead of dividing (or the other way round). 1‰ is a thousandth of the whole and 1% a hundredth, so 1‰ = 0.1%: the same quantity in per mille is a number <b>10 times larger</b> than in percent.`)},
+   {v,tol:Math.abs(v)*.03+.001,msg:P2(`To ta sama liczba co ${mode==='table'?'w tabeli':'na wykresie'} – trzeba ją jeszcze przeliczyć. 1‰ = 0,1%, więc liczba w ‰ jest 10 razy większa niż w %.`,`That is the same number as ${mode==='table'?'in the table':'on the chart'} – it still needs converting. 1‰ = 0.1%, so the number in ‰ is 10 times larger than in %.`)}].filter(a=>Math.abs(a.v-ans)>2*tol+.001);return q;}},
+ derive:{lv:3,w:2,f(sc,mode){const Ds=(sc.derives||[]).filter(D=>!(D.table&&mode!=='table'));if(!Ds.length)return null;const D=pick(Ds),i=RI(0,sc.n-1),raw=D.f(sc,i),v=rnd(raw,D.d),tol=mode==='table'?(D.d?.051:0):D.tol(sc);
+  const ac=k=>mode!=='table'&&tol?(k?` Answers from ${F(rnd(v-tol,D.d),1,D.d)} to ${F(rnd(v+tol,D.d),1,D.d)} are accepted (readings from a chart are approximate).`:` Przyjmujemy odpowiedzi od ${F(rnd(v-tol,D.d),0,D.d)} do ${F(rnd(v+tol,D.d),0,D.d)} – odczyt z wykresu jest przybliżony.`):'';
+  const res=k=>`${F(rnd(raw,3),k)}${rnd(raw,3)!==v?' ≈ '+F(v,k,D.d):''} ${D.unit[k]}`;
+  const q=numQ(sc,P2(`Oblicz <b>${D.name[0]}</b> ${XT(sc,i,0)}.${D.d?' Wynik zaokrąglij do 0,1.':''} Jeśli wynik jest ujemny, wpisz go z minusem.<br><span class="formula">${D.how[0]}</span>`,`Work out the <b>${D.name[1]}</b> ${XT(sc,i,1)}.${D.d?' Round to 1 decimal place.':''} If it is negative, include the minus sign.<br><span class="formula">${D.how[1]}</span>`),v,tol,D.unit,
+   [`${D.how[0]}<br>${D.calc(sc,i,0)} = ${res(0)}.${D.note?' '+D.note[0]:''}${ac(0)}`,`${D.how[1]}<br>${D.calc(sc,i,1)} = ${res(1)}.${D.note?' '+D.note[1]:''}${ac(1)}`],mode==='table'?[]:D.guide(sc,i),{rows:[i]});
+  q.dec=D.d;q.alts=(D.alts?D.alts(sc,i,v,tol||.001):[]).filter(a=>Math.abs(a.v-v)>2*(tol||.05));return q;}}
 };
 
 // ---------- ćwiczenia ----------
@@ -475,11 +536,11 @@ let Q=null,TALLY={ok:0,all:0};
 function newQ(){for(let t=0;t<80;t++){const keys=SC_KEYS.filter(k=>ST8.subj==='all'||SC[k]&&peekSubj(k)===ST8.subj),key=pick(keys),sc=make(key);
   const mode=ST8.mode==='all'?(Math.random()<.6?'chart':'table'):ST8.mode;
   const types=Object.entries(QT).filter(([id,d])=>d.lv===ST8.lv&&!(d.chart&&mode==='table')&&!(d.table&&mode==='chart')&&!(d.dual&&!sc.ax.R));
-  const ex=(sc.extra||[]).filter(e=>e.lv===ST8.lv);const opts=[...types.map(([id,d])=>()=>d.f(sc,mode)),...ex.map(e=>()=>e.f(sc,mode))];if(!opts.length)continue;
+  const ex=(sc.extra||[]).filter(e=>e.lv===ST8.lv);const opts=[...types.flatMap(([id,d])=>Array(d.w||1).fill(()=>d.f(sc,mode))),...ex.map(e=>()=>e.f(sc,mode))];if(!opts.length)continue;
   const q=pick(opts)();if(!q)continue;Q={sc,mode,q,ans:null,done:false};renderQ();return;}}
 const SUBJ_CACHE={};function peekSubj(k){if(!SUBJ_CACHE[k])SUBJ_CACHE[k]=SC[k]().subj;return SUBJ_CACHE[k];}
 function renderQ(){const {sc,mode,q}=Q,k=K(),card=$('#qCard');
- let h=`<div class="badges"><span class="badge ${sc.subj}">${sc.subj==='bio'?tr('biologia','biology'):tr('geografia','geography')}</span><span class="badge">${mode==='table'?tr('tabela','table'):(sc.ax.R?tr('wykres z dwiema osiami','dual-axis chart'):tr('wykres','chart'))}</span></div>`;
+ let h=`<div class="badges"><span class="badge ${sc.subj}">${sc.subj==='bio'?tr('dane biologiczne','biology data'):tr('dane geograficzne','geography data')}</span><span class="badge">${mode==='table'?tr('tabela','table'):(sc.ax.R?tr('wykres z dwiema osiami','dual-axis chart'):tr('wykres','chart'))}</span></div>`;
  h+=`<div class="two"><div><p class="ctitle">${esc(sc.title[k])}</p>${mode==='table'?table(sc,Q.done?q.hl:null):'<div class="chart" id="qChart"></div><div class="legend" id="qLeg"></div>'}<p class="src">${esc(sc.src[k])}</p></div><div>`;
  h+=`<p class="qtext">${q.q[k]}</p>`;
  if(q.type==='num')h+=`<div class="ans"><input id="qIn" inputmode="decimal" autocomplete="off" aria-label="${tr('odpowiedź','answer')}" ${Q.done?'disabled':''} value="${Q.ans!=null?esc(Q.ans):''}"> <span>${esc(q.unit[k]||'')}</span></div>`;
@@ -487,6 +548,7 @@ function renderQ(){const {sc,mode,q}=Q,k=K(),card=$('#qCard');
  if(q.type==='tf'){const a=Q.ans||[],TL=k?['T','F']:['P','F'];h+=`<table class="tf">${q.st.map((s,i)=>`<tr><td>${s.t[k]}${Q.done&&s.w?`<br><small class="note">${esc(s.w[k])}</small>`:''}</td><td class="c">${[true,false].map((v,j)=>`<button data-tf="${i}" data-v="${j}" aria-pressed="${a[i]===v}" class="${Q.done?(s.ok===v?'right':a[i]===v?'wrong':''):''}" ${Q.done?'disabled':''}>${TL[j]}</button>`).join('')}</td></tr>`).join('')}</table>`;}
  if(!Q.done)h+=`<div class="row"><button class="btn primary" id="qCheck">${tr('Sprawdź','Check')}</button><button class="btn" id="qSkip">${tr('Inne zadanie','Another task')}</button></div>`;
  else{h+=`<div class="fb ${Q.right?'ok':'no'}"><p class="h">${Q.right?tr('Dobrze!','Correct!'):tr('Nie tym razem.','Not this time.')}</p>`;
+  if(Q.alt)h+=`<p class="alt">💡 ${Q.alt[k]}</p>`;
   if(q.type==='num')h+=`<p>${tr('Poprawna odpowiedź','Correct answer')}: <b>${F(q.ans,k,q.dec!=null?q.dec:decOf(q.ans))}${q.unit[k]?' '+esc(q.unit[k]):''}</b></p>`;
   h+=`<p>${q.ex[k]}</p></div><div class="row"><button class="btn primary" id="qNext">${tr('Następne zadanie','Next task')} →</button></div>`;}
  h+='</div></div>';card.innerHTML=h.replace(/\.\.(?!\.)/g,'.');
@@ -497,7 +559,7 @@ function renderQ(){const {sc,mode,q}=Q,k=K(),card=$('#qCard');
  const inp=$('#qIn');if(inp){inp.oninput=()=>Q.ans=inp.value;inp.onkeydown=e=>{if(e.key==='Enter')check();};}
  if($('#qCheck'))$('#qCheck').onclick=check;if($('#qSkip'))$('#qSkip').onclick=newQ;if($('#qNext'))$('#qNext').onclick=()=>{newQ();$('#qCard').scrollIntoView({block:'nearest'});};}
 function check(){const q=Q.q;let ok;
- if(q.type==='num'){const v=num(Q.ans);if(!isFinite(v)){$('#qIn').focus();return;}ok=Math.abs(v-q.ans)<=q.tol+1e-9;}
+ if(q.type==='num'){const v=num(Q.ans);if(!isFinite(v)){$('#qIn').focus();return;}const vv=q.absOK?Math.abs(v):v;ok=Math.abs(vv-q.ans)<=q.tol+1e-9;Q.alt=null;if(!ok&&q.alts){const a=q.alts.find(a=>Math.abs(vv-a.v)<=a.tol+1e-9);if(a)Q.alt=a.msg;}}
  if(q.type==='mc'){if(Q.ans==null)return;ok=!!q.opts[Q.ans].ok;}
  if(q.type==='tf'){if(!Q.ans||q.st.some((s,i)=>Q.ans[i]===undefined))return;ok=q.st.every((s,i)=>Q.ans[i]===s.ok);}
  Q.done=true;Q.right=ok;TALLY.all++;if(ok)TALLY.ok++;renderQ();}
@@ -505,10 +567,49 @@ function segs(){[['#setSubj','subj'],['#setMode','mode'],['#setLv','lv']].forEac
 
 // ---------- teoria ----------
 let AN=null,DM=null,DMI=6,TRAP=null;
-const DEMOS=['klimat','tetno','glukoza','populacje','turystyka','wzrost'];
-function drawAnno(){if(!AN){AN=make('klimat');const w=ST.findIndex(s=>s[0]==='Warszawa');if(w>=0){const s=ST[w];AN.series[0].v=s[4].slice();AN.series[1].v=s[5].slice();AN.title=P2(`Klimatogram: ${s[0]} (${s[2]})`,`Climograph: ${s[1]} (${s[3]})`);AN.ax=scales(AN);}}
- $('#anTitle').textContent=AN.title[K()];draw($('#anChart'),AN,{anno:1});legend($('#anLeg'),AN);$('#anSrc').textContent=tr('Źródło: średnie wieloletnie ze stacji meteorologicznej.','Source: long-term averages from a weather station.');}
-function fillDm(){const v=$('#dmSel').value||DEMOS[0];const names={klimat:P2('klimatogram (temperatura i opady)','climograph (temperature and precipitation)'),tetno:P2('tętno i oddechy','heart rate and breathing'),glukoza:P2('glukoza i insulina','glucose and insulin'),populacje:P2('drapieżnik i ofiara','predator and prey'),turystyka:P2('turyści i temperatura','tourists and temperature'),wzrost:P2('masa ciała i wzrost','body mass and height')};
+const DEMOS=['klimat','tetno','glukoza','populacje','turystyka','wzrost','ludnosc'];
+const ANS={
+ opady:{n:P2('słupkowy – opady w Warszawie','bar – precipitation in Warsaw'),mk(){const w=ST.find(s=>s[0]==='Warszawa')||ST[0];return fin({subj:'geo',title:P2(`Średnie miesięczne sumy opadów: ${w[0]}`,`Mean monthly precipitation: ${w[1]}`),src:P2('Źródło: średnie wieloletnie ze stacji meteorologicznej.','Source: long-term averages from a weather station.'),x:XM,series:[{name:P2('opady','precipitation'),unit:P2('mm','mm'),type:'bar',axis:'L',c:'c2',v:w[5].slice()}]});}},
+ temp:{n:P2('liniowy – temperatura w Warszawie','line – temperature in Warsaw'),mk(){const w=ST.find(s=>s[0]==='Warszawa')||ST[0];return fin({subj:'geo',title:P2(`Średnia miesięczna temperatura powietrza: ${w[0]}`,`Mean monthly air temperature: ${w[1]}`),src:P2('Źródło: średnie wieloletnie ze stacji meteorologicznej.','Source: long-term averages from a weather station.'),x:XM,series:[{name:P2('temperatura powietrza','air temperature'),unit:P2('°C','°C'),type:'line',axis:'L',c:'c1',v:w[4].slice(),d:1}]});}},
+ enzymy:{n:P2('liniowy, dwie serie – aktywność enzymów','line, two series – enzyme activity'),mk:()=>make('enzymy')},
+ kielkowanie:{n:P2('liniowy – kiełkowanie nasion (%)','line – seed germination (%)'),mk:()=>make('kielkowanie')},
+ rzeka:{n:P2('liniowy z progami – stan wody w rzece','line with thresholds – river level'),mk:()=>make('rzeka')},
+ energia:{n:P2('słupkowy grupowany – źródła energii','grouped bars – energy sources'),mk:()=>make('energia')},
+ wspolczynniki:{n:P2('liniowy – współczynniki urodzeń i zgonów (‰)','line – birth and death rates (‰)'),mk:()=>make('wspolczynniki')},
+ pie:{n:P2('kołowy – użytkowanie ziemi w Polsce','pie – land use in Poland'),mk:()=>({pie:1,title:P2('Struktura użytkowania ziemi w Polsce','Land use in Poland'),src:P2('Dane przybliżone na podstawie danych GUS.','Approximate figures based on Statistics Poland (GUS).'),
+   slices:[{name:P2('użytki rolne','farmland'),v:60,c:'c5'},{name:P2('lasy i zadrzewienia','forests and woodland'),v:31,c:'c3'},{name:P2('tereny zabudowane','built-up land'),v:5,c:'c4'},{name:P2('wody','water'),v:2,c:'c2'},{name:P2('inne','other'),v:2,c:'muted'}]})}
+};
+let ANK='opady';
+function fillAn(){const v=$('#anSel').value||ANK;$('#anSel').innerHTML=Object.entries(ANS).map(([key,o])=>`<option value="${key}">${esc(o.n[K()])}</option>`).join('');$('#anSel').value=v;}
+function drawPie(el,sc){const k=K(),W=Math.round(clamp(el.clientWidth||500,280,620)),H=Math.round(clamp(W*.62,220,340)),tot=sc.slices.reduce((a,b)=>a+b.v,0),small=sc.slices.map(x=>x.v/tot<=.08);
+ const r=Math.min(H/2-14,W/2-(W<420?50:120)),cx=W/2-(W<420?20:40),cy=H/2,fi=small.indexOf(true),before=fi<0?0:sc.slices.slice(0,fi).reduce((a,b)=>a+b.v,0),ss=sc.slices.filter((x,i)=>small[i]).reduce((a,b)=>a+b.v,0);
+ let a0=fi<0?-Math.PI/2:-2*Math.PI*(before+ss/2)/tot,lastY=-99,s=`<svg xmlns="${NS}" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(sc.title[k])}">`;const lab=[];
+ sc.slices.forEach((sl,i)=>{const a1=a0+2*Math.PI*sl.v/tot,big=a1-a0>Math.PI?1:0,p=(a,rr)=>[cx+rr*Math.cos(a),cy+rr*Math.sin(a)];const [x0,y0]=p(a0,r),[x1,y1]=p(a1,r);
+  s+=`<path d="M${cx},${cy} L${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 ${big} 1 ${x1.toFixed(1)},${y1.toFixed(1)} Z" style="fill:${col(sl.c)};stroke:var(--paper)" stroke-width="2" opacity=".9"/>`;
+  const am=(a0+a1)/2;if(!small[i]){const [lx,ly]=p(am,r*.6);s+=`<text x="${lx}" y="${ly+5}" text-anchor="middle" font-size="14" font-weight="700" style="fill:var(--paper)">${sl.v}%</text>`;}else lab.push([am,sl]);a0=a1;});
+ lab.sort((a,b)=>Math.sin(a[0])-Math.sin(b[0])).forEach(([am,sl])=>{const ex=cx+(r+3)*Math.cos(am),ey=cy+(r+3)*Math.sin(am);let ty=Math.max(ey,lastY+17);lastY=ty;const tx=cx+r+18;
+  s+=`<polyline points="${ex.toFixed(1)},${ey.toFixed(1)} ${tx-6},${ty.toFixed(1)} ${tx-2},${ty.toFixed(1)}" fill="none" style="stroke:var(--muted)"/><text x="${tx}" y="${(ty+4).toFixed(1)}" font-size="12.5" font-weight="700" style="fill:var(--ink)">${sl.v}%${W<420?'':` <tspan font-weight="400">${esc(sl.name[k])}</tspan>`}</text>`;});
+ el.innerHTML=s+'</svg>';}
+function anSteps(sc){const k=K(),T=tr(`<b>Tytuł</b> – „${esc(sc.title[0])}”: mówi, czego dotyczą dane.`,`<b>Title</b> – “${esc(sc.title[1])}”: tells you what the data are about.`),S=tr(`<b>Źródło danych</b> (pod wykresem): ${esc(sc.src[0])}`,`<b>Data source</b> (under the chart): ${esc(sc.src[1])}`);
+ if(sc.pie){const tot=sc.slices.reduce((a,b)=>a+b.v,0),big=sc.slices.reduce((a,b)=>b.v>a.v?b:a);return [T,
+  tr(`<b>Wycinki koła</b> – każdy to udział jednej części w całości. Razem dają ${tot}%.`,`<b>Slices</b> – each is the share of one part in the whole. Together they make ${tot}%.`),
+  tr(`<b>Wielkość wycinka</b> – im większy kąt, tym większy udział. Największy: ${esc(big.name[0])} (${big.v}%). Połowa koła to 50%, ćwierć – 25%.`,`<b>Slice size</b> – the larger the angle, the larger the share. Largest: ${esc(big.name[1])} (${big.v}%). Half the circle is 50%, a quarter is 25%.`),
+  tr('<b>Legenda</b> – który kolor oznacza którą część.','<b>Legend</b> – which colour stands for which part.'),
+  tr('Wykres kołowy <b>nie ma osi</b>: pokazuje strukturę w jednym momencie, a nie zmiany w czasie.','A pie chart <b>has no axes</b>: it shows the make-up at one moment, not change over time.'),S];}
+ const A=sc.ax.L,u=U(sc.data[0],k),dd=decOf(A.st),dh=decOf(A.st/2),xo=sc.x.opt[k];
+ const leg=sc.series.map(s=>`${s.type==='bar'?tr('słupki','bars'):s.type==='hline'?tr('przerywana linia – stała wartość progowa','dashed line – a fixed threshold'):tr('linia','line')}: ${esc(s.name[k])}`).join('; ');
+ return [T,
+  tr(`<b>Oś pionowa</b> ①: ${esc(axisTitle(sc,'L',0))}. Podziałka co ${F(A.st,0,dd)} ${esc(u)}, od ${F(A.lo,0,dd)} do ${F(A.hi,0,dd)}.${A.lo>0?' <b>Uwaga: ta oś nie zaczyna się od zera</b> – różnice wyglądają na większe, niż są.':A.lo<0?' Oś ma też wartości ujemne – pogrubiona linia to zero.':''}`,
+     `<b>Vertical axis</b> ①: ${esc(axisTitle(sc,'L',1))}. Marks every ${F(A.st,1,dd)} ${esc(u)}, from ${F(A.lo,1,dd)} to ${F(A.hi,1,dd)}.${A.lo>0?' <b>Note: this axis does not start at zero</b> – differences look bigger than they are.':A.lo<0?' The axis also has negative values – the bold line is zero.':''}`),
+  tr(`<b>Oś pozioma</b> ②: ${esc(sc.x.title[0])} – od „${esc(xo[0])}” do „${esc(xo[xo.length-1])}”. Każdy punkt lub słupek to jeden pomiar.`,`<b>Horizontal axis</b> ②: ${esc(sc.x.title[1])} – from “${esc(xo[0])}” to “${esc(xo[xo.length-1])}”. Each point or bar is one measurement.`),
+  tr(`<b>Linie siatki</b> ③: ciemniejsze co ${F(A.st,0,dd)} ${esc(u)}, jaśniejsze w połowie – co ${F(A.st/2,0,dh)} ${esc(u)}. Pomagają oszacować wartość między nimi.`,`<b>Grid lines</b> ③: darker every ${F(A.st,1,dd)} ${esc(u)}, lighter halfway – every ${F(A.st/2,1,dh)} ${esc(u)}. They help you estimate values in between.`),
+  tr(`<b>Legenda</b> (pod wykresem) – ${leg}.`,`<b>Legend</b> (under the chart) – ${leg}.`),S];}
+function drawAnno(){const key=$('#anSel').value||ANK;if(!AN||AN._k!==key){AN=ANS[key].mk();AN._k=key;ANK=key;}const k=K();
+ $('#anTitle').textContent=AN.title[k];
+ if(AN.pie){drawPie($('#anChart'),AN);$('#anLeg').innerHTML=AN.slices.map(s=>`<span><i class="bar" style="--c:${col(s.c)}"></i>${esc(s.name[k])} – ${s.v}%</span>`).join('');}
+ else{draw($('#anChart'),AN,{anno:1});legend($('#anLeg'),AN);}
+ $('#anSrc').textContent=AN.src[k];$('#anSteps').innerHTML=anSteps(AN).map(x=>`<li>${x}</li>`).join('');}
+function fillDm(){const v=$('#dmSel').value||DEMOS[0];const names={klimat:P2('klimatogram (temperatura i opady)','climograph (temperature and precipitation)'),tetno:P2('tętno i oddechy','heart rate and breathing'),glukoza:P2('glukoza i insulina','glucose and insulin'),populacje:P2('drapieżnik i ofiara','predator and prey'),turystyka:P2('turyści i temperatura','tourists and temperature'),wzrost:P2('masa ciała i wzrost','body mass and height'),ludnosc:P2('ludność, urodzenia i zgony','population, births and deaths')};
  $('#dmSel').innerHTML=DEMOS.map(d=>`<option value="${d}">${esc(names[d][K()])}</option>`).join('');$('#dmSel').value=v;}
 function drawDm(){if(!DM||DM.key!==$('#dmSel').value){DM=make($('#dmSel').value);DMI=Math.min(DMI,DM.n-1);$('#dmX').max=DM.n-1;$('#dmX').value=DMI;}const k=K();
  $('#dmTitle').textContent=DM.title[k];draw($('#dmChart'),DM,{guides:DM.data.map(s=>({si:si(DM,s),i:DMI})),pick:i=>{if(i!==DMI){DMI=i;$('#dmX').value=i;drawDm();}}});legend($('#dmLeg'),DM);
@@ -523,9 +624,10 @@ let TAB='teoria';
 function showTab(t){TAB=t;$$('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab===t));['teoria','cwicz'].forEach(k=>$('#tab-'+k).hidden=k!==t);redraw();if(t==='cwicz'&&!Q)newQ();}
 $$('[data-tab]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
 function redraw(){if(TAB==='teoria'){drawAnno();drawDm();drawTraps();}else if(Q)renderQ();}
-function applyLang(){document.documentElement.lang=L;document.title=tr('Wykresy i tabele','Charts and tables');$$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));fillDm();segs();}
+function applyLang(){document.documentElement.lang=L;document.title=tr('Wykresy i tabele','Charts and tables');$$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));fillAn();fillDm();segs();}
 $$('[data-lang]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.lang===L)return;L=b.dataset.lang;try{localStorage.setItem('wykLang',L)}catch(e){}applyLang();redraw();}));
 $('#dmSel').addEventListener('change',()=>{DM=null;drawDm();});
+$('#anSel').addEventListener('change',()=>{AN=null;drawAnno();});
 $('#dmX').addEventListener('input',e=>{DMI=+e.target.value;drawDm();});
 let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(redraw,120);});
 applyLang();
