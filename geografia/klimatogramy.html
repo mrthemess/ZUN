@@ -69,13 +69,18 @@ table.inp input{width:100%;min-width:0;padding:4px;text-align:center}
 .note{font-size:.88rem;color:var(--muted)}
 .verdict{margin-top:10px;padding:12px 14px;border-radius:12px;background:var(--soft);border-left:6px solid var(--acc)}
 @media (max-width:880px){.two{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}}
+.bph{margin:0 0 10px}.bph img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;display:block;background:var(--soft)}.bph figcaption{font-size:.75rem;color:var(--muted);margin-top:3px}.bph a{color:inherit}
+#biome h3{margin:0 0 4px;font-size:1.6rem;border-left:8px solid var(--c);padding-left:10px}#biome h4,.tz h4{margin:6px 0 6px;font-size:1.1rem}#biome ul{margin:0;padding-left:20px}#biome li{margin:6px 0}
+.tz{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:14px;align-items:start;border-left:8px solid var(--c);background:var(--paper);border-radius:12px;padding:12px;margin-bottom:10px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line)}.tz p{margin:0 0 6px}.tz small{font-weight:400;color:var(--muted);font-family:'Atkinson Hyperlegible',sans-serif}.tz .bph{margin:0}
+#mtnChart svg{width:100%;height:auto;display:block;max-width:720px}
+@media (max-width:640px){.tz{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header><div><h1 data-en="Climographs and climate zones">Klimatogramy i strefy klimatyczne</h1><p data-en="How to read a climograph (climate chart), how the climate zones differ and how to recognise them.">Jak czytać klimatogram, czym różnią się strefy klimatyczne i jak je rozpoznać.</p></div>
 <div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
-<div class="tabs" role="tablist"><button role="tab" data-tab="czytaj" aria-selected="true" data-en="How to read">Jak czytać</button><button role="tab" data-tab="strefy" aria-selected="false" data-en="Zones and examples">Strefy i przykłady</button><button role="tab" data-tab="cwicz" aria-selected="false" data-en="Practise">Ćwicz</button></div></div></header>
+<div class="tabs" role="tablist"><button role="tab" data-tab="czytaj" aria-selected="true" data-en="How to read">Jak czytać</button><button role="tab" data-tab="strefy" aria-selected="false" data-en="Zones and examples">Strefy i przykłady</button><button role="tab" data-tab="biomy" aria-selected="false" data-en="Biomes and mountains">Biomy i góry</button><button role="tab" data-tab="cwicz" aria-selected="false" data-en="Practise">Ćwicz</button></div></div></header>
 
 <div id="tab-czytaj">
  <section class="s"><h2 data-en="What is a climograph?">Co to jest klimatogram?</h2>
@@ -116,6 +121,20 @@ table.inp input{width:100%;min-width:0;padding:4px;text-align:center}
   <div class="card"><div style="overflow-x:auto"><table class="inp" id="inp"></table></div>
    <div class="two" style="margin-top:12px"><div class="chart" id="ownChart"></div><div><div class="stats" id="ownStats"></div><div class="verdict" id="ownVerdict"></div>
    <p style="margin-top:10px"><label><span data-en="Load station data:">Wczytaj dane stacji:</span> <select id="ownLoad"></select></label> <button class="btn" id="ownClear" data-en="Clear">Wyczyść</button></p></div></div></div>
+ </section>
+</div>
+<div id="tab-biomy" hidden>
+ <section class="s"><h2 data-en="Biomes of the world">Biomy świata</h2>
+  <p class="lead" data-en="A &lt;b&gt;biome&lt;/b&gt; is a large area with a similar climate, vegetation and animals. Biomes follow the climate zones: temperature and rainfall decide which plants can grow, and the plants decide which animals can live there. Choose a biome:"><b>Biom</b> to duży obszar o podobnym klimacie, roślinności i świecie zwierząt. Biomy układają się zgodnie ze strefami klimatycznymi: temperatura i opady decydują, jakie rośliny mogą rosnąć, a od roślin zależy, jakie zwierzęta tam żyją. Wybierz biom:</p>
+  <div class="zchips" id="bchips"></div>
+  <div class="card zone" id="biome"></div>
+ </section>
+ <section class="s"><h2 data-en="Vegetation zones in mountains">Piętra roślinności w górach</h2>
+  <p class="lead" data-en="Going up a mountain is like travelling towards the pole: the temperature falls by about &lt;b&gt;0.6°C for every 100 m&lt;/b&gt;, so the vegetation changes in bands called &lt;b&gt;vegetation zones&lt;/b&gt;. In the Tatras there are six of them.">Wchodzenie w góry przypomina podróż w stronę bieguna: temperatura spada o ok. <b>0,6°C na każde 100 m</b>, dlatego roślinność zmienia się pasami, które nazywamy <b>piętrami roślinności</b>. W Tatrach jest ich sześć.</p>
+  <div id="tatry"></div>
+  <h3 style="margin-top:22px" data-en="The nearer the equator, the higher the zones">Im bliżej równika, tym wyżej sięgają piętra</h3>
+  <div class="card"><div id="mtnChart"></div>
+   <p class="note" data-en="Simplified heights; the boundaries also depend on which way the slope faces and how humid it is. In the Tatras the forest ends at about 1550 m, in the Alps at about 2000 m, and on Kilimanjaro at about 2800–3000 m. Permanent snow starts at about 3000 m in the Alps and above 5000 m near the equator; the Tatras are too low for it.">Wysokości są uproszczone – granice pięter zależą też od tego, w którą stronę opada stok i jak jest wilgotno. W Tatrach las kończy się na ok. 1550 m, w Alpach na ok. 2000 m, a na Kilimandżaro na ok. 2800–3000 m. Wieczny śnieg zaczyna się w Alpach na ok. 3000 m, a przy równiku powyżej 5000 m; Tatry są na niego za niskie.</p></div>
  </section>
 </div>
 </div>
@@ -306,14 +325,166 @@ function fillOwnLoad(){const v=$('#ownLoad').value;$('#ownLoad').innerHTML=`<opt
 fillOwnLoad();
 $('#ownLoad').addEventListener('change',e=>{if(e.target.value!==''){const s=ST[+e.target.value];buildInp(s[6],s[7]);}});
 $('#ownClear').addEventListener('click',()=>buildInp(Array(12).fill(0),Array(12).fill(0)));
+// ---------- biomy ----------
+const P2=(a,b)=>[a,b];
+const IMGB='https://thumb.wikimedia.org/wikipedia/commons/thumb/';
+const PH={
+ rown:['d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg','lubasi','CC BY-SA 2.0'],
+ sawanna:['0/0b/Serengeti-Landscape-2012.JPG','Bjørn Christian Tørrissen','CC BY-SA 3.0'],
+ pustynia:['b/b3/Libya_4709_Idehan_Ubari_Luca_Galuzzi_2007.jpg','Luca Galuzzi','CC BY-SA 2.5'],
+ srodz:['f/fe/Maquis_and_garrigue_in_Corsica1.jpg','Sten Porse','CC BY-SA 3.0'],
+ step:['1/17/Astana-steppe-7748.jpg','Vmenkov','CC BY-SA 3.0'],
+ las:['4/46/Forest_road_Shenderiv_2026_G2.jpg','George Chernilevsky','CC BY 4.0'],
+ tajga:['6/6c/Ergaki%2C_Siberian_pine_forest%2C_Spruce_forest%2C_Taiga_wilderness%2C_Sayan_Mountains%2C_Siberia%2C_Russia.jpg','Vyacheslav Argenberg','CC BY 4.0'],
+ tundra:['e/eb/Tundra_and_Mulgrave_Hills_%28933fedb0-1dd8-b71c-079d-bd390237f5f2%29.jpg','NPS Photo','domena publiczna|public domain'],
+ lod:['4/45/Sermersuaq_in_Isunngua_highland_in_summer_2010_%288%29.JPG','Chmee2/Valtameri','CC BY 3.0'],
+ regd:['e/ef/Maly_Rigel.jpg','Rafał Kozubek','CC BY-SA 3.0'],
+ regg:['7/77/Dolina_Chocho%C5%82owska_i_tatrza%C5%84skie_krokusy.jpg','Qvidemus','CC BY 3.0'],
+ kosod:['9/9c/Pinus_mugo_Sosna_g%C3%B3rska_2023-08-25_Dolina_Roztoki_03.jpg','Agnieszka Kwiecień, Nova','CC BY-SA 4.0'],
+ hale:['c/c8/Hala_G%C4%85sienicowa_-_sierpie%C5%84.jpg','Aneta Pawska','CC BY 3.0'],
+ turnie:['1/19/Szlak_Orla_Per%C4%87_07.JPG','SkyMaja','CC BY-SA 4.0'],
+ piet:['b/b4/Pinus_mugo_habitat_01.jpg','Agnieszka Kwiecień, Nova','CC BY 2.5']
+};
+function photo(k,alt){const p=PH[k],file=p[0].split('/').pop(),lic=p[2].includes('|')?tr(...p[2].split('|')):p[2];
+ return `<figure class="bph"><img loading="lazy" src="${IMGB}${p[0]}/960px-${file}" alt="${esc(alt)}"><figcaption>${tr('Fot.','Photo:')} ${esc(p[1])}, ${esc(lic)} – <a href="https://commons.wikimedia.org/wiki/File:${file}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>`;}
+// [klucz, strefa, stacja, nazwa, opis, klimat, gleba, flora[[n,opis]], fauna[[n,opis]], człowiek]
+const BIOMES=[
+ {k:'rown',z:'rown',st:'Manaus',
+  pl:{n:'Wilgotny las równikowy',o:'Najbogatszy w gatunki biom Ziemi – na kilku procentach powierzchni lądów żyje ponad połowa gatunków. Wiecznie zielony, wielopiętrowy las w dorzeczu Amazonki i Konga oraz na wyspach Azji Południowo-Wschodniej.',kl:'Gorąco przez cały rok (25–28°C), opady ponad 2000 mm, brak pór roku. Codziennie po południu ulewa.',g:'Ubogie, czerwone gleby laterytowe: składniki odżywcze z rozkładających się szczątków są od razu pobierane przez rośliny albo wymywane przez deszcz.',
+   f:[['drzewa olbrzymy','do 60 m wysokości, wystają ponad zwarte korony; szerokie korzenie podporowe utrzymują je w płytkiej glebie'],['liany','pnącza, które wspinają się po drzewach do światła'],['epifity – storczyki i bromelie','rosną na gałęziach drzew; wodę zbierają z deszczu i wilgotnego powietrza'],['kauczukowiec, mahoń, palmy','cenne drzewa; pod koronami jest ciemno, więc runo jest ubogie']],
+   a:[['małpy (wyjce, czepiaki)','żyją w koronach drzew; czepiaki mają chwytny ogon'],['tukany i papugi ary','duże dzioby pomagają zjadać owoce i rozłupywać orzechy'],['leniwiec','powolny roślinożerca zwisający z gałęzi; w jego futrze rosną glony, które go maskują'],['jaguar','największy kot Ameryki, dobrze pływa'],['żaby drzewołazy','jaskrawe barwy ostrzegają drapieżniki, że są trujące'],['owady','miliony gatunków – np. mrówki grzybiarki i motyle morfo']],
+   c:'Wycinanie i wypalanie lasu pod pastwiska i plantacje (soja, palma olejowa). Wylesianie zmniejsza różnorodność biologiczną i nasila zmiany klimatu.'},
+  en:{n:'Tropical rainforest',o:'The most species-rich biome on Earth – over half of all species live on a few per cent of the land. An evergreen, many-layered forest in the Amazon and Congo basins and on the islands of South-East Asia.',kl:'Hot all year (25–28°C), over 2000 mm of rain, no seasons. Heavy rain most afternoons.',g:'Poor red laterite soils: nutrients from decaying matter are taken up by plants straight away or washed out by the rain.',
+   f:[['giant emergent trees','up to 60 m tall, rising above the canopy; broad buttress roots hold them in the shallow soil'],['lianas','climbers that grow up the trees towards the light'],['epiphytes – orchids and bromeliads','grow on branches; they collect water from rain and humid air'],['rubber tree, mahogany, palms','valuable trees; it is dark under the canopy, so the forest floor has few plants']],
+   a:[['monkeys (howlers, spider monkeys)','live in the canopy; spider monkeys have a gripping tail'],['toucans and macaws','big beaks help them eat fruit and crack nuts'],['sloth','a slow plant-eater hanging from branches; algae grow in its fur as camouflage'],['jaguar','the largest cat in the Americas, a good swimmer'],['poison dart frogs','bright colours warn predators that they are poisonous'],['insects','millions of species – e.g. leafcutter ants and morpho butterflies']],
+   c:'Forest is cut and burnt for pasture and plantations (soya, oil palm). Deforestation reduces biodiversity and adds to climate change.'}},
+ {k:'sawanna',z:'podr',st:'Bamako',
+  pl:{n:'Sawanna',o:'Trawiaste równiny z pojedynczymi drzewami. Największe w Afryce (Serengeti), są też w Ameryce Południowej i Australii.',kl:'Gorąco przez cały rok; pora deszczowa i pora sucha. Opady zwykle 500–1500 mm.',g:'Czerwone gleby, w porze suchej twarde i spękane. Często zdarzają się pożary traw.',
+   f:[['wysokie trawy','do 2–3 m; w porze suchej zasychają, a po deszczach szybko odrastają z korzeni'],['akacje','parasolowata korona i ciernie chroniące przed zjadaniem'],['baobab','gruby pień magazynuje wodę na porę suchą; zrzuca liście, żeby mniej parować']],
+   a:[['zebry, antylopy gnu','wielkie stada roślinożerców wędrują za deszczami i świeżą trawą'],['żyrafa','długa szyja pozwala zjadać liście akacji niedostępne dla innych'],['słoń afrykański','największe zwierzę lądowe; duże uszy pomagają oddawać ciepło'],['lew, gepard','drapieżniki; gepard to najszybszy ssak lądowy'],['hieny, sępy','padlinożercy – „sprzątają” sawannę'],['termity','budują kopce wysokie na kilka metrów']],
+   c:'Wypas bydła, kłusownictwo, zamiana na pola. Wiele zwierząt chronią parki narodowe (Serengeti, Krüger).'},
+  en:{n:'Savanna',o:'Grassy plains with scattered trees. The largest are in Africa (Serengeti); there are also savannas in South America and Australia.',kl:'Hot all year, with a rainy season and a dry season. Usually 500–1500 mm of rain.',g:'Red soils, hard and cracked in the dry season. Grass fires are common.',
+   f:[['tall grasses','up to 2–3 m; they dry out in the dry season and regrow quickly from the roots after the rains'],['acacias','umbrella-shaped crowns and thorns that protect them from being eaten'],['baobab','its thick trunk stores water for the dry season; it drops its leaves to lose less water']],
+   a:[['zebras, wildebeest','huge herds of grazers follow the rains and fresh grass'],['giraffe','its long neck reaches acacia leaves other animals cannot'],['African elephant','the largest land animal; big ears help it lose heat'],['lion, cheetah','predators; the cheetah is the fastest land mammal'],['hyenas, vultures','scavengers that “clean up” the savanna'],['termites','build mounds several metres high']],
+   c:'Cattle grazing, poaching, conversion to farmland. National parks (Serengeti, Kruger) protect many animals.'}},
+ {k:'pustynia',z:'zwr',st:'Asuan',
+  pl:{n:'Pustynia gorąca',o:'Obszary o bardzo małych opadach i skąpej roślinności: Sahara, Pustynia Arabska, pustynie Australii, Atakama.',kl:'Opady poniżej 250 mm rocznie, czasem przez lata nie pada. Upalne dni i chłodne noce – duża dobowa amplituda temperatury.',g:'Słabo rozwinięte, często zasolone. Pustynie piaszczyste (ergi), żwirowe (serir) i kamieniste (hamada).',
+   f:[['kaktusy (Ameryka) i wilczomlecze (Afryka)','sukulenty: gromadzą wodę w grubych łodygach, a liście zamieniły się w ciernie'],['rośliny o długich korzeniach','sięgają nawet kilkudziesięciu metrów w głąb, do wód gruntowych'],['efemerydy','po rzadkim deszczu w kilka dni kiełkują, kwitną i wydają nasiona'],['palma daktylowa','rośnie w oazach, gdzie woda podziemna jest blisko powierzchni']],
+   a:[['wielbłąd (dromader)','długo może nie pić; w garbie ma zapas tłuszczu; szerokie stopy nie zapadają się w piasek'],['fenek','najmniejszy lis; ogromne uszy oddają ciepło'],['skorpiony, węże, jaszczurki','w dzień chowają się przed upałem, polują nocą'],['skoczki i myszoskoczki','prawie nie piją – wodę uzyskują z pokarmu']],
+   c:'Pustynnienie na obrzeżach (nadmierny wypas, wycinanie krzewów), wydobycie ropy naftowej, nawadnianie w oazach.'},
+  en:{n:'Hot desert',o:'Areas with very little rain and sparse plants: the Sahara, the Arabian Desert, Australia’s deserts, the Atacama.',kl:'Under 250 mm of rain a year, sometimes none for years. Scorching days and cool nights – a large daily temperature range.',g:'Poorly developed, often salty soils. Sand deserts (ergs), gravel deserts (serir) and rocky deserts (hamada).',
+   f:[['cacti (Americas) and spurges (Africa)','succulents: they store water in thick stems, and their leaves have become spines'],['deep-rooted plants','roots reach tens of metres down to groundwater'],['ephemerals','after a rare shower they sprout, flower and set seed within days'],['date palm','grows in oases, where groundwater is close to the surface']],
+   a:[['dromedary camel','can go a long time without drinking; its hump stores fat; wide feet don’t sink into sand'],['fennec fox','the smallest fox; huge ears give off heat'],['scorpions, snakes, lizards','hide from the heat by day and hunt at night'],['jerboas and gerbils','hardly drink – they get water from their food']],
+   c:'Desertification at the edges (overgrazing, cutting shrubs), oil extraction, irrigation in oases.'}},
+ {k:'srodz',z:'podzw',st:'Ateny',
+  pl:{n:'Roślinność śródziemnomorska',o:'Twardolistne, wiecznie zielone zarośla i lasy wokół Morza Śródziemnego; podobne są w Kalifornii, Chile, na południu Afryki i Australii.',kl:'Gorące, suche lato i łagodna, deszczowa zima.',g:'Czerwone gleby (terra rossa) na wapieniach, łatwo ulegają erozji.',
+   f:[['makia','gęste, wiecznie zielone zarośla z krzewów i niskich drzew'],['dąb korkowy, dąb ostrolistny','gruba kora dębu korkowego chroni przed pożarami; z niej robi się korki'],['oliwka, pinia, cyprys','typowe drzewa krajobrazu śródziemnomorskiego'],['lawenda, rozmaryn, tymianek','olejki eteryczne i twarde, małe liście ograniczają utratę wody w suche lato']],
+   a:[['żółwie lądowe, jaszczurki, gekony','zmiennocieplne – lubią ciepło i nasłonecznione skały'],['cykady','ich „granie” słychać w każdy upalny dzień'],['dudek, sokół','ptaki otwartych, krzewiastych terenów'],['kozy','wypas kóz przez stulecia zmienił lasy w zarośla']],
+   c:'Dawne wylesienie, pożary, uprawa winorośli i oliwek, masowa turystyka.'},
+  en:{n:'Mediterranean vegetation',o:'Hard-leaved evergreen scrub and woodland around the Mediterranean Sea; similar vegetation grows in California, Chile, southern Africa and Australia.',kl:'Hot, dry summers and mild, rainy winters.',g:'Red soils (terra rossa) on limestone that erode easily.',
+   f:[['maquis','dense evergreen scrub of shrubs and small trees'],['cork oak, holm oak','the cork oak’s thick bark protects it from fire; bottle corks are made from it'],['olive, stone pine, cypress','typical trees of the Mediterranean landscape'],['lavender, rosemary, thyme','essential oils and small hard leaves reduce water loss in the dry summer']],
+   a:[['tortoises, lizards, geckos','cold-blooded animals that like heat and sunny rocks'],['cicadas','their “singing” is heard every hot day'],['hoopoe, falcon','birds of open scrubland'],['goats','centuries of goat grazing turned forests into scrub']],
+   c:'Old deforestation, wildfires, vineyards and olive groves, mass tourism.'}},
+ {k:'step',z:'umiark',st:'Astana',
+  pl:{n:'Step',o:'Bezleśne, trawiaste równiny we wnętrzu kontynentów: od Ukrainy po Mongolię; w Ameryce Północnej to preria, w Ameryce Południowej – pampa.',kl:'Klimat kontynentalny: gorące lato, mroźna zima, opady 250–500 mm – za mało dla lasu.',g:'Czarnoziemy – najżyźniejsze gleby świata. Gruba warstwa próchnicy powstaje z obumierających co roku traw.',
+   f:[['ostnice, kostrzewy','trawy o wąskich liściach i gęstych, głębokich korzeniach'],['tulipany, irysy','rośliny cebulowe: kwitną wiosną, a suche lato przetrwają pod ziemią'],['byliny i krzewinki','np. piołun – szarozielone, owłosione liście chronią przed wysychaniem']],
+   a:[['susły, świstaki (bobaki), chomiki','gryzonie żyjące w norach; w zimie zapadają w sen zimowy'],['suhak (antylopa saiga)','wielkie stada wędrują po stepach Azji; nos jak trąbka ogrzewa powietrze zimą i filtruje pył latem'],['orzeł stepowy','drapieżny ptak polujący na gryzonie'],['bizon (preria)','dawniej miliony żyły na preriach Ameryki Północnej']],
+   c:'Większość stepów zamieniono w pola pszenicy i kukurydzy – to „spichlerze świata”. Problemem jest erozja gleby przez wiatr.'},
+  en:{n:'Steppe',o:'Treeless grassy plains deep inside continents: from Ukraine to Mongolia; in North America it is the prairie, in South America the pampas.',kl:'Continental climate: hot summers, freezing winters, 250–500 mm of rain – too little for forest.',g:'Chernozems – the most fertile soils in the world. A thick humus layer forms from grasses that die back every year.',
+   f:[['feather grasses, fescues','grasses with narrow leaves and dense, deep roots'],['tulips, irises','bulbs: they flower in spring and survive the dry summer underground'],['perennials and small shrubs','e.g. wormwood – grey-green hairy leaves protect against drying out']],
+   a:[['ground squirrels, marmots, hamsters','burrowing rodents that hibernate in winter'],['saiga antelope','large herds roam the Asian steppes; its trunk-like nose warms air in winter and filters dust in summer'],['steppe eagle','a bird of prey hunting rodents'],['bison (prairie)','millions once lived on the North American prairies']],
+   c:'Most steppe has been ploughed for wheat and maize – the “breadbaskets of the world”. Wind erosion of the soil is a problem.'}},
+ {k:'las',z:'umiark',st:'Warszawa',
+  pl:{n:'Lasy liściaste i mieszane strefy umiarkowanej',o:'Europa Zachodnia i Środkowa (także Polska), wschód Ameryki Północnej, wschodnia Azja.',kl:'Cztery pory roku, opady 500–1000 mm rozłożone na cały rok.',g:'Gleby brunatne i płowe. Opadające co roku liście tworzą ściółkę, z której powstaje próchnica.',
+   f:[['dąb, buk, grab, lipa, klon','drzewa zrzucające liście na zimę – w ten sposób nie tracą wody, gdy ziemia jest zamarznięta'],['sosna, świerk','w lasach mieszanych rosną razem z drzewami liściastymi'],['leszczyna, kalina','krzewy podszytu – pod koronami drzew'],['zawilec, przylaszczka','rośliny runa kwitną wczesną wiosną, zanim drzewa wypuszczą liście i zacienią dno lasu']],
+   a:[['jeleń, sarna, dzik','duże roślinożerne i wszystkożerne ssaki'],['żubr','największy ssak lądowy Europy; w Polsce żyje m.in. w Puszczy Białowieskiej'],['lis, wilk, borsuk','drapieżniki'],['jeż, nietoperze','zapadają w sen zimowy'],['dzięcioł, sowy','dzięcioły wykuwają dziuple, z których korzystają potem inne zwierzęta']],
+   c:'Większość lasów wycięto pod pola i miasta. Puszcza Białowieska to jeden z ostatnich lasów o charakterze naturalnym w Europie.'},
+  en:{n:'Temperate deciduous and mixed forest',o:'Western and Central Europe (including Poland), eastern North America, eastern Asia.',kl:'Four seasons, 500–1000 mm of rain spread through the year.',g:'Brown forest soils. Leaves fall every year and form litter that turns into humus.',
+   f:[['oak, beech, hornbeam, lime, maple','deciduous trees that drop their leaves in winter, so they don’t lose water when the ground is frozen'],['pine, spruce','in mixed forests they grow alongside broadleaved trees'],['hazel, guelder rose','shrubs of the understorey, below the tree crowns'],['wood anemone, hepatica','forest-floor plants flower in early spring, before the trees leaf out and shade the ground']],
+   a:[['red deer, roe deer, wild boar','large herbivores and omnivores'],['European bison','Europe’s largest land mammal; in Poland it lives in Białowieża Forest, among other places'],['fox, wolf, badger','predators'],['hedgehog, bats','hibernate in winter'],['woodpecker, owls','woodpeckers carve holes later used by other animals']],
+   c:'Most of these forests were cleared for fields and towns. Białowieża Forest is one of the last near-natural forests in Europe.'}},
+ {k:'tajga',z:'umiark',st:'Jakuck',
+  pl:{n:'Tajga (lasy iglaste)',o:'Największy biom lądowy: szeroki pas lasów iglastych na północy Eurazji i Ameryki Północnej.',kl:'Długa, mroźna zima i krótkie, chłodne lato; opady 300–600 mm. W Jakucji zimą bywa poniżej −50°C.',g:'Gleby bielicowe – kwaśne i ubogie. Na wschodzie Syberii pod ziemią jest wieczna zmarzlina.',
+   f:[['świerk, jodła, sosna','stożkowaty kształt pozwala zsuwać się śniegowi; igły pokryte woskiem mało parują'],['modrzew','jedyny iglak zrzucający igły na zimę; rośnie tam, gdzie zimy są najmroźniejsze'],['mchy, borówki, porosty','okrywają dno lasu']],
+   a:[['łoś','największy jeleniowaty; długie nogi pozwalają brodzić w śniegu i bagnach'],['niedźwiedź brunatny','zimą zasypia w gawrze'],['ryś, wilk, rosomak','drapieżniki'],['soból','bardzo gęste futro chroni przed mrozem'],['głuszec, sowy','ptaki tajgi; latem chmary komarów']],
+   c:'Wyrąb drewna, pożary, wydobycie ropy, gazu i rud.'},
+  en:{n:'Taiga (boreal forest)',o:'The largest land biome: a wide belt of conifer forest across northern Eurasia and North America.',kl:'Long, freezing winters and short, cool summers; 300–600 mm of rain. In Yakutia winters can go below −50°C.',g:'Podzols – acidic, poor soils. In eastern Siberia there is permafrost underground.',
+   f:[['spruce, fir, pine','a cone shape lets snow slide off; waxy needles lose little water'],['larch','the only conifer that sheds its needles in winter; it grows where winters are harshest'],['mosses, bilberries, lichens','cover the forest floor']],
+   a:[['moose (elk)','the largest deer; long legs let it wade through snow and bogs'],['brown bear','sleeps through the winter in a den'],['lynx, wolf, wolverine','predators'],['sable','very thick fur protects it from frost'],['capercaillie, owls','taiga birds; swarms of mosquitoes in summer']],
+   c:'Logging, wildfires, extraction of oil, gas and ores.'}},
+ {k:'tundra',z:'okolo',st:'Utqiaġvik (Barrow)',
+  pl:{n:'Tundra',o:'Bezleśne obszary na północ od tajgi: północ Kanady, Alaska, Syberia, wybrzeża Grenlandii.',kl:'Najcieplejszy miesiąc ma 0–10°C; długa zima, dzień i noc polarna, małe opady.',g:'Wieczna zmarzlina: latem rozmarza tylko cienka wierzchnia warstwa. Woda nie może wsiąknąć, więc powstają bagna i tysiące jeziorek.',
+   f:[['mchy i porosty','np. chrobotek („mech reniferowy”) – pokarm reniferów'],['brzoza karłowata, wierzba polarna','drzewa wysokie na kilka centymetrów – przy ziemi chronią się przed wiatrem i mrozem'],['turzyce, wełnianki','rośliny bagienne'],['kwiaty tundry','w krótkie lato kwitną bardzo szybko, często w zwartych kępach']],
+   a:[['renifer (karibu)','wędruje setki kilometrów między tundrą a tajgą'],['piżmowół','bardzo gęste futro do ziemi'],['lis polarny, zając bielak','zimą białe futro maskuje je na śniegu'],['lemingi','małe gryzonie – pokarm lisów i sów śnieżnych'],['gęsi i inne ptaki wodne','latem przylatują miliony ptaków na lęgi']],
+   c:'Wydobycie ropy i gazu; ocieplenie klimatu powoduje rozmarzanie wiecznej zmarzliny.'},
+  en:{n:'Tundra',o:'Treeless land north of the taiga: northern Canada, Alaska, Siberia, the coasts of Greenland.',kl:'The warmest month is 0–10°C; long winters, polar day and night, little precipitation.',g:'Permafrost: in summer only a thin top layer thaws. Water cannot drain away, so bogs and thousands of small lakes form.',
+   f:[['mosses and lichens','e.g. reindeer lichen – food for reindeer'],['dwarf birch, Arctic willow','trees a few centimetres tall – close to the ground they shelter from wind and frost'],['sedges, cotton grass','bog plants'],['tundra flowers','flower very quickly in the short summer, often in dense cushions']],
+   a:[['reindeer (caribou)','migrates hundreds of kilometres between tundra and taiga'],['musk ox','very thick fur reaching the ground'],['Arctic fox, mountain hare','a white winter coat hides them in the snow'],['lemmings','small rodents – food for foxes and snowy owls'],['geese and other waterbirds','millions of birds arrive in summer to breed']],
+   c:'Oil and gas extraction; global warming is thawing the permafrost.'}},
+ {k:'lod',z:'okolo',st:'Wostok',
+  pl:{n:'Pustynia lodowa',o:'Lądolody Antarktydy i Grenlandii oraz lody Oceanu Arktycznego. Na lądolodzie nie rosną żadne rośliny.',kl:'Wszystkie miesiące poniżej 0°C. Na stacji Wostok zmierzono −89,2°C. Opadów jest bardzo mało – to pustynia.',g:'Brak gleby – lądolód Antarktydy ma miejscami ponad 4 km grubości.',
+   f:[['porosty i mchy','tylko na odsłoniętych skałach na wybrzeżach'],['śmiałek antarktyczny i kolobantus','jedyne dwie rośliny kwiatowe Antarktydy, rosną na Półwyspie Antarktycznym']],
+   a:[['pingwiny','pingwin cesarski wysiaduje jajo w środku zimy, w temperaturze poniżej −40°C; gruba warstwa tłuszczu i zbite pióra chronią przed zimnem'],['foki (Weddella, lampart morski)','żyją w morzu i na lodzie'],['niedźwiedź polarny','w Arktyce; poluje na foki na lodzie morskim'],['kryl','drobne skorupiaki – podstawa łańcucha pokarmowego oceanu wokół Antarktydy']],
+   c:'Tylko stacje badawcze. Antarktydę chroni Układ Antarktyczny. Topnienie lodu podnosi poziom oceanu.'},
+  en:{n:'Ice desert',o:'The ice sheets of Antarctica and Greenland and the ice of the Arctic Ocean. No plants grow on the ice sheet.',kl:'Every month below 0°C. Vostok station recorded −89.2°C. Very little precipitation – it is a desert.',g:'No soil – in places the Antarctic ice sheet is over 4 km thick.',
+   f:[['lichens and mosses','only on bare coastal rocks'],['Antarctic hair grass and Antarctic pearlwort','Antarctica’s only two flowering plants, on the Antarctic Peninsula']],
+   a:[['penguins','the emperor penguin incubates its egg in midwinter, below −40°C; thick fat and dense feathers keep out the cold'],['seals (Weddell, leopard seal)','live in the sea and on the ice'],['polar bear','in the Arctic; hunts seals on the sea ice'],['krill','tiny crustaceans – the base of the food chain in the Southern Ocean']],
+   c:'Only research stations. Antarctica is protected by the Antarctic Treaty. Melting ice raises sea level.'}}
+];
+// piętra w Tatrach
+const TATRY=[
+ {h:[0,700],c:'#c9b458',ph:null,pl:['pogórze','do ok. 700 m','Pola uprawne, łąki i pastwiska, wsie. Dawniej rosły tu lasy liściaste.','sarna, zając, ptaki pól i łąk'],en:['foothills','up to about 700 m','Fields, meadows and pastures, villages. Broadleaved forest used to grow here.','roe deer, hare, farmland birds']},
+ {h:[700,1250],c:'#4f9a4a',ph:'regd',pl:['regiel dolny','700–1250 m','Las mieszany: buk, jodła i świerk (buczyna karpacka). Najbogatsze piętro lasu.','jeleń, sarna, dzik, niedźwiedź brunatny, salamandra plamista']
+   ,en:['lower montane forest','700–1250 m','Mixed forest: beech, fir and spruce (Carpathian beech forest). The richest forest zone.','red deer, roe deer, wild boar, brown bear, fire salamander']},
+ {h:[1250,1550],c:'#2b6b4a',ph:'regg',pl:['regiel górny','1250–1550 m','Bór świerkowy z jarzębiną; wyżej pojawia się limba. Chłodniej, dłużej leży śnieg.','niedźwiedź, ryś, głuszec, orzechówka (rozsiewa nasiona limby)']
+   ,en:['upper montane forest','1250–1550 m','Spruce forest with rowan; stone pine appears higher up. Colder, with snow lying longer.','brown bear, lynx, capercaillie, nutcracker (spreads stone pine seeds)']},
+ {h:[1550,1800],c:'#7a8f3a',ph:'kosod',pl:['piętro kosodrzewiny (subalpejskie)','1550–1800 m','Kosodrzewina (sosna górska) – krzew o płożących się, giętkich pędach, które nie łamią się pod śniegiem i wiatrem. Tu kończy się las (górna granica lasu).','niedźwiedź (żeruje latem), płochacz halny, pająki i owady']
+   ,en:['dwarf pine zone (subalpine)','1550–1800 m','Dwarf mountain pine – a shrub with flexible, sprawling shoots that don’t break under snow and wind. The forest ends here (the tree line).','brown bear (feeds here in summer), alpine accentor, spiders and insects']},
+ {h:[1800,2300],c:'#9fc46a',ph:'hale',pl:['piętro hal (alpejskie)','1800–2300 m','Wysokogórskie łąki i murawy: trawy, sit skucina, goryczki, dzwonki. Rośliny są niskie, często rosną w kępach i mają duże, jaskrawe kwiaty.','kozica, świstak (żyje w norach, zimą śpi), płochacz halny, siwerniak']
+   ,en:['alpine meadow zone','1800–2300 m','High-mountain meadows and grassland: grasses, rushes, gentians, bellflowers. Plants are low, often grow in cushions and have large, bright flowers.','chamois, marmot (lives in burrows, hibernates), alpine accentor, water pipit']},
+ {h:[2300,2655],c:'#9a948a',ph:'turnie',pl:['piętro turni (subniwalne)','powyżej 2300 m','Nagie skały i piargi. Rosną tylko porosty, mchy i nieliczne rośliny w szczelinach (np. skalnice, jaskier lodnikowy). W Tatrach nie ma piętra wiecznego śniegu – są za niskie.','kozica, pomurnik (ptak wspinający się po skałach)']
+   ,en:['bare rock zone (subnival)','above 2300 m','Bare rock and scree. Only lichens, mosses and a few plants in cracks (e.g. saxifrages, glacier crowfoot). The Tatras have no permanent snow zone – they are too low.','chamois, wallcreeper (a bird that climbs rock faces)']}
+];
+const MTN=[
+ {n:P2('Tatry','Tatras'),lat:P2('49°N, 2655 m','49°N, 2655 m'),top:2655,b:[[700,'#c9b458',P2('pola, łąki','fields, meadows')],[1250,'#4f9a4a',P2('regiel dolny','lower forest')],[1550,'#2b6b4a',P2('regiel górny','upper forest')],[1800,'#7a8f3a',P2('kosodrzewina','dwarf pine')],[2300,'#9fc46a',P2('hale','alpine meadows')],[2655,'#9a948a',P2('turnie','bare rock')]]},
+ {n:P2('Alpy','Alps'),lat:P2('46°N, 4808 m','46°N, 4808 m'),top:4808,b:[[1000,'#4f9a4a',P2('lasy liściaste','broadleaved forest')],[1900,'#2b6b4a',P2('lasy iglaste','conifer forest')],[2300,'#7a8f3a',P2('krzewy, kosodrzewina','shrubs, dwarf pine')],[2800,'#9fc46a',P2('łąki alpejskie','alpine meadows')],[3100,'#9a948a',P2('skały','bare rock')],[4808,'#e9eef2',P2('wieczny śnieg, lodowce','permanent snow, glaciers')]]},
+ {n:P2('Kilimandżaro','Kilimanjaro'),lat:P2('3°S, 5895 m','3°S, 5895 m'),top:5895,b:[[1800,'#c9b458',P2('sawanna, uprawy','savanna, farms')],[2800,'#357a5a',P2('las górski (mglisty)','montane cloud forest')],[4000,'#a87fa0',P2('wrzosowiska','heath and moorland')],[5000,'#c8a77a',P2('pustynia wysokogórska','alpine desert')],[5895,'#e9eef2',P2('lodowce','glaciers')]]}
+];
+let BSEL='rown';
+const dark=c=>{const n=parseInt(c.slice(1),16);return (.299*(n>>16)+.587*(n>>8&255)+.114*(n&255))<140;};
+function drawMtn(){const k=L==='en'?1:0,W=560,H=440,top=6000,x0=46,y=v=>20+(H-50)*(1-v/top),cw=(W-x0-10)/3;let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${tr('Piętra roślinności w górach na różnych szerokościach geograficznych','Vegetation zones in mountains at different latitudes')}">`;
+ for(let v=0;v<=top;v+=1000){s+=`<line x1="${x0}" x2="${W-6}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${x0-6}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="var(--muted)">${v}</text>`;}
+ s+=`<text x="4" y="12" font-size="12" font-weight="700" fill="var(--ink)">${tr('m n.p.m.','m a.s.l.')}</text>`;
+ MTN.forEach((m,i)=>{const cx=x0+cw*i+cw/2,hw=cw*.47,wAt=v=>2*hw*(.6+.4*(1-v/m.top));let lo=0;const pk=y(m.top);
+  s+=`<clipPath id="mc${i}"><polygon points="${cx-hw},${y(0)} ${cx-hw*.6},${pk} ${cx+hw*.6},${pk} ${cx+hw},${y(0)}"/></clipPath><g clip-path="url(#mc${i})">`;
+  m.b.forEach(([hi,c])=>{s+=`<rect x="${cx-hw}" y="${y(hi)}" width="${2*hw}" height="${y(lo)-y(hi)}" fill="${c}" stroke="rgba(0,0,0,.15)"/>`;lo=hi;});s+='</g>';
+  lo=0;m.b.forEach(([hi,c,t])=>{const mid=(y(lo)+y(hi))/2,hgt=y(lo)-y(hi);const fs=hgt<15?10.5:12,bw=wAt((lo+hi)/2)-8,txt=t[k],fits=txt.length*fs*.55<=bw,parts=!fits&&hgt>=26&&txt.includes(' ')?[txt.slice(0,txt.lastIndexOf(' ',Math.ceil(txt.length/2)+3)),txt.slice(txt.lastIndexOf(' ',Math.ceil(txt.length/2)+3)+1)]:[txt];
+  if(hgt>=11)s+=`<text x="${cx}" y="${mid+4-(parts.length-1)*7}" text-anchor="middle" font-size="${fs}" font-weight="700" fill="${dark(c)?'#fff':'#1a1a1a'}">${parts.map((x,j)=>`<tspan x="${cx}" dy="${j?14:0}">${esc(x)}</tspan>`).join('')}</text>`;lo=hi;});
+  s+=`<text x="${cx}" y="${H-14}" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">${esc(m.n[k])}</text><text x="${cx}" y="${H-1}" text-anchor="middle" font-size="11" fill="var(--muted)">${esc(m.lat[k])}</text>`;});
+ $('#mtnChart').innerHTML=s+'</svg>';}
+function drawBiomes(){const k=L==='en'?'en':'pl';
+ $('#bchips').innerHTML=BIOMES.map(b=>`<button data-bc="${b.k}" style="--c:${ZONES[b.z].c}" aria-pressed="${b.k===BSEL}"><i></i>${esc(b[k].n)}</button>`).join('');
+ const b=BIOMES.find(x=>x.k===BSEL),d=b[k],si=ST.findIndex(s=>s[0]===b.st);
+ const li=a=>a.map(([n,t])=>`<li><b>${esc(n)}</b> – ${esc(t)}</li>`).join('');
+ $('#biome').innerHTML=`<h3 style="--c:${ZONES[b.z].c}">${esc(d.n)}</h3><p class="note" style="margin:0 0 10px">${tr('Strefa klimatyczna','Climate zone')}: <b>${esc(Z(b.z).n)}</b></p>
+  <div class="two"><div>${photo(b.k,d.n)}<p>${esc(d.o)}</p><p><b>${tr('Klimat','Climate')}:</b> ${esc(d.kl)}</p><p><b>${tr('Gleba','Soil')}:</b> ${esc(d.g)}</p></div>
+  <div class="chart">${si>=0?chart(ST[si][6],ST[si][7],{title:tr('Przykładowa stacja: ','Example station: ')+sN(si)}):''}</div></div>
+  <div class="two" style="margin-top:6px"><div><h4>🌿 ${tr('Typowa flora','Typical plants')}</h4><ul>${li(d.f)}</ul></div><div><h4>🐾 ${tr('Typowa fauna','Typical animals')}</h4><ul>${li(d.a)}</ul></div></div>
+  <p class="verdict"><b>${tr('Człowiek','People')}:</b> ${esc(d.c)}</p>`;
+ $('#tatry').innerHTML=TATRY.slice().reverse().map(t=>{const d=t[k];return `<div class="tz" style="--c:${t.c}">${t.ph?photo(t.ph,d[0]):''}<div><h4>${esc(cap1(d[0]))} <small>${esc(d[1])}</small></h4><p>${esc(d[2])}</p><p class="note"><b>${tr('Zwierzęta','Animals')}:</b> ${esc(d[3])}</p></div></div>`;}).join('');
+ drawMtn();}
+const cap1=s=>s.charAt(0).toUpperCase()+s.slice(1);
+$('#bchips').addEventListener('click',e=>{const b=e.target.closest('[data-bc]');if(b){BSEL=b.dataset.bc;drawBiomes();}});
+
 // ---------- zakładki ----------
-function showTab(t){$$('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab===t));['czytaj','strefy','cwicz'].forEach(k=>$('#tab-'+k).hidden=k!==t);if(t==='cwicz'&&Q.i===null)newQ();}
+function showTab(t){$$('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab===t));['czytaj','strefy','biomy','cwicz'].forEach(k=>$('#tab-'+k).hidden=k!==t);if(t==='biomy')drawBiomes();if(t==='cwicz'&&Q.i===null)newQ();}
 $$('[data-tab]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
 // ---------- przełączanie języka ----------
 function applyStatic(){document.documentElement.lang=L;document.title=tr('Klimatogramy i strefy klimatyczne','Climographs and climate zones');
  $$('[data-en]').forEach(el=>{if(el.dataset.pl===undefined)el.dataset.pl=el.innerHTML;el.innerHTML=L==='en'?el.dataset.en:el.dataset.pl;});
  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));}
 function setLang(l){L=l;try{localStorage.setItem('klimLang',L)}catch(e){}
+ if(!$('#tab-biomy').hidden)drawBiomes();
  applyStatic();fillReadSel();drawRead();drawZones();fillOwnLoad();
  $('#inp tr').innerHTML=inpHead();drawOwn();
  if(Q.i!==null)renderQ();}
