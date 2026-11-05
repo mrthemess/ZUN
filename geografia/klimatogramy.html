@@ -71,7 +71,7 @@ table.inp input{width:100%;min-width:0;padding:4px;text-align:center}
 @media (max-width:880px){.two{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}}
 .bph{margin:0 0 10px}.bph img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;display:block;background:var(--soft)}.bph figcaption{font-size:.75rem;color:var(--muted);margin-top:3px}.bph a{color:inherit}
 #biome h3{margin:0 0 4px;font-size:1.6rem;border-left:8px solid var(--c);padding-left:10px}#biome h4,.tz h4{margin:6px 0 6px;font-size:1.1rem}#biome ul{margin:0;padding-left:20px}#biome li{margin:6px 0}
-.tz{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:14px;align-items:start;border-left:8px solid var(--c);background:var(--paper);border-radius:12px;padding:12px;margin-bottom:10px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line)}.tz p{margin:0 0 6px}.tz small{font-weight:400;color:var(--muted);font-family:'Atkinson Hyperlegible',sans-serif}.tz .bph{margin:0}
+.gl li{margin:7px 0}a.wl{color:inherit;text-decoration:underline dotted;text-underline-offset:3px}a.wl:hover{color:var(--acc);text-decoration-style:solid}.tz{display:grid;grid-template-columns:minmax(0,240px) minmax(0,1fr);gap:14px;align-items:start;border-left:8px solid var(--c);background:var(--paper);border-radius:12px;padding:12px;margin-bottom:10px;border-top:1.5px solid var(--line);border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line)}.tz p{margin:0 0 6px}.tz small{font-weight:400;color:var(--muted);font-family:'Atkinson Hyperlegible',sans-serif}.tz .bph{margin:0}
 #mtnChart svg{width:100%;height:auto;display:block;max-width:720px}
 @media (max-width:640px){.tz{grid-template-columns:1fr}}
 </style>
@@ -80,7 +80,7 @@ table.inp input{width:100%;min-width:0;padding:4px;text-align:center}
 <div class="wrap">
 <header><div><h1 data-en="Climographs and climate zones">Klimatogramy i strefy klimatyczne</h1><p data-en="How to read a climograph (climate chart), how the climate zones differ and how to recognise them.">Jak czytać klimatogram, czym różnią się strefy klimatyczne i jak je rozpoznać.</p></div>
 <div class="hr"><div class="lang" role="group" aria-label="Język / Language"><button data-lang="pl">PL</button><button data-lang="en">EN</button></div>
-<div class="tabs" role="tablist"><button role="tab" data-tab="czytaj" aria-selected="true" data-en="How to read">Jak czytać</button><button role="tab" data-tab="strefy" aria-selected="false" data-en="Zones and examples">Strefy i przykłady</button><button role="tab" data-tab="biomy" aria-selected="false" data-en="Biomes and mountains">Biomy i góry</button><button role="tab" data-tab="cwicz" aria-selected="false" data-en="Practise">Ćwicz</button></div></div></header>
+<div class="tabs" role="tablist"><button role="tab" data-tab="czytaj" aria-selected="true" data-en="How to read">Jak czytać</button><button role="tab" data-tab="strefy" aria-selected="false" data-en="Zones and examples">Strefy i przykłady</button><button role="tab" data-tab="biomy" aria-selected="false" data-en="Biomes">Biomy</button><button role="tab" data-tab="gory" aria-selected="false" data-en="Mountain climate">Klimat astrefowy gór</button><button role="tab" data-tab="cwicz" aria-selected="false" data-en="Practise">Ćwicz</button></div></div></header>
 
 <div id="tab-czytaj">
  <section class="s"><h2 data-en="What is a climograph?">Co to jest klimatogram?</h2>
@@ -116,6 +116,11 @@ table.inp input{width:100%;min-width:0;padding:4px;text-align:center}
     <div class="tasks" id="qTasks"></div>
     <p style="margin-top:12px"><button class="btn primary" id="qNext" data-en="Next climograph">Następny klimatogram</button></p></div></div></div>
  </section>
+ <section class="s"><h2><span data-en="Biomes and mountains">Biomy i piętra roślinności</span> <span class="score" id="bqScore"></span></h2>
+  <div class="card"><div class="two"><div id="bqMedia"></div>
+   <div><p style="margin:0" id="bqQ"></p><div class="opts" id="bqOpts"></div><div id="bqIn"></div><p class="fb" id="bqFb"></p><p id="bqEx"></p>
+    <p style="margin-top:12px"><button class="btn primary" id="bqNext" data-en="Next question">Następne pytanie</button></p></div></div></div>
+ </section>
  <section class="s"><h2 data-en="Draw your own climograph">Narysuj własny klimatogram</h2>
   <p class="lead" data-en="Enter data from your textbook, an atlas or an exercise. The chart and calculations update straight away, and the tool will suggest which type of climate the data match.">Wpisz dane z podręcznika, atlasu albo z zadania. Wykres i obliczenia zmieniają się od razu, a narzędzie podpowie, do jakiego typu klimatu pasują dane.</p>
   <div class="card"><div style="overflow-x:auto"><table class="inp" id="inp"></table></div>
@@ -123,11 +128,28 @@ table.inp input{width:100%;min-width:0;padding:4px;text-align:center}
    <p style="margin-top:10px"><label><span data-en="Load station data:">Wczytaj dane stacji:</span> <select id="ownLoad"></select></label> <button class="btn" id="ownClear" data-en="Clear">Wyczyść</button></p></div></div></div>
  </section>
 </div>
-<div id="tab-biomy" hidden>
- <section class="s"><h2 data-en="Biomes of the world">Biomy świata</h2>
-  <p class="lead" data-en="A &lt;b&gt;biome&lt;/b&gt; is a large area with a similar climate, vegetation and animals. Biomes follow the climate zones: temperature and rainfall decide which plants can grow, and the plants decide which animals can live there. Choose a biome:"><b>Biom</b> to duży obszar o podobnym klimacie, roślinności i świecie zwierząt. Biomy układają się zgodnie ze strefami klimatycznymi: temperatura i opady decydują, jakie rośliny mogą rosnąć, a od roślin zależy, jakie zwierzęta tam żyją. Wybierz biom:</p>
-  <div class="zchips" id="bchips"></div>
-  <div class="card zone" id="biome"></div>
+<div id="tab-gory" hidden>
+ <section class="s"><h2 data-en="Mountain (azonal) climate">Klimat astrefowy gór</h2>
+  <p class="lead" data-en="In high mountains the climate depends not only on latitude but above all on &lt;b&gt;height above sea level&lt;/b&gt;. That is why it is called &lt;b&gt;azonal&lt;/b&gt; – it does not fit the pattern of climate zones. Within a few kilometres you can go from a warm valley to permanent snow, like travelling thousands of kilometres towards the pole.">W wysokich górach klimat zależy nie tylko od szerokości geograficznej, ale przede wszystkim od <b>wysokości nad poziomem morza</b>. Dlatego nazywamy go <b>astrefowym</b> – nie pasuje do układu stref klimatycznych. Na odcinku kilku kilometrów można przejść z ciepłej doliny do wiecznego śniegu, jak podczas podróży o tysiące kilometrów w stronę bieguna.</p>
+  <div class="card"><div class="two"><div><h3 style="margin-top:0" data-en="Features of mountain climate">Cechy klimatu górskiego</h3><ul class="gl">
+   <li data-en="&lt;b&gt;Temperature falls with height&lt;/b&gt; – by about 0.6°C for every 100 m. Zakopane (about 850 m) has a mean annual temperature of about 5°C, Kasprowy Wierch (1987 m) about −1°C."><b>Temperatura spada z wysokością</b> – średnio o ok. 0,6°C na każde 100 m. Zakopane (ok. 850 m n.p.m.) ma średnią roczną temperaturę ok. 5°C, a Kasprowy Wierch (1987 m n.p.m.) – ok. −1°C.</li>
+   <li data-en="&lt;b&gt;Lower air pressure&lt;/b&gt; – the air is thinner and holds less oxygen; at 5000 m there is only about half as much as at sea level."><b>Niższe ciśnienie atmosferyczne</b> – powietrze jest rzadsze i zawiera mniej tlenu; na wysokości 5000 m jest go tylko ok. połowa tego, co nad morzem.</li>
+   <li data-en="&lt;b&gt;Stronger sunlight&lt;/b&gt; – thin, clean air lets through more solar radiation, especially UV. In the sun it can be hot even when the air is cold."><b>Silniejsze promieniowanie słoneczne</b> – rzadkie i czyste powietrze przepuszcza więcej promieniowania, zwłaszcza UV. W słońcu jest gorąco, choć powietrze jest zimne.</li>
+   <li data-en="&lt;b&gt;More precipitation&lt;/b&gt; – air forced up the slopes cools, and its water vapour condenses (orographic rain). The windward side is wet, the leeward side drier (a rain shadow)."><b>Więcej opadów</b> – powietrze wznoszące się po stokach ochładza się, a para wodna się skrapla (opady orograficzne). Strona dowietrzna jest wilgotna, a zawietrzna – suchsza (cień opadowy).</li>
+   <li data-en="&lt;b&gt;Strong winds and föhn&lt;/b&gt; – the föhn (in the Tatras: the &lt;i&gt;halny&lt;/i&gt;) is a warm, dry, gusty wind blowing down the leeward slopes; it can raise the temperature by a dozen degrees within hours."><b>Silne wiatry i wiatr fenowy</b> – fen (w Tatrach: <i>halny</i>) to ciepły, suchy i porywisty wiatr spływający po zawietrznych stokach; potrafi w kilka godzin podnieść temperaturę o kilkanaście stopni.</li>
+   <li data-en="&lt;b&gt;Long-lasting snow&lt;/b&gt; – the higher up, the longer the snow lies. Above the &lt;b&gt;snow line&lt;/b&gt; it never melts and glaciers form."><b>Długo zalegający śnieg</b> – im wyżej, tym dłużej leży pokrywa śnieżna. Powyżej <b>granicy wiecznego śniegu</b> śnieg nie topnieje i tworzą się lodowce.</li>
+   <li data-en="&lt;b&gt;Slope aspect matters&lt;/b&gt; – south-facing slopes (in the Northern Hemisphere) are sunnier and warmer than north-facing ones; in valleys on calm nights cold air collects (temperature inversion)."><b>Liczy się ekspozycja stoku</b> – stoki południowe (na półkuli północnej) są bardziej nasłonecznione i cieplejsze niż północne; w dolinach podczas bezwietrznych nocy gromadzi się zimne powietrze (inwersja temperatury).</li>
+   <li data-en="&lt;b&gt;Changeable weather&lt;/b&gt; – fog, storms and sudden changes happen often; that is why mountain hiking needs good preparation."><b>Zmienna pogoda</b> – częste mgły, burze i nagłe zmiany; dlatego w góry trzeba wychodzić dobrze przygotowanym.</li>
+  </ul></div>
+  <div><h3 style="margin-top:0" data-en="Same latitude, different height">Ta sama szerokość, inna wysokość</h3><p class="note" style="margin-top:0" data-en="Manaus and Quito both lie almost on the equator. Manaus is in the lowlands, Quito at 2850 m – it is about 13°C cooler there all year, &quot;eternal spring&quot;.">Manaus i Quito leżą prawie na równiku. Manaus – na nizinie, Quito – na wysokości 2850 m n.p.m. Jest tam przez cały rok ok. 13°C chłodniej – „wieczna wiosna”.</p>
+   <div class="chart" id="gChartA"></div><div class="chart" id="gChartB"></div></div></div></div>
+ </section>
+ <section class="s"><h2 data-en="How cold is it higher up?">Ile stopni będzie wyżej?</h2>
+  <div class="card"><div class="two"><div>
+   <label><span data-en="Temperature at the bottom (°C):">Temperatura na dole (°C):</span> <input id="gT0" type="number" value="20" step="1" style="width:90px"></label>
+   <label style="display:block;margin-top:10px"><span data-en="Height at the bottom (m a.s.l.):">Wysokość na dole (m n.p.m.):</span> <input id="gH0" type="number" value="850" step="50" style="width:110px"></label>
+   <label style="display:block;margin-top:10px"><span data-en="Height at the top (m a.s.l.):">Wysokość na górze (m n.p.m.):</span> <b id="gH1v"></b><input id="gH1" type="range" min="0" max="6000" step="50" value="1987"></label></div>
+   <div class="verdict" id="gOut"></div></div></div>
  </section>
  <section class="s"><h2 data-en="Vegetation zones in mountains">Piętra roślinności w górach</h2>
   <p class="lead" data-en="Going up a mountain is like travelling towards the pole: the temperature falls by about &lt;b&gt;0.6°C for every 100 m&lt;/b&gt;, so the vegetation changes in bands called &lt;b&gt;vegetation zones&lt;/b&gt;. In the Tatras there are six of them.">Wchodzenie w góry przypomina podróż w stronę bieguna: temperatura spada o ok. <b>0,6°C na każde 100 m</b>, dlatego roślinność zmienia się pasami, które nazywamy <b>piętrami roślinności</b>. W Tatrach jest ich sześć.</p>
@@ -135,6 +157,13 @@ table.inp input{width:100%;min-width:0;padding:4px;text-align:center}
   <h3 style="margin-top:22px" data-en="The nearer the equator, the higher the zones">Im bliżej równika, tym wyżej sięgają piętra</h3>
   <div class="card"><div id="mtnChart"></div>
    <p class="note" data-en="Simplified heights; the boundaries also depend on which way the slope faces and how humid it is. In the Tatras the forest ends at about 1550 m, in the Alps at about 2000 m, and on Kilimanjaro at about 2800–3000 m. Permanent snow starts at about 3000 m in the Alps and above 5000 m near the equator; the Tatras are too low for it.">Wysokości są uproszczone – granice pięter zależą też od tego, w którą stronę opada stok i jak jest wilgotno. W Tatrach las kończy się na ok. 1550 m, w Alpach na ok. 2000 m, a na Kilimandżaro na ok. 2800–3000 m. Wieczny śnieg zaczyna się w Alpach na ok. 3000 m, a przy równiku powyżej 5000 m; Tatry są na niego za niskie.</p></div>
+ </section>
+</div>
+<div id="tab-biomy" hidden>
+ <section class="s"><h2 data-en="Biomes of the world">Biomy świata</h2>
+  <p class="lead" data-en="A &lt;b&gt;biome&lt;/b&gt; is a large area with a similar climate, vegetation and animals. Biomes follow the climate zones: temperature and rainfall decide which plants can grow, and the plants decide which animals can live there. Choose a biome:"><b>Biom</b> to duży obszar o podobnym klimacie, roślinności i świecie zwierząt. Biomy układają się zgodnie ze strefami klimatycznymi: temperatura i opady decydują, jakie rośliny mogą rosnąć, a od roślin zależy, jakie zwierzęta tam żyją. Wybierz biom:</p>
+  <div class="zchips" id="bchips"></div>
+  <div class="card zone" id="biome"></div>
  </section>
 </div>
 </div>
@@ -433,7 +462,7 @@ const BIOMES=[
 ];
 // piętra w Tatrach
 const TATRY=[
- {h:[0,700],c:'#c9b458',ph:null,pl:['pogórze','do ok. 700 m','Pola uprawne, łąki i pastwiska, wsie. Dawniej rosły tu lasy liściaste.','sarna, zając, ptaki pól i łąk'],en:['foothills','up to about 700 m','Fields, meadows and pastures, villages. Broadleaved forest used to grow here.','roe deer, hare, farmland birds']},
+ {h:[0,700],c:'#c9b458',ph:null,pl:['pogórze','do ok. 700 m','Pola uprawne, łąki i pastwiska, wsie. Dawniej rosły tu lasy liściaste.','sarna, zając, skowronek'],en:['foothills','up to about 700 m','Fields, meadows and pastures, villages. Broadleaved forest used to grow here.','roe deer, hare, skylark']},
  {h:[700,1250],c:'#4f9a4a',ph:'regd',pl:['regiel dolny','700–1250 m','Las mieszany: buk, jodła i świerk (buczyna karpacka). Najbogatsze piętro lasu.','jeleń, sarna, dzik, niedźwiedź brunatny, salamandra plamista']
    ,en:['lower montane forest','700–1250 m','Mixed forest: beech, fir and spruce (Carpathian beech forest). The richest forest zone.','red deer, roe deer, wild boar, brown bear, fire salamander']},
  {h:[1250,1550],c:'#2b6b4a',ph:'regg',pl:['regiel górny','1250–1550 m','Bór świerkowy z jarzębiną; wyżej pojawia się limba. Chłodniej, dłużej leży śnieg.','niedźwiedź, ryś, głuszec, orzechówka (rozsiewa nasiona limby)']
@@ -465,26 +494,67 @@ function drawMtn(){const k=L==='en'?1:0,W=560,H=440,top=6000,x0=46,y=v=>20+(H-50
 function drawBiomes(){const k=L==='en'?'en':'pl';
  $('#bchips').innerHTML=BIOMES.map(b=>`<button data-bc="${b.k}" style="--c:${ZONES[b.z].c}" aria-pressed="${b.k===BSEL}"><i></i>${esc(b[k].n)}</button>`).join('');
  const b=BIOMES.find(x=>x.k===BSEL),d=b[k],si=ST.findIndex(s=>s[0]===b.st);
- const li=a=>a.map(([n,t])=>`<li><b>${esc(n)}</b> – ${esc(t)}</li>`).join('');
+ const li=a=>a.map(([n,t])=>`<li><b>${wl(n,k)}</b> – ${esc(t)}</li>`).join('');
  $('#biome').innerHTML=`<h3 style="--c:${ZONES[b.z].c}">${esc(d.n)}</h3><p class="note" style="margin:0 0 10px">${tr('Strefa klimatyczna','Climate zone')}: <b>${esc(Z(b.z).n)}</b></p>
   <div class="two"><div>${photo(b.k,d.n)}<p>${esc(d.o)}</p><p><b>${tr('Klimat','Climate')}:</b> ${esc(d.kl)}</p><p><b>${tr('Gleba','Soil')}:</b> ${esc(d.g)}</p></div>
   <div class="chart">${si>=0?chart(ST[si][6],ST[si][7],{title:tr('Przykładowa stacja: ','Example station: ')+sN(si)}):''}</div></div>
-  <div class="two" style="margin-top:6px"><div><h4>🌿 ${tr('Typowa flora','Typical plants')}</h4><ul>${li(d.f)}</ul></div><div><h4>🐾 ${tr('Typowa fauna','Typical animals')}</h4><ul>${li(d.a)}</ul></div></div>
-  <p class="verdict"><b>${tr('Człowiek','People')}:</b> ${esc(d.c)}</p>`;
- $('#tatry').innerHTML=TATRY.slice().reverse().map(t=>{const d=t[k];return `<div class="tz" style="--c:${t.c}">${t.ph?photo(t.ph,d[0]):''}<div><h4>${esc(cap1(d[0]))} <small>${esc(d[1])}</small></h4><p>${esc(d[2])}</p><p class="note"><b>${tr('Zwierzęta','Animals')}:</b> ${esc(d[3])}</p></div></div>`;}).join('');
- drawMtn();}
+  <div class="two" style="margin-top:6px"><div><h4>🌿 ${tr('Typowa flora','Typical plants')}</h4><ul>${li(d.f)}</ul></div><div><h4>🐾 ${tr('Typowa fauna','Typical animals')}</h4><ul>${li(d.a)}</ul></div></div><p class="note">🔗 ${tr('Kliknij nazwę rośliny lub zwierzęcia, aby otworzyć artykuł w Wikipedii.','Click the name of a plant or animal to open its Wikipedia article.')}</p>
+  <p class="verdict"><b>${tr('Człowiek','People')}:</b> ${esc(d.c)}</p>`;}
+function drawGory(){const k=L==='en'?'en':'pl';
+ $('#tatry').innerHTML=TATRY.slice().reverse().map(t=>{const d=t[k];return `<div class="tz" style="--c:${t.c}">${t.ph?photo(t.ph,d[0]):''}<div><h4>${esc(cap1(d[0]))} <small>${esc(d[1])}</small></h4><p>${esc(d[2])}</p><p class="note"><b>${tr('Zwierzęta','Animals')}:</b> ${wl(d[3],k)}</p></div></div>`;}).join('');
+ drawMtn();const a=ST.findIndex(x=>x[0]==='Manaus'),b=ST.findIndex(x=>x[0]==='Quito');$('#gChartA').innerHTML=chart(ST[a][6],ST[a][7],{title:sN(a)+' (~50 m)'});$('#gChartB').innerHTML=chart(ST[b][6],ST[b][7],{title:sN(b)+' (2850 m)'});drawCalc();}
+function drawCalc(){const t0=+$('#gT0').value||0,h0=+$('#gH0').value||0,h1=+$('#gH1').value,d=h1-h0,t1=Math.round((t0-d*.006)*10)/10,f=v=>String(v).replace('.',L==='en'?'.':',').replace('-','−');$('#gH1v').textContent=h1+' m';
+ $('#gOut').innerHTML=tr(`Różnica wysokości: <b>${f(d)} m</b>.<br>Zmiana temperatury: ${f(d)} m : 100 m × 0,6°C = <b>${f(Math.round(-d*.06)/10)}°C</b>.<br>Temperatura na wysokości ${h1} m n.p.m.: <b style="font-size:1.3rem">${f(t1)}°C</b>`,`Height difference: <b>${f(d)} m</b>.<br>Temperature change: ${f(d)} m ÷ 100 m × 0.6°C = <b>${f(Math.round(-d*.06)/10)}°C</b>.<br>Temperature at ${h1} m a.s.l.: <b style="font-size:1.3rem">${f(t1)}°C</b>`)+`<p class="note" style="margin:6px 0 0">${tr('To przybliżenie – w rzeczywistości spadek temperatury zależy od wilgotności powietrza i pogody.','This is an approximation – the real rate depends on humidity and weather.')}</p>`;}
+['gT0','gH0','gH1'].forEach(id=>$('#'+id).addEventListener('input',drawCalc));
+function wl(s,k){const base=k==='en'?'https://en.wikipedia.org/wiki/Special:Search?go=Go&search=':'https://pl.wikipedia.org/wiki/Special:Search?go=Go&search=';
+ return s.split(/(\([^)]*\))/).map(ch=>ch.startsWith('(')?esc(ch):ch.split(/(,\s+| i | and | or | – )/).map(t=>/^(,\s+| i | and | or | – )$/.test(t)||!t.trim()?esc(t):t.replace(/^(\s*)(.*?)(\s*)$/,(m,a,w,b)=>`${a}<a class="wl" href="${base}${encodeURIComponent(w)}" target="_blank" rel="noopener">${esc(w)}</a>${b}`)).join('')).join('');}
 const cap1=s=>s.charAt(0).toUpperCase()+s.slice(1);
 $('#bchips').addEventListener('click',e=>{const b=e.target.closest('[data-bc]');if(b){BSEL=b.dataset.bc;drawBiomes();}});
 
+// ---------- ćwiczenia: biomy ----------
+const BQ={ok:0,all:0,c:null,pick:null,done:false,right:false};
+const shB=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const pk=a=>a[Math.floor(Math.random()*a.length)];
+const toks=t=>t.toLowerCase().replace(/\([^)]*\)/g,'').split(/[^a-ząćęłńóśźżé]+/).filter(w=>w.length>=4);
+function uniqItems(){const out=[];BIOMES.forEach((b,bi)=>['f','a'].forEach(g=>b.pl[g].forEach((it,ii)=>{const mine=toks(it[0]);const clash=BIOMES.some((o,oi)=>oi!==bi&&['f','a'].some(h=>o.pl[h].some(x=>toks(x[0]).some(w=>mine.includes(w)))));if(!clash&&mine.length)out.push({bi,g,ii});})));return out;}
+const UNI=uniqItems();
+function bOpts(bi){return shB([bi,...shB(BIOMES.map((_,i)=>i).filter(i=>i!==bi)).slice(0,3)]);}
+const ZONEW=/(K|k)osodrzewin\S*|(R|r)egl\S*|(T|t)urni\S*|(H|h)al\S*|(L|l)as kończy się tutaj\S*/g;
+function newBQ(){const kind=pk(['photo','clim','org','org','typ','tatry','tatryH','temp']);const c={kind};
+ if(kind==='photo'||kind==='clim'){c.bi=Math.floor(Math.random()*BIOMES.length);c.o=bOpts(c.bi);}
+ if(kind==='org'){c.it=pk(UNI);c.bi=c.it.bi;c.o=bOpts(c.bi);}
+ if(kind==='typ'){c.bi=Math.floor(Math.random()*BIOMES.length);const mine=shB(UNI.filter(x=>x.bi===c.bi));if(!mine.length)return newBQ();
+  const others=shB(BIOMES.map((_,i)=>i).filter(i=>i!==c.bi)).map(i=>pk(UNI.filter(x=>x.bi===i))).filter(Boolean).slice(0,3);c.items=shB([mine[0],...others]);c.ans=c.items.indexOf(mine[0]);}
+ if(kind==='tatry'||kind==='tatryH'){c.zi=Math.floor(Math.random()*TATRY.length);c.o=shB([c.zi,...shB(TATRY.map((_,i)=>i).filter(i=>i!==c.zi)).slice(0,3)]);}
+ if(kind==='temp'){c.t0=Math.round(8+Math.random()*16);c.h0=500+50*Math.floor(Math.random()*11);c.h1=c.h0+100*(8+Math.floor(Math.random()*13));c.ans=Math.round((c.t0-(c.h1-c.h0)*.006)*10)/10;}
+ BQ.c=c;BQ.pick=null;BQ.done=false;renderBQ();}
+function renderBQ(){const c=BQ.c,k=L==='en'?'en':'pl',B=i=>BIOMES[i][k].n,f=v=>String(v).replace('.',L==='en'?'.':',').replace('-','−');let q='',media='',opts=[],ex='';
+ if(c.kind==='photo'){q=tr('Jaki biom przedstawia to zdjęcie?','Which biome does this photo show?');media=photo(BIOMES[c.bi].k,tr('zdjęcie biomu','biome photo'));opts=c.o.map(B);if(BQ.done)ex=esc(BIOMES[c.bi][k].o);}
+ if(c.kind==='clim'){const si=ST.findIndex(x=>x[0]===BIOMES[c.bi].st);q=tr('Klimatogram pochodzi ze stacji leżącej w typowym miejscu jednego z biomów. Który to biom?','This climograph comes from a station in a typical place of one biome. Which biome is it?');media=`<div class="chart">${chart(ST[si][6],ST[si][7],{title:tr('Stacja X','Station X')})}</div>`;opts=c.o.map(B);if(BQ.done)ex=tr(`To stacja ${esc(sN(si))}. `,`This is ${esc(sN(si))}. `)+esc(BIOMES[c.bi][k].kl);}
+ if(c.kind==='org'){const it=BIOMES[c.bi][k][c.it.g][c.it.ii];q=tr(`W którym biomie typowo ${c.it.g==='f'?'rośnie':'żyje'}: <b>${esc(it[0])}</b>?`,`In which biome is this typically found: <b>${esc(it[0])}</b>?`);opts=c.o.map(B);if(BQ.done)ex=`<b>${wl(it[0],k)}</b> – ${esc(it[1])}.`;}
+ if(c.kind==='typ'){q=tr(`Co jest typowe dla biomu: <b>${esc(B(c.bi))}</b>?`,`What is typical of this biome: <b>${esc(B(c.bi))}</b>?`);opts=c.items.map(x=>BIOMES[x.bi][k][x.g][x.ii][0]);if(BQ.done)ex=c.items.map(x=>`<b>${wl(BIOMES[x.bi][k][x.g][x.ii][0],k)}</b> → ${esc(B(x.bi))}`).join('<br>');}
+ if(c.kind==='tatry'){const z=TATRY[c.zi][k];q=tr('Które piętro roślinności w Tatrach opisano?','Which Tatra vegetation zone is described here?')+`<br><i>${esc(z[2]).replace(k==='pl'?ZONEW:/(D|d)warf (mountain )?pine\S*|(M|m)ontane\S*|(A|a)lpine meadow\S*|tree line|(B|b)are rock\S*/g,'…')}</i>`;opts=c.o.map(i=>cap1(TATRY[i][k][0]));if(BQ.done)ex=`<b>${esc(cap1(z[0]))}</b> (${esc(z[1])}). ${esc(z[2])}`;}
+ if(c.kind==='tatryH'){const z=TATRY[c.zi][k];q=tr(`Na jakiej wysokości w Tatrach leży <b>${esc(z[0])}</b>?`,`At what height is the <b>${esc(z[0])}</b> in the Tatras?`);opts=c.o.map(i=>TATRY[i][k][1]);if(BQ.done)ex=TATRY.map(t=>`${esc(cap1(t[k][0]))}: ${esc(t[k][1])}`).join('<br>');}
+ if(c.kind==='temp'){q=tr(`U podnóża góry, na wysokości ${c.h0} m n.p.m., termometr wskazuje ${c.t0}°C. Ile stopni będzie na szczycie, na wysokości ${c.h1} m n.p.m.? Przyjmij, że temperatura spada o 0,6°C na każde 100 m.`,`At the foot of a mountain, at ${c.h0} m a.s.l., the thermometer shows ${c.t0}°C. What will the temperature be at the summit, at ${c.h1} m a.s.l.? Assume it falls by 0.6°C for every 100 m.`);
+  if(BQ.done){const d=c.h1-c.h0,dt=f(Math.round(d*.06)/10);ex=tr(`Różnica wysokości: ${c.h1} − ${c.h0} = ${d} m. Spadek temperatury: ${d} : 100 × 0,6 = ${dt}°C. Na szczycie: ${c.t0} − ${dt} = <b>${f(c.ans)}°C</b>.`,`Height difference: ${c.h1} − ${c.h0} = ${d} m. Temperature drop: ${d} ÷ 100 × 0.6 = ${dt}°C. At the summit: ${c.t0} − ${dt} = <b>${f(c.ans)}°C</b>.`);}}
+ $('#bqQ').innerHTML=q;$('#bqMedia').innerHTML=media;
+ const right=c.kind==='typ'?c.ans:c.o?c.o.indexOf(c.kind.startsWith('tatry')?c.zi:c.bi):-1;
+ $('#bqOpts').innerHTML=opts.map((t,i)=>`<button data-bo="${i}" class="${BQ.done?(i===right?'right':i===BQ.pick?'wrong':''):''}" ${BQ.done?'disabled':''}>${String.fromCharCode(65+i)}. ${esc(t)}</button>`).join('');
+ $('#bqIn').innerHTML=c.kind==='temp'?`<p><input id="bqT" inputmode="decimal" style="width:110px" ${BQ.done?'disabled':''} value="${BQ.pick!=null?esc(BQ.pick):''}"> °C <button class="btn" id="bqCheck" ${BQ.done?'disabled':''}>${tr('Sprawdź','Check')}</button></p>`:'';
+ $('#bqFb').className='fb '+(BQ.done?(BQ.right?'ok':'no'):'');$('#bqFb').textContent=BQ.done?(BQ.right?tr('Dobrze!','Correct!'):tr('Nie tym razem.','Not this time.')):'';
+ $('#bqEx').innerHTML=BQ.done?ex:'';$('#bqScore').textContent=BQ.all?`${BQ.ok}/${BQ.all}`:'';
+ $$('[data-bo]').forEach(b=>b.onclick=()=>{if(BQ.done)return;BQ.pick=+b.dataset.bo;BQ.right=BQ.pick===right;BQ.done=true;BQ.all++;if(BQ.right)BQ.ok++;renderBQ();});
+ const ck=$('#bqCheck');if(ck&&!BQ.done){const go=()=>{const v=parseFloat(String($('#bqT').value).replace(',','.').replace(/[−–]/,'-'));if(!isFinite(v))return;BQ.pick=$('#bqT').value;BQ.right=Math.abs(v-c.ans)<=.31;BQ.done=true;BQ.all++;if(BQ.right)BQ.ok++;renderBQ();};ck.onclick=go;$('#bqT').onkeydown=e=>{if(e.key==='Enter')go();};}}
+$('#bqNext').addEventListener('click',newBQ);
 // ---------- zakładki ----------
-function showTab(t){$$('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab===t));['czytaj','strefy','biomy','cwicz'].forEach(k=>$('#tab-'+k).hidden=k!==t);if(t==='biomy')drawBiomes();if(t==='cwicz'&&Q.i===null)newQ();}
+function showTab(t){$$('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab===t));['czytaj','strefy','biomy','gory','cwicz'].forEach(k=>$('#tab-'+k).hidden=k!==t);if(t==='biomy')drawBiomes();if(t==='gory')drawGory();if(t==='cwicz'&&Q.i===null)newQ();if(t==='cwicz'&&!BQ.c)newBQ();}
 $$('[data-tab]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
 // ---------- przełączanie języka ----------
 function applyStatic(){document.documentElement.lang=L;document.title=tr('Klimatogramy i strefy klimatyczne','Climographs and climate zones');
  $$('[data-en]').forEach(el=>{if(el.dataset.pl===undefined)el.dataset.pl=el.innerHTML;el.innerHTML=L==='en'?el.dataset.en:el.dataset.pl;});
  $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));}
 function setLang(l){L=l;try{localStorage.setItem('klimLang',L)}catch(e){}
- if(!$('#tab-biomy').hidden)drawBiomes();
+ if(!$('#tab-biomy').hidden)drawBiomes();if(BQ.c)renderBQ();if(!$('#tab-gory').hidden)drawGory();
  applyStatic();fillReadSel();drawRead();drawZones();fillOwnLoad();
  $('#inp tr').innerHTML=inpHead();drawOwn();
  if(Q.i!==null)renderQ();}
