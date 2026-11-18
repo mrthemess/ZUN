@@ -61,7 +61,21 @@ select,input{font:inherit;color:var(--ink);background:var(--paper);border:1.5px 
 .xyb[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
 @media (max-width:900px){.lay{grid-template-columns:1fr}.side{position:static;max-height:none}}
 .card{background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:12px}
-.status{color:var(--muted);font-size:.9rem;min-height:1.3em}
+.status{color:var(--muted);font-size:.9rem;min-height:1.6em;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:8px 0}
+.status.busy{color:var(--acc-t);font-weight:700}
+.spin{width:16px;height:16px;border:2.5px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:spin .8s linear infinite;flex:none;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.pbar{flex:1 1 120px;max-width:260px;height:6px;background:var(--soft);border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--acc);border-radius:99px;transition:width .3s}
+.pbar.ind i{width:35%;animation:slide 1.2s ease-in-out infinite}
+@keyframes slide{from{transform:translateX(-100%)}to{transform:translateX(290%)}}
+.sk{display:inline-block;width:5.5em;max-width:100%;height:1em;border-radius:6px;vertical-align:middle;background:linear-gradient(90deg,var(--soft) 25%,var(--line) 50%,var(--soft) 75%);background-size:200% 100%;animation:shim 1.2s linear infinite}
+@keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
+.cellerr{color:var(--no);font-weight:700}
+#main.busy{position:relative;pointer-events:none}#main.busy>*{opacity:.4;transition:opacity .2s}
+#main.busy::after{content:"";position:absolute;top:60px;left:50%;width:34px;height:34px;margin-left:-17px;border:4px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:spin .8s linear infinite}
+.loadcard{display:flex;align-items:center;gap:10px;color:var(--acc-t);font-weight:700;margin-top:0}
+@media (prefers-reduced-motion:reduce){.spin,.sk,.pbar.ind i,#main.busy::after{animation-duration:2.5s}}
 .err{background:color-mix(in srgb,var(--no) 12%,var(--paper));border:1.5px solid var(--no);border-radius:12px;padding:12px 14px;margin-top:14px}
 table.cmp{width:100%;border-collapse:collapse;font-size:.93rem}
 table.cmp th,table.cmp td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
@@ -167,7 +181,7 @@ const li=()=>L==='pl'?0:1;
 const TX={pl:{t1:'Porównywarka państw świata',t2:'Dane na żywo z Banku Światowego i Wikidata: ludność, gospodarka, środowisko i poziom życia.',
  tabs:{cmp:'Porównaj',time:'Zmiany w czasie',rank:'Ranking',map:'Mapa',scat:'Zależności',quiz:'Quiz'},
  countries:'Państwa (1–5)',add:'Dodaj państwo…',ind:'Wskaźnik',x:'Oś pozioma (X)',y:'Oś pionowa (Y)',logx:'Skala logarytmiczna X',region:'Region',allr:'Cały świat',
- loading:'Pobieram dane…',noconn:'Nie udało się połączyć z Bankiem Światowym. Narzędzie pobiera dane na żywo, więc potrzebuje internetu – działa po osadzeniu np. w Google Sites (w podglądzie w Claude połączenia są zablokowane).',
+ loading:'Pobieram dane…',cellErr:'błąd pobierania',cellErrT:'Serwer z danymi nie odpowiedział – spróbuj ponownie za chwilę.',someErr:'Nie udało się pobrać części danych ({n}).',retry:'Spróbuj ponownie',noconn:'Nie udało się połączyć z Bankiem Światowym. Narzędzie pobiera dane na żywo, więc potrzebuje internetu – działa po osadzeniu np. w Google Sites (w podglądzie w Claude połączenia są zablokowane).',
  nodata:'brak danych',year:'rok',src:'Źródła: Bank Światowy (World Development Indicators), Wikidata (HDI i dane atlasowe). Dane mają zwykle 1–2 lata opóźnienia – przy każdej wartości podany jest rok.',
  capital:'Stolica',reg:'Region',income:'Grupa dochodowa',cur:'Waluta',lang:'Języki urzędowe',hp:'Najwyższy punkt',nb:'Liczba sąsiadów (lądowych)',
  sel:'wybrane',showAll:'pokaż wszystkie',top:'pierwsze',pos:'miejsce',of:'z',clickAdd:'Kliknij państwo, żeby dodać je do porównania.',
@@ -177,7 +191,7 @@ const TX={pl:{t1:'Porównywarka państw świata',t2:'Dane na żywo z Banku Świa
  en:{t1:'World country comparator',t2:'Live data from the World Bank and Wikidata: population, economy, environment and living standards.',
  tabs:{cmp:'Compare',time:'Change over time',rank:'Ranking',map:'Map',scat:'Relationships',quiz:'Quiz'},
  countries:'Countries (1–5)',add:'Add a country…',ind:'Indicator',x:'Horizontal axis (X)',y:'Vertical axis (Y)',logx:'Logarithmic X scale',region:'Region',allr:'Whole world',
- loading:'Loading data…',noconn:'Could not connect to the World Bank. This tool loads live data, so it needs internet access – it works once embedded e.g. in Google Sites (connections are blocked in the Claude preview).',
+ loading:'Loading data…',cellErr:'download failed',cellErrT:'The data server did not respond – try again in a moment.',someErr:'Some data could not be loaded ({n}).',retry:'Try again',noconn:'Could not connect to the World Bank. This tool loads live data, so it needs internet access – it works once embedded e.g. in Google Sites (connections are blocked in the Claude preview).',
  nodata:'no data',year:'year',src:'Sources: World Bank (World Development Indicators), Wikidata (HDI and atlas data). Data usually lag 1–2 years – the year is shown next to each value.',
  capital:'Capital',reg:'Region',income:'Income group',cur:'Currency',lang:'Official languages',hp:'Highest point',nb:'Number of land neighbours',
  sel:'selected',showAll:'show all',top:'top',pos:'rank',of:'of',clickAdd:'Click a country to add it to the comparison.',
@@ -203,6 +217,9 @@ let DN=null;const cname=iso3=>{const m=S.meta&&S.meta.by[iso3];if(!m)return iso3
 const CACHE={};
 async function getJSON(u,ms=15000){if(CACHE[u])return CACHE[u];const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);try{const r=await fetch(u,{signal:c.signal});if(!r.ok)throw new Error(r.status);const j=await r.json();CACHE[u]=j;return j;}finally{clearTimeout(t);}}
 const WB='https://api.worldbank.org/v2/';
+// ---------- wskaźnik ładowania ----------
+function busy(done,total){const s=$('#status');s.classList.add('busy');const t=total>0;s.innerHTML=`<span class="spin" aria-hidden="true"></span><span>${esc(tx('loading'))}${t?` ${done}/${total}`:''}</span><span class="pbar${t?'':' ind'}" aria-hidden="true"><i${t?` style="width:${Math.round(done/total*100)}%"`:''}></i></span>`;}
+function idle(html){const s=$('#status');s.classList.remove('busy');s.innerHTML=html||'';const mm=document.getElementById('main');if(mm)mm.classList.remove('busy');}
 // zapasowe źródło: Data360 Banku Światowego (gdy API v2 nie odpowiada)
 const D360='https://data360api.worldbank.org/data360/data';let WBDOWN=false;
 async function d360(ctry,code,dq){const p=new URLSearchParams({DATABASE_ID:'WB_WDI',INDICATOR:'WB_WDI_'+code.replace(/\./g,'_'),top:'1000'});
@@ -292,31 +309,42 @@ function topbar(){const m=S.meta;if(!m){$('#topbar').innerHTML='';return;}
 // ---------- PORÓWNAJ ----------
 function indPicker(){return `<div class="card"><h3 style="margin:0 0 8px;font-size:1.05rem">${tx('pickInd')}</h3><div class="chips">${S.cmpInd.map(k=>`<span class="chip" style="--c:var(--acc)">${esc(indName(k))}<button data-rmi="${k}" aria-label="×">×</button></span>`).join('')}${combo('indc',tx('addInd'))}</div>
  <div class="chips" style="margin-top:10px">${Object.entries(GROUPS).map(([g,n])=>`<button class="btn" data-addg="${g}">${tx('grp')}: ${esc(n[li()])}</button>`).join('')}<button class="btn" data-addg="*">${tx('all')}</button><button class="btn" data-clri="1">${tx('clear')}</button></div></div>`;}
-async function viewCmp(){const isos=S.sel;
- if(!isos.length||!S.cmpInd.length){setMain(S.cmpInd.length?'':`<div class="card note">${tx('noInd')}</div>`);return;}
- $('#status').textContent=tx('loading');
- const codes=S.cmpInd.filter(k=>!k.startsWith('atl_')).concat(S.cmpInd.includes('atl_area')?['AG.SRF.TOTL.K2']:[]);const vals={};
+async function viewCmp(){const isos=S.sel;const my=RT;
+ if(!isos.length||!S.cmpInd.length){idle();setMain(S.cmpInd.length?'':`<div class="card note">${tx('noInd')}</div>`);return;}
+ const codes=S.cmpInd.filter(k=>!k.startsWith('atl_')).concat(S.cmpInd.includes('atl_area')?['AG.SRF.TOTL.K2']:[]);const vals={},err={};
+ const needA=S.cmpInd.some(k=>['atl_cur','atl_lang','atl_hp','atl_nb'].includes(k));let A=null,aErr=false;
+ const total=codes.length+(needA?1:0);let done=0;const m=S.meta.by;
+ const draw=()=>{if(my!==RT)return;
+  const head=`<thead><tr><th></th>${isos.map((k,i)=>`<th style="--c:${COLS[i]}">${esc(cname(k))}</th>`).join('')}</tr></thead>`;
+  const row=(lab,f)=>`<tr><td>${lab}</td>${isos.map(k=>`<td>${f(k)}</td>`).join('')}</tr>`;
+  const sk=`<span class="sk" role="img" aria-label="${esc(tx('loading'))}"></span>`;
+  const failed=`<span class="cellerr" title="${esc(tx('cellErrT'))}">⚠ ${esc(tx('cellErr'))}</span>`;
+  const val=(c,v)=>err[c]?failed:!(c in vals)?sk:v?`${fmt(c,v[1])}<small>${v[0]||''}</small>`:`<span class="note">${tx('nodata')}</span>`;
+  const atv=f=>i=>A?f(A[i]):aErr?failed:sk;
+  let body='';S.cmpInd.forEach(k=>{
+   if(k==='atl_capital')body+=row(esc(tx('capital')),i=>esc(m[i].capital||'–'));
+   else if(k==='atl_region')body+=row(esc(tx('reg')),i=>esc(regName(m[i].region)));
+   else if(k==='atl_income')body+=row(esc(tx('income')),i=>esc(L==='pl'?(INCPL[m[i].income]||m[i].income):m[i].income));
+   else if(k==='atl_cur')body+=row(esc(tx('cur')),atv(a=>esc(a&&a.cur||'–')));
+   else if(k==='atl_lang')body+=row(esc(tx('lang')),atv(a=>esc(a&&a.lan||'–')));
+   else if(k==='atl_hp')body+=row(esc(tx('hp')),atv(a=>esc(a&&a.hp?a.hp+(a.el?` (${a.el} m)`:''):'–')));
+   else if(k==='atl_nb')body+=row(esc(tx('nb')),atv(a=>a&&a.nb!=null?a.nb:'–'));
+   else{const c=k==='atl_area'?'AG.SRF.TOTL.K2':k;body+=row(`${esc(IBY[c].n[li()])}${unit(c)?` <small>${esc(unit(c))}</small>`:''}`,i=>val(c,(vals[c]||{})[i]));
+    if(c==='SM.POP.TOTL.ZS'||c==='SM.POP.NETM')body+=`<tr><td colspan="${isos.length+1}" class="note">${esc(tx('mig'))}</td></tr>`;}});
+  const card=document.querySelector('#main .card');const sl=card?card.scrollLeft:0;
+  setMain(`<div class="card" style="overflow-x:auto;margin-top:0"><table class="cmp">${head}<tbody>${body}</tbody></table></div><p class="note">${esc(tx('src'))}</p>`);
+  const nc=document.querySelector('#main .card');if(nc)nc.scrollLeft=sl;};
+ const tick=()=>{done++;if(my!==RT)return;if(done<total)busy(done,total);draw();};
+ busy(0,total);draw();
  const fetchOne=async code=>{try{if(code==='natincr'||code==='netmigr'||code==='hdi'){vals[code]=await latestAll(code);}
-   else{let j=await wbInd(isos.join(';'),code,yq(),50);if(code==='EN.GHG.CO2.PC.CE.AR5'&&!(j[1]&&j[1].length))j=await wbInd(isos.join(';'),'EN.ATM.CO2E.PC',yq(),50);const o={};(j[1]||[]).forEach(d=>{if(d.value!=null&&(!S.year||d.date===String(S.year)))o[d.countryiso3code]=[+d.date,+d.value];});vals[code]=o;}}catch(e){vals[code]={};}};
- const needA=S.cmpInd.some(k=>['atl_cur','atl_lang','atl_hp','atl_nb'].includes(k));const at=needA?atlas(isos).catch(()=>({})):Promise.resolve({});
+   else{let j=await wbInd(isos.join(';'),code,yq(),50);if(code==='EN.GHG.CO2.PC.CE.AR5'&&!(j[1]&&j[1].length))j=await wbInd(isos.join(';'),'EN.ATM.CO2E.PC',yq(),50);const o={};(j[1]||[]).forEach(d=>{if(d.value!=null&&(!S.year||d.date===String(S.year)))o[d.countryiso3code]=[+d.date,+d.value];});vals[code]=o;}}catch(e){err[code]=true;}tick();};
+ const at=needA?atlas(isos).then(r=>{A=r||{};},()=>{aErr=true;}).then(tick):Promise.resolve();
  for(let i=0;i<codes.length;i+=8)await Promise.all(codes.slice(i,i+8).map(fetchOne));
- const A=await at;$('#status').textContent='';const m=S.meta.by;
- const head=`<thead><tr><th></th>${isos.map((k,i)=>`<th style="--c:${COLS[i]}">${esc(cname(k))}</th>`).join('')}</tr></thead>`;
- const row=(lab,f)=>`<tr><td>${lab}</td>${isos.map(k=>`<td>${f(k)}</td>`).join('')}</tr>`;
- const val=(c,v)=>v?`${fmt(c,v[1])}<small>${v[0]||''}</small>`:`<span class="note">${tx('nodata')}</span>`;
- let body='';S.cmpInd.forEach(k=>{
-  if(k==='atl_capital')body+=row(esc(tx('capital')),i=>esc(m[i].capital||'–'));
-  else if(k==='atl_region')body+=row(esc(tx('reg')),i=>esc(regName(m[i].region)));
-  else if(k==='atl_income')body+=row(esc(tx('income')),i=>esc(L==='pl'?(INCPL[m[i].income]||m[i].income):m[i].income));
-  else if(k==='atl_cur')body+=row(esc(tx('cur')),i=>esc(A[i]&&A[i].cur||'–'));
-  else if(k==='atl_lang')body+=row(esc(tx('lang')),i=>esc(A[i]&&A[i].lan||'–'));
-  else if(k==='atl_hp')body+=row(esc(tx('hp')),i=>esc(A[i]&&A[i].hp?A[i].hp+(A[i].el?` (${A[i].el} m)`:''):'–'));
-  else if(k==='atl_nb')body+=row(esc(tx('nb')),i=>A[i]&&A[i].nb!=null?A[i].nb:'–');
-  else{const c=k==='atl_area'?'AG.SRF.TOTL.K2':k;body+=row(`${esc(IBY[c].n[li()])}${unit(c)?` <small>${esc(unit(c))}</small>`:''}`,i=>val(c,(vals[c]||{})[i]));
-   if(c==='SM.POP.TOTL.ZS'||c==='SM.POP.NETM')body+=`<tr><td colspan="${isos.length+1}" class="note">${esc(tx('mig'))}</td></tr>`;}});
- setMain(`<div class="card" style="overflow-x:auto;margin-top:0"><table class="cmp">${head}<tbody>${body}</tbody></table></div><p class="note">${esc(tx('src'))}</p>`);}
+ await at;if(my!==RT)return;
+ const nE=Object.keys(err).length+(aErr?1:0);
+ idle(nE?`<span class="cellerr">⚠ ${esc(tx('someErr').replace('{n}',nE))}</span><button class="btn" data-retry="1">${esc(tx('retry'))}</button>`:'');draw();}
 // ---------- ZMIANY W CZASIE ----------
-async function viewTime(){$('#status').textContent=tx('loading');const s0=await series(S.ind,S.sel);$('#status').textContent='';const lo=+S.y0||1960,hi=+S.y1||9999;const s={};for(const k in s0)s[k]=s0[k].filter(p=>p[0]>=lo&&p[0]<=hi);
+async function viewTime(){busy();const s0=await series(S.ind,S.sel);idle();const lo=+S.y0||1960,hi=+S.y1||9999;const s={};for(const k in s0)s[k]=s0[k].filter(p=>p[0]>=lo&&p[0]<=hi);
  const W=900,H=420,Lm=80,R=20,T=20,B=40;const all=S.sel.flatMap(k=>s[k]||[]);if(!all.length){MAINSEL().innerHTML=`<div class="card" style="margin-top:0">${S.sel.length?tx('nodata'):(L==='pl'?'Dodaj co najmniej jedno państwo w polu u góry.':'Add at least one country in the box above.')}</div>`;return;}
  const x0=Math.min(...all.map(p=>p[0])),x1=Math.max(...all.map(p=>p[0]));let y0=Math.min(0,...all.map(p=>p[1])),y1=Math.max(...all.map(p=>p[1]));if(y1===y0)y1=y0+1;const pad=(y1-y0)*.05;y1+=pad;if(y0<0)y0-=pad;
  const X=v=>Lm+(v-x0)/(x1-x0||1)*(W-Lm-R),Y=v=>T+(y1-v)/(y1-y0)*(H-T-B);
@@ -326,7 +354,7 @@ async function viewTime(){$('#status').textContent=tx('loading');const s0=await 
  g+='</svg>';
  MAINSEL().innerHTML=`<div class="card chart"><h3 style="margin:0 0 8px">${esc(IBY[S.ind].n[li()])}${unit(S.ind)?` (${esc(unit(S.ind))})`:''}</h3>${g}<div class="legend">${S.sel.map((k,i)=>{const p=s[k]||[];const lp=p[p.length-1];return `<span><i style="background:${COLS[i]}"></i>${esc(cname(k))}${lp?`: ${fmtU(S.ind,lp[1])} (${lp[0]})`:` – ${tx('nodata')}`}</span>`;}).join('')}</div></div><p class="note">${esc(tx('src'))}</p>`;}
 // ---------- RANKING ----------
-async function viewRank(){$('#status').textContent=tx('loading');const d=await latestAll(S.ind);$('#status').textContent='';
+async function viewRank(){busy();const d=await latestAll(S.ind);idle();
  let rows=Object.entries(d).filter(([k])=>!S.region||S.meta.by[k].region===S.region).sort((a,b)=>b[1][1]-a[1][1]);const mx=Math.max(...rows.map(r=>Math.abs(r[1][1])),1);
  const n=rows.length;const show=S.showAll?rows:rows.filter((r,i)=>i<20||i>=n-5||S.sel.includes(r[0]));
  let h=`<div class="card"><h3 style="margin:0 0 4px">${esc(IBY[S.ind].n[li()])}${unit(S.ind)?` (${esc(unit(S.ind))})`:''}</h3><p class="note" style="margin:0 0 8px">${S.sel.map(k=>{const i=rows.findIndex(r=>r[0]===k);return i>=0?`${esc(cname(k))}: ${i+1}. ${tx('pos')} ${tx('of')} ${n}`:'';}).filter(Boolean).join(' · ')}</p><ol class="rank">`;
@@ -334,7 +362,7 @@ async function viewRank(){$('#status').textContent=tx('loading');const d=await l
   h+=`<li class="${S.sel.includes(r[0])?'sel':''}"><span>${i+1}.</span><span>${esc(cname(r[0]))}</span><span class="b" style="width:${(Math.abs(r[1][1])/mx*100).toFixed(1)}%"></span><span class="v">${fmt(S.ind,r[1][1])} <small class="note">${r[1][0]}</small></span></li>`;});
  h+=`</ol><p><button class="btn" id="showAll">${S.showAll?'−':''}${tx('showAll')} (${n})</button></p></div><p class="note">${esc(tx('src'))}</p>`;MAINSEL().innerHTML=h;}
 // ---------- MAPA ----------
-async function viewMap(){$('#status').textContent=tx('loading');const d=await latestAll(S.ind);$('#status').textContent='';
+async function viewMap(){busy();const d=await latestAll(S.ind);idle();
  const vals=Object.entries(d).filter(([k])=>!S.region||S.meta.by[k].region===S.region).map(r=>r[1][1]).sort((a,b)=>a-b);
  const PAL=['#f7fbff','#d6e6f4','#abd0e6','#6aaed6','#3787c0','#105ba4','#08306b'];const PALd=['#fde9c9','#fbc98a','#f6a35c','#e8783b','#c9512a','#9b2f1c','#651a12'];
  const pal=(IBY[S.ind].g==='env'&&S.ind.startsWith('EN.GHG'))||['SP.DYN.IMRT.IN','SP.DYN.CDRT.IN','FP.CPI.TOTL.ZG','SL.UEM.TOTL.ZS','SI.POV.DDAY','SI.POV.GINI'].includes(S.ind)?PALd:PAL;
@@ -348,7 +376,7 @@ async function viewMap(){$('#status').textContent=tx('loading');const d=await la
  $('#mapw').addEventListener('mouseleave',()=>tip.hidden=true);}
 // ---------- ZALEŻNOŚCI ----------
 const RCOL={};const RC=['#d1462f','#1f6fb2','#2e8b57','#b7791f','#7b3fa8','#0f8b8d','#c2185b','#6d4c41'];
-async function viewScat(){$('#status').textContent=tx('loading');const[xd,yd,pd]=await Promise.all([latestAll(S.x),latestAll(S.y),latestAll('SP.POP.TOTL')]);$('#status').textContent='';
+async function viewScat(){busy();const[xd,yd,pd]=await Promise.all([latestAll(S.x),latestAll(S.y),latestAll('SP.POP.TOTL')]);idle();
  const regs=[...new Set(S.meta.list.map(k=>S.meta.by[k].region))].sort();regs.forEach((r,i)=>RCOL[r]=RC[i%RC.length]);
  const pts=Object.keys(xd).filter(k=>yd[k]&&(!S.region||S.meta.by[k].region===S.region)&&(!S.logx||xd[k][1]>0)).map(k=>({k,x:xd[k][1],y:yd[k][1],p:pd[k]?pd[k][1]:1e6}));
  if(!pts.length){MAINSEL().innerHTML=`<div class="card">${tx('nodata')}</div>`;return;}
@@ -365,7 +393,7 @@ async function viewScat(){$('#status').textContent=tx('loading');const[xd,yd,pd]
  MAINSEL().innerHTML=`<div class="card chart"><h3 style="margin:0 0 8px">${esc(IBY[S.y].n[li()])} ↔ ${esc(IBY[S.x].n[li()])}</h3>${g}<div class="legend">${regs.map(r=>`<span><i style="background:${RCOL[r]}"></i>${esc(regName(r))}</span>`).join('')}</div><p class="note">${L==='pl'?'Wielkość kółka odpowiada liczbie ludności. Najedź na kółko, żeby zobaczyć państwo.':'Circle size shows population. Hover over a circle to see the country.'}</p></div><p class="note">${esc(tx('src'))}</p>`;}
 // ---------- QUIZ ----------
 const QI=['SP.POP.TOTL','NY.GDP.PCAP.PP.CD','SP.DYN.LE00.IN','SP.URB.TOTL.IN.ZS','SP.DYN.TFRT.IN','AG.SRF.TOTL.K2'];
-async function viewQuiz(){$('#status').textContent=tx('loading');const D=await Promise.all(QI.map(c=>latestAll(c,true)));$('#status').textContent='';
+async function viewQuiz(){busy();const D=await Promise.all(QI.map(c=>latestAll(c,true)));idle();
  if(!S.q){const ok=S.meta.list.filter(k=>D.every(d=>d[k])&&D[0][k][1]>1e6);const k=ok[Math.floor(Math.random()*ok.length)];const same=ok.filter(x=>x!==k&&S.meta.by[x].region===S.meta.by[k].region).sort(()=>Math.random()-.5);
   const opts=[k,...same.slice(0,3)];while(opts.length<4){const x=ok[Math.floor(Math.random()*ok.length)];if(!opts.includes(x))opts.push(x);}S.q={k,opts:opts.sort(()=>Math.random()-.5),done:null};}
  const q=S.q;$('#app').innerHTML=`<div class="card quiz"><h3 style="margin:0">${tx('quizQ')} <span class="note">${tx('score')}: ${S.qs[0]} / ${S.qs[1]}</span></h3>
@@ -373,15 +401,17 @@ async function viewQuiz(){$('#status').textContent=tx('loading');const D=await P
   <div class="opts">${q.opts.map(o=>`<button data-qa="${o}" class="${q.done?(o===q.k?'right':o===q.done?'wrong':''):''}" ${q.done?'disabled':''}>${esc(cname(o))}</button>`).join('')}</div>
   ${q.done?`<p class="fb ${q.done===q.k?'ok':'no'}">${q.done===q.k?tx('right'):tx('wrong')+' '+esc(cname(q.k))+'.'}</p><button class="btn primary" id="qnext">${tx('next')}</button>`:''}</div>`;}
 // ---------- render ----------
-let RT=0;
+let RT=0,LASTTAB='';
 async function render(){const my=++RT;document.documentElement.lang=L;$('#t1').textContent=tx('t1');$('#t2').textContent=tx('t2');$$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
  $('#tabs').innerHTML=Object.entries(tx('tabs')).map(([k,n])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${n}</button>`).join('');
- if(!S.meta){$('#status').textContent=tx('loading');try{await loadMeta();}catch(e){$('#status').textContent='';$('#app').innerHTML=`<div class="err">${esc(tx('noconn'))}</div>`;return;}$('#status').textContent='';S.sel=S.sel.filter(k=>S.meta.by[k]);}
+ if(!S.meta){busy();try{await loadMeta();}catch(e){idle();$('#app').innerHTML=`<div class="err">${esc(tx('noconn'))}</div>`;return;}idle();S.sel=S.sel.filter(k=>S.meta.by[k]);}
  topbar();save();
  const sideOld=document.getElementById('side');const scr=sideOld?sideOld.scrollTop:0;
- if(S.tab!=='quiz'){$('#app').innerHTML=`<div class="lay"><aside class="side" id="side" aria-label="${esc(tx('pickInd'))}">${sidebar()}</aside><div id="main"></div></div>`;document.getElementById('side').scrollTop=scr;}
- try{await ({cmp:viewCmp,time:viewTime,rank:viewRank,map:viewMap,scat:viewScat,quiz:viewQuiz}[S.tab])();}catch(e){console.error(e);if(my===RT){$('#status').textContent='';$('#app').innerHTML=`<div class="err">${esc(tx('noconn'))}</div>`;}}}
-document.addEventListener('click',e=>{const b=e.target.closest('button,[data-iso]');if(!b)return;
+ const om=document.getElementById('main');const keep=om&&LASTTAB===S.tab&&S.tab!=='cmp'?om.innerHTML:'';LASTTAB=S.tab;
+ if(S.tab!=='quiz'){$('#app').innerHTML=`<div class="lay"><aside class="side" id="side" aria-label="${esc(tx('pickInd'))}">${sidebar()}</aside><div id="main"></div></div>`;document.getElementById('side').scrollTop=scr;
+  const mm=document.getElementById('main');if(keep){mm.innerHTML=keep;mm.classList.add('busy');}else if(S.tab!=='cmp')mm.innerHTML=`<div class="card loadcard"><span class="spin" aria-hidden="true"></span>${esc(tx('loading'))}</div>`;}
+ try{await ({cmp:viewCmp,time:viewTime,rank:viewRank,map:viewMap,scat:viewScat,quiz:viewQuiz}[S.tab])();}catch(e){console.error(e);if(my===RT){idle();const mm=document.getElementById('main');(mm||$('#app')).innerHTML=`<div class="err">${esc(tx('noconn'))} <button class="btn" data-retry="1">${esc(tx('retry'))}</button></div>`;}}}
+document.addEventListener('click',e=>{const b=e.target.closest('button,[data-iso]');if(!b)return;if(b.dataset.retry){render();return;}
  if(b.dataset.lang){L=b.dataset.lang;render();}
  else if(b.dataset.tab){S.tab=b.dataset.tab;render();}
  else if(b.dataset.rm){S.sel=S.sel.filter(k=>k!==b.dataset.rm);render();}
