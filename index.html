@@ -59,6 +59,12 @@ a{color:var(--acc-t)}
 .intro{max-width:80ch;margin:0 auto;font-size:1.05rem}
 .intro p{margin:0}
 .langnote{text-align:center;font-size:.9rem;color:var(--muted);border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);padding:10px;margin:28px 0}
+.search{max-width:560px;margin:0 auto 24px;display:flex;align-items:center;gap:10px;background:var(--paper);border:1.5px solid var(--line);border-radius:999px;padding:6px 8px 6px 16px}
+.search:focus-within{border-color:var(--acc)}
+.search input{flex:1;min-width:0;font:400 1rem 'Atkinson Hyperlegible',system-ui,sans-serif;color:var(--ink);background:transparent;border:0;outline:0;padding:6px 0}
+#searchInfo{font-size:.85rem;color:var(--muted);white-space:nowrap;padding-right:8px}
+.tools li[hidden],.contest-btn[hidden]{display:none}
+.tools .none{font-size:.9rem;color:var(--muted);padding:4px 2px}
 .subjects{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .subj{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:20px}
 .subj-head{display:flex;gap:16px;align-items:center;margin-bottom:12px}
@@ -155,6 +161,11 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
     <span data-l="pl">Kliknij narzędzie, żeby zobaczyć jego opis. Wszystkie narzędzia (poza konkursami: geograficznym i biologicznym) mają też wersję angielską.</span>
     <span data-l="en">Click a tool to read what it does. Every tool is available in English.</span>
   </p>
+  <div class="search" role="search">
+    <span aria-hidden="true">🔍</span>
+    <input id="toolSearch" type="search" autocomplete="off" aria-label="Szukaj narzędzia">
+    <span id="searchInfo" aria-live="polite"></span>
+  </div>
 
   <div class="subjects">
     <section class="subj" id="geografia">
@@ -450,13 +461,15 @@ const UI = {
       repPh:'Co się stało albo co warto dodać? Jeśli to błąd: co klikasz i co się wtedy dzieje.',
       sending:'Wysyłam…',thanks:'Dzięki! Zgłoszenie dotarło do autora.',fail:'Nie udało się wysłać. Sprawdź internet i spróbuj ponownie za chwilę.',
       full:'🇵🇱 🇬🇧 Dostępne po polsku i po angielsku.',contest:'🇵🇱 Tylko po polsku – to zadania z polskiego konkursu.',
-      title:'Zakład utylizacji niewiedzy – narzędzia do nauki geografii i biologii'},
+      title:'Zakład utylizacji niewiedzy – narzędzia do nauki geografii i biologii',
+      searchPh:'Szukaj, np. mejoza, skala, klimat', found:n => 'znaleziono: ' + n, none:'Nic tu nie pasuje.'},
   en:{geo:'Geography',bio:'Biology',gen:'Generator',inside:"What's inside",go:'Open the tool →',close:'Back',
       report:'Something wrong? Report it',general:'General / home page',
       repPh:"What happened, or what would be worth adding? If it's a bug: what do you click and what happens then.",
       sending:'Sending…',thanks:'Thanks! Your message has reached the author.',fail:"Couldn't send it. Check your internet connection and try again in a moment.",
       full:'🇬🇧 Opens in English (Polish also available).',contest:'🇵🇱 Polish only – these are tasks from a Polish-language contest, so there is no English version.',
-      title:'The ignorance disposal facility – geography and biology learning tools'},
+      title:'The ignorance disposal facility – geography and biology learning tools',
+      searchPh:'Search, e.g. meiosis, scale, climate', found:n => n + ' found', none:'Nothing matches here.'},
 };
 const IMG = {geo:'img/geografia.jpg', bio:'img/biologia.jpg'};
 const $ = s => document.querySelector(s);
@@ -475,6 +488,27 @@ function renderLists(){
   });
 }
 
+// Wyszukiwarka: dopasowuje nazwę, opis i listę „co w środku” w obu językach, bez polskich znaków
+const norm = x => x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ł/g, 'l');
+const tokens = t => norm([t.pl, t.en].flatMap(([n, d, it]) => [n, d, ...it]).join(' ')).split(/[^a-z0-9]+/);
+function applySearch(){
+  // końcówki odcięte, żeby odmiana nie przeszkadzała: „pogoda” znajdzie „Mapę pogody”
+  const words = norm($('#toolSearch').value).split(/[^a-z0-9]+/).filter(Boolean).map(w => w.length > 5 ? w.slice(0, -2) : w.length === 5 ? w.slice(0, -1) : w);
+  // każde wpisane słowo musi zaczynać jakieś słowo w opisie: „dna” znajdzie DNA, ale nie „jedna”
+  const hit = t => { const tk = tokens(t); return words.every(w => tk.some(x => x.startsWith(w))); };
+  let n = 0;
+  document.querySelectorAll('.tools').forEach(ul => {
+    ul.querySelector('.none')?.remove();
+    let shown = 0;
+    ul.querySelectorAll('li').forEach(li => { const ok = hit(TOOLS.find(t => t.id === li.firstChild.dataset.tool)); li.hidden = !ok; shown += ok; });
+    n += shown;
+    if (!shown && words.length) { const p = document.createElement('li'); p.className = 'none'; p.textContent = UI[L].none; ul.append(p); }
+  });
+  document.querySelectorAll('.contest-btn').forEach(b => { const ok = hit(TOOLS.find(t => t.id === b.dataset.tool)); b.hidden = !ok; if (ok && L === 'pl') n++; });
+  $('#searchInfo').textContent = words.length ? UI[L].found(n) : '';
+}
+$('#toolSearch').addEventListener('input', applySearch);
+
 function setLang(l){
   L = l;
   document.documentElement.lang = l;
@@ -482,6 +516,8 @@ function setLang(l){
   document.querySelectorAll('.langsw button').forEach(b => b.setAttribute('aria-pressed', b.dataset.set === l));
   try { localStorage.setItem('siteLang', l); } catch(e) {}
   renderLists();
+  $('#toolSearch').placeholder = UI[l].searchPh;
+  applySearch();
   renderReportTools();
   $('#repText').placeholder = UI[l].repPh;
   $('#repLang').value = l;
@@ -559,7 +595,10 @@ $('#dlg').addEventListener('close', () => history.replaceState(null, '', locatio
 setLang(L);
 // ?zglos=geografia/poziomice – link „Zgłoś błąd” z wnętrza narzędzia
 const fromTool = new URLSearchParams(location.search).get('zglos');
-if (fromTool !== null) openReport((TOOLS.find(t => t.file === fromTool + '.html') || {}).id);
+// tryb generatora i część pliku (?czesc=, ?przedmiot=) wskazują właściwą pozycję, gdy kilka narzędzi dzieli jeden plik
+const rp = new URLSearchParams(location.search), rq = ['czesc','przedmiot'].filter(k => rp.get(k)).map(k => '&' + k + '=' + rp.get(k)).join('');
+const fromList = TOOLS.filter(t => t.file === fromTool + '.html');
+if (fromTool !== null) openReport((fromList.find(t => !t.g === (rp.get('tryb') !== 'generator') && (t.q || '') === rq) || fromList.find(t => !t.g) || {}).id);
 else if (location.hash === '#zglos') openReport();
 else if (location.hash === '#o-autorze') $('#about').showModal();
 else if (location.hash) openTool(location.hash.slice(1));

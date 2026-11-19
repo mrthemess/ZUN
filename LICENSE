@@ -43,13 +43,29 @@ Exclusions – the following are NOT covered by either licence above:
   under its own licence:
   - czcionki Atkinson Hyperlegible i Bricolage Grotesque – SIL Open Font
     License 1.1 (wczytywane z Google Fonts / loaded from Google Fonts),
-  - biblioteka docx (https://github.com/dolanmiu/docx) – MIT,
-  - dane i obrazy pobierane na żywo z zewnętrznych serwisów, m.in. Wikidata
-    (CC0), Wikimedia Commons, Bank Światowy / World Bank (CC BY 4.0),
-    Open-Meteo (CC BY 4.0) – na licencjach tych serwisów,
-  - dane NASA (domena publiczna / public domain),
+  - biblioteki JavaScript wczytywane z CDN / JavaScript libraries loaded
+    from a CDN: docx (https://github.com/dolanmiu/docx) – MIT,
+    qrcodejs (https://github.com/davidshimjs/qrcodejs) – MIT,
+  - dane pobierane na żywo / live data:
+    - Wikidata – CC0 (Europa polityczna, Dane o państwach, Taksonomia),
+    - Bank Światowy / World Bank, World Development Indicators – CC BY 4.0
+      (Dane o państwach),
+    - Open-Meteo.com – CC BY 4.0 (Mapa pogody, Ruchy Ziemi),
+    - Wikipedia – CC BY-SA 4.0 (Taksonomia, Klucz do oznaczania),
+    - GBIF – CC0 / CC BY 4.0 (Taksonomia),
+  - dane wbudowane / built-in data:
+    - NASA Planetary Fact Sheet – domena publiczna / public domain
+      (Układ Słoneczny),
+    - RESOLVE Ecoregions 2017 (Dinerstein et al. 2017) – CC BY 4.0
+      (Klimatogramy, mapa biomów),
+    - klasyfikacja klimatów Köppena–Geigera (Kottek et al. 2006)
+      (Klimatogramy),
+  - zdjęcia z Wikimedia Commons – na licencjach podanych przy każdym
+    zdjęciu (CC BY, CC BY-SA) / photos from Wikimedia Commons under the
+    licence shown next to each photo,
   - geometrie map wbudowane w narzędzia geograficzne – na licencjach
-    zbiorów danych, z których pochodzą.
+    zbiorów danych, z których pochodzą / built-in map geometry under the
+    licence of its source dataset.
 
 -------------------------------------------------------------------------------
 

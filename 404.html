@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Nie ma takiej strony – Zakład utylizacji niewiedzy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f1ea;--paper:#fdfcf8;--ink:#231f17;--muted:#6b6355;--line:#dcd4c3;--acc:#8a5a24;--acc-ink:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15130f;--paper:#1e1b15;--ink:#ece6da;--muted:#a99f8d;--line:#373126;--acc:#c48a45;--acc-ink:#1a140c}}
+:root[data-theme="dark"]{--bg:#15130f;--paper:#1e1b15;--ink:#ece6da;--muted:#a99f8d;--line:#373126;--acc:#c48a45;--acc-ink:#1a140c}
+html[lang=pl] [data-l=en],html[lang=en] [data-l=pl]{display:none!important}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--bg);color:var(--ink);font:17px/1.55 'Atkinson Hyperlegible',system-ui,sans-serif}
+main{max-width:560px;width:100%;background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:32px 28px;text-align:center}
+.big{font:800 clamp(4rem,18vw,7rem)/1 'Bricolage Grotesque',sans-serif;margin:0;color:var(--acc)}
+h1{font:800 1.7rem/1.2 'Bricolage Grotesque',sans-serif;margin:10px 0 12px}
+p{margin:0 0 20px;color:var(--muted)}
+a.btn{display:inline-block;font-weight:700;text-decoration:none;background:var(--acc);color:var(--acc-ink);border-radius:12px;padding:12px 20px}
+a.btn:focus-visible{outline:3px solid #2f6fbf;outline-offset:2px}
+</style>
+<script>(function(){var l='pl';try{l=localStorage.getItem('siteLang')||l}catch(e){}if(l==='en'){document.documentElement.lang='en';document.title='Page not found – The ignorance disposal facility'}})();</script>
+</head>
+<body>
+<main>
+  <p class="big" aria-hidden="true">404</p>
+  <h1><span data-l="pl">Tu niczego nie ma</span><span data-l="en">Nothing to see here</span></h1>
+  <p data-l="pl">Tej strony nie ma albo zmieniła adres. Niewiedza została zutylizowana razem z nią. Wszystkie narzędzia czekają na stronie głównej.</p>
+  <p data-l="en">This page doesn't exist or has moved. The ignorance went out with it. All the tools are waiting on the home page.</p>
+  <a class="btn" href="/"><span data-l="pl">← Wszystkie narzędzia</span><span data-l="en">← All tools</span></a>
+</main>
+<!--stats--><script>window.goatcounter={path:function(){return '404'+location.pathname}}</script><script data-goatcounter="https://zun.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script><!--stats-->
+</body>
+</html>
