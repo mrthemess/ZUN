@@ -130,6 +130,36 @@ input.sin:focus,input.ain:focus{border-color:var(--acc)}
 .wsopt{display:grid;gap:12px}
 @media (max-width:820px){.tgrid,.twocol{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.hr{align-items:flex-start}}
 @media (max-width:480px){.seg button{padding:6px 9px;font-size:.86rem}.card{padding:14px 14px}.sheet{padding:14px 12px}.formula{font-size:.95rem;padding:8px 10px}}
+/* własne dane */
+.owngrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px 26px;align-items:start}
+.oform{font-size:1.25rem;line-height:2.5}
+.v{display:inline-block;padding:0 7px;border-radius:7px;background:color-mix(in srgb,var(--c) 16%,var(--paper));border-bottom:3px solid var(--c);font-weight:700;line-height:1.55;font-variant-numeric:tabular-nums;transition:background .2s}
+.v.empty{background:transparent;border:2px dashed var(--c);color:var(--muted);font-weight:400;min-width:2.3em;text-align:center}
+.v.pop{animation:vpop .55s ease-out}
+@keyframes vpop{0%{transform:scale(1.3);background:color-mix(in srgb,var(--c) 45%,var(--paper))}100%{transform:none}}
+.ofields{display:grid;gap:12px}
+.ofield label{display:block;font-weight:700;margin-bottom:5px}.ofield label .v{margin-right:8px}
+.ofield .h{display:block;font-weight:400;font-size:.85rem;color:var(--muted);margin-top:2px}
+.ofield .row{display:flex;align-items:center;gap:8px}
+.ofield .ain[aria-invalid=true]{border-color:var(--no)}
+.oerr{color:var(--no);font-size:.88rem}.oerr:empty{display:none}
+.hr2{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
+.osteps{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+.ostep{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;background:var(--stage);border:1.5px solid var(--line);border-radius:14px;padding:12px 16px;opacity:0;transform:translateY(12px);transition:opacity .55s,transform .55s}
+.ostep.on{opacity:1;transform:none}
+.onum{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font-weight:800;margin-top:2px}
+.card .ostep p{margin:0 0 2px}
+.oline{font-size:1.15rem}
+.ostep .rv{display:inline-block;opacity:0;transition:opacity .35s;border-radius:7px;padding:0 5px}
+.ostep.shown .rv{opacity:1;animation:rvflash 1.4s ease-out}
+@keyframes rvflash{0%{background:color-mix(in srgb,var(--acc) 32%,transparent)}100%{background:transparent}}
+.ofinal{margin-top:16px;opacity:0;transform:translateY(12px) scale(.98);transition:opacity .6s,transform .6s}
+.ofinal.on{opacity:1;transform:none}
+.ofinal .big{font-size:clamp(2rem,6vw,2.8rem);margin:0 0 6px}
+.cnt{font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.ostep,.ofinal,.ostep .rv{transition:none}.v.pop,.ostep.shown .rv{animation:none}}
+@media (max-width:820px){.owngrid{grid-template-columns:1fr}}
+@media (max-width:480px){.oform{font-size:1.05rem}.oline{font-size:1rem}.ostep{padding:10px 12px;gap:10px}}
 html[data-tryb=generator] #tabs{display:none!important}
 </style>
 </head>
@@ -163,10 +193,10 @@ const ONMAP=new Set(WORLD.c.map(c=>c[0]));
 
 const UI={
  t1:['Demografia – ludność w liczbach','Population in numbers'],
- t2:['Gęstość zaludnienia, przyrost naturalny, saldo migracji i przyrost rzeczywisty – teoria, obliczenia krok po kroku na prawdziwych danych, porównania i quiz.','Population density, natural increase, net migration and real increase – theory, step-by-step calculations on real data, comparisons and a quiz.'],
+ t2:['Gęstość zaludnienia, przyrost naturalny, saldo migracji i przyrost rzeczywisty – teoria, obliczenia krok po kroku na prawdziwych i własnych danych, porównania i quiz.','Population density, natural increase, net migration and real increase – theory, step-by-step calculations on real data and your own, comparisons and a quiz.'],
  gt1:['Generator kart pracy: demografia','Worksheet generator: population in numbers'],
  gt2:['Karty pracy w Wordzie z obliczeniami na prawdziwych danych ONZ i kluczem odpowiedzi na osobnej stronie.','Word worksheets with calculations on real UN data and the answer key on a separate page.'],
- tabs:{theory:['Teoria','Theory'],step:['Policz krok po kroku','Step-by-step'],cmp:['Porównaj','Compare'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
+ tabs:{theory:['Teoria','Theory'],step:['Policz krok po kroku','Step-by-step'],own:['Własne dane','Your own data'],cmp:['Porównaj','Compare'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
 };
 const SRC=()=>tr('Dane: ONZ, World Population Prospects 2024, rok 2023 (szacunki); powierzchnia: Bank Światowy.','Data: UN, World Population Prospects 2024, year 2023 (estimates); area: World Bank.');
 const SRCS=()=>tr('Dane: ONZ, World Population Prospects 2024, rok 2023','Data: UN, World Population Prospects 2024, year 2023');
@@ -613,6 +643,118 @@ function viewStep(){
 function WLDref(ind){const w=iv('WLD',ind),c=iv(S.step.iso,ind);if(w==null||ind==='natChange'||ind==='netMig'||ind==='real')return '';
   return `<p class="note">${tr('Dla porównania – świat','For comparison – the world')}: ${esc(fmtI(ind,w,IND[ind].dp>1?1:IND[ind].dp))}${ind==='cnmr'?tr(' (na świecie jako całości migracje się równoważą)',' (for the world as a whole migration cancels out)'):''}.</p>`;}
 
+// ================= 2b. własne dane =================
+// uczeń wpisuje własne liczby; wzór wypełnia się na bieżąco, a „Oblicz” pokazuje kolejne kroki z animacją
+const OWNC={L:'var(--acc)',P:'#0f8b8d',U:'#009e73',Z:'#d55e00',I:'var(--nat)',E:'var(--mig)'};
+const OWNEX={L:'12 480',P:'96,4',U:'118',Z:'141',I:'236',E:'189'};
+const OWN0={L:'',P:'',U:'',Z:'',I:'',E:''};
+const OWNF=()=>{const y=SY(),os=tr('os.','people');return{
+ L:{s:y.L,n:tr('Liczba ludności','Population'),h:tr('w połowie roku (albo średnia z początku i końca roku)','mid-year (or the average of the start and end of the year)'),u:os,pos:1},
+ P:{s:y.P,n:tr('Powierzchnia','Area'),h:tr('całego obszaru','of the whole area'),u:'km²',pos:1},
+ U:{s:y.U,n:tr('Liczba urodzeń','Births'),h:tr('urodzenia żywe w ciągu roku','live births during the year'),u:os},
+ Z:{s:y.Z,n:tr('Liczba zgonów','Deaths'),h:tr('w ciągu roku','during the year'),u:os},
+ I:{s:y.I,n:tr('Imigracja (napływ)','Immigration (arrivals)'),h:tr('osoby, które w ciągu roku przyjechały na stałe','people who moved in permanently during the year'),u:os},
+ E:{s:y.E,n:tr('Emigracja (odpływ)','Emigration (departures)'),h:tr('osoby, które w ciągu roku wyjechały na stałe','people who moved out permanently during the year'),u:os}};};
+const OWNI={
+ dens:{need:['L','P'],f:(t,y)=>`${y.G} = ${frac(t('L'),t('P'))}`},
+ natChange:{need:['U','Z'],f:(t,y)=>`${y.Pn} = ${t('U')} − ${t('Z')}`},
+ nat:{need:['U','Z','L'],f:(t,y)=>`${y.Wpn} = ${frac(t('U')+' − '+t('Z'),t('L'))}${X1000}`},
+ cbr:{need:['U','L'],f:(t,y)=>`${y.Wu} = ${frac(t('U'),t('L'))}${X1000}`},
+ cdr:{need:['Z','L'],f:(t,y)=>`${y.Wz} = ${frac(t('Z'),t('L'))}${X1000}`},
+ netMig:{need:['I','E'],f:(t,y)=>`${y.Sm} = ${t('I')} − ${t('E')}`},
+ cnmr:{need:['I','E','L'],f:(t,y)=>`${y.Wsm} = ${frac(t('I')+' − '+t('E'),t('L'))}${X1000}`},
+ real:{need:['U','Z','I','E'],f:(t,y)=>`${y.Pr} = (${t('U')} − ${t('Z')}) + (${t('I')} − ${t('E')})`},
+ realR:{need:['U','Z','I','E','L'],f:(t,y)=>`${y.Wpr} = ${frac(`(${t('U')} − ${t('Z')}) + (${t('I')} − ${t('E')})`,t('L'))}${X1000}`},
+ growth:{need:['U','Z','I','E','L'],f:(t,y)=>`${y.t} = ${frac(`(${t('U')} − ${t('Z')}) + (${t('I')} − ${t('E')})`,t('L'))} × 100`},
+};
+const fmtIn=x=>nf(x,Math.min(3,(String(x).split('.')[1]||'').length));
+const sigDp=x=>x===0?2:Math.min(8,Math.max(2,3-Math.floor(Math.log10(Math.abs(x)))));
+const tok=(k,inner,cls)=>`<span class="v ${cls}" data-k="${k}" style="--c:${OWNC[k]}">${inner}</span>`;
+function ownParse(){const o=S.own,F=OWNF(),need=OWNI[o.ind].need,v={},err={};
+  need.forEach(k=>{const raw=String(o.v[k]||'').trim();if(!raw)return;const n=parseNums(raw);
+    if(!n.length)err[k]=tr('To nie jest liczba – wpisz np. 12 480 albo 96,4.','That is not a number – enter e.g. 12480 or 96.4.');
+    else if(n[0]<0)err[k]=tr('Ta liczba nie może być ujemna.','This number cannot be negative.');
+    else if(F[k].pos&&n[0]===0)err[k]=tr('Musi być większa od zera – przez nią dzielimy.','It must be greater than zero – we divide by it.');
+    else v[k]=n[0];});
+  const miss=need.filter(k=>v[k]==null);return{v,err,miss,ready:!miss.length};}
+const ownSubHTML=st=>OWNI[S.own.ind].f(k=>st.v[k]!=null?tok(k,fmtIn(st.v[k]),'full'):tok(k,OWNF()[k].s,'empty'),SY());
+const ownMissTxt=st=>st.ready?tr('Wszystkie dane są wpisane – można liczyć.','All the data are in – ready to calculate.'):tr('Brakuje','Missing')+': '+st.miss.map(k=>OWNF()[k].n.toLowerCase()).join(', ')+'.';
+function ownSteps(ind,v){
+  const y=SY(),os=tr('os.','people'),pn=v.U-v.Z,sm=v.I-v.E,pr=pn+sm,st=[],fi=k=>fmtIn(v[k]);
+  const sPn=()=>st.push({t:tr('Przyrost naturalny: od liczby urodzeń odejmujemy liczbę zgonów.','Natural increase: subtract deaths from births.'),lhs:y.Pn,expr:`${fi('U')} − ${fi('Z')}`,v:pn,dp:0,sg:1,u:os});
+  const sSm=()=>st.push({t:tr('Saldo migracji: od imigracji (napływu) odejmujemy emigrację (odpływ).','Net migration: subtract emigration (departures) from immigration (arrivals).'),lhs:y.Sm,expr:`${fi('I')} − ${fi('E')}`,v:sm,dp:0,sg:1,u:os});
+  const sPr=()=>st.push({t:tr('Przyrost rzeczywisty: dodajemy przyrost naturalny i saldo migracji.','Real increase: add natural increase and net migration.'),lhs:y.Pr,expr:`${nfs(pn)} + ${nfs(sm)}`,v:pr,dp:0,sg:1,u:os});
+  const sQ=(num,sym,what,numTxt)=>{const q=num/v.L;st.push({t:tr(`Dzielimy ${what[0]} przez liczbę ludności – tyle przypada na jednego mieszkańca.`,`Divide ${what[1]} by the population – this is the amount per resident.`),lhs:frac(sym,y.L),expr:frac(numTxt,fi('L')),v:q,dp:sigDp(q)});return q;};
+  const sX=(q,lhs,k,sgn)=>st.push({t:k===1000?tr('Mnożymy przez 1000 – wynik na 1000 mieszkańców, czyli w promilach (‰).','Multiply by 1000 – the result per 1000 residents, i.e. per mille (‰).'):tr('Mnożymy przez 100 – wynik w procentach (%).','Multiply by 100 – the result as a percentage (%).'),lhs,expr:`${nf(q,sigDp(q))} × ${k}`,v:q*k,dp:2,sg:sgn,u:k===1000?'‰':'%'});
+  if(ind==='dens')st.push({t:tr('Dzielimy liczbę ludności przez powierzchnię.','Divide the population by the area.'),lhs:y.G,expr:frac(fi('L'),fi('P')+' km²'),v:v.L/v.P,dp:1,u:tr('os./km²','people/km²')});
+  else if(ind==='natChange')sPn();
+  else if(ind==='netMig')sSm();
+  else if(ind==='real'){sPn();sSm();sPr();}
+  else if(ind==='cbr'||ind==='cdr'){const B=ind==='cbr';sX(sQ(B?v.U:v.Z,B?y.U:y.Z,B?['liczbę urodzeń','births']:['liczbę zgonów','deaths'],fi(B?'U':'Z')),B?y.Wu:y.Wz,1000,0);}
+  else if(ind==='nat'){sPn();sX(sQ(pn,y.Pn,['przyrost naturalny','natural increase'],nf(pn)),y.Wpn,1000,1);}
+  else if(ind==='cnmr'){sSm();sX(sQ(sm,y.Sm,['saldo migracji','net migration'],nf(sm)),y.Wsm,1000,1);}
+  else{sPn();sSm();sPr();const q=sQ(pr,y.Pr,['przyrost rzeczywisty','real increase'],nf(pr));sX(q,ind==='growth'?y.t:y.Wpr,ind==='growth'?100:1000,1);}
+  const last=st[st.length-1];return{st,res:last.v,dp:last.dp,u:last.u,sg:!!IND[ind].div,pn,sm};}
+function ownInterp(ind,r,R,v){const a=Math.abs(r),p1=nf(a,1);
+  const per=(up,down,zero,why)=>Math.round(r*10)===0?zero:tr(`Na każde 1000 mieszkańców ${r>0?up[0]:down[0]} w ciągu roku średnio ${p1} osoby${why?' '+(r>0?why[0][0]:why[1][0]):''}.`,`For every 1000 residents, an average of ${p1} people ${r>0?up[1]:down[1]} during the year${why?' '+(r>0?why[0][1]:why[1][1]):''}.`);
+  switch(ind){
+  case 'dens':return r>=1?tr(`Na 1 km² przypada średnio ok. ${nf(r,0)} ${osob(Math.round(r))}.`,`On average there are about ${nf(r,0)} people per 1 km².`):tr(`Na 100 km² przypada średnio ok. ${nf(r*100,0)} ${osob(Math.round(r*100))}.`,`On average there are about ${nf(r*100,0)} people per 100 km².`);
+  case 'natChange':return r>0?tr(`Urodzeń było o ${nf(r)} więcej niż zgonów – z tego powodu liczba ludności wzrosła o ${nf(r)} ${osob(r)}. To dodatni przyrost naturalny.`,`There were ${nf(r)} more births than deaths – so the population grew by ${nf(r)} for this reason. This is a natural increase.`):r<0?tr(`Zgonów było o ${nf(a)} więcej niż urodzeń – z tego powodu liczba ludności zmniejszyła się o ${nf(a)} ${osob(r)}. To ubytek naturalny (ujemny przyrost naturalny).`,`There were ${nf(a)} more deaths than births – so the population fell by ${nf(a)} for this reason. This is a natural decrease.`):tr('Urodzeń było tyle samo co zgonów – przyrost naturalny wynosi zero.','There were as many births as deaths – natural increase is zero.');
+  case 'netMig':return r>0?tr(`Przyjechało o ${nf(r)} ${osob(r)} więcej, niż wyjechało – saldo migracji jest dodatnie (przeważa imigracja).`,`${nf(r)} more people moved in than left – net migration is positive (immigration prevails).`):r<0?tr(`Wyjechało o ${nf(a)} ${osob(r)} więcej, niż przyjechało – saldo migracji jest ujemne (przeważa emigracja).`,`${nf(a)} more people left than moved in – net migration is negative (emigration prevails).`):tr('Przyjechało tyle samo osób, ile wyjechało – saldo migracji wynosi zero.','As many people moved in as left – net migration is zero.');
+  case 'real':return (r>0?tr(`Liczba ludności zwiększyła się w ciągu roku o ${nf(r)} ${osob(r)}.`,`The population grew by ${nf(r)} during the year.`):r<0?tr(`Liczba ludności zmniejszyła się w ciągu roku o ${nf(a)} ${osob(r)}.`,`The population fell by ${nf(a)} during the year.`):tr('Liczba ludności się nie zmieniła.','The population did not change.'))+(R.pn<0&&r>0?tr(' Mimo ubytku naturalnego ludność rośnie dzięki imigracji.',' Despite natural decrease the population grows thanks to immigration.'):R.pn>0&&r<0?tr(' Mimo dodatniego przyrostu naturalnego ludność maleje z powodu emigracji.',' Despite natural increase the population falls because of emigration.'):'');
+  case 'cbr':return tr(`Na każde 1000 mieszkańców urodziło się w ciągu roku średnio ${p1} dziecka.`,`For every 1000 residents, an average of ${p1} children were born during the year.`);
+  case 'cdr':return tr(`Na każde 1000 mieszkańców zmarło w ciągu roku średnio ${p1} osoby.`,`For every 1000 residents, an average of ${p1} people died during the year.`);
+  case 'nat':return per(['przybyło','were added'],['ubyło','were lost'],tr('Przyrost naturalny jest bliski zera – urodzeń i zgonów jest prawie tyle samo.','Natural increase is close to zero – births and deaths are almost equal.'),[['dzięki przewadze urodzeń nad zgonami','because births outnumbered deaths'],['– zgonów było więcej niż urodzeń (ubytek naturalny)','– deaths outnumbered births (natural decrease)']]);
+  case 'cnmr':return per(['przybyło','were added'],['ubyło','were lost'],tr('Saldo migracji jest bliskie zera – przyjeżdża prawie tyle samo osób, ile wyjeżdża.','Net migration is close to zero – almost as many people arrive as leave.'),[['dzięki przewadze imigracji nad emigracją','because more people arrived than left'],['z powodu przewagi emigracji nad imigracją','because more people left than arrived']]);
+  case 'realR':return per(['przybyło','were added'],['ubyło','were lost'],tr('Liczba ludności prawie się nie zmienia.','The population hardly changes.'));
+  case 'growth':return tr(`Liczba ludności ${r<0?'zmniejszyła się':'zwiększyła się'} w ciągu roku o ${nf(a,2)} % (${nf(a*10,1)} ‰).`,`The population ${r<0?'fell':'grew'} by ${nf(a,2)} % (${nf(a*10,1)} ‰) during the year.`)+(a>.05&&a<20?tr(` Przy stałym tempie ${r>0?'podwojenie':'spadek o połowę'} zajęłoby ok. ${nf(70/a,0)} lat.`,` At a constant pace the population would ${r>0?'double':'halve'} in about ${nf(70/a,0)} years.`):'');}}
+function ownWarn(ind,R,v){const w=[],F=OWNF();
+  if(v.L!=null)['U','Z','E'].forEach(k=>{if(v[k]!=null&&v[k]>v.L)w.push(tr(`${F[k].n} jest większa niż liczba ludności – sprawdź dane.`,`${F[k].n} is larger than the population – check the data.`));});
+  if(R.u==='‰'&&Math.abs(R.res)>80)w.push(tr('Wynik jest bardzo duży – w żadnym państwie świata takie współczynniki nie przekraczają ok. 50 ‰. Sprawdź, czy liczba ludności nie jest podana w tysiącach.','The result is very large – in no country do such rates exceed about 50 ‰. Check that the population is not given in thousands.'));
+  if(R.u==='‰'&&R.res!==0&&Math.abs(R.res)<.01)w.push(tr('Wynik jest bardzo mały – sprawdź, czy liczba ludności nie jest za duża (np. o trzy zera).','The result is very small – check that the population is not too large (e.g. three extra zeros).'));
+  if(R.u==='%'&&Math.abs(R.res)>8)w.push(tr('Wynik jest bardzo duży – w żadnym państwie świata tempo wzrostu nie przekracza ok. 5 % rocznie. Sprawdź dane.','The result is very large – in no country does the growth rate exceed about 5 % a year. Check the data.'));
+  return w;}
+const fmtCnt=(x,dp,s)=>s?sg(x,dp):nf(x,dp);
+const cntHTML=(v,dp,s)=>`<span class="cnt" data-v="${v}" data-dp="${dp}" data-sg="${s?1:0}">${fmtCnt(v,dp,s)}</span>`;
+function ownResHTML(anim){const o=S.own,st=ownParse();if(!st.ready)return '';const R=ownSteps(o.ind,st.v),on=anim?'':' on shown';
+  const ex=x=>Math.abs(x.v*10**x.dp-Math.round(x.v*10**x.dp))<1e-6;
+  const cmp=['dens','cbr','cdr','nat','cnmr','realR','growth'].includes(o.ind)?`<p class="note">${tr('Dla porównania (ONZ, 2023)','For comparison (UN, 2023)')}: ${esc(cname('POL'))} ${esc(fmtI(o.ind,iv('POL',o.ind),IND[o.ind].dp>1?1:IND[o.ind].dp))}, ${tr('świat','world')} ${esc(fmtI(o.ind,iv('WLD',o.ind),IND[o.ind].dp>1?1:IND[o.ind].dp))}.</p>`:'';
+  const warn=ownWarn(o.ind,R,st.v);
+  return `<section class="card"><div class="hr2"><h2>${tr('Obliczenia krok po kroku','Step-by-step calculation')}</h2><div class="bar" style="margin:0">${anim?`<button class="btn sm" data-act="ownSkip" id="ownSkip">⏩ ${tr('Pokaż od razu','Show all now')}</button>`:''}<button class="btn sm" data-act="ownAgain">↻ ${tr('Powtórz animację','Replay')}</button></div></div>
+   ${warn.map(x=>`<p class="msg no">${esc(x)}</p>`).join('')}
+   <ol class="osteps">${R.st.map((x,i)=>`<li class="ostep${on}"><span class="onum" aria-hidden="true">${i+1}</span><div><p>${x.t}</p><div class="oline calc">${x.lhs} = ${x.expr} <span class="rv">${ex(x)?'=':'≈'} <b>${cntHTML(x.v,x.dp,x.sg)}</b>${x.u?' '+esc(x.u):''}</span></div></div></li>`).join('')}</ol>
+   <div class="ofinal${anim?'':' on'}" id="ownFinal"><h3>${tr('Wynik','Result')}: ${esc(T(IND[o.ind].n).toLowerCase())}</h3><p class="big">${cntHTML(R.res,R.dp,R.sg)} ${esc(R.u||'')}</p>
+   <p class="msg ok"><b>${esc(ownInterp(o.ind,R.res,R,st.v))}</b></p>${cmp}</div></section>`;}
+let OWNT=[];const stopAnim=()=>{OWNT.forEach(clearTimeout);OWNT=[];};
+function countUp(el,dur){const v=+el.dataset.v,dp=+el.dataset.dp,s=el.dataset.sg==='1',t0=performance.now();
+  const f=now=>{const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmtCnt(p<1?v*e:v,dp,s);if(p<1&&el.isConnected)requestAnimationFrame(f);};requestAnimationFrame(f);}
+function ownFinish(){stopAnim();$$('#ownRes .ostep').forEach(e=>e.classList.add('on','shown'));const f=$('#ownFinal');if(f)f.classList.add('on');
+  $$('#ownRes .cnt').forEach(c=>c.textContent=fmtCnt(+c.dataset.v,+c.dataset.dp,c.dataset.sg==='1'));const b=$('#ownSkip');if(b)b.remove();}
+function ownAnimate(){stopAnim();const st=$$('#ownRes .ostep'),fin=$('#ownFinal');if(!fin)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return ownFinish();
+  const D1=1400,near=e=>{try{e.scrollIntoView({block:'nearest',behavior:'smooth'});}catch(_){}};
+  $$('#ownRes .cnt').forEach(c=>c.textContent=fmtCnt(0,+c.dataset.dp,0));
+  st.forEach((e,i)=>{OWNT.push(setTimeout(()=>{e.classList.add('on');near(e);},i*D1+150));
+    OWNT.push(setTimeout(()=>{e.classList.add('shown');const c=e.querySelector('.cnt');if(c)countUp(c,650);},i*D1+850));});
+  OWNT.push(setTimeout(()=>{fin.classList.add('on');countUp(fin.querySelector('.cnt'),900);near(fin);const b=$('#ownSkip');if(b)b.remove();},st.length*D1+250));}
+function ownLive(k){const st=ownParse(),sub=$('#ownSub');if(!sub)return;sub.innerHTML=ownSubHTML(st);
+  if(k&&st.v[k]!=null)$$(`#ownSub .v[data-k="${k}"]`).forEach(e=>e.classList.add('pop'));
+  OWNI[S.own.ind].need.forEach(n=>{const e=$('#ownErr-'+n),i=$('#own-'+n);if(e)e.textContent=st.err[n]||'';if(i)i.setAttribute('aria-invalid',st.err[n]?'true':'false');});
+  $('#ownCalc').disabled=!st.ready;$('#ownMiss').textContent=ownMissTxt(st);
+  if(S.own.done){S.own.done=false;stopAnim();$('#ownRes').innerHTML='';}}
+function viewOwn(){const o=S.own,keys=STEPK();if(!keys.includes(o.ind))o.ind='nat';const I=OWNI[o.ind],F=OWNF(),y=SY(),st=ownParse();
+  let h=`<section class="card"><div class="bar" style="margin-top:0">${lvlSeg()}</div><h2 style="margin-top:12px">${tr('Co chcesz policzyć?','What do you want to calculate?')}</h2>
+   <div class="steps" role="group" aria-label="${tr('Wskaźnik','Indicator')}">${keys.map(k=>`<button data-oind="${k}" aria-pressed="${o.ind===k}" class="${IND[k].adv?'adv':''}">${esc(T(IND[k].n))}</button>`).join('')}</div>
+   <p class="note" style="margin:10px 0 0">${tr('Wpisz własne dane – z rocznika statystycznego, z zadania w podręczniku albo dla swojej gminy. Liczby od razu pojawiają się we wzorze, a po kliknięciu „Oblicz” zobaczysz całe obliczenie krok po kroku. Wpisane dane zostają po zmianie wskaźnika.','Enter your own data – from a statistical yearbook, a textbook exercise or your own town. The numbers go straight into the formula, and “Calculate” shows the whole calculation step by step. Your data stay when you switch indicators.')}</p></section>`;
+  h+=`<section class="card"><div class="owngrid"><div><h2>${esc(T(IND[o.ind].n))}</h2><h3>${tr('Wzór','Formula')}</h3><div class="formula oform">${I.f(k=>tok(k,F[k].s,'sym'),y)}</div>
+   <h3>${tr('Wzór z Twoimi danymi','The formula with your data')}</h3><div class="formula oform calc" id="ownSub" aria-live="polite">${ownSubHTML(st)}</div></div>
+   <div><h3 style="margin-top:4px">${tr('Twoje dane','Your data')}</h3><div class="ofields">${I.need.map(k=>`<div class="ofield"><label for="own-${k}">${tok(k,F[k].s,'sym')}${esc(F[k].n)}<span class="h">${esc(F[k].h)}</span></label>
+     <div class="row"><input class="ain" id="own-${k}" data-own="${k}" inputmode="decimal" autocomplete="off" placeholder="${tr('np.','e.g.')} ${OWNEX[k]}" value="${esc(o.v[k])}" aria-invalid="${st.err[k]?'true':'false'}" aria-describedby="ownErr-${k}"><span class="note">${esc(F[k].u)}</span></div>
+     <div class="oerr" id="ownErr-${k}">${esc(st.err[k]||'')}</div></div>`).join('')}</div>
+   <div class="bar"><button class="btn primary" id="ownCalc" data-act="ownCalc" ${st.ready?'':'disabled'}>▶ ${tr('Oblicz','Calculate')}</button><button class="btn" data-act="ownEx">${tr('Wstaw przykład','Use an example')}</button><button class="btn" data-act="ownClr">${tr('Wyczyść','Clear')}</button></div>
+   <p class="note" id="ownMiss" style="margin-top:8px">${esc(ownMissTxt(st))}</p></div></div></section>`;
+  return h+`<div id="ownRes">${o.done?ownResHTML(o.anim):''}</div>`;}
+
 // ================= 3. porównaj =================
 const EU27=['AUT','BEL','BGR','HRV','CYP','CZE','DNK','EST','FIN','FRA','DEU','GRC','HUN','IRL','ITA','LVA','LTU','LUX','MLT','NLD','POL','PRT','ROU','SVK','SVN','ESP','SWE'];
 const byGrowth=()=>BIG.slice().sort((a,b)=>iv(b,'growth')-iv(a,'growth'));
@@ -854,6 +996,7 @@ async function pngClick(ch){
 const GM0={pop:20000,b:190,d:230,im:160,em:110};
 const S={tab:GEN?'sheet':'theory',lvl:'B',th:'pop',gm:{...GM0},trans:'POL',
  step:{iso:'POL',ind:'nat',mode:'show',q:'',ans:'',chk:null,show:false},
+ own:{ind:'nat',v:{...OWN0},done:false,anim:false},
  cmp:{sel:['POL','DEU','NGA','JPN','QAT'],ind:'realR',map:'nat',sort:{k:'',dir:-1},q:''},
  q:null,ok:0,all:0,ws:{groups:false,key:true,seed:1+Math.floor(Math.random()*99999)},wsSt:'',pngSt:''};
 const lvlSeg=()=>`<span class="lbl" id="lvlLbl">${tr('Poziom','Level')}</span><div class="seg" role="group" aria-labelledby="lvlLbl"><button data-lvl="B" aria-pressed="${S.lvl==='B'}">${tr('Podstawowy','Basic')}</button><button data-lvl="A" aria-pressed="${S.lvl==='A'}">${tr('Rozszerzony','Advanced')}</button></div>`;
@@ -864,15 +1007,16 @@ function focusKey(el){if(!el||el===document.body)return null;if(el.id)return '#'
   const a=[...el.attributes].filter(x=>x.name.startsWith('data-')).map(x=>`[${x.name}="${CSS.escape(x.value)}"]`).join('');if(!a)return null;
   return el.tagName.toLowerCase()+a;}
 function render(keep=true){
-  const fk=keep?focusKey(document.activeElement):null;
+  const fk=keep?focusKey(document.activeElement):null;stopAnim();
   const sl=$$('#app .scroll, #app .tablewrap').map(e=>e.scrollLeft);
   document.documentElement.lang=L;document.title=T(GEN?UI.gt1:UI.t1);
   $('#t1').textContent=T(GEN?UI.gt1:UI.t1);$('#t2').textContent=T(GEN?UI.gt2:UI.t2);
   $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
   $('#tabs').innerHTML=Object.entries(UI.tabs).filter(([k])=>GEN===(k==='sheet')).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
-  $('#app').innerHTML={theory:viewTheory,step:viewStep,cmp:viewCmp,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
+  $('#app').innerHTML={theory:viewTheory,step:viewStep,own:viewOwn,cmp:viewCmp,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
   $$('#app .scroll, #app .tablewrap').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
   if(fk){const el=$(fk);if(el&&el!==document.activeElement)try{el.focus({preventScroll:true});}catch(_){}}
+  if(S.tab==='own'&&S.own.anim){S.own.anim=false;ownAnimate();}
 }
 function addCmp(k){const s=S.cmp.sel;if(!D[k]||k==='WLD')return;const i=s.indexOf(k);if(i>=0)s.splice(i,1);else if(s.length<MAXSEL)s.push(k);S.cmp.q='';}
 function act(b){
@@ -887,6 +1031,12 @@ function act(b){
   else if(d.iso&&b.closest('#stepMap')){S.step.iso=d.iso;resetTry();}
   else if(d.iso&&b.closest('#cmpMap')){const s=S.cmp.sel;if(s.includes(d.iso))s.splice(s.indexOf(d.iso),1);else if(s.length<MAXSEL)s.push(d.iso);}
   else if(d.sind){S.step.ind=d.sind;resetTry();}
+  else if(d.oind){S.own.ind=d.oind;S.own.done=false;}
+  else if(d.act==='ownCalc'){if(!ownParse().ready)return;S.own.done=true;S.own.anim=true;after='#ownRes h2';}
+  else if(d.act==='ownAgain'){S.own.done=true;S.own.anim=true;}
+  else if(d.act==='ownSkip'){ownFinish();return;}
+  else if(d.act==='ownEx'){S.own.v={...OWNEX};S.own.done=false;}
+  else if(d.act==='ownClr'){S.own.v={...OWN0};S.own.done=false;after='#own-'+OWNI[S.own.ind].need[0];}
   else if(d.smode){S.step.mode=d.smode;resetTry();}
   else if(d.rm){S.cmp.sel=S.cmp.sel.filter(k=>k!==d.rm);}
   else if(d.set){const v=SETS[d.set];S.cmp.sel=(typeof v==='function'?v():v).slice();S.cmp.sort={k:'',dir:-1};}
@@ -906,11 +1056,12 @@ function act(b){
   if(after){const el=$(after);if(el){if(after==='.card .q')el.setAttribute('tabindex','-1');el.focus({preventScroll:after!=='.card .q'});}}
 }
 document.addEventListener('click',e=>{
-  const b=e.target.closest('[data-lang],[data-tab],[data-lvl],[data-th],[data-trans],[data-pick],[data-sind],[data-smode],[data-rm],[data-set],[data-sort],[data-ans],#nextQ,[data-act],#stepMap [data-iso],#cmpMap [data-iso]');
+  const b=e.target.closest('[data-lang],[data-tab],[data-lvl],[data-th],[data-trans],[data-pick],[data-sind],[data-oind],[data-smode],[data-rm],[data-set],[data-sort],[data-ans],#nextQ,[data-act],#stepMap [data-iso],#cmpMap [data-iso]');
   if(!b||b.disabled)return;act(b);
 });
 document.addEventListener('keydown',e=>{const t=e.target;if(e.key!=='Enter')return;
   if(t.id==='tryIn'){e.preventDefault();act({dataset:{act:'check'}});}
+  else if(t.dataset.own){e.preventDefault();const st=ownParse();if(st.ready)act({dataset:{act:'ownCalc'}});else{const n=$('#own-'+st.miss.find(k=>k!==t.dataset.own));if(n)n.focus();}}
   else if(t.id==='stepQ'||t.id==='cmpQ'){const f=$(t.id==='stepQ'?'#stepList [data-iso]':'#cmpList [data-iso]');if(f){e.preventDefault();act(f);}}});
 document.addEventListener('change',e=>{const t=e.target;
   if(t.dataset.wsopt){S.ws[t.dataset.wsopt]=t.checked;S.wsSt='';render();}
@@ -921,6 +1072,7 @@ document.addEventListener('input',e=>{const t=e.target;
   if(t.id==='stepQ'){S.step.q=t.value;$('#stepList').innerHTML=pickList('step',t.value);}
   else if(t.id==='cmpQ'){S.cmp.q=t.value;$('#cmpList').innerHTML=pickList('cmp',t.value,S.cmp.sel);}
   else if(t.id==='tryIn'){S.step.ans=t.value;}
+  else if(t.dataset.own){S.own.v[t.dataset.own]=t.value;ownLive(t.dataset.own);}
   else if(t.dataset.gm){S.gm[t.dataset.gm]=+t.value;$('#gmv-'+t.dataset.gm).textContent=nf(+t.value);$('#gmOut').innerHTML=gmOut();}});
 render();
 </script>
