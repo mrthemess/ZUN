@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
+<head><script id="zun-motyw">try{var m=localStorage.getItem('zunMotyw');if(m==='dark'||m==='light')document.documentElement.setAttribute('data-theme',m)}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zakład utylizacji niewiedzy – narzędzia do nauki geografii i biologii</title>
@@ -52,6 +52,7 @@ a{color:var(--acc-t)}
 .langsw button{font:700 .9rem 'Atkinson Hyperlegible',sans-serif;cursor:pointer;border:0;border-radius:999px;padding:6px 12px;background:transparent;color:#ece6da;display:flex;gap:6px;align-items:center}
 .langsw button{white-space:nowrap}.langsw .ls{display:none}
 .langsw button[aria-pressed=true]{background:#e2b27a;color:#1a140c}
+.tbr{display:flex;gap:8px;align-items:center}.themebtn{font:700 .9rem 'Atkinson Hyperlegible',sans-serif;cursor:pointer;border:1.5px solid #4a4436;border-radius:999px;padding:6px 12px;background:transparent;color:#ece6da;display:flex;gap:6px;align-items:center;white-space:nowrap;min-height:38px}.themebtn:hover{background:rgba(236,230,218,.1)}.themebtn:focus-visible,.langsw button:focus-visible{outline:3px solid #86b4ec;outline-offset:2px}.themebtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}@media (max-width:560px){.themebtn .tt{display:none}}
 .hero{background:#121713}
 /* na szerokich ekranach przycinamy górę i dół, napis zostaje w kadrze */
 .hero img{display:block;width:100%;max-width:1600px;height:auto;max-height:min(68vh,720px);object-fit:cover;object-position:50% 40%;margin:0 auto}
@@ -146,10 +147,11 @@ dialog::backdrop{background:rgba(15,18,14,.6)}
 <body>
 <div class="topbar"><div class="in">
   <b><span data-l="pl">Zakład utylizacji niewiedzy</span><span data-l="en">The ignorance disposal facility</span></b>
+  <div class="tbr"><button type="button" class="themebtn" id="themeBtn"></button>
   <div class="langsw" role="group" aria-label="Język / Language">
     <button type="button" data-set="pl" aria-pressed="true">🇵🇱 <span class="lf">Polski</span><span class="ls">PL</span></button>
     <button type="button" data-set="en" aria-pressed="false">🇬🇧 <span class="lf">English</span><span class="ls">EN</span></button>
-  </div>
+  </div></div>
 </div></div>
 <header class="hero"><!-- oba banery są „lazy”: przeglądarka pobiera tylko ten, który jest widoczny w danym języku --><img data-l="pl" src="img/baner.jpg" loading="lazy" alt="Zakład utylizacji niewiedzy – geografia, biologia i inne sposoby na mądrzejszy internet" width="1515" height="851"><img data-l="en" src="img/baner-en.jpg" loading="lazy" lang="en" alt="The ignorance disposal facility – geography, biology and other ways to put your brain to work" width="1511" height="848"></header>
 <main class="wrap">
@@ -612,5 +614,6 @@ else if (location.hash === '#o-autorze') $('#about').showModal();
 else if (location.hash) openTool(location.hash.slice(1));
 </script>
 <!--stats--><script>window.goatcounter={path:function(){return location.pathname.replace(/index\.html$/,"")}}</script><script data-goatcounter="https://zun.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script><!--stats-->
+<script>/* przełącznik jasny/ciemny – ten sam klucz zunMotyw co w pasku narzędzi */(function(){var b=document.getElementById('themeBtn'),h=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');function dk(){var t=h.getAttribute('data-theme');return t?t==='dark':mq.matches}function th(){var d=dk(),e=h.lang==='en',l=d?(e?'Light mode':'Tryb jasny'):(e?'Dark mode':'Tryb ciemny');b.innerHTML=(d?'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>')+'<span class="tt"></span>';b.lastChild.textContent=l;b.title=d?(e?'Switch to light mode':'Przełącz na tryb jasny'):(e?'Switch to dark mode':'Przełącz na tryb ciemny');b.setAttribute('aria-label',b.title)}b.onclick=function(){var m=dk()?'light':'dark';h.setAttribute('data-theme',m);try{localStorage.setItem('zunMotyw',m)}catch(e){}th()};try{mq.addEventListener('change',th)}catch(e){}new MutationObserver(th).observe(h,{attributes:true,attributeFilter:['lang']});th()})();</script>
 </body>
 </html>
