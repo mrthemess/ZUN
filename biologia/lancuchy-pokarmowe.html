@@ -351,7 +351,7 @@ producer:'Producent',consumer:'Konsument',detritus:'Martwa materia organiczna',r
 prodDesc:'Wytwarza materię organiczną w fotosyntezie, korzystając z energii światła.',
 xDesc:'Szczątki roślin i zwierząt, odchody i opadłe części roślin. Od niej zaczyna się łańcuch detrytusowy.',
 rDesc:'Rozkłada martwą materię na związki nieorganiczne, z których znów korzystają producenci. Rozkłada szczątki organizmów ze wszystkich poziomów troficznych.',
-eatsL:'Zjada',eatenBy:'Zjadany przez',nobody:'nikogo w tej sieci – to drapieżnik szczytowy',
+eatsL:'Zjada',eatenBy:'Zjadany przez',nobody:'nikogo w tej sieci',nobodyApex:'nikogo w tej sieci – to drapieżnik szczytowy',nobodyTop:'nikogo w tej sieci – to konsument szczytowy, ale nie drapieżnik (nie zjada innych zwierząt)',
 positions:'W łańcuchach tej sieci bywa',avgTL:'Średni poziom troficzny',chainsThrough:'Pełnych łańcuchów przez ten organizm',
 detrNote:'(łańcuch detrytusowy)',
 chainBox:'Łańcuch z zakładki „Łańcuch”',hideChain:'Ukryj łańcuch',
@@ -394,7 +394,7 @@ producer:'Producer',consumer:'Consumer',detritus:'Dead organic matter',reducent:
 prodDesc:'Makes organic matter in photosynthesis, using light energy.',
 xDesc:'Remains of plants and animals, faeces and fallen plant parts. The detrital chain starts here.',
 rDesc:'Breaks dead matter down into inorganic substances that producers use again. It breaks down remains from every trophic level.',
-eatsL:'Eats',eatenBy:'Eaten by',nobody:'nothing in this web – it is an apex predator',
+eatsL:'Eats',eatenBy:'Eaten by',nobody:'nothing in this web',nobodyApex:'nothing in this web – it is an apex predator',nobodyTop:'nothing in this web – it is a top consumer, but not a predator (it does not eat other animals)',
 positions:'In the chains of this web it can be a',avgTL:'Average trophic level',chainsThrough:'Complete chains through this organism',
 detrNote:'(detrital chain)',
 chainBox:'Chain from the “Chain” tab',hideChain:'Hide chain',
@@ -471,7 +471,7 @@ pl:`
 <div class="lv l4"><b>4. poziom</b><span>konsumenci III rzędu</span><em>krogulec</em></div>
 </div>
 <h3>Czym różnią się konsumenci I i II rzędu?</h3>
-<p><b>Konsument I rzędu</b> zjada producenta. W łańcuchu spasania jest więc roślinożercą: sarna skubiąca trawę, gąsienica na igłach sosny, kryl filtrujący fitoplankton. <b>Konsument II rzędu</b> zjada konsumenta I rzędu, czyli zwykle jest drapieżnikiem albo owadożercą. <b>Konsument III rzędu</b> zjada konsumenta II rzędu i tak dalej. Konsumenta, którego w danym ekosystemie nikt już nie zjada, nazywamy <b>drapieżnikiem szczytowym</b> (np. wilk, orka).</p>
+<p><b>Konsument I rzędu</b> zjada producenta. W łańcuchu spasania jest więc roślinożercą: sarna skubiąca trawę, gąsienica na igłach sosny, kryl filtrujący fitoplankton. <b>Konsument II rzędu</b> zjada konsumenta I rzędu, czyli zwykle jest drapieżnikiem albo owadożercą. <b>Konsument III rzędu</b> zjada konsumenta II rzędu i tak dalej. Konsumenta, którego w danym ekosystemie nikt już nie zjada, nazywamy <b>konsumentem szczytowym</b>. Jeśli przy tym poluje na inne zwierzęta, jest <b>drapieżnikiem szczytowym</b> (np. wilk, orka). Roślinożerca, którego nikt nie zjada (np. łabędź niemy w jeziorze), jest konsumentem szczytowym, ale nie drapieżnikiem.</p>
 <div class="tnote"><b>Uwaga:</b> „rząd” konsumenta zależy od łańcucha, a nie od gatunku. Sikora jedząca gąsienice jest konsumentem II rzędu, ale ta sama sikora jedząca zimą nasiona sosny jest konsumentem I rzędu.</div>
 </section>
 
@@ -547,7 +547,7 @@ en:`
 <div class="lv l4"><b>Level 4</b><span>tertiary consumers</span><em>sparrowhawk</em></div>
 </div>
 <h3>Primary vs secondary consumers</h3>
-<p>A <b>primary consumer</b> eats a producer, so in a grazing chain it is a herbivore: a deer grazing on grass, a caterpillar on pine needles, krill filtering phytoplankton. A <b>secondary consumer</b> eats a primary consumer, so it is usually a carnivore or an insectivore. A <b>tertiary consumer</b> eats a secondary consumer, and so on. A consumer that nothing else eats in the ecosystem is called an <b>apex predator</b> (e.g. wolf, orca).</p>
+<p>A <b>primary consumer</b> eats a producer, so in a grazing chain it is a herbivore: a deer grazing on grass, a caterpillar on pine needles, krill filtering phytoplankton. A <b>secondary consumer</b> eats a primary consumer, so it is usually a carnivore or an insectivore. A <b>tertiary consumer</b> eats a secondary consumer, and so on. A consumer that nothing else eats in the ecosystem is called a <b>top consumer</b>. If it also hunts other animals, it is an <b>apex predator</b> (e.g. wolf, orca). A herbivore that nothing eats (e.g. a mute swan on a lake) is a top consumer, but not a predator.</p>
 <div class="tnote"><b>Careful:</b> the consumer’s level depends on the chain, not on the species. A great tit eating caterpillars is a secondary consumer, but the same tit eating pine seeds in winter is a primary consumer.</div>
 </section>
 
@@ -633,6 +633,7 @@ function build(id){
   g.PD.forEach(p=>p.forEach((x,i)=>{const o=g.pos[x].d;if(!o[i+1])o[i+1]=p.slice(0,i+1);}));
   g.fromP=new Set();g.PG.forEach(p=>p.forEach(x=>g.fromP.add(x)));nodes.filter(n=>n.t==='P').forEach(n=>g.fromP.add(n.id));
   g.isApex=isApex;
+  g.isPred=x=>by[x].food.some(f=>by[f]&&by[f].t==='C');
   G[id]=g;return g;
 }
 const nm=(g,id)=>g.by[id][L];
@@ -827,7 +828,7 @@ function webInfo(g,vis,fx){
     if(n.t==='X')h+=`<p><span class="tag cd">${t('detritus')}</span></p><p>${t('xDesc')}</p>`;
     if(n.t==='R')h+=`<p><span class="tag cd">${t('reducent')}</span></p><p>${t('rDesc')}</p>`;
     if(n.t==='C'){const f=n.food.filter(x=>ids.has(x));h+=`<p class="kv"><b>${t('eatsL')}:</b> ${f.map(x=>g.by[x].e+' '+esc(nm(g,x))).join(', ')}</p>`;}
-    if(n.t!=='R'){const e=n.eaters.filter(x=>ids.has(x)&&g.by[x].t==='C');h+=`<p class="kv"><b>${t('eatenBy')}:</b> ${e.length?e.map(x=>g.by[x].e+' '+esc(nm(g,x))).join(', '):t('nobody')}</p>`;}
+    if(n.t!=='R'){const e=n.eaters.filter(x=>ids.has(x)&&g.by[x].t==='C');h+=`<p class="kv"><b>${t('eatenBy')}:</b> ${e.length?e.map(x=>g.by[x].e+' '+esc(nm(g,x))).join(', '):t(n.t!=='C'?'nobody':g.isPred(n.id)?'nobodyApex':'nobodyTop')}</p>`;}
     if(n.t==='C'){
       const P=g.pos[n.id];let rows='';
       Object.keys(P.g).forEach(k=>rows+=`<li><span class="tag c${Math.min(+k,6)}">${lvlName(+k,false,L)}</span> <span class="ex">${P.g[k].map(x=>esc(nm(g,x))).join(' → ')}</span></li>`);
@@ -844,10 +845,10 @@ function webInfo(g,vis,fx){
     if(multi.length)h+=`<p>${L==='pl'?'Kilka poziomów troficznych zajmują tu':'Several trophic levels are occupied here by'}: ${multi.map(x=>'<b>'+esc(nm(g,x))+'</b>').join(', ')}. ${L==='pl'?'Kliknij je, żeby zobaczyć szczegóły.':'Tap them to see details.'}</p>`;
     return h+`<button class="btn" id="whide">${t('hideChain')}</button>`;
   }
-  const nC=vis.filter(n=>n.t==='C').length,nP=vis.filter(n=>n.t==='P').length,ap=vis.filter(n=>n.t==='C'&&g.isApex(n.id));
+  const nC=vis.filter(n=>n.t==='C').length,nP=vis.filter(n=>n.t==='P').length,ap=vis.filter(n=>n.t==='C'&&g.isApex(n.id)&&g.isPred(n.id)),topH=vis.filter(n=>n.t==='C'&&g.isApex(n.id)&&!g.isPred(n.id));
   const nCh=g.complete.filter(p=>W.det||!isDetr(g,p)).length;
   h+=`<h3>${ECOS[ECO].e} ${ECOS[ECO][L]}</h3><p>${L==='pl'?`Producenci: <b>${nP}</b>, konsumenci: <b>${nC}</b>, pełne łańcuchy: <b>${nCh}</b>.`:`Producers: <b>${nP}</b>, consumers: <b>${nC}</b>, complete chains: <b>${nCh}</b>.`}</p>
-  <p>${L==='pl'?'Drapieżniki szczytowe':'Apex predators'}: ${ap.map(x=>x.e+' '+esc(x[L])).join(', ')}</p>
+  <p>${L==='pl'?'Drapieżniki szczytowe':'Apex predators'}: ${ap.map(x=>x.e+' '+esc(x[L])).join(', ')}</p>${topH.length?`<p>${L==='pl'?'Konsumenci szczytowi, którzy nie są drapieżnikami':'Top consumers that are not predators'}: ${topH.map(x=>x.e+' '+esc(x[L])).join(', ')}</p>`:''}
   <p class="small">${L==='pl'?'Liczby przy organizmach to średni poziom troficzny. Organizmy ustawione są w pionie według niego, a numery po lewej to całe poziomy troficzne.':'Numbers next to organisms are average trophic levels. Organisms are placed vertically by it, and the numbers on the left are whole trophic levels.'}</p>`;
   return h;
 }
@@ -957,7 +958,7 @@ const QG={
    o:shuffle(vals.map(v=>opt(String(v),v===n))),x:paths.map(p=>p.map(y=>esc(nm(g,y))).join(' → ')).join('<br>')};}
    return QG.lvl();},
  apex(){for(let tries=0;tries<30;tries++){const g=build(ecoForQ());
-   const ap=g.nodes.filter(n=>n.t==='C'&&g.fromP.has(n.id)&&g.isApex(n.id)&&g.TL[n.id]>=3);const non=g.nodes.filter(n=>n.t==='C'&&g.fromP.has(n.id)&&!g.isApex(n.id));
+   const ap=g.nodes.filter(n=>n.t==='C'&&g.fromP.has(n.id)&&g.isApex(n.id)&&g.isPred(n.id)&&g.TL[n.id]>=3);const non=g.nodes.filter(n=>n.t==='C'&&g.fromP.has(n.id)&&!g.isApex(n.id));
    if(!ap.length||non.length<3)continue;const a=rnd(ap);
    return {q:`${ecoTag(g)}<p>${L==='pl'?'Który z tych organizmów jest w tej sieci drapieżnikiem szczytowym, czyli nikt go już nie zjada?':'Which of these organisms is an apex predator in this web, i.e. nothing else eats it?'}</p>`,
    o:shuffle([opt(a.e+' '+esc(a[L]),1)].concat(shuffle(non).slice(0,3).map(n=>opt(n.e+' '+esc(n[L]))))),x:L==='pl'?`W tej sieci nic nie zjada tego organizmu (${esc(a[L])}). Pozostałe organizmy są zjadane przez inne.`:`In this web nothing eats this organism (${esc(a[L])}). The other organisms are eaten by others.`};}
