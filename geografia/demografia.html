@@ -199,7 +199,7 @@ const UI={
  t2:['Gęstość zaludnienia, przyrost naturalny, saldo migracji i przyrost rzeczywisty – teoria, obliczenia krok po kroku na prawdziwych i własnych danych, porównania i quiz.','Population density, natural increase, net migration and real increase – theory, step-by-step calculations on real data and your own, comparisons and a quiz.'],
  gt1:['Generator kart pracy: demografia','Worksheet generator: population in numbers'],
  gt2:['Karty pracy w Wordzie z obliczeniami na prawdziwych danych ONZ i kluczem odpowiedzi na osobnej stronie.','Word worksheets with calculations on real UN data and the answer key on a separate page.'],
- tabs:{theory:['Teoria','Theory'],step:['Policz krok po kroku','Step-by-step'],own:['Własne dane','Your own data'],cmp:['Porównaj','Compare'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
+ tabs:{theory:['Teoria','Theory'],step:['Policz krok po kroku','Step-by-step'],own:['Własne dane','Your own data'],dtm:['Przejście demograficzne','Demographic transition'],cmp:['Porównaj','Compare'],quiz:['Quiz','Quiz'],sheet:['Karta pracy','Worksheet']},
 };
 const SRC=()=>tr('Dane: ONZ, World Population Prospects 2024, rok 2023 (szacunki); powierzchnia: Bank Światowy.','Data: UN, World Population Prospects 2024, year 2023 (estimates); area: World Bank.');
 const SRCS=()=>tr('Dane: ONZ, World Population Prospects 2024, rok 2023','Data: UN, World Population Prospects 2024, year 2023');
@@ -361,12 +361,12 @@ function transSVG(iso,o={}){
 //   III – Wu ≥ 18 ‰ (i nie II): urodzenia spadają, ale wciąż wyraźnie przewyższają zgony;
 //   IV  – Wu < 18 ‰ i Wpn ≥ −0,5 ‰: niskie urodzenia i zgony, przyrost niewielki lub bliski zera.
 // Ubytek przy Wu ≥ 20 ‰ (Korea 1950, Kambodża i Timor Wsch. 1975) to skutek wojny/kryzysu, nie faza V – pomijany w losowaniu.
-// Położenie w poziomie wewnątrz pasa fazy (0–1, przycięte do 0,1–0,9): I – spadek Wz 40→25 ‰; II – spadek Wu 50→30 ‰;
-// III – spadek Wu 30→18 ‰; IV – spadek Wpn 8→0 ‰; V – pogłębianie ubytku 0→−10 ‰. W pionie: prawdziwe wartości Wu i Wz.
+// Położenie w poziomie wewnątrz pasa fazy (0–1, przycięte do 0,05–0,92): I – spadek Wz 40→25 ‰; II – spadek Wu 50→30 ‰;
+// III – spadek Wu 30→18 ‰; IV – spadek Wpn 8→0 ‰; V – pogłębianie ubytku −0,5→−15 ‰ (Polska 2023, Wpn −2,4 ‰, wypada na początku fazy V). W pionie: prawdziwe wartości Wu i Wz.
 const DPH=[['I','przedprzemysłowa','pre-industrial'],['II','eksplozja demograficzna','population explosion'],['III','późna przemysłowa','late industrial'],['IV','postprzemysłowa','post-industrial'],['V','regres (ubytek)','decline']];
 const dtmPhase=(b,d)=>['I','II','III','IV','V'].indexOf(phaseOf(b,d))+1;
-function dtmPos(b,d){const p=dtmPhase(b,d),n=b-d,cl=v=>Math.min(.9,Math.max(.1,v));
-  return p-1+cl(p===1?(40-d)/15:p===2?(50-b)/20:p===3?(30-b)/12:p===4?(8-n)/8:-n/10);}
+function dtmPos(b,d){const p=dtmPhase(b,d),n=b-d,cl=v=>Math.min(.92,Math.max(.05,v));
+  return p-1+cl(p===1?(40-d)/15:p===2?(50-b)/20:p===3?(30-b)/12:p===4?(8-n)/8:(-n-.5)/14.5);}
 const dtmVal=(k,yi)=>{const s=D[k]&&D[k].s;if(!s||s.cbr[yi]==null||s.cdr[yi]==null)return null;const b=s.cbr[yi],d=s.cdr[yi];return{b,d,n:b-d,p:dtmPhase(b,d),yr:YEARS[yi]};};
 const dtmCrisis=v=>v.p===5&&v.b>=20;
 const DTM_WHY=[['Wu ≥ 35 ‰ i Wz ≥ 25 ‰ – oba współczynniki bardzo wysokie, jak w społeczeństwie przedprzemysłowym.','Birth rate ≥ 35 ‰ and death rate ≥ 25 ‰ – both very high, as in a pre-industrial society.'],
@@ -416,8 +416,7 @@ function dtmInfo(){const k=S.trans,v=dtmVal(k,S.dtm.yi);if(!v||!S.dtm.open)retur
    <dt>${tr('Faza','Stage')}</dt><dd>${DPH[v.p-1][0]} – ${esc(L==='pl'?DPH[v.p-1][1]:DPH[v.p-1][2])}</dd></dl>
    <p class="note" style="margin:0">${tr('Dlaczego','Why')}: ${esc(T(DTM_WHY[v.p-1]))}</p>${dtmCrisis(v)?`<p class="note" style="margin:6px 0 0"><b>${tr('Uwaga','Note')}:</b> ${tr('ubytek przy wysokich urodzeniach to skutek kryzysu (wojny, ludobójstwa, głodu), a nie zaawansowanej fazy V – model przejścia tego nie opisuje.','a decrease despite high births is caused by a crisis (war, genocide, famine), not by an advanced stage V – the transition model does not describe this.')}</p>`:''}</div>`;}
 function dtmBlock(){const k=S.trans,yi=S.dtm.yi,last=YEARS.length-1;
-  return `<h3 style="margin-top:18px">${tr('Państwo na modelu','A country on the model')}</h3>
-   <p>${tr('Wybierz państwo i rok albo wylosuj państwo z danej fazy (z danych za 2023 r.). Okrąg pokazuje prawdziwy współczynnik urodzeń, kółko z obwódką – współczynnik zgonów. <b>Kliknij okrąg</b>, aby zobaczyć wartości. Zaawansowaną fazę V (więcej zgonów niż urodzeń) przechodzi dziś wiele państw Europy – m.in. Polska, Niemcy, Włochy i Hiszpania – a także Japonia, Korea Południowa i Chiny.','Pick a country and a year, or draw a random country from a given stage (2023 data). The filled circle shows the real birth rate, the ringed dot the death rate. <b>Click the circle</b> to see the values. The advanced stage V (more deaths than births) now applies to many European countries – e.g. Poland, Germany, Italy and Spain – as well as Japan, South Korea and China.')}</p>
+  return `<p>${tr('Wybierz państwo i rok albo wylosuj państwo z danej fazy (z danych za 2023 r.). Okrąg pokazuje prawdziwy współczynnik urodzeń, kółko z obwódką – współczynnik zgonów. <b>Kliknij okrąg</b>, aby zobaczyć wartości. Zaawansowaną fazę V (więcej zgonów niż urodzeń) przechodzi dziś wiele państw Europy – m.in. Polska, Niemcy, Włochy i Hiszpania – a także Japonia, Korea Południowa i Chiny.','Pick a country and a year, or draw a random country from a given stage (2023 data). The filled circle shows the real birth rate, the ringed dot the death rate. <b>Click the circle</b> to see the values. The advanced stage V (more deaths than births) now applies to many European countries – e.g. Poland, Germany, Italy and Spain – as well as Japan, South Korea and China.')}</p>
    <div class="bar"><label class="lbl" for="dtmSel">${tr('Państwo','Country')}</label><select class="sin" id="dtmSel" style="max-width:240px">${sortedIsos().map(i=>`<option value="${i}" ${i===k?'selected':''}>${esc(cname(i))}</option>`).join('')}</select>
    <label class="lbl" for="dtmYear">${tr('Rok danych','Data year')}</label><select class="sin" id="dtmYear" style="max-width:110px">${YEARS.map((y,i)=>[y,i]).reverse().map(([y,i])=>`<option value="${i}" ${i===yi?'selected':''}>${y}</option>`).join('')}</select></div>
    <div class="bar"><span class="lbl" id="dtmRndLbl">${tr('Losowe państwo z fazy','Random country from stage')}</span><div class="dtm-rnd steps" style="margin:0" role="group" aria-labelledby="dtmRndLbl">${DPH.map((n,i)=>`<button data-act="dtmRnd" data-ph="${i+1}" title="${esc(tr('Losuj państwo z fazy ','Random country from stage ')+n[0])}">${n[0]}</button>`).join('')}</div>
@@ -448,7 +447,7 @@ const frac=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`
 const X1000=' × 1000';
 const TOP={pop:['Ludność','Population'],dens:['Gęstość zaludnienia','Population density'],bd:['Urodzenia i zgony','Births and deaths'],nat:['Przyrost naturalny','Natural increase'],mig:['Migracje','Migration'],real:['Przyrost rzeczywisty','Real increase'],model:['Model gminy','Town model'],use:['Zastosowania i pułapki','Uses and pitfalls'],
  tfr:['Dzietność','Fertility'],trans:['Przejście demograficzne','Demographic transition'],expl:['Eksplozja demograficzna','Population explosion'],aging:['Starzenie się','Ageing'],all:['Wszystko po kolei','Everything']};
-const TOPB=['pop','dens','bd','nat','mig','real','model','use'],TOPA=['tfr','trans','expl','aging'];
+const TOPB=['pop','dens','bd','nat','mig','real','model','use'],TOPA=['tfr','expl','aging']; // przejście demograficzne ma własną zakładkę (viewDtm)
 function tcard(key,o){return `<section class="card" id="th-${key}"><h2>${esc(T(TOP[key]))}</h2><div class="tgrid">
  <div class="tsec"><h3>${tr('Definicja','Definition')}</h3>${o.def}</div>
  <div class="tsec"><h3>${tr('Wzór','Formula')}</h3><div class="formula">${o.f}</div></div>
@@ -547,14 +546,19 @@ function thTrans(){const p=D.POL,n=D.NER,iso=S.trans;
   f:tr(`Wpn = Wu − Wz<div class="note">Przyrost naturalny to <b>odstęp</b> między linią urodzeń a linią zgonów.</div>`,`NI rate = birth rate − death rate<div class="note">Natural increase is the <b>gap</b> between the birth line and the death line.</div>`),
   ex:tr(`<p>Polska 1950: Wu ${nf(p.s.cbr[0],1)} ‰, Wz ${nf(p.s.cdr[0],1)} ‰ → Wpn ${sg(p.s.cbr[0]-p.s.cdr[0],1)} ‰ (faza II/III).<br>Polska 2023: Wu ${nf(p.cbr,1)} ‰, Wz ${nf(p.cdr,1)} ‰ → Wpn ${sg(p.nat,1)} ‰ (faza V).<br>Niger 2023: Wu ${nf(n.cbr,1)} ‰, Wz ${nf(n.cdr,1)} ‰ → Wpn ${sg(n.nat,1)} ‰ (faza II).</p>`,
    `<p>Poland 1950: birth rate ${nf(p.s.cbr[0],1)} ‰, death rate ${nf(p.s.cdr[0],1)} ‰ → NI rate ${sg(p.s.cbr[0]-p.s.cdr[0],1)} ‰ (stage II/III).<br>Poland 2023: ${nf(p.cbr,1)} ‰ and ${nf(p.cdr,1)} ‰ → ${sg(p.nat,1)} ‰ (stage V).<br>Niger 2023: ${nf(n.cbr,1)} ‰ and ${nf(n.cdr,1)} ‰ → ${sg(n.nat,1)} ‰ (stage II).</p>`),
-  read:tr(`<p>Na schemacie najpierw spada linia zgonów, a dopiero później linia urodzeń – stąd okres bardzo szybkiego przyrostu. Na wykresie prawdziwych danych (poniżej) można sprawdzić, w której fazie jest wybrane państwo. Model to uproszczenie: wojny, epidemie (np. COVID-19 w 2020 r.) czy polityka (np. polityka jednego dziecka w Chinach) zaburzają ten przebieg.</p>`,
-   `<p>In the diagram the death line falls first and the birth line only later – hence the period of very fast growth. In the real-data chart below you can check which stage a country is in. The model is a simplification: wars, epidemics (e.g. COVID-19 in 2020) and policies (e.g. China’s one-child policy) distort the pattern.</p>`),
+  read:tr(`<p>Na schemacie najpierw spada linia zgonów, a dopiero później linia urodzeń – stąd okres bardzo szybkiego przyrostu. Na wykresach wyżej można sprawdzić, w której fazie jest wybrane państwo. Model to uproszczenie: wojny, epidemie (np. COVID-19 w 2020 r.) czy polityka (np. polityka jednego dziecka w Chinach) zaburzają ten przebieg.</p>`,
+   `<p>In the diagram the death line falls first and the birth line only later – hence the period of very fast growth. In the charts above you can check which stage a country is in. The model is a simplification: wars, epidemics (e.g. COVID-19 in 2020) and policies (e.g. China’s one-child policy) distort the pattern.</p>`),
   use:tr(`<p>Wyjaśnianie, dlaczego liczba ludności rośnie szybko w jednych regionach, a maleje w innych; prognozowanie zmian.</p>`,`<p>Explaining why population grows fast in some regions and shrinks in others; forecasting change.</p>`),
-  extra:`${dtmBlock()}
-   <div class="bar"><span class="lbl" id="trLbl">${tr('Prawdziwe dane 1950–2023','Real data 1950–2023')}</span><div class="seg" role="group" aria-labelledby="trLbl">${TRANS_C.map(k=>`<button data-trans="${k}" aria-pressed="${iso===k}">${esc(cname(k))}</button>`).join('')}</div>
+  });}
+// ================= przejście demograficzne (osobna zakładka) =================
+function viewDtm(){const iso=S.trans;
+ return `<section class="card"><h2>${tr('Model przejścia demograficznego','Demographic transition model')}</h2>${dtmBlock()}</section>
+  <section class="card"><h2>${tr('Prawdziwe dane 1950–2023','Real data 1950–2023')}</h2>
+   <div class="bar"><span class="lbl" id="trLbl">${tr('Państwo','Country')}</span><div class="seg" role="group" aria-labelledby="trLbl">${TRANS_C.map(k=>`<button data-trans="${k}" aria-pressed="${iso===k}">${esc(cname(k))}</button>`).join('')}</div>
    <select class="sin" id="transSel" aria-label="${tr('Inne państwo','Another country')}" style="max-width:240px"><option value="">${tr('inne państwo…','another country…')}</option>${sortedIsos().map(k=>`<option value="${k}" ${k===iso&&!TRANS_C.includes(k)?'selected':''}>${esc(cname(k))}</option>`).join('')}</select>
    <button class="btn sm" data-act="png" data-ch="trans">${tr('Pobierz PNG','Download PNG')}</button></div>
-   <div class="stage scroll">${transSVG(iso,{cls:'wide'})}</div><p class="src">${esc(SRC())}</p>`});}
+   <div class="stage scroll">${transSVG(iso,{cls:'wide'})}</div><p class="src">${esc(SRC())}</p></section>
+  ${thTrans()}`;}
 function thExpl(){const w=D.WLD,n=D.NER,p0=w.s.pop[0]*1000;
  return tcard('expl',{def:tr(`<p><b>Eksplozja demograficzna</b> to bardzo szybki wzrost liczby ludności, gdy współczynnik zgonów gwałtownie spada (szczepienia, antybiotyki, higiena, lepsze wyżywienie), a współczynnik urodzeń pozostaje wysoki (faza II przejścia demograficznego). W skali świata najsilniejsza była w II połowie XX w.; dziś dotyczy głównie Afryki Subsaharyjskiej.</p>`,
    `<p>A <b>population explosion</b> is very fast population growth when the death rate drops sharply (vaccines, antibiotics, hygiene, better food) while the birth rate stays high (stage II of the demographic transition). Globally it was strongest in the second half of the 20th century; today it mainly affects sub-Saharan Africa.</p>`),
@@ -1084,7 +1088,7 @@ function render(keep=true){
   $('#t1').textContent=T(GEN?UI.gt1:UI.t1);$('#t2').textContent=T(GEN?UI.gt2:UI.t2);
   $$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));
   $('#tabs').innerHTML=Object.entries(UI.tabs).filter(([k])=>GEN===(k==='sheet')).map(([k,v])=>`<button role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${esc(T(v))}</button>`).join('');
-  $('#app').innerHTML={theory:viewTheory,step:viewStep,own:viewOwn,cmp:viewCmp,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
+  $('#app').innerHTML={theory:viewTheory,step:viewStep,own:viewOwn,dtm:viewDtm,cmp:viewCmp,quiz:viewQuiz,sheet:viewSheet}[S.tab]();
   $$('#app .scroll, #app .tablewrap').forEach((e,i)=>{if(sl[i])e.scrollLeft=sl[i];});
   if(fk){const el=$(fk);if(el&&el!==document.activeElement)try{el.focus({preventScroll:true});}catch(_){}}
   if(S.tab==='own'&&S.own.anim){S.own.anim=false;ownAnimate();}
