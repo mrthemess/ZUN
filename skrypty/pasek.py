@@ -27,14 +27,21 @@ STYLE = (
     "<style>"
     # all:unset odcina style narzędzia (każde ma własne reguły dla a i button), więc pasek wygląda wszędzie tak samo
     "#site-bar,#site-bar a,#site-bar button,#site-bar span,#report-link,#report-link span{all:unset;box-sizing:border-box}"
-    "#site-bar{position:fixed;left:14px;bottom:14px;z-index:9999;display:flex;gap:4px;align-items:center;padding:5px;"
+    "#site-bar{position:fixed;left:14px;bottom:14px;z-index:9999;display:flex;gap:0;align-items:center;padding:5px;"
     "background:rgba(253,252,248,.92);border:1px solid rgba(35,31,23,.14);border-radius:999px;"
     "box-shadow:0 6px 24px rgba(0,0,0,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}"
     "#site-bar a,#site-bar button,#report-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;"
     "border-radius:999px;cursor:pointer;font:700 15px/1 'Atkinson Hyperlegible',system-ui,sans-serif;color:#231f17;"
     "white-space:nowrap;transition:background .15s,transform .15s,box-shadow .15s}"
     "#site-bar svg{display:block;width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}"
-    "#site-bar #home-link{background:#231f17;color:#fdfcf8!important;padding:0 18px 0 14px!important}"
+    "#site-bar #home-link{background:#231f17;color:#fdfcf8!important;padding:0 12px;gap:0;transition:padding .25s,gap .25s,background .15s,transform .15s}"
+    # zwinięty pasek: samo kółko ze strzałką; po najechaniu (albo fokusie z klawiatury – :focus-visible, żeby po kliknięciu myszą pasek się zwijał, albo pierwszym dotknięciu) rozwija się
+    "#site-bar #home-link .t,#site-bar #home-link .s{display:inline-block;max-width:0;overflow:hidden;opacity:0;transition:max-width .25s,opacity .2s}"
+    "#site-bar button{max-width:0;padding:0;margin-left:0;opacity:0;overflow:hidden;transition:max-width .25s,opacity .2s,padding .25s,margin .25s,background .15s}"
+    + "@media (hover:hover){#site-bar:hover #home-link{padding:0 18px 0 14px;gap:8px}#site-bar:hover #home-link .t{max-width:320px;opacity:1}#site-bar:hover button{max-width:220px;padding:0 16px;margin-left:4px;opacity:1}}"
+    "#site-bar:has(:focus-visible) #home-link,#site-bar.open #home-link{padding:0 18px 0 14px;gap:8px}"
+    "#site-bar:has(:focus-visible) #home-link .t,#site-bar.open #home-link .t{max-width:320px;opacity:1}"
+    "#site-bar:has(:focus-visible) button,#site-bar.open button{max-width:220px;padding:0 16px;margin-left:4px;opacity:1}"
     "#site-bar #home-link:hover{background:#3a3326;transform:translateY(-1px)}"
     "#site-bar button:hover{background:rgba(35,31,23,.08)}"
     "#site-bar button[aria-pressed=true]{background:#e2b27a}"
@@ -51,8 +58,12 @@ STYLE = (
     # przewijanie do elementu (scrollIntoView, fokus) zostawia miejsce na pasek, żeby wyniki nie chowały się pod nim
     "html{scroll-padding-bottom:96px}html.rzutnik{scroll-padding-bottom:124px}"
     # QR i rzutnik przydają się przy tablicy, nie na telefonie; motyw zostaje jako sama ikona
-    "#site-bar #home-link .s{display:none}"
-    "@media (max-width:760px){#site-bar #home-link .t{display:none}#site-bar #home-link .s{display:inline}#site-bar button:not(#theme-btn){display:none}#site-bar #theme-btn{padding:0 12px}#site-bar #theme-btn .t{display:none}#site-bar{padding:4px}#report-link .t{display:none}#report-link{padding:0 14px}}"
+        "@media (max-width:760px){#site-bar{padding:4px}#site-bar #home-link .t{max-width:0!important;opacity:0!important}"
+    "#site-bar:has(:focus-visible) #home-link .s,#site-bar.open #home-link .s,#site-bar:hover #home-link .s{max-width:220px;opacity:1}"
+    "#site-bar button:not(#theme-btn){max-width:0!important;padding:0!important;margin:0!important;opacity:0!important}"
+    "#site-bar:has(:focus-visible) #theme-btn,#site-bar.open #theme-btn,#site-bar:hover #theme-btn{padding:0 12px}#site-bar #theme-btn .t{display:none}"
+    "#report-link .t{display:none}#report-link{padding:0 14px}}"
+    "@media (prefers-reduced-motion:reduce){#site-bar *{transition:none!important}}"
     "@media print{#site-bar,#report-link,#qr-dlg{display:none!important}}"
     "html.rzutnik body{zoom:1.3}"
     "#qr-dlg{position:fixed;inset:0;z-index:10000;background:rgba(15,18,14,.75);display:grid;place-items:center;padding:16px}"
@@ -127,6 +138,10 @@ def bar(home, rel, follows_html_lang):
         "sc.onerror=function(){d.querySelector('.qr').textContent=e?'No internet connection – the QR code could not be loaded.':'Brak internetu – nie udało się wczytać kodu QR.'};"
         "document.head.append(sc)}"
         "qb.onclick=qr;"
+        # bez myszy (dotyk): pierwsze dotknięcie kółka rozwija pasek, dotknięcie poza nim zwija
+        "var sb=document.getElementById('site-bar');if(matchMedia('(hover: none)').matches){"
+        "a.addEventListener('click',function(ev){if(!sb.classList.contains('open')){ev.preventDefault();sb.classList.add('open')}});"
+        "document.addEventListener('click',function(ev){if(!sb.contains(ev.target))sb.classList.remove('open')})}"
         "})();</script>"
     )
     return (
