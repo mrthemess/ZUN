@@ -16,9 +16,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#edf0f5;--paper:#fbfcfe;--ink:#18202e;--muted:#5a6476;--line:#d1d7e2;--soft:#e4e8f0;--acc:#1f3f8a;--acc-t:#1f3f8a;--acc-ink:#fff;--sea:#dfe8f3;--land:#ffffff;--ctx:#e7e7e7;--border:#7b8496;--sel:#f2b705;--focus:#c2571a;
---nato:#8fb6e6;--ue:#c99a00;--sch:#2b8a57;--eur:#7b2e8e;--eout:#b06fc2;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151d;--paper:#181e29;--ink:#e3e8f0;--muted:#9aa4b6;--line:#2c3443;--soft:#202838;--acc:#5f7fd6;--acc-t:#a9bdf5;--sea:#152132;--land:#2a3343;--ctx:#1d232e;--border:#6f7a8e;--nato:#3d6db3;--ue:#e0b42a;--sch:#4cc283;--eur:#c27ad6;--eout:#d9a6e6;--focus:#f0a36a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#11151d;--paper:#181e29;--ink:#e3e8f0;--muted:#9aa4b6;--line:#2c3443;--soft:#202838;--acc:#5f7fd6;--acc-t:#a9bdf5;--sea:#152132;--land:#2a3343;--ctx:#1d232e;--border:#6f7a8e;--nato:#3d6db3;--ue:#e0b42a;--sch:#4cc283;--eur:#c27ad6;--eout:#d9a6e6;--focus:#f0a36a;color-scheme:dark}
+--nato:#8fb6e6;--ue:#c99a00;--sch:#2b8a57;--eur:#7b2e8e;--eout:#b06fc2;--cand:#c0392b;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11151d;--paper:#181e29;--ink:#e3e8f0;--muted:#9aa4b6;--line:#2c3443;--soft:#202838;--acc:#5f7fd6;--acc-t:#a9bdf5;--sea:#152132;--land:#2a3343;--ctx:#1d232e;--border:#6f7a8e;--nato:#3d6db3;--ue:#e0b42a;--sch:#4cc283;--eur:#c27ad6;--eout:#d9a6e6;--cand:#ef7a6e;--focus:#f0a36a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11151d;--paper:#181e29;--ink:#e3e8f0;--muted:#9aa4b6;--line:#2c3443;--soft:#202838;--acc:#5f7fd6;--acc-t:#a9bdf5;--sea:#152132;--land:#2a3343;--ctx:#1d232e;--border:#6f7a8e;--nato:#3d6db3;--ue:#e0b42a;--sch:#4cc283;--eur:#c27ad6;--eout:#d9a6e6;--cand:#ef7a6e;--focus:#f0a36a;color-scheme:dark}
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*::before,*::after{box-sizing:inherit}[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 'Atkinson Hyperlegible',system-ui,sans-serif}
@@ -59,6 +59,22 @@ dl.facts dd small{font-weight:400;color:var(--muted)}
 .src{font-size:.8rem;color:var(--muted);margin-top:14px}
 .empty{color:var(--muted)}
 .note{font-size:.88rem;color:var(--muted)}
+.mlist button.what,.mlist button.more{font:inherit;font-size:.8rem;font-weight:600;padding:2px 10px;margin-left:6px;border:1px solid var(--border);border-radius:999px;background:transparent;color:inherit;cursor:pointer;vertical-align:middle}
+.mlist button.what[aria-expanded=true]{background:var(--ink);color:var(--bg,#fff)}
+.mlist button.more{margin:2px 0 0}
+.mlist .defbox{border-left:3px solid var(--border);padding:4px 0 4px 10px;margin:0 0 8px}
+.mlist p.def{font-style:italic;margin:0 0 4px}
+.mlist p.long{margin:0 0 4px}
+#eoutDlg{width:min(760px,calc(100vw - 32px));max-height:min(85vh,900px);padding:0;border:1px solid var(--line);border-radius:16px;background:var(--paper);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+#eoutDlg::backdrop{background:rgba(10,14,22,.55)}
+#eoutDlg .dlg-in{padding:24px 28px 20px;position:relative}
+#eoutDlg h2{margin:0 40px 10px 0;font-size:1.4rem}
+#eoutDlg h3{margin:18px 0 6px;font-size:1.05rem;color:var(--acc)}
+#eoutDlg p{margin:0 0 10px;line-height:1.55}
+#eoutDlg .src{font-size:.85rem;color:var(--muted)}
+#eoutDlg .dlg-x{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:var(--ink);font-size:1rem;cursor:pointer}
+@media (max-width:520px){#eoutDlg .dlg-in{padding:20px 16px 16px}}
+.mlist p.fn{font-size:.8rem;margin:-4px 0 6px}
 /* warstwy */
 .layers{display:grid;gap:8px;margin:0}
 .layers label{display:grid;grid-template-columns:auto 34px 1fr auto;gap:10px;align-items:center;cursor:pointer;padding:6px 8px;border-radius:10px}
@@ -138,11 +154,12 @@ VA:['Watykan','Vatican City','euro','euro','monarchia absolutna (elekcyjna, teok
 const NOTES={XK:['Niepodległość Kosowa uznaje część państw świata.','Kosovo’s independence is recognised by some, but not all, countries.'],CY:['Północna część wyspy jest od 1974 r. poza kontrolą rządu Cypru.','The northern part of the island has been outside the control of the Cypriot government since 1974.'],VA:['Najmniejsze państwo świata.','The smallest country in the world.']};
 // Członkostwo – stan na lipiec 2026
 const LAYERS={
- nato:{pl:'NATO',en:'NATO',m:'AL BE BG HR CZ DK EE FI FR DE GR HU IS IT LV LT LU ME NL MK NO PL PT RO SK SI ES SE TR GB',extra:['Poza Europą także USA i Kanada (razem 32 państwa).','Outside Europe also the USA and Canada (32 countries in total).']},
- ue:{pl:'Unia Europejska',en:'European Union',m:'AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE'},
- schengen:{pl:'Strefa Schengen',en:'Schengen Area',m:'AT BE BG HR CZ DK EE FI FR DE GR HU IS IT LV LI LT LU MT NL NO PL PT RO SK SI ES SE CH',extra:['Należą też państwa spoza UE: Islandia, Norwegia, Szwajcaria i Liechtenstein. Cypr i Irlandia są w UE, ale nie w Schengen.','Non-EU members: Iceland, Norway, Switzerland and Liechtenstein. Cyprus and Ireland are in the EU but not in Schengen.']},
- euro:{pl:'Strefa euro',en:'Euro area',m:'AT BE BG HR CY EE FI FR DE GR IE IT LV LT LU MT NL PT SK SI ES',extra:['Bułgaria przyjęła euro 1 stycznia 2026 r.','Bulgaria adopted the euro on 1 January 2026.']},
- euroout:{pl:'Euro poza strefą euro',en:'Euro outside the euro area',m:'AD MC SM VA ME XK',extra:['Andora, Monako, San Marino i Watykan używają euro na mocy umów z UE. Czarnogóra i Kosowo wprowadziły je samodzielnie.','Andorra, Monaco, San Marino and the Vatican use the euro under agreements with the EU. Montenegro and Kosovo adopted it unilaterally.']}
+ nato:{pl:'NATO',en:'NATO',long:['Powstał w 1949 r. jako obrona przed ZSRR (Układ Warszawski powstał później, w 1955 r., jako przeciwwaga dla NATO). Zgodnie z art. 5 traktatu atak na jednego członka jest traktowany jak atak na wszystkich.','Founded in 1949 for defence against the USSR (the Warsaw Pact came later, in 1955, as a counterweight to NATO). Under Article 5 of the treaty, an attack on one member is treated as an attack on all.'],def:['Sojusz wojskowy państw Europy i Ameryki Północnej.','A military alliance of European and North American countries.'],m:'AL BE BG HR CZ DK EE FI FR DE GR HU IS IT LV LT LU ME NL MK NO PL PT RO SK SI ES SE TR GB',extra:['Poza Europą także USA i Kanada (razem 32 państwa).','Outside Europe also the USA and Canada (32 countries in total).']},
+ ue:{pl:'Unia Europejska',en:'European Union',long:['Państwa członkowskie tworzą wspólny rynek, na którym swobodnie przepływają towary, usługi, kapitał i ludzie, i stosują wspólne prawo w wielu dziedzinach. Część decyzji podejmują wspólne instytucje, m.in. Parlament Europejski, Komisja Europejska i Rada UE.','Member states form a single market with free movement of goods, services, capital and people, and share common laws in many areas. Some decisions are taken by shared institutions such as the European Parliament, the European Commission and the Council of the EU.'],def:['Unia państw o charakterze gospodarczym i politycznym.','A union of countries with economic and political aims.'],m:'AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE'},
+ cand:{pl:'Kandydaci do UE',en:'EU candidate countries',def:['Państwa, którym UE oficjalnie przyznała status kandydata do członkostwa.','Countries officially granted EU candidate status.'],long:['Status kandydata przyznają jednomyślnie wszystkie państwa UE. Potem kandydat negocjuje z UE dostosowanie swojego prawa i gospodarki do unijnych zasad, a na końcu wszystkie państwa UE muszą zatwierdzić traktat o jego przystąpieniu.','All EU countries must unanimously agree to grant candidate status. The candidate then negotiates with the EU to align its laws and economy with EU rules, and finally every EU country must ratify its accession treaty.'],m:'AL BA MD ME MK RS TR UA',extra:['Kandydatem jest też Gruzja (poza zasięgiem mapy). Kosowo złożyło wniosek w 2022 r. i jest tzw. potencjalnym kandydatem.','Georgia is also a candidate (outside the map). Kosovo applied in 2022 and is a so-called potential candidate.']},
+ schengen:{pl:'Strefa Schengen',en:'Schengen Area',long:['Między państwami strefy można podróżować bez pokazywania paszportu na granicy. Kontrole prowadzi się na granicach zewnętrznych strefy, a w wyjątkowych sytuacjach państwa mogą je czasowo przywrócić także wewnątrz niej.',"You can travel between member countries without showing a passport at the border. Checks take place at the area's external borders, and in exceptional situations countries may temporarily reintroduce them inside it too."],def:['Obszar bez kontroli paszportowych na granicach wewnętrznych.','An area without passport checks at internal borders.'],m:'AT BE BG HR CZ DK EE FI FR DE GR HU IS IT LV LI LT LU MT NL NO PL PT RO SK SI ES SE CH',extra:['Należą też państwa spoza UE: Islandia, Norwegia, Szwajcaria i Liechtenstein. Cypr i Irlandia są w UE, ale nie w Schengen.','Non-EU members: Iceland, Norway, Switzerland and Liechtenstein. Cyprus and Ireland are in the EU but not in Schengen.']},
+ euro:{pl:'Strefa euro',en:'Euro area',long:['Wspólną walutę i stopy procentowe ustala dla nich Europejski Bank Centralny we Frankfurcie nad Menem. Euro może przyjąć tylko państwo UE, które spełni określone warunki, m.in. niską inflację i stabilne finanse publiczne.','The European Central Bank in Frankfurt am Main manages their common currency and sets interest rates. Only an EU country that meets certain conditions, such as low inflation and sound public finances, can adopt the euro.'],def:['Państwa używające euro*.','Countries using the euro*.'],fn:['*Objęte polityką pieniężną Europejskiego Banku Centralnego.','*Covered by the European Central Bank\'s monetary policy.'],m:'AT BE BG HR CY EE FI FR DE GR IE IT LV LT LU MT NL PT SK SI ES',extra:['Bułgaria przyjęła euro 1 stycznia 2026 r.','Bulgaria adopted the euro on 1 January 2026.']},
+ euroout:{pl:'Euro poza strefą euro',en:'Euro outside the euro area',long:['Euro jest u nich prawnym środkiem płatniczym, ale nie mają przedstawicieli w Europejskim Banku Centralnym ani wpływu na jego decyzje.','The euro is legal tender there, but they have no representatives in the European Central Bank and no say in its decisions.'],def:['Państwa używające euro bez członkostwa w strefie euro.','Countries using the euro without being part of the euro area.'],m:'AD MC SM VA ME XK',extra:['Andora, Monako, San Marino i Watykan używają euro na mocy umów z UE. Czarnogóra i Kosowo wprowadziły je samodzielnie.','Andorra, Monaco, San Marino and the Vatican use the euro under agreements with the EU. Montenegro and Kosovo adopted it unilaterally.']}
 };
 const DATA_DATE={pl:'lipiec 2026',en:'July 2026'};
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -151,23 +168,24 @@ let L='pl';try{const s=localStorage.getItem('euLang');if(s==='pl'||s==='en')L=s;
 const T={pl:{t1:'Państwa Europy',t2:'Kliknij państwo na mapie, żeby poznać jego podstawowe dane, albo sprawdź, kto należy do NATO, UE, Schengen i strefy euro.',info:'Państwa',mem:'NATO, UE, Schengen, euro',
   pick:'Wybierz państwo z listy…',hint:'Kliknij państwo na mapie albo wybierz je z listy.',full:'Pełna nazwa',cap:'Stolica',pop:'Ludność',cur:'Waluta',gov:'Ustrój',hos:'Głowa państwa',hog:'Szef rządu',
   live:'Dane aktualne: Wikidata, pobrane teraz.',off:'Dane wbudowane. Przywódców i liczbę ludności strona pobiera na żywo, gdy ma dostęp do internetu (np. po osadzeniu w Google Sites).',loading:'Pobieram najświeższe dane…',na:'dostępne online',wiki:'Wikipedia',
-  mode1:'Nakładaj warstwy',mode2:'Tylko część wspólna',members:'Należą',inter:'Należą do wszystkich zaznaczonych',none:'Brak państw spełniających warunek.',memOf:'Członkostwo',state:'Stan na',click:'Kliknij państwo, żeby zobaczyć jego członkostwo.',cnt:n=>n===1?'1 państwo':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?n+' państwa':n+' państw',onmap:'na mapie'},
+  what:'Co to jest?',expl:'Wyjaśnienie',more:'Więcej',less:'Mniej',mode1:'Nakładaj warstwy',mode2:'Tylko część wspólna',members:'Należą',inter:'Należą do wszystkich zaznaczonych',none:'Brak państw spełniających warunek.',memOf:'Członkostwo',state:'Stan na',click:'Kliknij państwo, żeby zobaczyć jego członkostwo.',cnt:n=>n===1?'1 państwo':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?n+' państwa':n+' państw',onmap:'na mapie'},
  en:{t1:'Countries of Europe',t2:'Click a country on the map to see its key facts, or check who belongs to NATO, the EU, Schengen and the euro area.',info:'Countries',mem:'NATO, EU, Schengen, euro',
   pick:'Choose a country from the list…',hint:'Click a country on the map or choose it from the list.',full:'Official name',cap:'Capital',pop:'Population',cur:'Currency',gov:'Government',hos:'Head of state',hog:'Head of government',
   live:'Up-to-date data: Wikidata, loaded just now.',off:'Built-in data. Leaders and population are loaded live when the page is online (e.g. embedded in Google Sites).',loading:'Loading the latest data…',na:'available online',wiki:'Wikipedia',
-  mode1:'Overlay layers',mode2:'Overlap only',members:'Members',inter:'Members of all selected',none:'No countries match.',memOf:'Membership',state:'As of',click:'Click a country to see its memberships.',cnt:n=>n===1?'1 country':n+' countries',onmap:'on the map'}};
+  what:'What is it?',expl:'Explanation',more:'More',less:'Less',mode1:'Overlay layers',mode2:'Overlap only',members:'Members',inter:'Members of all selected',none:'No countries match.',memOf:'Membership',state:'As of',click:'Click a country to see its memberships.',cnt:n=>n===1?'1 country':n+' countries',onmap:'on the map'}};
 const t=k=>T[L][k];
 const C=MAP.c, MAIN=C.filter(c=>c.m), BY={};MAIN.forEach(c=>BY[c.iso]=c);
 const nameOf=iso=>BY[iso]?BY[iso][L]:iso;
 const flagEmoji=iso=>iso.replace(/./g,ch=>String.fromCodePoint(127397+ch.charCodeAt(0)));
-const S={tab:'info',sel:null,lay:{nato:true,ue:true,schengen:false,euro:false,euroout:false},mode:'over',cache:{},fresh:{},exact:{},online:null};
+const S={tab:'info',sel:null,lay:{nato:true,ue:true,cand:false,schengen:false,euro:false,euroout:false},mode:'over',def:{},cache:{},fresh:{},exact:{},online:null};
 const SETS={};for(const k in LAYERS)SETS[k]=new Set(LAYERS[k].m.split(' '));
-const LCOL={nato:'var(--nato)',ue:'var(--ue)',schengen:'var(--sch)',euro:'var(--eur)',euroout:'var(--eout)'};
+const LCOL={nato:'var(--nato)',ue:'var(--ue)',cand:'var(--cand)',schengen:'var(--sch)',euro:'var(--eur)',euroout:'var(--eout)'};
 // ---------- mapa ----------
 function drawMap(){
   const small=MAIN.filter(c=>c.a<60);
   let s=`<svg viewBox="0 0 ${MAP.w} ${MAP.h}" role="img" aria-label="${esc(t('t1'))}"><defs>
    <pattern id="pUE" width="13" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.6" height="13" fill="var(--ue)"/></pattern>
+   <pattern id="pCAND" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="10" height="3.4" fill="var(--cand)"/></pattern>
    <pattern id="pSCH" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.4" fill="var(--sch)"/></pattern></defs>`;
   s+=`<g>${C.filter(c=>!c.m).map(c=>`<path class="cx" d="${c.d}"/>`).join('')}</g>`;
   s+=`<g id="countries">${MAIN.map(c=>`<path class="ct" data-iso="${c.iso}" d="${c.d}"><title>${esc(c[L])}</title></path>`).join('')}</g>`;
@@ -184,9 +202,12 @@ function paint(){
     else{
       if(S.lay.nato)g+=MAIN.filter(c=>SETS.nato.has(c.iso)).map(c=>`<path d="${c.d}" fill="var(--nato)" fill-opacity=".85"/>`).join('');
       if(S.lay.ue)g+=MAIN.filter(c=>SETS.ue.has(c.iso)).map(c=>`<path d="${c.d}" fill="url(#pUE)"/>`).join('');
+      if(S.lay.cand)g+=MAIN.filter(c=>SETS.cand.has(c.iso)).map(c=>`<path d="${c.d}" fill="url(#pCAND)"/>`).join('');
       if(S.lay.schengen)g+=MAIN.filter(c=>SETS.schengen.has(c.iso)).map(c=>`<path d="${c.d}" fill="url(#pSCH)"/>`).join('');
-      if(S.lay.euro)g+=MAIN.filter(c=>SETS.euro.has(c.iso)).map(c=>`<path d="${c.d}" fill="none" stroke="var(--eur)" stroke-width="2.6" stroke-linejoin="round"/>`).join('');
-      if(S.lay.euroout)g+=MAIN.filter(c=>SETS.euroout.has(c.iso)).map(c=>`<path d="${c.d}" fill="none" stroke="var(--eout)" stroke-width="2.6" stroke-dasharray="4 3"/>`).join('');
+      // euro: półprzezroczyste wypełnienie + obwódka przycięta do wnętrza państwa (żeby obwódki sąsiadów nie „otaczały” np. Szwajcarii)
+      const inFill=(k,col,op,dash)=>MAIN.filter(c=>SETS[k].has(c.iso)).map(c=>`<clipPath id="cl-${k}-${c.iso}"><path d="${c.d}"/></clipPath><path d="${c.d}" fill="${col}" fill-opacity="${op}" stroke="${col}" stroke-width="5" ${dash?'stroke-dasharray="5 3"':''} stroke-linejoin="round" clip-path="url(#cl-${k}-${c.iso})"/>`).join('');
+      if(S.lay.euro)g+=inFill('euro','var(--eur)',.35);
+      if(S.lay.euroout)g+=inFill('euroout','var(--eout)',.4,true);
     }
     // małe państwa jako kropki z kolorem warstw
     $$('#dots .dot').forEach(d=>{const iso=d.dataset.iso;const ks=Object.keys(S.lay).filter(k=>S.lay[k]&&SETS[k].has(iso));d.style.fill=S.mode==='inter'?(on.length&&on.every(k=>SETS[k].has(iso))?'var(--acc)':''):(ks.length?LCOL[ks[0]]:'');});
@@ -285,7 +306,7 @@ function refineLeaders(iso){
 // ---------- panele ----------
 function header(){document.documentElement.lang=L;$('#t1').textContent=t('t1');$('#t2').textContent=t('t2');$$('[data-tab]').forEach(b=>{b.textContent=t(b.dataset.tab);b.setAttribute('aria-selected',b.dataset.tab===S.tab);});$$('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===L));$$('#map title').forEach(ti=>{const iso=ti.parentNode.dataset.iso;if(iso)ti.textContent=nameOf(iso);});}
 function countrySelect(){const opts=MAIN.slice().sort((a,b)=>a[L].localeCompare(b[L],L));return `<select id="csel"><option value="">${t('pick')}</option>${opts.map(c=>`<option value="${c.iso}" ${c.iso===S.sel?'selected':''}>${esc(c[L])}</option>`).join('')}</select>`;}
-function memChips(iso){return `<div class="chips">${['ue','nato','schengen','euro'].map(k=>{const y=SETS[k].has(iso);return `<span class="chip ${y?'y':''}" style="${y?'background:'+(k==='nato'?'#3d6db3':LCOL[k]):''}">${y?'✓':'✕'} ${esc(LAYERS[k][L])}</span>`;}).join('')}</div>`;}
+function memChips(iso){return `<div class="chips">${['ue','nato','schengen','euro'].concat(SETS.cand.has(iso)?['cand']:[]).map(k=>{const y=SETS[k].has(iso);return `<span class="chip ${y?'y':''}" style="${y?'background:'+(k==='nato'?'#3d6db3':LCOL[k]):''}">${y?'✓':'✕'} ${esc(k==='cand'?(L==='pl'?'Kandydat do UE':'EU candidate'):LAYERS[k][L])}</span>`;}).join('')}</div>`;}
 async function infoPanel(){
   const p=$('#panel');const iso=S.sel;
   if(!iso){p.innerHTML=countrySelect()+`<p class="empty" style="margin-top:14px">${t('hint')}</p>`;return;}
@@ -304,19 +325,95 @@ async function infoPanel(){
   render(C||null,C?'live':'loading');
   try{const D=await live(iso);if(S.sel===iso&&S.tab==='info'&&D!==C)render(D,'live');S.online=true;refineLeaders(iso);}catch(e){S.online=false;if(S.sel===iso&&S.tab==='info'&&!C)render(null,'off');}
 }
+// „Co to jest?”: S.def[k] = 0 (ukryte), 1 (krótka definicja), 2 (rozwinięta)
+const defBtn=k=>(LAYERS[k].def?` <button class="what" data-def="${k}" aria-expanded="${!!S.def[k]}">${t('what')}</button>`:'')+(INFO[k]?` <button class="what" data-info="${k}" aria-haspopup="dialog">${t('expl')}</button>`:'');
+const defHtml=k=>{const x=LAYERS[k],i=L==='pl'?0:1,lv=S.def[k]||0;if(!x.def||!lv)return '';
+  let h=`<div class="defbox"><p class="def">${esc(x.def[i])}</p>${x.fn?`<p class="note fn">${esc(x.fn[i])}</p>`:''}`;
+  if(x.long){if(lv===2)h+=`<p class="long">${esc(x.long[i])}</p>`;h+=`<button class="more" data-more="${k}" aria-expanded="${lv===2}">${t(lv===2?'less':'more')}</button>`;}
+  return h+'</div>';};
 function memPanel(){
   const on=Object.keys(S.lay).filter(k=>S.lay[k]);
   const cnt=k=>MAIN.filter(c=>SETS[k].has(c.iso)).length;
-  const sw=k=>k==='ue'?'background:repeating-linear-gradient(45deg,var(--ue) 0 3px,transparent 3px 7px)':k==='schengen'?'background:radial-gradient(var(--sch) 2px,transparent 2.4px) 0 0/8px 8px':k==='euro'?'border:3px solid var(--eur)':k==='euroout'?'border:3px dashed var(--eout)':'background:var(--nato)';
+  const sw=k=>k==='ue'?'background:repeating-linear-gradient(45deg,var(--ue) 0 3px,transparent 3px 7px)':k==='cand'?'background:repeating-linear-gradient(-45deg,var(--cand) 0 3px,transparent 3px 7px)':k==='schengen'?'background:radial-gradient(var(--sch) 2px,transparent 2.4px) 0 0/8px 8px':k==='euro'?'border:3px solid var(--eur);background:color-mix(in srgb,var(--eur) 35%,transparent)':k==='euroout'?'border:3px dashed var(--eout);background:color-mix(in srgb,var(--eout) 40%,transparent)':'background:var(--nato)';
   let h=`<div class="layers">${Object.keys(LAYERS).map(k=>`<label><input type="checkbox" data-lay="${k}" ${S.lay[k]?'checked':''}><span class="sw" style="${sw(k)}"></span><span>${esc(LAYERS[k][L])}</span><span class="cnt">${cnt(k)}</span></label>`).join('')}</div>
    <div class="mode" role="group"><button data-mode="over" aria-pressed="${S.mode==='over'}">${t('mode1')}</button><button data-mode="inter" aria-pressed="${S.mode==='inter'}">${t('mode2')}</button></div><div class="mlist">`;
   if(S.sel){const c=BY[S.sel];h+=`<h3>${esc(c[L])}</h3>`+Object.keys(LAYERS).map(k=>`<p>${SETS[k].has(S.sel)?`<span class="yes">✓</span>`:`<span class="no">✕</span>`} ${esc(LAYERS[k][L])}</p>`).join('');}else h+=`<p class="empty">${t('click')}</p>`;
-  if(S.mode==='inter'&&on.length){const inter=MAIN.filter(c=>on.every(k=>SETS[k].has(c.iso))).map(c=>c[L]).sort((a,b)=>a.localeCompare(b,L));h+=`<h3>${t('inter')} (${inter.length})</h3><p>${inter.length?esc(inter.join(', ')):t('none')}</p>`;}
-  else on.forEach(k=>{const m=MAIN.filter(c=>SETS[k].has(c.iso)).map(c=>c[L]).sort((a,b)=>a.localeCompare(b,L));h+=`<h3>${esc(LAYERS[k][L])} – ${t('cnt')(m.length)} ${t('onmap')}</h3><p>${esc(m.join(', '))}</p>${LAYERS[k].extra?`<p class="note">${esc(LAYERS[k].extra[L==='pl'?0:1])}</p>`:''}`;});
+  if(S.mode==='inter'&&on.length){const inter=MAIN.filter(c=>on.every(k=>SETS[k].has(c.iso))).map(c=>c[L]).sort((a,b)=>a.localeCompare(b,L));h+=on.map(k=>`<h3>${esc(LAYERS[k][L])}${defBtn(k)}</h3>${defHtml(k)}`).join('')+`<h3>${t('inter')} (${inter.length})</h3><p>${inter.length?esc(inter.join(', ')):t('none')}</p>`;}
+  else on.forEach(k=>{const m=MAIN.filter(c=>SETS[k].has(c.iso)).map(c=>c[L]).sort((a,b)=>a.localeCompare(b,L));h+=`<h3>${esc(LAYERS[k][L])} – ${t('cnt')(m.length)} ${t('onmap')}${defBtn(k)}</h3>${defHtml(k)}<p>${esc(m.join(', '))}</p>${LAYERS[k].extra?`<p class="note">${esc(LAYERS[k].extra[L==='pl'?0:1])}</p>`:''}`;});
   h+=`<p class="src">${t('state')}: ${DATA_DATE[L]}</p></div>`;
   $('#panel').innerHTML=h;
 }
 function render(){header();paint();S.tab==='info'?infoPanel():memPanel();}
+// ---------- okno „Wyjaśnienie” dla wybranych warstw (INFO[k]) ----------
+const INFO={};
+INFO.euroout={
+ pl:{title:'Euro poza strefą euro',
+  intro:'Strefę euro tworzą tylko państwa UE, które przyjęły euro. Państwa opisane poniżej nie należą do UE, więc nie mają przedstawicieli w Europejskim Banku Centralnym ani wpływu na jego decyzje, choć euro jest u nich prawnym środkiem płatniczym.',
+  groups:[
+   {h:'Na mocy umowy z UE (UE wyraziła zgodę)',items:[
+    ['Monako','Wcześniej używało franka francuskiego, więc gdy Francja przeszła na euro, Monako zrobiło to razem z nią, 1 stycznia 2002 r. Pozwoliła na to umowa zawarta z Francją w imieniu UE, a od 2012 r. obowiązuje nowa umowa bezpośrednio z UE. Monako może bić własne monety euro w ograniczonej liczbie.'],
+    ['San Marino','Wcześniej używało liry włoskiej (i biło własne liry), więc przeszło na euro razem z Włochami w 2002 r. Najpierw na mocy umowy z Włochami w imieniu UE, od 2012 r. na mocy umowy z UE. Bije własne monety euro.'],
+    ['Watykan','Sytuacja podobna jak w San Marino: lira watykańska była powiązana z lirą włoską, a euro obowiązuje od 2002 r. Od 2010 r. obowiązuje umowa z UE. Watykańskie monety euro mają wizerunek papieża i są poszukiwane przez kolekcjonerów.'],
+    ['Andora','Nie miała własnej waluty i używała franka francuskiego oraz pesety hiszpańskiej, więc euro zastąpiło je w 2002 r. samo z siebie. Umowę z UE podpisała dopiero w 2011 r., a własne monety euro bije od 2014 r.']]},
+   {h:'Jednostronnie (bez zgody UE)',items:[
+    ['Czarnogóra','W 1999 r., odcinając się od Serbii i jugosłowiańskiego dinara, przyjęła markę niemiecką, a w 2002 r. razem z marką przeszła na euro. Nie ma umowy z UE i nie może bić monet. UE tę sytuację toleruje, ale nie zatwierdziła jej. Czarnogóra jest kandydatem do UE, więc sprawa euro będzie częścią negocjacji.'],
+    ['Kosowo','W 1999 r., pod zarządem ONZ, wprowadzono markę niemiecką, a w 2002 r. euro. Także bez umowy z UE i bez prawa do bicia monet. Od 2024 r. euro jest jedyną walutą w płatnościach gotówkowych, a na północy kraju, zamieszkanej głównie przez Serbów, wcześniej używano też dinara serbskiego.']]}]},
+ en:{title:'Euro outside the euro area',
+  intro:'Only EU countries that have adopted the euro make up the euro area. The countries below are not in the EU, so they have no representatives in the European Central Bank and no say in its decisions, even though the euro is legal tender there.',
+  groups:[
+   {h:'Under an agreement with the EU (the EU consented)',items:[
+    ['Monaco','It used to use the French franc, so when France switched to the euro, Monaco did so too, on 1 January 2002. This was allowed by an agreement with France acting on behalf of the EU; since 2012 a new agreement directly with the EU applies. Monaco may mint a limited number of its own euro coins.'],
+    ['San Marino','It used to use the Italian lira (and minted its own lira coins), so it switched to the euro together with Italy in 2002. First under an agreement with Italy on behalf of the EU, since 2012 under an agreement with the EU. It mints its own euro coins.'],
+    ['Vatican City','Similar to San Marino: the Vatican lira was tied to the Italian lira, and the euro has been in use since 2002. An agreement with the EU has applied since 2010. Vatican euro coins show the Pope and are sought after by collectors.'],
+    ['Andorra','It had no currency of its own and used the French franc and the Spanish peseta, so the euro replaced them automatically in 2002. It signed an agreement with the EU only in 2011 and has minted its own euro coins since 2014.']]},
+   {h:'Unilaterally (without EU consent)',items:[
+    ['Montenegro','In 1999, distancing itself from Serbia and the Yugoslav dinar, it adopted the German mark, and in 2002 it switched to the euro along with the mark. It has no agreement with the EU and cannot mint coins. The EU tolerates this but has not approved it. Montenegro is an EU candidate, so the euro question will be part of the accession talks.'],
+    ['Kosovo','In 1999, under UN administration, the German mark was introduced, followed by the euro in 2002. Also without an EU agreement and without the right to mint coins. Since 2024 the euro has been the only currency for cash payments; the Serb-majority north had also used the Serbian dinar before that.']]}]}
+};
+INFO.cand={
+ pl:{title:'Kandydaci do UE',
+  intro:'Droga do UE ma kilka etapów: państwo składa wniosek, UE jednomyślnie przyznaje mu status kandydata, potem toczą się negocjacje akcesyjne (prawo kandydata dostosowuje się do unijnego w 35 obszarach, tzw. rozdziałach), a na końcu wszystkie państwa UE muszą ratyfikować traktat o przystąpieniu. Warunkiem są m.in. stabilna demokracja, praworządność i sprawna gospodarka rynkowa (tzw. kryteria kopenhaskie). Stan na lipiec 2026 r.',
+  groups:[
+   {h:'Negocjacje akcesyjne trwają',items:[
+    ['Czarnogóra','Wniosek 2008, kandydat od 2010, negocjacje od 2012. Najbardziej zaawansowany kandydat: otworzyła wszystkie rozdziały i zamyka kolejne. Ciekawostka: używa euro bez zgody UE.'],
+    ['Serbia','Wniosek 2009, kandydat od 2012, negocjacje od 2014. Postępy są powolne. UE wymaga m.in. normalizacji stosunków z Kosowem, którego Serbia nie uznaje.'],
+    ['Albania','Wniosek 2009, kandydat od 2014, negocjacje od 2022. W ostatnich latach szybko otwiera kolejne obszary negocjacji.'],
+    ['Macedonia Północna','Wniosek 2004, kandydat od 2005, negocjacje od 2022. Przez lata blokowała ją Grecja (spór o nazwę, rozwiązany w 2019 r. zmianą nazwy z „Macedonia”), a później Bułgaria (spór o język i historię).'],
+    ['Ukraina','Wniosek złożyła w lutym 2022 r., kilka dni po rosyjskiej inwazji. Kandydat od czerwca 2022, negocjacje formalnie od 2024. Dalsze etapy blokują Węgry.'],
+    ['Mołdawia','Wniosek 2022 (razem z Ukrainą), kandydat od 2022, negocjacje formalnie od 2024. Jej postępy są w praktyce powiązane z postępami Ukrainy.']]},
+   {h:'Status kandydata, negocjacje jeszcze nie ruszyły',items:[
+    ['Bośnia i Hercegowina','Wniosek 2016, kandydat od 2022. UE zgodziła się w 2024 r. rozpocząć negocjacje, ale dopiero po spełnieniu dodatkowych warunków. Trudnością jest skomplikowany ustrój państwa podzielonego na dwie części.']]},
+   {h:'Proces zamrożony',items:[
+    ['Turcja','Wniosek 1987, kandydat od 1999, negocjacje od 2005. Od 2018 r. stoją w miejscu z powodu łamania praworządności i praw człowieka. Spór dotyczy też Cypru, którego Turcja nie uznaje.'],
+    ['Gruzja (poza mapą)','Wniosek 2022, kandydat od grudnia 2023. W 2024 r. rząd przyjął ustawy krytykowane przez UE i ogłosił wstrzymanie starań o członkostwo, więc proces w praktyce stanął.']]},
+   {h:'Potencjalny kandydat',items:[
+    ['Kosowo','Złożyło wniosek w 2022 r., ale nie ma statusu kandydata. Przeszkodą jest m.in. to, że pięć państw UE (Cypr, Grecja, Hiszpania, Rumunia i Słowacja) nie uznaje jego niepodległości.']]}]},
+ en:{title:'EU candidate countries',
+  intro:'Joining the EU has several stages: a country applies, the EU unanimously grants it candidate status, accession negotiations follow (the candidate aligns its law with EU law in 35 areas called chapters), and finally every EU country must ratify the accession treaty. Conditions include stable democracy, the rule of law and a functioning market economy (the Copenhagen criteria). As of July 2026.',
+  groups:[
+   {h:'Accession negotiations under way',items:[
+    ['Montenegro','Applied 2008, candidate since 2010, negotiating since 2012. The most advanced candidate: it has opened all chapters and is closing more of them. Fun fact: it uses the euro without EU consent.'],
+    ['Serbia','Applied 2009, candidate since 2012, negotiating since 2014. Progress is slow. Among other things, the EU requires normalised relations with Kosovo, which Serbia does not recognise.'],
+    ['Albania','Applied 2009, candidate since 2014, negotiating since 2022. In recent years it has been quickly opening new areas of negotiation.'],
+    ['North Macedonia','Applied 2004, candidate since 2005, negotiating since 2022. For years it was blocked by Greece (a name dispute, settled in 2019 by changing its name from "Macedonia") and later by Bulgaria (a dispute over language and history).'],
+    ['Ukraine','Applied in February 2022, days after the Russian invasion. Candidate since June 2022, formal negotiations since 2024. Hungary is blocking further steps.'],
+    ['Moldova','Applied in 2022 (together with Ukraine), candidate since 2022, formal negotiations since 2024. In practice its progress is tied to Ukraine\'s.']]},
+   {h:'Candidate status, negotiations not yet started',items:[
+    ['Bosnia and Herzegovina','Applied 2016, candidate since 2022. In 2024 the EU agreed to open negotiations, but only once further conditions are met. A complex political system, with the country split into two entities, makes progress hard.']]},
+   {h:'Process frozen',items:[
+    ['Turkey','Applied 1987, candidate since 1999, negotiating since 2005. Talks have stalled since 2018 over the rule of law and human rights. There is also a dispute over Cyprus, which Turkey does not recognise.'],
+    ['Georgia (off the map)','Applied 2022, candidate since December 2023. In 2024 the government passed laws criticised by the EU and announced it was suspending its EU bid, so the process has effectively stopped.']]},
+   {h:'Potential candidate',items:[
+    ['Kosovo','Applied in 2022 but has no candidate status. One obstacle is that five EU countries (Cyprus, Greece, Romania, Slovakia and Spain) do not recognise its independence.']]}]}
+};
+function openInfo(k){
+  let d=$('#eoutDlg');
+  if(!d){d=document.createElement('dialog');d.id='eoutDlg';d.setAttribute('aria-labelledby','eoutTitle');document.body.appendChild(d);
+    d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-close]'))d.close();});}
+  const x=INFO[k][L];
+  d.innerHTML=`<div class="dlg-in"><button class="dlg-x" data-close aria-label="${L==='pl'?'Zamknij':'Close'}">✕</button><h2 id="eoutTitle">${esc(x.title)}</h2><p>${esc(x.intro)}</p>${x.groups.map(g=>`<h3>${esc(g.h)}</h3>${g.items.map(([n,t])=>`<p><b>${esc(n)}:</b> ${esc(t)}</p>`).join('')}`).join('')}<p class="src">${t('state')}: ${DATA_DATE[L]}</p></div>`;
+  d.showModal();d.querySelector('.dlg-x').focus();
+}
 // ---------- zdarzenia ----------
 const mb=$('#mapbox'),tip=$('#tip');
 mb.addEventListener('mousemove',e=>{const el=e.target.closest('[data-iso]');if(!el){tip.hidden=true;return;}const r=mb.getBoundingClientRect();tip.hidden=false;tip.textContent=nameOf(el.dataset.iso);tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top)+'px';});
@@ -325,7 +422,10 @@ mb.addEventListener('click',e=>{const el=e.target.closest('[data-iso]');if(!el)r
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.lang){L=b.dataset.lang;try{localStorage.setItem('euLang',L);}catch(_){}fetchAll(L).catch(()=>{});render();}
   else if(b.dataset.tab){S.tab=b.dataset.tab;render();}
-  else if(b.dataset.mode){S.mode=b.dataset.mode;render();}});
+  else if(b.dataset.mode){S.mode=b.dataset.mode;render();}
+  else if(b.dataset.info)openInfo(b.dataset.info);
+  else if(b.dataset.def){const k=b.dataset.def;S.def[k]=S.def[k]?0:1;memPanel();}
+  else if(b.dataset.more){const k=b.dataset.more;S.def[k]=S.def[k]===2?1:2;memPanel();}});
 document.addEventListener('change',e=>{if(e.target.id==='csel'){S.sel=e.target.value||null;render();}else if(e.target.dataset.lay){S.lay[e.target.dataset.lay]=e.target.checked;render();}});
 drawMap();render();
 fetchAll(L).catch(()=>{});
