@@ -79,7 +79,12 @@ input.sin:focus,input.ain:focus{border-color:var(--acc)}
 .dtm-pt{cursor:pointer}.dtm-pt:focus{outline:none}.dtm-pt:hover .dtm-c,.dtm-pt:focus-visible .dtm-c{stroke:var(--focus);stroke-width:4}
 .kv.dtm-kv dd{white-space:nowrap}@media (max-width:480px){.kv.dtm-kv{grid-template-columns:1fr}.kv.dtm-kv dd{margin-bottom:6px;white-space:normal}}
 .pyr-row{cursor:pointer}.pyr-row:hover{fill:var(--ink);fill-opacity:.06}
-.pyr-pop{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}.pyr-pop div{background:var(--soft);border-radius:12px;padding:8px 12px}.pyr-pop small{display:block;color:var(--muted);font-size:.82rem}.pyr-pop b{font-size:1.15rem;font-variant-numeric:tabular-nums}
+.pyr-lay{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start;margin-top:12px}
+.pyr-lay:not(.big) .pyr-left{position:sticky;top:12px}.pyr-lay:not(.big) .pyr-stage svg{max-height:calc(100vh - 110px)}
+.pyr-lay .pyr-right>.bar:first-child{margin-top:0}.pyr-right .bar{gap:8px 12px}
+.pyr-lay.big{display:flex;flex-direction:column-reverse;align-items:stretch;gap:14px}
+@media (max-width:820px){.pyr-lay{grid-template-columns:1fr}.pyr-lay:not(.big) .pyr-left{position:static}.pyr-lay .pyr-right{order:-1}.pyr-zoom{display:none}}
+.pyr-pop{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:12px}.pyr-pop div{background:var(--soft);border-radius:12px;padding:8px 12px}.pyr-pop small{display:block;color:var(--muted);font-size:.82rem}.pyr-pop b{font-size:1.15rem;font-variant-numeric:tabular-nums}
 .cont-seg{cursor:pointer}.cont-seg:focus{outline:none}.cont-seg:focus-visible,.cont-seg:hover{stroke:var(--focus);stroke-width:3}
 .dtm-rnd{display:flex;flex-wrap:wrap;gap:6px}.dtm-rnd button{min-width:44px;font-weight:700}
 .big{font-family:'Bricolage Grotesque','Atkinson Hyperlegible',sans-serif;font-size:1.7rem;font-weight:800;color:var(--acc-t)}
@@ -516,7 +521,7 @@ function pyrRows(p){return pyrGroups().map(([a,b])=>{const m=psum(p.m,a,b),f=psu
   ['m','f'].forEach(sx=>{const [p1,p2]=ecoB(sx),arr=p[sx],seg=(x,y)=>{x=Math.max(x,a);y=Math.min(y,b);return x>y?0:psum(arr,x,y);};eco[sx]=[seg(0,p1-1),seg(p1,p2-1),seg(p2,100)];});
   return{a,b,m,f,eco};});}
 function pyrSVG(k,yi,o={}){const p=pyrGet(k,yi);if(!p)return '';const C=col(o.exp),rows=pyrRows(p),n=rows.length,pct=S.pyr.u==='pct',val=v=>pct?v/p.T*100:v;
-  const W=780,cw=70,pad=34,half=(W-2*pad-cw)/2,rh=Math.max(4.4,Math.min(26,500/n)),top=(o.title?50:6)+40,ph=rh*n,H=top+ph+56+(S.pyr.ecoOn?20:0)+(o.exp?16:0);
+  const W=o.W||780,cw=W<700?60:70,pad=W<700?26:34,half=(W-2*pad-cw)/2,rh=Math.max(4.4,Math.min(26,500/n)),top=(o.title?50:6)+40,ph=rh*n,H=top+ph+56+(S.pyr.ecoOn?20:0)+(o.exp?16:0);
   const mx0=Math.max(...rows.map(r=>Math.max(val(r.m),val(r.f)))),tk=ticks(0,mx0,4),mx=Math.max(mx0,tk[tk.length-1]),xs=v=>val(v)/mx*half,cL=pad+half,cR=pad+half+cw;
   const sel=new Set(S.pyr.sel.filter(a=>a!=null).map(a=>pyrGroups().findIndex(([x,y])=>a>=x&&a<=y)));
   let g=svgOpen(W,H,o,tr('Piramida wieku i płci: ','Age-sex pyramid: ')+cname(k)+' '+PYRD.years[yi]);if(!o.exp)g=g.replace('role="img"','role="group"');
@@ -567,19 +572,23 @@ function viewPyr(){const P=S.pyr,k=P.k,yi=P.yi,p=pyrGet(k,yi),sh=pyrShape(p),yr=
   const isos=['WLD',...PISO.slice().sort((a,b)=>cname(a).localeCompare(cname(b),L))];
   return `<section class="card"><h2>${tr('Piramida wieku i płci','Age-sex pyramid')}</h2>
    <p>${tr('Wybierz państwo i rok. Piramida pokazuje, ilu mężczyzn (po lewej) i kobiet (po prawej) jest w każdej grupie wieku. <b>Kliknij pasek</b>, aby wybrać poziom do porównania.','Choose a country and a year. The pyramid shows how many males (left) and females (right) there are in each age group. <b>Click a bar</b> to pick a level to compare.')}</p>
-   <div class="bar"><label class="lbl" for="pyrC">${tr('Państwo','Country')}</label><select class="sin" id="pyrC" style="max-width:240px">${isos.map(i=>`<option value="${i}" ${i===k?'selected':''}>${esc(cname(i))}</option>`).join('')}</select>
-    <label class="lbl" for="pyrY">${tr('Rok danych','Data year')}</label><select class="sin" id="pyrY" style="max-width:110px">${PYRD.years.map((y,i)=>[y,i]).reverse().map(([y,i])=>`<option value="${i}" ${i===yi?'selected':''}>${y}</option>`).join('')}</select></div>
+   <div class="pyr-lay${P.big?' big':''}">
+   <div class="pyr-left"><div class="bar" style="margin-top:0"><button class="btn sm pyr-zoom" data-act="pyrBig" aria-pressed="${!!P.big}">${P.big?tr('⤡ Pomniejsz – wróć do widoku z opisem','⤡ Shrink – back to the side-by-side view'):tr('⤢ Powiększ piramidę','⤢ Enlarge the pyramid')}</button><button class="btn sm" data-act="png" data-ch="pyr">${tr('Pobierz PNG','Download PNG')}</button></div>
+   <div class="stage scroll pyr-stage">${pyrSVG(k,yi,{cls:'wide',W:P.big?780:620})}</div></div>
+   <div class="pyr-right">
+   <div class="bar"><label class="lbl" for="pyrC">${tr('Państwo','Country')}</label><select class="sin" id="pyrC" style="max-width:220px">${isos.map(i=>`<option value="${i}" ${i===k?'selected':''}>${esc(cname(i))}</option>`).join('')}</select>
+    <label class="lbl" for="pyrY">${tr('Rok','Year')}</label><select class="sin" id="pyrY" style="max-width:100px">${PYRD.years.map((y,i)=>[y,i]).reverse().map(([y,i])=>`<option value="${i}" ${i===yi?'selected':''}>${y}</option>`).join('')}</select></div>
    <div class="bar"><span class="lbl" id="pyrRL">${tr('Losuj państwo o piramidzie','Random country with a pyramid that is')}</span><div class="steps" style="margin:0" role="group" aria-labelledby="pyrRL">${['Y','S','A'].map(s=>`<button data-act="pyrRnd" data-sh="${s}">${esc(T(SHN[s]).replace(/ \(.*/,''))}</button>`).join('')}<button data-act="pyrCur" class="adv">${tr('nietypowa – ciekawostka','unusual – curiosity')}</button></div></div>
    <div class="pyr-pop"><div><small>${tr('Ludność','Population')} (${tr('1 VII','1 July')} ${yr})</small><b>${nf(yi===PYRD.years.length-1&&D[k]?D[k].pop:p.T)}</b></div><div><small>${tr('Mężczyźni','Males')}</small><b>${pyrN(mT,p.T)}</b></div><div><small>${tr('Kobiety','Females')}</small><b>${pyrN(fT,p.T)}</b></div><div><small>${tr('Wsp. feminizacji (K na 100 M)','Females per 100 males')}</small><b>${nf(fT/mT*100,0)}</b></div><div><small>${tr('Kształt piramidy','Pyramid shape')}</small><b>${esc(T(SHN[sh.k]))}</b></div></div>
-   ${P.note?`<p class="msg hint">${esc(P.note)}</p>`:''}${P.cur!=null&&PCUR[P.cur][0]===k&&PCUR[P.cur][1]===yr?`<p class="msg hint"><b>${tr('Ciekawostka:','Did you know?')}</b> ${esc(L==='pl'?PCUR[P.cur][2]:PCUR[P.cur][3])}</p>`:sh.k==='X'?`<p class="msg hint"><b>${tr('Nietypowa piramida','Unusual pyramid')}:</b> ${sh.sr>=1.25?tr(`w wieku 20–49 lat na 100 kobiet przypada ${nf(sh.sr*100,0)} mężczyzn – zwykle skutek napływu imigrantów zarobkowych (głównie mężczyzn).`,`there are ${nf(sh.sr*100,0)} men per 100 women aged 20–49 – usually because of an inflow of (mostly male) labour migrants.`):tr(`w wieku 20–49 lat na 100 kobiet przypada tylko ${nf(sh.sr*100,0)} mężczyzn – zwykle skutek strat wojennych albo wyjazdów mężczyzn do pracy za granicą.`,`there are only ${nf(sh.sr*100,0)} men per 100 women aged 20–49 – usually because of war losses or men working abroad.`)}</p>`:''}
+   ${P.note?`<p class="msg hint" style="margin:12px 0 0">${esc(P.note)}</p>`:''}${P.cur!=null&&PCUR[P.cur][0]===k&&PCUR[P.cur][1]===yr?`<p class="msg hint" style="margin:12px 0 0"><b>${tr('Ciekawostka:','Did you know?')}</b> ${esc(L==='pl'?PCUR[P.cur][2]:PCUR[P.cur][3])}</p>`:sh.k==='X'?`<p class="msg hint" style="margin:12px 0 0"><b>${tr('Nietypowa piramida','Unusual pyramid')}:</b> ${sh.sr>=1.25?tr(`w wieku 20–49 lat na 100 kobiet przypada ${nf(sh.sr*100,0)} mężczyzn – zwykle skutek napływu imigrantów zarobkowych (głównie mężczyzn).`,`there are ${nf(sh.sr*100,0)} men per 100 women aged 20–49 – usually because of an inflow of (mostly male) labour migrants.`):tr(`w wieku 20–49 lat na 100 kobiet przypada tylko ${nf(sh.sr*100,0)} mężczyzn – zwykle skutek strat wojennych albo wyjazdów mężczyzn do pracy za granicą.`,`there are only ${nf(sh.sr*100,0)} men per 100 women aged 20–49 – usually because of war losses or men working abroad.`)}</p>`:''}
    <div class="bar"><span class="lbl" id="pyrWL">${tr('Przedziały wieku','Age groups')}</span><div class="seg" role="group" aria-labelledby="pyrWL">${[1,2,5,10].map(w=>`<button data-pyrw="${w}" aria-pressed="${P.w===w}">${w} ${tr(w===1?'rok':w===2?'lata':'lat',w===1?'yr':'yrs')}</button>`).join('')}</div>
-    <label class="lbl" for="pyrTop">${tr('Ostatnia grupa','Last group')}</label><select class="sin" id="pyrTop" style="max-width:110px">${[60,65,70,75,80,85,90,95,100].map(t=>`<option value="${t}" ${t===P.top?'selected':''}>${t}+</option>`).join('')}</select>
+    <label class="lbl" for="pyrTop">${tr('Ostatnia grupa','Last group')}</label><select class="sin" id="pyrTop" style="max-width:96px">${[60,65,70,75,80,85,90,95,100].map(t=>`<option value="${t}" ${t===P.top?'selected':''}>${t}+</option>`).join('')}</select>
     <span class="lbl" id="pyrUL">${tr('Jednostka','Unit')}</span><div class="seg" role="group" aria-labelledby="pyrUL"><button data-pyru="pct" aria-pressed="${P.u==='pct'}">%</button><button data-pyru="abs" aria-pressed="${P.u==='abs'}">${tr('osoby','people')}</button></div></div>
    <div class="bar"><label class="ck"><input type="checkbox" id="pyrExc" ${P.exc?'checked':''}> ${tr('Zaznacz przewagę jednej płci','Mark the excess of one sex')}</label>
     <label class="ck"><input type="checkbox" id="pyrEco" ${P.ecoOn?'checked':''}> ${tr('Kolory ekonomicznych grup wieku','Colour economic age groups')}</label>
     ${P.ecoOn?`<div class="seg" role="group" aria-label="${tr('Definicja grup','Group definition')}"><button data-pyre="gus" aria-pressed="${P.eco==='gus'}">${tr('GUS (Polska)','Statistics Poland')}</button><button data-pyre="int" aria-pressed="${P.eco==='int'}">${tr('ONZ / Eurostat','UN / Eurostat')}</button></div>`:''}
-    <button class="btn sm" data-act="png" data-ch="pyr">${tr('Pobierz PNG','Download PNG')}</button></div>
-   <div class="stage scroll pyr-stage">${pyrSVG(k,yi,{cls:'wide'})}</div>
+    </div>
+   </div></div>
    <p class="src">${tr(`Dane: ONZ, World Population Prospects 2024 – ludność w połowie roku ${yr} według rocznika wieku i płci (szacunki). Liczby w grupach zaokrąglone${p.T>=1e7?' do 1000':p.T>=1e5?' do 10':''}.`,`Data: UN, World Population Prospects 2024 – mid-year ${yr} population by single year of age and sex (estimates). Group numbers rounded${p.T>=1e7?' to 1000':p.T>=1e5?' to 10':''}.`)}</p></section>
   <section class="card"><h2>${tr('Porównaj dwa poziomy piramidy','Compare two levels of the pyramid')}</h2>${pyrCmp(p)}</section>
   <section class="card"><h2>${tr('Ekonomiczne grupy wieku','Economic age groups')}</h2>
@@ -1233,7 +1242,7 @@ async function pngClick(ch){
 
 // ================= stan =================
 const GM0={pop:20000,b:190,d:230,im:160,em:110};
-const S={tab:GEN?'sheet':'theory',lvl:'B',th:'pop',gm:{...GM0},trans:'POL',dtm:{yi:YEARS.length-1,open:false,note:0,noteYr:0,cy:YEARS.length-1,cs:null},pyr:{k:'POL',yi:PYRD.years.length-1,w:5,top:85,u:'pct',exc:true,ecoOn:false,eco:'gus',sel:[0,40],note:'',cur:null},
+const S={tab:GEN?'sheet':'theory',lvl:'B',th:'pop',gm:{...GM0},trans:'POL',dtm:{yi:YEARS.length-1,open:false,note:0,noteYr:0,cy:YEARS.length-1,cs:null},pyr:{k:'POL',yi:PYRD.years.length-1,w:5,top:85,u:'pct',exc:true,ecoOn:false,eco:'gus',sel:[0,40],note:'',cur:null,big:false},
  step:{iso:'POL',ind:'nat',mode:'show',q:'',ans:'',chk:null,show:false},
  own:{ind:'nat',v:{...OWN0},done:false,anim:false},
  cmp:{sel:['POL','DEU','NGA','JPN','QAT'],ind:'realR',map:'nat',sort:{k:'',dir:-1},q:''},
@@ -1276,6 +1285,7 @@ function act(b){
     if(i>=0)s2[i]=null;else if(s2[0]==null)s2[0]=a;else if(s2[1]==null)s2[1]=a;else{s2[0]=s2[1];s2[1]=a;}}
   else if(d.act==='pyrRnd'){pyrRndPick(d.sh);}
   else if(d.act==='pyrCur'){pyrCurPick();}
+  else if(d.act==='pyrBig'){S.pyr.big=!S.pyr.big;}
   else if(d.pyrw){S.pyr.w=+d.pyrw;}
   else if(d.pyru){S.pyr.u=d.pyru;}
   else if(d.pyre){S.pyr.eco=d.pyre;}
