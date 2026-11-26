@@ -330,7 +330,9 @@ document.addEventListener('change',e=>{if(e.target.id==='csel'){S.sel=e.target.v
 drawMap();render();
 fetchAll(L).catch(()=>{});
 // ---------- próba aktualizacji członkostwa z Wikidata (NATO i UE) ----------
-(async()=>{try{for(const [k,q] of [['nato','Q7184'],['ue','Q458']]){const r=await sparql(`SELECT DISTINCT ?iso WHERE{?c p:P463 ?st. ?st ps:P463 wd:${q}. FILTER NOT EXISTS{?st pq:P582 ?e} ?c wdt:P297 ?iso.}`);
+// Członkostwo bywa zapisane na innym elemencie niż kod ISO: Holandia (Q55, kod NL ma Królestwo Q29999, stąd P17)
+// i Dania (NATO ma Królestwo Q756617, kod DK ma Q35, stąd P150). Bez tych gałęzi NL i DK znikały z warstw.
+(async()=>{try{for(const [k,q] of [['nato','Q7184'],['ue','Q458']]){const r=await sparql(`SELECT DISTINCT ?iso WHERE{?c p:P463 ?st. ?st ps:P463 wd:${q}. FILTER NOT EXISTS{?st pq:P582 ?e} {?c wdt:P297 ?iso} UNION {?c wdt:P17 ?k. ?k wdt:P297 ?iso} UNION {?c wdt:P150 ?d. ?d wdt:P297 ?iso}}`);
   const s=new Set(r.results.bindings.map(b=>b.iso.value).filter(i=>BY[i]));const old=SETS[k];const same=[...s].filter(i=>old.has(i)).length;
   if(s.size&&Math.abs(s.size-old.size)<=2&&same>=old.size-2){SETS[k]=s;}}
   if(S.tab==='mem')render();}catch(e){}})();
