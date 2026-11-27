@@ -150,6 +150,7 @@ html[data-tryb] .modebar>b,html[data-tryb] .modebar [data-mode]{display:none!imp
     <legend data-t>Mapa</legend>
     <label class="f" for="region" data-t>Obszar</label><select id="region"></select>
     <label class="f" for="borders" data-t>Granice</label><select id="borders"></select>
+    <label class="chk"><input type="checkbox" id="hipso"><span data-t> Kolorowa mapa hipsometryczna (pastelowe barwy wysokości)</span></label>
   </fieldset>
 
   <fieldset>
@@ -274,7 +275,7 @@ const UI={'Tryb:':'Mode:','Karta pracy':'Worksheet','Mapa do wyświetlania':'Dis
  'Dołącz klucz odpowiedzi':'Include an answer key','Punktacja':'Scoring','Punkty za obiekt z numerem':'Points per numbered object',
  'Punkty za obiekt do zaznaczenia':'Points per object to mark','Druga grupa (A i B)':'Second group (A and B)','Czym różni się grupa B':'How group B differs',
  'Te same obiekty, inne numery':'Same objects, different numbers','Inne obiekty z tych samych kategorii':'Different objects from the same categories',
- 'Wymieszaj numery':'Shuffle numbers','Pobierz plik Word':'Download Word file','Drukuj':'Print',
+ 'Wymieszaj numery':'Shuffle numbers','Kolorowa mapa hipsometryczna (pastelowe barwy wysokości)':'Colour relief map (soft hypsometric tints)','Pobierz plik Word':'Download Word file','Drukuj':'Print',
  'Mapa Polski do wyświetlania':'Map of Poland for display',
  'Włączaj i wyłączaj warstwy. Przybliżaj kółkiem myszy, gestem lub przyciskami, przesuwaj przeciągając. Kliknij podpis „Warszawa”, żeby zobaczyć dzielnice.':'Switch layers on and off. Zoom with the mouse wheel, a pinch gesture or the buttons; drag to move the map. Click the “Warsaw” label to see its districts.',
  'Podział administracyjny':'Administrative division','Województwa':'Voivodeships','nazwy województw':'voivodeship names','stolice województw':'voivodeship capitals',
@@ -311,7 +312,7 @@ function setLang(l){if(l!=='pl'&&l!=='en'||l===L)return;L=l;try{localStorage.set
 const RG={}; REGIONS.forEach(r=>{RG[r.k]=r; const seen={}; r.objs.forEach(o=>{let id=o.c+':'+o.n; if(seen[id]){id+='#'+(++seen[id]);} else seen[id]=1; o.id=id;}); r.byId={}; r.objs.forEach(o=>r.byId[o.id]=o);});
 const DEF_SEL={};
 function defaults(){const sel={},titles={},borders={},cat={};REGIONS.forEach(r=>{sel[r.k]={};Object.entries(DEF_SEL[r.k]||{}).forEach(([k,v])=>{if(r.byId[k])sel[r.k][k]=v;});titles[r.k]=EN()?r.titleEn:r.title;borders[r.k]=r.borderDef;cat[r.k]=r.cats[0].k;});
- return {region:'pl',sel,titles,borders,cat,instr:TXT.instr[+EN()],t1:TXT.t1[+EN()],t2:TXT.t2[+EN()],allRivers:false,shuffle:true,seed:7,bank:false,key:false,showInstr:false,pts:true,p1:1,p2:1,groups:false,gmode:'order',cityDots:true,allLakes:false};}
+ return {region:'pl',sel,titles,borders,cat,instr:TXT.instr[+EN()],t1:TXT.t1[+EN()],t2:TXT.t2[+EN()],allRivers:false,shuffle:true,seed:7,bank:false,key:false,showInstr:false,pts:true,p1:1,p2:1,groups:false,gmode:'order',cityDots:true,allLakes:false,hipso:false};}
 let S=defaults();
 try{let L=JSON.parse(localStorage.getItem('kartaMapa4')||'null');
   if(L&&L.sel){const D=defaults(); S=Object.assign(D,L); ['sel','titles','borders','cat'].forEach(k=>S[k]=Object.assign(D[k],L[k]||{})); if(!RG[S.region])S.region='pl';}}catch(e){}
@@ -363,12 +364,23 @@ function symbol(o){
 function badge(x,y,num){return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="11" fill="#fff" stroke="#000" stroke-width="1.4"/><text x="${x.toFixed(1)}" y="${(y+5).toFixed(1)}" text-anchor="middle" font-family="${FONT}" font-size="14" font-weight="700" fill="#000">${num}</text>`;}
 function mapSVG(mode,G){
   const r=REG(), nums=G.nums, mk=G.mk, bd=S.borders[r.k], cid='clip-'+r.k+'-'+mode+(G.g||'');
-  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${r.w} ${r.h}" width="${r.w}" height="${r.h}"><rect width="100%" height="100%" fill="#fff"/>`;
-  if(r.clip) s+=`<defs><clipPath id="${cid}"><path d="${r.clip}"/></clipPath></defs>`;
+  const H=HIPSO_ON(r), MHr=MH(r);
+  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${r.w} ${MHr}" width="${r.w}" height="${MHr}"><rect width="100%" height="100%" fill="#fff"/>`;
   const ctx=r.land.filter(l=>!l.m), main=r.land.filter(l=>l.m);
+  s+=`<defs>${r.clip?`<clipPath id="${cid}"><path d="${r.clip}"/></clipPath>`:''}${H?`<clipPath id="${cid}-hc"><path d="${ctx.map(l=>l.d).join(' ')}"/></clipPath><clipPath id="${cid}-hm"><path d="${main.map(l=>l.d).join(' ')}"/></clipPath>`:''}</defs>`;
+  if(H){
+    // skala hipsometryczna: pastelowe barwy wysokości, morze jasnoniebieskie, sąsiednie lądy lekko przygaszone
+    const img=`<image href="${H.png}" x="0" y="0" width="${r.w}" height="${r.h}" preserveAspectRatio="none"/>`;
+    s+=H.sea?`<image href="${H.sea}" x="0" y="0" width="${r.w}" height="${r.h}" preserveAspectRatio="none"/>`:`<rect width="${r.w}" height="${r.h}" fill="${HIPSO_SEA}"/>`;
+    s+=`<g clip-path="url(#${cid}-hc)">${img}<rect width="${r.w}" height="${r.h}" fill="#fff" opacity="0.45"/></g>`;
+    s+=`<g fill="none" stroke="#8f8f8f" stroke-width="0.6" stroke-linejoin="round">${ctx.map(l=>`<path d="${l.d}"/>`).join('')}</g>`;
+    s+=`<g fill="none" stroke="#000" stroke-width="2.4" stroke-linejoin="round">${main.map(l=>`<path d="${l.d}"/>`).join('')}</g>`;
+    s+=`<g clip-path="url(#${cid}-hm)">${img}</g>`;
+  } else {
   s+=`<g fill="#e6e6e6" stroke="#b5b5b5" stroke-width="0.6" stroke-linejoin="round">${ctx.map(l=>`<path d="${l.d}"/>`).join('')}</g>`;
   s+=`<g fill="none" stroke="#000" stroke-width="2.4" stroke-linejoin="round">${main.map(l=>`<path d="${l.d}"/>`).join('')}</g>`;
   s+=`<g fill="#fff">${main.map(l=>`<path d="${l.d}"/>`).join('')}</g>`;
+  }
   if(r.k==='pl'){
     if(bd==='pow') s+=`<g fill="none" stroke="#9c9c9c" stroke-width="0.45">${r.sub2.map(d=>`<path d="${d}"/>`).join('')}</g>`;
     if(bd==='woj'||bd==='pow') s+=`<g fill="none" stroke="${bd==='pow'?'#333':'#8a8a8a'}" stroke-width="${bd==='pow'?0.9:0.7}" ${bd==='woj'?'stroke-dasharray="3 2"':''}>${r.sub1.map(d=>`<path d="${d}"/>`).join('')}</g>`;
@@ -397,9 +409,35 @@ function mapSVG(mode,G){
     mk.forEach(o=>{s+=symbol(o); if(o.t==='river') s+=`<path d="${r.rivers[o.n].d}" fill="none" stroke="#000" stroke-width="2.4" ${r.clip?`clip-path="url(#${cid})"`:''}/>`;});
     const tl=[];mk.forEach(o=>{const pt=POINTY(o.t);let x=pt?o.x+6:o.x,y=pt?o.y-6:o.y+5;const lb=nm(o),w=lb.length*8.2,l=()=>pt?x:x-w/2;for(const dy of [0,16,-16,32,-32,48]){const yy=y+dy;if(tl.every(([a,b,c])=>yy+4<b-14||yy-14>b+4||l()+w<a||l()>c)){y=yy;break;}}tl.push([l(),y,l()+w]);s+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-family="${FONT}" font-size="15" font-weight="700" fill="#000" ${pt?'':'text-anchor="middle"'} paint-order="stroke" stroke="#fff" stroke-width="3.5">${esc(lb)}</text>`;});
   }
+  if(H) s+=hipsoLegend(r,H).svg;
   return s+'</svg>';
 }
-function fitBox(r,mw,mh){const w=Math.min(mw,mh*r.w/r.h);return [Math.round(w),Math.round(w*r.h/r.w)];}
+// ---------- Skala hipsometryczna ----------
+// kolory jak w handoucie „Europa – mapa fizyczna” (6 klasa): klasa 0 = depresja, 1 = 0–100 m … 7 = powyżej 3000 m
+const HIPSO_SEA='#d0deed';
+const HIPSO_COLS=['#cfe3c6','#dbeccf','#e7f2cd','#f4f3cd','#f5e5c5','#f0d2b6','#e6bead','#e0aaa8'];
+const HIPSO_LBL=()=>[tr('poniżej 0 m','below 0 m'),'0–100 m','100–200 m','200–500 m','500–1000 m','1000–2000 m','2000–3000 m',tr('powyżej 3000 m','above 3000 m')];
+window.HIPSO=window.HIPSO||{};
+const HIPSO_ON=r=>S.hipso&&window.HIPSO[r.k]||null;
+function loadHipso(k){
+  if(window.HIPSO[k]||loadHipso.p[k])return;
+  status(tr('Wczytuję kolorową mapę wysokości…','Loading the colour relief map…'));
+  const sc=document.createElement('script');sc.src='hipso/'+k+'.js?v=3';
+  sc.onload=()=>{status('');render();};
+  sc.onerror=()=>{delete loadHipso.p[k];status(tr('Nie udało się wczytać kolorowej mapy wysokości.','The colour relief map could not be loaded.'));};
+  loadHipso.p[k]=1;document.head.append(sc);
+}
+loadHipso.p={};
+function hipsoLegend(r,H){
+  const fs=14,cw=fs*0.55,sw=22,gap=16,pad=10,rowH=22,title=tr('Wysokość n.p.m.:','Height above sea level:');
+  const L=HIPSO_LBL(),items=[...H.cls].sort((a,b)=>b-a);
+  let x=pad+title.length*cw+12,y=r.h+pad+rowH/2+2,out=`<text x="${pad}" y="${y+4}" font-family="${FONT}" font-size="${fs}" font-weight="700" fill="#000">${esc(title)}</text>`;
+  items.forEach(i=>{const w=sw+6+L[i].length*cw;if(x+w>r.w-pad){x=pad;y+=rowH;}
+    out+=`<rect x="${x.toFixed(1)}" y="${y-6}" width="${sw}" height="12" fill="${HIPSO_COLS[i]}" stroke="#8a8a8a" stroke-width="0.6"/><text x="${(x+sw+5).toFixed(1)}" y="${y+4}" font-family="${FONT}" font-size="${fs}" fill="#000">${esc(L[i])}</text>`;x+=w+gap;});
+  return {svg:out,h:Math.ceil(y+rowH/2+pad-r.h)};
+}
+const MH=r=>{const H=HIPSO_ON(r);return H?r.h+hipsoLegend(r,H).h:r.h;};
+function fitBox(r,mw,mh){const h=MH(r),w=Math.min(mw,mh*r.w/h);return [Math.round(w),Math.round(w*h/r.w)];}
 
 // ---------- Podgląd ----------
 function pts(n){return S.pts&&n?`<span class="ws-pts">…… / ${n} ${tr('pkt','pts')}</span>`:'';}
@@ -452,7 +490,7 @@ function renderControls(){
   $('#region').value=r.k; $('#title').value=S.titles[r.k];
   $('#borders').innerHTML=r.borderOpts.map(([v,n,en])=>`<option value="${v}">${EN()&&en?en:n}</option>`).join(''); $('#borders').value=S.borders[r.k];
 }
-function render(){ $('#sheet').innerHTML=sheetHTML(); renderList(); renderPresetsKeep(); save(); fit(); }
+function render(){ if(S.hipso)loadHipso(S.region); $('#sheet').innerHTML=sheetHTML(); renderList(); renderPresetsKeep(); save(); fit(); }
 function renderPresetsKeep(){const v=$('#preset').value, k=REG().k+S.cat[REG().k];renderPresets();if(renderPresetsKeep.k===k&&v&&+v<CUR_PRESETS.length)$('#preset').value=v;renderPresetsKeep.k=k;}
 function fit(){const w=$('#stage').clientWidth-32;const sc=Math.min(1,w/794);$('#sheet').style.transform=`scale(${sc})`;$('#sheetbox').style.height=($('#sheet').offsetHeight*sc)+'px';$('#sheetbox').style.width=(794*sc)+'px';}
 let DL=null;
@@ -483,7 +521,7 @@ function init(){
   $('#region').addEventListener('change',e=>{S.region=e.target.value;$('#q').value='';renderControls();render();});
   $('#title').addEventListener('input',e=>{S.titles[S.region]=e.target.value;render();});
   ['instr','t1','t2'].forEach(k=>{const el=$('#'+k);el.value=S[k];el.addEventListener('input',()=>{S[k]=el.value;render();});});
-  ['allRivers','allLakes','shuffle','bank','key','showInstr','pts','groups','cityDots'].forEach(k=>{const el=$('#'+k);el.checked=!!S[k];el.addEventListener('change',()=>{S[k]=el.checked;syncOpts();render();});});
+  ['allRivers','allLakes','shuffle','bank','key','showInstr','pts','groups','cityDots','hipso'].forEach(k=>{const el=$('#'+k);el.checked=!!S[k];el.addEventListener('change',()=>{S[k]=el.checked;syncOpts();render();});});
   ['p1','p2'].forEach(k=>{const el=$('#'+k);el.value=S[k];el.addEventListener('input',()=>{S[k]=Math.max(0,Math.min(20,parseFloat(el.value.replace(',','.'))||0));render();});});
   $('#gmode').value=S.gmode; $('#gmode').addEventListener('change',e=>{S.gmode=e.target.value;render();});
   syncOpts();
@@ -527,7 +565,7 @@ async function exportDocx(){
       if(S.pts&&(P.t1+P.t2)) nameRuns.push(...ptsRun(P.t1+P.t2,true));
       ch.push(para(nameRuns,{tabStops:tabRight,spacing:{after:120}}));
       if(S.showInstr&&S.instr.trim()) ch.push(para([R(S.instr,{italics:true,size:22})],{spacing:{after:120}}));
-      const png=await svgToPng(mapSVG('task',G),r.w*3,r.h*3);
+      const png=await svgToPng(mapSVG('task',G),r.w*3,MH(r)*3);
       ch.push(para([new D.ImageRun({data:png,transformation:{width:mw,height:mh}})],{alignment:D.AlignmentType.CENTER,spacing:{after:120}}));
       let z=0;
       const head=(n)=>{z++;const runs=[R(`${tr('Zadanie','Task')} ${z}.`,{bold:true,size:24})];if(S.pts&&n)runs.push(...ptsRun(n));ch.push(para(runs,{tabStops:tabRight,spacing:{before:160,after:60}}));};
@@ -551,7 +589,7 @@ async function exportDocx(){
         if(G.g) ch.push(para([R(`${tr('Grupa','Group')} ${G.g}`,{bold:true,size:22})],{spacing:{before:120,after:60}}));
         let kz=0;
         if(G.nums.length){kz++;ch.push(para([R(`${tr('Zadanie','Task')} ${kz}`,{bold:true,size:22})],{spacing:{after:60}}));const runs=[];G.nums.forEach((o,i)=>{runs.push(R(`${i+1}.\u00A0`,{bold:true,size:22}),R(nm(o)+(i<G.nums.length-1?'    ':''),{size:22}));});ch.push(para(runs,{spacing:{after:120}}));}
-        if(G.mk.length){kz++;ch.push(para([R(`${tr('Zadanie','Task')} ${kz}`,{bold:true,size:22})],{spacing:{after:60}}));const kp=await svgToPng(mapSVG('key',G),r.w*3,r.h*3);ch.push(para([new D.ImageRun({data:kp,transformation:{width:kw,height:kh}})],{alignment:D.AlignmentType.CENTER}));}
+        if(G.mk.length){kz++;ch.push(para([R(`${tr('Zadanie','Task')} ${kz}`,{bold:true,size:22})],{spacing:{after:60}}));const kp=await svgToPng(mapSVG('key',G),r.w*3,MH(r)*3);ch.push(para([new D.ImageRun({data:kp,transformation:{width:kw,height:kh}})],{alignment:D.AlignmentType.CENTER}));}
       }
       if(GS.length>1) sections.push(ch);
     }
